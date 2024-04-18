@@ -23,28 +23,22 @@ val LocalColor = staticCompositionLocalOf {
 }
 
 fun customLightColorScheme(
-    red: Color = Color.Red,
-    blue: Color = Color.Blue
+    surface: Color = Color.White,
 ): CustomColorScheme =
     CustomColorScheme(
-        red = red,
-        blue = blue
+        surface = surface,
     )
 
 fun customDarkColorScheme(
-    red: Color = Color.Cyan,
-    blue: Color = Color.Yellow
+    surface: Color = Color.White,
 ): CustomColorScheme =
     CustomColorScheme(
-        red = blue,
-        blue = red
+        surface = surface,
     )
 
 @Stable
 class CustomColorScheme(
-    red: Color,
-    blue: Color
+    surface: Color,
 ) {
-    var red by mutableStateOf(red, structuralEqualityPolicy())
-    var blue by mutableStateOf(blue, structuralEqualityPolicy())
+    var surface by mutableStateOf(surface, structuralEqualityPolicy())
 }
