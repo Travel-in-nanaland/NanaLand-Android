@@ -23,6 +23,7 @@ android {
             useSupportLibrary = true
         }
         buildConfigField("String", "BASE_URL", getProperty("baseUrl"))
+        buildConfigField("String", "DEV_ACCESS_TOKEN", getProperty("accessToken"))
     }
 
     buildTypes {
