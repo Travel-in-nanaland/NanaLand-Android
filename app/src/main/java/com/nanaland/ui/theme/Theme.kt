@@ -1,10 +1,20 @@
 package com.nanaland.ui.theme
 
 import android.app.Activity
+import android.os.Build
+import android.util.Log
 import androidx.compose.foundation.isSystemInDarkTheme
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.darkColorScheme
+import androidx.compose.material3.dynamicDarkColorScheme
+import androidx.compose.material3.dynamicLightColorScheme
+import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.SideEffect
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.toArgb
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.unit.Density
@@ -15,21 +25,21 @@ import androidx.core.view.WindowCompat
 //    secondary = PurpleGrey80,
 //    tertiary = Pink80
 //)
-
+//
 //private val LightColorScheme = lightColorScheme(
 //    primary = Purple40,
 //    secondary = PurpleGrey40,
 //    tertiary = Pink40
-
-    /* Other default colors to override
-    background = Color(0xFFFFFBFE),
-    surface = Color(0xFFFFFBFE),
-    onPrimary = Color.White,
-    onSecondary = Color.White,
-    onTertiary = Color.White,
-    onBackground = Color(0xFF1C1B1F),
-    onSurface = Color(0xFF1C1B1F),
-    */
+//
+//    /* Other default colors to override
+//    background = Color(0xFFFFFBFE),
+//    surface = Color(0xFFFFFBFE),
+//    onPrimary = Color.White,
+//    onSecondary = Color.White,
+//    onTertiary = Color.White,
+//    onBackground = Color(0xFF1C1B1F),
+//    onSurface = Color(0xFF1C1B1F),
+//    */
 //)
 
 @Composable
@@ -59,19 +69,24 @@ fun NanaLandTheme(
     val colorScheme = customLightColorScheme()
 
     val view = LocalView.current
-    val density = LocalDensity.current.density
+    val customDensity = LocalContext.current.resources.displayMetrics.widthPixels.toFloat() / 360f
+    Log.e("density", "${customDensity}")
+    Log.e("", "${LocalContext.current.resources.displayMetrics.density}")
     if (!view.isInEditMode) {
         SideEffect {
             val window = (view.context as Activity).window
-            WindowCompat.getInsetsController(window, view).isAppearanceLightStatusBars = !darkTheme
+//            WindowCompat.getInsetsController(window, view).isAppearanceLightStatusBars = !darkTheme
+            WindowCompat.getInsetsController(window, view).isAppearanceLightStatusBars = true
+            WindowCompat.getInsetsController(window, view).isAppearanceLightNavigationBars = true
         }
     }
     CompositionLocalProvider(
         LocalColor provides colorScheme,
-        LocalDensity provides Density(density, fontScale = 1f)
+        LocalDensity provides Density(customDensity, fontScale = 1f)
     ) {
         content()
     }
+
 //    MaterialTheme(
 //        colorScheme = colorScheme,
 //        typography = Typography,
