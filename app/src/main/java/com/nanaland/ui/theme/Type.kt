@@ -105,7 +105,7 @@ val title01Bold = TextStyle(
     platformStyle = PlatformTextStyle(false)
 )
 val title02Bold = TextStyle(
-    fontSize = (baseFontSize + 12).sp,
+    fontSize = (baseFontSize + 8).sp,
     fontWeight = FontWeight.Bold,
     fontFamily = appleSdGothicNeo,
     platformStyle = PlatformTextStyle(false)
