@@ -31,7 +31,7 @@ object LogUtil {
         }
     }
 
-    private fun printLog(tag: String, message: String) {
+    fun printLog(tag: String, message: String) {
         if (BuildConfig.DEBUG) Log.e(tag, message) else Unit
     }
 }

@@ -1,3 +1,34 @@
 <resources>
     <string name="app_name">NanaLand</string>
+    <string name="all">전체</string>
+    <string name="nature">7대 자연</string>
+    <string name="festival">축제</string>
+    <string name="market">전통시장</string>
+    <string name="experience">이색 체험</string>
+
+    <!--언어 설정 화면-->
+    <string name="select_language_please">언어를 선택해주세요</string>
+
+    <string name="cdrp_mon">월</string>
+    <string name="cdrp_tue">화</string>
+    <string name="cdrp_wed">수</string>
+    <string name="cdrp_thu">목</string>
+    <string name="cdrp_fri">금</string>
+    <string name="cdrp_sat">토</string>
+    <string name="cdrp_sun">일</string>
+
+    <string-array name="week_sun_sat">
+        <item>@string/cdrp_sun</item>
+        <item>@string/cdrp_mon</item>
+        <item>@string/cdrp_tue</item>
+        <item>@string/cdrp_wed</item>
+        <item>@string/cdrp_thu</item>
+        <item>@string/cdrp_fri</item>
+        <item>@string/cdrp_sat</item>
+    </string-array>
+
+    <string name="cancel">Cancel</string>
+    <string name="done">Done</string>
+    <string name="title_time_picker">Select Time</string>
+    <string name="select_time">Select a Time</string>
 </resources>

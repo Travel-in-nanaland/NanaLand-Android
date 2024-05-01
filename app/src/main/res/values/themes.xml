@@ -1,5 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="Theme.NanaLand" parent="android:Theme.Material.Light.NoActionBar" />
+    <style name="Theme.NanaLand" parent="Theme.AppCompat.Light.NoActionBar" />
+
+    <style name="WeekDayTitleStyle">
+        <item name="android:layout_width">@dimen/dayOfMonthBoxSize</item>
+        <item name="android:layout_height">@dimen/dayOfMonthBoxSize</item>
+        <item name="android:textSize">@dimen/text_size_week</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/date_color</item>
+        <item name="android:paddingBottom">@dimen/dayOfMonthPaddingBottom</item>
+    </style>
+
+    <style name="DayOfMonthStyle">
+    <item name="android:layout_width">@dimen/dayOfMonthSize</item>
+    <item name="android:layout_height">@dimen/dayOfMonthSize</item>
+    <item name="android:textSize">@dimen/text_size_date</item>
+    <item name="android:gravity">center</item>
+    <item name="android:minHeight">@dimen/dayOfMonthMinHeight</item>
+    <item name="android:minWidth">@dimen/dayOfMonthMinWidth</item>
+    <item name="android:layout_centerInParent">true</item>
+    <item name="android:paddingBottom">@dimen/dayOfMonthPaddingBottom</item>
+    <item name="android:textColor">@color/default_date_color</item>
+    <item name="android:layout_gravity">center</item>
+</style>
+
+    <style name="ContainerDayOfWeek">
+        <item name="android:layout_width">@dimen/dayOfMonthBoxSize</item>
+        <item name="android:layout_height">@dimen/dayOfMonthBoxSize</item>
+        <item name="android:gravity">center_vertical</item>
+    </style>
+
+    <style name="StripRange">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/strip_height</item>
+        <item name="android:background">@color/range_bg_color</item>
+        <item name="android:layout_gravity">center</item>
+    </style>
 </resources>

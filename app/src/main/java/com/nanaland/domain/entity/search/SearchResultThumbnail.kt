@@ -6,9 +6,9 @@ data class SearchResultThumbnail(
     @SerializedName("id")
     val id: Long,
     @SerializedName("thumbnailUrl")
-    val thumbnailUrl: String,
+    val thumbnailUrl: String?,
     @SerializedName("title")
-    val title: String,
+    val title: String?,
     @SerializedName("favorite")
     val favorite: Boolean
 )

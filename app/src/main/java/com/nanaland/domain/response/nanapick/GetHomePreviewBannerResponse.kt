@@ -7,7 +7,7 @@ data class GetHomePreviewBannerResponse(
     @SerializedName("status")
     val status: Long,
     @SerializedName("message")
-    val message: String,
+    val message: String?,
     @SerializedName("data")
     val data: List<NanaPickThumbnail>
 )

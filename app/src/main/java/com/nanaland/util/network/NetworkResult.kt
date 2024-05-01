@@ -5,28 +5,33 @@ sealed class NetworkResult<out T> {
     data class Error(val code: Int, val message: String?) : NetworkResult<Nothing>()
     data class Exception(val e: Throwable) : NetworkResult<Nothing>()
 
-    public val isSuccess get() = this is Success
-    public val isError get() = this is Error
-    public val isException get() = this is Exception
+    val isSuccess get() = this is Success
+    val isError get() = this is Error
+    val isException get() = this is Exception
 }
 
-public inline fun <T> NetworkResult<T>.onSuccess(action: (data: NetworkResult.Success<T>) -> Unit): NetworkResult<T> {
+inline fun <T> NetworkResult<T>.onSuccess(action: (code: Int, data: T?) -> Unit): NetworkResult<T> {
     if (this is NetworkResult.Success) {
-        action(this)
+        action(this.code, this.data)
     }
     return this
 }
 
-public inline fun <T> NetworkResult<T>.onError(action: (data: NetworkResult.Error) -> Unit): NetworkResult<T> {
+inline fun <T> NetworkResult<T>.onError(action: (code: Int, message: String?) -> Unit): NetworkResult<T> {
     if (this is NetworkResult.Error) {
-        action(this)
+        action(this.code, this.message)
     }
     return this
 }
 
-public inline fun <T> NetworkResult<T>.onException(action: (data: NetworkResult.Exception) -> Unit): NetworkResult<T> {
+inline fun <T> NetworkResult<T>.onException(action: (data: Throwable) -> Unit): NetworkResult<T> {
     if (this is NetworkResult.Exception) {
-        action(this)
+        action(this.e)
     }
+    return this
+}
+
+inline fun <T> NetworkResult<T>.finally(action: (data: NetworkResult<T>) -> Unit): NetworkResult<T> {
+    action(this)
     return this
 }

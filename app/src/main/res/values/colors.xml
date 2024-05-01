@@ -1,10 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="purple_200">#FFBB86FC</color>
-    <color name="purple_500">#FF6200EE</color>
-    <color name="purple_700">#FF3700B3</color>
-    <color name="teal_200">#FF03DAC5</color>
-    <color name="teal_700">#FF018786</color>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
+    <color name="main">#FF583FF5</color>
+    <color name="black">#FF151515</color>
+
+    <!-- General -->
+    <color name="selected_date_circle_color">#FF583FF5</color>
+
+    <!-- Fonts -->
+    <color name="title_color">#FF000000</color>
+    <color name="date_color">#000</color>
+    <!--  월화수목금토일 날짜색  -->
+    <color name="week_color">#FF000000</color>
+
+    <!-- Calendar Date -->
+    <color name="default_date_color">#FF000000</color>
+    <color name="disable_date_color">#FF000000</color>
+    <!--  선택된 날짜 글자색  -->
+    <color name="range_date_color">#FFFFFFFF</color>
+    <!--  선택된 날짜 양 끝 글자색  -->
+    <color name="selected_date_color">#FFFFFFFF</color>
+    <!--  선택된 날짜 배경색  -->
+    <color name="range_bg_color">#FF583FF5</color>
+    <color name="calendar_text">#474747</color>
 </resources>
