@@ -1,8 +1,7 @@
 package com.nanaland.domain.response.search
 
 import com.google.gson.annotations.SerializedName
-import com.nanaland.domain.entity.search.SearchResult
-import com.nanaland.domain.entity.search.SearchResultThumbnail
+import com.nanaland.domain.entity.search.SearchResultData
 
 data class GetSearchResultListResponse(
     @SerializedName("status")
@@ -10,5 +9,5 @@ data class GetSearchResultListResponse(
     @SerializedName("message")
     val message: String?,
     @SerializedName("data")
-    val data: SearchResult
+    val data: SearchResultData
 )

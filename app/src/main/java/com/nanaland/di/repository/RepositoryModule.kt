@@ -1,12 +1,10 @@
 package com.nanaland.di.repository
 
-import android.content.Context
 import androidx.datastore.core.DataStore
-import androidx.datastore.preferences.core.PreferenceDataStoreFactory
 import androidx.datastore.preferences.core.Preferences
-import androidx.datastore.preferences.preferencesDataStoreFile
 import com.nanaland.data.api.AuthApi
 import com.nanaland.data.api.FavoriteApi
+import com.nanaland.data.api.FestivalApi
 import com.nanaland.data.api.MarketApi
 import com.nanaland.data.api.MemberApi
 import com.nanaland.domain.repository.NanaPickRepository
@@ -15,39 +13,33 @@ import com.nanaland.data.api.NatureApi
 import com.nanaland.data.api.SearchApi
 import com.nanaland.data.repository.AuthRepositoryImpl
 import com.nanaland.data.repository.FavoriteRepositoryImpl
+import com.nanaland.data.repository.FestivalRepositoryImpl
 import com.nanaland.data.repository.MarketRepositoryImpl
 import com.nanaland.data.repository.MemberRepositoryImpl
 import com.nanaland.data.repository.NanaPickRepositoryImpl
 import com.nanaland.data.repository.NatureRepositoryImpl
-import com.nanaland.data.repository.PreferencesDataStoreRepositoryImpl
+import com.nanaland.data.repository.AuthDataStoreRepositoryImpl
+import com.nanaland.data.repository.RecentSearchDataStoreRepositoryImpl
 import com.nanaland.data.repository.SearchRepositoryImpl
+import com.nanaland.di.datastore.DataStoreModule
 import com.nanaland.domain.repository.AuthRepository
 import com.nanaland.domain.repository.FavoriteRepository
+import com.nanaland.domain.repository.FestivalRepository
 import com.nanaland.domain.repository.MarketRepository
 import com.nanaland.domain.repository.MemberRepository
 import com.nanaland.domain.repository.NatureRepository
-import com.nanaland.domain.repository.PreferencesDataStoreRepository
+import com.nanaland.domain.repository.AuthDataStoreRepository
+import com.nanaland.domain.repository.RecentSearchDataStoreRepository
 import com.nanaland.domain.repository.SearchRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
 object RepositoryModule {
-
-    @Singleton
-    @Provides
-    fun providePreferencesDataStore(
-        @ApplicationContext context: Context
-    ): DataStore<Preferences> {
-        return PreferenceDataStoreFactory.create(
-            produceFile = { context.preferencesDataStoreFile("preference_datastore") }
-        )
-    }
 
     @Singleton
     @Provides
@@ -99,10 +91,10 @@ object RepositoryModule {
 
     @Singleton
     @Provides
-    fun providePreferencesDataStoreRepository(
-        preferencesDataStore: DataStore<Preferences>
-    ): PreferencesDataStoreRepository {
-        return PreferencesDataStoreRepositoryImpl(preferencesDataStore)
+    fun provideFestivalRepository(
+        festivalApi: FestivalApi
+    ): FestivalRepository {
+        return FestivalRepositoryImpl(festivalApi)
     }
 
     @Singleton
@@ -111,5 +103,21 @@ object RepositoryModule {
         authApi: AuthApi
     ): AuthRepository {
         return AuthRepositoryImpl(authApi)
+    }
+
+    @Singleton
+    @Provides
+    fun provideAuthDataStoreRepository(
+        @DataStoreModule.AuthDataStore dataStore: DataStore<Preferences>
+    ): AuthDataStoreRepository {
+        return AuthDataStoreRepositoryImpl(dataStore)
+    }
+
+    @Singleton
+    @Provides
+    fun provideRecentSearchDataStoreRepository(
+        @DataStoreModule.RecentSearchDataStore dataStore: DataStore<Preferences>
+    ): RecentSearchDataStoreRepository {
+        return RecentSearchDataStoreRepositoryImpl(dataStore)
     }
 }

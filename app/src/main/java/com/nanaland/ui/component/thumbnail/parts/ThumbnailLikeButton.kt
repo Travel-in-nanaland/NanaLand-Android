@@ -20,9 +20,9 @@ fun ThumbnailLikeButton(
 ) {
     Image(
         modifier = Modifier
-            .size(28.dp)
+            .size(32.dp)
             .clickableNoEffect { onClick() },
-        painter = painterResource(if (isLiked) R.drawable.ic_heart_filled else R.drawable.ic_heart_outlined_white),
+        painter = painterResource(if (isLiked) R.drawable.ic_heart_filled_black else R.drawable.ic_heart_outlined_white),
         contentDescription = null,
         colorFilter = if (isLiked) ColorFilter.tint(getColor().main) else null
     )
@@ -30,7 +30,7 @@ fun ThumbnailLikeButton(
 
 @ComponentPreview
 @Composable
-private fun ThumbnailLikeButtonPreview_isLiked_True() {
+private fun ThumbnailLikeButtonPreview1() {
     NanaLandTheme {
         ThumbnailLikeButton(
             isLiked = true
@@ -40,10 +40,8 @@ private fun ThumbnailLikeButtonPreview_isLiked_True() {
 
 @ComponentPreview
 @Composable
-private fun ThumbnailLikeButtonPreview_isLiked_False() {
+private fun ThumbnailLikeButtonPreview2() {
     NanaLandTheme {
-        ThumbnailLikeButton(
-            isLiked = false
-        ) {}
+        ThumbnailLikeButton(isLiked = false) {}
     }
 }

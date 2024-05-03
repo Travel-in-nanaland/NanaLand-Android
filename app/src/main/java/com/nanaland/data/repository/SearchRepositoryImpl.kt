@@ -5,6 +5,7 @@ import com.nanaland.domain.repository.SearchRepository
 import com.nanaland.domain.request.search.GetAllSearchResultListRequest
 import com.nanaland.domain.request.search.GetSearchResultListRequest
 import com.nanaland.domain.response.search.GetAllSearchResultListResponse
+import com.nanaland.domain.response.search.GetHotPostsResponse
 import com.nanaland.domain.response.search.GetSearchResultListResponse
 import com.nanaland.domain.response.search.GetTopKeywordsResponse
 import com.nanaland.util.network.NetworkResult
@@ -13,6 +14,11 @@ import com.nanaland.util.network.NetworkResultHandler
 class SearchRepositoryImpl(
     private val searchApi: SearchApi
 ): SearchRepository, NetworkResultHandler {
+
+    // 검색량 UP 게시물 조회
+    override suspend fun getHotPosts(): NetworkResult<GetHotPostsResponse> {
+        return handleResult { searchApi.getHotPosts() }
+    }
 
     // 인기 검색어 8개 조회
     override suspend fun getTopKeywords(): NetworkResult<GetTopKeywordsResponse> {

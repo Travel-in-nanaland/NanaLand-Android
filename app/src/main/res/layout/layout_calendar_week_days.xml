@@ -10,42 +10,49 @@
         android:id="@+id/tvDayOfWeek1"
         style="@style/WeekDayTitleStyle"
         android:tag="dayOfWeek1"
-        android:text="@string/cdrp_sun" />
+        android:text="@string/cdrp_sun"
+        android:fontFamily="@font/apple_neo_m" />
 
     <com.nanaland.util.daterangecalendar.customviews.CustomTextView
         android:id="@+id/tvDayOfWeek2"
         style="@style/WeekDayTitleStyle"
         android:tag="dayOfWeek2"
-        android:text="@string/cdrp_mon" />
+        android:text="@string/cdrp_mon"
+        android:fontFamily="@font/apple_neo_m" />
 
     <com.nanaland.util.daterangecalendar.customviews.CustomTextView
         android:id="@+id/tvDayOfWeek3"
         style="@style/WeekDayTitleStyle"
         android:tag="dayOfWeek3"
-        android:text="@string/cdrp_tue" />
+        android:text="@string/cdrp_tue"
+        android:fontFamily="@font/apple_neo_m" />
 
     <com.nanaland.util.daterangecalendar.customviews.CustomTextView
         android:id="@+id/tvDayOfWeek4"
         style="@style/WeekDayTitleStyle"
         android:tag="dayOfWeek4"
-        android:text="@string/cdrp_wed" />
+        android:text="@string/cdrp_wed"
+        android:fontFamily="@font/apple_neo_m" />
 
     <com.nanaland.util.daterangecalendar.customviews.CustomTextView
         android:id="@+id/tvDayOfWeek5"
         style="@style/WeekDayTitleStyle"
         android:tag="dayOfWeek5"
-        android:text="@string/cdrp_thu" />
+        android:text="@string/cdrp_thu"
+        android:fontFamily="@font/apple_neo_m" />
 
     <com.nanaland.util.daterangecalendar.customviews.CustomTextView
         android:id="@+id/tvDayOfWeek6"
         style="@style/WeekDayTitleStyle"
         android:tag="dayOfWeek6"
-        android:text="@string/cdrp_fri" />
+        android:text="@string/cdrp_fri"
+        android:fontFamily="@font/apple_neo_m" />
 
     <com.nanaland.util.daterangecalendar.customviews.CustomTextView
         android:id="@+id/tvDayOfWeek7"
         style="@style/WeekDayTitleStyle"
         android:tag="dayOfWeek7"
-        android:text="@string/cdrp_sat" />
+        android:text="@string/cdrp_sat"
+        android:fontFamily="@font/apple_neo_m" />
 
 </LinearLayout>

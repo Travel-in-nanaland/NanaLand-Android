@@ -34,7 +34,7 @@ import com.nanaland.globalvalue.type.HomeScreenViewType
 import com.nanaland.ui.theme.NanaLandTheme
 import com.nanaland.ui.theme.body02
 import com.nanaland.ui.theme.getColor
-import com.nanaland.util.ui.CustomPreview
+import com.nanaland.util.ui.ScreenPreview
 import com.nanaland.util.ui.clickableNoEffect
 
 @Composable
@@ -136,7 +136,7 @@ fun HomeScreenTopBar(
     }
 }
 
-@CustomPreview
+@ScreenPreview
 @Composable
 private fun HomeScreenTopBarPreview_Home() {
     NanaLandTheme {
@@ -150,7 +150,7 @@ private fun HomeScreenTopBarPreview_Home() {
     }
 }
 
-@CustomPreview
+@ScreenPreview
 @Composable
 private fun HomeScreenTopBarPreview_Searching() {
     NanaLandTheme {
@@ -164,7 +164,7 @@ private fun HomeScreenTopBarPreview_Searching() {
     }
 }
 
-@CustomPreview
+@ScreenPreview
 @Composable
 private fun HomeScreenTopBarPreview_SearchResult() {
     NanaLandTheme {

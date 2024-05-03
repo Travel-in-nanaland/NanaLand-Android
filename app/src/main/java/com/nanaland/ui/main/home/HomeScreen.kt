@@ -18,8 +18,7 @@ import com.nanaland.globalvalue.type.HomeScreenViewType
 import com.nanaland.ui.main.home.search.SearchResultContent
 import com.nanaland.ui.main.home.search.SearchViewModel
 import com.nanaland.ui.main.home.search.SearchingContent
-import com.nanaland.ui.theme.NanaLandTheme
-import com.nanaland.util.ui.CustomPreview
+import com.nanaland.util.ui.ScreenPreview
 
 @Composable
 fun HomeScreen(
@@ -119,7 +118,7 @@ private fun HomeScreen(
     }
 }
 
-@CustomPreview
+@ScreenPreview
 @Composable
 private fun HomeScreenPreview() {
 //    NanaLandTheme {

@@ -78,7 +78,7 @@ private fun SearchContentCard(
                 .clickableNoEffect {
                     isLiked.value = !isLiked.value
                 },
-            painter = painterResource(id = if (isLiked.value) R.drawable.ic_heart_filled else R.drawable.ic_heart_outlined_white),
+            painter = painterResource(id = if (isLiked.value) R.drawable.ic_heart_filled_black else R.drawable.ic_heart_outlined_white),
             contentDescription = null,
             colorFilter = if (isLiked.value) ColorFilter.tint(getColor().main) else null
         )

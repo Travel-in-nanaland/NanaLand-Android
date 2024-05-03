@@ -19,7 +19,8 @@ class MarketRepositoryImpl(
     ): NetworkResult<GetMarketContentResponse> {
         return handleResult {
             marketApi.getMarketContent(
-                id = data.id
+                id = data.id,
+                isSearch = data.isSearch
             )
         }
     }

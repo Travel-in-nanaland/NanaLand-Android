@@ -12,9 +12,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.nanaland.domain.entity.nanapick.NanaPickThumbnail
-import com.nanaland.ui.component.CustomSurface
-import com.nanaland.ui.component.CustomTopBar
+import com.nanaland.domain.entity.nanapick.NanaPickBannerData
+import com.nanaland.ui.component.common.CustomSurface
+import com.nanaland.ui.component.common.CustomTopBar
+import com.nanaland.ui.component.home.main.parts.HomeScreenNanaPickBanner
 import com.nanaland.util.ui.UiState
 
 @Composable
@@ -37,7 +38,7 @@ fun NanaPickListScreen(
 
 @Composable
 private fun NanaPickListScreen(
-    nanaPickList: UiState<List<NanaPickThumbnail>>,
+    nanaPickList: UiState<List<NanaPickBannerData>>,
     moveToMainScreen: () -> Unit,
     moveToNanaPickContentScreen: (Long) -> Unit,
     isContent: Boolean
@@ -50,13 +51,10 @@ private fun NanaPickListScreen(
             )
             LazyColumn {
                 when (nanaPickList) {
-                    is UiState.Empty -> {}
-                    is UiState.Loading -> {
-
-                    }
+                    is UiState.Loading -> {}
                     is UiState.Success -> {
                         itemsIndexed(nanaPickList.data) { idx, item ->
-                            NanaPickThumbnail(
+                            HomeScreenNanaPickBanner(
                                 item = item,
                                 onClick = moveToNanaPickContentScreen
                             )

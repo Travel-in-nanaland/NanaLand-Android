@@ -30,7 +30,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.nanaland.R
 import com.nanaland.globalvalue.constant.TOP_BAR_HEIGHT
 import com.nanaland.globalvalue.type.MainScreenViewType
-import com.nanaland.ui.component.CustomSurface
+import com.nanaland.ui.component.common.CustomSurface
 import com.nanaland.ui.main.home.HomeScreen
 import com.nanaland.ui.main.jejustory.JejuStoryScreen
 import com.nanaland.ui.main.like.LikeScreen
@@ -193,8 +193,8 @@ private fun MainScreenPreview() {
         ),
         MainViewModel.NavigationItemContent(
             viewType = MainScreenViewType.Like,
-            iconSelected = R.drawable.ic_heart_filled,
-            iconUnselected = R.drawable.ic_heart_outlined,
+            iconSelected = R.drawable.ic_heart_filled_black,
+            iconUnselected = R.drawable.ic_heart_outlined_black,
             label = "찜"
         ),
         MainViewModel.NavigationItemContent(

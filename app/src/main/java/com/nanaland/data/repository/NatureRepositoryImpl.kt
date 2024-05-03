@@ -19,7 +19,8 @@ class NatureRepositoryImpl(
     ): NetworkResult<GetNatureContentResponse> {
         return handleResult {
             natureApi.getNatureContent(
-                id = data.id
+                id = data.id,
+                isSearch = data.isSearch
             )
         }
     }

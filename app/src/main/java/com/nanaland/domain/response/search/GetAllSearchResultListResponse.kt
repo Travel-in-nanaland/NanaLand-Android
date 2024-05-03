@@ -1,7 +1,7 @@
 package com.nanaland.domain.response.search
 
 import com.google.gson.annotations.SerializedName
-import com.nanaland.domain.entity.search.SearchResult
+import com.nanaland.domain.entity.search.SearchResultData
 
 data class GetAllSearchResultListResponse(
     @SerializedName("status")
@@ -14,11 +14,11 @@ data class GetAllSearchResultListResponse(
 
 data class GetAllSearchResultListResponseData(
     @SerializedName("festival")
-    val festival: SearchResult,
+    val festival: SearchResultData,
     @SerializedName("nature")
-    val nature: SearchResult,
+    val nature: SearchResultData,
     @SerializedName("experience")
-    val experience: SearchResult,
+    val experience: SearchResultData,
     @SerializedName("market")
-    val market: SearchResult,
+    val market: SearchResultData,
 )

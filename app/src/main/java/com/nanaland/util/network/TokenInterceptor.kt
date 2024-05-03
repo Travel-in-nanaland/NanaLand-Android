@@ -1,7 +1,7 @@
 package com.nanaland.util.network
 
 import android.util.Log
-import com.nanaland.domain.usecase.datastore.GetAccessTokenUseCase
+import com.nanaland.domain.usecase.authdatastore.GetAccessTokenUseCase
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.runBlocking
 import okhttp3.Interceptor

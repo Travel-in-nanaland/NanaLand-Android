@@ -16,7 +16,7 @@ import androidx.compose.ui.unit.dp
 import com.nanaland.R
 import com.nanaland.ui.theme.getColor
 import com.nanaland.util.resource.getString
-import com.nanaland.util.ui.CustomPreview
+import com.nanaland.util.ui.ScreenPreview
 import com.nanaland.util.ui.clickableNoEffect
 
 @Composable
@@ -61,7 +61,7 @@ private fun LanguageSelectionScreen(
     }
 }
 
-@CustomPreview
+@ScreenPreview
 @Composable
 private fun LanguageSelectionScreenPreview() {
 }

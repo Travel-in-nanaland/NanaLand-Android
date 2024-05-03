@@ -2,6 +2,7 @@ package com.nanaland.data.api
 
 import com.nanaland.domain.response.search.GetTopKeywordsResponse
 import com.nanaland.domain.response.search.GetAllSearchResultListResponse
+import com.nanaland.domain.response.search.GetHotPostsResponse
 import com.nanaland.domain.response.search.GetSearchResultListResponse
 import retrofit2.Response
 import retrofit2.http.GET
@@ -9,6 +10,11 @@ import retrofit2.http.Header
 import retrofit2.http.Query
 
 interface SearchApi {
+
+    // 검색량 UP 게시물 조회
+    @GET("search/volume")
+    suspend fun getHotPosts(
+    ): Response<GetHotPostsResponse>
 
     // 인기 검색어 8개 조회
     @GET("search/popular")

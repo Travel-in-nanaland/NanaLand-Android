@@ -3,10 +3,10 @@ package com.nanaland
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.nanaland.domain.usecase.datastore.GetAccessTokenUseCase
-import com.nanaland.domain.usecase.datastore.GetRefreshTokenUseCase
-import com.nanaland.domain.usecase.datastore.SaveAccessTokenUseCase
-import com.nanaland.domain.usecase.datastore.SaveRefreshTokenUseCase
+import com.nanaland.domain.usecase.authdatastore.GetAccessTokenUseCase
+import com.nanaland.domain.usecase.authdatastore.GetRefreshTokenUseCase
+import com.nanaland.domain.usecase.authdatastore.SaveAccessTokenUseCase
+import com.nanaland.domain.usecase.authdatastore.SaveRefreshTokenUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch

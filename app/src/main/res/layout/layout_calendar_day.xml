@@ -9,6 +9,7 @@
     <com.nanaland.util.daterangecalendar.customviews.CustomTextView
         android:id="@+id/dayOfMonthText"
         style="@style/DayOfMonthStyle"
+        android:fontFamily="@font/apple_neo_m"
         android:text="0" />
 
 </merge>

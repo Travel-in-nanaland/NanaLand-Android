@@ -2,7 +2,7 @@ package com.nanaland.ui.experience
 
 import androidx.compose.runtime.Composable
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.nanaland.util.ui.CustomPreview
+import com.nanaland.util.ui.ScreenPreview
 
 @Composable
 fun ExperienceListScreen(
@@ -21,7 +21,7 @@ private fun ExperienceListScreen(
 
 }
 
-@CustomPreview
+@ScreenPreview
 @Composable
 private fun ExperienceListScreenPreview() {
 

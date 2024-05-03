@@ -1,11 +1,9 @@
 package com.nanaland.ui.main.home.search
 
-import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -15,11 +13,9 @@ import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.grid.GridCells
-import androidx.compose.foundation.lazy.grid.LazyHorizontalGrid
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.itemsIndexed
 import androidx.compose.foundation.lazy.itemsIndexed
@@ -35,7 +31,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.nanaland.R
-import com.nanaland.domain.entity.search.SearchResult
+import com.nanaland.domain.entity.search.SearchResultData
 import com.nanaland.globalvalue.type.SearchCategoryType
 import com.nanaland.ui.component.SearchContentCard
 import com.nanaland.ui.main.home.HomeViewModel
@@ -75,8 +71,8 @@ private fun SearchResultContent(
     inputText: String,
     getSearchResult: (String) -> Unit,
     selectedCategory: SearchCategoryType,
-    allSearchResultList: UiState<Map<String, SearchResult>>,
-    categorizedSearchResultList: UiState<SearchResult>,
+    allSearchResultList: UiState<Map<String, SearchResultData>>,
+    categorizedSearchResultList: UiState<SearchResultData>,
     updateSelectedCategory: (SearchCategoryType) -> Unit,
     isContent: Boolean
 ) {
@@ -146,8 +142,8 @@ private fun CategoryListTab(
 private fun SearchResultList(
     scaffoldPadding: PaddingValues,
     selectedCategory: SearchCategoryType,
-    allSearchResultList: UiState<Map<String, SearchResult>>,
-    categorizedSearchResultList: UiState<SearchResult>,
+    allSearchResultList: UiState<Map<String, SearchResultData>>,
+    categorizedSearchResultList: UiState<SearchResultData>,
 ) {
     if (selectedCategory == SearchCategoryType.All) {
         LazyColumn(
@@ -179,10 +175,9 @@ private fun SearchResultList(
 @Composable
 private fun SearchResultPreview(
     category: SearchCategoryType,
-    allSearchResultList: UiState<Map<String, SearchResult>>,
+    allSearchResultList: UiState<Map<String, SearchResultData>>,
 ) {
     when (allSearchResultList) {
-        is UiState.Empty -> {}
         is UiState.Loading -> {}
         is UiState.Success -> {
             Row(
@@ -257,10 +252,9 @@ private fun SearchResultPreview(
 @Composable
 private fun SearchedResultByCategoryContent(
     scaffoldPadding: PaddingValues,
-    categorizedSearchResultList: UiState<SearchResult>,
+    categorizedSearchResultList: UiState<SearchResultData>,
 ) {
     when (categorizedSearchResultList) {
-        is UiState.Empty -> {}
         is UiState.Loading -> {}
         is UiState.Success -> {
             LazyVerticalGrid(
@@ -268,7 +262,6 @@ private fun SearchedResultByCategoryContent(
                 columns = GridCells.Fixed(2)
             ) {
                 itemsIndexed(categorizedSearchResultList.data.data) { idx, item ->
-                    Log.e("", "${idx}")
                     Box(
                         modifier = Modifier.padding(start = 4.dp, end = 4.dp)
                     ) {

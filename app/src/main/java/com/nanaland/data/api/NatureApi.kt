@@ -13,13 +13,14 @@ interface NatureApi {
     // 7대 자연 상세 정보 조회
     @GET("nature/{contentId}")
     suspend fun getNatureContent(
-        @Path("contentId") id: Long
+        @Path("contentId") id: Long,
+        @Query("isSearch") isSearch: Boolean
     ): Response<GetNatureContentResponse>
 
     // 7대 자연 리스트 조회
     @GET("nature/list")
     suspend fun getNatureList(
-        @Query("addressFilterList") addressFilterList: String,
+        @Query("addressFilterList") addressFilterList: List<String>,
         @Query("page") page: Long,
         @Query("size") size: Long
     ): Response<GetNatureListResponse>

@@ -2,12 +2,12 @@ package com.nanaland.ui.main.home
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.nanaland.BuildConfig
-import com.nanaland.domain.entity.nanapick.NanaPickThumbnail
+import com.nanaland.domain.entity.member.RecommendedPostData
+import com.nanaland.domain.entity.nanapick.NanaPickBannerData
+import com.nanaland.domain.usecase.member.GetRecommendedPostUseCase
 import com.nanaland.domain.usecase.nanapick.GetHomePreviewBannerUseCase
 import com.nanaland.globalvalue.type.HomeScreenViewType
 import com.nanaland.util.log.LogUtil
-import com.nanaland.util.network.finally
 import com.nanaland.util.network.onError
 import com.nanaland.util.network.onException
 import com.nanaland.util.network.onSuccess
@@ -23,15 +23,18 @@ import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
-    private val getHomePreviewBannerUseCase: GetHomePreviewBannerUseCase
+    private val getHomePreviewBannerUseCase: GetHomePreviewBannerUseCase,
+    private val getRecommendedPostUseCase: GetRecommendedPostUseCase
 ) : ViewModel() {
 
     private val _inputText = MutableStateFlow("")
     val inputText = _inputText.asStateFlow()
     private val _viewType = MutableStateFlow(HomeScreenViewType.Home)
     val viewType = _viewType.asStateFlow()
-    private val _homeBannerPreview = MutableStateFlow<UiState<List<NanaPickThumbnail>>>(UiState.Empty)
+    private val _homeBannerPreview = MutableStateFlow<UiState<List<NanaPickBannerData>>>(UiState.Loading)
     val homeBannerPreview = _homeBannerPreview.asStateFlow()
+    private val _recommendedPost = MutableStateFlow<UiState<List<RecommendedPostData>>>(UiState.Loading)
+    val recommendedPosts = _recommendedPost.asStateFlow()
 
     fun updateInputText(text: String) {
         _inputText.update { text }
@@ -51,15 +54,33 @@ class HomeViewModel @Inject constructor(
                             UiState.Success(data.data)
                         }
                     }
-                }.onError { _, _ ->
-
-                }.onException { _ ->
-
-                }.finally {
-                    LogUtil.printNetworkLog("", networkResult, "GetHomePreviewBannerUseCase")
+                }.onError { code, message ->
+                    LogUtil.printLog("onError", "code: ${code}\nmessage: $message")
+                }.onException {
+                    LogUtil.printLog("onException", "${it.message}")
                 }
             }
-            .catch { LogUtil.printLog("flow Error", "flow Error") }
+            .catch { LogUtil.printLog("flow Error", "GetHomePreviewBannerUseCase") }
+            .launchIn(viewModelScope)
+    }
+
+    fun getRecommendedPos() {
+        _recommendedPost.update { UiState.Loading }
+        getRecommendedPostUseCase()
+            .onEach { networkResult ->
+                networkResult.onSuccess { code, data ->
+                    data?.let {
+                        _recommendedPost.update {
+                            UiState.Success(data.data)
+                        }
+                    }
+                }.onError { code, message ->
+                    LogUtil.printLog("onError", "code: ${code}\nmessage: $message")
+                }.onException {
+                    LogUtil.printLog("onException", "${it.message}")
+                }
+            }
+            .catch { LogUtil.printLog("flow Error", "GetRecommendedPostUseCase") }
             .launchIn(viewModelScope)
     }
 }

@@ -2,12 +2,10 @@ package com.nanaland.ui.nanapick
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.nanaland.BuildConfig
-import com.nanaland.domain.entity.nanapick.NanaPickContent
+import com.nanaland.domain.entity.nanapick.NanaPickContentData
 import com.nanaland.domain.request.nanapick.GetNanaPickContentRequest
 import com.nanaland.domain.usecase.nanapick.GetNanaPickContentUseCase
 import com.nanaland.util.log.LogUtil
-import com.nanaland.util.network.finally
 import com.nanaland.util.network.onError
 import com.nanaland.util.network.onException
 import com.nanaland.util.network.onSuccess
@@ -26,7 +24,7 @@ class NanaPickContentViewModel @Inject constructor(
     private val getNanaPickContentUseCase: GetNanaPickContentUseCase
 ) : ViewModel() {
 
-    private val _nanaPickContent = MutableStateFlow<UiState<NanaPickContent>>(UiState.Empty)
+    private val _nanaPickContent = MutableStateFlow<UiState<NanaPickContentData>>(UiState.Loading)
     val nanaPickContent = _nanaPickContent.asStateFlow()
 
     fun getNanaPickContent(contentId: Long?) {
@@ -41,12 +39,10 @@ class NanaPickContentViewModel @Inject constructor(
                             UiState.Success(data.data)
                         }
                     }
-                }.onError { _, _ ->
-
-                }.onException { _ ->
-
-                }.finally { _ ->
-                    LogUtil.printNetworkLog(requestData, networkResult, "GetNanaPickContentUseCase")
+                }.onError { code, message ->
+                    LogUtil.printLog("onError", "code: ${code}\nmessage: $message")
+                }.onException {
+                    LogUtil.printLog("onException", "${it.message}")
                 }
             }
             .catch { LogUtil.printLog("flow Error", "flow Error") }

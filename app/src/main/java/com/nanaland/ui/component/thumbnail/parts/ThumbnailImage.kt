@@ -29,7 +29,7 @@ fun ThumbnailImage(
 
 @ComponentPreview
 @Composable
-private fun ThumbnailImagePreview() {
+private fun Preview() {
     NanaLandTheme {
         ThumbnailImage(
             imageUri = "https://file.notion.so/f/f/2bf22a5c-a41d-4bbb-9b75-5fe557a5bad9/9afe3dac-6ab9-4149-b2aa-622d49cc258c/nanapick_list_preview_background_1.png?id=1b13ce8f-66f1-4c24-ae34-dbe69cd348e9&table=block&spaceId=2bf22a5c-a41d-4bbb-9b75-5fe557a5bad9&expirationTimestamp=1714615200000&signature=kgKQjMAQzxSijaQYGxd7P1y3Sp9iNYVNmvjy2t4adMU&downloadName=nanapick_list_preview_background_1.png"

@@ -5,24 +5,36 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.wrapContentSize
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.nanaland.ui.component.thumbnail.parts.ThumbnailImage
 import com.nanaland.ui.component.thumbnail.parts.ThumbnailLikeButton
+import com.nanaland.ui.component.thumbnail.parts.ThumbnailSubtitle
+import com.nanaland.ui.component.common.Tag
+import com.nanaland.ui.component.thumbnail.parts.ThumbnailTitle
 import com.nanaland.ui.theme.NanaLandTheme
 import com.nanaland.util.ui.ComponentPreview
+import com.nanaland.util.ui.clickableNoEffect
 
 @Composable
 fun FestivalThumbnail(
     imageUri: String?,
     isLiked: Boolean,
-    onIsLikedButtonClicked: () -> Unit,
+    title: String?,
+    subTitle: String?,
+    tag: String?,
+    onLikeButtonClick: () -> Unit,
+    onClick: () -> Unit
 ) {
     Column(
-        modifier = Modifier.wrapContentSize()
+        modifier = Modifier
+            .width(160.dp)
+            .wrapContentHeight()
+            .clickableNoEffect { onClick() }
     ) {
         Box {
             ThumbnailImage(imageUri = imageUri)
@@ -33,23 +45,53 @@ fun FestivalThumbnail(
             ) {
                 ThumbnailLikeButton(
                     isLiked = isLiked,
-                    onClick = onIsLikedButtonClicked
+                    onClick = onLikeButtonClick
                 )
             }
         }
 
-        Spacer(Modifier.height(10.dp))
+        Spacer(Modifier.height(8.dp))
+
+        ThumbnailTitle(text = title)
+
+        Spacer(Modifier.height(4.dp))
+
+        ThumbnailSubtitle(text = subTitle)
+
+        Spacer(Modifier.height(8.dp))
+
+        Tag(text = tag)
     }
 }
 
 @ComponentPreview
 @Composable
-private fun FestivalThumbnailPreview() {
+private fun FestivalThumbnailPreview1() {
     NanaLandTheme {
         FestivalThumbnail(
             imageUri = "",
             isLiked = false,
-            onIsLikedButtonClicked = {}
+            title = "title",
+            subTitle = "subTitle",
+            tag = "tag",
+            onLikeButtonClick = {},
+            onClick = {}
+        )
+    }
+}
+
+@ComponentPreview
+@Composable
+private fun FestivalThumbnailPreview2() {
+    NanaLandTheme {
+        FestivalThumbnail(
+            imageUri = "",
+            isLiked = true,
+            title = "title title title title title title title",
+            subTitle = "subTitle",
+            tag = "tag",
+            onLikeButtonClick = {},
+            onClick = {}
         )
     }
 }

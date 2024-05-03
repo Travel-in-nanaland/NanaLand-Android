@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName
 
 data class GetMarketListRequest(
     @SerializedName("addressFilterList")
-    val addressFilterList: String,
+    val addressFilterList: List<String>,
     @SerializedName("page")
     val page: Long,
     @SerializedName("size")

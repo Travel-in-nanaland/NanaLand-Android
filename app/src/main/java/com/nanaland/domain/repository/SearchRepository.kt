@@ -3,12 +3,16 @@ package com.nanaland.domain.repository
 import com.nanaland.domain.request.search.GetAllSearchResultListRequest
 import com.nanaland.domain.request.search.GetSearchResultListRequest
 import com.nanaland.domain.response.search.GetAllSearchResultListResponse
+import com.nanaland.domain.response.search.GetHotPostsResponse
 import com.nanaland.domain.response.search.GetSearchResultListResponse
 import com.nanaland.domain.response.search.GetTopKeywordsResponse
 import com.nanaland.util.network.NetworkResult
 
 
 interface SearchRepository {
+
+    // 검색량 UP 게시물 조회
+    suspend fun getHotPosts(): NetworkResult<GetHotPostsResponse>
 
     // 인기 검색어 8개 조회
     suspend fun getTopKeywords(): NetworkResult<GetTopKeywordsResponse>

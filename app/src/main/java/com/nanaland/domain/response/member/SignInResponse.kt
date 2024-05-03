@@ -1,7 +1,7 @@
 package com.nanaland.domain.response.member
 
 import com.google.gson.annotations.SerializedName
-import com.nanaland.domain.entity.member.TokenData
+import com.nanaland.domain.entity.member.TokenDataData
 
 data class SignInResponse(
     @SerializedName("status")
@@ -9,5 +9,5 @@ data class SignInResponse(
     @SerializedName("message")
     val message: String?,
     @SerializedName("data")
-    val data: TokenData
+    val data: TokenDataData
 )

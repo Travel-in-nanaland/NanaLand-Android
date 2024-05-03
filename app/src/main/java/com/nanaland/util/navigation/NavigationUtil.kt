@@ -14,9 +14,15 @@ import androidx.navigation.Navigator
 fun NavController.navigate(
     route: String,
     args: Bundle,
+    isSingleTop: Boolean = true,
     navOptions: NavOptions? = null,
     navigatorExtras: Navigator.Extras? = null
 ) {
+    if (isSingleTop) {
+        if (this.currentBackStackEntry?.destination?.route != null) {
+            if (this.currentBackStackEntry!!.destination.route == route) return
+        }
+    }
     val routeLink = NavDeepLinkRequest
         .Builder
         .fromUri(NavDestination.createRoute(route).toUri())

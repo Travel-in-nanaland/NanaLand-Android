@@ -1,7 +1,7 @@
 package com.nanaland.ui.signin
 
 import androidx.compose.runtime.Composable
-import com.nanaland.util.ui.CustomPreview
+import com.nanaland.util.ui.ScreenPreview
 
 @Composable
 fun SignInScreen() {
@@ -17,7 +17,7 @@ private fun SignInScreen(
 
 }
 
-@CustomPreview
+@ScreenPreview
 @Composable
 private fun SignInScreenPreview() {
 

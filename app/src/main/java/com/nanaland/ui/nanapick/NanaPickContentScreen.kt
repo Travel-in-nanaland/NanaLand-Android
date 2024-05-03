@@ -3,7 +3,6 @@ package com.nanaland.ui.nanapick
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -21,7 +20,6 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -33,10 +31,10 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.nanaland.R
-import com.nanaland.domain.entity.nanapick.NanaPickContent
-import com.nanaland.ui.component.CustomSurface
-import com.nanaland.ui.component.CustomTopBar
-import com.nanaland.ui.component.MoveToTopButton
+import com.nanaland.domain.entity.nanapick.NanaPickContentData
+import com.nanaland.ui.component.common.CustomSurface
+import com.nanaland.ui.component.common.CustomTopBar
+import com.nanaland.ui.component.detailscreen.MoveToTopButton
 import com.nanaland.ui.theme.getColor
 import com.nanaland.ui.theme.body01
 import com.nanaland.ui.theme.body02
@@ -44,9 +42,7 @@ import com.nanaland.ui.theme.body02Bold
 import com.nanaland.ui.theme.caption01
 import com.nanaland.ui.theme.title01Bold
 import com.nanaland.util.ui.UiState
-import com.nanaland.util.ui.clickableNoEffect
 import com.skydoves.landscapist.glide.GlideImage
-import kotlinx.coroutines.launch
 
 @Composable
 fun NanaPickContentScreen(
@@ -67,7 +63,7 @@ fun NanaPickContentScreen(
 
 @Composable
 private fun NanaPickContentScreen(
-    nanaPickContent: UiState<NanaPickContent>,
+    nanaPickContent: UiState<NanaPickContentData>,
     moveTonNanaPickListScreen: () -> Unit,
     tmp: Boolean
 ) {
@@ -92,7 +88,7 @@ private fun NanaPickContentScreen(
                             .padding(20.dp)
                     ) {
                         when (nanaPickContent) {
-                            is UiState.Empty -> { Box(Modifier.fillMaxSize()) }
+                            is UiState.Loading -> { Box(Modifier.fillMaxSize()) }
                             is UiState.Loading -> { Box(Modifier.fillMaxSize()) }
                             is UiState.Success -> {
                                 TipBox(
@@ -109,7 +105,7 @@ private fun NanaPickContentScreen(
                 }
             }
             MoveToTopButton(
-                moveToTop = { listState.animateScrollToItem(0, 0) }
+                onClick = { listState.animateScrollToItem(0, 0) }
             )
         }
     }
@@ -117,7 +113,7 @@ private fun NanaPickContentScreen(
 
 @Composable
 private fun TopBannerContent(
-    nanaPickContentUiState: UiState<NanaPickContent>
+    nanaPickContentUiState: UiState<NanaPickContentData>
 ) {
     Box(
         modifier = Modifier
@@ -126,7 +122,7 @@ private fun TopBannerContent(
             .background(Color(0xFF262F60))
     ) {
         when (nanaPickContentUiState) {
-            is UiState.Empty -> { Box(Modifier.fillMaxSize()) }
+            is UiState.Loading -> { Box(Modifier.fillMaxSize()) }
             is UiState.Loading -> { Box(Modifier.fillMaxSize()) }
             is UiState.Success -> {
                 GlideImage(
@@ -148,13 +144,13 @@ private fun TopBannerContent(
 //            )
             Spacer(Modifier.weight(1f))
             Image(
-                painter = painterResource(id = R.drawable.ic_heart_outlined),
+                painter = painterResource(id = R.drawable.ic_heart_outlined_black),
                 contentDescription = null,
                 colorFilter = ColorFilter.tint(Color(0xFFFFFFFF))
             )
             Spacer(Modifier.width(10.dp))
             Image(
-                painter = painterResource(id = R.drawable.ic_share),
+                painter = painterResource(id = R.drawable.ic_share_outlined_white),
                 contentDescription = null,
                 colorFilter = ColorFilter.tint(Color(0xFFFFFFFF))
             )
@@ -179,7 +175,7 @@ private fun TipBox(
             verticalAlignment = Alignment.CenterVertically
         ) {
             Image(
-                painter = painterResource(id = R.drawable.ic_warning_circle),
+                painter = painterResource(id = R.drawable.ic_warning_circle_maincolor),
                 contentDescription = null
             )
             Spacer(Modifier.width(4.dp))
@@ -200,7 +196,7 @@ private fun TipBox(
 
 @Composable
 private fun DetailContent(
-    nanaPickContent: NanaPickContent
+    nanaPickContent: NanaPickContentData
 ) {
     nanaPickContent.nanaDetails.forEach { subContent ->
         Text(

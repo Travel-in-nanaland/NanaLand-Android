@@ -52,6 +52,7 @@ fun MainNavigation(
                 moveToMainScreen = {
                     navController.navigate(ROUTE_MAIN) {
                         popUpTo(ROUTE_SPLASH) { inclusive = true }
+                        launchSingleTop = true
                     }
                 }
             )
@@ -60,7 +61,7 @@ fun MainNavigation(
         // 언어 선택 화면
         composable(route = ROUTE_LANGUAGE_SELECTION) {
             LanguageSelectionScreen(
-                moveToSignInScreen = { navController.navigate(ROUTE_SIGN_IN) }
+                moveToSignInScreen = { navController.navigate(ROUTE_SIGN_IN) { launchSingleTop = true } }
             )
         }
 
@@ -71,16 +72,16 @@ fun MainNavigation(
         // 메인 화면
         composable(route = ROUTE_MAIN) {
             MainScreen(
-                moveToNanaPickListScreen = { navController.navigate(ROUTE_NANAPICK_LIST) },
+                moveToNanaPickListScreen = { navController.navigate(ROUTE_NANAPICK_LIST) { launchSingleTop = true } },
                 moveToNanaPickContentScreen = { contentId ->
                     val bundle = bundleOf(
                         "contentId" to contentId
                     )
                     navController.navigate(ROUTE_NANAPICK_CONTENT, bundle)
                 },
-                moveToNatureListScreen = { navController.navigate(ROUTE_NATURE_LIST) },
-                moveToFestivalListScreen = { navController.navigate(ROUTE_FESTIVAL_LIST) },
-                moveToMarketListScreen = { navController.navigate(ROUTE_MARKET_LIST) },
+                moveToNatureListScreen = { navController.navigate(ROUTE_NATURE_LIST) { launchSingleTop = true } },
+                moveToFestivalListScreen = { navController.navigate(ROUTE_FESTIVAL_LIST) { launchSingleTop = true } },
+                moveToMarketListScreen = { navController.navigate(ROUTE_MARKET_LIST) { launchSingleTop = true } },
                 moveToExperienceScreen = { /* MVP2 구현 예정 */ }
             )
         }
@@ -88,43 +89,70 @@ fun MainNavigation(
         // 자연 리스트 화면
         composable(route = ROUTE_NATURE_LIST) {
             NatureListScreen(
-                moveToNatureContentScreen = { navController.navigate(ROUTE_NATURE_CONTENT) }
+                moveToBackScreen = { navController.popBackStack() },
+                moveToNatureContentScreen = { contentId ->
+                    val bundle = bundleOf(
+                        "contentId" to contentId
+                    )
+                    navController.navigate(ROUTE_NATURE_CONTENT, bundle)
+                }
             )
         }
 
         // 자연 상세 화면
         composable(route = ROUTE_NATURE_CONTENT) {
-            NatureContentScreen()
+            NatureContentScreen(
+                contentId = it.arguments?.getLong("contentId"),
+                moveToBackScreen = { navController.popBackStack() }
+            )
         }
 
         // 축제 리스트 화면
         composable(route = ROUTE_FESTIVAL_LIST) {
             FestivalListScreen(
-                moveToFestivalContentScreen = { navController.navigate(ROUTE_FESTIVAL_CONTENT) }
+                moveToBackScreen = { navController.popBackStack() },
+                moveToFestivalContentScreen = { contentId ->
+                    val bundle = bundleOf(
+                        "contentId" to contentId
+                    )
+                    navController.navigate(ROUTE_FESTIVAL_CONTENT, bundle)
+                }
             )
         }
 
         // 축제 상세 화면
         composable(route = ROUTE_FESTIVAL_CONTENT) {
-            FestivalContentScreen()
+            FestivalContentScreen(
+                contentId = it.arguments?.getLong("contentId"),
+                moveToBackScreen = { navController.popBackStack() }
+            )
         }
 
         // 전통시장 리스트 화면
         composable(route = ROUTE_MARKET_LIST) {
             MarketListScreen(
-                moveToMarketContentScreen = { navController.navigate(ROUTE_MARKET_CONTENT) }
+                moveToBackScreen = { navController.popBackStack() },
+                moveToMarketContentScreen = { contentId ->
+                    val bundle = bundleOf(
+                        "contentId" to contentId
+                    )
+                    navController.navigate(ROUTE_MARKET_CONTENT, bundle)
+                }
             )
         }
 
         // 전통시장 상세 화면
         composable(route = ROUTE_MARKET_CONTENT) {
-            MarketContentScreen()
+            MarketContentScreen(
+                contentId = it.arguments?.getLong("contentId"),
+                moveToBackScreen = { navController.popBackStack() }
+            )
         }
 
         // 이색체험 리스트 화면
         composable(route = ROUTE_EXPERIENCE_LIST) {
             ExperienceListScreen(
-                moveToExperienceContentScreen = { navController.navigate(ROUTE_EXPERIENCE_CONTENT) }
+                moveToExperienceContentScreen = { navController.navigate(ROUTE_EXPERIENCE_CONTENT) { launchSingleTop = true } }
             )
         }
 

@@ -1,7 +1,7 @@
 package com.nanaland.domain.response.nanapick
 
 import com.google.gson.annotations.SerializedName
-import com.nanaland.domain.entity.nanapick.NanaPickContent
+import com.nanaland.domain.entity.nanapick.NanaPickContentData
 
 data class GetNanaPickContentResponse(
     @SerializedName("status")
@@ -9,5 +9,5 @@ data class GetNanaPickContentResponse(
     @SerializedName("message")
     val message: String?,
     @SerializedName("data")
-    val data: NanaPickContent
+    val data: NanaPickContentData
 )

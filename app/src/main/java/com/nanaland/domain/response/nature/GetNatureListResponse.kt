@@ -1,7 +1,7 @@
 package com.nanaland.domain.response.nature
 
 import com.google.gson.annotations.SerializedName
-import com.nanaland.domain.entity.nature.NatureThumbnail
+import com.nanaland.domain.entity.nature.NatureThumbnailData
 
 data class GetNatureListResponse(
     @SerializedName("status")
@@ -16,5 +16,5 @@ data class GetNatureListResponseData(
     @SerializedName("totalElements")
     val totalElements: Long,
     @SerializedName("data")
-    val data: List<NatureThumbnail>
+    val data: List<NatureThumbnailData>
 )

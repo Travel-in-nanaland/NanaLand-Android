@@ -1,9 +1,9 @@
 package com.nanaland.util.network
 
 import android.util.Log
-import com.nanaland.domain.usecase.datastore.GetRefreshTokenUseCase
+import com.nanaland.domain.usecase.authdatastore.GetRefreshTokenUseCase
 import com.nanaland.domain.usecase.auth.ReissueAccessTokenUseCase
-import com.nanaland.domain.usecase.datastore.SaveAccessTokenUseCase
+import com.nanaland.domain.usecase.authdatastore.SaveAccessTokenUseCase
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.runBlocking
 import okhttp3.Authenticator
@@ -42,7 +42,7 @@ class AuthAuthenticator @Inject constructor(
         }
         Log.e("AuthAuthenticator", "new AccessToken: ${newAccessToken}")
 
-        return newRequestWithToken(newAccessToken, response.request())
+        return newRequestWithToken(newAccessToken, response.request)
     }
 
     private fun newRequestWithToken(token: String, request: Request): Request =
