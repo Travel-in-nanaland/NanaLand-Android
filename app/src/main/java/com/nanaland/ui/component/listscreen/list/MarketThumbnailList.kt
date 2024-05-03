@@ -16,6 +16,7 @@ import com.nanaland.util.ui.UiState
 @Composable
 fun MarketThumbnailList(
     thumbnailList: UiState<List<MarketThumbnailData>>,
+    toggleFavorite: (Long) -> Unit,
     moveToMarketContentScreen: (Long) -> Unit,
 ) {
     when (thumbnailList) {
@@ -35,7 +36,7 @@ fun MarketThumbnailList(
                             isLiked = item.favorite,
                             title = item.title,
                             tag = item.addressTag,
-                            onLikeButtonClick = {},
+                            onLikeButtonClick = { toggleFavorite(item.id) },
                             onClick = { moveToMarketContentScreen(item.id) }
                         )
                     }

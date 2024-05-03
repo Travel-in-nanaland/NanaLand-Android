@@ -24,6 +24,6 @@ fun DetailScreenInformationIcon(@DrawableRes id: Int) {
 @Composable
 private fun DetailScreenInformationIconPreview() {
     NanaLandTheme {
-        DetailScreenInformationIcon(R.drawable.ic_heart_outlined_black)
+        DetailScreenInformationIcon(R.drawable.ic_heart_outlined)
     }
 }

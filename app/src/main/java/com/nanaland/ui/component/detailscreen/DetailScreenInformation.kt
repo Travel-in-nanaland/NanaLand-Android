@@ -56,7 +56,7 @@ private fun DetailScreenInformationPreview() {
                 .padding(16.dp)
         ) {
             DetailScreenInformation(
-                drawableId = R.drawable.ic_heart_outlined_black,
+                drawableId = R.drawable.ic_heart_outlined,
                 title = "Title",
                 content = "Content"
             )

@@ -3,7 +3,9 @@ package com.nanaland.ui.market
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.nanaland.domain.entity.market.MarketContentData
+import com.nanaland.domain.request.favorite.ToggleFavoriteRequest
 import com.nanaland.domain.request.market.GetMarketContentRequest
+import com.nanaland.domain.usecase.favorite.ToggleFavoriteUseCase
 import com.nanaland.domain.usecase.market.GetMarketContentUseCase
 import com.nanaland.util.log.LogUtil
 import com.nanaland.util.network.onError
@@ -21,7 +23,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class MarketContentViewModel @Inject constructor(
-    private val getMarketContentUseCase: GetMarketContentUseCase
+    private val getMarketContentUseCase: GetMarketContentUseCase,
+    private val toggleFavoriteUseCase: ToggleFavoriteUseCase
 ) : ViewModel() {
 
     private val _marketContent = MutableStateFlow<UiState<MarketContentData>>(UiState.Loading)
@@ -49,6 +52,34 @@ class MarketContentViewModel @Inject constructor(
                 }
             }
             .catch { LogUtil.printLog("flow error", "GetMarketContentUseCase") }
+            .launchIn(viewModelScope)
+    }
+
+    fun toggleFavorite(contentId: Long, updateList: (Long, Boolean) -> Unit) {
+        val requestData = ToggleFavoriteRequest(
+            id = contentId,
+            category = "MARKET"
+        )
+        toggleFavoriteUseCase(requestData)
+            .onEach { networkResult ->
+                networkResult.onSuccess { code, data ->
+                    data?.let {
+                        _marketContent.update { uiState ->
+                            if (uiState is UiState.Success) {
+                                updateList(contentId, data.data.favorite)
+                                UiState.Success(uiState.data.copy(favorite = data.data.favorite))
+                            } else {
+                                uiState
+                            }
+                        }
+                    }
+                }.onError { code, message ->
+                    LogUtil.printLog("onError", "code: ${code}\nmessage: $message")
+                }.onException {
+                    LogUtil.printLog("onException", "${it.message}")
+                }
+            }
+            .catch { LogUtil.printLog("flow Error", "ToggleFavoriteUseCase") }
             .launchIn(viewModelScope)
     }
 }

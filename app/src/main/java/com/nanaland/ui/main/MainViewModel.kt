@@ -23,8 +23,8 @@ class MainViewModel @Inject constructor() : ViewModel() {
         ),
         NavigationItemContent(
             viewType = MainScreenViewType.Like,
-            iconSelected = R.drawable.ic_heart_filled_black,
-            iconUnselected = R.drawable.ic_heart_outlined_black,
+            iconSelected = R.drawable.ic_heart_filled,
+            iconUnselected = R.drawable.ic_heart_outlined,
             label = "찜"
         ),
         NavigationItemContent(

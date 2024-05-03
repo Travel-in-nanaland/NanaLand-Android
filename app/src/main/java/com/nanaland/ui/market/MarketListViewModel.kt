@@ -4,7 +4,9 @@ import androidx.compose.runtime.mutableStateListOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.nanaland.domain.entity.market.MarketThumbnailData
+import com.nanaland.domain.request.favorite.ToggleFavoriteRequest
 import com.nanaland.domain.request.market.GetMarketListRequest
+import com.nanaland.domain.usecase.favorite.ToggleFavoriteUseCase
 import com.nanaland.domain.usecase.market.GetMarketListUseCase
 import com.nanaland.util.log.LogUtil
 import com.nanaland.util.network.onError
@@ -22,7 +24,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class MarketListViewModel @Inject constructor(
-    private val getMarketListUseCase: GetMarketListUseCase
+    private val getMarketListUseCase: GetMarketListUseCase,
+    private val toggleFavoriteUseCase: ToggleFavoriteUseCase
 ) : ViewModel() {
 
     private val locationList = listOf("전체", "제주시", "애월", "서귀포시", "성산", "한림", "조천", "구좌", "한경", "대정", "안덕", "남원", "표선", "우도")
@@ -61,6 +64,51 @@ class MarketListViewModel @Inject constructor(
             }
             .catch { LogUtil.printLog("flow Error", "GetMarketListUseCase") }
             .launchIn(viewModelScope)
+    }
+
+    fun toggleFavorite(contentId: Long) {
+        val requestData = ToggleFavoriteRequest(
+            id = contentId,
+            category = "MARKET"
+        )
+        toggleFavoriteUseCase(requestData)
+            .onEach { networkResult ->
+                networkResult.onSuccess { code, data ->
+                    data?.let {
+                        _marketThumbnailList.update { uiState ->
+                            if (uiState is UiState.Success) {
+                                val newList = uiState.data.map {  item ->
+                                    if (item.id == contentId) item.copy(favorite = data.data.favorite)
+                                    else item
+                                }
+                                UiState.Success(newList)
+                            } else {
+                                uiState
+                            }
+                        }
+                    }
+                }.onError { code, message ->
+                    LogUtil.printLog("onError", "code: ${code}\nmessage: $message")
+                }.onException {
+                    LogUtil.printLog("onException", "${it.message}")
+                }
+            }
+            .catch { LogUtil.printLog("flow Error", "ToggleFavoriteUseCase") }
+            .launchIn(viewModelScope)
+    }
+
+    fun toggleFavoriteWithNoApi(contentId: Long, isLiked: Boolean) {
+        _marketThumbnailList.update { uiState ->
+            if (uiState is UiState.Success) {
+                val newList = uiState.data.map {  item ->
+                    if (item.id == contentId) item.copy(favorite = isLiked)
+                    else item
+                }
+                UiState.Success(newList)
+            } else {
+                uiState
+            }
+        }
     }
 
     init {

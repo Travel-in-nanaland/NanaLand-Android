@@ -31,6 +31,7 @@ import com.nanaland.ui.theme.NanaLandTheme
 import com.nanaland.ui.theme.getColor
 import com.nanaland.util.ui.ComponentPreview
 import com.nanaland.util.ui.ScreenPreview
+import com.nanaland.util.ui.drawColoredShadow
 
 @Composable
 fun DetailScreenDescription(
@@ -44,11 +45,12 @@ fun DetailScreenDescription(
     val isMoreOpen = remember { mutableStateOf(false) }
     Box(
         modifier = Modifier
-            .padding(16.dp)
+//            .padding(16.dp)
             .fillMaxWidth()
-            .shadow(
-                elevation = 4.dp,
-                shape = RoundedCornerShape(12.dp)
+            .drawColoredShadow(
+                color = Color.Black,
+                alpha = 0.1f,
+                shadowRadius = 6.dp
             )
             .clip(RoundedCornerShape(12.dp))
             .background(

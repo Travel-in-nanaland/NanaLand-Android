@@ -3,7 +3,9 @@ package com.nanaland.ui.festival
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.nanaland.domain.entity.festival.FestivalContentData
+import com.nanaland.domain.request.favorite.ToggleFavoriteRequest
 import com.nanaland.domain.request.festival.GetFestivalContentRequest
+import com.nanaland.domain.usecase.favorite.ToggleFavoriteUseCase
 import com.nanaland.domain.usecase.festival.GetFestivalContentUseCase
 import com.nanaland.util.log.LogUtil
 import com.nanaland.util.network.onError
@@ -21,7 +23,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class FestivalContentViewModel @Inject constructor(
-    private val getFestivalContentUseCase: GetFestivalContentUseCase
+    private val getFestivalContentUseCase: GetFestivalContentUseCase,
+    private val toggleFavoriteUseCase: ToggleFavoriteUseCase
 ) : ViewModel() {
 
     private val _festivalContent = MutableStateFlow<UiState<FestivalContentData>>(UiState.Loading)
@@ -49,6 +52,33 @@ class FestivalContentViewModel @Inject constructor(
                 }
             }
             .catch { LogUtil.printLog("flow error", "GetFestivalContentUseCase") }
+            .launchIn(viewModelScope)
+    }
+
+    fun toggleFavorite(contentId: Long) {
+        val requestData = ToggleFavoriteRequest(
+            id = contentId,
+            category = "FESTIVAL"
+        )
+        toggleFavoriteUseCase(requestData)
+            .onEach { networkResult ->
+                networkResult.onSuccess { code, data ->
+                    data?.let {
+                        _festivalContent.update { uiState ->
+                            if (uiState is UiState.Success) {
+                                UiState.Success(uiState.data.copy(favorite = data.data.favorite))
+                            } else {
+                                uiState
+                            }
+                        }
+                    }
+                }.onError { code, message ->
+                    LogUtil.printLog("onError", "code: ${code}\nmessage: $message")
+                }.onException {
+                    LogUtil.printLog("onException", "${it.message}")
+                }
+            }
+            .catch { LogUtil.printLog("flow Error", "ToggleFavoriteUseCase") }
             .launchIn(viewModelScope)
     }
 }

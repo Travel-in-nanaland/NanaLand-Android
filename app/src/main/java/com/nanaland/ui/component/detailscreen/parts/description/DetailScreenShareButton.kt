@@ -17,7 +17,7 @@ fun DetailScreenShareButton(onClick: () -> Unit) {
         modifier = Modifier
             .size(32.dp)
             .clickableNoEffect { onClick() },
-        painter = painterResource(R.drawable.ic_share_outlined_black),
+        painter = painterResource(R.drawable.ic_share_outlined),
         contentDescription = null
     )
 }

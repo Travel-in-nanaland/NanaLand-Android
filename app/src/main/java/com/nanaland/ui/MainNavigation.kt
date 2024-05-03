@@ -2,8 +2,10 @@ package com.nanaland.ui
 
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.core.os.bundleOf
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -22,6 +24,7 @@ import com.nanaland.globalvalue.constant.ROUTE_NATURE_CONTENT
 import com.nanaland.globalvalue.constant.ROUTE_NATURE_LIST
 import com.nanaland.globalvalue.constant.ROUTE_SIGN_IN
 import com.nanaland.globalvalue.constant.ROUTE_SPLASH
+import com.nanaland.globalvalue.type.CategoryType
 import com.nanaland.ui.experience.ExperienceContentScreen
 import com.nanaland.ui.experience.ExperienceListScreen
 import com.nanaland.ui.languageselection.LanguageSelectionScreen
@@ -36,6 +39,7 @@ import com.nanaland.ui.nature.NatureContentScreen
 import com.nanaland.ui.nature.NatureListScreen
 import com.nanaland.ui.splash.SplashScreen
 import com.nanaland.util.navigation.navigate
+import com.nanaland.util.type.getCategoryType
 
 @Composable
 fun MainNavigation(
@@ -72,13 +76,19 @@ fun MainNavigation(
         // 메인 화면
         composable(route = ROUTE_MAIN) {
             MainScreen(
-                moveToNanaPickListScreen = { navController.navigate(ROUTE_NANAPICK_LIST) { launchSingleTop = true } },
-                moveToNanaPickContentScreen = { contentId ->
+                moveToCategoryContentScreen = { contentId, category ->
                     val bundle = bundleOf(
                         "contentId" to contentId
                     )
-                    navController.navigate(ROUTE_NANAPICK_CONTENT, bundle)
+                    when (getCategoryType(category)) {
+                        CategoryType.Nature -> { navController.navigate(ROUTE_NATURE_CONTENT, bundle) }
+                        CategoryType.Festival -> { navController.navigate(ROUTE_FESTIVAL_CONTENT, bundle) }
+                        CategoryType.Market -> { navController.navigate(ROUTE_MARKET_CONTENT, bundle) }
+                        CategoryType.Experience -> { navController.navigate(ROUTE_EXPERIENCE_CONTENT, bundle) }
+                        CategoryType.Nana -> { navController.navigate(ROUTE_NANAPICK_CONTENT, bundle) }
+                    }
                 },
+                moveToNanaPickListScreen = { navController.navigate(ROUTE_NANAPICK_LIST) { launchSingleTop = true } },
                 moveToNatureListScreen = { navController.navigate(ROUTE_NATURE_LIST) { launchSingleTop = true } },
                 moveToFestivalListScreen = { navController.navigate(ROUTE_FESTIVAL_LIST) { launchSingleTop = true } },
                 moveToMarketListScreen = { navController.navigate(ROUTE_MARKET_LIST) { launchSingleTop = true } },
@@ -143,8 +153,12 @@ fun MainNavigation(
 
         // 전통시장 상세 화면
         composable(route = ROUTE_MARKET_CONTENT) {
+            val parentEntry = remember(it) {
+                navController.previousBackStackEntry!!
+            }
             MarketContentScreen(
                 contentId = it.arguments?.getLong("contentId"),
+                marketListViewModel = hiltViewModel(parentEntry),
                 moveToBackScreen = { navController.popBackStack() }
             )
         }
@@ -170,9 +184,7 @@ fun MainNavigation(
                     )
                     navController.navigate(ROUTE_NANAPICK_CONTENT, bundle)
                 },
-                moveToMainScreen = {
-                    navController.popBackStack(ROUTE_MAIN, false)
-                }
+                moveToMainScreen = { navController.popBackStack() }
             )
         }
 
@@ -180,7 +192,7 @@ fun MainNavigation(
         composable(route = ROUTE_NANAPICK_CONTENT) {
             NanaPickContentScreen(
                 contentId = it.arguments?.getLong("contentId"),
-                moveTonNanaPickListScreen = { navController.popBackStack(ROUTE_NANAPICK_LIST, false) }
+                moveToBackScreen = { navController.popBackStack() }
             )
         }
     }

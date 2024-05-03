@@ -4,6 +4,8 @@ import android.util.Log
 import com.nanaland.domain.usecase.authdatastore.GetAccessTokenUseCase
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.sync.Mutex
+import kotlinx.coroutines.sync.withLock
 import okhttp3.Interceptor
 import okhttp3.Protocol
 import okhttp3.Request
@@ -14,15 +16,25 @@ import javax.inject.Inject
 class TokenInterceptor @Inject constructor(
     private val getAccessTokenUseCase: GetAccessTokenUseCase
 ) : Interceptor {
+
+    private val mutex = Mutex()
+
     override fun intercept(chain: Interceptor.Chain): Response {
-        val accessToken: String = runBlocking {
-            getAccessTokenUseCase().first()
-        } ?: return errorResponse(chain.request())
-
-        Log.e("TokenInterceptor", "${accessToken}")
-        val request = chain.request().newBuilder().header("Authorization", "Bearer $accessToken").build()
-
-        return chain.proceed(request)
+        lateinit var response: Response
+        runBlocking {
+            mutex.withLock {
+                val accessToken = getAccessTokenUseCase().first()
+                if (accessToken.isNullOrEmpty()) {
+                    response = errorResponse(chain.request())
+                    return@runBlocking
+                } else {
+                    Log.e("TokenInterceptor", "${accessToken}")
+                    val request = chain.request().newBuilder().header("Authorization", "Bearer $accessToken").build()
+                    response = chain.proceed(request)
+                }
+            }
+        }
+        return response
     }
 }
 private fun errorResponse(request: Request): Response = Response.Builder()

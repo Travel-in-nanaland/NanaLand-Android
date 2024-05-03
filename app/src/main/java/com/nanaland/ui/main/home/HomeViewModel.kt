@@ -64,7 +64,7 @@ class HomeViewModel @Inject constructor(
             .launchIn(viewModelScope)
     }
 
-    fun getRecommendedPos() {
+    fun getRecommendedPost() {
         _recommendedPost.update { UiState.Loading }
         getRecommendedPostUseCase()
             .onEach { networkResult ->

@@ -40,6 +40,7 @@ fun MarketListScreen(
         marketThumbnailCount = marketThumbnailCount,
         marketThumbnailList = marketThumbnailList,
         getMarketList = viewModel::getMarketList,
+        toggleFavorite = viewModel::toggleFavorite,
         moveToBackScreen = moveToBackScreen,
         moveToMarketContentScreen = moveToMarketContentScreen,
         isContent = true
@@ -53,6 +54,7 @@ private fun MarketListScreen(
     marketThumbnailCount: UiState<Long>,
     marketThumbnailList: UiState<List<MarketThumbnailData>>,
     getMarketList: () -> Unit,
+    toggleFavorite: (Long) -> Unit,
     moveToBackScreen: () -> Unit,
     moveToMarketContentScreen: (Long) -> Unit,
     isContent: Boolean
@@ -84,6 +86,7 @@ private fun MarketListScreen(
 
                 MarketThumbnailList(
                     thumbnailList = marketThumbnailList,
+                    toggleFavorite = toggleFavorite,
                     moveToMarketContentScreen = moveToMarketContentScreen
                 )
             }

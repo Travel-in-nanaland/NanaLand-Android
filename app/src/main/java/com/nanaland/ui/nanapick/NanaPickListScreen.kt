@@ -15,7 +15,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.nanaland.domain.entity.nanapick.NanaPickBannerData
 import com.nanaland.ui.component.common.CustomSurface
 import com.nanaland.ui.component.common.CustomTopBar
-import com.nanaland.ui.component.home.main.parts.HomeScreenNanaPickBanner
+import com.nanaland.ui.component.main.home.parts.HomeScreenNanaPickBanner
 import com.nanaland.util.ui.UiState
 
 @Composable

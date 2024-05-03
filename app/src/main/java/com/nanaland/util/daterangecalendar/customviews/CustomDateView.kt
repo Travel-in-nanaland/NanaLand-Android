@@ -189,7 +189,7 @@ class CustomDateView @JvmOverloads constructor(
                 throw IllegalArgumentException("$state is an invalid state.")
             }
         }
-        val mDrawable = ContextCompat.getDrawable(context, R.drawable.green_circle)
+        val mDrawable = ContextCompat.getDrawable(context, R.drawable.calendar_selected_circle)
         mDrawable!!.colorFilter = PorterDuffColorFilter(selectedDateCircleColor, filterMode)
         tvDate.background = mDrawable
         setBackgroundColor(Color.TRANSPARENT)

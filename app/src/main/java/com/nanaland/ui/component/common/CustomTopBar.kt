@@ -60,7 +60,7 @@ fun CustomTopBar(
                 modifier = Modifier
                     .width(32.dp)
                     .height(32.dp),
-                painter = painterResource(id = R.drawable.ic_back),
+                painter = painterResource(id = R.drawable.ic_arrow_left),
                 contentDescription = null,
                 colorFilter = ColorFilter.tint(getColor().black)
             )

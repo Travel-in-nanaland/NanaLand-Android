@@ -20,6 +20,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -43,11 +44,12 @@ import com.nanaland.ui.theme.caption01
 import com.nanaland.ui.theme.title01Bold
 import com.nanaland.util.ui.UiState
 import com.skydoves.landscapist.glide.GlideImage
+import kotlinx.coroutines.launch
 
 @Composable
 fun NanaPickContentScreen(
     contentId: Long?,
-    moveTonNanaPickListScreen: () -> Unit,
+    moveToBackScreen: () -> Unit,
     viewModel: NanaPickContentViewModel = hiltViewModel()
 ) {
     LaunchedEffect(Unit) {
@@ -56,7 +58,7 @@ fun NanaPickContentScreen(
     val nanaPickContent = viewModel.nanaPickContent.collectAsState().value
     NanaPickContentScreen(
         nanaPickContent = nanaPickContent,
-        moveTonNanaPickListScreen = moveTonNanaPickListScreen,
+        moveToBackScreen = moveToBackScreen,
         tmp = true
     )
 }
@@ -64,13 +66,14 @@ fun NanaPickContentScreen(
 @Composable
 private fun NanaPickContentScreen(
     nanaPickContent: UiState<NanaPickContentData>,
-    moveTonNanaPickListScreen: () -> Unit,
+    moveToBackScreen: () -> Unit,
     tmp: Boolean
 ) {
+    val coroutineScope = rememberCoroutineScope()
     CustomSurface {
         CustomTopBar(
             title = "나나's Pick",
-            onBackButtonClicked = moveTonNanaPickListScreen
+            onBackButtonClicked = moveToBackScreen
         )
         Box(
             modifier = Modifier.fillMaxSize()
@@ -105,7 +108,7 @@ private fun NanaPickContentScreen(
                 }
             }
             MoveToTopButton(
-                onClick = { listState.animateScrollToItem(0, 0) }
+                onClick = { coroutineScope.launch { listState.animateScrollToItem(0, 0) } }
             )
         }
     }
@@ -144,13 +147,13 @@ private fun TopBannerContent(
 //            )
             Spacer(Modifier.weight(1f))
             Image(
-                painter = painterResource(id = R.drawable.ic_heart_outlined_black),
+                painter = painterResource(id = R.drawable.ic_heart_outlined),
                 contentDescription = null,
                 colorFilter = ColorFilter.tint(Color(0xFFFFFFFF))
             )
             Spacer(Modifier.width(10.dp))
             Image(
-                painter = painterResource(id = R.drawable.ic_share_outlined_white),
+                painter = painterResource(id = R.drawable.ic_share_outlined),
                 contentDescription = null,
                 colorFilter = ColorFilter.tint(Color(0xFFFFFFFF))
             )
@@ -175,7 +178,7 @@ private fun TipBox(
             verticalAlignment = Alignment.CenterVertically
         ) {
             Image(
-                painter = painterResource(id = R.drawable.ic_warning_circle_maincolor),
+                painter = painterResource(id = R.drawable.ic_warning_outlined),
                 contentDescription = null
             )
             Spacer(Modifier.width(4.dp))
@@ -217,7 +220,8 @@ private fun DetailContent(
                     .size(30.dp)
                     .shadow(
                         elevation = 4.dp,
-                        shape = CircleShape
+                        shape = CircleShape,
+                        spotColor = Color(0x00000000)
                     )
                     .clip(CircleShape)
                     .background(Color(0xFFFFFFFF)),

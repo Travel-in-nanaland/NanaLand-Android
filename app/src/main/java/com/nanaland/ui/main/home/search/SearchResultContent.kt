@@ -202,7 +202,7 @@ private fun SearchResultPreview(
 
                 Image(
                     modifier = Modifier.size(24.dp),
-                    painter = painterResource(id = R.drawable.ic_next),
+                    painter = painterResource(id = R.drawable.ic_arrow_right),
                     contentDescription = null
                 )
             }
@@ -291,7 +291,7 @@ private fun EmptySearchResultContent() {
     ) {
         Image(
             modifier = Modifier.size(48.dp),
-            painter = painterResource(id = R.drawable.ic_orange_face),
+            painter = painterResource(id = R.drawable.ic_orangeface_outlined),
             contentDescription = null
         )
         Spacer(Modifier.height(4.dp))

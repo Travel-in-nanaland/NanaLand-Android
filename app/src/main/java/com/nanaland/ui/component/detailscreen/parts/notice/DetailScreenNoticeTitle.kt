@@ -22,7 +22,7 @@ fun DetailScreenNoticeTitle(text: String?) {
         verticalAlignment = Alignment.CenterVertically
     ) {
         Image(
-            painter = painterResource(id = R.drawable.ic_warning_circle_maincolor),
+            painter = painterResource(id = R.drawable.ic_warning_outlined),
             contentDescription = null
         )
 

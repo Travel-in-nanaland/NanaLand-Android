@@ -181,7 +181,7 @@ class SearchViewModel @Inject constructor(
     fun toggleFavorite(contentId: Long, category: String?) {
         if (category == null) return
         val requestData = ToggleFavoriteRequest(
-            id =  contentId,
+            id = contentId,
             category = category
         )
         toggleFavoriteUseCase(requestData)
@@ -190,7 +190,6 @@ class SearchViewModel @Inject constructor(
                     data?.let {
                         _hotPosts.update { uiState ->
                             if (uiState is UiState.Success) {
-                                uiState as UiState.Success
                                 val newList = uiState.data.map { item ->
                                     if (item.id == contentId && item.category == category) item.copy(favorite = data.data.favorite)
                                     else item

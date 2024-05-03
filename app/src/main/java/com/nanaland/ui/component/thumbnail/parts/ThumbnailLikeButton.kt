@@ -22,7 +22,7 @@ fun ThumbnailLikeButton(
         modifier = Modifier
             .size(32.dp)
             .clickableNoEffect { onClick() },
-        painter = painterResource(if (isLiked) R.drawable.ic_heart_filled_black else R.drawable.ic_heart_outlined_white),
+        painter = painterResource(if (isLiked) R.drawable.ic_heart_filled else R.drawable.ic_heart_outlined_white_filled_translucent),
         contentDescription = null,
         colorFilter = if (isLiked) ColorFilter.tint(getColor().main) else null
     )

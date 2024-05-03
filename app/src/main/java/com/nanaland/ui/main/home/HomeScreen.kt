@@ -15,6 +15,7 @@ import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.nanaland.globalvalue.type.HomeScreenViewType
+import com.nanaland.ui.component.main.home.HomeScreenTopBar
 import com.nanaland.ui.main.home.search.SearchResultContent
 import com.nanaland.ui.main.home.search.SearchViewModel
 import com.nanaland.ui.main.home.search.SearchingContent
@@ -23,6 +24,7 @@ import com.nanaland.util.ui.ScreenPreview
 @Composable
 fun HomeScreen(
     scaffoldPadding: PaddingValues,
+    moveToCategoryContentScreen: (Long, String?) -> Unit,
     moveToNanaPickListScreen: () -> Unit,
     moveToNatureListScreen: () -> Unit,
     moveToFestivalListScreen: () -> Unit,
@@ -40,6 +42,7 @@ fun HomeScreen(
         updateInputText = homeViewModel::updateInputText,
         getSearchResult = searchViewModel::getSearchResult,
         updateViewType = homeViewModel::updateViewType,
+        moveToCategoryContentScreen = moveToCategoryContentScreen,
         moveToNanaPickListScreen = moveToNanaPickListScreen,
         moveToNatureListScreen = moveToNatureListScreen,
         moveToFestivalListScreen = moveToFestivalListScreen,
@@ -58,6 +61,7 @@ private fun HomeScreen(
     updateInputText: (String) -> Unit,
     getSearchResult: (String) -> Unit,
     updateViewType: (HomeScreenViewType) -> Unit,
+    moveToCategoryContentScreen: (Long, String?) -> Unit,
     moveToNanaPickListScreen: () -> Unit,
     moveToNatureListScreen: () -> Unit,
     moveToFestivalListScreen: () -> Unit,
@@ -78,6 +82,7 @@ private fun HomeScreen(
             HomeScreenViewType.Home -> {
                 HomeContent(
                     scaffoldPadding = scaffoldPadding,
+                    moveToCategoryContentScreen = moveToCategoryContentScreen,
                     moveToNanaPickListScreen = moveToNanaPickListScreen,
                     moveToNatureListScreen = moveToNatureListScreen,
                     moveToFestivalListScreen = moveToFestivalListScreen,

@@ -42,8 +42,8 @@ import kotlinx.coroutines.flow.emptyFlow
 
 @Composable
 fun MainScreen(
+    moveToCategoryContentScreen: (Long, String?) -> Unit,
     moveToNanaPickListScreen: () -> Unit,
-    moveToNanaPickContentScreen: (String) -> Unit,
     moveToNatureListScreen: () -> Unit,
     moveToFestivalListScreen: () -> Unit,
     moveToMarketListScreen: () -> Unit,
@@ -56,8 +56,8 @@ fun MainScreen(
         viewType = viewType,
         navigationItemContentList = navigationItemContentList,
         updateViewType = viewModel::updateViewType,
+        moveToCategoryContentScreen = moveToCategoryContentScreen,
         moveToNanaPickListScreen = moveToNanaPickListScreen,
-        moveToNanaPickContentScreen = moveToNanaPickContentScreen,
         moveToNatureListScreen = moveToNatureListScreen,
         moveToFestivalListScreen = moveToFestivalListScreen,
         moveToMarketListScreen = moveToMarketListScreen,
@@ -72,8 +72,8 @@ private fun MainScreen(
     viewType: MainScreenViewType,
     navigationItemContentList: List<MainViewModel.NavigationItemContent>,
     updateViewType: (MainScreenViewType) -> Unit,
+    moveToCategoryContentScreen: (Long, String?) -> Unit,
     moveToNanaPickListScreen: () -> Unit,
-    moveToNanaPickContentScreen: (String) -> Unit,
     moveToNatureListScreen: () -> Unit,
     moveToFestivalListScreen: () -> Unit,
     moveToMarketListScreen: () -> Unit,
@@ -98,6 +98,7 @@ private fun MainScreen(
                 MainScreenViewType.Home -> {
                     HomeScreen(
                         scaffoldPadding = it,
+                        moveToCategoryContentScreen = moveToCategoryContentScreen,
                         moveToNanaPickListScreen = moveToNanaPickListScreen,
                         moveToNatureListScreen = moveToNatureListScreen,
                         moveToFestivalListScreen = moveToFestivalListScreen,
@@ -193,8 +194,8 @@ private fun MainScreenPreview() {
         ),
         MainViewModel.NavigationItemContent(
             viewType = MainScreenViewType.Like,
-            iconSelected = R.drawable.ic_heart_filled_black,
-            iconUnselected = R.drawable.ic_heart_outlined_black,
+            iconSelected = R.drawable.ic_heart_filled,
+            iconUnselected = R.drawable.ic_heart_outlined,
             label = "찜"
         ),
         MainViewModel.NavigationItemContent(

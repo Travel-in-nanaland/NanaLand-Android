@@ -45,7 +45,9 @@ class MainActivity : ComponentActivity() {
         // 임시 액세스 토큰 저장
         viewModel.saveAccessToken("aaa")
 //        viewModel.saveAccessToken("eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIyIiwiYXV0aCI6IlJPTEVfTUVNQkVSIiwiZXhwIjoxNzQ1ODkwNTYzfQ.EIzWYHeyYlGlofOXpxpHOotsheqIuXSfKx1FmB2EsW4hNkMfcQ-_m8EHG6W_bgj4vBtXKRb7if4KRL2nm79Zaw")
-        viewModel.saveRefreshToken("eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiYXV0aCI6IlJPTEVfTUVNQkVSIiwiZXhwIjoxNzE0OTY2NjA2fQ.qe2FwQHelLL8mLZBkGXBSa74IzRiZ-TnVXbfJwtQ1PpI3BDPnugTvaE_LtsR_aUjUATG-fLZ8x_bShET9h6JVA")
+        viewModel.saveRefreshToken("eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiYXV0aCI6IlJPTEVfTUVNQkVSIiwiZXhwIjoxNzE1MzUyMzAyfQ.3aJFKbMcnLRkQ0VDHbLA5BA6FSK1BaviLy7cIFv04hCRpDdURMGl7zxDN4__awfbhXnUWLX206Kh-D_QNKQEKA")
+        // 가은님 전달용 토큰
+//        viewModel.saveRefreshToken("eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI2IiwiYXV0aCI6IlJPTEVfTUVNQkVSIiwiZXhwIjoxNzE1MzU1MDQ3fQ.0qaNAfkEohRBwOAUjiv-3Ob2-tfOUL_XhaVKeFcpp3qQxyVPlbTRz8Q0hzruHNRO5b-p3RymfQxc3CRw24Hvaw")
 
 
         setContent {

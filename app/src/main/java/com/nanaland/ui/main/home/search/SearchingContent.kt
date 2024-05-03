@@ -16,11 +16,11 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.nanaland.domain.entity.search.HotPostThumbnailData
-import com.nanaland.ui.component.home.searching.SearchingScreenHotPosts
-import com.nanaland.ui.component.home.searching.SearchingScreenHotPostsText
-import com.nanaland.ui.component.home.searching.SearchingScreenTopKeywords
-import com.nanaland.ui.component.home.searching.SearchingScreenTopKeywordsText
-import com.nanaland.ui.component.home.searching.SearchingScreenRecentSearchContent
+import com.nanaland.ui.component.main.searching.SearchingScreenHotPosts
+import com.nanaland.ui.component.main.searching.SearchingScreenHotPostsText
+import com.nanaland.ui.component.main.searching.SearchingScreenTopKeywords
+import com.nanaland.ui.component.main.searching.SearchingScreenTopKeywordsText
+import com.nanaland.ui.component.main.searching.SearchingScreenRecentSearchContent
 import com.nanaland.util.ui.UiState
 
 @Composable
@@ -38,7 +38,7 @@ fun SearchingContent(
         scaffoldPadding = scaffoldPadding,
         topKeywords = topKeywords,
         hotPosts = hotPosts,
-        onLikeButtonClick = viewModel::toggleFavorite,
+        toggleFavorite = viewModel::toggleFavorite,
         onHotPostClick = {},
         isContent = true
     )
@@ -49,7 +49,7 @@ private fun SearchingContent(
     scaffoldPadding: PaddingValues,
     topKeywords: UiState<List<String>>,
     hotPosts: UiState<List<HotPostThumbnailData>>,
-    onLikeButtonClick: (Long, String?) -> Unit,
+    toggleFavorite: (Long, String?) -> Unit,
     onHotPostClick: (Long) -> Unit,
     isContent: Boolean
 ) {
@@ -79,7 +79,7 @@ private fun SearchingContent(
 
             SearchingScreenHotPosts(
                 hotPosts = hotPosts,
-                onLikeButtonClick = onLikeButtonClick,
+                onLikeButtonClick = toggleFavorite,
                 onClick = onHotPostClick
             )
         }

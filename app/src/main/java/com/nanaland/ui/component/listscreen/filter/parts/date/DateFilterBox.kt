@@ -63,7 +63,7 @@ fun DateFilterBox(
 
         Image(
             modifier = Modifier.size(16.dp),
-            painter = painterResource(R.drawable.ic_down),
+            painter = painterResource(R.drawable.ic_arrow_down),
             contentDescription = null,
             colorFilter = ColorFilter.tint(getColor().gray01)
         )

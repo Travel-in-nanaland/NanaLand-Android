@@ -54,7 +54,7 @@ interface SearchApi {
     ): Response<GetSearchResultListResponse>
 
     // 전체 카테고리 검색 결과 2개씩
-    @GET("search/category")
+    @GET("search/all")
     suspend fun getAllSearchResultList(
         @Query("keyword") keyword: String
     ): Response<GetAllSearchResultListResponse>
