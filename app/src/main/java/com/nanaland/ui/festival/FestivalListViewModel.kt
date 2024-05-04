@@ -4,9 +4,11 @@ import androidx.compose.runtime.mutableStateListOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.nanaland.domain.entity.festival.FestivalThumbnailData
+import com.nanaland.domain.request.favorite.ToggleFavoriteRequest
 import com.nanaland.domain.request.festival.GetEndedFestivalListRequest
 import com.nanaland.domain.request.festival.GetMonthlyFestivalListRequest
 import com.nanaland.domain.request.festival.GetSeasonalFestivalListRequest
+import com.nanaland.domain.usecase.favorite.ToggleFavoriteUseCase
 import com.nanaland.domain.usecase.festival.GetEndedFestivalListUseCase
 import com.nanaland.domain.usecase.festival.GetMonthlyFestivalListUseCase
 import com.nanaland.domain.usecase.festival.GetSeasonalFestivalListUseCase
@@ -30,46 +32,75 @@ import javax.inject.Inject
 @HiltViewModel
 class FestivalListViewModel @Inject constructor(
     private val getMonthlyFestivalListUseCase: GetMonthlyFestivalListUseCase,
+    private val getEndedFestivalListUseCase: GetEndedFestivalListUseCase,
     private val getSeasonalFestivalListUseCase: GetSeasonalFestivalListUseCase,
-    private val getEndedFestivalListUseCase: GetEndedFestivalListUseCase
+    private val toggleFavoriteUseCase: ToggleFavoriteUseCase
 ) : ViewModel() {
 
     private val _selectedCategoryType = MutableStateFlow(FestivalCategoryType.Monthly)
     val selectedCategoryType = _selectedCategoryType.asStateFlow()
     private val locationList = listOf("전체", "제주시", "애월", "서귀포시", "성산", "한림", "조천", "구좌", "한경", "대정", "안덕", "남원", "표선", "우도")
     val selectedLocationList = mutableStateListOf(false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false)
-    private val _startCalendar = MutableStateFlow<Calendar?>(null)
+    private val seasonList = listOf("spring", "summer", "autumn", "winter")
+    val selectedSeasonList = mutableStateListOf(true, false, false, false)
+    private val _startCalendar = MutableStateFlow<Calendar>(Calendar.getInstance())
     val startCalendar = _startCalendar.asStateFlow()
-    private val _endCalendar = MutableStateFlow<Calendar?>(null)
+    private val _endCalendar = MutableStateFlow<Calendar>(Calendar.getInstance())
     val endCalendar = _endCalendar.asStateFlow()
     private val _festivalThumbnailCount = MutableStateFlow<UiState<Long>>(UiState.Loading)
     val festivalThumbnailCount = _festivalThumbnailCount.asStateFlow()
     private val _festivalThumbnailList = MutableStateFlow<UiState<List<FestivalThumbnailData>>>(UiState.Loading)
     val festivalThumbnailList = _festivalThumbnailList.asStateFlow()
+    private var page = 0L
 
     fun updateSelectedCategoryType(type: FestivalCategoryType) {
+        clearFestivalList()
         _selectedCategoryType.update { type }
+        when (type) {
+            FestivalCategoryType.Monthly -> {
+                repeat(selectedLocationList.size) { selectedLocationList[it] = false }
+                _startCalendar.update { Calendar.getInstance() }
+                _endCalendar.update { Calendar.getInstance() }
+                getMonthlyFestivalList()
+            }
+            FestivalCategoryType.Ended -> {
+                repeat(selectedLocationList.size) { selectedLocationList[it] = false }
+                getEndedFestivalList()
+            }
+            FestivalCategoryType.Seasonal -> {
+                // 현재 월에 따라 자동으로 봄/여름/가을/겨울이 미리 선택된다.
+                repeat(4) { selectedSeasonList[it] = false }
+                var currMonth = Calendar.getInstance().get(Calendar.MONTH)
+                currMonth -= 2
+                if (currMonth < 0) currMonth += 12
+                selectedSeasonList[currMonth / 3] = true
+                getSeasonalFestivalList()
+            }
+        }
     }
 
-    fun updateStartCalendar(calendar: Calendar?) {
+    fun updateStartCalendar(calendar: Calendar) {
         _startCalendar.update { calendar }
     }
 
-    fun updateEndCalendar(calendar: Calendar?) {
+    fun updateEndCalendar(calendar: Calendar) {
         _endCalendar.update { calendar }
     }
 
     fun getMonthlyFestivalList() {
-        _festivalThumbnailCount.update { UiState.Loading }
-        _festivalThumbnailList.update { UiState.Loading }
+        var prevList: List<FestivalThumbnailData>? = null
+        if (_festivalThumbnailList.value is UiState.Success) {
+            page++
+            prevList = (_festivalThumbnailList.value as UiState.Success).data
+        }
         val requestData = GetMonthlyFestivalListRequest(
-            page = 0,
+            page = page,
             size = 12,
             addressFilterList = selectedLocationList.mapIndexedNotNull { idx, value ->
                 if (value) locationList[idx] else null
             },
-            startDate = _startCalendar.value?.let { getYearMonthDate(it) },
-            endDate = _startCalendar.value?.let { getYearMonthDate(it) }
+            startDate = getYearMonthDate(_startCalendar.value),
+            endDate = getYearMonthDate(_endCalendar.value)
         )
         getMonthlyFestivalListUseCase(requestData)
             .onEach { networkResult ->
@@ -79,7 +110,11 @@ class FestivalListViewModel @Inject constructor(
                             UiState.Success(data.data.totalElements)
                         }
                         _festivalThumbnailList.update {
-                            UiState.Success(data.data.data)
+                            if (prevList.isNullOrEmpty()) {
+                                UiState.Success(data.data.data)
+                            } else {
+                                UiState.Success(prevList + data.data.data)
+                            }
                         }
                     }
                 }.onError { code, message ->
@@ -92,13 +127,52 @@ class FestivalListViewModel @Inject constructor(
             .launchIn(viewModelScope)
     }
 
+    fun getEndedFestivalList() {
+        var prevList: List<FestivalThumbnailData>? = null
+        if (_festivalThumbnailList.value is UiState.Success) {
+            page++
+            prevList = (_festivalThumbnailList.value as UiState.Success).data
+        }
+        val requestData = GetEndedFestivalListRequest(
+            page = page,
+            size = 12
+        )
+        getEndedFestivalListUseCase(requestData)
+            .onEach { networkResult ->
+                networkResult.onSuccess { _, data ->
+                    data?.let {
+                        _festivalThumbnailCount.update {
+                            UiState.Success(data.data.totalElements)
+                        }
+                        _festivalThumbnailList.update {
+                            if (prevList.isNullOrEmpty()) {
+                                UiState.Success(data.data.data)
+                            } else {
+                                UiState.Success(prevList + data.data.data)
+                            }
+                        }
+                    }
+                }.onError { code, message ->
+                    LogUtil.printLog("onError", "code: ${code}\nmessage: $message")
+                }.onException {
+                    LogUtil.printLog("onException", "${it.message}")
+                }
+            }
+            .catch { LogUtil.printLog("flow Error", "GetEndedFestivalListUseCase") }
+            .launchIn(viewModelScope)
+    }
+
     fun getSeasonalFestivalList() {
-        _festivalThumbnailCount.update { UiState.Loading }
-        _festivalThumbnailList.update { UiState.Loading }
+        var prevList: List<FestivalThumbnailData>? = null
+        if (_festivalThumbnailList.value is UiState.Success) {
+            page++
+            prevList = (_festivalThumbnailList.value as UiState.Success).data
+        }
         val requestData = GetSeasonalFestivalListRequest(
-            page = 0,
+            page = page,
             size = 12,
-            season = "spring"
+            season = seasonList[selectedSeasonList.withIndex()
+                .filter { selectedSeasonList[it.index] }[0].index]
         )
         getSeasonalFestivalListUseCase(requestData)
             .onEach { networkResult ->
@@ -108,7 +182,11 @@ class FestivalListViewModel @Inject constructor(
                             UiState.Success(data.data.totalElements)
                         }
                         _festivalThumbnailList.update {
-                            UiState.Success(data.data.data)
+                            if (prevList.isNullOrEmpty()) {
+                                UiState.Success(data.data.data)
+                            } else {
+                                UiState.Success(prevList + data.data.data)
+                            }
                         }
                     }
                 }.onError { code, message ->
@@ -121,22 +199,30 @@ class FestivalListViewModel @Inject constructor(
             .launchIn(viewModelScope)
     }
 
-    fun getEndedFestivalList() {
-        _festivalThumbnailCount.update { UiState.Loading }
+    fun clearFestivalList() {
         _festivalThumbnailList.update { UiState.Loading }
-        val requestData = GetEndedFestivalListRequest(
-            page = 0,
-            size = 12
+        page = 0
+    }
+
+    fun toggleFavorite(contentId: Long) {
+        val requestData = ToggleFavoriteRequest(
+            id = contentId,
+            category = "FESTIVAL"
         )
-        getEndedFestivalListUseCase(requestData)
+        toggleFavoriteUseCase(requestData)
             .onEach { networkResult ->
-                networkResult.onSuccess { _, data ->
+                networkResult.onSuccess { code, data ->
                     data?.let {
-                        _festivalThumbnailCount.update {
-                            UiState.Success(data.data.totalElements)
-                        }
-                        _festivalThumbnailList.update {
-                            UiState.Success(data.data.data)
+                        _festivalThumbnailList.update { uiState ->
+                            if (uiState is UiState.Success) {
+                                val newList = uiState.data.map {  item ->
+                                    if (item.id == contentId) item.copy(favorite = data.data.favorite)
+                                    else item
+                                }
+                                UiState.Success(newList)
+                            } else {
+                                uiState
+                            }
                         }
                     }
                 }.onError { code, message ->
@@ -145,8 +231,22 @@ class FestivalListViewModel @Inject constructor(
                     LogUtil.printLog("onException", "${it.message}")
                 }
             }
-            .catch { LogUtil.printLog("flow Error", "GetEndedFestivalListUseCase") }
+            .catch { LogUtil.printLog("flow Error", "ToggleFavoriteUseCase") }
             .launchIn(viewModelScope)
+    }
+
+    fun toggleFavoriteWithNoApi(contentId: Long, isLiked: Boolean) {
+        _festivalThumbnailList.update { uiState ->
+            if (uiState is UiState.Success) {
+                val newList = uiState.data.map { item ->
+                    if (item.id == contentId) item.copy(favorite = isLiked)
+                    else item
+                }
+                UiState.Success(newList)
+            } else {
+                uiState
+            }
+        }
     }
 
     init {

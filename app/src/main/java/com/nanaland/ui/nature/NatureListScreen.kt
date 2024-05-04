@@ -42,8 +42,9 @@ fun NatureListScreen(
         selectedLocationList = selectedLocationList,
         natureThumbnailCount = natureThumbnailCount,
         natureThumbnailList = natureThumbnailList,
-        getThumbnailList = viewModel::getThumbnailList,
-        clearThumbnailList = viewModel::clearThumbnailList,
+        getNatureList = viewModel::getNatureList,
+        toggleFavorite = viewModel::toggleFavorite,
+        clearNatureList = viewModel::clearNatureList,
         moveToBackScreen = moveToBackScreen,
         moveToNatureContentScreen = moveToNatureContentScreen,
         isContent = true
@@ -56,8 +57,9 @@ private fun NatureListScreen(
     selectedLocationList: SnapshotStateList<Boolean>,
     natureThumbnailCount: UiState<Long>,
     natureThumbnailList: UiState<List<NatureThumbnailData>>,
-    clearThumbnailList: () -> Unit,
-    getThumbnailList: () -> Unit,
+    toggleFavorite: (Long) -> Unit,
+    clearNatureList: () -> Unit,
+    getNatureList: () -> Unit,
     moveToBackScreen: () -> Unit,
     moveToNatureContentScreen: (Long) -> Unit,
     isContent: Boolean
@@ -75,11 +77,13 @@ private fun NatureListScreen(
             lastVisibleItemIndex > (totalItemsNumber - 1)
         }
     }
+
     LaunchedEffect(loadMore.value) {
         if (loadMore.value) {
-            getThumbnailList()
+            getNatureList()
         }
     }
+
     CustomSurface {
         Box(
             modifier = Modifier.fillMaxSize()
@@ -104,6 +108,7 @@ private fun NatureListScreen(
                 NatureThumbnailList(
                     listState = lazyGridState,
                     thumbnailList = natureThumbnailList,
+                    toggleFavorite = toggleFavorite,
                     moveToNatureContentScreen = moveToNatureContentScreen
                 )
             }
@@ -120,9 +125,9 @@ private fun NatureListScreen(
                 hideDimBackground = { isDimBackgroundShowing.value = false },
                 anchoredDraggableState = locationFilterDialogAnchoredDraggableState,
                 selectedLocationList = selectedLocationList,
-                updateList = getThumbnailList,
+                updateList = getNatureList,
                 clearList = {
-                    clearThumbnailList()
+                    clearNatureList()
                     coroutineScope.launch { lazyGridState.scrollToItem(0) }
                 }
             )

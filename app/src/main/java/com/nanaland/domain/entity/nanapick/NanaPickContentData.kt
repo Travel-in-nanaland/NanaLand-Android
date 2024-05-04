@@ -12,5 +12,7 @@ data class NanaPickContentData(
     @SerializedName("notice")
     val notice: String?,
     @SerializedName("nanaDetails")
-    val nanaDetails: List<NanaPickSubContentData>
+    val nanaDetails: List<NanaPickSubContentData>,
+    @SerializedName("favorite")
+    val favorite: Boolean
 )

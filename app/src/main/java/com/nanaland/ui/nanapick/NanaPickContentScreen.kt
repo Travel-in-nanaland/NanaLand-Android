@@ -14,8 +14,10 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.rememberLazyListState
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -35,7 +37,11 @@ import com.nanaland.R
 import com.nanaland.domain.entity.nanapick.NanaPickContentData
 import com.nanaland.ui.component.common.CustomSurface
 import com.nanaland.ui.component.common.CustomTopBar
-import com.nanaland.ui.component.detailscreen.MoveToTopButton
+import com.nanaland.ui.component.common.CustomTopBarWithShadow
+import com.nanaland.ui.component.detailscreen.nanapick.NanaPickContentSubContents
+import com.nanaland.ui.component.detailscreen.nanapick.NanaPickContentTopBanner
+import com.nanaland.ui.component.detailscreen.other.DetailScreenNotice
+import com.nanaland.ui.component.detailscreen.other.MoveToTopButton
 import com.nanaland.ui.theme.getColor
 import com.nanaland.ui.theme.body01
 import com.nanaland.ui.theme.body02
@@ -69,95 +75,45 @@ private fun NanaPickContentScreen(
     moveToBackScreen: () -> Unit,
     tmp: Boolean
 ) {
+    val scrollState = rememberScrollState()
     val coroutineScope = rememberCoroutineScope()
     CustomSurface {
-        CustomTopBar(
+        CustomTopBarWithShadow(
             title = "나나's Pick",
             onBackButtonClicked = moveToBackScreen
         )
-        Box(
-            modifier = Modifier.fillMaxSize()
-        ) {
-            val listState = rememberLazyListState()
-            LazyColumn(
-                state = listState
-            ) {
-                item {
-                    TopBannerContent(
-                        nanaPickContentUiState = nanaPickContent
-                    )
-                    Column(
-                        modifier = Modifier
-                            .padding(20.dp)
-                    ) {
-                        when (nanaPickContent) {
-                            is UiState.Loading -> { Box(Modifier.fillMaxSize()) }
-                            is UiState.Loading -> { Box(Modifier.fillMaxSize()) }
-                            is UiState.Success -> {
-                                TipBox(
-                                    notice = nanaPickContent.data.notice ?: ""
-                                )
-                                Spacer(Modifier.height(40.dp))
-                                DetailContent(
-                                    nanaPickContent = nanaPickContent.data
-                                )
-                            }
-                            is UiState.Failure -> { Box(Modifier.fillMaxSize()) }
+
+        when (nanaPickContent) {
+            is UiState.Loading -> {}
+            is UiState.Success -> {
+                Box(modifier = Modifier.fillMaxSize()) {
+                    Column(modifier = Modifier.verticalScroll(scrollState)) {
+                        NanaPickContentTopBanner(nanaPickContent = nanaPickContent)
+
+                        Spacer(Modifier.height(16.dp))
+
+                        Column(modifier = Modifier.padding(start = 16.dp, end = 16.dp)) {
+                            DetailScreenNotice(
+                                title = "알아두면 좋아요!",
+                                content = nanaPickContent.data.notice
+                            )
+
+                            Spacer(Modifier.height(32.dp))
+
+                            NanaPickContentSubContents(nanaPickContent = nanaPickContent.data)
                         }
+
+                        Spacer(Modifier.height(80.dp))
+                    }
+
+                    MoveToTopButton {
+                        coroutineScope.launch { scrollState.animateScrollTo(0) }
                     }
                 }
             }
-            MoveToTopButton(
-                onClick = { coroutineScope.launch { listState.animateScrollToItem(0, 0) } }
-            )
+            is UiState.Failure -> {}
         }
-    }
-}
 
-@Composable
-private fun TopBannerContent(
-    nanaPickContentUiState: UiState<NanaPickContentData>
-) {
-    Box(
-        modifier = Modifier
-            .fillMaxWidth()
-            .height(240.dp)
-            .background(Color(0xFF262F60))
-    ) {
-        when (nanaPickContentUiState) {
-            is UiState.Loading -> { Box(Modifier.fillMaxSize()) }
-            is UiState.Loading -> { Box(Modifier.fillMaxSize()) }
-            is UiState.Success -> {
-                GlideImage(
-                    modifier = Modifier.fillMaxSize(),
-                    imageModel = { nanaPickContentUiState.data.originUrl }
-                )
-            }
-            is UiState.Failure -> { Box(Modifier.fillMaxSize()) }
-        }
-        Row(
-            modifier = Modifier
-                .padding(20.dp),
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-//            Text(
-//                text = "vol.0",
-//                fontWeight = FontWeight.Medium,
-//                color = Color(0xFFFFFFFF)
-//            )
-            Spacer(Modifier.weight(1f))
-            Image(
-                painter = painterResource(id = R.drawable.ic_heart_outlined),
-                contentDescription = null,
-                colorFilter = ColorFilter.tint(Color(0xFFFFFFFF))
-            )
-            Spacer(Modifier.width(10.dp))
-            Image(
-                painter = painterResource(id = R.drawable.ic_share_outlined),
-                contentDescription = null,
-                colorFilter = ColorFilter.tint(Color(0xFFFFFFFF))
-            )
-        }
     }
 }
 

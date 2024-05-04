@@ -1,7 +1,6 @@
 package com.nanaland.ui.main.home
 
 import androidx.activity.compose.BackHandler
-import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
@@ -41,6 +40,7 @@ fun HomeScreen(
         viewType = viewType,
         updateInputText = homeViewModel::updateInputText,
         getSearchResult = searchViewModel::getSearchResult,
+        addRecentSearch = searchViewModel::addRecentSearch,
         updateViewType = homeViewModel::updateViewType,
         moveToCategoryContentScreen = moveToCategoryContentScreen,
         moveToNanaPickListScreen = moveToNanaPickListScreen,
@@ -52,7 +52,6 @@ fun HomeScreen(
     )
 }
 
-@OptIn(ExperimentalFoundationApi::class)
 @Composable
 private fun HomeScreen(
     scaffoldPadding: PaddingValues,
@@ -60,6 +59,7 @@ private fun HomeScreen(
     viewType: HomeScreenViewType,
     updateInputText: (String) -> Unit,
     getSearchResult: (String) -> Unit,
+    addRecentSearch: (String) -> Unit,
     updateViewType: (HomeScreenViewType) -> Unit,
     moveToCategoryContentScreen: (Long, String?) -> Unit,
     moveToNanaPickListScreen: () -> Unit,
@@ -75,7 +75,8 @@ private fun HomeScreen(
             onValueChange = updateInputText,
             currentViewType = viewType,
             updateViewType = updateViewType,
-            getSearchResult = getSearchResult
+            getSearchResult = getSearchResult,
+            addRecentSearch = addRecentSearch
         )
         Spacer(Modifier.height(10.dp))
         when (viewType) {
@@ -98,7 +99,8 @@ private fun HomeScreen(
                     updateViewType(HomeScreenViewType.Home)
                 }
                 SearchingContent(
-                    scaffoldPadding = scaffoldPadding
+                    scaffoldPadding = scaffoldPadding,
+                    moveToCategoryContentScreen = moveToCategoryContentScreen
                 )
             }
             HomeScreenViewType.SearchResult -> {
@@ -109,7 +111,8 @@ private fun HomeScreen(
                     updateViewType(HomeScreenViewType.Home)
                 }
                 SearchResultContent(
-                    scaffoldPadding = scaffoldPadding
+                    scaffoldPadding = scaffoldPadding,
+                    moveToCategoryContentScreen = moveToCategoryContentScreen
                 )
             }
         }

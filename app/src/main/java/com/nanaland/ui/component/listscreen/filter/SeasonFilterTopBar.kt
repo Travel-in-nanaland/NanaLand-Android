@@ -6,15 +6,21 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.snapshots.SnapshotStateList
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.nanaland.ui.component.listscreen.filter.parts.FilteredItemCount
+import com.nanaland.ui.component.listscreen.filter.parts.season.SeasonFilterBox
 import com.nanaland.util.ui.UiState
 
 @Composable
 fun SeasonFilterTopBar(
     count: UiState<Long>,
+    selectedSeasonList: SnapshotStateList<Boolean>,
+    seasonList: List<String>,
+    openSeasonFilterDialog: () -> Unit,
+    showDimBackground: () -> Unit,
 ) {
     Row(
         modifier = Modifier
@@ -30,5 +36,12 @@ fun SeasonFilterTopBar(
         }
 
         Spacer(Modifier.weight(1f))
+
+        SeasonFilterBox(
+            showDimBackground = showDimBackground,
+            seasonList = seasonList,
+            openSeasonFilterDialog = openSeasonFilterDialog,
+            selectedSeasonList = selectedSeasonList
+        )
     }
 }

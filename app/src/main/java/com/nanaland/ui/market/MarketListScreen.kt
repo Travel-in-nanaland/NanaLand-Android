@@ -5,8 +5,11 @@ import androidx.compose.foundation.gestures.animateTo
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.lazy.grid.rememberLazyGridState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
@@ -41,6 +44,7 @@ fun MarketListScreen(
         marketThumbnailList = marketThumbnailList,
         getMarketList = viewModel::getMarketList,
         toggleFavorite = viewModel::toggleFavorite,
+        clearMarketList = viewModel::clearMarketList,
         moveToBackScreen = moveToBackScreen,
         moveToMarketContentScreen = moveToMarketContentScreen,
         isContent = true
@@ -55,6 +59,7 @@ private fun MarketListScreen(
     marketThumbnailList: UiState<List<MarketThumbnailData>>,
     getMarketList: () -> Unit,
     toggleFavorite: (Long) -> Unit,
+    clearMarketList: () -> Unit,
     moveToBackScreen: () -> Unit,
     moveToMarketContentScreen: (Long) -> Unit,
     isContent: Boolean
@@ -63,6 +68,22 @@ private fun MarketListScreen(
     val locationFilterDialogAnchoredDraggableState = remember { getLocationAnchoredDraggableState() }
     val isDimBackgroundShowing = remember { mutableStateOf(false) }
     val locationList = listOf("전체", "제주시", "애월", "서귀포시", "성산", "한림", "조천", "구좌", "한경", "대정", "안덕", "남원", "표선", "우도")
+    val lazyGridState = rememberLazyGridState()
+    val loadMore = remember {
+        derivedStateOf {
+            val layoutInfo = lazyGridState.layoutInfo
+            val totalItemsNumber = layoutInfo.totalItemsCount
+            val lastVisibleItemIndex = (layoutInfo.visibleItemsInfo.lastOrNull()?.index ?: 0) + 1
+            lastVisibleItemIndex > (totalItemsNumber - 1)
+        }
+    }
+
+    LaunchedEffect(loadMore.value) {
+        if (loadMore.value) {
+            getMarketList()
+        }
+    }
+
     CustomSurface {
         Box(
             modifier = Modifier.fillMaxSize()
@@ -85,6 +106,7 @@ private fun MarketListScreen(
                 )
 
                 MarketThumbnailList(
+                    listState = lazyGridState,
                     thumbnailList = marketThumbnailList,
                     toggleFavorite = toggleFavorite,
                     moveToMarketContentScreen = moveToMarketContentScreen
@@ -104,7 +126,10 @@ private fun MarketListScreen(
                 anchoredDraggableState = locationFilterDialogAnchoredDraggableState,
                 selectedLocationList = selectedLocationList,
                 updateList = getMarketList,
-                clearList = {}
+                clearList = {
+                    clearMarketList()
+                    coroutineScope.launch { lazyGridState.scrollToItem(0) }
+                }
             )
         }
     }

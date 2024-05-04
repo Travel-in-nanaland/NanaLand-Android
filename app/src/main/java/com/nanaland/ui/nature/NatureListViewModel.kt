@@ -4,7 +4,9 @@ import androidx.compose.runtime.mutableStateListOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.nanaland.domain.entity.nature.NatureThumbnailData
+import com.nanaland.domain.request.favorite.ToggleFavoriteRequest
 import com.nanaland.domain.request.nature.GetNatureListRequest
+import com.nanaland.domain.usecase.favorite.ToggleFavoriteUseCase
 import com.nanaland.domain.usecase.nature.GetNatureListUseCase
 import com.nanaland.util.log.LogUtil
 import com.nanaland.util.network.onError
@@ -22,7 +24,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class NatureListViewModel @Inject constructor(
-    private val getNatureListUseCase: GetNatureListUseCase
+    private val getNatureListUseCase: GetNatureListUseCase,
+    private val toggleFavoriteUseCase: ToggleFavoriteUseCase
 ) : ViewModel() {
 
     private val locationList = listOf("전체", "제주시", "애월", "서귀포시", "성산", "한림", "조천", "구좌", "한경", "대정", "안덕", "남원", "표선", "우도")
@@ -31,19 +34,19 @@ class NatureListViewModel @Inject constructor(
     val natureThumbnailCount = _natureThumbnailCount.asStateFlow()
     private val _natureThumbnailList = MutableStateFlow<UiState<List<NatureThumbnailData>>>(UiState.Loading)
     val natureThumbnailList = _natureThumbnailList.asStateFlow()
-    private var page = MutableStateFlow(0L)
+    private var page = 0L
 
-    fun getThumbnailList() {
+    fun getNatureList() {
         var prevList: List<NatureThumbnailData>? = null
         if (_natureThumbnailList.value is UiState.Success) {
-            page.update { it + 1 }
+            page++
             prevList = (_natureThumbnailList.value as UiState.Success).data
         }
         val requestData = GetNatureListRequest(
             addressFilterList = selectedLocationList.mapIndexedNotNull { idx, value ->
                 if (value) locationList[idx] else null
             },
-            page = page.value,
+            page = page,
             size = 12
         )
         getNatureListUseCase(requestData)
@@ -71,12 +74,57 @@ class NatureListViewModel @Inject constructor(
             .launchIn(viewModelScope)
     }
 
-    fun clearThumbnailList() {
+    fun clearNatureList() {
         _natureThumbnailList.update { UiState.Loading }
-        page.update { 0 }
+        page = 0
+    }
+
+    fun toggleFavorite(contentId: Long) {
+        val requestData = ToggleFavoriteRequest(
+            id = contentId,
+            category = "NATURE"
+        )
+        toggleFavoriteUseCase(requestData)
+            .onEach { networkResult ->
+                networkResult.onSuccess { code, data ->
+                    data?.let {
+                        _natureThumbnailList.update { uiState ->
+                            if (uiState is UiState.Success) {
+                                val newList = uiState.data.map {  item ->
+                                    if (item.id == contentId) item.copy(favorite = data.data.favorite)
+                                    else item
+                                }
+                                UiState.Success(newList)
+                            } else {
+                                uiState
+                            }
+                        }
+                    }
+                }.onError { code, message ->
+                    LogUtil.printLog("onError", "code: ${code}\nmessage: $message")
+                }.onException {
+                    LogUtil.printLog("onException", "${it.message}")
+                }
+            }
+            .catch { LogUtil.printLog("flow Error", "ToggleFavoriteUseCase") }
+            .launchIn(viewModelScope)
+    }
+
+    fun toggleFavoriteWithNoApi(contentId: Long, isLiked: Boolean) {
+        _natureThumbnailList.update { uiState ->
+            if (uiState is UiState.Success) {
+                val newList = uiState.data.map {  item ->
+                    if (item.id == contentId) item.copy(favorite = isLiked)
+                    else item
+                }
+                UiState.Success(newList)
+            } else {
+                uiState
+            }
+        }
     }
 
     init {
-        getThumbnailList()
+        getNatureList()
     }
 }

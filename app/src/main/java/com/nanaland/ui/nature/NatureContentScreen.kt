@@ -19,29 +19,31 @@ import com.nanaland.R
 import com.nanaland.domain.entity.nature.NatureContentData
 import com.nanaland.ui.component.common.CustomSurface
 import com.nanaland.ui.component.common.CustomTopBarWithShadow
-import com.nanaland.ui.component.detailscreen.DetailScreenDescription
-import com.nanaland.ui.component.detailscreen.DetailScreenInformation
-import com.nanaland.ui.component.detailscreen.DetailScreenNotice
-import com.nanaland.ui.component.detailscreen.DetailScreenTopBannerImage
-import com.nanaland.ui.component.detailscreen.MoveToTopButton
+import com.nanaland.ui.component.detailscreen.other.DetailScreenDescription
+import com.nanaland.ui.component.detailscreen.other.DetailScreenInformation
+import com.nanaland.ui.component.detailscreen.other.DetailScreenNotice
+import com.nanaland.ui.component.detailscreen.other.DetailScreenTopBannerImage
+import com.nanaland.ui.component.detailscreen.other.MoveToTopButton
 import com.nanaland.util.ui.ScreenPreview
 import com.nanaland.util.ui.UiState
 import kotlinx.coroutines.launch
-import okhttp3.internal.notify
 
 @Composable
 fun NatureContentScreen(
     contentId: Long?,
+    isSearch: Boolean,
+    updatePrevScreenListFavorite: (Long, Boolean) -> Unit,
     moveToBackScreen: () -> Unit,
     viewModel: NatureContentViewModel = hiltViewModel()
 ) {
     LaunchedEffect(Unit) {
-        viewModel.getNatureContent(contentId)
+        viewModel.getNatureContent(contentId, isSearch)
     }
     val natureContent = viewModel.natureContent.collectAsState().value
     NatureContentScreen(
         natureContent = natureContent,
         toggleFavorite = viewModel::toggleFavorite,
+        updatePrevScreenListFavorite = updatePrevScreenListFavorite,
         moveToBackScreen = moveToBackScreen,
         isContent = true
     )
@@ -50,23 +52,22 @@ fun NatureContentScreen(
 @Composable
 private fun NatureContentScreen(
     natureContent: UiState<NatureContentData>,
-    toggleFavorite: (Long) -> Unit,
+    toggleFavorite: (Long, (Long, Boolean) -> Unit) -> Unit,
+    updatePrevScreenListFavorite: (Long, Boolean) -> Unit,
     moveToBackScreen: () -> Unit,
     isContent: Boolean
 ) {
     val scrollState = rememberScrollState()
     val coroutineScope = rememberCoroutineScope()
     CustomSurface {
+        CustomTopBarWithShadow(
+            title = "7대 자연",
+            onBackButtonClicked = moveToBackScreen
+        )
         when (natureContent) {
             is UiState.Loading -> {}
             is UiState.Success -> {
                 Box(modifier = Modifier.fillMaxSize()) {
-                    Column {
-                        CustomTopBarWithShadow(
-                            title = "7대 자연",
-                            onBackButtonClicked = moveToBackScreen
-                        )
-
                         Column(modifier = Modifier.verticalScroll(scrollState)) {
                             DetailScreenTopBannerImage(imageUri = natureContent.data.originUrl)
 
@@ -78,7 +79,7 @@ private fun NatureContentScreen(
                                     tag = natureContent.data.addressTag,
                                     title = natureContent.data.title,
                                     content = natureContent.data.content,
-                                    onLikeButtonClicked = { toggleFavorite(natureContent.data.id) },
+                                    onLikeButtonClicked = { toggleFavorite(natureContent.data.id, updatePrevScreenListFavorite) },
                                     onShareButtonClicked = {}
                                 )
 
@@ -154,7 +155,6 @@ private fun NatureContentScreen(
 
                             Spacer(Modifier.height(80.dp))
                         }
-                    }
 
                     MoveToTopButton {
                         coroutineScope.launch { scrollState.animateScrollTo(0) }

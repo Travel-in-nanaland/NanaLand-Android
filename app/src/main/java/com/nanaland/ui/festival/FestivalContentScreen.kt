@@ -19,10 +19,10 @@ import com.nanaland.R
 import com.nanaland.domain.entity.festival.FestivalContentData
 import com.nanaland.ui.component.common.CustomSurface
 import com.nanaland.ui.component.common.CustomTopBarWithShadow
-import com.nanaland.ui.component.detailscreen.DetailScreenDescription
-import com.nanaland.ui.component.detailscreen.DetailScreenInformation
-import com.nanaland.ui.component.detailscreen.DetailScreenTopBannerImage
-import com.nanaland.ui.component.detailscreen.MoveToTopButton
+import com.nanaland.ui.component.detailscreen.other.DetailScreenDescription
+import com.nanaland.ui.component.detailscreen.other.DetailScreenInformation
+import com.nanaland.ui.component.detailscreen.other.DetailScreenTopBannerImage
+import com.nanaland.ui.component.detailscreen.other.MoveToTopButton
 import com.nanaland.util.ui.ScreenPreview
 import com.nanaland.util.ui.UiState
 import kotlinx.coroutines.launch
@@ -30,16 +30,19 @@ import kotlinx.coroutines.launch
 @Composable
 fun FestivalContentScreen(
     contentId: Long?,
+    isSearch: Boolean,
+    updatePrevScreenListFavorite: (Long, Boolean) -> Unit,
     moveToBackScreen: () -> Unit,
     viewModel: FestivalContentViewModel = hiltViewModel()
 ) {
     LaunchedEffect(Unit) {
-        viewModel.getFestivalContent(contentId)
+        viewModel.getFestivalContent(contentId, isSearch)
     }
     val festivalContent = viewModel.festivalContent.collectAsState().value
     FestivalContentScreen(
         festivalContent = festivalContent,
         toggleFavorite = viewModel::toggleFavorite,
+        updatePrevScreenListFavorite = updatePrevScreenListFavorite,
         moveToBackScreen = moveToBackScreen,
         isContent = true
     )
@@ -48,23 +51,22 @@ fun FestivalContentScreen(
 @Composable
 private fun FestivalContentScreen(
     festivalContent: UiState<FestivalContentData>,
-    toggleFavorite: (Long) -> Unit,
+    toggleFavorite: (Long, (Long, Boolean) -> Unit) -> Unit,
+    updatePrevScreenListFavorite: (Long, Boolean) -> Unit,
     moveToBackScreen: () -> Unit,
     isContent: Boolean
 ) {
     val scrollState = rememberScrollState()
     val coroutineScope = rememberCoroutineScope()
     CustomSurface {
+        CustomTopBarWithShadow(
+            title = "축제",
+            onBackButtonClicked = moveToBackScreen
+        )
         when (festivalContent) {
             is UiState.Loading -> {}
             is UiState.Success -> {
                 Box(modifier = Modifier.fillMaxSize()) {
-                    Column {
-                        CustomTopBarWithShadow(
-                            title = "축제",
-                            onBackButtonClicked = moveToBackScreen
-                        )
-
                         Column(modifier = Modifier.verticalScroll(scrollState)) {
                             DetailScreenTopBannerImage(imageUri = festivalContent.data.originUrl)
 
@@ -76,7 +78,7 @@ private fun FestivalContentScreen(
                                     tag = festivalContent.data.addressTag,
                                     title = festivalContent.data.title,
                                     content = festivalContent.data.content,
-                                    onLikeButtonClicked = { toggleFavorite(festivalContent.data.id) },
+                                    onLikeButtonClicked = { toggleFavorite(festivalContent.data.id, updatePrevScreenListFavorite) },
                                     onShareButtonClicked = {}
                                 )
 
@@ -146,7 +148,6 @@ private fun FestivalContentScreen(
 
                             Spacer(Modifier.height(80.dp))
                         }
-                    }
 
                     MoveToTopButton {
                         coroutineScope.launch { scrollState.animateScrollTo(0) }

@@ -11,6 +11,7 @@
         style="@style/WeekDayTitleStyle"
         android:tag="dayOfWeek1"
         android:text="@string/cdrp_sun"
+        android:layout_weight="1"
         android:fontFamily="@font/apple_neo_m" />
 
     <com.nanaland.util.daterangecalendar.customviews.CustomTextView
@@ -18,6 +19,7 @@
         style="@style/WeekDayTitleStyle"
         android:tag="dayOfWeek2"
         android:text="@string/cdrp_mon"
+        android:layout_weight="1"
         android:fontFamily="@font/apple_neo_m" />
 
     <com.nanaland.util.daterangecalendar.customviews.CustomTextView
@@ -25,6 +27,7 @@
         style="@style/WeekDayTitleStyle"
         android:tag="dayOfWeek3"
         android:text="@string/cdrp_tue"
+        android:layout_weight="1"
         android:fontFamily="@font/apple_neo_m" />
 
     <com.nanaland.util.daterangecalendar.customviews.CustomTextView
@@ -32,6 +35,7 @@
         style="@style/WeekDayTitleStyle"
         android:tag="dayOfWeek4"
         android:text="@string/cdrp_wed"
+        android:layout_weight="1"
         android:fontFamily="@font/apple_neo_m" />
 
     <com.nanaland.util.daterangecalendar.customviews.CustomTextView
@@ -39,6 +43,7 @@
         style="@style/WeekDayTitleStyle"
         android:tag="dayOfWeek5"
         android:text="@string/cdrp_thu"
+        android:layout_weight="1"
         android:fontFamily="@font/apple_neo_m" />
 
     <com.nanaland.util.daterangecalendar.customviews.CustomTextView
@@ -46,6 +51,7 @@
         style="@style/WeekDayTitleStyle"
         android:tag="dayOfWeek6"
         android:text="@string/cdrp_fri"
+        android:layout_weight="1"
         android:fontFamily="@font/apple_neo_m" />
 
     <com.nanaland.util.daterangecalendar.customviews.CustomTextView
@@ -53,6 +59,7 @@
         style="@style/WeekDayTitleStyle"
         android:tag="dayOfWeek7"
         android:text="@string/cdrp_sat"
+        android:layout_weight="1"
         android:fontFamily="@font/apple_neo_m" />
 
 </LinearLayout>

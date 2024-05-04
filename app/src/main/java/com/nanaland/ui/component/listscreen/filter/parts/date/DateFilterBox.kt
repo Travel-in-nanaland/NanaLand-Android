@@ -21,7 +21,7 @@ import com.nanaland.R
 import com.nanaland.ui.theme.NanaLandTheme
 import com.nanaland.ui.theme.caption01
 import com.nanaland.ui.theme.getColor
-import com.nanaland.util.string.getMonthDateDayOfWeek
+import com.nanaland.util.string.getYearMonthDateSeperated
 import com.nanaland.util.ui.ComponentPreview
 import com.nanaland.util.ui.clickableNoEffect
 import java.util.Calendar
@@ -30,8 +30,8 @@ import java.util.Calendar
 fun DateFilterBox(
     showDimBackground: () -> Unit,
     openDateFilterDialog: () -> Unit,
-    startCalendar: Calendar?,
-    endCalendar: Calendar?,
+    startCalendar: Calendar,
+    endCalendar: Calendar,
 ) {
     val borderColor = getColor().gray02
     Row(
@@ -54,7 +54,10 @@ fun DateFilterBox(
         Spacer(Modifier.width(12.dp))
 
         Text(
-            text = if (startCalendar != null && endCalendar != null) "${getMonthDateDayOfWeek(startCalendar)} ~ ${getMonthDateDayOfWeek(endCalendar)}" else "날짜",
+            text = if (startCalendar.get(Calendar.YEAR) == endCalendar.get(Calendar.YEAR) &&
+                startCalendar.get(Calendar.MONTH) == endCalendar.get(Calendar.MONTH) &&
+                startCalendar.get(Calendar.DATE) == endCalendar.get(Calendar.DATE)) getYearMonthDateSeperated(startCalendar)
+            else "${getYearMonthDateSeperated(startCalendar)} ~ ${getYearMonthDateSeperated(endCalendar)}",
             color = getColor().gray01,
             style = caption01
         )
@@ -79,8 +82,8 @@ private fun DateFilterBoxPreview() {
         DateFilterBox(
             showDimBackground = {},
             openDateFilterDialog = {},
-            startCalendar = null,
-            endCalendar = null
+            startCalendar = Calendar.getInstance(),
+            endCalendar = Calendar.getInstance()
         )
     }
 }

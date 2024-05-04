@@ -5,6 +5,8 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -27,7 +29,8 @@ fun SearchThumbnail(
 ) {
     Column(
         modifier = Modifier
-            .wrapContentSize()
+            .width(160.dp)
+            .wrapContentHeight()
             .clickableNoEffect { onClick() }
     ) {
         Box {

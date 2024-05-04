@@ -54,9 +54,10 @@ fun DateFilterBottomDialog(
     hideDimBackground: () -> Unit,
     startCalendar: Calendar?,
     endCalendar: Calendar?,
-    updateStartCalendar: (Calendar?) -> Unit,
-    updateEndCalendar: (Calendar?) -> Unit,
-    getMonthlyFestivalList: () -> Unit
+    updateStartCalendar: (Calendar) -> Unit,
+    updateEndCalendar: (Calendar) -> Unit,
+    updateList: () -> Unit,
+    clearList: () -> Unit,
 ) {
     val coroutineScope = rememberCoroutineScope()
     val context = LocalContext.current
@@ -107,13 +108,26 @@ fun DateFilterBottomDialog(
         Spacer(Modifier.height(24.dp))
 
         AndroidView(
+            modifier = Modifier.padding(start = 12.dp, end = 12.dp),
             factory = { context ->
                 DateRangeCalendarView(context).apply {
                     dateRangeCalendarManager.value = getCalendarManager()
                     adapterEventCalendarMonths.value = getAdapterEventCalendarMonths()
+                    val currentCalendar = Calendar.getInstance()
+                    val startRangeCalendar = Calendar.getInstance()
+                    val endRangeCalendar = Calendar.getInstance()
+                    startRangeCalendar.set(currentCalendar.get(Calendar.YEAR) - 2, currentCalendar.get(Calendar.MONTH), currentCalendar.get(Calendar.DATE))
+                    endRangeCalendar.set(currentCalendar.get(Calendar.YEAR) + 2, currentCalendar.get(Calendar.MONTH), currentCalendar.get(Calendar.DATE))
+                    dateRangeCalendarManager.value?.setSelectableDateRange(startRangeCalendar, endRangeCalendar)
                     this.setCalendarListener(object : CalendarListener {
-                        override fun onFirstDateSelected(startDate: Calendar) {}
-                        override fun onDateRangeSelected(startDate: Calendar, endDate: Calendar) {}
+                        override fun onFirstDateSelected(startDate: Calendar) {
+                            dateRangeCalendarManager.value?.mMinSelectedDate = startDate
+                            dateRangeCalendarManager.value?.mMaxSelectedDate = null
+                        }
+                        override fun onDateRangeSelected(startDate: Calendar, endDate: Calendar) {
+                            dateRangeCalendarManager.value?.mMinSelectedDate = startDate
+                            dateRangeCalendarManager.value?.mMaxSelectedDate = endDate
+                        }
                     })
                 }
             }
@@ -127,25 +141,28 @@ fun DateFilterBottomDialog(
                 .height(48.dp)
         ) {
             FilterDialogResetButton {
-                dateRangeCalendarManager.value?.resetSelectedDateRange()
-                adapterEventCalendarMonths.value?.resetAllSelectedViews()
+                dateRangeCalendarManager.value?.mMinSelectedDate = Calendar.getInstance()
+                dateRangeCalendarManager.value?.mMaxSelectedDate = Calendar.getInstance()
+//                dateRangeCalendarManager.value?.resetSelectedDateRange()
+//                adapterEventCalendarMonths.value?.resetAllSelectedViews()
                 adapterEventCalendarMonths.value?.invalidateCalendar()
             }
 
             Spacer(Modifier.weight(1f))
 
             FilterDialogApplyButton {
-                if (dateRangeCalendarManager.value?.mMinSelectedDate != null && dateRangeCalendarManager.value?.mMaxSelectedDate == null ||
-                    dateRangeCalendarManager.value?.mMinSelectedDate == null && dateRangeCalendarManager.value?.mMaxSelectedDate != null) {
-                    Toast.makeText(context, "올바른 날짜 구간을 선택해주세요.", Toast.LENGTH_SHORT).show()
+                if (dateRangeCalendarManager.value?.mMinSelectedDate != null && dateRangeCalendarManager.value?.mMaxSelectedDate == null) {
+                    updateStartCalendar(dateRangeCalendarManager.value?.mMinSelectedDate ?: Calendar.getInstance())
+                    updateEndCalendar(dateRangeCalendarManager.value?.mMinSelectedDate ?: Calendar.getInstance())
                 } else {
-                    getMonthlyFestivalList()
-                    updateStartCalendar(dateRangeCalendarManager.value?.mMinSelectedDate)
-                    updateEndCalendar(dateRangeCalendarManager.value?.mMaxSelectedDate)
-                    coroutineScope.launch {
-                        anchoredDraggableState.animateTo(AnchoredDraggableContentState.Closed)
-                        hideDimBackground()
-                    }
+                    updateStartCalendar(dateRangeCalendarManager.value?.mMinSelectedDate ?: Calendar.getInstance())
+                    updateEndCalendar(dateRangeCalendarManager.value?.mMaxSelectedDate ?: Calendar.getInstance())
+                }
+                clearList()
+                updateList()
+                coroutineScope.launch {
+                    anchoredDraggableState.animateTo(AnchoredDraggableContentState.Closed)
+                    hideDimBackground()
                 }
             }
         }

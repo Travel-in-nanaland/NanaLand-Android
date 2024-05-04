@@ -15,11 +15,13 @@ import androidx.compose.ui.unit.dp
 import com.nanaland.ui.theme.NanaLandTheme
 import com.nanaland.ui.theme.getColor
 import com.nanaland.util.ui.ComponentPreview
+import com.nanaland.util.ui.clickableNoEffect
 
 @Composable
 fun SearchingScreenRecentSearchItem(
     text: String,
-    onCloseClick: () -> Unit
+    onCloseClick: () -> Unit,
+    onClick: () -> Unit,
 ) {
     Box(
         modifier = Modifier
@@ -28,13 +30,14 @@ fun SearchingScreenRecentSearchItem(
                 color = getColor().main10,
                 shape = RoundedCornerShape(50)
             )
+            .clickableNoEffect { onClick() }
             .padding(start = 20.dp, end = 20.dp),
         contentAlignment = Alignment.Center
     ) {
         Row(
             verticalAlignment = Alignment.CenterVertically
         ) {
-            SearchingScreenRecentSearchItemText(text = "Text")
+            SearchingScreenRecentSearchItemText(text = text)
 
             Spacer(Modifier.width(10.dp))
 
@@ -49,7 +52,8 @@ private fun SearchingScreenRecentSearchItemPreview() {
     NanaLandTheme {
         SearchingScreenRecentSearchItem(
             text = "Text",
-            onCloseClick = {}
+            onCloseClick = {},
+            onClick = {}
         )
     }
 }

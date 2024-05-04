@@ -1,6 +1,5 @@
 package com.nanaland.ui.market
 
-import android.util.Log
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -20,10 +19,10 @@ import com.nanaland.R
 import com.nanaland.domain.entity.market.MarketContentData
 import com.nanaland.ui.component.common.CustomSurface
 import com.nanaland.ui.component.common.CustomTopBarWithShadow
-import com.nanaland.ui.component.detailscreen.DetailScreenDescription
-import com.nanaland.ui.component.detailscreen.DetailScreenInformation
-import com.nanaland.ui.component.detailscreen.DetailScreenTopBannerImage
-import com.nanaland.ui.component.detailscreen.MoveToTopButton
+import com.nanaland.ui.component.detailscreen.other.DetailScreenDescription
+import com.nanaland.ui.component.detailscreen.other.DetailScreenInformation
+import com.nanaland.ui.component.detailscreen.other.DetailScreenTopBannerImage
+import com.nanaland.ui.component.detailscreen.other.MoveToTopButton
 import com.nanaland.util.ui.ScreenPreview
 import com.nanaland.util.ui.UiState
 import kotlinx.coroutines.launch
@@ -31,18 +30,19 @@ import kotlinx.coroutines.launch
 @Composable
 fun MarketContentScreen(
     contentId: Long?,
-    marketListViewModel: MarketListViewModel,
+    isSearch: Boolean,
+    updatePrevScreenListFavorite: (Long, Boolean) -> Unit,
     moveToBackScreen: () -> Unit,
     viewModel: MarketContentViewModel = hiltViewModel()
 ) {
     LaunchedEffect(Unit) {
-        viewModel.getMarketContent(contentId)
+        viewModel.getMarketContent(contentId, isSearch)
     }
     val marketContent = viewModel.marketContent.collectAsState().value
     MarketContentScreen(
         marketContent = marketContent,
         toggleFavorite = viewModel::toggleFavorite,
-        toggleListFavorite = marketListViewModel::toggleFavoriteWithNoApi,
+        updatePrevScreenListFavorite = updatePrevScreenListFavorite,
         moveToBackScreen = moveToBackScreen,
         isContent = true
     )
@@ -52,23 +52,21 @@ fun MarketContentScreen(
 private fun MarketContentScreen(
     marketContent: UiState<MarketContentData>,
     toggleFavorite: (Long, (Long, Boolean) -> Unit) -> Unit,
-    toggleListFavorite: (Long, Boolean) -> Unit,
+    updatePrevScreenListFavorite: (Long, Boolean) -> Unit,
     moveToBackScreen: () -> Unit,
     isContent: Boolean
 ) {
     val scrollState = rememberScrollState()
     val coroutineScope = rememberCoroutineScope()
     CustomSurface {
+        CustomTopBarWithShadow(
+            title = "전통시장",
+            onBackButtonClicked = moveToBackScreen
+        )
         when (marketContent) {
             is UiState.Loading -> {}
             is UiState.Success -> {
                 Box(modifier = Modifier.fillMaxSize()) {
-                    Column {
-                        CustomTopBarWithShadow(
-                            title = "전통시장",
-                            onBackButtonClicked = moveToBackScreen
-                        )
-
                         Column(modifier = Modifier.verticalScroll(scrollState)) {
                             DetailScreenTopBannerImage(imageUri = marketContent.data.originUrl)
 
@@ -80,9 +78,7 @@ private fun MarketContentScreen(
                                     tag = marketContent.data.addressTag,
                                     title = marketContent.data.title,
                                     content = marketContent.data.content,
-                                    onLikeButtonClicked = {
-                                        toggleFavorite(marketContent.data.id, toggleListFavorite)
-                                    },
+                                    onLikeButtonClicked = { toggleFavorite(marketContent.data.id, updatePrevScreenListFavorite) },
                                     onShareButtonClicked = {}
                                 )
 
@@ -141,7 +137,6 @@ private fun MarketContentScreen(
 
                             Spacer(Modifier.height(80.dp))
                         }
-                    }
 
                     MoveToTopButton {
                         coroutineScope.launch { scrollState.animateScrollTo(0) }

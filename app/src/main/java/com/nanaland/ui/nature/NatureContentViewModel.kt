@@ -30,12 +30,12 @@ class NatureContentViewModel @Inject constructor(
     private val _natureContent = MutableStateFlow<UiState<NatureContentData>>(UiState.Loading)
     val natureContent = _natureContent.asStateFlow()
 
-    fun getNatureContent(contentId: Long?) {
+    fun getNatureContent(contentId: Long?, isSearch: Boolean) {
         if (contentId == null) return
         _natureContent.update { UiState.Loading }
         val requestData = GetNatureContentRequest(
             id = contentId,
-            isSearch = false
+            isSearch = isSearch
         )
         getNatureContentUseCase(requestData)
             .onEach { networkResult ->
@@ -55,7 +55,7 @@ class NatureContentViewModel @Inject constructor(
             .launchIn(viewModelScope)
     }
 
-    fun toggleFavorite(contentId: Long) {
+    fun toggleFavorite(contentId: Long, updateList: (Long, Boolean) -> Unit) {
         val requestData = ToggleFavoriteRequest(
             id = contentId,
             category = "NATURE"
@@ -66,6 +66,7 @@ class NatureContentViewModel @Inject constructor(
                     data?.let {
                         _natureContent.update { uiState ->
                             if (uiState is UiState.Success) {
+                                updateList(contentId, data.data.favorite)
                                 UiState.Success(uiState.data.copy(favorite = data.data.favorite))
                             } else {
                                 uiState

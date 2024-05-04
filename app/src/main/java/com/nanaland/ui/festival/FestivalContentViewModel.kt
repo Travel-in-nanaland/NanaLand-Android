@@ -30,12 +30,12 @@ class FestivalContentViewModel @Inject constructor(
     private val _festivalContent = MutableStateFlow<UiState<FestivalContentData>>(UiState.Loading)
     val festivalContent = _festivalContent.asStateFlow()
 
-    fun getFestivalContent(contentId: Long?) {
+    fun getFestivalContent(contentId: Long?, isSearch: Boolean) {
         if (contentId == null) return
         _festivalContent.update { UiState.Loading }
         val requestData = GetFestivalContentRequest(
             id = contentId,
-            isSearch = false
+            isSearch = isSearch
         )
         getFestivalContentUseCase(requestData)
             .onEach { networkResult ->
@@ -55,7 +55,7 @@ class FestivalContentViewModel @Inject constructor(
             .launchIn(viewModelScope)
     }
 
-    fun toggleFavorite(contentId: Long) {
+    fun toggleFavorite(contentId: Long, updateList: (Long, Boolean) -> Unit) {
         val requestData = ToggleFavoriteRequest(
             id = contentId,
             category = "FESTIVAL"
@@ -66,6 +66,7 @@ class FestivalContentViewModel @Inject constructor(
                     data?.let {
                         _festivalContent.update { uiState ->
                             if (uiState is UiState.Success) {
+                                updateList(contentId, data.data.favorite)
                                 UiState.Success(uiState.data.copy(favorite = data.data.favorite))
                             } else {
                                 uiState

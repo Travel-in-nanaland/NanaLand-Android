@@ -18,6 +18,7 @@ import com.nanaland.util.ui.UiState
 fun NatureThumbnailList(
     listState: LazyGridState,
     thumbnailList: UiState<List<NatureThumbnailData>>,
+    toggleFavorite: (Long) -> Unit,
     moveToNatureContentScreen: (Long) -> Unit
 ) {
     when (thumbnailList) {
@@ -37,7 +38,7 @@ fun NatureThumbnailList(
                             isLiked = item.favorite,
                             title = item.title,
                             tag = item.addressTag,
-                            onLikeButtonClick = {},
+                            onLikeButtonClick = { toggleFavorite(item.id) },
                             onClick = { moveToNatureContentScreen(item.id) }
                         )
                     }

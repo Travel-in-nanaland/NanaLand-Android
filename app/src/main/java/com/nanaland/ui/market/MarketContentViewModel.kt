@@ -30,12 +30,12 @@ class MarketContentViewModel @Inject constructor(
     private val _marketContent = MutableStateFlow<UiState<MarketContentData>>(UiState.Loading)
     val marketContent = _marketContent.asStateFlow()
 
-    fun getMarketContent(contentId: Long?) {
+    fun getMarketContent(contentId: Long?, isSearch: Boolean) {
         if (contentId == null) return
         _marketContent.update { UiState.Loading }
         val requestData = GetMarketContentRequest(
             id = contentId,
-            isSearch = false
+            isSearch = isSearch
         )
         getMarketContentUseCase(requestData)
             .onEach { networkResult ->

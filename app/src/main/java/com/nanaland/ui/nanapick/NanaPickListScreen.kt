@@ -44,7 +44,7 @@ private fun NanaPickListScreen(
     isContent: Boolean
 ) {
     CustomSurface {
-        Column() {
+        Column {
             CustomTopBar(
                 title = "나나's Pick",
                 onBackButtonClicked = moveToMainScreen

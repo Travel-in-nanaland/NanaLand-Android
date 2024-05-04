@@ -3,7 +3,6 @@ package com.nanaland.ui.main.home.search
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import androidx.lifecycle.viewmodel.compose.viewModel
 import com.nanaland.domain.entity.search.HotPostThumbnailData
 import com.nanaland.domain.entity.search.SearchResultData
 import com.nanaland.domain.request.favorite.ToggleFavoriteRequest
@@ -54,30 +53,30 @@ class SearchViewModel @Inject constructor(
     private val getHotPostsUseCase: GetHotPostsUseCase,
     private val toggleFavoriteUseCase: ToggleFavoriteUseCase,
 ) : ViewModel() {
-    private val _topKeywords = MutableStateFlow<UiState<List<String>>>(UiState.Loading)
-    val topKeywords = _topKeywords.asStateFlow()
-    private val _hotPosts = MutableStateFlow<UiState<List<HotPostThumbnailData>>>(UiState.Loading)
-    val hotPosts = _hotPosts.asStateFlow()
+    private val _topKeywordList = MutableStateFlow<UiState<List<String>>>(UiState.Loading)
+    val topKeywordList = _topKeywordList.asStateFlow()
+    private val _hotPostList = MutableStateFlow<UiState<List<HotPostThumbnailData>>>(UiState.Loading)
+    val hotPostList = _hotPostList.asStateFlow()
     private val _selectedCategory = MutableStateFlow(SearchCategoryType.All)
     val selectedCategory = _selectedCategory.asStateFlow()
     private val _allSearchResultList = MutableStateFlow<UiState<Map<String, SearchResultData>>>(UiState.Loading)
     val allSearchResultList = _allSearchResultList.asStateFlow()
     private val _categorizedSearchResultList = MutableStateFlow<UiState<SearchResultData>>(UiState.Loading)
     val categorizedSearchResultList = _categorizedSearchResultList.asStateFlow()
-    private val _recentSearchMap = MutableStateFlow<Map<String, String>>(emptyMap())
-    val recentSearchMap = _recentSearchMap.asStateFlow()
+    private val _recentSearchList = MutableStateFlow<List<Pair<String, String>>>(emptyList())
+    val recentSearchList = _recentSearchList.asStateFlow()
 
     fun updateSelectedCategory(category: SearchCategoryType) {
         _selectedCategory.update { category }
     }
 
     fun getTopKeywords() {
-        _topKeywords.update { UiState.Loading }
+        _topKeywordList.update { UiState.Loading }
         getTopKeywordsUseCase()
             .onEach { networkResult ->
                 networkResult.onSuccess { _, data ->
                     data?.let {
-                        _topKeywords.update {
+                        _topKeywordList.update {
                             UiState.Success(data.data)
                         }
                     }
@@ -140,15 +139,25 @@ class SearchViewModel @Inject constructor(
         .launchIn(viewModelScope)
     }
 
-    fun getAllRecentSearch() {
+    fun getAllRecentSearches() {
         viewModelScope.launch {
             val map = getAllRecentSearchUseCase().first()
-            val sortedMap = map.toList().sortedBy { it.first.name }.toMap()
+            val sortedPairList = map.entries
+                .sortedByDescending { it.key.name }
+                .map { it.key.name to it.value.toString() }
+            _recentSearchList.update {
+                sortedPairList
+            }
         }
     }
 
     fun addRecentSearch(keyword: String) {
         viewModelScope.launch {
+            // 이미 같은 검색어가 있다면 삭제하고 새로 추가한다.
+            val duplicateItemKey = _recentSearchList.value.firstOrNull() { it.second == keyword }?.first
+            if (duplicateItemKey != null) {
+                deleteRecentSearch(duplicateItemKey)
+            }
             val time = Calendar.getInstance().timeInMillis
             addRecentSearchUseCase("$time", keyword)
         }
@@ -157,7 +166,15 @@ class SearchViewModel @Inject constructor(
     fun deleteRecentSearch(key: String) {
         viewModelScope.launch {
             deleteRecentSearchUseCase(key)
+            getAllRecentSearches()
         }
+    }
+
+    fun deleteAllRecentSearches() {
+        _recentSearchList.value.forEach { item ->
+            deleteRecentSearch(item.first)
+        }
+        getAllRecentSearches()
     }
 
     fun getHotPosts() {
@@ -165,7 +182,7 @@ class SearchViewModel @Inject constructor(
             .onEach { networkResult ->
                 networkResult.onSuccess { code, data ->
                     data?.let {
-                        _hotPosts.update {
+                        _hotPostList.update {
                             UiState.Success(data.data)
                         }
                     }
@@ -178,7 +195,8 @@ class SearchViewModel @Inject constructor(
             .launchIn(viewModelScope)
     }
 
-    fun toggleFavorite(contentId: Long, category: String?) {
+    fun toggleHotPostFavorite(contentId: Long, category: String?) {
+        Log.e("toggleHotPostFavorite", "toggleHotPostFavorite")
         if (category == null) return
         val requestData = ToggleFavoriteRequest(
             id = contentId,
@@ -188,7 +206,7 @@ class SearchViewModel @Inject constructor(
             .onEach { networkResult ->
                 networkResult.onSuccess { code, data ->
                     data?.let {
-                        _hotPosts.update { uiState ->
+                        _hotPostList.update { uiState ->
                             if (uiState is UiState.Success) {
                                 val newList = uiState.data.map { item ->
                                     if (item.id == contentId && item.category == category) item.copy(favorite = data.data.favorite)
@@ -208,5 +226,130 @@ class SearchViewModel @Inject constructor(
             }
             .catch { LogUtil.printLog("flow Error", "ToggleFavoriteUseCase") }
             .launchIn(viewModelScope)
+    }
+
+    fun toggleSearchResultFavorite(contentId: Long, category: String?) {
+        Log.e("toggleSearchResultFavorite", "toggleSearchResultFavorite")
+        if (category == null) return
+        val requestData = ToggleFavoriteRequest(
+            id = contentId,
+            category = category
+        )
+        toggleFavoriteUseCase(requestData)
+            .onEach { networkResult ->
+                networkResult.onSuccess { code, data ->
+                    data?.let {
+                        _categorizedSearchResultList.update { uiState ->
+                            if (uiState is UiState.Success) {
+                                val newList = uiState.data.data.map { item ->
+                                    if (item.id == contentId) item.copy(favorite = data.data.favorite)
+                                    else item
+                                }
+                                UiState.Success(uiState.data.copy(data = newList))
+                            } else {
+                                uiState
+                            }
+                        }
+                    }
+                }.onError { code, message ->
+                    LogUtil.printLog("onError", "code: ${code}\nmessage: $message")
+                }.onException {
+                    LogUtil.printLog("onException", "${it.message}")
+                }
+            }
+            .catch { LogUtil.printLog("flow Error", "ToggleFavoriteUseCase") }
+            .launchIn(viewModelScope)
+    }
+
+    fun toggleSearchResultFavoriteWithNoApi(contentId: Long, isLiked: Boolean) {
+        _categorizedSearchResultList.update { uiState ->
+            if (uiState is UiState.Success) {
+                val newList = uiState.data.data.map { item ->
+                    if (item.id == contentId) item.copy(favorite = isLiked)
+                    else item
+                }
+                UiState.Success(uiState.data.copy(data = newList))
+            } else {
+                uiState
+            }
+        }
+    }
+
+    fun toggleAllSearchResultFavorite(contentId: Long, category: String?) {
+        Log.e("toggleAllSearchResultFavorite", "toggleAllSearchResultFavorite")
+        if (category == null) return
+        val requestData = ToggleFavoriteRequest(
+            id = contentId,
+            category = category
+        )
+        toggleFavoriteUseCase(requestData)
+            .onEach { networkResult ->
+                networkResult.onSuccess { code, data ->
+                    data?.let {
+                        _allSearchResultList.update { uiState ->
+                            if (uiState is UiState.Success) {
+                                Log.e("toggleAllSearchResultFavorite", "${uiState.data.hashCode()}")
+                                val newMap = uiState.data.toMutableMap()
+                                val categoryString = when (category) {
+                                    "NATURE" -> "Nature"
+                                    "FESTIVAL" -> "Festival"
+                                    "MARKET" -> "Market"
+                                    "EXPERIENCE" -> "Experience"
+                                    else -> ""
+                                }
+                                if (newMap.containsKey(categoryString)) {
+                                    val newSearchResultData = newMap[categoryString]!!.copy(
+                                        data = newMap[categoryString]!!.data.map { item ->
+                                            if (item.id == contentId) item.copy(favorite = data.data.favorite)
+                                            else item
+                                        }
+                                    )
+                                    newMap[categoryString] = newSearchResultData
+                                }
+                                Log.e("toggleAllSearchResultFavorite", "${newMap}")
+                                UiState.Success(newMap)
+                            } else {
+                                uiState
+                            }
+                        }
+                    }
+                }.onError { code, message ->
+                    LogUtil.printLog("onError", "code: ${code}\nmessage: $message")
+                }.onException {
+                    LogUtil.printLog("onException", "${it.message}")
+                }
+            }
+            .catch { LogUtil.printLog("flow Error", "ToggleFavoriteUseCase") }
+            .launchIn(viewModelScope)
+    }
+
+    fun toggleAllSearchResultFavoriteWithNoApi(contentId: Long, isLiked: Boolean, category: String?) {
+        if (category == null) return
+        _allSearchResultList.update { uiState ->
+            if (uiState is UiState.Success) {
+                Log.e("toggleAllSearchResultFavorite", "${uiState.data.hashCode()}")
+                val newMap = uiState.data.toMutableMap()
+                val categoryString = when (category) {
+                    "NATURE" -> "Nature"
+                    "FESTIVAL" -> "Festival"
+                    "MARKET" -> "Market"
+                    "EXPERIENCE" -> "Experience"
+                    else -> ""
+                }
+                if (newMap.containsKey(categoryString)) {
+                    val newSearchResultData = newMap[categoryString]!!.copy(
+                        data = newMap[categoryString]!!.data.map { item ->
+                            if (item.id == contentId) item.copy(favorite = isLiked)
+                            else item
+                        }
+                    )
+                    newMap[categoryString] = newSearchResultData
+                }
+                Log.e("toggleAllSearchResultFavorite", "${newMap}")
+                UiState.Success(newMap)
+            } else {
+                uiState
+            }
+        }
     }
 }

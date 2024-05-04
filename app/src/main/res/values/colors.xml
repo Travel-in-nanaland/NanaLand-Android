@@ -7,14 +7,14 @@
     <color name="selected_date_circle_color">#FF583FF5</color>
 
     <!-- Fonts -->
-    <color name="title_color">#FF000000</color>
+    <color name="title_color">#FF151515</color>
     <color name="date_color">#000</color>
     <!--  월화수목금토일 날짜색  -->
-    <color name="week_color">#FF000000</color>
+    <color name="week_color">#FF151515</color>
 
     <!-- Calendar Date -->
     <color name="default_date_color">#FF000000</color>
-    <color name="disable_date_color">#FF000000</color>
+    <color name="disable_date_color">#FFCCCCCC</color>
     <!--  선택된 날짜 글자색  -->
     <color name="range_date_color">#FFFFFFFF</color>
     <!--  선택된 날짜 양 끝 글자색  -->

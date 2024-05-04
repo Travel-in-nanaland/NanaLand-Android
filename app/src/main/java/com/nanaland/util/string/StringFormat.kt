@@ -5,8 +5,9 @@ import java.util.Calendar
 import java.util.Locale
 
 // 05.01 (수)
-fun getMonthDateDayOfWeek(calendar: Calendar): String {
-    val dateFormat = SimpleDateFormat("MM.dd (E)", Locale.KOREAN)
+fun getYearMonthDateSeperated(calendar: Calendar): String {
+//    val dateFormat = SimpleDateFormat("yy.MM.dd (E)", Locale.KOREAN)
+    val dateFormat = SimpleDateFormat("yy.MM.dd", Locale.KOREAN)
     return dateFormat.format(calendar.time)
 }
 

@@ -34,15 +34,19 @@ class MarketListViewModel @Inject constructor(
     val marketThumbnailCount = _marketThumbnailCount.asStateFlow()
     private val _marketThumbnailList = MutableStateFlow<UiState<List<MarketThumbnailData>>>(UiState.Loading)
     val marketThumbnailList = _marketThumbnailList.asStateFlow()
+    private var page = 0L
 
     fun getMarketList() {
-        _marketThumbnailCount.update { UiState.Loading }
-        _marketThumbnailList.update { UiState.Loading }
+        var prevList: List<MarketThumbnailData>? = null
+        if (_marketThumbnailList.value is UiState.Success) {
+            page++
+            prevList = (_marketThumbnailList.value as UiState.Success).data
+        }
         val requestData = GetMarketListRequest(
             addressFilterList = selectedLocationList.mapIndexedNotNull { idx, value ->
                 if (value) locationList[idx] else null
             },
-            page = 0,
+            page = page,
             size = 12
         )
         getMarketListUseCase(requestData)
@@ -53,7 +57,11 @@ class MarketListViewModel @Inject constructor(
                             UiState.Success(data.data.totalElements)
                         }
                         _marketThumbnailList.update {
-                            UiState.Success(data.data.data)
+                            if (prevList.isNullOrEmpty()) {
+                                UiState.Success(data.data.data)
+                            } else {
+                                UiState.Success(prevList + data.data.data)
+                            }
                         }
                     }
                 }.onError { code, message ->
@@ -64,6 +72,11 @@ class MarketListViewModel @Inject constructor(
             }
             .catch { LogUtil.printLog("flow Error", "GetMarketListUseCase") }
             .launchIn(viewModelScope)
+    }
+
+    fun clearMarketList() {
+        _marketThumbnailList.update { UiState.Loading }
+        page = 0
     }
 
     fun toggleFavorite(contentId: Long) {

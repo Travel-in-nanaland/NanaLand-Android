@@ -7,18 +7,26 @@
     android:minHeight="@dimen/weekRowMinHeight"
     android:orientation="horizontal">
 
-    <com.nanaland.util.daterangecalendar.customviews.CustomDateView style="@style/ContainerDayOfWeek" />
-
-    <com.nanaland.util.daterangecalendar.customviews.CustomDateView style="@style/ContainerDayOfWeek" />
-
-    <com.nanaland.util.daterangecalendar.customviews.CustomDateView style="@style/ContainerDayOfWeek" />
-
-    <com.nanaland.util.daterangecalendar.customviews.CustomDateView style="@style/ContainerDayOfWeek" />
-
-    <com.nanaland.util.daterangecalendar.customviews.CustomDateView style="@style/ContainerDayOfWeek" />
-
-    <com.nanaland.util.daterangecalendar.customviews.CustomDateView style="@style/ContainerDayOfWeek" />
-
-    <com.nanaland.util.daterangecalendar.customviews.CustomDateView style="@style/ContainerDayOfWeek" />
+    <com.nanaland.util.daterangecalendar.customviews.CustomDateView
+        style="@style/ContainerDayOfWeek"
+        android:layout_weight="1" />
+    <com.nanaland.util.daterangecalendar.customviews.CustomDateView
+        style="@style/ContainerDayOfWeek"
+        android:layout_weight="1" />
+    <com.nanaland.util.daterangecalendar.customviews.CustomDateView
+        style="@style/ContainerDayOfWeek"
+        android:layout_weight="1" />
+    <com.nanaland.util.daterangecalendar.customviews.CustomDateView
+        style="@style/ContainerDayOfWeek"
+        android:layout_weight="1" />
+    <com.nanaland.util.daterangecalendar.customviews.CustomDateView
+        style="@style/ContainerDayOfWeek"
+        android:layout_weight="1" />
+    <com.nanaland.util.daterangecalendar.customviews.CustomDateView
+        style="@style/ContainerDayOfWeek"
+        android:layout_weight="1" />
+    <com.nanaland.util.daterangecalendar.customviews.CustomDateView
+        style="@style/ContainerDayOfWeek"
+        android:layout_weight="1" />
 
 </LinearLayout>

@@ -31,12 +31,16 @@ import com.nanaland.ui.languageselection.LanguageSelectionScreen
 import com.nanaland.ui.main.MainScreen
 import com.nanaland.ui.festival.FestivalContentScreen
 import com.nanaland.ui.festival.FestivalListScreen
+import com.nanaland.ui.festival.FestivalListViewModel
+import com.nanaland.ui.main.home.search.SearchViewModel
 import com.nanaland.ui.market.MarketContentScreen
 import com.nanaland.ui.market.MarketListScreen
+import com.nanaland.ui.market.MarketListViewModel
 import com.nanaland.ui.nanapick.NanaPickContentScreen
 import com.nanaland.ui.nanapick.NanaPickListScreen
 import com.nanaland.ui.nature.NatureContentScreen
 import com.nanaland.ui.nature.NatureListScreen
+import com.nanaland.ui.nature.NatureListViewModel
 import com.nanaland.ui.splash.SplashScreen
 import com.nanaland.util.navigation.navigate
 import com.nanaland.util.type.getCategoryType
@@ -111,8 +115,27 @@ fun MainNavigation(
 
         // 자연 상세 화면
         composable(route = ROUTE_NATURE_CONTENT) {
+            val parentEntry = remember(it) { navController.previousBackStackEntry!! }
+            val isSearch = it.arguments?.getBoolean("isSearch") ?: false
+            val updatePrevScreenListFavorite: (Long, Boolean) -> Unit = when (parentEntry.destination.route) {
+                ROUTE_NATURE_LIST -> {
+                    val viewModel: NatureListViewModel = hiltViewModel(parentEntry)
+                    viewModel::toggleFavoriteWithNoApi
+                }
+                ROUTE_MAIN -> {
+                    val viewModel: SearchViewModel = hiltViewModel(parentEntry)
+                    val tmp = { contentId: Long, isLiked: Boolean ->
+                        viewModel.toggleSearchResultFavoriteWithNoApi(contentId, isLiked)
+                        viewModel.toggleAllSearchResultFavoriteWithNoApi(contentId, isLiked, "NATURE")
+                    }
+                    tmp
+                }
+                else -> { _, _ -> }
+            }
             NatureContentScreen(
                 contentId = it.arguments?.getLong("contentId"),
+                isSearch = isSearch,
+                updatePrevScreenListFavorite = updatePrevScreenListFavorite,
                 moveToBackScreen = { navController.popBackStack() }
             )
         }
@@ -132,8 +155,27 @@ fun MainNavigation(
 
         // 축제 상세 화면
         composable(route = ROUTE_FESTIVAL_CONTENT) {
+            val parentEntry = remember(it) { navController.previousBackStackEntry!! }
+            val isSearch = it.arguments?.getBoolean("isSearch") ?: false
+            val updatePrevScreenListFavorite: (Long, Boolean) -> Unit = when (parentEntry.destination.route) {
+                ROUTE_FESTIVAL_LIST -> {
+                    val viewModel: FestivalListViewModel = hiltViewModel(parentEntry)
+                    viewModel::toggleFavoriteWithNoApi
+                }
+                ROUTE_MAIN -> {
+                    val viewModel: SearchViewModel = hiltViewModel(parentEntry)
+                    val tmp = { contentId: Long, isLiked: Boolean ->
+                        viewModel.toggleSearchResultFavoriteWithNoApi(contentId, isLiked)
+                        viewModel.toggleAllSearchResultFavoriteWithNoApi(contentId, isLiked, "FESTIVAL")
+                    }
+                    tmp
+                }
+                else -> { _, _ -> }
+            }
             FestivalContentScreen(
                 contentId = it.arguments?.getLong("contentId"),
+                isSearch = isSearch,
+                updatePrevScreenListFavorite = updatePrevScreenListFavorite,
                 moveToBackScreen = { navController.popBackStack() }
             )
         }
@@ -153,12 +195,27 @@ fun MainNavigation(
 
         // 전통시장 상세 화면
         composable(route = ROUTE_MARKET_CONTENT) {
-            val parentEntry = remember(it) {
-                navController.previousBackStackEntry!!
+            val parentEntry = remember(it) { navController.previousBackStackEntry!! }
+            val isSearch = it.arguments?.getBoolean("isSearch") ?: false
+            val updatePrevScreenListFavorite: (Long, Boolean) -> Unit = when (parentEntry.destination.route) {
+                ROUTE_MARKET_LIST -> {
+                    val viewModel: MarketListViewModel = hiltViewModel(parentEntry)
+                    viewModel::toggleFavoriteWithNoApi
+                }
+                ROUTE_MAIN -> {
+                    val viewModel: SearchViewModel = hiltViewModel(parentEntry)
+                    val tmp = { contentId: Long, isLiked: Boolean ->
+                        viewModel.toggleSearchResultFavoriteWithNoApi(contentId, isLiked)
+                        viewModel.toggleAllSearchResultFavoriteWithNoApi(contentId, isLiked, "MARKET")
+                    }
+                    tmp
+                }
+                else -> { _, _ -> }
             }
             MarketContentScreen(
                 contentId = it.arguments?.getLong("contentId"),
-                marketListViewModel = hiltViewModel(parentEntry),
+                isSearch = isSearch,
+                updatePrevScreenListFavorite = updatePrevScreenListFavorite,
                 moveToBackScreen = { navController.popBackStack() }
             )
         }

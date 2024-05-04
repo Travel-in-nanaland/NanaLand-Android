@@ -30,6 +30,7 @@ fun FilterDialogDimBackground(
     isDimBackgroundShowing: MutableState<Boolean>,
     dateAnchoredDraggableState: AnchoredDraggableState<AnchoredDraggableContentState>? = null,
     locationAnchoredDraggableState: AnchoredDraggableState<AnchoredDraggableContentState>? = null,
+    seasonAnchoredDraggableState: AnchoredDraggableState<AnchoredDraggableContentState>? = null
     ) {
     val density = LocalDensity.current.density
     val coroutineScope = rememberCoroutineScope()
@@ -41,38 +42,24 @@ fun FilterDialogDimBackground(
                 IntOffset(x = 0, y = (-SYSTEM_STATUS_BAR_HEIGHT * density).roundToInt())
             }
             .alpha(
-                if (dateAnchoredDraggableState != null && locationAnchoredDraggableState != null) {
-                    (locationAnchoredDraggableState.anchors.maxAnchor() - locationAnchoredDraggableState.offset) /
-                            (locationAnchoredDraggableState.anchors.maxAnchor() - locationAnchoredDraggableState.anchors.minAnchor()) +
-                            (dateAnchoredDraggableState.anchors.maxAnchor() - dateAnchoredDraggableState.offset) /
-                            (dateAnchoredDraggableState.anchors.maxAnchor() - dateAnchoredDraggableState.anchors.minAnchor())
-                } else if (dateAnchoredDraggableState != null && locationAnchoredDraggableState == null) {
-                    (dateAnchoredDraggableState.anchors.maxAnchor() - dateAnchoredDraggableState.offset) /
-                            (dateAnchoredDraggableState.anchors.maxAnchor() - dateAnchoredDraggableState.anchors.minAnchor())
-                } else if (dateAnchoredDraggableState == null && locationAnchoredDraggableState != null) {
-                    (locationAnchoredDraggableState.anchors.maxAnchor() - locationAnchoredDraggableState.offset) /
-                            (locationAnchoredDraggableState.anchors.maxAnchor() - locationAnchoredDraggableState.anchors.minAnchor())
-                } else {
-                    1f
-                }
+                ((locationAnchoredDraggableState?.anchors?.maxAnchor() ?: 0f) - (locationAnchoredDraggableState?.offset ?: 0f)) /
+                        ((locationAnchoredDraggableState?.anchors?.maxAnchor() ?: 1f) - (locationAnchoredDraggableState?.anchors?.minAnchor() ?: 0f)) +
+                        ((dateAnchoredDraggableState?.anchors?.maxAnchor() ?: 0f) - (dateAnchoredDraggableState?.offset ?: 0f)) /
+                        ((dateAnchoredDraggableState?.anchors?.maxAnchor() ?: 1f) - (dateAnchoredDraggableState?.anchors?.minAnchor() ?: 0f)) +
+                        ((seasonAnchoredDraggableState?.anchors?.maxAnchor() ?: 0f) - (seasonAnchoredDraggableState?.offset ?: 0f)) /
+                        ((seasonAnchoredDraggableState?.anchors?.maxAnchor() ?: 1f) - (seasonAnchoredDraggableState?.anchors?.minAnchor() ?: 0f))
             )
             .background(color = Color(0xAA000000))
             .clickableNoEffect {
                 coroutineScope.launch {
-                    if (dateAnchoredDraggableState != null && locationAnchoredDraggableState != null) {
-                        if (locationAnchoredDraggableState.targetValue == AnchoredDraggableContentState.Open) {
-                            locationAnchoredDraggableState.animateTo(AnchoredDraggableContentState.Closed)
-                        } else {
-                            dateAnchoredDraggableState.animateTo(AnchoredDraggableContentState.Closed)
-                        }
-                    } else if (dateAnchoredDraggableState != null && locationAnchoredDraggableState == null) {
-                        if (dateAnchoredDraggableState.targetValue == AnchoredDraggableContentState.Open) {
-                            dateAnchoredDraggableState.animateTo(AnchoredDraggableContentState.Closed)
-                        }
-                    } else if (dateAnchoredDraggableState == null && locationAnchoredDraggableState != null) {
-                        if (locationAnchoredDraggableState.targetValue == AnchoredDraggableContentState.Open) {
-                            locationAnchoredDraggableState.animateTo(AnchoredDraggableContentState.Closed)
-                        }
+                    if (locationAnchoredDraggableState?.targetValue == AnchoredDraggableContentState.Open) {
+                        locationAnchoredDraggableState.animateTo(AnchoredDraggableContentState.Closed)
+                    }
+                    if (dateAnchoredDraggableState?.targetValue == AnchoredDraggableContentState.Open) {
+                        dateAnchoredDraggableState.animateTo(AnchoredDraggableContentState.Closed)
+                    }
+                    if (seasonAnchoredDraggableState?.targetValue == AnchoredDraggableContentState.Open) {
+                        seasonAnchoredDraggableState.animateTo(AnchoredDraggableContentState.Closed)
                     }
                     isDimBackgroundShowing.value = false
                 }

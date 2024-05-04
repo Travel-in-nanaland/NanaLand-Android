@@ -31,7 +31,11 @@ fun RowScope.CategoryBox(
         modifier = Modifier
             .weight(1f)
             .fillMaxHeight()
-            .clickableNoEffect { updateSelectedCategoryType(titleList[categoryIdx]) }
+            .clickableNoEffect {
+                if (selectedCategoryType != titleList[categoryIdx]) {
+                    updateSelectedCategoryType(titleList[categoryIdx])
+                }
+            }
             .drawBehind {
                 if (titleList[categoryIdx] == selectedCategoryType) {
                     val borderSize = 2.dp.toPx()

@@ -7,53 +7,64 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.nanaland.globalvalue.type.HomeScreenViewType
 import com.nanaland.ui.component.main.searching.parts.SearchingScreenTopKeyword
 import com.nanaland.util.ui.UiState
 
 @Composable
 fun SearchingScreenTopKeywords(
-    topKeywords: UiState<List<String>>,
+    topKeywordList: UiState<List<String>>,
+    searchKeyword: (String) -> Unit,
+    updateViewType: (HomeScreenViewType) -> Unit,
+    updateInputText: (String) -> Unit,
+    addRecentSearch: (String) -> Unit,
 ) {
-    Row {
-        Column(
-            modifier = Modifier.weight(1f)
-        ) {
-            repeat(4) {
-                Box(
-                    modifier = Modifier.height(40.dp)
+    when (topKeywordList) {
+        is UiState.Loading -> {}
+        is UiState.Success -> {
+            Row {
+                Column(
+                    modifier = Modifier.weight(1f)
                 ) {
-                    when (topKeywords) {
-                        is UiState.Loading -> {}
-                        is UiState.Success -> {
+                    repeat(4) {
+                        Box(
+                            modifier = Modifier.height(40.dp)
+                        ) {
                             SearchingScreenTopKeyword(
-                                text = topKeywords.data[it],
-                                rank = it
+                                text = topKeywordList.data[it],
+                                rank = it,
+                                onClick = {
+                                    searchKeyword(topKeywordList.data[it])
+                                    updateInputText(topKeywordList.data[it])
+                                    addRecentSearch(topKeywordList.data[it])
+                                    updateViewType(HomeScreenViewType.SearchResult)
+                                }
                             )
                         }
-                        is UiState.Failure -> {}
+                    }
+                }
+                Column(
+                    modifier = Modifier.weight(1f)
+                ) {
+                    repeat(4) {
+                        Box(
+                            modifier = Modifier.height(40.dp)
+                        ) {
+                            SearchingScreenTopKeyword(
+                                text = topKeywordList.data[it + 4],
+                                rank = it + 4,
+                                onClick = {
+                                    searchKeyword(topKeywordList.data[it + 4])
+                                    updateInputText(topKeywordList.data[it + 4])
+                                    addRecentSearch(topKeywordList.data[it + 4])
+                                    updateViewType(HomeScreenViewType.SearchResult)
+                                }
+                            )
+                        }
                     }
                 }
             }
         }
-        Column(
-            modifier = Modifier.weight(1f)
-        ) {
-            repeat(4) {
-                Box(
-                    modifier = Modifier.height(40.dp)
-                ) {
-                    when (topKeywords) {
-                        is UiState.Loading -> {}
-                        is UiState.Success -> {
-                            SearchingScreenTopKeyword(
-                                text = topKeywords.data[it + 4],
-                                rank = it + 4
-                            )
-                        }
-                        is UiState.Failure -> {}
-                    }
-                }
-            }
-        }
+        is UiState.Failure -> {}
     }
 }

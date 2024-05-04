@@ -25,8 +25,8 @@ fun DateLocationFilterTopBar(
     openDateFilterDialog: () -> Unit,
     openLocationFilterDialog: () -> Unit,
     showDimBackground: () -> Unit,
-    startCalendar: Calendar?,
-    endCalendar: Calendar?,
+    startCalendar: Calendar,
+    endCalendar: Calendar,
 ) {
     Row(
         modifier = Modifier

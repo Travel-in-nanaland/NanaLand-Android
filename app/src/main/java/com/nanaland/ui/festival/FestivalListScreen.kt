@@ -7,8 +7,11 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.lazy.grid.rememberLazyGridState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
@@ -27,9 +30,11 @@ import com.nanaland.ui.component.listscreen.filter.FilterDialogDimBackground
 import com.nanaland.ui.component.listscreen.filter.LocationFilterBottomDialog
 import com.nanaland.ui.component.listscreen.filter.DateLocationFilterTopBar
 import com.nanaland.ui.component.listscreen.filter.LocationFilterTopBar
+import com.nanaland.ui.component.listscreen.filter.SeasonFilterBottomDialog
 import com.nanaland.ui.component.listscreen.filter.SeasonFilterTopBar
 import com.nanaland.ui.component.listscreen.filter.getDateAnchoredDraggableState
 import com.nanaland.ui.component.listscreen.filter.getLocationAnchoredDraggableState
+import com.nanaland.ui.component.listscreen.filter.getSeasonAnchoredDraggableState
 import com.nanaland.ui.component.listscreen.list.FestivalThumbnailList
 import com.nanaland.ui.theme.NanaLandTheme
 import com.nanaland.util.ui.ScreenPreview
@@ -45,6 +50,7 @@ fun FestivalListScreen(
 ) {
     val selectedCategoryType = viewModel.selectedCategoryType.collectAsState().value
     val selectedLocationList = viewModel.selectedLocationList
+    val selectedSeasonList = viewModel.selectedSeasonList
     val startCalendar = viewModel.startCalendar.collectAsState().value
     val endCalendar = viewModel.endCalendar.collectAsState().value
     val festivalThumbnailList = viewModel.festivalThumbnailList.collectAsState().value
@@ -57,9 +63,14 @@ fun FestivalListScreen(
         endCalendar = endCalendar,
         updateEndCalendar = viewModel::updateEndCalendar,
         selectedLocationList = selectedLocationList,
+        selectedSeasonList = selectedSeasonList,
         festivalThumbnailList = festivalThumbnailList,
         festivalThumbnailCount = festivalThumbnailCount,
+        toggleFavorite = viewModel::toggleFavorite,
         getMonthlyFestivalList = viewModel::getMonthlyFestivalList,
+        getEndedFestivalList = viewModel::getEndedFestivalList,
+        getSeasonalFestivalList = viewModel::getSeasonalFestivalList,
+        clearFestivalList = viewModel::clearFestivalList,
         moveToBackScreen = moveToBackScreen,
         moveToFestivalContentScreen = moveToFestivalContentScreen,
         isContent = true
@@ -71,14 +82,19 @@ fun FestivalListScreen(
 private fun FestivalListScreen(
     selectedCategoryType: FestivalCategoryType,
     updateSelectedCategoryType: (FestivalCategoryType) -> Unit,
-    startCalendar: Calendar?,
-    updateStartCalendar: (Calendar?) -> Unit,
-    endCalendar: Calendar?,
-    updateEndCalendar: (Calendar?) -> Unit,
+    startCalendar: Calendar,
+    updateStartCalendar: (Calendar) -> Unit,
+    endCalendar: Calendar,
+    updateEndCalendar: (Calendar) -> Unit,
     selectedLocationList: SnapshotStateList<Boolean>,
+    selectedSeasonList: SnapshotStateList<Boolean>,
     festivalThumbnailList: UiState<List<FestivalThumbnailData>>,
     festivalThumbnailCount: UiState<Long>,
+    toggleFavorite: (Long) -> Unit,
     getMonthlyFestivalList: () -> Unit,
+    getEndedFestivalList: () -> Unit,
+    getSeasonalFestivalList: () -> Unit,
+    clearFestivalList: () -> Unit,
     moveToBackScreen: () -> Unit,
     moveToFestivalContentScreen: (Long) -> Unit,
     isContent: Boolean
@@ -86,7 +102,27 @@ private fun FestivalListScreen(
     val coroutineScope = rememberCoroutineScope()
     val dateFilterDialogAnchoredDraggableState = remember { getDateAnchoredDraggableState() }
     val locationFilterDialogAnchoredDraggableState = remember { getLocationAnchoredDraggableState() }
-    val locationList = listOf("전체", "제주시", "애월", "서귀포시", "성산", "한림", "조천", "구좌", "한경", "대정", "안덕", "남원", "표선", "우도")
+    val seasonFilterDialogAnchoredDraggableState = remember { getSeasonAnchoredDraggableState() }
+    val locationList = remember { listOf("전체", "제주시", "애월", "서귀포시", "성산", "한림", "조천", "구좌", "한경", "대정", "안덕", "남원", "표선", "우도") }
+    val seasonList = remember { listOf("봄", "여름", "가을", "겨울") }
+    val lazyGridState = rememberLazyGridState()
+    val loadMore = remember {
+        derivedStateOf {
+            val layoutInfo = lazyGridState.layoutInfo
+            val totalItemsNumber = layoutInfo.totalItemsCount
+            val lastVisibleItemIndex = (layoutInfo.visibleItemsInfo.lastOrNull()?.index ?: 0) + 1
+            lastVisibleItemIndex > (totalItemsNumber - 1)
+        }
+    }
+    LaunchedEffect(loadMore.value) {
+        if (loadMore.value) {
+            when (selectedCategoryType) {
+                FestivalCategoryType.Monthly -> { getMonthlyFestivalList() }
+                FestivalCategoryType.Ended -> { getEndedFestivalList() }
+                FestivalCategoryType.Seasonal -> { getSeasonalFestivalList() }
+            }
+        }
+    }
     val isDimBackgroundShowing = remember { mutableStateOf(false) }
     CustomSurface {
         Box(
@@ -132,12 +168,18 @@ private fun FestivalListScreen(
                     FestivalCategoryType.Seasonal -> {
                         SeasonFilterTopBar(
                             count = festivalThumbnailCount,
+                            selectedSeasonList = selectedSeasonList,
+                            seasonList = seasonList,
+                            openSeasonFilterDialog = { coroutineScope.launch { seasonFilterDialogAnchoredDraggableState.animateTo(AnchoredDraggableContentState.Open) } },
+                            showDimBackground = { isDimBackgroundShowing.value = true }
                         )
                     }
                 }
 
                 FestivalThumbnailList(
+                    listState = lazyGridState,
                     thumbnailList = festivalThumbnailList,
+                    toggleFavorite = toggleFavorite,
                     moveToFestivalContentScreen = moveToFestivalContentScreen
                 )
             }
@@ -146,7 +188,8 @@ private fun FestivalListScreen(
                 FilterDialogDimBackground(
                     isDimBackgroundShowing = isDimBackgroundShowing,
                     dateAnchoredDraggableState = dateFilterDialogAnchoredDraggableState,
-                    locationAnchoredDraggableState = locationFilterDialogAnchoredDraggableState
+                    locationAnchoredDraggableState = locationFilterDialogAnchoredDraggableState,
+                    seasonAnchoredDraggableState = seasonFilterDialogAnchoredDraggableState
                 )
             }
 
@@ -157,7 +200,8 @@ private fun FestivalListScreen(
                 endCalendar = endCalendar,
                 updateStartCalendar = updateStartCalendar,
                 updateEndCalendar = updateEndCalendar,
-                getMonthlyFestivalList = getMonthlyFestivalList,
+                updateList = { getMonthlyFestivalList() },
+                clearList = { clearFestivalList() }
             )
 
             LocationFilterBottomDialog(
@@ -165,8 +209,40 @@ private fun FestivalListScreen(
                 hideDimBackground = { isDimBackgroundShowing.value = false },
                 anchoredDraggableState = locationFilterDialogAnchoredDraggableState,
                 selectedLocationList = selectedLocationList,
-                updateList = {},
-                clearList = {}
+                updateList = {
+                    when(selectedCategoryType) {
+                        FestivalCategoryType.Monthly -> {
+                            getMonthlyFestivalList()
+                        }
+                        FestivalCategoryType.Ended -> {
+                            getEndedFestivalList()
+                        }
+                        FestivalCategoryType.Seasonal -> {}
+                    }
+                },
+                clearList = {
+                    clearFestivalList()
+                    coroutineScope.launch { lazyGridState.scrollToItem(0) }
+                }
+            )
+
+            SeasonFilterBottomDialog(
+                seasonList = seasonList,
+                hideDimBackground = { isDimBackgroundShowing.value = false },
+                anchoredDraggableState = seasonFilterDialogAnchoredDraggableState,
+                selectedSeasonList = selectedSeasonList,
+                updateList = {
+                    when(selectedCategoryType) {
+                        FestivalCategoryType.Seasonal -> {
+                            getSeasonalFestivalList()
+                        }
+                        else -> {}
+                    }
+                },
+                clearList = {
+                    clearFestivalList()
+                    coroutineScope.launch { lazyGridState.scrollToItem(0) }
+                },
             )
         }
     }

@@ -45,6 +45,7 @@ fun HomeScreenTopBar(
     currentViewType: HomeScreenViewType,
     updateViewType: (HomeScreenViewType) -> Unit,
     getSearchResult: (String) -> Unit,
+    addRecentSearch: (String) -> Unit,
 ) {
     val focusManager = LocalFocusManager.current
     val focusRequester = FocusRequester()
@@ -92,6 +93,7 @@ fun HomeScreenTopBar(
                     if (inputText != "") {
                         updateViewType(HomeScreenViewType.SearchResult)
                         getSearchResult(inputText)
+                        addRecentSearch(inputText)
                     }
                 }
             )
@@ -147,7 +149,8 @@ private fun HomeScreenTopBarPreview_Home() {
             onValueChange = {},
             currentViewType = HomeScreenViewType.Home,
             updateViewType = {},
-            getSearchResult = {}
+            getSearchResult = {},
+            addRecentSearch = {}
         )
     }
 }
@@ -161,7 +164,8 @@ private fun HomeScreenTopBarPreview_Searching() {
             onValueChange = {},
             currentViewType = HomeScreenViewType.Searching,
             updateViewType = {},
-            getSearchResult = {}
+            getSearchResult = {},
+            addRecentSearch = {}
         )
     }
 }
@@ -175,7 +179,8 @@ private fun HomeScreenTopBarPreview_SearchResult() {
             onValueChange = {},
             currentViewType = HomeScreenViewType.SearchResult,
             updateViewType = {},
-            getSearchResult = {}
+            getSearchResult = {},
+            addRecentSearch = {}
         )
     }
 }
