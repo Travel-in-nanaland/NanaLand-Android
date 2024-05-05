@@ -6,7 +6,7 @@
     <style name="WeekDayTitleStyle">
         <item name="android:layout_width">@dimen/dayOfMonthBoxSize</item>
         <item name="android:layout_height">@dimen/dayOfMonthBoxSize</item>
-        <item name="android:textSize">@dimen/text_size_week</item>
+<!--        <item name="android:textSize">@dimen/text_size_week</item>-->
         <item name="android:gravity">center</item>
         <item name="android:textColor">@color/date_color</item>
         <item name="android:paddingBottom">@dimen/dayOfMonthPaddingBottom</item>

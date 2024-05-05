@@ -5,6 +5,8 @@
     <string name="festival">축제</string>
     <string name="market">전통시장</string>
     <string name="experience">이색 체험</string>
+    <string name="nanapick">나나\'s Pick</string>
+    <string name="jejustory">제주 이야기</string>
 
     <!--언어 설정 화면-->
     <string name="select_language_please">언어를 선택해주세요</string>

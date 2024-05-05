@@ -33,7 +33,6 @@
                 android:id="@+id/imgVNavLeft"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
-                android:layout_marginEnd="24dp"
                 android:fontFamily="@font/apple_neo_sb"
                 android:src="@drawable/ic_arrow_left" />
 
@@ -53,7 +52,6 @@
                 android:id="@+id/imgVNavRight"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
-                android:layout_marginStart="24dp"
                 android:src="@drawable/ic_arrow_right" />
         </LinearLayout>
 

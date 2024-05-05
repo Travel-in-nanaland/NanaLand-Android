@@ -8,12 +8,13 @@
 
     <!-- Fonts -->
     <color name="title_color">#FF151515</color>
-    <color name="date_color">#000</color>
+    <color name="date_color">#FF151515</color>
     <!--  월화수목금토일 날짜색  -->
-    <color name="week_color">#FF151515</color>
+    <color name="week_color">#FF7F7F7F</color>
 
     <!-- Calendar Date -->
     <color name="default_date_color">#FF000000</color>
+    <!--  비활성화된 날짜 글자색  -->
     <color name="disable_date_color">#FFCCCCCC</color>
     <!--  선택된 날짜 글자색  -->
     <color name="range_date_color">#FFFFFFFF</color>
@@ -21,5 +22,5 @@
     <color name="selected_date_color">#FFFFFFFF</color>
     <!--  선택된 날짜 배경색  -->
     <color name="range_bg_color">#FF583FF5</color>
-    <color name="calendar_text">#474747</color>
+    <color name="calendar_text">#FF474747</color>
 </resources>
