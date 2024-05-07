@@ -6,10 +6,12 @@ import android.graphics.PorterDuff.Mode.SRC_IN
 import android.graphics.PorterDuffColorFilter
 import android.graphics.Typeface
 import android.util.AttributeSet
+import android.util.Log
 import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.OnClickListener
+import android.view.ViewGroup
 import android.widget.FrameLayout
 import androidx.core.content.ContextCompat
 import com.nanaland.R
@@ -43,12 +45,19 @@ class CustomDateView @JvmOverloads constructor(
     private var onDateClickListener: OnDateClickListener? = null
     private var mDateState: DateState
     private val isRightToLeft = resources.getBoolean(R.bool.cdr_is_right_to_left)
+    private val fontScale = resources.configuration.fontScale
+    private val dpi = resources.configuration.densityDpi
 
     init {
+        Log.e("fontScale", "${fontScale}, ${30 * 360 / dpi}")
         val inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         inflater.inflate(R.layout.layout_calendar_day, this, true)
         tvDate = findViewById(R.id.dayOfMonthText)
+        tvDate.layoutParams.height = 70
+        tvDate.layoutParams.width = 70
         strip = findViewById(R.id.viewStrip)
+        strip.layoutParams.height = ViewGroup.LayoutParams.MATCH_PARENT
+        strip.layoutParams.width = ViewGroup.LayoutParams.MATCH_PARENT
         mDateState = SELECTABLE
         if (!isInEditMode) {
             setDateStyleAttributes(CalendarStyleAttrImpl.getDefAttributes(context))
@@ -57,7 +66,7 @@ class CustomDateView @JvmOverloads constructor(
     }
 
     private val defCalendarStyleAttr: CalendarStyleAttrImpl = CalendarStyleAttrImpl.getDefAttributes(context)
-    override var dateTextSize: Float = defCalendarStyleAttr.textSizeDate
+    override var dateTextSize: Float = defCalendarStyleAttr.textSizeDate / fontScale * 360 / dpi
     override var defaultDateColor: Int = defCalendarStyleAttr.defaultDateColor
     override var disableDateColor: Int = defCalendarStyleAttr.disableDateColor
     override var selectedDateCircleColor: Int = defCalendarStyleAttr.selectedDateCircleColor
@@ -115,7 +124,7 @@ class CustomDateView @JvmOverloads constructor(
     }
 
     override fun refreshLayout() {
-        tvDate.setTextSize(TypedValue.COMPLEX_UNIT_PX, dateTextSize)
+        tvDate.textSize = 14f / fontScale * 360 / dpi
     }
 
     override fun setDateClickListener(listener: OnDateClickListener) {
@@ -199,6 +208,8 @@ class CustomDateView @JvmOverloads constructor(
     }
 
     private fun setLeftFacedSelectedDate() {
+//        strip.layoutParams.height = ViewGroup.LayoutParams.MATCH_PARENT
+//        strip.layoutParams.width = ViewGroup.LayoutParams.MATCH_PARENT
         val layoutParams = strip.layoutParams as LayoutParams
         val drawable = ContextCompat.getDrawable(context, R.drawable.range_bg_left)
         drawable!!.colorFilter = PorterDuffColorFilter(stripColor, filterMode)
@@ -208,6 +219,8 @@ class CustomDateView @JvmOverloads constructor(
     }
 
     private fun setRightFacedSelectedDate() {
+//        strip.layoutParams.height = ViewGroup.LayoutParams.MATCH_PARENT
+//        strip.layoutParams.width = ViewGroup.LayoutParams.MATCH_PARENT
         val layoutParams = strip.layoutParams as LayoutParams
         val drawable = ContextCompat.getDrawable(context, R.drawable.range_bg_right)
         drawable!!.colorFilter = PorterDuffColorFilter(stripColor, filterMode)
@@ -220,6 +233,8 @@ class CustomDateView @JvmOverloads constructor(
      * To draw date as middle date
      */
     private fun makeAsRangeDate() {
+        strip.layoutParams.height = ViewGroup.LayoutParams.MATCH_PARENT
+        strip.layoutParams.width = ViewGroup.LayoutParams.MATCH_PARENT
         tvDate.setBackgroundColor(Color.TRANSPARENT)
         val mDrawable = ContextCompat.getDrawable(context, R.drawable.range_bg)
         mDrawable!!.colorFilter = PorterDuffColorFilter(stripColor, filterMode)

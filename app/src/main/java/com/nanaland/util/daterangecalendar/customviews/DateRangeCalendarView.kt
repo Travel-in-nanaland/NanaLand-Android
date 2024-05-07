@@ -10,6 +10,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.widget.LinearLayout
 import androidx.appcompat.widget.AppCompatImageView
+import androidx.core.view.marginEnd
+import androidx.core.view.setMargins
 import androidx.viewpager.widget.ViewPager
 import androidx.viewpager.widget.ViewPager.OnPageChangeListener
 import com.nanaland.R
@@ -31,6 +33,9 @@ class DateRangeCalendarView : LinearLayout, DateRangeCalendarViewApi {
     private lateinit var calendarStyleAttr: CalendarStyleAttributes
     private lateinit var mDateRangeCalendarManager: CalendarDateRangeManagerImpl
 
+    private val fontScale = resources.configuration.fontScale
+    private val dpi = resources.configuration.densityDpi
+
     constructor(context: Context) : super(context) {
         initViews(context, null)
     }
@@ -51,11 +56,17 @@ class DateRangeCalendarView : LinearLayout, DateRangeCalendarViewApi {
         val rlHeaderCalendar = findViewById<LinearLayout>(R.id.rlHeaderCalendar)
         rlHeaderCalendar.background = calendarStyleAttr.headerBg
         tvYearTitle = findViewById(R.id.tvYearTitle)
-        tvYearTitle.textSize = 12f
+        tvYearTitle.textSize = 10f / fontScale * 360 / dpi
         tvMonthTitle = findViewById(R.id.tvMonthTitle)
-        tvMonthTitle.textSize = 22f
+        tvMonthTitle.textSize = 18f / fontScale * 360 / dpi
         imgVNavLeft = findViewById(R.id.imgVNavLeft)
+        imgVNavLeft.layoutParams.width = 50
+        imgVNavLeft.layoutParams.height = 50
+        (imgVNavLeft.layoutParams as LinearLayout.LayoutParams).setMargins(0, 0, 40, 0)
         imgVNavRight = findViewById(R.id.imgVNavRight)
+        imgVNavRight.layoutParams.width = 50
+        imgVNavRight.layoutParams.height = 50
+        (imgVNavRight.layoutParams as LinearLayout.LayoutParams).setMargins(40, 0, 0, 0)
         vpCalendar = findViewById(R.id.vpCalendar)
         val defStartMonth = Calendar.getInstance().clone() as Calendar
         defStartMonth.add(Calendar.MONTH, -TOTAL_ALLOWED_MONTHS)

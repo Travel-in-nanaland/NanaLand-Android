@@ -42,6 +42,8 @@ internal class DateRangeMonthView : LinearLayout {
     private lateinit var calendarStyleAttr: CalendarStyleAttributes
     private var calendarListener: CalendarListener? = null
     private lateinit var dateRangeCalendarManager: CalendarDateRangeManager
+    private val fontScale = resources.configuration.fontScale
+    private val dpi = resources.configuration.densityDpi
 
     private val mOnDateClickListener: OnDateClickListener = object : OnDateClickListener {
         override fun onDateClicked(view: View, selectedDate: Calendar) {
@@ -101,6 +103,7 @@ internal class DateRangeMonthView : LinearLayout {
         val layoutInflater = LayoutInflater.from(context)
         val mainView = layoutInflater.inflate(R.layout.layout_calendar_month, this, true) as LinearLayout
         llDaysContainer = mainView.findViewById(R.id.llDaysContainer)
+//        llDaysContainer.layoutParams.height = 200 * 360 / dpi
         llTitleWeekContainer = mainView.findViewById(R.id.llTitleWeekContainer)
     }
 
@@ -186,7 +189,10 @@ internal class DateRangeMonthView : LinearLayout {
 
         //To set week day title as per offset
         for (i in 0 until TOTAL_DAYS_IN_A_WEEK) {
+            // 달력 상단의 월화수목금토일
             val textView = llTitleWeekContainer.getChildAt(i) as CustomTextView
+            textView.layoutParams.height = 90
+            textView.textSize = 12f / fontScale * 360 / dpi
             val weekStr = weekTitle[(i + calendarStyleAttr.weekOffset) % TOTAL_DAYS_IN_A_WEEK]
             textView.text = weekStr
         }
@@ -194,13 +200,17 @@ internal class DateRangeMonthView : LinearLayout {
 
         //To rotate week day according to offset
         if (startDay < 1) {
-            startDay = startDay + TOTAL_DAYS_IN_A_WEEK
+            startDay += TOTAL_DAYS_IN_A_WEEK
         }
         month.add(Calendar.DATE, -startDay + 1)
         for (i in 0 until llDaysContainer.childCount) {
+            // 월화수목금토일 밑의 날짜 한 줄
             val weekRow = llDaysContainer.getChildAt(i) as LinearLayout
+            weekRow.layoutParams.height = 90
             for (j in 0 until TOTAL_DAYS_IN_A_WEEK) {
                 val customDateView = weekRow.getChildAt(j) as CustomDateView
+                customDateView.layoutParams.height = 70
+                customDateView.layoutParams.width = 70
                 drawDayContainer(customDateView, month)
                 month.add(Calendar.DATE, 1)
             }
