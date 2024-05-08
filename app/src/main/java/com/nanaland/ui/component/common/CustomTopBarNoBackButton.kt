@@ -28,9 +28,8 @@ import com.nanaland.util.ui.clickableNoEffect
 import com.nanaland.util.ui.drawColoredShadow
 
 @Composable
-fun CustomTopBar(
-    title: String,
-    onBackButtonClicked: () -> Unit,
+fun CustomTopBarNoBackButton(
+    title: String
 ) {
     Box(
         modifier = Modifier
@@ -56,23 +55,6 @@ fun CustomTopBar(
         ,
         contentAlignment = Alignment.Center
     ) {
-        Box(
-            modifier = Modifier
-                .padding(start = 20.dp)
-                .align(Alignment.CenterStart)
-                .clip(RoundedCornerShape(50))
-                .clickableNoEffect { onBackButtonClicked() },
-            contentAlignment = Alignment.Center
-        ) {
-            Image(
-                modifier = Modifier
-                    .width(32.dp)
-                    .height(32.dp),
-                painter = painterResource(id = R.drawable.ic_arrow_left),
-                contentDescription = null,
-                colorFilter = ColorFilter.tint(getColor().black)
-            )
-        }
         Text(
             text = title,
             color = getColor().black,
@@ -83,11 +65,10 @@ fun CustomTopBar(
 
 @ScreenPreview
 @Composable
-private fun CustomTopBarPreview() {
+private fun CustomTopBarNoBackButtonPreview() {
     NanaLandTheme {
-        CustomTopBar(
+        CustomTopBarNoBackButton(
             title = "나나 Pick",
-            onBackButtonClicked = {}
         )
     }
 }

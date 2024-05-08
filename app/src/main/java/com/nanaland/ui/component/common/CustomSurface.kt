@@ -26,7 +26,7 @@ import com.nanaland.ui.theme.getColor
 
 @Composable
 fun CustomSurface(
-    content: @Composable () -> Unit
+    content: @Composable (Boolean) -> Unit
 ) {
     val view = LocalView.current
     val context = LocalContext.current
@@ -77,7 +77,7 @@ fun CustomSurface(
                 .fillMaxWidth()
                 .weight(1f)
         ) {
-            content()
+            content(isImeKeyboardShowing.value)
         }
         if (!isImeKeyboardShowing.value) {
             Spacer(

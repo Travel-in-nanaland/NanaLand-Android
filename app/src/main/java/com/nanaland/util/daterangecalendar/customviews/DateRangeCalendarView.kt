@@ -56,16 +56,16 @@ class DateRangeCalendarView : LinearLayout, DateRangeCalendarViewApi {
         val rlHeaderCalendar = findViewById<LinearLayout>(R.id.rlHeaderCalendar)
         rlHeaderCalendar.background = calendarStyleAttr.headerBg
         tvYearTitle = findViewById(R.id.tvYearTitle)
-        tvYearTitle.textSize = 10f / fontScale * 360 / dpi
+        tvYearTitle.textSize = 12f / fontScale * 160 / dpi * resources.displayMetrics.widthPixels / 360
         tvMonthTitle = findViewById(R.id.tvMonthTitle)
-        tvMonthTitle.textSize = 18f / fontScale * 360 / dpi
+        tvMonthTitle.textSize = 22f / fontScale * 160 / dpi * resources.displayMetrics.widthPixels / 360
         imgVNavLeft = findViewById(R.id.imgVNavLeft)
-        imgVNavLeft.layoutParams.width = 50
-        imgVNavLeft.layoutParams.height = 50
+        imgVNavLeft.layoutParams.width = 24 * resources.displayMetrics.widthPixels / 360
+        imgVNavLeft.layoutParams.height = 24 * resources.displayMetrics.widthPixels / 360
         (imgVNavLeft.layoutParams as LinearLayout.LayoutParams).setMargins(0, 0, 40, 0)
         imgVNavRight = findViewById(R.id.imgVNavRight)
-        imgVNavRight.layoutParams.width = 50
-        imgVNavRight.layoutParams.height = 50
+        imgVNavRight.layoutParams.width = 24 * resources.displayMetrics.widthPixels / 360
+        imgVNavRight.layoutParams.height = 24 * resources.displayMetrics.widthPixels / 360
         (imgVNavRight.layoutParams as LinearLayout.LayoutParams).setMargins(40, 0, 0, 0)
         vpCalendar = findViewById(R.id.vpCalendar)
         val defStartMonth = Calendar.getInstance().clone() as Calendar

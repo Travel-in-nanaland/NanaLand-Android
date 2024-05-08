@@ -1,7 +1,7 @@
 package com.nanaland.domain.response.favorite
 
 import com.google.gson.annotations.SerializedName
-import com.nanaland.domain.entity.favorite.FavoriteThumbnail
+import com.nanaland.domain.entity.favorite.FavoriteThumbnailData
 
 data class GetFavoriteListResponse(
     @SerializedName("status")
@@ -16,5 +16,5 @@ data class GetFavoriteListResponseData(
     @SerializedName("totalElements")
     val totalElements: Long,
     @SerializedName("data")
-    val data: List<FavoriteThumbnail>
+    val data: List<FavoriteThumbnailData>
 )

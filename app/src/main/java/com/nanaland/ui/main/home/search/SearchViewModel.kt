@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.nanaland.domain.entity.search.HotPostThumbnailData
 import com.nanaland.domain.entity.search.SearchResultData
+import com.nanaland.domain.entity.search.SearchResultThumbnailData
 import com.nanaland.domain.request.favorite.ToggleFavoriteRequest
 import com.nanaland.domain.request.search.GetAllSearchResultListRequest
 import com.nanaland.domain.request.search.GetSearchResultListRequest
@@ -65,8 +66,11 @@ class SearchViewModel @Inject constructor(
     val categorizedSearchResultList = _categorizedSearchResultList.asStateFlow()
     private val _recentSearchList = MutableStateFlow<List<Pair<String, String>>>(emptyList())
     val recentSearchList = _recentSearchList.asStateFlow()
+    private var page = 0L
 
-    fun updateSelectedCategory(category: SearchCategoryType) {
+    fun updateSelectedCategoryType(category: SearchCategoryType) {
+        page = 0L
+        _categorizedSearchResultList.update { UiState.Loading }
         _selectedCategory.update { category }
     }
 
@@ -81,22 +85,26 @@ class SearchViewModel @Inject constructor(
                         }
                     }
                 }.onError { code, message ->
-                    LogUtil.printLog("onError", "code: ${code}\nmessage: $message")
+                    LogUtil.log("onError", "code: ${code}\nmessage: $message")
                 }.onException {
-                    LogUtil.printLog("onException", "${it.message}")
+                    LogUtil.log("onException", "${it.message}")
                 }
             }
-            .catch { LogUtil.printLog("flow Error", "GetPopularSearchListUseCase") }
+            .catch { LogUtil.log("flow Error", "GetPopularSearchListUseCase") }
             .launchIn(viewModelScope)
     }
 
     fun getSearchResult(keyword: String) {
-        _categorizedSearchResultList.update { UiState.Loading }
+        var prevList: List<SearchResultThumbnailData>? = null
+        if (_categorizedSearchResultList.value is UiState.Success) {
+            page++
+            prevList = (_categorizedSearchResultList.value as UiState.Success).data.data
+        }
         val requestData = when (_selectedCategory.value) {
             SearchCategoryType.All -> GetAllSearchResultListRequest(keyword = keyword)
             else -> GetSearchResultListRequest(
                 keyword = keyword,
-                page = 0,
+                page = page,
                 size = 12
             )
         }
@@ -106,6 +114,8 @@ class SearchViewModel @Inject constructor(
             SearchCategoryType.Festival -> getFestivalSearchResultListUseCase(requestData as GetSearchResultListRequest)
             SearchCategoryType.Nature -> getNatureSearchResultListUseCase(requestData as GetSearchResultListRequest)
             SearchCategoryType.Market -> getMarketSearchResultListUseCase(requestData as GetSearchResultListRequest)
+            SearchCategoryType.NanaPick -> { return }
+            SearchCategoryType.JejuStory -> { return }
         }.onEach { networkResult ->
             networkResult.onSuccess { _, data ->
                 data?.let {
@@ -116,7 +126,8 @@ class SearchViewModel @Inject constructor(
                                 SearchCategoryType.Nature.name to data.data.nature,
                                 SearchCategoryType.Festival.name to data.data.festival,
                                 SearchCategoryType.Market.name to data.data.market,
-                                SearchCategoryType.Experience.name to data.data.experience)
+                                SearchCategoryType.Experience.name to data.data.experience,
+                            )
                             _allSearchResultList.update {
                                 UiState.Success(map)
                             }
@@ -124,18 +135,22 @@ class SearchViewModel @Inject constructor(
                         else -> {
                             data as GetSearchResultListResponse
                             _categorizedSearchResultList.update {
-                                UiState.Success(data.data)
+                                if (prevList.isNullOrEmpty()) {
+                                    UiState.Success(data.data)
+                                } else {
+                                    UiState.Success(data.data.copy(data = prevList + data.data.data))
+                                }
                             }
                         }
                     }
                 }
             }.onError { code, message ->
-                LogUtil.printLog("onError", "code: ${code}\nmessage: $message")
+                LogUtil.log("onError", "code: ${code}\nmessage: $message")
             }.onException {
-                LogUtil.printLog("onException", "${it.message}")
+                LogUtil.log("onException", "${it.message}")
             }
         }
-        .catch { LogUtil.printLog("flow Error", "GetNatureSearchResultListUseCase") }
+        .catch { LogUtil.log("flow Error", "GetNatureSearchResultListUseCase") }
         .launchIn(viewModelScope)
     }
 
@@ -187,9 +202,9 @@ class SearchViewModel @Inject constructor(
                         }
                     }
                 }.onError { code, message ->
-                    LogUtil.printLog("onError", "code: ${code}\nmessage: $message")
+                    LogUtil.log("onError", "code: ${code}\nmessage: $message")
                 }.onException {
-                    LogUtil.printLog("onException", "${it.message}")
+                    LogUtil.log("onException", "${it.message}")
                 }
             }
             .launchIn(viewModelScope)
@@ -219,12 +234,12 @@ class SearchViewModel @Inject constructor(
                         }
                     }
                 }.onError { code, message ->
-                    LogUtil.printLog("onError", "code: ${code}\nmessage: $message")
+                    LogUtil.log("onError", "code: ${code}\nmessage: $message")
                 }.onException {
-                    LogUtil.printLog("onException", "${it.message}")
+                    LogUtil.log("onException", "${it.message}")
                 }
             }
-            .catch { LogUtil.printLog("flow Error", "ToggleFavoriteUseCase") }
+            .catch { LogUtil.log("flow Error", "ToggleFavoriteUseCase") }
             .launchIn(viewModelScope)
     }
 
@@ -252,20 +267,20 @@ class SearchViewModel @Inject constructor(
                         }
                     }
                 }.onError { code, message ->
-                    LogUtil.printLog("onError", "code: ${code}\nmessage: $message")
+                    LogUtil.log("onError", "code: ${code}\nmessage: $message")
                 }.onException {
-                    LogUtil.printLog("onException", "${it.message}")
+                    LogUtil.log("onException", "${it.message}")
                 }
             }
-            .catch { LogUtil.printLog("flow Error", "ToggleFavoriteUseCase") }
+            .catch { LogUtil.log("flow Error", "ToggleFavoriteUseCase") }
             .launchIn(viewModelScope)
     }
 
-    fun toggleSearchResultFavoriteWithNoApi(contentId: Long, isLiked: Boolean) {
+    fun toggleSearchResultFavoriteWithNoApi(contentId: Long, isFavorite: Boolean) {
         _categorizedSearchResultList.update { uiState ->
             if (uiState is UiState.Success) {
                 val newList = uiState.data.data.map { item ->
-                    if (item.id == contentId) item.copy(favorite = isLiked)
+                    if (item.id == contentId) item.copy(favorite = isFavorite)
                     else item
                 }
                 UiState.Success(uiState.data.copy(data = newList))
@@ -314,16 +329,16 @@ class SearchViewModel @Inject constructor(
                         }
                     }
                 }.onError { code, message ->
-                    LogUtil.printLog("onError", "code: ${code}\nmessage: $message")
+                    LogUtil.log("onError", "code: ${code}\nmessage: $message")
                 }.onException {
-                    LogUtil.printLog("onException", "${it.message}")
+                    LogUtil.log("onException", "${it.message}")
                 }
             }
-            .catch { LogUtil.printLog("flow Error", "ToggleFavoriteUseCase") }
+            .catch { LogUtil.log("flow Error", "ToggleFavoriteUseCase") }
             .launchIn(viewModelScope)
     }
 
-    fun toggleAllSearchResultFavoriteWithNoApi(contentId: Long, isLiked: Boolean, category: String?) {
+    fun toggleAllSearchResultFavoriteWithNoApi(contentId: Long, isFavorite: Boolean, category: String?) {
         if (category == null) return
         _allSearchResultList.update { uiState ->
             if (uiState is UiState.Success) {
@@ -339,7 +354,7 @@ class SearchViewModel @Inject constructor(
                 if (newMap.containsKey(categoryString)) {
                     val newSearchResultData = newMap[categoryString]!!.copy(
                         data = newMap[categoryString]!!.data.map { item ->
-                            if (item.id == contentId) item.copy(favorite = isLiked)
+                            if (item.id == contentId) item.copy(favorite = isFavorite)
                             else item
                         }
                     )

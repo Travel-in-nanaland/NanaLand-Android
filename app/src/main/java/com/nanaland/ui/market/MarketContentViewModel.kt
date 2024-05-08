@@ -46,12 +46,12 @@ class MarketContentViewModel @Inject constructor(
                         }
                     }
                 }.onError { code, message ->
-                    LogUtil.printLog("onError", "code: ${code}\nmessage: $message")
+                    LogUtil.log("onError", "code: ${code}\nmessage: $message")
                 }.onException {
-                    LogUtil.printLog("onException", "${it.message}")
+                    LogUtil.log("onException", "${it.message}")
                 }
             }
-            .catch { LogUtil.printLog("flow error", "GetMarketContentUseCase") }
+            .catch { LogUtil.log("flow error", "GetMarketContentUseCase") }
             .launchIn(viewModelScope)
     }
 
@@ -74,12 +74,12 @@ class MarketContentViewModel @Inject constructor(
                         }
                     }
                 }.onError { code, message ->
-                    LogUtil.printLog("onError", "code: ${code}\nmessage: $message")
+                    LogUtil.log("onError", "code: ${code}\nmessage: $message")
                 }.onException {
-                    LogUtil.printLog("onException", "${it.message}")
+                    LogUtil.log("onException", "${it.message}")
                 }
             }
-            .catch { LogUtil.printLog("flow Error", "ToggleFavoriteUseCase") }
+            .catch { LogUtil.log("flow Error", "ToggleFavoriteUseCase") }
             .launchIn(viewModelScope)
     }
 }

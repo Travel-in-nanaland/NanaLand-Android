@@ -49,12 +49,11 @@ class CustomDateView @JvmOverloads constructor(
     private val dpi = resources.configuration.densityDpi
 
     init {
-        Log.e("fontScale", "${fontScale}, ${30 * 360 / dpi}")
         val inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         inflater.inflate(R.layout.layout_calendar_day, this, true)
         tvDate = findViewById(R.id.dayOfMonthText)
-        tvDate.layoutParams.height = 70
-        tvDate.layoutParams.width = 70
+        tvDate.layoutParams.height = 40 * resources.displayMetrics.widthPixels / 360
+        tvDate.layoutParams.width = 40 * resources.displayMetrics.widthPixels / 360
         strip = findViewById(R.id.viewStrip)
         strip.layoutParams.height = ViewGroup.LayoutParams.MATCH_PARENT
         strip.layoutParams.width = ViewGroup.LayoutParams.MATCH_PARENT
@@ -66,7 +65,7 @@ class CustomDateView @JvmOverloads constructor(
     }
 
     private val defCalendarStyleAttr: CalendarStyleAttrImpl = CalendarStyleAttrImpl.getDefAttributes(context)
-    override var dateTextSize: Float = defCalendarStyleAttr.textSizeDate / fontScale * 360 / dpi
+    override var dateTextSize: Float = defCalendarStyleAttr.textSizeDate / fontScale / dpi * 360
     override var defaultDateColor: Int = defCalendarStyleAttr.defaultDateColor
     override var disableDateColor: Int = defCalendarStyleAttr.disableDateColor
     override var selectedDateCircleColor: Int = defCalendarStyleAttr.selectedDateCircleColor
@@ -124,7 +123,7 @@ class CustomDateView @JvmOverloads constructor(
     }
 
     override fun refreshLayout() {
-        tvDate.textSize = 14f / fontScale * 360 / dpi
+        tvDate.textSize = 16f / fontScale * 160 / dpi * resources.displayMetrics.widthPixels / 360
     }
 
     override fun setDateClickListener(listener: OnDateClickListener) {

@@ -12,7 +12,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.nanaland.domain.entity.nanapick.NanaPickContentData
-import com.nanaland.ui.component.detailscreen.nanapick.parts.topbanner.NanaPickContentTopBannerLikeButton
+import com.nanaland.ui.component.detailscreen.nanapick.parts.topbanner.NanaPickContentTopBannerFavoriteButton
 import com.nanaland.ui.component.detailscreen.nanapick.parts.topbanner.NanaPickContentTopBannerShareButton
 import com.nanaland.ui.component.detailscreen.nanapick.parts.topbanner.NanaPickContentTopBannerSubTitle
 import com.nanaland.ui.component.detailscreen.nanapick.parts.topbanner.NanaPickContentTopBannerTitle
@@ -24,7 +24,8 @@ import com.skydoves.landscapist.glide.GlideImage
 
 @Composable
 fun NanaPickContentTopBanner(
-    nanaPickContent: UiState.Success<NanaPickContentData>
+    nanaPickContent: UiState.Success<NanaPickContentData>,
+    toggleFavorite: () -> Unit,
 ) {
     Box(
         modifier = Modifier
@@ -59,12 +60,12 @@ fun NanaPickContentTopBanner(
             onClick = {}
         )
 
-        NanaPickContentTopBannerLikeButton(
+        NanaPickContentTopBannerFavoriteButton(
             modifier = Modifier
                 .align(Alignment.TopEnd)
                 .padding(top = 8.dp, end = 56.dp),
-            isLiked = nanaPickContent.data.favorite,
-            onClick = {}
+            isFavorite = nanaPickContent.data.favorite,
+            onClick = { toggleFavorite() }
         )
     }
 }

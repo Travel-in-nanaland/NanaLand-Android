@@ -118,12 +118,12 @@ class FestivalListViewModel @Inject constructor(
                         }
                     }
                 }.onError { code, message ->
-                    LogUtil.printLog("onError", "code: ${code}\nmessage: $message")
+                    LogUtil.log("onError", "code: ${code}\nmessage: $message")
                 }.onException {
-                    LogUtil.printLog("onException", "${it.message}")
+                    LogUtil.log("onException", "${it.message}")
                 }
             }
-            .catch { LogUtil.printLog("flow Error", "GetMonthlyFestivalListUseCase") }
+            .catch { LogUtil.log("flow Error", "GetMonthlyFestivalListUseCase") }
             .launchIn(viewModelScope)
     }
 
@@ -153,12 +153,12 @@ class FestivalListViewModel @Inject constructor(
                         }
                     }
                 }.onError { code, message ->
-                    LogUtil.printLog("onError", "code: ${code}\nmessage: $message")
+                    LogUtil.log("onError", "code: ${code}\nmessage: $message")
                 }.onException {
-                    LogUtil.printLog("onException", "${it.message}")
+                    LogUtil.log("onException", "${it.message}")
                 }
             }
-            .catch { LogUtil.printLog("flow Error", "GetEndedFestivalListUseCase") }
+            .catch { LogUtil.log("flow Error", "GetEndedFestivalListUseCase") }
             .launchIn(viewModelScope)
     }
 
@@ -190,12 +190,12 @@ class FestivalListViewModel @Inject constructor(
                         }
                     }
                 }.onError { code, message ->
-                    LogUtil.printLog("onError", "code: ${code}\nmessage: $message")
+                    LogUtil.log("onError", "code: ${code}\nmessage: $message")
                 }.onException {
-                    LogUtil.printLog("onException", "${it.message}")
+                    LogUtil.log("onException", "${it.message}")
                 }
             }
-            .catch { LogUtil.printLog("flow Error", "GetSeasonalFestivalListUseCase") }
+            .catch { LogUtil.log("flow Error", "GetSeasonalFestivalListUseCase") }
             .launchIn(viewModelScope)
     }
 
@@ -226,20 +226,20 @@ class FestivalListViewModel @Inject constructor(
                         }
                     }
                 }.onError { code, message ->
-                    LogUtil.printLog("onError", "code: ${code}\nmessage: $message")
+                    LogUtil.log("onError", "code: ${code}\nmessage: $message")
                 }.onException {
-                    LogUtil.printLog("onException", "${it.message}")
+                    LogUtil.log("onException", "${it.message}")
                 }
             }
-            .catch { LogUtil.printLog("flow Error", "ToggleFavoriteUseCase") }
+            .catch { LogUtil.log("flow Error", "ToggleFavoriteUseCase") }
             .launchIn(viewModelScope)
     }
 
-    fun toggleFavoriteWithNoApi(contentId: Long, isLiked: Boolean) {
+    fun toggleFavoriteWithNoApi(contentId: Long, isFavorite: Boolean) {
         _festivalThumbnailList.update { uiState ->
             if (uiState is UiState.Success) {
                 val newList = uiState.data.map { item ->
-                    if (item.id == contentId) item.copy(favorite = isLiked)
+                    if (item.id == contentId) item.copy(favorite = isFavorite)
                     else item
                 }
                 UiState.Success(newList)

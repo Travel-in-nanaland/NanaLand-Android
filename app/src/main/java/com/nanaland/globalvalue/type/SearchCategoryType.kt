@@ -8,5 +8,7 @@ enum class SearchCategoryType(val titleResId: Int) {
     Nature(R.string.nature),
     Festival(R.string.festival),
     Market(R.string.market),
-    Experience(R.string.experience)
+    Experience(R.string.experience),
+    NanaPick(R.string.nanapick),
+    JejuStory(R.string.jejustory)
 }

@@ -40,7 +40,7 @@ class HomeViewModel @Inject constructor(
         _inputText.update { text }
     }
 
-    fun updateViewType(viewType: HomeScreenViewType) {
+    fun updateHomeScreenViewType(viewType: HomeScreenViewType) {
         _viewType.update { viewType }
     }
 
@@ -55,12 +55,12 @@ class HomeViewModel @Inject constructor(
                         }
                     }
                 }.onError { code, message ->
-                    LogUtil.printLog("onError", "code: ${code}\nmessage: $message")
+                    LogUtil.log("onError", "code: ${code}\nmessage: $message")
                 }.onException {
-                    LogUtil.printLog("onException", "${it.message}")
+                    LogUtil.log("onException", "${it.message}")
                 }
             }
-            .catch { LogUtil.printLog("flow Error", "GetHomePreviewBannerUseCase") }
+            .catch { LogUtil.log("flow Error", "GetHomePreviewBannerUseCase") }
             .launchIn(viewModelScope)
     }
 
@@ -75,12 +75,12 @@ class HomeViewModel @Inject constructor(
                         }
                     }
                 }.onError { code, message ->
-                    LogUtil.printLog("onError", "code: ${code}\nmessage: $message")
+                    LogUtil.log("onError", "code: ${code}\nmessage: $message")
                 }.onException {
-                    LogUtil.printLog("onException", "${it.message}")
+                    LogUtil.log("onException", "${it.message}")
                 }
             }
-            .catch { LogUtil.printLog("flow Error", "GetRecommendedPostUseCase") }
+            .catch { LogUtil.log("flow Error", "GetRecommendedPostUseCase") }
             .launchIn(viewModelScope)
     }
 }

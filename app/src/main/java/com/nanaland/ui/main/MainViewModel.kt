@@ -22,7 +22,7 @@ class MainViewModel @Inject constructor() : ViewModel() {
             label = "홈"
         ),
         NavigationItemContent(
-            viewType = MainScreenViewType.Like,
+            viewType = MainScreenViewType.Favorite,
             iconSelected = R.drawable.ic_heart_filled,
             iconUnselected = R.drawable.ic_heart_outlined,
             label = "찜"

@@ -191,8 +191,9 @@ internal class DateRangeMonthView : LinearLayout {
         for (i in 0 until TOTAL_DAYS_IN_A_WEEK) {
             // 달력 상단의 월화수목금토일
             val textView = llTitleWeekContainer.getChildAt(i) as CustomTextView
-            textView.layoutParams.height = 90
-            textView.textSize = 12f / fontScale * 360 / dpi
+            textView.layoutParams.height = 40 * resources.displayMetrics.widthPixels / 360
+//            textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12f / fontScale * resources.displayMetrics.widthPixels / 360)
+            textView.textSize = 12f / fontScale * 160 / dpi * resources.displayMetrics.widthPixels / 360
             val weekStr = weekTitle[(i + calendarStyleAttr.weekOffset) % TOTAL_DAYS_IN_A_WEEK]
             textView.text = weekStr
         }
@@ -206,11 +207,11 @@ internal class DateRangeMonthView : LinearLayout {
         for (i in 0 until llDaysContainer.childCount) {
             // 월화수목금토일 밑의 날짜 한 줄
             val weekRow = llDaysContainer.getChildAt(i) as LinearLayout
-            weekRow.layoutParams.height = 90
+            weekRow.layoutParams.height = 50 * resources.displayMetrics.widthPixels / 360
             for (j in 0 until TOTAL_DAYS_IN_A_WEEK) {
                 val customDateView = weekRow.getChildAt(j) as CustomDateView
-                customDateView.layoutParams.height = 70
-                customDateView.layoutParams.width = 70
+                customDateView.layoutParams.height = 40 * resources.displayMetrics.widthPixels / 360
+                customDateView.layoutParams.width = 40 * resources.displayMetrics.widthPixels / 360
                 drawDayContainer(customDateView, month)
                 month.add(Calendar.DATE, 1)
             }
