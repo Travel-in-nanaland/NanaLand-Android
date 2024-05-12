@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">NanaLand</string>
+    <string name="select_language_please">중국어</string>
 </resources>
