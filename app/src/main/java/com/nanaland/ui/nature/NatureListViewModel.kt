@@ -1,6 +1,5 @@
 package com.nanaland.ui.nature
 
-import androidx.compose.runtime.mutableStateListOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.nanaland.domain.entity.nature.NatureThumbnailData
@@ -8,6 +7,8 @@ import com.nanaland.domain.request.favorite.ToggleFavoriteRequest
 import com.nanaland.domain.request.nature.GetNatureListRequest
 import com.nanaland.domain.usecase.favorite.ToggleFavoriteUseCase
 import com.nanaland.domain.usecase.nature.GetNatureListUseCase
+import com.nanaland.globalvalue.constant.getLocationList
+import com.nanaland.globalvalue.constant.getLocationSelectionList
 import com.nanaland.util.log.LogUtil
 import com.nanaland.util.network.onError
 import com.nanaland.util.network.onException
@@ -28,8 +29,8 @@ class NatureListViewModel @Inject constructor(
     private val toggleFavoriteUseCase: ToggleFavoriteUseCase
 ) : ViewModel() {
 
-    private val locationList = listOf("전체", "제주시", "애월", "서귀포시", "성산", "한림", "조천", "구좌", "한경", "대정", "안덕", "남원", "표선", "우도")
-    val selectedLocationList = mutableStateListOf(false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false)
+    private val locationList = getLocationList()
+    val selectedLocationList = getLocationSelectionList()
     private val _natureThumbnailCount = MutableStateFlow<UiState<Long>>(UiState.Loading)
     val natureThumbnailCount = _natureThumbnailCount.asStateFlow()
     private val _natureThumbnailList = MutableStateFlow<UiState<List<NatureThumbnailData>>>(UiState.Loading)
@@ -65,12 +66,12 @@ class NatureListViewModel @Inject constructor(
                         }
                     }
                 }.onError { code, message ->
-                    LogUtil.log("onError", "code: ${code}\nmessage: $message")
+                    LogUtil.e("onError", "code: ${code}\nmessage: $message")
                 }.onException {
-                    LogUtil.log("onException", "${it.message}")
+                    LogUtil.e("onException", "${it.message}")
                 }
             }
-            .catch { LogUtil.log("flow Error", "GetNatureListUseCase") }
+            .catch { LogUtil.e("flow Error", "GetNatureListUseCase") }
             .launchIn(viewModelScope)
     }
 
@@ -101,12 +102,12 @@ class NatureListViewModel @Inject constructor(
                         }
                     }
                 }.onError { code, message ->
-                    LogUtil.log("onError", "code: ${code}\nmessage: $message")
+                    LogUtil.e("onError", "code: ${code}\nmessage: $message")
                 }.onException {
-                    LogUtil.log("onException", "${it.message}")
+                    LogUtil.e("onException", "${it.message}")
                 }
             }
-            .catch { LogUtil.log("flow Error", "ToggleFavoriteUseCase") }
+            .catch { LogUtil.e("flow Error", "ToggleFavoriteUseCase") }
             .launchIn(viewModelScope)
     }
 
