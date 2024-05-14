@@ -114,6 +114,19 @@ dependencies {
     implementation("com.google.firebase:firebase-auth:22.0.0")
     implementation("com.google.firebase:firebase-bom:32.0.0")
     implementation("com.google.android.gms:play-services-auth:20.5.0")
+
+    // Kakao
+    implementation("com.kakao.sdk:v2-user:2.20.1") // 카카오 로그인 API 모듈
+    implementation("com.kakao.sdk:v2-share:2.20.1") // 카카오톡 공유 API 모듈
+
+    // Lottie
+    implementation("com.airbnb.android:lottie-compose:6.4.0")
+
+    // Google 로그인
+    implementation("com.google.android.gms:play-services-auth:20.7.0")
+    implementation("androidx.credentials:credentials:1.2.2")
+    implementation("androidx.credentials:credentials-play-services-auth:1.2.2")
+    implementation("com.google.android.libraries.identity.googleid:googleid:1.1.0")
 }
 
 kapt {
