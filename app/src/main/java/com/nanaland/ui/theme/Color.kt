@@ -22,7 +22,7 @@ fun customLightColorScheme(
     surface: Color = Color(0xFFFFFFFF),
     main: Color = Color(0xFF583FF5),
     main10: Color = Color(0x19583FF5),
-    black: Color = Color(0xFF151515),
+    black: Color = Color(0xFF262627),
     black25: Color = Color(0x3F151515),
     white: Color = Color(0xFFFFFFFF),
     gray01: Color = Color(0xFF7F7F7F),
