@@ -13,7 +13,7 @@
         android:orientation="vertical"
         android:gravity="center">
 
-        <com.nanaland.util.daterangecalendar.customviews.CustomTextView
+        <com.jeju.nanaland.util.daterangecalendar.customviews.CustomTextView
             android:id="@+id/tvYearTitle"
             android:layout_width="wrap_content"
             android:gravity="center"
@@ -37,7 +37,7 @@
                 android:src="@drawable/ic_arrow_left" />
 
 
-            <com.nanaland.util.daterangecalendar.customviews.CustomTextView
+            <com.jeju.nanaland.util.daterangecalendar.customviews.CustomTextView
                 android:id="@+id/tvMonthTitle"
                 android:layout_width="wrap_content"
                 android:gravity="center"

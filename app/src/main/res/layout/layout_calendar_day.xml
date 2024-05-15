@@ -6,7 +6,7 @@
         android:id="@+id/viewStrip"
         style="@style/StripRange" />
 
-    <com.nanaland.util.daterangecalendar.customviews.CustomTextView
+    <com.jeju.nanaland.util.daterangecalendar.customviews.CustomTextView
         android:id="@+id/dayOfMonthText"
         style="@style/DayOfMonthStyle"
         android:fontFamily="@font/apple_neo_m"

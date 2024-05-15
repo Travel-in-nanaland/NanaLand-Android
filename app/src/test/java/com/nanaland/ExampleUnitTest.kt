@@ -1,4 +1,4 @@
-package com.nanaland
+package com.jeju.nanaland
 
 import org.junit.Test
 

@@ -6,7 +6,7 @@
     android:gravity="center"
     android:orientation="horizontal">
 
-    <com.nanaland.util.daterangecalendar.customviews.CustomTextView
+    <com.jeju.nanaland.util.daterangecalendar.customviews.CustomTextView
         android:id="@+id/tvDayOfWeek1"
         style="@style/WeekDayTitleStyle"
         android:tag="dayOfWeek1"
@@ -14,7 +14,7 @@
         android:layout_weight="1"
         android:fontFamily="@font/apple_neo_m" />
 
-    <com.nanaland.util.daterangecalendar.customviews.CustomTextView
+    <com.jeju.nanaland.util.daterangecalendar.customviews.CustomTextView
         android:id="@+id/tvDayOfWeek2"
         style="@style/WeekDayTitleStyle"
         android:tag="dayOfWeek2"
@@ -22,7 +22,7 @@
         android:layout_weight="1"
         android:fontFamily="@font/apple_neo_m" />
 
-    <com.nanaland.util.daterangecalendar.customviews.CustomTextView
+    <com.jeju.nanaland.util.daterangecalendar.customviews.CustomTextView
         android:id="@+id/tvDayOfWeek3"
         style="@style/WeekDayTitleStyle"
         android:tag="dayOfWeek3"
@@ -30,7 +30,7 @@
         android:layout_weight="1"
         android:fontFamily="@font/apple_neo_m" />
 
-    <com.nanaland.util.daterangecalendar.customviews.CustomTextView
+    <com.jeju.nanaland.util.daterangecalendar.customviews.CustomTextView
         android:id="@+id/tvDayOfWeek4"
         style="@style/WeekDayTitleStyle"
         android:tag="dayOfWeek4"
@@ -38,7 +38,7 @@
         android:layout_weight="1"
         android:fontFamily="@font/apple_neo_m" />
 
-    <com.nanaland.util.daterangecalendar.customviews.CustomTextView
+    <com.jeju.nanaland.util.daterangecalendar.customviews.CustomTextView
         android:id="@+id/tvDayOfWeek5"
         style="@style/WeekDayTitleStyle"
         android:tag="dayOfWeek5"
@@ -46,7 +46,7 @@
         android:layout_weight="1"
         android:fontFamily="@font/apple_neo_m" />
 
-    <com.nanaland.util.daterangecalendar.customviews.CustomTextView
+    <com.jeju.nanaland.util.daterangecalendar.customviews.CustomTextView
         android:id="@+id/tvDayOfWeek6"
         style="@style/WeekDayTitleStyle"
         android:tag="dayOfWeek6"
@@ -54,7 +54,7 @@
         android:layout_weight="1"
         android:fontFamily="@font/apple_neo_m" />
 
-    <com.nanaland.util.daterangecalendar.customviews.CustomTextView
+    <com.jeju.nanaland.util.daterangecalendar.customviews.CustomTextView
         android:id="@+id/tvDayOfWeek7"
         style="@style/WeekDayTitleStyle"
         android:tag="dayOfWeek7"

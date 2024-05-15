@@ -4,12 +4,12 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
-    <com.nanaland.util.daterangecalendar.customviews.DateRangeMonthView
+    <com.jeju.nanaland.util.daterangecalendar.customviews.DateRangeMonthView
         android:id="@+id/cvEventCalendarView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center">
 
-    </com.nanaland.util.daterangecalendar.customviews.DateRangeMonthView>
+    </com.jeju.nanaland.util.daterangecalendar.customviews.DateRangeMonthView>
 
 </LinearLayout>

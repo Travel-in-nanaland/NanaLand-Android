@@ -8,11 +8,11 @@ plugins {
 }
 
 android {
-    namespace = "com.nanaland"
+    namespace = "com.jeju.nanaland"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.nanaland"
+        applicationId = "com.jeju.nanaland"
         minSdk = 24
         targetSdk = 34
         versionCode = 1
