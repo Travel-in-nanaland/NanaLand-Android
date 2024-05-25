@@ -19,7 +19,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import com.jeju.nanaland.ui.component.common.Tag
+import com.jeju.nanaland.ui.component.common.TagChip1
 import com.jeju.nanaland.ui.component.detailscreen.other.parts.description.DetailScreenDescriptionContent
 import com.jeju.nanaland.ui.component.detailscreen.other.parts.description.DetailScreenDescriptionTitle
 import com.jeju.nanaland.ui.component.detailscreen.other.parts.description.DetailScreenFavoriteButton
@@ -47,7 +47,7 @@ fun DetailScreenDescription(
             .drawColoredShadow(
                 color = Color.Black,
                 alpha = 0.1f,
-                shadowRadius = 6.dp
+                shadowRadius = 12.dp
             )
             .clip(RoundedCornerShape(12.dp))
             .background(
@@ -59,7 +59,7 @@ fun DetailScreenDescription(
         Column(
             modifier = Modifier.padding(start = 16.dp, top = 28.dp, end = 16.dp, bottom = 16.dp)
         ) {
-            Tag(text = tag)
+            TagChip1(text = tag)
 
             Spacer(Modifier.height(12.dp))
 

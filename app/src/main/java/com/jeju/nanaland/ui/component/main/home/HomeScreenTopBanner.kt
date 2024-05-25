@@ -25,6 +25,9 @@ fun HomeScreenTopBanner(
             initialPage = 200,
             pageCount = {1000}
         )
+        LaunchedEffect(Unit) {
+            pagerState.scrollToPage(200)
+        }
         val isDragged by pagerState.interactionSource.collectIsDraggedAsState()
         if (!isDragged) {
             LaunchedEffect(Unit) {

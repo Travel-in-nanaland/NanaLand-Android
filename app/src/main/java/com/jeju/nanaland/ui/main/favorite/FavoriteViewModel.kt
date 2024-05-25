@@ -82,12 +82,12 @@ class FavoriteViewModel @Inject constructor(
                     }
                 }
             }.onError { code, message ->
-                LogUtil.e("onError", "code: ${code}\nmessage: $message")
+
             }.onException {
-                LogUtil.e("onException", "${it.message}")
+
             }
         }
-            .catch { LogUtil.e("flow Error", "GetFavoriteListUseCase") }
+            .catch { LogUtil.e("flow Error", "getFavoriteList") }
         .launchIn(viewModelScope)
     }
 
@@ -123,12 +123,12 @@ class FavoriteViewModel @Inject constructor(
                         }
                     }
                 }.onError { code, message ->
-                    LogUtil.e("onError", "code: ${code}\nmessage: $message")
+
                 }.onException {
-                    LogUtil.e("onException", "${it.message}")
+
                 }
             }
-            .catch { LogUtil.e("flow Error", "ToggleFavoriteUseCase") }
+            .catch { LogUtil.e("flow Error", "toggleFavoriteUseCase") }
             .launchIn(viewModelScope)
     }
 

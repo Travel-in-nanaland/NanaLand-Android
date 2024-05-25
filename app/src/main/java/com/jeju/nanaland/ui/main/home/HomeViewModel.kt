@@ -55,12 +55,12 @@ class HomeViewModel @Inject constructor(
                         }
                     }
                 }.onError { code, message ->
-                    LogUtil.e("onError", "code: ${code}\nmessage: $message")
+
                 }.onException {
-                    LogUtil.e("onException", "${it.message}")
+
                 }
             }
-            .catch { LogUtil.e("flow Error", "GetHomePreviewBannerUseCase") }
+            .catch { LogUtil.e("flow Error", "getHomePreviewBannerUseCase") }
             .launchIn(viewModelScope)
     }
 
@@ -75,12 +75,12 @@ class HomeViewModel @Inject constructor(
                         }
                     }
                 }.onError { code, message ->
-                    LogUtil.e("onError", "code: ${code}\nmessage: $message")
+
                 }.onException {
-                    LogUtil.e("onException", "${it.message}")
+
                 }
             }
-            .catch { LogUtil.e("flow Error", "GetRecommendedPostUseCase") }
+            .catch { LogUtil.e("flow Error", "getRecommendedPostUseCase") }
             .launchIn(viewModelScope)
     }
 }

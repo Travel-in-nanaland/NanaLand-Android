@@ -1,5 +1,6 @@
 package com.jeju.nanaland.di.network
 
+import com.google.gson.GsonBuilder
 import com.jeju.nanaland.BuildConfig
 import com.jeju.nanaland.data.api.AuthApi
 import com.jeju.nanaland.data.api.FavoriteApi
@@ -16,7 +17,6 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
-import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
@@ -43,14 +43,13 @@ object NetworkModule {
 //        authenticator: AuthAuthenticator,
         logInterceptor: LogInterceptor
     ): OkHttpClient {
-        val httpLoggingInterceptor = HttpLoggingInterceptor()
-        httpLoggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
         return OkHttpClient.Builder()
             .readTimeout(20, TimeUnit.SECONDS)
             .connectTimeout(20, TimeUnit.SECONDS)
+//            .addNetworkInterceptor(httpLoggingInterceptor)
+            .addInterceptor(logInterceptor)
             .addInterceptor(tokenInterceptor)
 //            .authenticator(authenticator)
-            .addNetworkInterceptor(logInterceptor)
             .build()
     }
 
@@ -63,6 +62,7 @@ object NetworkModule {
         return OkHttpClient.Builder()
             .readTimeout(20, TimeUnit.SECONDS)
             .connectTimeout(20, TimeUnit.SECONDS)
+//            .addInterceptor(httpLoggingInterceptor)
             .addInterceptor(logInterceptor)
             .build()
     }
@@ -71,10 +71,11 @@ object NetworkModule {
     @Provides
     @AccessTokenAutoAdded
     fun provideAccessTokenNeededRetrofitInstance(@AccessTokenAutoAdded okHttpClient: OkHttpClient): Retrofit {
+        val gson = GsonBuilder().setLenient().create()
         return Retrofit.Builder()
             .baseUrl(BuildConfig.BASE_URL)
             .client(okHttpClient)
-            .addConverterFactory(GsonConverterFactory.create())
+            .addConverterFactory(GsonConverterFactory.create(gson))
             .build()
     }
 
@@ -82,10 +83,11 @@ object NetworkModule {
     @Provides
     @HeaderManuallyAdded
     fun provideHeaderManuallyAddedRetrofitInstance(@HeaderManuallyAdded okHttpClient: OkHttpClient): Retrofit {
+        val gson = GsonBuilder().setLenient().create()
         return Retrofit.Builder()
             .baseUrl(BuildConfig.BASE_URL)
             .client(okHttpClient)
-            .addConverterFactory(GsonConverterFactory.create())
+            .addConverterFactory(GsonConverterFactory.create(gson))
             .build()
     }
 

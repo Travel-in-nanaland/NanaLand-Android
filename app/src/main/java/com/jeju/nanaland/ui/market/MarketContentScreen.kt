@@ -17,13 +17,7 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
-import androidx.core.content.ContextCompat.startActivity
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.kakao.sdk.common.util.KakaoCustomTabsClient
-import com.kakao.sdk.share.ShareClient
-import com.kakao.sdk.share.WebSharerClient
-import com.kakao.sdk.template.model.Link
-import com.kakao.sdk.template.model.TextTemplate
 import com.jeju.nanaland.R
 import com.jeju.nanaland.domain.entity.market.MarketContentData
 import com.jeju.nanaland.ui.component.common.CustomSurface
@@ -33,8 +27,14 @@ import com.jeju.nanaland.ui.component.detailscreen.other.DetailScreenInformation
 import com.jeju.nanaland.ui.component.detailscreen.other.DetailScreenInformationModificationProposalButton
 import com.jeju.nanaland.ui.component.detailscreen.other.DetailScreenTopBannerImage
 import com.jeju.nanaland.ui.component.detailscreen.other.MoveToTopButton
+import com.jeju.nanaland.util.log.LogUtil
 import com.jeju.nanaland.util.ui.ScreenPreview
 import com.jeju.nanaland.util.ui.UiState
+import com.kakao.sdk.common.util.KakaoCustomTabsClient
+import com.kakao.sdk.share.ShareClient
+import com.kakao.sdk.share.WebSharerClient
+import com.kakao.sdk.template.model.Link
+import com.kakao.sdk.template.model.TextTemplate
 import kotlinx.coroutines.launch
 
 @Composable
@@ -112,7 +112,7 @@ private fun MarketContentScreen(
                                         // 카카오톡으로 카카오톡 공유 가능
                                         ShareClient.instance.shareDefault(context, defaultText) { sharingResult, error ->
                                             if (error != null) {
-                                                Log.e("kakaoShare", "카카오톡 공유 실패", error)
+                                                LogUtil.e("kakaoShare", "카카오톡 공유 실패")
                                             }
                                             else if (sharingResult != null) {
                                                 Log.d("kakaoShare", "카카오톡 공유 성공 ${sharingResult.intent}")

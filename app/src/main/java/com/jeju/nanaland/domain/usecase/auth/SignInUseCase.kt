@@ -1,7 +1,7 @@
 package com.jeju.nanaland.domain.usecase.auth
 
 import com.jeju.nanaland.domain.repository.AuthRepository
-import com.jeju.nanaland.domain.request.member.SignInRequest
+import com.jeju.nanaland.domain.request.auth.SignInRequest
 import kotlinx.coroutines.flow.flow
 
 class SignInUseCase(

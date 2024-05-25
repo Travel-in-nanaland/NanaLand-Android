@@ -1,12 +1,12 @@
 package com.jeju.nanaland
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.jeju.nanaland.domain.usecase.authdatastore.GetAccessTokenUseCase
 import com.jeju.nanaland.domain.usecase.authdatastore.GetRefreshTokenUseCase
 import com.jeju.nanaland.domain.usecase.authdatastore.SaveAccessTokenUseCase
 import com.jeju.nanaland.domain.usecase.authdatastore.SaveRefreshTokenUseCase
+import com.jeju.nanaland.util.log.LogUtil
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
@@ -23,14 +23,14 @@ class MainActivityViewModel @Inject constructor(
     fun saveAccessToken(token: String) {
         viewModelScope.launch {
             saveAccessTokenUseCase(token)
-            Log.e("accessTokenInit", "${getAccessTokenUseCase().first()}")
+            LogUtil.e("accessTokenInit", "${getAccessTokenUseCase().first()}")
         }
     }
 
     fun saveRefreshToken(token: String) {
         viewModelScope.launch {
             saveRefreshTokenUseCase(token)
-            Log.e("refreshTokenInit", "${getRefreshTokenUseCase().first()}")
+            LogUtil.e("refreshTokenInit", "${getRefreshTokenUseCase().first()}")
         }
     }
 }

@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.ContextWrapper
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -26,7 +27,7 @@ import com.jeju.nanaland.ui.theme.getColor
 
 @Composable
 fun CustomSurface(
-    content: @Composable (Boolean) -> Unit
+    content: @Composable ColumnScope.(Boolean) -> Unit
 ) {
     val view = LocalView.current
     val context = LocalContext.current
@@ -53,8 +54,8 @@ fun CustomSurface(
                         val updatedHeight = if(imeHeight - sysBarInsets.bottom < 0) 0 else imeHeight - sysBarInsets.bottom
                         val viewHeight = view.height
                         isImeKeyboardShowing.value = updatedHeight > viewHeight * 0.2f
-//                    Log.e("updatedHeight", "${updatedHeight}")
-//                    Log.e("viewHeight", "${viewHeight}")
+//                    LogUtil.e("updatedHeight", "${updatedHeight}")
+//                    LogUtil.e("viewHeight", "${viewHeight}")
                         // translate your view with updated height
                         return insets
                     }

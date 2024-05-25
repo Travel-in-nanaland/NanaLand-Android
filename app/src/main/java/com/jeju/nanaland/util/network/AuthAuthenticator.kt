@@ -28,7 +28,7 @@ package com.jeju.nanaland.util.network
 //            response.close()
 //            return null
 //        }
-//        Log.e("AuthAuthenticator", "new AccessToken: ${newAccessToken}")
+//        LogUtil.e("AuthAuthenticator", "new AccessToken: ${newAccessToken}")
 //
 //        return newRequestWithToken(newAccessToken, response.request)
 //    }

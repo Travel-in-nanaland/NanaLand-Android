@@ -42,9 +42,9 @@ class NanaPickListViewModel @Inject constructor(
                         }
                     }
                 }.onError { code, message ->
-                    LogUtil.e("onError", "code: ${code}\nmessage: $message")
+
                 }.onException {
-                    LogUtil.e("onException", "${it.message}")
+
                 }
             }
             .catch { LogUtil.e("flow Error", "flow Error") }

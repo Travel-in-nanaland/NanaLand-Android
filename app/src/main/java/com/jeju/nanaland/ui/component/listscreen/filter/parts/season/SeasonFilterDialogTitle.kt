@@ -10,7 +10,7 @@ import com.jeju.nanaland.util.ui.ComponentPreview
 @Composable
 fun SeasonFilterDialogTitle() {
     Text(
-        text = "날짜 선택",
+        text = "계절 선택",
         color = getColor().black,
         style = title02Bold
     )

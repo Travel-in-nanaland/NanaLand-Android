@@ -1,5 +1,8 @@
 package com.jeju.nanaland.util.network
 
+import com.jeju.nanaland.util.log.LogUtil
+import java.util.Arrays
+
 sealed class NetworkResult<out T> {
     data class Success<out T>(val code: Int, val data: T?) : NetworkResult<T>()
     data class Error(val code: Int, val message: String?) : NetworkResult<Nothing>()
@@ -20,6 +23,7 @@ inline fun <T> NetworkResult<T>.onSuccess(action: (code: Int, data: T?) -> Unit)
 inline fun <T> NetworkResult<T>.onError(action: (code: Int, message: String?) -> Unit): NetworkResult<T> {
     if (this is NetworkResult.Error) {
         action(this.code, this.message)
+
     }
     return this
 }
@@ -27,6 +31,8 @@ inline fun <T> NetworkResult<T>.onError(action: (code: Int, message: String?) ->
 inline fun <T> NetworkResult<T>.onException(action: (data: Throwable) -> Unit): NetworkResult<T> {
     if (this is NetworkResult.Exception) {
         action(this.e)
+        LogUtil.e("onException", e.message + "\n" + Arrays.toString(e.stackTrace).replace(", ", "\n")
+            .replace("[", "").replace("]", ""))
     }
     return this
 }

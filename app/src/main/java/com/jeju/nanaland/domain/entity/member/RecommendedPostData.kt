@@ -11,6 +11,6 @@ data class RecommendedPostData(
     val thumbnailUrl: String?,
     @SerializedName("title")
     val title: String?,
-    @SerializedName("intro")
+    @SerializedName("introduction")
     val intro: String?
 )

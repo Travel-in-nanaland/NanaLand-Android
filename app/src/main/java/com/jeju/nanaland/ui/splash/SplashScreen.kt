@@ -1,29 +1,26 @@
 package com.jeju.nanaland.ui.splash
 
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.airbnb.lottie.compose.LottieAnimation
-import com.airbnb.lottie.compose.LottieCompositionSpec
-import com.airbnb.lottie.compose.animateLottieCompositionAsState
-import com.airbnb.lottie.compose.rememberLottieComposition
+import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.jeju.nanaland.R
 import com.jeju.nanaland.globalvalue.type.SplashCheckingState
-import com.jeju.nanaland.ui.theme.getColor
+import com.skydoves.landscapist.glide.GlideImage
 import kotlinx.coroutines.delay
 
 @Composable
 fun SplashScreen(
     moveToMainScreen: () -> Unit,
+    moveToLanguageSelectionScreen: () -> Unit,
+    moveToSignInScreen: () -> Unit,
     viewModel: SplashViewModel = hiltViewModel()
 ) {
     val checkingState = viewModel.checkingState.collectAsState().value
@@ -32,7 +29,11 @@ fun SplashScreen(
         checkingState = checkingState,
         isNetworkConnected = isNetworkConnected,
         checkNetworkState = viewModel::checkNetworkState,
+        checkLanguageState = viewModel::checkLanguageState,
+        checkSignInState = viewModel::checkSignInState,
         moveToMainScreen = moveToMainScreen,
+        moveToLanguageSelectionScreen = moveToLanguageSelectionScreen,
+        moveToSignInScreen = moveToSignInScreen,
         isContent = true
     )
 }
@@ -42,21 +43,44 @@ private fun SplashScreen(
     checkingState: SplashCheckingState,
     isNetworkConnected: Boolean,
     checkNetworkState: () -> Unit,
+    checkLanguageState: (() -> Unit) -> Unit,
+    checkSignInState: (() -> Unit, () -> Unit) -> Unit,
     moveToMainScreen: () -> Unit,
+    moveToLanguageSelectionScreen: () -> Unit,
+    moveToSignInScreen: () -> Unit,
     isContent: Boolean
 ) {
+    val systemUiController = rememberSystemUiController()
     LaunchedEffect(checkingState) {
         when (checkingState) {
             SplashCheckingState.Network -> {
+                systemUiController.setStatusBarColor(
+                    color = Color(0x00000000),
+                    darkIcons = false
+                )
+                systemUiController.setNavigationBarColor(
+                    color = Color(0x00000000),
+                    darkIcons = false
+                )
+
+                delay(3500)
+
+                systemUiController.setStatusBarColor(
+                    color = Color(0x00000000),
+                    darkIcons = true
+                )
+                systemUiController.setNavigationBarColor(
+                    color = Color(0x00000000),
+                    darkIcons = true
+                )
                 checkNetworkState()
-                delay(4000)
-                moveToMainScreen()
+//                moveToMainScreen()
             }
             SplashCheckingState.Language -> {
-
+                checkLanguageState(moveToLanguageSelectionScreen)
             }
             SplashCheckingState.Authorization -> {
-
+                checkSignInState(moveToMainScreen, moveToSignInScreen)
             }
         }
     }
@@ -67,11 +91,9 @@ private fun SplashScreen(
     ) {
 //        val composition by rememberLottieComposition(LottieCompositionSpec.RawRes(R.raw.splash1))
 //        LottieAnimation(composition)
-        val composition by rememberLottieComposition(LottieCompositionSpec.RawRes(R.raw.splash2))
-        val progress by animateLottieCompositionAsState(composition)
-        LottieAnimation(
-            composition = composition,
-            progress = { progress },
+        GlideImage(
+            modifier = Modifier.fillMaxSize(),
+            imageModel = { R.raw.splash }
         )
     }
 }

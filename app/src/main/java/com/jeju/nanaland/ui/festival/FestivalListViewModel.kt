@@ -120,12 +120,12 @@ class FestivalListViewModel @Inject constructor(
                         }
                     }
                 }.onError { code, message ->
-                    LogUtil.e("onError", "code: ${code}\nmessage: $message")
+
                 }.onException {
-                    LogUtil.e("onException", "${it.message}")
+
                 }
             }
-            .catch { LogUtil.e("flow Error", "GetMonthlyFestivalListUseCase") }
+            .catch { LogUtil.e("flow Error", "getMonthlyFestivalListUseCase") }
             .launchIn(viewModelScope)
     }
 
@@ -155,12 +155,12 @@ class FestivalListViewModel @Inject constructor(
                         }
                     }
                 }.onError { code, message ->
-                    LogUtil.e("onError", "code: ${code}\nmessage: $message")
+
                 }.onException {
-                    LogUtil.e("onException", "${it.message}")
+
                 }
             }
-            .catch { LogUtil.e("flow Error", "GetEndedFestivalListUseCase") }
+            .catch { LogUtil.e("flow Error", "getEndedFestivalListUseCase") }
             .launchIn(viewModelScope)
     }
 
@@ -192,12 +192,12 @@ class FestivalListViewModel @Inject constructor(
                         }
                     }
                 }.onError { code, message ->
-                    LogUtil.e("onError", "code: ${code}\nmessage: $message")
+
                 }.onException {
-                    LogUtil.e("onException", "${it.message}")
+
                 }
             }
-            .catch { LogUtil.e("flow Error", "GetSeasonalFestivalListUseCase") }
+            .catch { LogUtil.e("flow Error", "getSeasonalFestivalListUseCase") }
             .launchIn(viewModelScope)
     }
 
@@ -228,12 +228,12 @@ class FestivalListViewModel @Inject constructor(
                         }
                     }
                 }.onError { code, message ->
-                    LogUtil.e("onError", "code: ${code}\nmessage: $message")
+
                 }.onException {
-                    LogUtil.e("onException", "${it.message}")
+
                 }
             }
-            .catch { LogUtil.e("flow Error", "ToggleFavoriteUseCase") }
+            .catch { LogUtil.e("flow Error", "toggleFavoriteUseCase") }
             .launchIn(viewModelScope)
     }
 

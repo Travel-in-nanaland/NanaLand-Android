@@ -16,7 +16,7 @@ fun SearchingScreenTopKeywordsText() {
             withStyle(
                 style = title02Bold.toSpanStyle().copy(
                     color = getColor().main
-                ) ,
+                )
             ) {
                 append("가장 많이")
             }

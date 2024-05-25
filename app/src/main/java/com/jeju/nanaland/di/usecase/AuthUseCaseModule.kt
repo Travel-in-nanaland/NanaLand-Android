@@ -3,6 +3,7 @@ package com.jeju.nanaland.di.usecase
 import com.jeju.nanaland.domain.repository.AuthRepository
 import com.jeju.nanaland.domain.usecase.auth.ReissueAccessTokenUseCase
 import com.jeju.nanaland.domain.usecase.auth.SignInUseCase
+import com.jeju.nanaland.domain.usecase.auth.SignUpUseCase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -27,5 +28,13 @@ object AuthUseCaseModule {
         repository: AuthRepository
     ): SignInUseCase {
         return SignInUseCase(repository)
+    }
+
+    @Singleton
+    @Provides
+    fun provideSignUpUseCase(
+        repository: AuthRepository
+    ): SignUpUseCase {
+        return SignUpUseCase(repository)
     }
 }

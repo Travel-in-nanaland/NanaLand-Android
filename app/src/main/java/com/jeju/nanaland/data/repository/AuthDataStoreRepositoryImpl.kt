@@ -21,7 +21,7 @@ class AuthDataStoreRepositoryImpl(
     }
 
     // DataStore에서 Refresh Token 가져오기
-    override suspend fun getRefreshToken(): Flow<String?> {
+    override fun getRefreshToken(): Flow<String?> {
         val key = stringPreferencesKey(KEY_REFRESH_TOKEN)
         return dataStore.data.map { it[key] }
     }

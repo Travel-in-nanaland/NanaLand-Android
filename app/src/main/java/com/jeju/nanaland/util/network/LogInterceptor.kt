@@ -1,20 +1,29 @@
 package com.jeju.nanaland.util.network
 
-import android.util.Log
 import com.google.gson.GsonBuilder
+import com.google.gson.JsonElement
+import com.google.gson.JsonIOException
 import com.google.gson.JsonParser
+import com.google.gson.JsonParser.parseString
+import com.google.gson.JsonSyntaxException
+import com.google.gson.stream.JsonReader
+import com.google.gson.stream.JsonToken
+import com.google.gson.stream.MalformedJsonException
+import com.jeju.nanaland.util.log.LogUtil
 import okhttp3.Interceptor
 import okhttp3.Response
 import okio.Buffer
 import okio.GzipSource
+import java.io.IOException
+import java.io.Reader
+import java.io.StringReader
 import java.nio.charset.Charset
 import java.nio.charset.StandardCharsets
 import javax.inject.Inject
 
 class LogInterceptor @Inject constructor() : Interceptor{
 
-    private val mGson = GsonBuilder().setPrettyPrinting().create()
-    private val mJsonParser = JsonParser()
+    private val mGson = GsonBuilder().setLenient().setPrettyPrinting().create()
 
     override fun intercept(chain: Interceptor.Chain): Response {
         val request = chain.request()
@@ -26,9 +35,20 @@ class LogInterceptor @Inject constructor() : Interceptor{
             val contentType = requestBody.contentType()
             val charset: Charset = contentType?.charset(StandardCharsets.UTF_8) ?: StandardCharsets.UTF_8
             val bodyString = buffer.clone().readString(charset)
-            requestBodyString = mGson.toJson(mJsonParser.parse(bodyString))
+            requestBodyString = try {
+                // 일반 request
+                mGson.toJson(customParseString(bodyString))
+            } catch (e: Exception) {
+                // Multipart 사용 시
+//                if (bodyString.contains("image/*")) {
+//                    val newString = bodyString.substringBefore("image/*") + "image/*"
+//                    newString
+//                }
+//                else bodyString
+                bodyString
+            }
         }
-        Log.e("httpRequestLog", "[url]\n${request.url}\n" +
+        LogUtil.e("httpRequestLog", "[url]\n${request.url}\n" +
                 "[host]\n${request.url.host}\n" +
                 "[query]\n${request.url.query?.replace("&", "\n")}\n" +
                 "[method]\n${request.method}\n" +
@@ -53,12 +73,34 @@ class LogInterceptor @Inject constructor() : Interceptor{
             val contentType = response.body?.contentType()
             val charset: Charset = contentType?.charset(StandardCharsets.UTF_8) ?: StandardCharsets.UTF_8
             val bodyString = buffer.clone().readString(charset)
-            responseBodyString = mGson.toJson(mJsonParser.parse(bodyString))
+            responseBodyString = mGson.toJson(parseString(bodyString))
         }
 
-        Log.e("httpResponseLog", "[code]\n${response.code}\n" +
+        LogUtil.e("httpResponseLog", "[code]\n${response.code}\n" +
                 "[headers]\n${response.headers}" +
                 "[body]\n${responseBodyString}")
         return response
+    }
+}
+
+fun customParseString(json: String): JsonElement {
+    return customParseReader(StringReader(json))
+}
+
+fun customParseReader(reader: Reader): JsonElement {
+    return try {
+        val jsonReader = JsonReader(reader)
+        jsonReader.isLenient = true
+        val element = JsonParser.parseReader(jsonReader)
+        if (!element.isJsonNull && jsonReader.peek() != JsonToken.END_DOCUMENT) {
+            throw JsonSyntaxException("Did not consume the entire document.")
+        }
+        element
+    } catch (e: MalformedJsonException) {
+        throw JsonSyntaxException(e)
+    } catch (e: IOException) {
+        throw JsonIOException(e)
+    } catch (e: NumberFormatException) {
+        throw JsonSyntaxException(e)
     }
 }

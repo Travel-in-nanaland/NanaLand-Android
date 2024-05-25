@@ -46,12 +46,12 @@ class NatureContentViewModel @Inject constructor(
                         }
                     }
                 }.onError { code, message ->
-                    LogUtil.e("onError", "code: ${code}\nmessage: $message")
+
                 }.onException {
-                    LogUtil.e("onException", "${it.message}")
+
                 }
             }
-            .catch { LogUtil.e("flow error", "GetNatureContentUseCase") }
+            .catch { LogUtil.e("flow error", "getNatureContentUseCase") }
             .launchIn(viewModelScope)
     }
 
@@ -74,12 +74,12 @@ class NatureContentViewModel @Inject constructor(
                         }
                     }
                 }.onError { code, message ->
-                    LogUtil.e("onError", "code: ${code}\nmessage: $message")
+
                 }.onException {
-                    LogUtil.e("onException", "${it.message}")
+
                 }
             }
-            .catch { LogUtil.e("flow Error", "ToggleFavoriteUseCase") }
+            .catch { LogUtil.e("flow Error", "toggleFavoriteUseCase") }
             .launchIn(viewModelScope)
     }
 }

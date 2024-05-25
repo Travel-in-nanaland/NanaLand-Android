@@ -3,10 +3,8 @@ package com.jeju.nanaland.ui.component.main.home
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.width
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
 import com.jeju.nanaland.domain.entity.member.RecommendedPostData
 import com.jeju.nanaland.ui.component.thumbnail.MainHomeThumbnail
 import com.jeju.nanaland.util.ui.UiState
@@ -30,7 +28,7 @@ fun HomeScreenRecommendedPosts(
                         onClick = { onClick(item.id, item.category, false) }
                     )
 
-                    if (idx % 2 == 0) Spacer(Modifier.width(8.dp))
+                    if (idx % 2 == 0) Spacer(Modifier.weight(1f))
                 }
             }
         }

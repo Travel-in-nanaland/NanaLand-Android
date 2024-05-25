@@ -1,7 +1,6 @@
 package com.jeju.nanaland.ui.main.home
 
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.imePadding
@@ -16,6 +15,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.jeju.nanaland.domain.entity.member.RecommendedPostData
 import com.jeju.nanaland.domain.entity.nanapick.NanaPickBannerData
+import com.jeju.nanaland.globalvalue.userdata.UserData
 import com.jeju.nanaland.ui.component.main.home.HomeScreenAdBanner
 import com.jeju.nanaland.ui.component.main.home.HomeScreenCategoryButtons
 import com.jeju.nanaland.ui.component.main.home.HomeScreenRecommendText
@@ -89,13 +89,23 @@ private fun HomeContent(
                 moveToNanaPickListScreen = moveToNanaPickListScreen,
             )
 
-            Spacer(Modifier.height(20.dp))
+        }
 
-            HomeScreenAdBanner()
+        Spacer(Modifier.height(20.dp))
+
+        HomeScreenAdBanner(
+            moveToNatureListScreen = moveToNatureListScreen,
+            moveToFestivalListScreen = moveToFestivalListScreen,
+            moveToMarketListScreen = moveToMarketListScreen
+        )
+
+        Column(
+            modifier = Modifier.padding(start = 16.dp, end = 16.dp, bottom = 20.dp)
+        ) {
 
             Spacer(Modifier.height(24.dp))
 
-            HomeScreenRecommendText(text = "감자마케터")
+            HomeScreenRecommendText(text = UserData.nickname)
 
             Spacer(Modifier.height(10.dp))
 

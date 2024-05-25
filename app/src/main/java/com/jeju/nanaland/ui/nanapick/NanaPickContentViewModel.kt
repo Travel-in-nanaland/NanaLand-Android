@@ -43,12 +43,12 @@ class NanaPickContentViewModel @Inject constructor(
                         }
                     }
                 }.onError { code, message ->
-                    LogUtil.e("onError", "code: ${code}\nmessage: $message")
+
                 }.onException {
-                    LogUtil.e("onException", "${it.message}")
+
                 }
             }
-            .catch { LogUtil.e("flow Error", "flow Error") }
+            .catch { LogUtil.e("flow Error", "getNanaPickContentUseCase") }
             .launchIn(viewModelScope)
     }
 
@@ -71,12 +71,12 @@ class NanaPickContentViewModel @Inject constructor(
                         }
                     }
                 }.onError { code, message ->
-                    LogUtil.e("onError", "code: ${code}\nmessage: $message")
+
                 }.onException {
-                    LogUtil.e("onException", "${it.message}")
+
                 }
             }
-            .catch { LogUtil.e("flow Error", "ToggleFavoriteUseCase") }
+            .catch { LogUtil.e("flow Error", "toggleFavoriteUseCase") }
             .launchIn(viewModelScope)
     }
 }

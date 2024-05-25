@@ -4,9 +4,10 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.provider.Settings
-import android.util.Log
 import android.view.WindowManager
+import android.widget.Toast
 import androidx.activity.ComponentActivity
+import androidx.activity.OnBackPressedCallback
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.fillMaxSize
@@ -61,10 +62,11 @@ class MainActivity : ComponentActivity() {
 //        LogUtil.log("keyHash", keyHash)
 
 
+        onBackPressedDispatcher.addCallback(this, onBackPressedCallback)
 
         // 개발용 액세스 토큰
 //        viewModel.saveAccessToken("aa")
-        viewModel.saveAccessToken("eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxMiIsImF1dGgiOiJST0xFX01FTUJFUiIsImV4cCI6MTc0NjYyODIyNH0.DUvVBtqjb432nT8M0IScjJTJD-GqR3G-srfNHFgfWUir2gtnxokb5JWQ8xONzat9HcciCqQ7OIF7t0D5pCVrTg")
+//        viewModel.saveAccessToken("eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxMiIsImF1dGgiOiJST0xFX01FTUJFUiIsImV4cCI6MTc0NjYyODIyNH0.DUvVBtqjb432nT8M0IScjJTJD-GqR3G-srfNHFgfWUir2gtnxokb5JWQ8xONzat9HcciCqQ7OIF7t0D5pCVrTg")
         // 공유용 액세스 토큰
 //        viewModel.saveAccessToken("eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxMyIsImF1dGgiOiJST0xFX01FTUJFUiIsImV4cCI6MTc0NjYyODQ2N30.F5eYloUAFMrSNTIg2Vz0z1SLhomQDN791ZHIxoYmEf8sR2gYPjzuyea8g8D0Ur8NEKAHijfvM9PML-jUIBCLTg")
 
@@ -101,7 +103,7 @@ class MainActivity : ComponentActivity() {
 //        metrics.densityDpi = 360
         val xdpi = metrics.xdpi
         val ydpi = metrics.ydpi
-        Log.e("dpi", "metrics.density: ${metrics.density}\n" +
+        LogUtil.e("dpi", "metrics.density: ${metrics.density}\n" +
                 "densityDpi: ${metrics.densityDpi}\n" +
                 "xDpi: ${xdpi}\n" +
                 "yDpi: ${ydpi}\n" +
@@ -127,7 +129,7 @@ class MainActivity : ComponentActivity() {
         // 상단 영역 높이
 //        TOP_BAR_HEIGHT = (SCREEN_HEIGHT_WITHOUT_SYSTEM_BAR / 10) / density
         TOP_BAR_HEIGHT = 56f
-        Log.e("ScreenValue", "totalScreenHeight: $TOTAL_SCREEN_HEIGHT\n" +
+        LogUtil.e("ScreenValue", "totalScreenHeight: $TOTAL_SCREEN_HEIGHT\n" +
                 "statusBarHeight: $SYSTEM_STATUS_BAR_HEIGHT ${statusBarHeight}\n" +
                 "systemNavigationBarHeight: $SYSTEM_NAVIGATION_BAR_HEIGHT ${systemNavigationBarHeight}\n" +
                 "screenHeightWithoutSystemBar: $SCREEN_HEIGHT_WITHOUT_SYSTEM_BAR ${SCREEN_HEIGHT_WITHOUT_SYSTEM_BAR}\n" +
@@ -135,5 +137,18 @@ class MainActivity : ComponentActivity() {
                 "bottomNavBarHeight: $BOTTOM_NAVIGATION_BAR_HEIGHT ${BOTTOM_NAVIGATION_BAR_HEIGHT}\n" +
                 "topBarHeight: $TOP_BAR_HEIGHT ${TOP_BAR_HEIGHT}\n"
         )
+    }
+
+    private var backPressedTime = 0L
+
+    private val onBackPressedCallback = object : OnBackPressedCallback(true) {
+        override fun handleOnBackPressed() {
+            if (System.currentTimeMillis() - backPressedTime <= 2000) {
+                finish()
+            } else {
+                backPressedTime = System.currentTimeMillis()
+                Toast.makeText(this@MainActivity, "한 번 더 누르면 앱이 종료됩니다.", Toast.LENGTH_SHORT).show()
+            }
+        }
     }
 }

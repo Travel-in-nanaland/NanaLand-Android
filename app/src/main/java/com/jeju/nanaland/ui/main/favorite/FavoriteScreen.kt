@@ -14,8 +14,8 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.jeju.nanaland.domain.entity.favorite.FavoriteThumbnailData
 import com.jeju.nanaland.globalvalue.type.SearchCategoryType
 import com.jeju.nanaland.ui.component.common.CustomTopBarNoBackButton
-import com.jeju.nanaland.ui.component.main.favorite.FavoriteScreenCategorySelectionTab
-import com.jeju.nanaland.ui.component.main.favorite.FavoriteScreenFavoritePosts
+import com.jeju.nanaland.ui.component.favorite.FavoriteScreenCategorySelectionTab
+import com.jeju.nanaland.ui.component.favorite.FavoriteScreenFavoritePosts
 import com.jeju.nanaland.ui.component.main.searchresult.parts.SearchResultScreenItemCount
 import com.jeju.nanaland.util.ui.UiState
 

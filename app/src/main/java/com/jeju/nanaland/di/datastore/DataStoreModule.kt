@@ -27,7 +27,7 @@ object DataStoreModule {
 
     @Qualifier
     @Retention(AnnotationRetention.BINARY)
-    annotation class SettingsDataStore
+    annotation class UserSettingsDataStore
 
     @Singleton
     @Provides
@@ -53,7 +53,7 @@ object DataStoreModule {
 
     @Singleton
     @Provides
-    @SettingsDataStore
+    @UserSettingsDataStore
     fun provideSettingsDataStore(
         @ApplicationContext context: Context
     ): DataStore<Preferences> {

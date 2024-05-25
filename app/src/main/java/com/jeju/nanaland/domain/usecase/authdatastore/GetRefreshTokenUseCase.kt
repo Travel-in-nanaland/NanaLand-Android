@@ -5,5 +5,5 @@ import com.jeju.nanaland.domain.repository.AuthDataStoreRepository
 class GetRefreshTokenUseCase(
     private val repository: AuthDataStoreRepository
 ) {
-    suspend operator fun invoke() = repository.getRefreshToken()
+    operator fun invoke() = repository.getRefreshToken()
 }

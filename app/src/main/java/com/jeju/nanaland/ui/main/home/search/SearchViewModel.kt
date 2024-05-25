@@ -1,6 +1,5 @@
 package com.jeju.nanaland.ui.main.home.search
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.jeju.nanaland.domain.entity.search.HotPostThumbnailData
@@ -85,12 +84,12 @@ class SearchViewModel @Inject constructor(
                         }
                     }
                 }.onError { code, message ->
-                    LogUtil.e("onError", "code: ${code}\nmessage: $message")
+
                 }.onException {
-                    LogUtil.e("onException", "${it.message}")
+
                 }
             }
-            .catch { LogUtil.e("flow Error", "GetPopularSearchListUseCase") }
+            .catch { LogUtil.e("flow Error", "getTopKeywordsUseCase") }
             .launchIn(viewModelScope)
     }
 
@@ -145,12 +144,12 @@ class SearchViewModel @Inject constructor(
                     }
                 }
             }.onError { code, message ->
-                LogUtil.e("onError", "code: ${code}\nmessage: $message")
+
             }.onException {
-                LogUtil.e("onException", "${it.message}")
+
             }
         }
-        .catch { LogUtil.e("flow Error", "GetNatureSearchResultListUseCase") }
+        .catch { LogUtil.e("flow Error", "getSearchResult") }
         .launchIn(viewModelScope)
     }
 
@@ -197,16 +196,16 @@ class SearchViewModel @Inject constructor(
                         }
                     }
                 }.onError { code, message ->
-                    LogUtil.e("onError", "code: ${code}\nmessage: $message")
+
                 }.onException {
-                    LogUtil.e("onException", "${it.message}")
+
                 }
             }
             .launchIn(viewModelScope)
     }
 
     fun toggleHotPostFavorite(contentId: Long, category: String?) {
-        Log.e("toggleHotPostFavorite", "toggleHotPostFavorite")
+        LogUtil.e("toggleHotPostFavorite", "toggleHotPostFavorite")
         if (category == null) return
         val requestData = ToggleFavoriteRequest(
             id = contentId,
@@ -229,17 +228,17 @@ class SearchViewModel @Inject constructor(
                         }
                     }
                 }.onError { code, message ->
-                    LogUtil.e("onError", "code: ${code}\nmessage: $message")
+
                 }.onException {
-                    LogUtil.e("onException", "${it.message}")
+
                 }
             }
-            .catch { LogUtil.e("flow Error", "ToggleFavoriteUseCase") }
+            .catch { LogUtil.e("flow Error", "toggleFavoriteUseCase") }
             .launchIn(viewModelScope)
     }
 
     fun toggleSearchResultFavorite(contentId: Long, category: String?) {
-        Log.e("toggleSearchResultFavorite", "toggleSearchResultFavorite")
+        LogUtil.e("toggleSearchResultFavorite", "toggleSearchResultFavorite")
         if (category == null) return
         val requestData = ToggleFavoriteRequest(
             id = contentId,
@@ -262,12 +261,12 @@ class SearchViewModel @Inject constructor(
                         }
                     }
                 }.onError { code, message ->
-                    LogUtil.e("onError", "code: ${code}\nmessage: $message")
+
                 }.onException {
-                    LogUtil.e("onException", "${it.message}")
+
                 }
             }
-            .catch { LogUtil.e("flow Error", "ToggleFavoriteUseCase") }
+            .catch { LogUtil.e("flow Error", "toggleFavoriteUseCase") }
             .launchIn(viewModelScope)
     }
 
@@ -286,7 +285,7 @@ class SearchViewModel @Inject constructor(
     }
 
     fun toggleAllSearchResultFavorite(contentId: Long, category: String?) {
-        Log.e("toggleAllSearchResultFavorite", "toggleAllSearchResultFavorite")
+        LogUtil.e("toggleAllSearchResultFavorite", "toggleAllSearchResultFavorite")
         if (category == null) return
         val requestData = ToggleFavoriteRequest(
             id = contentId,
@@ -298,7 +297,7 @@ class SearchViewModel @Inject constructor(
                     data?.let {
                         _allSearchResultList.update { uiState ->
                             if (uiState is UiState.Success) {
-                                Log.e("toggleAllSearchResultFavorite", "${uiState.data.hashCode()}")
+                                LogUtil.e("toggleAllSearchResultFavorite", "${uiState.data.hashCode()}")
                                 val newMap = uiState.data.toMutableMap()
                                 val categoryString = when (category) {
                                     "NATURE" -> "Nature"
@@ -316,7 +315,7 @@ class SearchViewModel @Inject constructor(
                                     )
                                     newMap[categoryString] = newSearchResultData
                                 }
-                                Log.e("toggleAllSearchResultFavorite", "${newMap}")
+                                LogUtil.e("toggleAllSearchResultFavorite", "${newMap}")
                                 UiState.Success(newMap)
                             } else {
                                 uiState
@@ -324,12 +323,12 @@ class SearchViewModel @Inject constructor(
                         }
                     }
                 }.onError { code, message ->
-                    LogUtil.e("onError", "code: ${code}\nmessage: $message")
+
                 }.onException {
-                    LogUtil.e("onException", "${it.message}")
+
                 }
             }
-            .catch { LogUtil.e("flow Error", "ToggleFavoriteUseCase") }
+            .catch { LogUtil.e("flow Error", "toggleFavoriteUseCase") }
             .launchIn(viewModelScope)
     }
 
@@ -337,7 +336,7 @@ class SearchViewModel @Inject constructor(
         if (category == null) return
         _allSearchResultList.update { uiState ->
             if (uiState is UiState.Success) {
-                Log.e("toggleAllSearchResultFavorite", "${uiState.data.hashCode()}")
+                LogUtil.e("toggleAllSearchResultFavorite", "${uiState.data.hashCode()}")
                 val newMap = uiState.data.toMutableMap()
                 val categoryString = when (category) {
                     "NATURE" -> "Nature"
@@ -355,7 +354,7 @@ class SearchViewModel @Inject constructor(
                     )
                     newMap[categoryString] = newSearchResultData
                 }
-                Log.e("toggleAllSearchResultFavorite", "${newMap}")
+                LogUtil.e("toggleAllSearchResultFavorite", "${newMap}")
                 UiState.Success(newMap)
             } else {
                 uiState

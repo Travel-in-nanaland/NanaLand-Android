@@ -35,16 +35,17 @@ import com.jeju.nanaland.globalvalue.type.HomeScreenViewType
 import com.jeju.nanaland.globalvalue.type.MainScreenViewType
 import com.jeju.nanaland.globalvalue.type.SearchCategoryType
 import com.jeju.nanaland.ui.component.common.CustomSurface
+import com.jeju.nanaland.ui.main.favorite.FavoriteScreen
+import com.jeju.nanaland.ui.main.favorite.FavoriteViewModel
 import com.jeju.nanaland.ui.main.home.HomeScreen
 import com.jeju.nanaland.ui.main.home.HomeViewModel
 import com.jeju.nanaland.ui.main.home.search.SearchViewModel
 import com.jeju.nanaland.ui.main.jejustory.JejuStoryScreen
-import com.jeju.nanaland.ui.main.favorite.FavoriteScreen
-import com.jeju.nanaland.ui.main.favorite.FavoriteViewModel
-import com.jeju.nanaland.ui.main.mynana.MyNanaScreen
-import com.jeju.nanaland.ui.theme.getColor
+import com.jeju.nanaland.ui.main.mypage.MyPageScreen
 import com.jeju.nanaland.ui.theme.NanaLandTheme
 import com.jeju.nanaland.ui.theme.caption02
+import com.jeju.nanaland.ui.theme.getColor
+import com.jeju.nanaland.util.ui.drawColoredShadow
 import kotlinx.coroutines.flow.emptyFlow
 
 @Composable
@@ -55,6 +56,7 @@ fun MainScreen(
     moveToFestivalListScreen: () -> Unit,
     moveToMarketListScreen: () -> Unit,
     moveToExperienceListScreen: () -> Unit,
+    moveToProfileModificationScreen: () -> Unit,
     viewModel: MainViewModel = hiltViewModel(),
     homeViewModel: HomeViewModel = hiltViewModel(),
     searchViewModel: SearchViewModel = hiltViewModel(),
@@ -80,6 +82,7 @@ fun MainScreen(
         moveToFestivalListScreen = moveToFestivalListScreen,
         moveToMarketListScreen = moveToMarketListScreen,
         moveToExperienceListScreen = moveToExperienceListScreen,
+        moveToProfileModificationScreen = moveToProfileModificationScreen,
         isContent = true
     )
 }
@@ -98,6 +101,7 @@ private fun MainScreen(
     moveToFestivalListScreen: () -> Unit,
     moveToMarketListScreen: () -> Unit,
     moveToExperienceListScreen: () -> Unit,
+    moveToProfileModificationScreen: () -> Unit,
     isContent: Boolean
 ) {
     CustomSurface { isImeKeyboardShowing ->
@@ -140,8 +144,10 @@ private fun MainScreen(
                     MainScreenViewType.JejuStory -> {
                         JejuStoryScreen()
                     }
-                    MainScreenViewType.MyNana -> {
-                        MyNanaScreen()
+                    MainScreenViewType.MyPage -> {
+                        MyPageScreen(
+                            moveToProfileModificationScreen = moveToProfileModificationScreen
+                        )
                     }
                 }
             }
@@ -160,10 +166,16 @@ fun MainNavigationBar(
     NavigationBar(
         modifier = Modifier
             .height(TOP_BAR_HEIGHT.dp)
+            .drawColoredShadow(
+                color = getColor().black,
+                alpha = 0.1f,
+                shadowRadius = 10.dp,
+                offsetX = 0.dp,
+                offsetY = 0.dp
+            )
             .graphicsLayer {
                 clip = true
                 shape = RoundedCornerShape(topStart = 10.dp, topEnd = 10.dp)
-                shadowElevation = 20f
             },
         containerColor = Color(0xFFFFFFFF),
         windowInsets = WindowInsets(0, 0, 0, 0)
@@ -244,7 +256,7 @@ private fun MainScreenPreview() {
             label = "제주 이야기"
         ),
         MainViewModel.NavigationItemContent(
-            viewType = MainScreenViewType.MyNana,
+            viewType = MainScreenViewType.MyPage,
             iconSelected = R.drawable.ic_person_filled,
             iconUnselected = R.drawable.ic_person_outlined,
             label = "나의 나나"

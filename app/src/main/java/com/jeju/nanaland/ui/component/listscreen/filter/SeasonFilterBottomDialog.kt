@@ -49,7 +49,7 @@ fun SeasonFilterBottomDialog(
     Column(
         modifier = Modifier
             .fillMaxWidth()
-            .height(400.dp)
+            .height(370.dp)
             .offset {
                 IntOffset(
                     x = 0,
@@ -60,12 +60,12 @@ fun SeasonFilterBottomDialog(
                 color = getColor().white,
                 shape = RoundedCornerShape(topStart = 12.dp, topEnd = 12.dp)
             )
-            .padding(start = 16.dp, end = 16.dp)
             .clickableNoEffect {},
     ) {
         Spacer(Modifier.height(24.dp))
 
         Row(
+            modifier = Modifier.padding(start = 16.dp, end = 16.dp),
             verticalAlignment = Alignment.Bottom
         ) {
             SeasonFilterDialogTitle()
@@ -84,7 +84,13 @@ fun SeasonFilterBottomDialog(
 
         repeat(4) { seasonIdx ->
             SeasonSelectableBox(
-                text = seasonList[seasonIdx],
+                seasonText = seasonList[seasonIdx],
+                monthText = when (seasonIdx) {
+                    0 -> "3, 4월"
+                    1 -> "5, 6, 7, 8월"
+                    2 -> "9, 10월"
+                    else -> "11, 12, 1, 2월"
+                },
                 onClick = {
                     // 이미 같은 계절이 선택되어 있으면 새로고침 안한다.
                     if (!selectedSeasonList[seasonIdx]) {
@@ -115,7 +121,7 @@ fun getSeasonAnchoredDraggableState() = AnchoredDraggableState(
 ).apply {
     updateAnchors(
         DraggableAnchors {
-            AnchoredDraggableContentState.Open at TOTAL_SCREEN_HEIGHT - 300f - SYSTEM_STATUS_BAR_HEIGHT - SYSTEM_NAVIGATION_BAR_HEIGHT
+            AnchoredDraggableContentState.Open at TOTAL_SCREEN_HEIGHT - 360f - SYSTEM_STATUS_BAR_HEIGHT - SYSTEM_NAVIGATION_BAR_HEIGHT
             AnchoredDraggableContentState.Closed at TOTAL_SCREEN_HEIGHT - SYSTEM_STATUS_BAR_HEIGHT
         }
     )

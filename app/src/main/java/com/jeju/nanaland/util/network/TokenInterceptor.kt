@@ -1,6 +1,5 @@
 package com.jeju.nanaland.util.network
 
-import android.util.Log
 import com.jeju.nanaland.domain.usecase.auth.ReissueAccessTokenUseCase
 import com.jeju.nanaland.domain.usecase.authdatastore.GetAccessTokenUseCase
 import com.jeju.nanaland.domain.usecase.authdatastore.GetRefreshTokenUseCase
@@ -30,15 +29,14 @@ class TokenInterceptor @Inject constructor(
 
     override fun intercept(chain: Interceptor.Chain): Response {
         lateinit var response: Response
-        runBlocking {
+        return runBlocking<Response> {
             mutex.withLock {
                 val accessToken = getAccessTokenUseCase().first()
                 if (accessToken.isNullOrEmpty()) {
                     response = errorResponse(chain.request())
                     LogUtil.e("Network Error", "Access Token is Null or Empty")
-                    return@runBlocking
                 } else {
-                    Log.e("TokenInterceptor", "${accessToken}")
+                    LogUtil.e("TokenInterceptor", "${accessToken}")
                     val request = chain.request().newBuilder().header("Authorization", "Bearer $accessToken").build()
                     response = chain.proceed(request)
                     if (response.code == 401) {
@@ -62,11 +60,10 @@ class TokenInterceptor @Inject constructor(
                         }
                     }
                 }
+                response
             }
         }
-        return response
     }
-
 }
 
 private fun errorResponse(request: Request): Response = Response.Builder()

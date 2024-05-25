@@ -1,15 +1,6 @@
 package com.jeju.nanaland.ui.signin
 
-import android.R
-import android.app.Activity
-import android.content.IntentSender.SendIntentException
-import android.service.credentials.BeginGetCredentialRequest
-import android.service.credentials.GetCredentialRequest
-import android.util.Log
 import androidx.activity.compose.rememberLauncherForActivityResult
-import androidx.activity.result.ActivityResult
-import androidx.activity.result.contract.ActivityResultContract
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
@@ -20,18 +11,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
-import androidx.core.app.ActivityCompat.startIntentSenderForResult
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.google.android.gms.auth.api.identity.GetSignInIntentRequest
-import com.google.android.gms.auth.api.identity.Identity
-import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
-import com.google.android.gms.auth.api.signin.GoogleSignInClient
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.tasks.Task
-import com.google.android.libraries.identity.googleid.GetSignInWithGoogleOption
-import com.kakao.sdk.user.UserApiClient
 import com.jeju.nanaland.ui.component.common.CustomSurface
 import com.jeju.nanaland.ui.component.signin.SignInScreenGoogleLoginButton
 import com.jeju.nanaland.ui.component.signin.SignInScreenGuestModeText
@@ -43,20 +26,29 @@ import com.jeju.nanaland.util.log.LogUtil
 import com.jeju.nanaland.util.signin.AuthResultContract
 import com.jeju.nanaland.util.signin.getGoogleSignInClient
 import com.jeju.nanaland.util.ui.ScreenPreview
+import com.kakao.sdk.user.UserApiClient
 import kotlinx.coroutines.launch
 
 
 @Composable
 fun SignInScreen(
+    moveToMainScreen: () -> Unit,
+    moveToSignUpScreen: (String, String, String) -> Unit,
     viewModel: SignInViewModel = hiltViewModel()
 ) {
     SignInScreen(
+        signIn = viewModel::signIn,
+        moveToMainScreen = moveToMainScreen,
+        moveToSignUpScreen = moveToSignUpScreen,
         isContent = true
     )
 }
 
 @Composable
 private fun SignInScreen(
+    signIn: (String, String, () -> Unit, () -> Unit) -> Unit,
+    moveToMainScreen: () -> Unit,
+    moveToSignUpScreen: (String, String, String) -> Unit,
     isContent: Boolean
 ) {
     val context = LocalContext.current
@@ -69,9 +61,18 @@ private fun SignInScreen(
                     LogUtil.e("error", "${task?.exception}")
                 } else {
                     LogUtil.e("success", "email: ${account.email}\n" +
-                            "id: ${account.id}\n"
+                            "id: ${account.id}\n" +
+                            "birthdate: ${account}"
                     )
                     coroutineScope.launch {
+                        if (account.id != null) {
+                            signIn(
+                                "GOOGLE",
+                                account.id!!,
+                                moveToMainScreen,
+                                { moveToSignUpScreen("GOOGLE", account.email!!, account.id!!) }
+                            )
+                        }
                     }
                 }
             } catch (e: ApiException) {
@@ -122,8 +123,7 @@ private fun SignInScreen(
 
             SignInScreenGoogleLoginButton {
                 getGoogleSignInClient(context).signOut()
-                LogUtil.e("signed in email", "${GoogleSignIn.getLastSignedInAccount(context)?.email}")
-                startForResult.launch(1)
+                startForResult.launch(0)
             }
 
             Spacer(Modifier.height(24.dp))

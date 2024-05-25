@@ -34,6 +34,7 @@ import com.jeju.nanaland.R
 import com.jeju.nanaland.domain.entity.nanapick.NanaPickContentData
 import com.jeju.nanaland.ui.component.common.CustomSurface
 import com.jeju.nanaland.ui.component.common.CustomTopBar
+import com.jeju.nanaland.ui.component.common.TagChip2
 import com.jeju.nanaland.ui.component.detailscreen.nanapick.NanaPickContentSubContents
 import com.jeju.nanaland.ui.component.detailscreen.nanapick.NanaPickContentTopBanner
 import com.jeju.nanaland.ui.component.detailscreen.other.DetailScreenNotice
@@ -230,7 +231,7 @@ private fun DetailContent(
 
         Row {
             subContent.hashtags.forEach { tag ->
-                TagChip(
+                TagChip2(
                     text = tag ?: ""
                 )
 
@@ -239,28 +240,6 @@ private fun DetailContent(
         }
 
         Spacer(Modifier.height(60.dp))
-    }
-}
-
-@Composable
-private fun TagChip(
-    text: String
-) {
-    Box(
-        modifier = Modifier
-            .height(32.dp)
-            .background(
-                color = getColor().main10,
-                shape = RoundedCornerShape(50)
-            )
-            .padding(start = 10.dp, end = 10.dp),
-        contentAlignment = Alignment.Center
-    ) {
-        Text(
-            text = text,
-            color = getColor().main,
-            style = body02
-        )
     }
 }
 

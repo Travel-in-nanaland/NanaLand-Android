@@ -110,9 +110,21 @@ val title02Bold = TextStyle(
     fontFamily = appleSdGothicNeo,
     platformStyle = PlatformTextStyle(false)
 )
+val title = TextStyle(
+    fontSize = (baseFontSize + 8).sp,
+    fontWeight = FontWeight.Medium,
+    fontFamily = appleSdGothicNeo,
+    platformStyle = PlatformTextStyle(false)
+)
 val bodyBold = TextStyle(
     fontSize = (baseFontSize + 6).sp,
     fontWeight = FontWeight.Bold,
+    fontFamily = appleSdGothicNeo,
+    platformStyle = PlatformTextStyle(false)
+)
+val bodySemiBold = TextStyle(
+    fontSize = (baseFontSize + 6).sp,
+    fontWeight = FontWeight.SemiBold,
     fontFamily = appleSdGothicNeo,
     platformStyle = PlatformTextStyle(false)
 )
@@ -161,6 +173,18 @@ val caption02 = TextStyle(
 val caption02SemiBold = TextStyle(
     fontSize = (baseFontSize + 0).sp,
     fontWeight = FontWeight.SemiBold,
+    fontFamily = appleSdGothicNeo,
+    platformStyle = PlatformTextStyle(false)
+)
+val largeTitle02Regular = TextStyle(
+    fontSize = (baseFontSize + 12).sp,
+    fontWeight = FontWeight.Normal,
+    fontFamily = appleSdGothicNeo,
+    platformStyle = PlatformTextStyle(false)
+)
+val largeTitle02Medium = TextStyle(
+    fontSize = (baseFontSize + 12).sp,
+    fontWeight = FontWeight.Medium,
     fontFamily = appleSdGothicNeo,
     platformStyle = PlatformTextStyle(false)
 )

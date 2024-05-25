@@ -20,7 +20,7 @@ import com.jeju.nanaland.data.repository.NanaPickRepositoryImpl
 import com.jeju.nanaland.data.repository.NatureRepositoryImpl
 import com.jeju.nanaland.data.repository.RecentSearchDataStoreRepositoryImpl
 import com.jeju.nanaland.data.repository.SearchRepositoryImpl
-import com.jeju.nanaland.data.repository.SettingsDataStoreRepositoryImpl
+import com.jeju.nanaland.data.repository.UserSettingsDataStoreRepositoryImpl
 import com.jeju.nanaland.di.datastore.DataStoreModule
 import com.jeju.nanaland.domain.repository.AuthDataStoreRepository
 import com.jeju.nanaland.domain.repository.AuthRepository
@@ -32,7 +32,7 @@ import com.jeju.nanaland.domain.repository.NanaPickRepository
 import com.jeju.nanaland.domain.repository.NatureRepository
 import com.jeju.nanaland.domain.repository.RecentSearchDataStoreRepository
 import com.jeju.nanaland.domain.repository.SearchRepository
-import com.jeju.nanaland.domain.repository.SettingsDataStoreRepository
+import com.jeju.nanaland.domain.repository.UserSettingsDataStoreRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -125,9 +125,9 @@ object RepositoryModule {
 
     @Singleton
     @Provides
-    fun provideSettingsDataStoreRepository(
-        @DataStoreModule.SettingsDataStore dataStore: DataStore<Preferences>
-    ): SettingsDataStoreRepository {
-        return SettingsDataStoreRepositoryImpl(dataStore)
+    fun provideUserSettingsDataStoreRepository(
+        @DataStoreModule.UserSettingsDataStore dataStore: DataStore<Preferences>
+    ): UserSettingsDataStoreRepository {
+        return UserSettingsDataStoreRepositoryImpl(dataStore)
     }
 }

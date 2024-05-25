@@ -8,7 +8,7 @@ interface AuthDataStoreRepository {
     suspend fun getAccessToken(): Flow<String?>
 
     // Refresh Token 가져오기
-    suspend fun getRefreshToken(): Flow<String?>
+    fun getRefreshToken(): Flow<String?>
 
     // Access Token 저장하기
     suspend fun saveAccessToken(accessToken: String)

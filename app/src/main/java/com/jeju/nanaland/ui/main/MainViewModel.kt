@@ -34,7 +34,7 @@ class MainViewModel @Inject constructor() : ViewModel() {
             label = "제주 이야기"
         ),
         NavigationItemContent(
-            viewType = MainScreenViewType.MyNana,
+            viewType = MainScreenViewType.MyPage,
             iconSelected = R.drawable.ic_person_filled,
             iconUnselected = R.drawable.ic_person_outlined,
             label = "나의 나나"

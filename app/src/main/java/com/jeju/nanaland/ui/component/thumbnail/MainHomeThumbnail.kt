@@ -10,7 +10,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.jeju.nanaland.ui.component.thumbnail.parts.ThumbnailImage
-import com.jeju.nanaland.ui.component.thumbnail.parts.ThumbnailSubtitle
 import com.jeju.nanaland.ui.component.thumbnail.parts.ThumbnailTitle
 import com.jeju.nanaland.ui.theme.NanaLandTheme
 import com.jeju.nanaland.util.ui.ComponentPreview
@@ -35,9 +34,9 @@ fun MainHomeThumbnail(
 
         ThumbnailTitle(text = title)
 
-        Spacer(Modifier.height(4.dp))
-
-        ThumbnailSubtitle(text = subTitle)
+//        Spacer(Modifier.height(4.dp))
+//
+//        ThumbnailSubtitle(text = subTitle)
     }
 }
 

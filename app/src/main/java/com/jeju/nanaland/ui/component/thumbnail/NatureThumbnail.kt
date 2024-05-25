@@ -13,7 +13,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.jeju.nanaland.ui.component.thumbnail.parts.ThumbnailImage
 import com.jeju.nanaland.ui.component.thumbnail.parts.ThumbnailFavoriteButton
-import com.jeju.nanaland.ui.component.common.Tag
+import com.jeju.nanaland.ui.component.common.TagChip1
 import com.jeju.nanaland.ui.component.thumbnail.parts.ThumbnailTitle
 import com.jeju.nanaland.ui.theme.NanaLandTheme
 import com.jeju.nanaland.util.ui.ComponentPreview
@@ -54,7 +54,7 @@ fun NatureThumbnail(
 
         Spacer(Modifier.height(8.dp))
 
-        Tag(text = tag)
+        TagChip1(text = tag)
     }
 }
 

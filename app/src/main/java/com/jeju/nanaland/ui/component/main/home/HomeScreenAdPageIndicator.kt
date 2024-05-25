@@ -19,22 +19,28 @@ import com.jeju.nanaland.ui.theme.getColor
 fun HomeScreenAdPageIndicator(
     pageNum: Int
 ) {
-    val transition = updateTransition(pageNum % 3, "")
+    val transition = updateTransition(pageNum % 4, "")
     val dot1Color: Color by transition.animateColor(label = "") {
         when (it) {
-            1 -> getColor().black
+            0 -> getColor().black
             else -> getColor().gray02
         }
     }
     val dot2Color: Color by transition.animateColor(label = "") {
         when (it) {
-            2 -> getColor().black
+            1 -> getColor().black
             else -> getColor().gray02
         }
     }
     val dot3Color: Color by transition.animateColor(label = "") {
         when (it) {
-            0 -> getColor().black
+            2 -> getColor().black
+            else -> getColor().gray02
+        }
+    }
+    val dot4Color: Color by transition.animateColor(label = "") {
+        when (it) {
+            3 -> getColor().black
             else -> getColor().gray02
         }
     }
@@ -52,5 +58,9 @@ fun HomeScreenAdPageIndicator(
         Spacer(Modifier.width(10.dp))
 
         AdPageIndicatorDot(color = dot3Color)
+
+        Spacer(Modifier.width(10.dp))
+
+        AdPageIndicatorDot(color = dot4Color)
     }
 }

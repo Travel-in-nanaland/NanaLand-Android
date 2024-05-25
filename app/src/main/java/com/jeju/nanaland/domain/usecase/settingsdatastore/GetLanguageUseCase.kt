@@ -1,9 +1,9 @@
 package com.jeju.nanaland.domain.usecase.settingsdatastore
 
-import com.jeju.nanaland.domain.repository.SettingsDataStoreRepository
+import com.jeju.nanaland.domain.repository.UserSettingsDataStoreRepository
 
 class GetLanguageUseCase(
-    private val repository: SettingsDataStoreRepository
+    private val repository: UserSettingsDataStoreRepository
 ) {
-    suspend operator fun invoke() = repository.getLanguage()
+    operator fun invoke() = repository.getLanguage()
 }

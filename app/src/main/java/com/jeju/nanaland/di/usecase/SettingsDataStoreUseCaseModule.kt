@@ -1,6 +1,6 @@
 package com.jeju.nanaland.di.usecase
 
-import com.jeju.nanaland.domain.repository.SettingsDataStoreRepository
+import com.jeju.nanaland.domain.repository.UserSettingsDataStoreRepository
 import com.jeju.nanaland.domain.usecase.settingsdatastore.GetLanguageUseCase
 import com.jeju.nanaland.domain.usecase.settingsdatastore.SaveLanguageUseCase
 import dagger.Module
@@ -16,7 +16,7 @@ object SettingsDataStoreUseCaseModule {
     @Singleton
     @Provides
     fun provideGetLanguageUseCase(
-        repository: SettingsDataStoreRepository
+        repository: UserSettingsDataStoreRepository
     ): GetLanguageUseCase {
         return GetLanguageUseCase(repository)
     }
@@ -24,7 +24,7 @@ object SettingsDataStoreUseCaseModule {
     @Singleton
     @Provides
     fun provideSaveLanguageUseCase(
-        repository: SettingsDataStoreRepository
+        repository: UserSettingsDataStoreRepository
     ): SaveLanguageUseCase {
         return SaveLanguageUseCase(repository)
     }

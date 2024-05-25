@@ -16,22 +16,38 @@ import kotlinx.coroutines.delay
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun HomeScreenAdBanner() {
+fun HomeScreenAdBanner(
+    moveToNatureListScreen: () -> Unit,
+    moveToFestivalListScreen: () -> Unit,
+    moveToMarketListScreen: () -> Unit
+) {
     val pagerState = rememberPagerState(
         initialPage = 200,
         pageCount = {1000}
     )
+    LaunchedEffect(Unit) {
+        pagerState.scrollToPage(200)
+    }
     val isDragged by pagerState.interactionSource.collectIsDraggedAsState()
     if (!isDragged) {
         LaunchedEffect(Unit) {
             while (true) {
-                delay(3500)
+                delay(5000)
                 pagerState.animateScrollToPage(pagerState.currentPage + 1)
             }
         }
     }
     HorizontalPager(state = pagerState) { page ->
-        HomeScreenAdContent(page)
+        HomeScreenAdContent(
+            idx = page,
+            onClick = {
+                when (page % 4) {
+                    0, 1 -> moveToNatureListScreen()
+                    2 -> moveToMarketListScreen()
+                    else -> moveToFestivalListScreen()
+                }
+            }
+        )
     }
 
     Spacer(Modifier.height(10.dp))
