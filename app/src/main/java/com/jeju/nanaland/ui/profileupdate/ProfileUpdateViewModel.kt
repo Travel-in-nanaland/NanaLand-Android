@@ -1,4 +1,4 @@
-package com.jeju.nanaland.ui.signup
+package com.jeju.nanaland.ui.profileupdate
 
 import android.annotation.SuppressLint
 import android.app.Application
@@ -7,14 +7,9 @@ import android.provider.MediaStore
 import androidx.core.net.toUri
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
-import com.jeju.nanaland.domain.entity.member.ConsentItem
-import com.jeju.nanaland.domain.request.auth.SignUpRequest
-import com.jeju.nanaland.domain.usecase.auth.SignUpUseCase
-import com.jeju.nanaland.domain.usecase.authdatastore.SaveAccessTokenUseCase
-import com.jeju.nanaland.domain.usecase.authdatastore.SaveRefreshTokenUseCase
-import com.jeju.nanaland.domain.usecase.settingsdatastore.GetLanguageUseCase
+import com.jeju.nanaland.domain.request.member.UpdateUserProfileRequest
+import com.jeju.nanaland.domain.usecase.member.UpdateUserProfileUseCase
 import com.jeju.nanaland.globalvalue.type.InputNicknameState
-import com.jeju.nanaland.globalvalue.userdata.UserData
 import com.jeju.nanaland.util.log.LogUtil
 import com.jeju.nanaland.util.network.onError
 import com.jeju.nanaland.util.network.onException
@@ -31,11 +26,8 @@ import java.io.File
 import javax.inject.Inject
 
 @HiltViewModel
-class SignUpViewModel @Inject constructor(
-    private val signUpUseCase: SignUpUseCase,
-    private val getLanguageUseCase: GetLanguageUseCase,
-    private val saveAccessTokenUseCase: SaveAccessTokenUseCase,
-    private val saveRefreshTokenUseCase: SaveRefreshTokenUseCase,
+class ProfileUpdateViewModel @Inject constructor(
+    private val updateProfileUseCase: UpdateUserProfileUseCase,
     private val application: Application
 ) : AndroidViewModel(application) {
 
@@ -43,6 +35,8 @@ class SignUpViewModel @Inject constructor(
     val inputNickname = _inputNickname.asStateFlow()
     private val _inputNicknameState = MutableStateFlow(InputNicknameState.Idle)
     val inputNicknameState = _inputNicknameState.asStateFlow()
+    private val _inputIntroduction = MutableStateFlow("")
+    val inputIntroduction = _inputIntroduction.asStateFlow()
     private val _profileImageUri = MutableStateFlow<String?>(null)
     val profileImageUri: StateFlow<String?> = _profileImageUri
 
@@ -55,35 +49,20 @@ class SignUpViewModel @Inject constructor(
         }
     }
 
+    fun updateInputIntroduction(introduction: String) {
+        _inputIntroduction.update { introduction }
+    }
+
     fun updateProfileImageUri(uri: Uri) {
         _profileImageUri.update { uri.toString() }
     }
 
-    @SuppressLint("Range", "Recycle")
-    fun signUp(
-        provider: String,
-        email: String,
-        providerId: String,
-        isPrivacyPolicyAgreed: Boolean,
-        isMarketingPolicyAgreed: Boolean,
-        isLocationPolicyAgreed: Boolean,
-        moveToTypeTestingScreen: () -> Unit,
-    ) {
-        if (_inputNickname.value.length > 8 || _inputNickname.value.isEmpty()) return
-
-        var locale = "ENGLISH"
-        getLanguageUseCase()
-            .onEach {
-                locale = when (it) {
-                    "en" -> "ENGLISH"
-                    "zh" -> "CHINESE"
-                    "ms" -> "MALAYSIA"
-                    "ko" -> "KOREAN"
-                    else -> "ENGLISH"
-                }
-            }
-            .catch { LogUtil.e("flow Error", "getLanguageUseCase") }
-            .launchIn(viewModelScope)
+    @SuppressLint("Recycle", "Range")
+    fun updateProfile(moveToBackScreen: () -> Unit) {
+        val requestData = UpdateUserProfileRequest(
+            nickname = _inputNickname.value,
+            description = _inputIntroduction.value
+        )
 
         var imageFile: File? = null
         if (_profileImageUri.value?.contains("content") == true) {
@@ -93,29 +72,13 @@ class SignUpViewModel @Inject constructor(
             imageFile = path?.let { File(it) }
         }
 
-        val requestData = SignUpRequest(
-            consentItems = listOf(
-                ConsentItem("TERMS_OF_USE", isPrivacyPolicyAgreed),
-                ConsentItem("MARKETING", isMarketingPolicyAgreed),
-                ConsentItem("LOCATION_SERVICE", isLocationPolicyAgreed)
-            ),
-            email = email,
-            provider = provider,
-            providerId = providerId,
-            locale = locale,
-            nickname = _inputNickname.value
-        )
-
-        signUpUseCase(requestData, imageFile)
+        updateProfileUseCase(requestData, imageFile)
             .onEach { networkResult ->
                 networkResult.onSuccess { code, data ->
                     data?.let {
-                        saveAccessTokenUseCase(it.data.accessToken ?: "")
-                        saveRefreshTokenUseCase(it.data.refreshToken ?: "")
-                        UserData.nickname = _inputNickname.value
-                        UserData.provider = provider
-                        moveToTypeTestingScreen()
+
                     }
+                    moveToBackScreen()
                 }.onError { code, message ->
                     when (code) {
                         409 -> {
@@ -126,7 +89,7 @@ class SignUpViewModel @Inject constructor(
 
                 }
             }
-            .catch { LogUtil.e("flow Error", "signUpUseCase") }
+            .catch { LogUtil.e("flow Error", "updateProfileUseCase") }
             .launchIn(viewModelScope)
     }
 }

@@ -1,6 +1,7 @@
 package com.jeju.nanaland.domain.repository
 
 import com.jeju.nanaland.domain.request.member.UpdateLanguageRequest
+import com.jeju.nanaland.domain.request.member.UpdatePolicyAgreementRequest
 import com.jeju.nanaland.domain.request.member.UpdateUserProfileRequest
 import com.jeju.nanaland.domain.request.member.UpdateUserTypeRequest
 import com.jeju.nanaland.domain.request.member.WithdrawalRequest
@@ -8,6 +9,7 @@ import com.jeju.nanaland.domain.response.member.GetRecommendedPostResponse
 import com.jeju.nanaland.domain.response.member.GetUserProfileResponse
 import com.jeju.nanaland.domain.response.member.SignOutResponse
 import com.jeju.nanaland.domain.response.member.UpdateLanguageResponse
+import com.jeju.nanaland.domain.response.member.UpdatePolicyAgreementResponse
 import com.jeju.nanaland.domain.response.member.UpdateUserProfileResponse
 import com.jeju.nanaland.domain.response.member.UpdateUserTypeResponse
 import com.jeju.nanaland.domain.response.member.WithdrawalResponse
@@ -20,6 +22,9 @@ interface MemberRepository {
 
     // 유저 타입에 따른 추천 게시물 2개 반환
     suspend fun getRecommendedPost(): NetworkResult<GetRecommendedPostResponse>
+
+    // 랜덤 추천 게시물 2개 반환
+    suspend fun getRandomRecommendedPost(): NetworkResult<GetRecommendedPostResponse>
 
     // 테스트 결과에 따른 유저 타입 갱신
     suspend fun updateUserType(
@@ -44,4 +49,9 @@ interface MemberRepository {
     suspend fun updateLanguage(
         data: UpdateLanguageRequest
     ): NetworkResult<UpdateLanguageResponse>
+
+    // 이용약관 동의 여부 수정
+    suspend fun updatePolicyAgreement(
+        data: UpdatePolicyAgreementRequest
+    ): NetworkResult<UpdatePolicyAgreementResponse>
 }

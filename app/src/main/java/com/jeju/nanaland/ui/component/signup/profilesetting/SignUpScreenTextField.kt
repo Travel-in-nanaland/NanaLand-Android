@@ -23,7 +23,7 @@ import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.jeju.nanaland.R
-import com.jeju.nanaland.globalvalue.type.SignUpNicknameState
+import com.jeju.nanaland.globalvalue.type.InputNicknameState
 import com.jeju.nanaland.ui.component.signup.profilesetting.parts.SignUpScreenTextFieldHint
 import com.jeju.nanaland.ui.theme.caption01
 import com.jeju.nanaland.ui.theme.getColor
@@ -32,7 +32,7 @@ import com.jeju.nanaland.ui.theme.getColor
 fun SignUpScreenTextField(
     inputText: String,
     onValueChange: (String) -> Unit,
-    inputState: SignUpNicknameState
+    inputState: InputNicknameState
 ) {
     BasicTextField(
         value = inputText,
@@ -49,7 +49,7 @@ fun SignUpScreenTextField(
                     .border(
                         border = BorderStroke(
                             width = 1.dp,
-                            color = if (inputState == SignUpNicknameState.Idle) getColor().gray02 else getColor().warning
+                            color = if (inputState == InputNicknameState.Idle) getColor().gray02 else getColor().warning
                         ),
                         shape = RoundedCornerShape(12.dp)
                     )
@@ -62,7 +62,7 @@ fun SignUpScreenTextField(
                 }
             }
 
-            if (inputState != SignUpNicknameState.Idle) {
+            if (inputState != InputNicknameState.Idle) {
                 Spacer(Modifier.height(8.dp))
 
                 Row(verticalAlignment = Alignment.CenterVertically) {
@@ -76,7 +76,7 @@ fun SignUpScreenTextField(
                     Spacer(Modifier.width(4.dp))
 
                     Text(
-                        text = if (inputState == SignUpNicknameState.Invalid) "해당 닉네임은 사용할 수 없습니다."
+                        text = if (inputState == InputNicknameState.Invalid) "해당 닉네임은 사용할 수 없습니다."
                                 else "해당 닉네임은 다른 사용자가 사용 중입니다.",
                         color = getColor().warning,
                         style = caption01

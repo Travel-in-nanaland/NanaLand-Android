@@ -58,7 +58,7 @@ fun CustomTopBar(
     ) {
         Box(
             modifier = Modifier
-                .padding(start = 20.dp)
+                .padding(start = 16.dp)
                 .align(Alignment.CenterStart)
                 .clip(RoundedCornerShape(50))
                 .clickableNoEffect { onBackButtonClicked() },

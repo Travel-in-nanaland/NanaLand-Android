@@ -1,78 +1,79 @@
-package com.jeju.nanaland.ui.signup
+package com.jeju.nanaland.ui.profileupdate
 
 import android.net.Uri
 import android.util.Log
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.remember
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.jeju.nanaland.globalvalue.type.InputNicknameState
 import com.jeju.nanaland.ui.component.common.CustomSurface
-import com.jeju.nanaland.ui.component.signup.profilesetting.SignUpScreenBottomButton
+import com.jeju.nanaland.ui.component.common.CustomTopBar
+import com.jeju.nanaland.ui.component.mypage.MyPageScreenIntroductionText
+import com.jeju.nanaland.ui.component.profileupdate.ProfileUpdateScreenBottomButton
+import com.jeju.nanaland.ui.component.profileupdate.ProfileUpdateScreenIntroductionTextField
+import com.jeju.nanaland.ui.component.profileupdate.ProfileUpdateScreenNicknameText
+import com.jeju.nanaland.ui.component.profileupdate.ProfileUpdateScreenProfileContent
 import com.jeju.nanaland.ui.component.signup.profilesetting.SignUpScreenCharacterCount
-import com.jeju.nanaland.ui.component.signup.profilesetting.SignUpScreenGuideLine
-import com.jeju.nanaland.ui.component.signup.profilesetting.SignUpScreenPhotoPreview
 import com.jeju.nanaland.ui.component.signup.profilesetting.SignUpScreenTextField
 import com.jeju.nanaland.util.ui.scrollableVerticalArrangement
 
 @Composable
-fun SignUpScreen(
-    provider: String,
-    email: String,
-    providerId: String,
-    isPrivacyPolicyAgreed: Boolean,
-    isMarketingPolicyAgreed: Boolean,
-    isLocationPolicyAgreed: Boolean,
-    moveToTypeTestingScreen: () -> Unit,
-    viewModel: SignUpViewModel = hiltViewModel()
+fun ProfileUpdateScreen(
+    profileImageUri: String,
+    nickname: String,
+    introduction: String,
+    moveToBackScreen: () -> Unit,
+    viewModel: ProfileUpdateViewModel = hiltViewModel()
 ) {
+    LaunchedEffect(Unit) {
+        viewModel.updateProfileImageUri(Uri.parse(profileImageUri))
+        viewModel.updateInputNickname(nickname)
+        viewModel.updateInputIntroduction(introduction)
+    }
     val inputNickname = viewModel.inputNickname.collectAsState().value
-    val profileImageUri = viewModel.profileImageUri.collectAsState().value
     val inputNicknameState = viewModel.inputNicknameState.collectAsState().value
-    SignUpScreen(
+    val inputIntroduction = viewModel.inputIntroduction.collectAsState().value
+    val profileImageUri = viewModel.profileImageUri.collectAsState().value
+    ProfileUpdateScreen(
         inputNickname = inputNickname,
         updateInputNickname = viewModel::updateInputNickname,
         inputNicknameState = inputNicknameState,
+        inputIntroduction = inputIntroduction,
+        updateInputIntroduction = viewModel::updateInputIntroduction,
         profileImageUri = profileImageUri,
         updateProfileImageUri = viewModel::updateProfileImageUri,
-        signUp = {
-            viewModel.signUp(
-                provider = provider,
-                email = email,
-                providerId = providerId,
-                isPrivacyPolicyAgreed = isPrivacyPolicyAgreed,
-                isMarketingPolicyAgreed = isMarketingPolicyAgreed,
-                isLocationPolicyAgreed = isLocationPolicyAgreed,
-                moveToTypeTestingScreen = moveToTypeTestingScreen
-            )
-        },
+        updateProfile = viewModel::updateProfile,
+        moveToBackScreen = moveToBackScreen,
         isContent = true
     )
 }
 
 @Composable
-private fun SignUpScreen(
+private fun ProfileUpdateScreen(
     inputNickname: String,
     updateInputNickname: (String) -> Unit,
     inputNicknameState: InputNicknameState,
+    inputIntroduction: String,
+    updateInputIntroduction: (String) -> Unit,
     profileImageUri: String?,
     updateProfileImageUri: (Uri) -> Unit,
-    signUp: () -> Unit,
+    updateProfile: (() -> Unit) -> Unit,
+    moveToBackScreen: () -> Unit,
     isContent: Boolean
 ) {
     val takePhotoFromAlbumLauncher =
@@ -85,6 +86,14 @@ private fun SignUpScreen(
         }
 
     CustomSurface {
+        CustomTopBar(
+            title = "프로필 수정",
+            onBackButtonClicked = {
+                moveToBackScreen()
+            }
+        )
+
+        Spacer(Modifier.height(40.dp))
         LazyColumn(
             modifier = Modifier
                 .fillMaxSize()
@@ -93,31 +102,26 @@ private fun SignUpScreen(
         ) {
             item {
                 Column(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(start = 16.dp, end = 16.dp),
-                    horizontalAlignment = Alignment.CenterHorizontally
+                    modifier = Modifier.padding(start = 16.dp, end = 16.dp)
                 ) {
-                    Spacer(Modifier.height(80.dp))
-
-                    SignUpScreenGuideLine()
-
-                    Spacer(Modifier.height(32.dp))
-
-                    SignUpScreenPhotoPreview(imageUri = profileImageUri) {
-                        takePhotoFromAlbumLauncher.launch(
-                            PickVisualMediaRequest(
-                                ActivityResultContracts.PickVisualMedia.ImageOnly
+                    ProfileUpdateScreenProfileContent(
+                        imageUri = profileImageUri,
+                        onClick = {
+                            takePhotoFromAlbumLauncher.launch(
+                                PickVisualMediaRequest(
+                                    ActivityResultContracts.PickVisualMedia.ImageOnly
+                                )
                             )
-                        )
-                    }
+                        }
+                    )
 
                     Spacer(Modifier.height(48.dp))
 
-                    Box(
-                        modifier = Modifier.fillMaxWidth(),
-                        contentAlignment = Alignment.CenterEnd
-                    ) {
+                    Row {
+                        ProfileUpdateScreenNicknameText()
+
+                        Spacer(Modifier.weight(1f))
+
                         SignUpScreenCharacterCount(count = inputNickname.length)
                     }
 
@@ -129,14 +133,26 @@ private fun SignUpScreen(
                         inputState = inputNicknameState
                     )
 
+                    Spacer(Modifier.height(80.dp))
+
+                    MyPageScreenIntroductionText()
+
+                    Spacer(Modifier.height(4.dp))
+
+                    ProfileUpdateScreenIntroductionTextField(
+                        inputText = inputIntroduction,
+                        onValueChange = updateInputIntroduction
+                    )
+
                     Spacer(Modifier.height(40.dp))
                 }
             }
-
             item {
-                SignUpScreenBottomButton(
+                ProfileUpdateScreenBottomButton(
                     isActivated = inputNickname.isNotEmpty() && inputNicknameState == InputNicknameState.Idle,
-                    onClick = signUp
+                    onClick = {
+                        updateProfile(moveToBackScreen)
+                    }
                 )
 
                 Spacer(Modifier.height(20.dp))

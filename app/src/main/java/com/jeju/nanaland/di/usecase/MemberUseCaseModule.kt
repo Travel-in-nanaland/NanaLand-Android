@@ -1,10 +1,13 @@
 package com.jeju.nanaland.di.usecase
 
 import com.jeju.nanaland.domain.repository.MemberRepository
+import com.jeju.nanaland.domain.usecase.member.GetRandomRecommendedPostUseCase
 import com.jeju.nanaland.domain.usecase.member.GetRecommendedPostUseCase
 import com.jeju.nanaland.domain.usecase.member.GetUserProfileUseCase
 import com.jeju.nanaland.domain.usecase.member.SignOutUseCase
 import com.jeju.nanaland.domain.usecase.member.UpdateLanguageUseCase
+import com.jeju.nanaland.domain.usecase.member.UpdatePolicyAgreementUseCase
+import com.jeju.nanaland.domain.usecase.member.UpdateUserProfileUseCase
 import com.jeju.nanaland.domain.usecase.member.UpdateUserTypeUseCase
 import com.jeju.nanaland.domain.usecase.member.WithdrawUseCase
 import dagger.Module
@@ -35,10 +38,26 @@ object MemberUseCaseModule {
 
     @Singleton
     @Provides
+    fun provideGetRandomRecommendedPostUseCase(
+        repository: MemberRepository
+    ): GetRandomRecommendedPostUseCase {
+        return GetRandomRecommendedPostUseCase(repository)
+    }
+
+    @Singleton
+    @Provides
     fun provideUpdateUserTypeUseCase(
         repository: MemberRepository
     ): UpdateUserTypeUseCase {
         return UpdateUserTypeUseCase(repository)
+    }
+
+    @Singleton
+    @Provides
+    fun provideUpdateUserProfileUseCase(
+        repository: MemberRepository
+    ): UpdateUserProfileUseCase {
+        return UpdateUserProfileUseCase(repository)
     }
 
     @Singleton
@@ -63,5 +82,13 @@ object MemberUseCaseModule {
         repository: MemberRepository
     ): UpdateLanguageUseCase {
         return UpdateLanguageUseCase(repository)
+    }
+
+    @Singleton
+    @Provides
+    fun provideUpdatePolicyAgreement(
+        repository: MemberRepository
+    ): UpdatePolicyAgreementUseCase {
+        return UpdatePolicyAgreementUseCase(repository)
     }
 }

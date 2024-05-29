@@ -1,5 +1,5 @@
 package com.jeju.nanaland.globalvalue.type
 
-enum class SignUpNicknameState {
+enum class InputNicknameState {
     Idle, Invalid, Duplicated
 }

@@ -21,7 +21,7 @@ fun SignUpScreenPhotoPreview(
             .clip(RoundedCornerShape(50))
             .clickableNoEffect { onClick() },
         imageModel = {
-            imageUri ?: R.drawable.photo_preview
+            imageUri ?: R.drawable.img_photo_preview
         }
     )
 }

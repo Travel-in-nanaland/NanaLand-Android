@@ -14,7 +14,8 @@ import com.jeju.nanaland.globalvalue.constant.ROUTE_NANAPICK_CONTENT
 import com.jeju.nanaland.globalvalue.constant.ROUTE_NANAPICK_LIST
 import com.jeju.nanaland.globalvalue.constant.ROUTE_NATURE_CONTENT
 import com.jeju.nanaland.globalvalue.constant.ROUTE_NATURE_LIST
-import com.jeju.nanaland.globalvalue.constant.ROUTE_PROFILE_MODIFICATION
+import com.jeju.nanaland.globalvalue.constant.ROUTE_PROFILE_UPDATE
+import com.jeju.nanaland.globalvalue.constant.ROUTE_SETTINGS
 import com.jeju.nanaland.globalvalue.type.CategoryType
 import com.jeju.nanaland.ui.main.MainScreen
 import com.jeju.nanaland.util.navigation.navigate
@@ -40,6 +41,14 @@ fun NavGraphBuilder.mainScreen(navController: NavController) = composable(route 
         moveToFestivalListScreen = { navController.navigate(ROUTE_FESTIVAL_LIST) { launchSingleTop = true } },
         moveToMarketListScreen = { navController.navigate(ROUTE_MARKET_LIST) { launchSingleTop = true } },
         moveToExperienceListScreen = { /* MVP2 구현 예정 */ },
-        moveToProfileModificationScreen = { navController.navigate(ROUTE_PROFILE_MODIFICATION) }
+        moveToSettingsScreen = { navController.navigate(ROUTE_SETTINGS) { launchSingleTop = true } },
+        moveToProfileModificationScreen = { profileImageUri, nickname, introduction ->
+            val bundle = bundleOf(
+                "profileImageUri" to profileImageUri,
+                "nickname" to nickname,
+                "introduction" to introduction
+            )
+            navController.navigate(ROUTE_PROFILE_UPDATE, bundle)
+        }
     )
 }

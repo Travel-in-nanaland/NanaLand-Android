@@ -22,9 +22,12 @@ import com.jeju.nanaland.ui.navigation.nanaPickContentScreen
 import com.jeju.nanaland.ui.navigation.nanaPickListScreen
 import com.jeju.nanaland.ui.navigation.natureContentScreen
 import com.jeju.nanaland.ui.navigation.natureListScreen
+import com.jeju.nanaland.ui.navigation.permissionCheckingRoute
 import com.jeju.nanaland.ui.navigation.policyAgreeScreen
+import com.jeju.nanaland.ui.navigation.policySettingScreen
 import com.jeju.nanaland.ui.navigation.privacyPolicyDetailsScreen
-import com.jeju.nanaland.ui.navigation.profileModificationScreen
+import com.jeju.nanaland.ui.navigation.profileUpdateScreen
+import com.jeju.nanaland.ui.navigation.settingsScreen
 import com.jeju.nanaland.ui.navigation.signInScreen
 import com.jeju.nanaland.ui.navigation.signUpScreen
 import com.jeju.nanaland.ui.navigation.splashScreen
@@ -116,6 +119,15 @@ fun MainNavigation(
         informationModificationProposalScreen(navController)
 
         // 프로필 수정 화면
-        profileModificationScreen(navController)
+        profileUpdateScreen(navController)
+
+        // 설정 화면
+        settingsScreen(navController)
+
+        // 약관 및 정책 설정 화면
+        policySettingScreen(navController)
+
+        // 접근 권한 안내 화면
+        permissionCheckingRoute(navController)
     }
 }

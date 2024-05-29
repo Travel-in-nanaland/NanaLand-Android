@@ -36,7 +36,8 @@ import com.jeju.nanaland.util.ui.UiState
 
 @Composable
 fun MyPageScreen(
-    moveToProfileModificationScreen: () -> Unit,
+    moveToSettingsScreen: () -> Unit,
+    moveToProfileModificationScreen: (String?, String?, String?) -> Unit,
     viewModel: MyPageViewModel = hiltViewModel()
 ) {
     val userProfile = viewModel.userProfile.collectAsState().value
@@ -45,6 +46,7 @@ fun MyPageScreen(
     }
     MyPageScreen(
         userProfile = userProfile,
+        moveToSettingsScreen = moveToSettingsScreen,
         moveToProfileModificationScreen = moveToProfileModificationScreen,
         isContent = true
     )
@@ -53,14 +55,15 @@ fun MyPageScreen(
 @Composable
 private fun MyPageScreen(
     userProfile: UiState<UserProfile>,
-    moveToProfileModificationScreen: () -> Unit,
+    moveToSettingsScreen: () -> Unit,
+    moveToProfileModificationScreen: (String?, String?, String?) -> Unit,
     isContent: Boolean
 ) {
     val colorMain10 = getColor().main10
     val colorWhite = getColor().white
     val density = LocalDensity.current.density
     MyPageScreenTopBar {
-
+        moveToSettingsScreen()
     }
 
     Column(
@@ -131,13 +134,17 @@ private fun MyPageScreen(
                     MyPageScreenIntroductionContent(text = userProfile.data.description ?: "")
 
                     Spacer(Modifier.weight(1f))
-
-                    MyPageScreenBottomButton {
-                        moveToProfileModificationScreen()
-                    }
-
-                    Spacer(Modifier.height(20.dp))
                 }
+
+                MyPageScreenBottomButton {
+                    moveToProfileModificationScreen(
+                        userProfile.data.profileImageUrl,
+                        userProfile.data.nickname,
+                        userProfile.data.description
+                    )
+                }
+
+                Spacer(Modifier.height(20.dp))
             }
             is UiState.Failure -> {}
         }

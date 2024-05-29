@@ -56,7 +56,8 @@ fun MainScreen(
     moveToFestivalListScreen: () -> Unit,
     moveToMarketListScreen: () -> Unit,
     moveToExperienceListScreen: () -> Unit,
-    moveToProfileModificationScreen: () -> Unit,
+    moveToSettingsScreen: () -> Unit,
+    moveToProfileModificationScreen: (String?, String?, String?) -> Unit,
     viewModel: MainViewModel = hiltViewModel(),
     homeViewModel: HomeViewModel = hiltViewModel(),
     searchViewModel: SearchViewModel = hiltViewModel(),
@@ -82,6 +83,7 @@ fun MainScreen(
         moveToFestivalListScreen = moveToFestivalListScreen,
         moveToMarketListScreen = moveToMarketListScreen,
         moveToExperienceListScreen = moveToExperienceListScreen,
+        moveToSettingsScreen = moveToSettingsScreen,
         moveToProfileModificationScreen = moveToProfileModificationScreen,
         isContent = true
     )
@@ -101,7 +103,8 @@ private fun MainScreen(
     moveToFestivalListScreen: () -> Unit,
     moveToMarketListScreen: () -> Unit,
     moveToExperienceListScreen: () -> Unit,
-    moveToProfileModificationScreen: () -> Unit,
+    moveToSettingsScreen: () -> Unit,
+    moveToProfileModificationScreen: (String?, String?, String?) -> Unit,
     isContent: Boolean
 ) {
     CustomSurface { isImeKeyboardShowing ->
@@ -146,6 +149,7 @@ private fun MainScreen(
                     }
                     MainScreenViewType.MyPage -> {
                         MyPageScreen(
+                            moveToSettingsScreen = moveToSettingsScreen,
                             moveToProfileModificationScreen = moveToProfileModificationScreen
                         )
                     }
