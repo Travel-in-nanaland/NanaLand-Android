@@ -20,6 +20,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.jeju.nanaland.domain.entity.member.UserProfile
+import com.jeju.nanaland.globalvalue.type.MainScreenViewType
+import com.jeju.nanaland.globalvalue.userdata.UserData
 import com.jeju.nanaland.ui.component.common.TagChip2
 import com.jeju.nanaland.ui.component.mypage.MyPageScreenBottomButton
 import com.jeju.nanaland.ui.component.mypage.MyPageScreenDivider
@@ -31,13 +33,17 @@ import com.jeju.nanaland.ui.component.mypage.MyPageScreenTestAgainContent
 import com.jeju.nanaland.ui.component.mypage.MyPageScreenTopBar
 import com.jeju.nanaland.ui.component.mypage.MyPageScreenTravelType
 import com.jeju.nanaland.ui.component.mypage.MyPageScreenTravelTypeText
+import com.jeju.nanaland.ui.component.nonmember.NonMemberGuideDialog
 import com.jeju.nanaland.ui.theme.getColor
 import com.jeju.nanaland.util.ui.UiState
 
 @Composable
 fun MyPageScreen(
+    prevViewType: MainScreenViewType,
+    updateMainScreenViewType: (MainScreenViewType) -> Unit,
     moveToSettingsScreen: () -> Unit,
     moveToProfileModificationScreen: (String?, String?, String?) -> Unit,
+    moveToSignInScreen: () -> Unit,
     viewModel: MyPageViewModel = hiltViewModel()
 ) {
     val userProfile = viewModel.userProfile.collectAsState().value
@@ -45,18 +51,24 @@ fun MyPageScreen(
         viewModel.getUserProfile()
     }
     MyPageScreen(
+        prevViewType = prevViewType,
+        updateMainScreenViewType = updateMainScreenViewType,
         userProfile = userProfile,
         moveToSettingsScreen = moveToSettingsScreen,
         moveToProfileModificationScreen = moveToProfileModificationScreen,
+        moveToSignInScreen = moveToSignInScreen,
         isContent = true
     )
 }
 
 @Composable
 private fun MyPageScreen(
+    prevViewType: MainScreenViewType,
+    updateMainScreenViewType: (MainScreenViewType) -> Unit,
     userProfile: UiState<UserProfile>,
     moveToSettingsScreen: () -> Unit,
     moveToProfileModificationScreen: (String?, String?, String?) -> Unit,
+    moveToSignInScreen: () -> Unit,
     isContent: Boolean
 ) {
     val colorMain10 = getColor().main10
@@ -148,6 +160,14 @@ private fun MyPageScreen(
             }
             is UiState.Failure -> {}
         }
+    }
+
+
+    if (UserData.provider == "GUEST") {
+        NonMemberGuideDialog(
+            onCloseClick = { updateMainScreenViewType(prevViewType) },
+            moveToSignInScreen = moveToSignInScreen
+        )
     }
 }
 

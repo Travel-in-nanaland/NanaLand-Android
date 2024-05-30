@@ -22,6 +22,7 @@ fun MarketThumbnailList(
     thumbnailList: UiState<List<MarketThumbnailData>>,
     toggleFavorite: (Long) -> Unit,
     moveToMarketContentScreen: (Long) -> Unit,
+    moveToSignInScreen: () -> Unit,
 ) {
     when (thumbnailList) {
         is UiState.Loading -> {}
@@ -44,7 +45,8 @@ fun MarketThumbnailList(
                             title = item.title,
                             tag = item.addressTag,
                             onFavoriteButtonClick = { toggleFavorite(item.id) },
-                            onClick = { moveToMarketContentScreen(item.id) }
+                            onClick = { moveToMarketContentScreen(item.id) },
+                            moveToSignInScreen = moveToSignInScreen,
                         )
                     }
                 }

@@ -36,6 +36,7 @@ fun NatureContentScreen(
     updatePrevScreenListFavorite: (Long, Boolean) -> Unit,
     moveToBackScreen: () -> Unit,
     moveToInfoModificationProposalScreen: () -> Unit,
+    moveToSignInScreen: () -> Unit,
     viewModel: NatureContentViewModel = hiltViewModel()
 ) {
     LaunchedEffect(Unit) {
@@ -48,6 +49,7 @@ fun NatureContentScreen(
         updatePrevScreenListFavorite = updatePrevScreenListFavorite,
         moveToBackScreen = moveToBackScreen,
         moveToInfoModificationProposalScreen = moveToInfoModificationProposalScreen,
+        moveToSignInScreen = moveToSignInScreen,
         isContent = true
     )
 }
@@ -59,6 +61,7 @@ private fun NatureContentScreen(
     updatePrevScreenListFavorite: (Long, Boolean) -> Unit,
     moveToBackScreen: () -> Unit,
     moveToInfoModificationProposalScreen: () -> Unit,
+    moveToSignInScreen: () -> Unit,
     isContent: Boolean
 ) {
     val scrollState = rememberScrollState()
@@ -84,7 +87,8 @@ private fun NatureContentScreen(
                                     title = natureContent.data.title,
                                     content = natureContent.data.content,
                                     onFavoriteButtonClicked = { toggleFavorite(natureContent.data.id, updatePrevScreenListFavorite) },
-                                    onShareButtonClicked = {}
+                                    onShareButtonClicked = {},
+                                    moveToSignInScreen = moveToSignInScreen,
                                 )
 
                                 Spacer(Modifier.height(24.dp))

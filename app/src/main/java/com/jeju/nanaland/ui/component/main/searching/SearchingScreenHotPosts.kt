@@ -19,6 +19,7 @@ fun SearchingScreenHotPosts(
     hotPosts: UiState<List<HotPostThumbnailData>>,
     onFavoriteButtonClick: (Long, String?) -> Unit,
     onPostClick: (Long, String?, Boolean) -> Unit,
+    moveToSignInScreen: () -> Unit,
 ) {
     when (hotPosts) {
         is UiState.Loading -> {}
@@ -32,7 +33,8 @@ fun SearchingScreenHotPosts(
                             isFavorite = item.favorite,
                             title = item.title,
                             onFavoriteButtonClick = { onFavoriteButtonClick(item.id, item.category) },
-                            onClick = { onPostClick(item.id, item.category, false) }
+                            onClick = { onPostClick(item.id, item.category, false) },
+                            moveToSignInScreen = moveToSignInScreen,
                         )
 
                         Spacer(Modifier.height(16.dp))

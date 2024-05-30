@@ -23,7 +23,7 @@ fun HomeScreenTopBanner(
     Box {
         val pagerState = rememberPagerState(
             initialPage = 200,
-            pageCount = {1000}
+            pageCount = {100000}
         )
         LaunchedEffect(Unit) {
             pagerState.scrollToPage(200)

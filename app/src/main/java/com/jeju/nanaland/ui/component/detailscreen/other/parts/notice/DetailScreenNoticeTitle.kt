@@ -3,6 +3,7 @@ package com.jeju.nanaland.ui.component.detailscreen.other.parts.notice
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -23,6 +24,7 @@ fun DetailScreenNoticeTitle(text: String?) {
         verticalAlignment = Alignment.CenterVertically
     ) {
         Image(
+            modifier = Modifier.size(20.dp),
             painter = painterResource(id = R.drawable.ic_warning_outlined),
             contentDescription = null,
             colorFilter = ColorFilter.tint(getColor().main)

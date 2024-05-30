@@ -21,7 +21,8 @@ fun FestivalThumbnailList(
     listState: LazyGridState,
     thumbnailList: UiState<List<FestivalThumbnailData>>,
     toggleFavorite: (Long) -> Unit,
-    moveToFestivalContentScreen: (Long) -> Unit
+    moveToFestivalContentScreen: (Long) -> Unit,
+    moveToSignInScreen: () -> Unit,
 ) {
     when (thumbnailList) {
         is UiState.Loading -> {}
@@ -45,7 +46,8 @@ fun FestivalThumbnailList(
                             subTitle = item.period,
                             tag = item.addressTag,
                             onFavoriteButtonClick = { toggleFavorite(item.id) },
-                            onClick = { moveToFestivalContentScreen(item.id) }
+                            onClick = { moveToFestivalContentScreen(item.id) },
+                            moveToSignInScreen = moveToSignInScreen,
                         )
                     }
                 }

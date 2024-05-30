@@ -24,7 +24,8 @@ fun SearchThumbnail(
     isFavorite: Boolean,
     title: String?,
     onFavoriteButtonClick: () -> Unit,
-    onClick: () -> Unit
+    onClick: () -> Unit,
+    moveToSignInScreen: () -> Unit,
 ) {
     Column(
         modifier = Modifier
@@ -41,7 +42,8 @@ fun SearchThumbnail(
             ) {
                 ThumbnailFavoriteButton(
                     isFavorite = isFavorite,
-                    onClick = onFavoriteButtonClick
+                    onClick = onFavoriteButtonClick,
+                    moveToSignInScreen = moveToSignInScreen,
                 )
             }
         }
@@ -61,7 +63,8 @@ private fun SearchThumbnailPreview() {
             isFavorite = false,
             title = "title",
             onFavoriteButtonClick = {},
-            onClick = {}
+            onClick = {},
+            moveToSignInScreen = {}
         )
     }
 }

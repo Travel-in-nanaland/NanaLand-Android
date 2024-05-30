@@ -40,6 +40,7 @@ class TokenInterceptor @Inject constructor(
                     val request = chain.request().newBuilder().header("Authorization", "Bearer $accessToken").build()
                     response = chain.proceed(request)
                     if (response.code == 401) {
+                        response.close()
                         val refreshToken = getRefreshTokenUseCase().first()
                         if (refreshToken.isNullOrEmpty()) {
                             response = errorResponse(chain.request())

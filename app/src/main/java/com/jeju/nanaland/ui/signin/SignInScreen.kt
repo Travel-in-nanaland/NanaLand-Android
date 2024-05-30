@@ -1,5 +1,7 @@
 package com.jeju.nanaland.ui.signin
 
+import android.annotation.SuppressLint
+import android.provider.Settings
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -38,15 +40,18 @@ fun SignInScreen(
 ) {
     SignInScreen(
         signIn = viewModel::signIn,
+        nonMemberSignUp = viewModel::nonMemberSignUp,
         moveToMainScreen = moveToMainScreen,
         moveToSignUpScreen = moveToSignUpScreen,
         isContent = true
     )
 }
 
+@SuppressLint("HardwareIds")
 @Composable
 private fun SignInScreen(
     signIn: (String, String, () -> Unit, () -> Unit) -> Unit,
+    nonMemberSignUp: (String, () -> Unit) -> Unit,
     moveToMainScreen: () -> Unit,
     moveToSignUpScreen: (String, String, String) -> Unit,
     isContent: Boolean
@@ -129,7 +134,10 @@ private fun SignInScreen(
             Spacer(Modifier.height(24.dp))
 
             SignInScreenGuestModeText {
-
+                nonMemberSignUp(
+                    Settings.Secure.getString(context.contentResolver, Settings.Secure.ANDROID_ID),
+                    moveToMainScreen
+                )
             }
         }
     }

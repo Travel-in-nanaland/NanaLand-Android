@@ -26,6 +26,7 @@ import com.skydoves.landscapist.glide.GlideImage
 fun NanaPickContentTopBanner(
     nanaPickContent: UiState.Success<NanaPickContentData>,
     toggleFavorite: () -> Unit,
+    moveToSignInScreen: () -> Unit,
 ) {
     Box(
         modifier = Modifier
@@ -65,7 +66,8 @@ fun NanaPickContentTopBanner(
                 .align(Alignment.TopEnd)
                 .padding(top = 8.dp, end = 56.dp),
             isFavorite = nanaPickContent.data.favorite,
-            onClick = { toggleFavorite() }
+            onClick = { toggleFavorite() },
+            moveToSignInScreen = moveToSignInScreen,
         )
     }
 }

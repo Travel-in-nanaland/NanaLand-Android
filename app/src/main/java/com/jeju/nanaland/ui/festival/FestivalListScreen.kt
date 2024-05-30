@@ -48,6 +48,7 @@ import java.util.Calendar
 fun FestivalListScreen(
     moveToBackScreen: () -> Unit,
     moveToFestivalContentScreen: (Long) -> Unit,
+    moveToSignInScreen: () -> Unit,
     viewModel: FestivalListViewModel = hiltViewModel()
 ) {
     val selectedCategoryType = viewModel.selectedCategoryType.collectAsState().value
@@ -75,6 +76,7 @@ fun FestivalListScreen(
         clearFestivalList = viewModel::clearFestivalList,
         moveToBackScreen = moveToBackScreen,
         moveToFestivalContentScreen = moveToFestivalContentScreen,
+        moveToSignInScreen = moveToSignInScreen,
         isContent = true
     )
 }
@@ -99,6 +101,7 @@ private fun FestivalListScreen(
     clearFestivalList: () -> Unit,
     moveToBackScreen: () -> Unit,
     moveToFestivalContentScreen: (Long) -> Unit,
+    moveToSignInScreen: () -> Unit,
     isContent: Boolean
 ) {
     val coroutineScope = rememberCoroutineScope()
@@ -182,7 +185,8 @@ private fun FestivalListScreen(
                     listState = lazyGridState,
                     thumbnailList = festivalThumbnailList,
                     toggleFavorite = toggleFavorite,
-                    moveToFestivalContentScreen = moveToFestivalContentScreen
+                    moveToFestivalContentScreen = moveToFestivalContentScreen,
+                    moveToSignInScreen = moveToSignInScreen,
                 )
             }
 

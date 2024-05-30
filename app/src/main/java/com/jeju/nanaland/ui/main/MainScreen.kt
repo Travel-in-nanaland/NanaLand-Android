@@ -58,15 +58,18 @@ fun MainScreen(
     moveToExperienceListScreen: () -> Unit,
     moveToSettingsScreen: () -> Unit,
     moveToProfileModificationScreen: (String?, String?, String?) -> Unit,
+    moveToSignInScreen: () -> Unit,
     viewModel: MainViewModel = hiltViewModel(),
     homeViewModel: HomeViewModel = hiltViewModel(),
     searchViewModel: SearchViewModel = hiltViewModel(),
     favoriteViewModel: FavoriteViewModel = hiltViewModel()
 ) {
     val viewType = viewModel.viewType.collectAsState().value
+    val prevViewType = viewModel.prevViewType.collectAsState().value
     val navigationItemContentList = viewModel.getNavigationItemContentList()
     MainScreen(
         viewType = viewType,
+        prevViewType = prevViewType,
         navigationItemContentList = navigationItemContentList,
         updateMainScreenViewType = viewModel::updateViewType,
         initHomeScreen = {
@@ -85,6 +88,7 @@ fun MainScreen(
         moveToExperienceListScreen = moveToExperienceListScreen,
         moveToSettingsScreen = moveToSettingsScreen,
         moveToProfileModificationScreen = moveToProfileModificationScreen,
+        moveToSignInScreen = moveToSignInScreen,
         isContent = true
     )
 }
@@ -93,6 +97,7 @@ fun MainScreen(
 @Composable
 private fun MainScreen(
     viewType: MainScreenViewType,
+    prevViewType: MainScreenViewType,
     navigationItemContentList: List<MainViewModel.NavigationItemContent>,
     updateMainScreenViewType: (MainScreenViewType) -> Unit,
     initHomeScreen: () -> Unit,
@@ -105,6 +110,7 @@ private fun MainScreen(
     moveToExperienceListScreen: () -> Unit,
     moveToSettingsScreen: () -> Unit,
     moveToProfileModificationScreen: (String?, String?, String?) -> Unit,
+    moveToSignInScreen: () -> Unit,
     isContent: Boolean
 ) {
     CustomSurface { isImeKeyboardShowing ->
@@ -137,11 +143,15 @@ private fun MainScreen(
                             moveToFestivalListScreen = moveToFestivalListScreen,
                             moveToMarketListScreen = moveToMarketListScreen,
                             moveToExperienceListScreen = moveToExperienceListScreen,
+                            moveToSignInScreen = moveToSignInScreen,
                         )
                     }
                     MainScreenViewType.Favorite -> {
                         FavoriteScreen(
+                            prevViewType = prevViewType,
+                            updateMainScreenViewType = updateMainScreenViewType,
                             moveToCategoryContentScreen = moveToCategoryContentScreen,
+                            moveToSignInScreen = moveToSignInScreen,
                         )
                     }
                     MainScreenViewType.JejuStory -> {
@@ -149,8 +159,11 @@ private fun MainScreen(
                     }
                     MainScreenViewType.MyPage -> {
                         MyPageScreen(
+                            prevViewType = prevViewType,
+                            updateMainScreenViewType = updateMainScreenViewType,
                             moveToSettingsScreen = moveToSettingsScreen,
-                            moveToProfileModificationScreen = moveToProfileModificationScreen
+                            moveToProfileModificationScreen = moveToProfileModificationScreen,
+                            moveToSignInScreen = moveToSignInScreen,
                         )
                     }
                 }

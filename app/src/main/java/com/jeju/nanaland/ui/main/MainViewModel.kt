@@ -12,8 +12,12 @@ import javax.inject.Inject
 
 @HiltViewModel
 class MainViewModel @Inject constructor() : ViewModel() {
+
     private val _viewType = MutableStateFlow(MainScreenViewType.Home)
     val viewType = _viewType.asStateFlow()
+    private val _prevViewType = MutableStateFlow(MainScreenViewType.Home)
+    val prevViewType = _prevViewType.asStateFlow()
+
     private val navigationItemContentList = listOf(
         NavigationItemContent(
             viewType = MainScreenViewType.Home,
@@ -46,6 +50,7 @@ class MainViewModel @Inject constructor() : ViewModel() {
     }
 
     fun updateViewType(viewType: MainScreenViewType) {
+        _prevViewType.update { _viewType.value }
         _viewType.update { viewType }
     }
 

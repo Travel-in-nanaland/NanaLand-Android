@@ -35,6 +35,7 @@ fun FestivalContentScreen(
     updatePrevScreenListFavorite: (Long, Boolean) -> Unit,
     moveToBackScreen: () -> Unit,
     moveToInfoModificationProposalScreen: () -> Unit,
+    moveToSignInScreen: () -> Unit,
     viewModel: FestivalContentViewModel = hiltViewModel()
 ) {
     LaunchedEffect(Unit) {
@@ -47,6 +48,7 @@ fun FestivalContentScreen(
         updatePrevScreenListFavorite = updatePrevScreenListFavorite,
         moveToBackScreen = moveToBackScreen,
         moveToInfoModificationProposalScreen = moveToInfoModificationProposalScreen,
+        moveToSignInScreen = moveToSignInScreen,
         isContent = true
     )
 }
@@ -58,6 +60,7 @@ private fun FestivalContentScreen(
     updatePrevScreenListFavorite: (Long, Boolean) -> Unit,
     moveToBackScreen: () -> Unit,
     moveToInfoModificationProposalScreen: () -> Unit,
+    moveToSignInScreen: () -> Unit,
     isContent: Boolean
 ) {
     val scrollState = rememberScrollState()
@@ -83,7 +86,8 @@ private fun FestivalContentScreen(
                                     title = festivalContent.data.title,
                                     content = festivalContent.data.content,
                                     onFavoriteButtonClicked = { toggleFavorite(festivalContent.data.id, updatePrevScreenListFavorite) },
-                                    onShareButtonClicked = {}
+                                    onShareButtonClicked = {},
+                                    moveToSignInScreen = moveToSignInScreen,
                                 )
 
                                 Spacer(Modifier.height(24.dp))

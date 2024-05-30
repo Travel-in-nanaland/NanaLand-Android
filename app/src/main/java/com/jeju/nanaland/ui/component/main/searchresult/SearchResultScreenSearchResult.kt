@@ -29,6 +29,7 @@ fun SearchResultScreenSearchResult(
     toggleAllSearchResultFavorite: (Long, String?) -> Unit,
     toggleSearchResultFavorite: (Long, String?) -> Unit,
     onPostClick: (Long, String?, Boolean) -> Unit,
+    moveToSignInScreen: () -> Unit,
 ) {
     if (selectedCategory == SearchCategoryType.All) {
         when (allSearchResultList) {
@@ -48,7 +49,8 @@ fun SearchResultScreenSearchResult(
                                 getSearchResult = getSearchResult,
                                 updateSearchCategoryType = updateSearchCategoryType,
                                 onFavoriteButtonClick = toggleAllSearchResultFavorite,
-                                onPostClick = onPostClick
+                                onPostClick = onPostClick,
+                                moveToSignInScreen = moveToSignInScreen,
                             )
 
                             Spacer(Modifier.height(40.dp))
@@ -82,7 +84,8 @@ fun SearchResultScreenSearchResult(
                         categorizedSearchResultList = categorizedSearchResultList.data,
                         getSearchResult = getSearchResult,
                         onFavoriteButtonClick = toggleSearchResultFavorite,
-                        onPostClick = onPostClick
+                        onPostClick = onPostClick,
+                        moveToSignInScreen = moveToSignInScreen,
                     )
                 }
                 is UiState.Failure -> {}

@@ -113,6 +113,8 @@ private fun PermissionCheckingScreen(
                     content = "선택적 접근권한에 동의하지 않으셨을 경우에, 나나랜드인제주  " +
                             "서비스의 일부 기능을 제한 받으실 수 있는 점 안내드립니다."
                 )
+
+                Spacer(Modifier.height(20.dp))
             }
         }
     }

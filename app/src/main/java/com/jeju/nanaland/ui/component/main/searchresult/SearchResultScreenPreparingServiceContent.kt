@@ -24,7 +24,7 @@ fun SearchResultScreenPreparingServiceContent() {
     ) {
         Image(
             modifier = Modifier.size(48.dp),
-            painter = painterResource(R.drawable.ic_smilingface_outlined),
+            painter = painterResource(R.drawable.img_airplane),
             contentDescription = null,
             colorFilter = ColorFilter.tint(getColor().gray01)
         )

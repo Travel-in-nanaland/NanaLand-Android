@@ -26,7 +26,8 @@ fun NatureThumbnail(
     title: String?,
     tag: String?,
     onFavoriteButtonClick: () -> Unit,
-    onClick: () -> Unit
+    onClick: () -> Unit,
+    moveToSignInScreen: () -> Unit,
 ) {
     Column(
         modifier = Modifier
@@ -43,7 +44,8 @@ fun NatureThumbnail(
             ) {
                 ThumbnailFavoriteButton(
                     isFavorite = isFavorite,
-                    onClick = onFavoriteButtonClick
+                    onClick = onFavoriteButtonClick,
+                    moveToSignInScreen = moveToSignInScreen,
                 )
             }
         }
@@ -68,7 +70,8 @@ private fun NatureThumbnailPreview1() {
             title = "title",
             tag = "tag",
             onFavoriteButtonClick = {},
-            onClick = {}
+            onClick = {},
+            moveToSignInScreen = {}
         )
     }
 }
@@ -83,7 +86,8 @@ private fun NatureThumbnailPreview2() {
             title = "title title title title title title title",
             tag = "tag",
             onFavoriteButtonClick = {},
-            onClick = {}
+            onClick = {},
+            moveToSignInScreen = {}
         )
     }
 }

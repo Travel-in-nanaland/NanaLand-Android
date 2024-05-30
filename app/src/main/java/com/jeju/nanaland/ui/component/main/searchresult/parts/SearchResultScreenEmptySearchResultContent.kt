@@ -25,7 +25,7 @@ fun SearchResultScreenEmptySearchResultContent() {
     ) {
         Image(
             modifier = Modifier.size(48.dp),
-            painter = painterResource(id = R.drawable.ic_orangeface_outlined),
+            painter = painterResource(id = R.drawable.img_mandarine),
             contentDescription = null,
             colorFilter = ColorFilter.tint(getColor().gray01)
         )

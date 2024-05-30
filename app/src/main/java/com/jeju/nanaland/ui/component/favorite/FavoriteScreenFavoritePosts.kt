@@ -23,6 +23,7 @@ fun FavoriteScreenFavoritePosts(
     getFavoriteList: () -> Unit,
     onFavoriteButtonClick: (Long, String?) -> Unit,
     onPostClick: (Long, String?, Boolean) -> Unit,
+    moveToSignInScreen: () -> Unit,
 ) {
     val lazyGridState = rememberLazyGridState()
     val loadMore = remember {
@@ -58,7 +59,8 @@ fun FavoriteScreenFavoritePosts(
                     },
                     onClick = {
                         onPostClick(item.id, item.category, false)
-                    }
+                    },
+                    moveToSignInScreen = moveToSignInScreen,
                 )
             }
         }

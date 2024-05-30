@@ -44,6 +44,7 @@ fun MarketContentScreen(
     updatePrevScreenListFavorite: (Long, Boolean) -> Unit,
     moveToBackScreen: () -> Unit,
     moveToInfoModificationProposalScreen: () -> Unit,
+    moveToSignInScreen: () -> Unit,
     viewModel: MarketContentViewModel = hiltViewModel()
 ) {
     LaunchedEffect(Unit) {
@@ -56,6 +57,7 @@ fun MarketContentScreen(
         updatePrevScreenListFavorite = updatePrevScreenListFavorite,
         moveToBackScreen = moveToBackScreen,
         moveToInfoModificationProposalScreen = moveToInfoModificationProposalScreen,
+        moveToSignInScreen = moveToSignInScreen,
         isContent = true
     )
 }
@@ -67,6 +69,7 @@ private fun MarketContentScreen(
     updatePrevScreenListFavorite: (Long, Boolean) -> Unit,
     moveToBackScreen: () -> Unit,
     moveToInfoModificationProposalScreen: () -> Unit,
+    moveToSignInScreen: () -> Unit,
     isContent: Boolean
 ) {
     val context = LocalContext.current
@@ -146,7 +149,8 @@ private fun MarketContentScreen(
                                             // 디바이스에 설치된 인터넷 브라우저가 없을 때 예외처리
                                         }
                                     }
-                                }
+                                },
+                                moveToSignInScreen = moveToSignInScreen,
                             )
 
                             Spacer(Modifier.height(24.dp))

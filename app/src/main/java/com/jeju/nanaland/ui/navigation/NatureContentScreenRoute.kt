@@ -10,6 +10,7 @@ import com.jeju.nanaland.globalvalue.constant.ROUTE_INFORMATION_MODIFICATION_PRO
 import com.jeju.nanaland.globalvalue.constant.ROUTE_MAIN
 import com.jeju.nanaland.globalvalue.constant.ROUTE_NATURE_CONTENT
 import com.jeju.nanaland.globalvalue.constant.ROUTE_NATURE_LIST
+import com.jeju.nanaland.globalvalue.constant.ROUTE_SIGN_IN
 import com.jeju.nanaland.globalvalue.type.MainScreenViewType
 import com.jeju.nanaland.ui.main.MainViewModel
 import com.jeju.nanaland.ui.main.favorite.FavoriteViewModel
@@ -65,6 +66,10 @@ fun NavGraphBuilder.natureContentScreen(navController: NavController) = composab
         moveToBackScreen = { navController.popBackStack() },
         moveToInfoModificationProposalScreen = { navController.navigate(
             ROUTE_INFORMATION_MODIFICATION_PROPOSAL
-        ) }
+        ) },
+        moveToSignInScreen = { navController.navigate(ROUTE_SIGN_IN) {
+            popUpTo(ROUTE_MAIN) { inclusive = true }
+            launchSingleTop = true
+        } }
     )
 }

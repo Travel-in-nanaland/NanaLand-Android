@@ -12,16 +12,22 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.jeju.nanaland.domain.entity.favorite.FavoriteThumbnailData
+import com.jeju.nanaland.globalvalue.type.MainScreenViewType
 import com.jeju.nanaland.globalvalue.type.SearchCategoryType
+import com.jeju.nanaland.globalvalue.userdata.UserData
 import com.jeju.nanaland.ui.component.common.CustomTopBarNoBackButton
 import com.jeju.nanaland.ui.component.favorite.FavoriteScreenCategorySelectionTab
 import com.jeju.nanaland.ui.component.favorite.FavoriteScreenFavoritePosts
 import com.jeju.nanaland.ui.component.main.searchresult.parts.SearchResultScreenItemCount
+import com.jeju.nanaland.ui.component.nonmember.NonMemberGuideDialog
 import com.jeju.nanaland.util.ui.UiState
 
 @Composable
 fun FavoriteScreen(
+    prevViewType: MainScreenViewType,
+    updateMainScreenViewType: (MainScreenViewType) -> Unit,
     moveToCategoryContentScreen: (Long, String?, Boolean) -> Unit,
+    moveToSignInScreen: () -> Unit,
     viewModel: FavoriteViewModel = hiltViewModel()
 ) {
     val selectedCategory = viewModel.selectedCategory.collectAsState().value
@@ -31,6 +37,8 @@ fun FavoriteScreen(
         viewModel.getFavoriteList()
     }
     FavoriteScreen(
+        prevViewType = prevViewType,
+        updateMainScreenViewType = updateMainScreenViewType,
         selectedCategory = selectedCategory,
         favoriteThumbnailCount = favoriteThumbnailCount,
         favoriteThumbnailList = favoriteThumbnailList,
@@ -38,12 +46,15 @@ fun FavoriteScreen(
         getFavoriteList = viewModel::getFavoriteList,
         toggleFavorite = viewModel::toggleFavorite,
         onPostClick = moveToCategoryContentScreen,
+        moveToSignInScreen = moveToSignInScreen,
         isContent = true
     )
 }
 
 @Composable
 private fun FavoriteScreen(
+    prevViewType: MainScreenViewType,
+    updateMainScreenViewType: (MainScreenViewType) -> Unit,
     selectedCategory: SearchCategoryType,
     favoriteThumbnailCount: UiState<Long>,
     favoriteThumbnailList: UiState<List<FavoriteThumbnailData>>,
@@ -51,6 +62,7 @@ private fun FavoriteScreen(
     getFavoriteList: () -> Unit,
     toggleFavorite: (Long, String?) -> Unit,
     onPostClick: (Long, String?, Boolean) -> Unit,
+    moveToSignInScreen: () -> Unit,
     isContent: Boolean
 ) {
     Column {
@@ -86,11 +98,19 @@ private fun FavoriteScreen(
                     favoriteThumbnailList = favoriteThumbnailList.data,
                     getFavoriteList = getFavoriteList,
                     onFavoriteButtonClick = toggleFavorite,
-                    onPostClick = onPostClick
+                    onPostClick = onPostClick,
+                    moveToSignInScreen = moveToSignInScreen,
                 )
             }
             is UiState.Failure -> {}
         }
+    }
+
+    if (UserData.provider == "GUEST") {
+        NonMemberGuideDialog(
+            onCloseClick = { updateMainScreenViewType(prevViewType) },
+            moveToSignInScreen = moveToSignInScreen
+        )
     }
 }
 

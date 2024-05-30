@@ -7,6 +7,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.jeju.nanaland.BuildConfig
 import com.jeju.nanaland.ui.component.common.CustomSurface
 import com.jeju.nanaland.ui.component.settings.SettingsScreenCategoryItem
@@ -19,18 +20,30 @@ import com.jeju.nanaland.ui.component.settings.SettingsScreenVersionText
 fun SettingsScreen(
     moveToBackScreen: () -> Unit,
     moveToPolicySettingScreen: () -> Unit,
+    moveToPermissionCheckingScreen: () -> Unit,
+    moveToWithdrawalScreen: () -> Unit,
+    moveToSignInScreen: () -> Unit,
+    viewModel: SettingsViewModel = hiltViewModel()
 ) {
     SettingsScreen(
+        signOut = viewModel::signOut,
         moveToBackScreen = moveToBackScreen,
         moveToPolicySettingScreen = moveToPolicySettingScreen,
+        moveToPermissionCheckingScreen = moveToPermissionCheckingScreen,
+        moveToWithdrawalScreen = moveToWithdrawalScreen,
+        moveToSignInScreen = moveToSignInScreen,
         isContent = true
     )
 }
 
 @Composable
 private fun SettingsScreen(
+    signOut: (() -> Unit) -> Unit,
     moveToBackScreen: () -> Unit,
     moveToPolicySettingScreen: () -> Unit,
+    moveToPermissionCheckingScreen: () -> Unit,
+    moveToWithdrawalScreen: () -> Unit,
+    moveToSignInScreen: () -> Unit,
     isContent: Boolean
 ) {
     CustomSurface {
@@ -51,7 +64,7 @@ private fun SettingsScreen(
 
         SettingsScreenCategoryItem(
             text = "접근권한 안내",
-            onClick = {}
+            onClick = { moveToPermissionCheckingScreen() }
         )
 
         SettingsScreenCategoryItem(
@@ -70,16 +83,20 @@ private fun SettingsScreen(
             SettingsScreenVersionText(BuildConfig.VERSION_NAME)
         }
 
+        Spacer(Modifier.height(4.dp))
+
         SettingsScreenHorizontalDivider()
+
+        Spacer(Modifier.height(4.dp))
 
         SettingsScreenCategoryItem(
             text = "로그아웃",
-            onClick = {}
+            onClick = { signOut(moveToSignInScreen) }
         )
 
         SettingsScreenCategoryItem(
             text = "회원 탈퇴",
-            onClick = {}
+            onClick = { moveToWithdrawalScreen() }
         )
     }
 }

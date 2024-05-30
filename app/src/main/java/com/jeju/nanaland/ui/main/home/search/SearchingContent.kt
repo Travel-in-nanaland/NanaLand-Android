@@ -27,6 +27,7 @@ import com.jeju.nanaland.util.ui.UiState
 @Composable
 fun SearchingContent(
     moveToCategoryContentScreen: (Long, String?, Boolean) -> Unit,
+    moveToSignInScreen: () -> Unit,
     homeViewModel: HomeViewModel = hiltViewModel(),
     viewModel: SearchViewModel = hiltViewModel()
 ) {
@@ -50,6 +51,7 @@ fun SearchingContent(
         updateInputText = homeViewModel::updateInputText,
         addRecentSearch = viewModel::addRecentSearch,
         onHotPostClick = moveToCategoryContentScreen,
+        moveToSignInScreen = moveToSignInScreen,
         isContent = true
     )
 }
@@ -67,6 +69,7 @@ private fun SearchingContent(
     updateInputText: (String) -> Unit,
     addRecentSearch: (String) -> Unit,
     onHotPostClick: (Long, String?, Boolean) -> Unit,
+    moveToSignInScreen: () -> Unit,
     isContent: Boolean
 ) {
     Column(
@@ -110,7 +113,8 @@ private fun SearchingContent(
             SearchingScreenHotPosts(
                 hotPosts = hotPostList,
                 onFavoriteButtonClick = toggleHotPostFavorite,
-                onPostClick = onHotPostClick
+                onPostClick = onHotPostClick,
+                moveToSignInScreen = moveToSignInScreen,
             )
 
             Spacer(Modifier.height(20.dp))

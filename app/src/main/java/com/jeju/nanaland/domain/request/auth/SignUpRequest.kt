@@ -5,7 +5,7 @@ import com.jeju.nanaland.domain.entity.member.ConsentItem
 
 data class SignUpRequest (
     @SerializedName("consentItems")
-    val consentItems: List<ConsentItem>,
+    val consentItems: List<ConsentItem>?,
     @SerializedName("email")
     val email: String,
     @SerializedName("provider")

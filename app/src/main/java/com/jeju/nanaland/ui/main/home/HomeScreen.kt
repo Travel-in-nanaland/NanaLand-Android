@@ -26,6 +26,7 @@ fun HomeScreen(
     moveToFestivalListScreen: () -> Unit,
     moveToMarketListScreen: () -> Unit,
     moveToExperienceListScreen: () -> Unit,
+    moveToSignInScreen: () -> Unit,
     homeViewModel: HomeViewModel = hiltViewModel(),
     searchViewModel: SearchViewModel = hiltViewModel()
 ) {
@@ -45,6 +46,7 @@ fun HomeScreen(
         moveToFestivalListScreen = moveToFestivalListScreen,
         moveToMarketListScreen = moveToMarketListScreen,
         moveToExperienceScreen = moveToExperienceListScreen,
+        moveToSignInScreen = moveToSignInScreen,
         isContent = true
     )
 }
@@ -64,6 +66,7 @@ private fun HomeScreen(
     moveToFestivalListScreen: () -> Unit,
     moveToMarketListScreen: () -> Unit,
     moveToExperienceScreen: () -> Unit,
+    moveToSignInScreen: () -> Unit,
     isContent: Boolean
 ) {
     Column {
@@ -98,7 +101,8 @@ private fun HomeScreen(
                     updateHomeScreenViewType(HomeScreenViewType.Home)
                 }
                 SearchingContent(
-                    moveToCategoryContentScreen = moveToCategoryContentScreen
+                    moveToCategoryContentScreen = moveToCategoryContentScreen,
+                    moveToSignInScreen = moveToSignInScreen,
                 )
             }
             HomeScreenViewType.SearchResult -> {
@@ -110,7 +114,8 @@ private fun HomeScreen(
                     updateSearchCategoryType(SearchCategoryType.All)
                 }
                 SearchResultContent(
-                    moveToCategoryContentScreen = moveToCategoryContentScreen
+                    moveToCategoryContentScreen = moveToCategoryContentScreen,
+                    moveToSignInScreen = moveToSignInScreen,
                 )
             }
         }

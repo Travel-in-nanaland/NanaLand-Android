@@ -21,7 +21,8 @@ fun NatureThumbnailList(
     listState: LazyGridState,
     thumbnailList: UiState<List<NatureThumbnailData>>,
     toggleFavorite: (Long) -> Unit,
-    moveToNatureContentScreen: (Long) -> Unit
+    moveToNatureContentScreen: (Long) -> Unit,
+    moveToSignInScreen: () -> Unit,
 ) {
     when (thumbnailList) {
         is UiState.Loading -> {}
@@ -44,7 +45,8 @@ fun NatureThumbnailList(
                             title = item.title,
                             tag = item.addressTag,
                             onFavoriteButtonClick = { toggleFavorite(item.id) },
-                            onClick = { moveToNatureContentScreen(item.id) }
+                            onClick = { moveToNatureContentScreen(item.id) },
+                            moveToSignInScreen = moveToSignInScreen,
                         )
                     }
                 }

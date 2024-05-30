@@ -35,6 +35,7 @@ import com.jeju.nanaland.ui.navigation.typeTestCompletionScreen
 import com.jeju.nanaland.ui.navigation.typeTestLoadingScreen
 import com.jeju.nanaland.ui.navigation.typeTestResultScreen
 import com.jeju.nanaland.ui.navigation.typeTestingScreen
+import com.jeju.nanaland.ui.navigation.withdrawalScreen
 
 @Composable
 fun MainNavigation(
@@ -129,5 +130,8 @@ fun MainNavigation(
 
         // 접근 권한 안내 화면
         permissionCheckingRoute(navController)
+
+        // 회원 탈퇴 화면
+        withdrawalScreen(navController)
     }
 }

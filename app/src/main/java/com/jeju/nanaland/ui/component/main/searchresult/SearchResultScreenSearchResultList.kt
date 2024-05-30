@@ -25,6 +25,7 @@ fun SearchResultScreenSearchResultList(
     getSearchResult: () -> Unit,
     onFavoriteButtonClick: (Long, String?) -> Unit,
     onPostClick: (Long, String?, Boolean) -> Unit,
+    moveToSignInScreen: () -> Unit,
 ) {
     val lazyGridState = rememberLazyGridState()
     val loadMore = remember {
@@ -72,7 +73,8 @@ fun SearchResultScreenSearchResultList(
                             SearchCategoryType.Experience -> "EXPERIENCE"
                             else -> ""
                         }, true)
-                    }
+                    },
+                    moveToSignInScreen = moveToSignInScreen,
                 )
             }
         }

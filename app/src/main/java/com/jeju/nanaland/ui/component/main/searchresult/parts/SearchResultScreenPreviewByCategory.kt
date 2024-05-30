@@ -33,6 +33,7 @@ fun SearchResultScreenPreviewByCategory(
     updateSearchCategoryType: (SearchCategoryType) -> Unit,
     onFavoriteButtonClick: (Long, String?) -> Unit,
     onPostClick: (Long, String?, Boolean) -> Unit,
+    moveToSignInScreen: () -> Unit,
 ) {
     Row(
         modifier = Modifier
@@ -98,7 +99,8 @@ fun SearchResultScreenPreviewByCategory(
                                     SearchCategoryType.Experience -> "EXPERIENCE"
                                     else -> ""
                                 }, true)
-                            }
+                            },
+                            moveToSignInScreen = moveToSignInScreen,
                         )
 
                         if (idx % 2 == 0) {

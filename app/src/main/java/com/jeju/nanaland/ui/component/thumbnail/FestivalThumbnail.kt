@@ -28,7 +28,8 @@ fun FestivalThumbnail(
     subTitle: String?,
     tag: String?,
     onFavoriteButtonClick: () -> Unit,
-    onClick: () -> Unit
+    onClick: () -> Unit,
+    moveToSignInScreen: () -> Unit,
 ) {
     Column(
         modifier = Modifier
@@ -45,7 +46,8 @@ fun FestivalThumbnail(
             ) {
                 ThumbnailFavoriteButton(
                     isFavorite = isFavorite,
-                    onClick = onFavoriteButtonClick
+                    onClick = onFavoriteButtonClick,
+                    moveToSignInScreen = moveToSignInScreen
                 )
             }
         }
@@ -75,7 +77,8 @@ private fun FestivalThumbnailPreview1() {
             subTitle = "subTitle",
             tag = "tag",
             onFavoriteButtonClick = {},
-            onClick = {}
+            onClick = {},
+            moveToSignInScreen = {}
         )
     }
 }
@@ -91,7 +94,8 @@ private fun FestivalThumbnailPreview2() {
             subTitle = "subTitle",
             tag = "tag",
             onFavoriteButtonClick = {},
-            onClick = {}
+            onClick = {},
+            moveToSignInScreen = {}
         )
     }
 }

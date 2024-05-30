@@ -14,7 +14,6 @@ import com.jeju.nanaland.ui.theme.getColor
 fun SettingsScreenHorizontalDivider() {
     Spacer(
         modifier = Modifier
-            .padding(top = 4.dp, bottom = 4.dp)
             .fillMaxWidth()
             .height(1.dp)
             .background(getColor().gray02)

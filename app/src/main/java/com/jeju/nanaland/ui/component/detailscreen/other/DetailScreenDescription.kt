@@ -38,6 +38,7 @@ fun DetailScreenDescription(
     content: String?,
     onFavoriteButtonClicked: () -> Unit,
     onShareButtonClicked: () -> Unit,
+    moveToSignInScreen: () -> Unit,
 ) {
     val isMoreOpen = remember { mutableStateOf(false) }
     Box(
@@ -88,7 +89,11 @@ fun DetailScreenDescription(
                 .align(Alignment.TopEnd)
                 .padding(top = 8.dp, end = 16.dp)
         ) {
-            DetailScreenFavoriteButton(isFavorite = isFavorite) { onFavoriteButtonClicked() }
+            DetailScreenFavoriteButton(
+                isFavorite = isFavorite,
+                onClick = { onFavoriteButtonClicked() },
+                moveToSignInScreen = moveToSignInScreen
+            )
 
             Spacer(Modifier.width(8.dp))
 
@@ -107,7 +112,8 @@ private fun DetailScreenDescriptionPreview() {
             title = "Title",
             content = "DescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescription",
             onFavoriteButtonClicked = {},
-            onShareButtonClicked = {}
+            onShareButtonClicked = {},
+            moveToSignInScreen = {}
         )
     }
 }

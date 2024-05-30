@@ -35,6 +35,7 @@ import kotlinx.coroutines.launch
 fun NatureListScreen(
     moveToBackScreen: () -> Unit,
     moveToNatureContentScreen: (Long) -> Unit,
+    moveToSignInScreen: () -> Unit,
     viewModel: NatureListViewModel = hiltViewModel()
 ) {
     val selectedLocationList = viewModel.selectedLocationList
@@ -49,6 +50,7 @@ fun NatureListScreen(
         clearNatureList = viewModel::clearNatureList,
         moveToBackScreen = moveToBackScreen,
         moveToNatureContentScreen = moveToNatureContentScreen,
+        moveToSignInScreen = moveToSignInScreen,
         isContent = true
     )
 }
@@ -64,6 +66,7 @@ private fun NatureListScreen(
     getNatureList: () -> Unit,
     moveToBackScreen: () -> Unit,
     moveToNatureContentScreen: (Long) -> Unit,
+    moveToSignInScreen: () -> Unit,
     isContent: Boolean
 ) {
     val coroutineScope = rememberCoroutineScope()
@@ -111,7 +114,8 @@ private fun NatureListScreen(
                     listState = lazyGridState,
                     thumbnailList = natureThumbnailList,
                     toggleFavorite = toggleFavorite,
-                    moveToNatureContentScreen = moveToNatureContentScreen
+                    moveToNatureContentScreen = moveToNatureContentScreen,
+                    moveToSignInScreen = moveToSignInScreen,
                 )
             }
 

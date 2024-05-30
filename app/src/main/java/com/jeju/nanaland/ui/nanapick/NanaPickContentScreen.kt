@@ -53,6 +53,7 @@ import kotlinx.coroutines.launch
 fun NanaPickContentScreen(
     contentId: Long?,
     moveToBackScreen: () -> Unit,
+    moveToSignInScreen: () -> Unit,
     viewModel: NanaPickContentViewModel = hiltViewModel()
 ) {
     LaunchedEffect(Unit) {
@@ -63,7 +64,8 @@ fun NanaPickContentScreen(
         nanaPickContent = nanaPickContent,
         moveToBackScreen = moveToBackScreen,
         toggleFavorite = { viewModel.toggleFavorite(contentId) },
-        tmp = true
+        moveToSignInScreen = moveToSignInScreen,
+        isContent = true
     )
 }
 
@@ -72,7 +74,8 @@ private fun NanaPickContentScreen(
     nanaPickContent: UiState<NanaPickContentData>,
     toggleFavorite: () -> Unit,
     moveToBackScreen: () -> Unit,
-    tmp: Boolean
+    moveToSignInScreen: () -> Unit,
+    isContent: Boolean
 ) {
     val scrollState = rememberScrollState()
     val coroutineScope = rememberCoroutineScope()
@@ -89,7 +92,8 @@ private fun NanaPickContentScreen(
                     Column(modifier = Modifier.verticalScroll(scrollState)) {
                         NanaPickContentTopBanner(
                             nanaPickContent = nanaPickContent,
-                            toggleFavorite = toggleFavorite
+                            toggleFavorite = toggleFavorite,
+                            moveToSignInScreen = moveToSignInScreen,
                         )
 
                         Spacer(Modifier.height(16.dp))

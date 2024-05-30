@@ -16,7 +16,7 @@ fun SearchingScreenTopKeyword(
 ) {
     Text(
         modifier = Modifier.clickableNoEffect { onClick() },
-        text = "${rank + 1}. ${text ?: ""}" ,
+        text = text ?: "",
         color = if (rank == 0 || rank == 1) getColor().main else getColor().gray01,
         style = if (rank == 0 || rank == 1) body02SemiBold else body02
     )

@@ -16,6 +16,7 @@ import com.jeju.nanaland.globalvalue.constant.ROUTE_NATURE_CONTENT
 import com.jeju.nanaland.globalvalue.constant.ROUTE_NATURE_LIST
 import com.jeju.nanaland.globalvalue.constant.ROUTE_PROFILE_UPDATE
 import com.jeju.nanaland.globalvalue.constant.ROUTE_SETTINGS
+import com.jeju.nanaland.globalvalue.constant.ROUTE_SIGN_IN
 import com.jeju.nanaland.globalvalue.type.CategoryType
 import com.jeju.nanaland.ui.main.MainScreen
 import com.jeju.nanaland.util.navigation.navigate
@@ -49,6 +50,10 @@ fun NavGraphBuilder.mainScreen(navController: NavController) = composable(route 
                 "introduction" to introduction
             )
             navController.navigate(ROUTE_PROFILE_UPDATE, bundle)
-        }
+        },
+        moveToSignInScreen = { navController.navigate(ROUTE_SIGN_IN) {
+            popUpTo(ROUTE_MAIN) { inclusive = true }
+            launchSingleTop = true
+        } }
     )
 }

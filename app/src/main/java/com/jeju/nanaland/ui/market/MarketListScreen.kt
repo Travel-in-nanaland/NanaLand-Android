@@ -35,6 +35,7 @@ import kotlinx.coroutines.launch
 fun MarketListScreen(
     moveToBackScreen: () -> Unit,
     moveToMarketContentScreen: (Long) -> Unit,
+    moveToSignInScreen: () -> Unit,
     viewModel: MarketListViewModel = hiltViewModel()
 ) {
     val selectedLocationList = viewModel.selectedLocationList
@@ -49,6 +50,7 @@ fun MarketListScreen(
         clearMarketList = viewModel::clearMarketList,
         moveToBackScreen = moveToBackScreen,
         moveToMarketContentScreen = moveToMarketContentScreen,
+        moveToSignInScreen = moveToSignInScreen,
         isContent = true
     )
 }
@@ -64,6 +66,7 @@ private fun MarketListScreen(
     clearMarketList: () -> Unit,
     moveToBackScreen: () -> Unit,
     moveToMarketContentScreen: (Long) -> Unit,
+    moveToSignInScreen: () -> Unit,
     isContent: Boolean
 ) {
     val coroutineScope = rememberCoroutineScope()
@@ -111,7 +114,8 @@ private fun MarketListScreen(
                     listState = lazyGridState,
                     thumbnailList = marketThumbnailList,
                     toggleFavorite = toggleFavorite,
-                    moveToMarketContentScreen = moveToMarketContentScreen
+                    moveToMarketContentScreen = moveToMarketContentScreen,
+                    moveToSignInScreen = moveToSignInScreen
                 )
             }
 

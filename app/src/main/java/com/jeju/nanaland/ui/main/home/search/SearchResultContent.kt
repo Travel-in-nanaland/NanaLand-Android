@@ -18,6 +18,7 @@ import com.jeju.nanaland.util.ui.UiState
 @Composable
 fun SearchResultContent(
     moveToCategoryContentScreen: (Long, String?, Boolean) -> Unit,
+    moveToSignInScreen: () -> Unit,
     searchViewModel: SearchViewModel = hiltViewModel(),
     homeViewModel: HomeViewModel = hiltViewModel()
 ) {
@@ -35,6 +36,7 @@ fun SearchResultContent(
         toggleAllSearchResultFavorite = searchViewModel::toggleAllSearchResultFavorite,
         toggleSearchResultFavorite = searchViewModel::toggleSearchResultFavorite,
         onPostClick = moveToCategoryContentScreen,
+        moveToSignInScreen = moveToSignInScreen,
         isContent = true
     )
 }
@@ -50,6 +52,7 @@ private fun SearchResultContent(
     toggleAllSearchResultFavorite: (Long, String?) -> Unit,
     toggleSearchResultFavorite: (Long, String?) -> Unit,
     onPostClick: (Long, String?, Boolean) -> Unit,
+    moveToSignInScreen: () -> Unit,
     isContent: Boolean
 ) {
     SearchResultScreenCategorySelectionTab(
@@ -68,7 +71,8 @@ private fun SearchResultContent(
         updateSearchCategoryType = updateSelectedCategory,
         toggleAllSearchResultFavorite = toggleAllSearchResultFavorite,
         toggleSearchResultFavorite = toggleSearchResultFavorite,
-        onPostClick = onPostClick
+        onPostClick = onPostClick,
+        moveToSignInScreen = moveToSignInScreen,
     )
 }
 

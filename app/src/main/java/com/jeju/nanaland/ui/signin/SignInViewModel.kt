@@ -1,12 +1,16 @@
 package com.jeju.nanaland.ui.signin
 
+import android.provider.Settings
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.jeju.nanaland.domain.request.auth.SignInRequest
+import com.jeju.nanaland.domain.request.auth.SignUpRequest
 import com.jeju.nanaland.domain.usecase.auth.SignInUseCase
+import com.jeju.nanaland.domain.usecase.auth.SignUpUseCase
 import com.jeju.nanaland.domain.usecase.authdatastore.SaveAccessTokenUseCase
 import com.jeju.nanaland.domain.usecase.authdatastore.SaveRefreshTokenUseCase
 import com.jeju.nanaland.domain.usecase.settingsdatastore.GetLanguageUseCase
+import com.jeju.nanaland.globalvalue.userdata.UserData
 import com.jeju.nanaland.util.log.LogUtil
 import com.jeju.nanaland.util.network.onError
 import com.jeju.nanaland.util.network.onException
@@ -23,6 +27,7 @@ class SignInViewModel @Inject constructor(
     private val getLanguageUseCase: GetLanguageUseCase,
     private val saveAccessTokenUseCase: SaveAccessTokenUseCase,
     private val saveRefreshTokenUseCase: SaveRefreshTokenUseCase,
+    private val signUpUseCase: SignUpUseCase,
 ) : ViewModel() {
 
     fun signIn(
@@ -68,6 +73,91 @@ class SignInViewModel @Inject constructor(
                 }
             }
             .catch { LogUtil.e("flow error", "signInUseCase") }
+            .launchIn(viewModelScope)
+    }
+
+    fun nonMemberSignUp(
+        androidId: String,
+        moveToMainScreen: () -> Unit,
+    ) {
+        var locale = "ENGLISH"
+        getLanguageUseCase()
+            .onEach {
+                locale = when (it) {
+                    "en" -> "ENGLISH"
+                    "zh" -> "CHINESE"
+                    "ms" -> "MALAYSIA"
+                    "ko" -> "KOREAN"
+                    else -> "ENGLISH"
+                }
+            }
+            .catch { LogUtil.e("flow Error", "getLanguageUseCase") }
+            .launchIn(viewModelScope)
+
+        val requestData = SignUpRequest(
+            consentItems = null,
+            email = "GUEST@nanaland.com",
+            provider = "GUEST",
+            providerId = androidId,
+            locale = locale,
+            nickname = "GUEST"
+        )
+
+        signUpUseCase(requestData, null)
+            .onEach { networkResult ->
+                networkResult.onSuccess { code, data ->
+                    data?.let {
+                        UserData.nickname = "GUEST"
+                        UserData.provider = "GUEST"
+                        saveAccessTokenUseCase(data.data.accessToken ?: "")
+                        saveRefreshTokenUseCase(data.data.refreshToken ?: "")
+                        moveToMainScreen()
+                    }
+                }.onError { code, message ->
+                    when (code) {
+                        409 -> {
+                            nonMemberSignIn(
+                                locale = locale,
+                                androidId = androidId,
+                                moveToMainScreen = moveToMainScreen
+                            )
+                        }
+                    }
+                }.onException {
+
+                }
+            }
+            .catch { LogUtil.e("flow Error", "signUpUseCase") }
+            .launchIn(viewModelScope)
+    }
+
+    private fun nonMemberSignIn(
+        locale: String,
+        androidId: String,
+        moveToMainScreen: () -> Unit,
+    ) {
+        val signInData = SignInRequest(
+            locale = locale,
+            provider = "GUEST",
+            providerId = androidId
+        )
+        signInUseCase(signInData)
+            .onEach { networkResult ->
+                networkResult.onSuccess { code, data ->
+                    data?.let {
+                        UserData.nickname = "GUEST"
+                        UserData.provider = "GUEST"
+                        saveAccessTokenUseCase(data.data.accessToken ?: "")
+                        saveRefreshTokenUseCase(data.data.refreshToken ?: "")
+                        moveToMainScreen()
+                    }
+                }.onError { code, message ->
+
+                }.onException {
+
+                }
+            }
+            .catch { LogUtil.e("flow Error", "signInUseCase") }
             .launchIn(viewModelScope)
     }
 }
