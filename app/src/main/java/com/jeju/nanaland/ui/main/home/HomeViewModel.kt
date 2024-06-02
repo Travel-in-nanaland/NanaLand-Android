@@ -4,6 +4,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.jeju.nanaland.domain.entity.member.RecommendedPostData
 import com.jeju.nanaland.domain.entity.nanapick.NanaPickBannerData
+import com.jeju.nanaland.domain.request.favorite.ToggleFavoriteRequest
+import com.jeju.nanaland.domain.usecase.favorite.ToggleFavoriteUseCase
+import com.jeju.nanaland.domain.usecase.member.GetRandomRecommendedPostUseCase
 import com.jeju.nanaland.domain.usecase.member.GetRecommendedPostUseCase
 import com.jeju.nanaland.domain.usecase.nanapick.GetHomePreviewBannerUseCase
 import com.jeju.nanaland.globalvalue.type.HomeScreenViewType
@@ -24,7 +27,8 @@ import javax.inject.Inject
 @HiltViewModel
 class HomeViewModel @Inject constructor(
     private val getHomePreviewBannerUseCase: GetHomePreviewBannerUseCase,
-    private val getRecommendedPostUseCase: GetRecommendedPostUseCase
+    private val getRandomRecommendedPostUseCase: GetRandomRecommendedPostUseCase,
+    private val toggleFavoriteUseCase: ToggleFavoriteUseCase
 ) : ViewModel() {
 
     private val _inputText = MutableStateFlow("")
@@ -66,7 +70,7 @@ class HomeViewModel @Inject constructor(
 
     fun getRecommendedPost() {
         _recommendedPost.update { UiState.Loading }
-        getRecommendedPostUseCase()
+        getRandomRecommendedPostUseCase()
             .onEach { networkResult ->
                 networkResult.onSuccess { code, data ->
                     data?.let {
@@ -81,6 +85,38 @@ class HomeViewModel @Inject constructor(
                 }
             }
             .catch { LogUtil.e("flow Error", "getRecommendedPostUseCase") }
+            .launchIn(viewModelScope)
+    }
+
+    fun toggleFavorite(contentId: Long, category: String?) {
+        if (category == null) return
+        val requestData = ToggleFavoriteRequest(
+            id = contentId,
+            category = category
+        )
+        toggleFavoriteUseCase(requestData)
+            .onEach { networkResult ->
+                networkResult.onSuccess { code, data ->
+                    data?.let {
+                        _recommendedPost.update { uiState ->
+                            if (uiState is UiState.Success) {
+                                val newList = uiState.data.map { item ->
+                                    if (item.id == contentId) item.copy(favorite = data.data.favorite)
+                                    else item
+                                }
+                                UiState.Success(newList)
+                            } else {
+                                uiState
+                            }
+                        }
+                    }
+                }.onError { code, message ->
+
+                }.onException {
+
+                }
+            }
+            .catch { LogUtil.e("flow Error", "toggleFavoriteUseCase") }
             .launchIn(viewModelScope)
     }
 }

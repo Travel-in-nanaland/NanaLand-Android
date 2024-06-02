@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">NanaLand</string>
+    <string name="app_name">nanaland in Jeju</string>
     <string name="all">전체</string>
     <string name="nature">7대 자연</string>
     <string name="festival">축제</string>
@@ -33,4 +33,110 @@
     <string name="done">Done</string>
     <string name="title_time_picker">Select Time</string>
     <string name="select_time">Select a Time</string>
+
+    <!--전체 공통-->
+    <string name="common_7대_자연">7대 자연</string>
+    <string name="common_축제">축제</string>
+    <string name="common_전통시장">전통시장</string>
+    <string name="common_이색_체험">이색 체험</string>
+    <string name="common_나나s_Pick">나나\'s Pick</string>
+    <string name="common_찜">찜</string>
+    <string name="common_제주_이야기">제주 이야기</string>
+    <string name="common_나의_나나">나의 나나</string>
+    <string name="common_전체">전체</string>
+    <string name="common_건">건</string>
+    <string name="common_년">년</string>
+    <string name="common_월">월</string>
+    <string name="common_봄">봄</string>
+    <string name="common_여름">여름</string>
+    <string name="common_가을">가을</string>
+    <string name="common_겨울">겨울</string>
+
+    <!--홈 화면-->
+    <string name="home_screen_ad1_title">제주도에서 예쁜 바다 보고 싶다고?</string>
+    <string name="home_screen_ad1_content">서귀포시 성산의 자연으로 투어해보자!!</string>
+    <string name="home_screen_ad2_title">보기 귀한 별 보러 가지 않을래?💫</string>
+    <string name="home_screen_ad2_content">애월의 감성 가득 오름들 확인😯</string>
+    <string name="home_screen_ad3_title">한국의 정감을 느끼고 싶다면, 시장이지!</string>
+    <string name="home_screen_ad3_content">아직도 남은 전통 시장들은 뭐가 있을까?</string>
+    <string name="home_screen_ad4_title">제주도에서만 여는 7월 축제🎈</string>
+    <string name="home_screen_ad4_content">세계의 보물, 제주도가 가득 느껴지는 축제 보러가자</string>
+    <string name="home_screen_recommend">님을 위한 도민 추천 🍊</string>
+
+    <!--하단 네비게이션 바-->
+    <string name="navigation_bar_홈">홈</string>
+
+    <!--검색 화면-->
+    <string name="searching_screen_textfiled_hint">검색어를 입력해 주세요</string>
+    <string name="searching_screen_최근_검색어">최근 검색어</string>
+    <string name="searching_screen_모두_지우기">모두 지우기</string>
+    <string name="searching_screen_최근_검색어가_없습니다">최근 검색어가 없습니다.</string>
+    <string name="searching_screen_가장_많이">가장 많이</string>
+    <string name="searching_screen_검색하고_있어요">&#160;검색하고 있어요!</string>
+    <string name="searching_screen_hot_keywords">검색량 UP ! JEJU Place 🍊</string>
+
+    <!--검색 결과 화면-->
+    <string name="search_result_screen_no_result">해당 검색 결과가 없습니다.</string>
+    <string name="search_result_screen_preparing_service">해당 서비스 준비 중입니다.\n다음에 만나요!</string>
+
+    <!--비회원 회원가입 유도 다이얼로그-->
+    <string name="non_member_dialog_guide">나나랜드의 회원이 되셔야,\n모든 서비스를\n이용하실 수 있습니다✨</string>
+    <string name="non_member_dialog_go_sign_up">회원가입 하러 가기</string>
+
+
+    <!--날짜 선택 다이얼로그-->
+    <string name="date_filter_dialog_날짜_선택">날짜 선택</string>
+    <string name="date_filter_dialog_초기화">초기화</string>
+
+    <!--지역 선택 다이얼로그-->
+    <string name="location_filter_dialog_지역">지역</string>
+    <string name="location_filter_dialog_전체선택">전체선택</string>
+    <string name="location_filter_dialog_해제">해제</string>
+
+    <!--계절 선택 다이얼로그-->
+    <string name="season_filter_dialog_계절_선택">계절 선택</string>
+
+    <!--필터링 다이얼로그 공통-->
+    <string name="filter_dialog_common_적용하기">적용하기</string>
+
+    <!--리스트 화면 공통-->
+    <string name="list_screen_common_전_지역">전 지역</string>
+
+    <!--지역 공통-->
+    <string name="location_common_제주시">제주시</string>
+    <string name="location_common_애월">애월</string>
+    <string name="location_common_조천">조천</string>
+    <string name="location_common_한경">한경</string>
+    <string name="location_common_구좌">구좌</string>
+    <string name="location_common_한림">한림</string>
+    <string name="location_common_우도">우도</string>
+    <string name="location_common_추자">추자</string>
+    <string name="location_common_서귀포시">서귀포시</string>
+    <string name="location_common_대정">대정</string>
+    <string name="location_common_안덕">안덕</string>
+    <string name="location_common_남원">남원</string>
+    <string name="location_common_표선">표선</string>
+    <string name="location_common_성산">성산</string>
+
+    <!--축제 리스트 화면-->
+    <string name="festival_list_screen_월별_축제">월별 축제</string>
+    <string name="festival_list_screen_종료된_축제">종료된 축제</string>
+    <string name="festival_list_screen_계절별_축제">계절별 축제</string>
+    <string name="festival_list_screen_image_caption">*참고용 사진입니다.</string>
+
+    <!--상세 화면 공통-->
+    <string name="detail_screen_common_더_보기">더 보기</string>
+    <string name="detail_screen_common_접기">접기</string>
+    <string name="detail_screen_common_주소">주소</string>
+    <string name="detail_screen_common_연락처">연락처</string>
+    <string name="detail_screen_common_이용_시간">이용 시간</string>
+    <string name="detail_screen_common_편의시설">편의시설</string>
+    <string name="detail_screen_common_홈페이지">홈페이지</string>
+    <string name="detail_screen_common_입장료">입장료</string>
+    <string name="detail_screen_common_상세_정보">상세 정보</string>
+    <string name="detail_screen_common_기간">기간</string>
+    <string name="detail_screen_common_소개합니다">소개합니다!</string>
+    <string name="detail_screen_common_정보_수정_제안">정보 수정 제안</string>
+
+
 </resources>

@@ -24,6 +24,7 @@ import com.jeju.nanaland.R
 import com.jeju.nanaland.ui.theme.NanaLandTheme
 import com.jeju.nanaland.ui.theme.caption01
 import com.jeju.nanaland.ui.theme.getColor
+import com.jeju.nanaland.util.resource.getString
 import com.jeju.nanaland.util.ui.ComponentPreview
 import com.jeju.nanaland.util.ui.clickableNoEffect
 
@@ -56,7 +57,7 @@ fun LocationFilterBox(
 
         Text(
             text = when (selectedLocationList.count { it }) {
-                0 -> "전 지역"
+                0 -> getString(R.string.list_screen_common_전_지역)
                 1, 2 -> selectedLocationList.withIndex()
                     .filter { selectedLocationList[it.index] }.take(2)
                     .joinToString(separator = ", ") { locationList[it.index] }

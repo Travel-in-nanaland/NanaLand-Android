@@ -40,17 +40,19 @@ fun HomeScreenTopBanner(
         when (topBanner) {
             is UiState.Loading -> {}
             is UiState.Success -> {
-                HorizontalPager(state = pagerState) { page ->
-                    HomeScreenNanaPickBanner(
-                        item = topBanner.data[page % (topBanner.data.size)],
-                        onClick = { onBannerClick(topBanner.data[page % (topBanner.data.size)].id, "NANA", false) }
+                if (topBanner.data.isNotEmpty()) {
+                    HorizontalPager(state = pagerState) { page ->
+                        HomeScreenNanaPickBanner(
+                            item = topBanner.data[page % (topBanner.data.size)],
+                            onClick = { onBannerClick(topBanner.data[page % (topBanner.data.size)].id, "NANA", false) }
+                        )
+                    }
+
+                    HomeScreenTopBannerPageIndicator(
+                        itemCnt = topBanner.data.size,
+                        pageNum = pagerState.currentPage
                     )
                 }
-
-                HomeScreenTopBannerPageIndicator(
-                    itemCnt = topBanner.data.size,
-                    pageNum = pagerState.currentPage
-                )
             }
             is UiState.Failure -> {}
         }

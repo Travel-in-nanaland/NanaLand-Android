@@ -11,8 +11,11 @@ import com.jeju.nanaland.ui.navigation.experienceContentScreen
 import com.jeju.nanaland.ui.navigation.experienceListScreen
 import com.jeju.nanaland.ui.navigation.festivalContentScreen
 import com.jeju.nanaland.ui.navigation.festivalListScreen
-import com.jeju.nanaland.ui.navigation.informationModificationProposalScreen
-import com.jeju.nanaland.ui.navigation.languageSelectionScreen
+import com.jeju.nanaland.ui.navigation.informationModificationProposalCategoryScreen
+import com.jeju.nanaland.ui.navigation.informationModificationProposalCompleteScreen
+import com.jeju.nanaland.ui.navigation.informationModificationProposalWritingScreen
+import com.jeju.nanaland.ui.navigation.languageChangeScreen
+import com.jeju.nanaland.ui.navigation.languageInitializationScreen
 import com.jeju.nanaland.ui.navigation.locationPolicyDetailsScreen
 import com.jeju.nanaland.ui.navigation.mainScreen
 import com.jeju.nanaland.ui.navigation.marketContentScreen
@@ -27,6 +30,7 @@ import com.jeju.nanaland.ui.navigation.policyAgreeScreen
 import com.jeju.nanaland.ui.navigation.policySettingScreen
 import com.jeju.nanaland.ui.navigation.privacyPolicyDetailsScreen
 import com.jeju.nanaland.ui.navigation.profileUpdateScreen
+import com.jeju.nanaland.ui.navigation.recommendedSpotScreen
 import com.jeju.nanaland.ui.navigation.settingsScreen
 import com.jeju.nanaland.ui.navigation.signInScreen
 import com.jeju.nanaland.ui.navigation.signUpScreen
@@ -51,7 +55,7 @@ fun MainNavigation(
         splashScreen(navController)
 
         // 언어 선택 화면
-        languageSelectionScreen(navController)
+        languageInitializationScreen(navController)
 
         // 로그인 화면
         signInScreen(navController)
@@ -82,6 +86,9 @@ fun MainNavigation(
 
         // 유형 테스트 결과 화면
         typeTestResultScreen(navController)
+
+        // 유형 테스트별 추천 여행지 화면
+        recommendedSpotScreen(navController)
 
         // 메인 화면
         mainScreen(navController)
@@ -116,8 +123,14 @@ fun MainNavigation(
         // 나나 Pick 상세 화면
         nanaPickContentScreen(navController)
 
-        // 정보 수정 제안 화면
-        informationModificationProposalScreen(navController)
+        // 정보 수정 제안 카테고리 선택 화면
+        informationModificationProposalCategoryScreen(navController)
+
+        // 정보 수정 제안 작성 화면
+        informationModificationProposalWritingScreen(navController)
+
+        // 정보 수정 제안 완료 화면
+        informationModificationProposalCompleteScreen(navController)
 
         // 프로필 수정 화면
         profileUpdateScreen(navController)
@@ -133,5 +146,8 @@ fun MainNavigation(
 
         // 회원 탈퇴 화면
         withdrawalScreen(navController)
+
+        // 언어 변경 화면
+        languageChangeScreen(navController)
     }
 }

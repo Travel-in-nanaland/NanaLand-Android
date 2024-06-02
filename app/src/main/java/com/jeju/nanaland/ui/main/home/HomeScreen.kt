@@ -91,6 +91,7 @@ private fun HomeScreen(
                     moveToFestivalListScreen = moveToFestivalListScreen,
                     moveToMarketListScreen = moveToMarketListScreen,
                     moveToExperienceScreen = moveToExperienceScreen,
+                    moveToSignInScreen = moveToSignInScreen,
                 )
             }
             HomeScreenViewType.Searching -> {

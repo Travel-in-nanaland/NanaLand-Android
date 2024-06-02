@@ -1,6 +1,7 @@
 package com.jeju.nanaland.di.usecase
 
 import com.jeju.nanaland.domain.repository.AuthDataStoreRepository
+import com.jeju.nanaland.domain.usecase.authdatastore.ClearAuthDataStoreUseCase
 import com.jeju.nanaland.domain.usecase.authdatastore.GetAccessTokenUseCase
 import com.jeju.nanaland.domain.usecase.authdatastore.GetRefreshTokenUseCase
 import com.jeju.nanaland.domain.usecase.authdatastore.SaveAccessTokenUseCase
@@ -45,5 +46,13 @@ object AuthDataStoreUseCaseModule {
         repository: AuthDataStoreRepository
     ): SaveRefreshTokenUseCase {
         return SaveRefreshTokenUseCase(repository)
+    }
+
+    @Singleton
+    @Provides
+    fun provideClearAuthDataStoreUseCase(
+        repository: AuthDataStoreRepository
+    ): ClearAuthDataStoreUseCase {
+        return ClearAuthDataStoreUseCase(repository)
     }
 }

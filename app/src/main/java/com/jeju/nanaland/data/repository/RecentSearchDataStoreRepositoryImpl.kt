@@ -32,4 +32,10 @@ class RecentSearchDataStoreRepositoryImpl(
             it.remove(dataStoreKey)
         }
     }
+
+    override suspend fun clearAll() {
+        dataStore.edit {
+            it.clear()
+        }
+    }
 }

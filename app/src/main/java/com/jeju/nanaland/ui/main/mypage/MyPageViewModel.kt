@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.jeju.nanaland.domain.entity.member.UserProfile
 import com.jeju.nanaland.domain.usecase.member.GetUserProfileUseCase
+import com.jeju.nanaland.globalvalue.userdata.UserData
 import com.jeju.nanaland.util.log.LogUtil
 import com.jeju.nanaland.util.network.onError
 import com.jeju.nanaland.util.network.onException
@@ -33,6 +34,12 @@ class MyPageViewModel @Inject constructor(
                     data?.let {
                         _userProfile.update {
                             UiState.Success(data.data)
+                        }
+                        UserData.provider = data.data.provider ?: "GUEST"
+                        if (UserData.provider == "GUEST") {
+                            UserData.nickname = "GUEST"
+                        } else {
+                            UserData.nickname = data.data.nickname ?: "GUEST"
                         }
                     }
                 }.onError { code, message ->

@@ -8,7 +8,6 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
@@ -29,7 +28,6 @@ import com.jeju.nanaland.util.signin.AuthResultContract
 import com.jeju.nanaland.util.signin.getGoogleSignInClient
 import com.jeju.nanaland.util.ui.ScreenPreview
 import com.kakao.sdk.user.UserApiClient
-import kotlinx.coroutines.launch
 
 
 @Composable
@@ -57,7 +55,6 @@ private fun SignInScreen(
     isContent: Boolean
 ) {
     val context = LocalContext.current
-    val coroutineScope = rememberCoroutineScope()
     val startForResult =
         rememberLauncherForActivityResult(contract = AuthResultContract()) { task: Task<GoogleSignInAccount>? ->
             try {
@@ -69,15 +66,13 @@ private fun SignInScreen(
                             "id: ${account.id}\n" +
                             "birthdate: ${account}"
                     )
-                    coroutineScope.launch {
-                        if (account.id != null) {
-                            signIn(
-                                "GOOGLE",
-                                account.id!!,
-                                moveToMainScreen,
-                                { moveToSignUpScreen("GOOGLE", account.email!!, account.id!!) }
-                            )
-                        }
+                    if (account.id != null) {
+                        signIn(
+                            "GOOGLE",
+                            account.id!!,
+                            moveToMainScreen,
+                            { moveToSignUpScreen("GOOGLE", account.email!!, account.id!!) }
+                        )
                     }
                 }
             } catch (e: ApiException) {
@@ -117,6 +112,15 @@ private fun SignInScreen(
                                             "\n이메일: ${user.kakaoAccount?.email}" +
                                             "\n닉네임: ${user.kakaoAccount?.profile?.nickname}" +
                                             "\n프로필사진: ${user.kakaoAccount?.profile?.thumbnailImageUrl}")
+
+                                    if (user.id != null) {
+                                        signIn(
+                                            "KAKAO",
+                                            user.id.toString(),
+                                            moveToMainScreen,
+                                            { moveToSignUpScreen("KAKAO", user.kakaoAccount?.email!!, user.id.toString()) }
+                                        )
+                                    }
                                 }
                             }
                         }

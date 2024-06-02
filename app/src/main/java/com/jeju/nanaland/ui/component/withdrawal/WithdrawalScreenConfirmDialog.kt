@@ -14,6 +14,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
+import com.jeju.nanaland.ui.component.common.SettingsScreenDialogCancelButton
+import com.jeju.nanaland.ui.component.common.SettingsScreenDialogConfirmButton
 import com.jeju.nanaland.ui.component.settings.SettingsScreenHorizontalDivider
 import com.jeju.nanaland.ui.component.withdrawal.parts.WithdrawalScreenDialogDescription
 import com.jeju.nanaland.ui.component.withdrawal.parts.WithdrawalScreenDialogHeading
@@ -26,7 +28,7 @@ fun WithdrawalScreenConfirmDialog(
     onCancel: () -> Unit,
 ) {
     Dialog(
-        onDismissRequest = { onCancel() }
+        onDismissRequest = onCancel
     ) {
         NanaLandTheme {
             Surface(
@@ -54,14 +56,20 @@ fun WithdrawalScreenConfirmDialog(
                     SettingsScreenHorizontalDivider()
 
                     Row(Modifier.height(IntrinsicSize.Min)) {
-                        WithdrawalScreenDialogCancelButton { onCancel() }
+                        SettingsScreenDialogCancelButton(
+                            text = "취소",
+                            onClick = onCancel
+                        )
 
                         WithdrawalScreenDialogVerticalDivider()
 
-                        WithdrawalScreenDialogConfirmButton {
-                            onCancel()
-                            onConfirm()
-                        }
+                        SettingsScreenDialogConfirmButton(
+                            text = "삭제",
+                            onClick = {
+                                onCancel()
+                                onConfirm()
+                            }
+                        )
                     }
                 }
             }

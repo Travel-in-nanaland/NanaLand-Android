@@ -22,7 +22,6 @@
             android:name=".MainActivity"
             android:screenOrientation="portrait"
             android:exported="true"
-            android:label="@string/app_name"
             android:windowSoftInputMode="adjustResize"
             android:theme="@style/Theme.NanaLand">
             <intent-filter>
@@ -35,7 +34,7 @@
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
                 <!-- 카카오 로그인 -->
-                <data android:scheme="kakao319c262a291562c6993e381b90508e20"/>
+                <data android:scheme="kakaobf7035e60f5541853f1e732e701fcc37"/>
                 <data android:host="oauth"/>
             </intent-filter>
             <intent-filter>
@@ -43,7 +42,7 @@
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
                 <!-- 카카오톡으로 앱 실행 -->
-                <data android:scheme="kakao319c262a291562c6993e381b90508e20"/>
+                <data android:scheme="kakaobf7035e60f5541853f1e732e701fcc37"/>
                 <data android:host="kakaolink"/>
             </intent-filter>
             <intent-filter>

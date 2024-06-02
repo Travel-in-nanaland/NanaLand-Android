@@ -15,4 +15,6 @@ interface AuthDataStoreRepository {
 
     // Refresh Token 저장하기
     suspend fun saveRefreshToken(refreshToken: String)
+
+    suspend fun clearAll()
 }

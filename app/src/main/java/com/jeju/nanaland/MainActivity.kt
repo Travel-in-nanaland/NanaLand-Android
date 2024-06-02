@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.provider.Settings
+import android.util.Log
 import android.view.WindowManager
 import android.widget.Toast
 import androidx.activity.ComponentActivity
@@ -28,6 +29,7 @@ import com.jeju.nanaland.ui.MainNavigation
 import com.jeju.nanaland.ui.theme.NanaLandTheme
 import com.jeju.nanaland.ui.theme.getColor
 import com.jeju.nanaland.util.log.LogUtil
+import com.kakao.sdk.common.util.Utility
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -59,8 +61,7 @@ class MainActivity : ComponentActivity() {
         }
 //
 //        val keyHash = Utility.getKeyHash(this)
-//        LogUtil.log("keyHash", keyHash)
-
+//        Toast.makeText(this, keyHash, Toast.LENGTH_LONG).show()
 
         onBackPressedDispatcher.addCallback(this, onBackPressedCallback)
 

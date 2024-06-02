@@ -6,8 +6,11 @@ import com.jeju.nanaland.domain.usecase.auth.ReissueAccessTokenUseCase
 import com.jeju.nanaland.domain.usecase.authdatastore.GetRefreshTokenUseCase
 import com.jeju.nanaland.domain.usecase.authdatastore.SaveAccessTokenUseCase
 import com.jeju.nanaland.domain.usecase.authdatastore.SaveRefreshTokenUseCase
-import com.jeju.nanaland.domain.usecase.settingsdatastore.GetLanguageUseCase
+import com.jeju.nanaland.domain.usecase.member.GetUserProfileUseCase
+import com.jeju.nanaland.domain.usecase.settingsdatastore.GetValueUseCase
+import com.jeju.nanaland.globalvalue.constant.KEY_LANGUAGE
 import com.jeju.nanaland.globalvalue.type.SplashCheckingState
+import com.jeju.nanaland.globalvalue.userdata.UserData
 import com.jeju.nanaland.util.log.LogUtil
 import com.jeju.nanaland.util.network.NetworkManager
 import com.jeju.nanaland.util.network.onError
@@ -27,11 +30,12 @@ import javax.inject.Inject
 @HiltViewModel
 class SplashViewModel @Inject constructor(
     private val networkManager: NetworkManager,
-    private val getLanguageUseCase: GetLanguageUseCase,
+    private val getValueUseCase: GetValueUseCase,
     private val getRefreshTokenUseCase: GetRefreshTokenUseCase,
     private val reissueAccessTokenUseCase: ReissueAccessTokenUseCase,
     private val saveAccessTokenUseCase: SaveAccessTokenUseCase,
-    private val saveRefreshTokenUseCase: SaveRefreshTokenUseCase
+    private val saveRefreshTokenUseCase: SaveRefreshTokenUseCase,
+    private val getUserProfileUseCase: GetUserProfileUseCase
 ) : ViewModel() {
 
     private val _checkingState = MutableStateFlow(SplashCheckingState.Network)
@@ -51,12 +55,12 @@ class SplashViewModel @Inject constructor(
     }
 
     fun checkLanguageState(
-        moveToLanguageSelectionScreen: () -> Unit
+        moveToLanguageInitScreen: () -> Unit
     ) {
-        getLanguageUseCase()
+        getValueUseCase(KEY_LANGUAGE)
             .onEach {
                 if (it.isNullOrEmpty()) {
-                    moveToLanguageSelectionScreen()
+                    moveToLanguageInitScreen()
                 } else {
                     _checkingState.update { SplashCheckingState.Authorization }
                 }
@@ -80,6 +84,7 @@ class SplashViewModel @Inject constructor(
                             data?.let {
                                 saveAccessTokenUseCase(data.data.accessToken ?: "")
                                 saveRefreshTokenUseCase(data.data.refreshToken ?: "")
+                                getUserData()
                             }
                             moveToMainScreen()
                         }.onError { code, message ->
@@ -99,5 +104,25 @@ class SplashViewModel @Inject constructor(
                     .launchIn(viewModelScope)
             }
         }
+    }
+
+    private fun getUserData() {
+        getUserProfileUseCase()
+            .onEach { networkResult ->
+                networkResult.onSuccess { code, data ->
+                    data?.let {
+                        UserData.provider = data.data.provider ?: "GUEST"
+                        if (UserData.provider == "GUEST") {
+                            UserData.nickname = "GUEST"
+                        } else {
+                            UserData.nickname = data.data.nickname ?: "GUEST"
+                        }
+                    }
+                }.onError { code, message ->
+
+                }.onException {  }
+            }
+            .catch { LogUtil.e("flow error", "getUserProfileUseCase") }
+            .launchIn(viewModelScope)
     }
 }

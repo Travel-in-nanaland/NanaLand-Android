@@ -15,12 +15,14 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.unit.dp
+import com.jeju.nanaland.R
 import com.jeju.nanaland.globalvalue.type.HomeScreenViewType
 import com.jeju.nanaland.ui.component.main.searching.parts.SearchingScreenDeleteAllRecentSearchText
 import com.jeju.nanaland.ui.component.main.searching.parts.SearchingScreenRecentSearchItem
 import com.jeju.nanaland.ui.component.main.searching.parts.SearchingScreenRecentSearchText
 import com.jeju.nanaland.ui.theme.body02
 import com.jeju.nanaland.ui.theme.getColor
+import com.jeju.nanaland.util.resource.getString
 
 @Composable
 fun SearchingScreenRecentSearchContent(
@@ -52,7 +54,7 @@ fun SearchingScreenRecentSearchContent(
                 contentAlignment = Alignment.TopStart
             ) {
                 Text(
-                    text = "최근 검색어가 없습니다.",
+                    text = getString(R.string.searching_screen_최근_검색어가_없습니다),
                     color = getColor().gray01,
                     style = body02
                 )

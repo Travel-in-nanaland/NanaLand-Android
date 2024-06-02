@@ -2,11 +2,12 @@ package com.jeju.nanaland.ui.navigation
 
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.remember
+import androidx.core.os.bundleOf
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
-import com.jeju.nanaland.globalvalue.constant.ROUTE_INFORMATION_MODIFICATION_PROPOSAL
+import com.jeju.nanaland.globalvalue.constant.ROUTE_INFORMATION_MODIFICATION_PROPOSAL_CATEGORY
 import com.jeju.nanaland.globalvalue.constant.ROUTE_MAIN
 import com.jeju.nanaland.globalvalue.constant.ROUTE_MARKET_CONTENT
 import com.jeju.nanaland.globalvalue.constant.ROUTE_MARKET_LIST
@@ -17,6 +18,7 @@ import com.jeju.nanaland.ui.main.favorite.FavoriteViewModel
 import com.jeju.nanaland.ui.main.home.search.SearchViewModel
 import com.jeju.nanaland.ui.market.MarketContentScreen
 import com.jeju.nanaland.ui.market.MarketListViewModel
+import com.jeju.nanaland.util.navigation.navigate
 
 fun NavGraphBuilder.marketContentScreen(navController: NavController) = composable(route = ROUTE_MARKET_CONTENT) {
     val parentEntry = remember(it) { navController.previousBackStackEntry!! }
@@ -64,9 +66,12 @@ fun NavGraphBuilder.marketContentScreen(navController: NavController) = composab
         isSearch = isSearch,
         updatePrevScreenListFavorite = updatePrevScreenListFavorite,
         moveToBackScreen = { navController.popBackStack() },
-        moveToInfoModificationProposalScreen = { navController.navigate(
-            ROUTE_INFORMATION_MODIFICATION_PROPOSAL
-        ) },
+        moveToInfoModificationProposalScreen = {
+            val bundle = bundleOf(
+                "postId" to it.arguments?.getLong("contentId"),
+                "category" to "MARKET"
+            )
+            navController.navigate(ROUTE_INFORMATION_MODIFICATION_PROPOSAL_CATEGORY, bundle) },
         moveToSignInScreen = { navController.navigate(ROUTE_SIGN_IN) {
             popUpTo(ROUTE_MAIN) { inclusive = true }
             launchSingleTop = true

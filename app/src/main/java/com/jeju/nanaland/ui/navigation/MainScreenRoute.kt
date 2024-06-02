@@ -7,6 +7,7 @@ import androidx.navigation.compose.composable
 import com.jeju.nanaland.globalvalue.constant.ROUTE_EXPERIENCE_CONTENT
 import com.jeju.nanaland.globalvalue.constant.ROUTE_FESTIVAL_CONTENT
 import com.jeju.nanaland.globalvalue.constant.ROUTE_FESTIVAL_LIST
+import com.jeju.nanaland.globalvalue.constant.ROUTE_LANGUAGE_INITIALIZATION
 import com.jeju.nanaland.globalvalue.constant.ROUTE_MAIN
 import com.jeju.nanaland.globalvalue.constant.ROUTE_MARKET_CONTENT
 import com.jeju.nanaland.globalvalue.constant.ROUTE_MARKET_LIST
@@ -17,6 +18,7 @@ import com.jeju.nanaland.globalvalue.constant.ROUTE_NATURE_LIST
 import com.jeju.nanaland.globalvalue.constant.ROUTE_PROFILE_UPDATE
 import com.jeju.nanaland.globalvalue.constant.ROUTE_SETTINGS
 import com.jeju.nanaland.globalvalue.constant.ROUTE_SIGN_IN
+import com.jeju.nanaland.globalvalue.constant.ROUTE_TYPE_TESTING
 import com.jeju.nanaland.globalvalue.type.CategoryType
 import com.jeju.nanaland.ui.main.MainScreen
 import com.jeju.nanaland.util.navigation.navigate
@@ -52,6 +54,10 @@ fun NavGraphBuilder.mainScreen(navController: NavController) = composable(route 
             navController.navigate(ROUTE_PROFILE_UPDATE, bundle)
         },
         moveToSignInScreen = { navController.navigate(ROUTE_SIGN_IN) {
+            popUpTo(ROUTE_MAIN) { inclusive = true }
+            launchSingleTop = true
+        } },
+        moveToTypeTestScreen = { navController.navigate(ROUTE_TYPE_TESTING) {
             popUpTo(ROUTE_MAIN) { inclusive = true }
             launchSingleTop = true
         } }

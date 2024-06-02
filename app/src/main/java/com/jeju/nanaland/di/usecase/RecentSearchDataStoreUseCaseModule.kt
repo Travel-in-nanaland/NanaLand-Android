@@ -2,6 +2,7 @@ package com.jeju.nanaland.di.usecase
 
 import com.jeju.nanaland.domain.repository.RecentSearchDataStoreRepository
 import com.jeju.nanaland.domain.usecase.recentsearchdatastore.AddRecentSearchUseCase
+import com.jeju.nanaland.domain.usecase.recentsearchdatastore.ClearRecentSearchDataStoreUseCase
 import com.jeju.nanaland.domain.usecase.recentsearchdatastore.DeleteRecentSearchUseCase
 import com.jeju.nanaland.domain.usecase.recentsearchdatastore.GetAllRecentSearchUseCase
 import dagger.Module
@@ -36,5 +37,13 @@ object RecentSearchDataStoreUseCaseModule {
         repository: RecentSearchDataStoreRepository
     ): DeleteRecentSearchUseCase {
         return DeleteRecentSearchUseCase(repository)
+    }
+
+    @Singleton
+    @Provides
+    fun provideClearRecentSearchDataStoreUseCase(
+        repository: RecentSearchDataStoreRepository
+    ): ClearRecentSearchDataStoreUseCase {
+        return ClearRecentSearchDataStoreUseCase(repository)
     }
 }

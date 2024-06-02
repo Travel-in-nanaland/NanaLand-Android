@@ -15,6 +15,8 @@ import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.unit.dp
 import com.jeju.nanaland.globalvalue.type.SearchCategoryType
+import com.jeju.nanaland.ui.theme.body02
+import com.jeju.nanaland.ui.theme.body02SemiBold
 import com.jeju.nanaland.ui.theme.caption01
 import com.jeju.nanaland.ui.theme.getColor
 import com.jeju.nanaland.util.resource.getString
@@ -59,7 +61,7 @@ fun SearchResultScreenCategorySelectionTab(
                 Text(
                     text = getString(item.titleResId),
                     color = getColor().black,
-                    style = caption01
+                    style = if (selectedCategory == item) body02SemiBold else body02
                 )
             }
         }

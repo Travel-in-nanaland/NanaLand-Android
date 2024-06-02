@@ -13,4 +13,6 @@ interface RecentSearchDataStoreRepository {
 
     // 최근 검색어 지우기
     suspend fun deleteRecentSearch(key: String)
+
+    suspend fun clearAll()
 }

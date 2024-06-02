@@ -1,5 +1,6 @@
 package com.jeju.nanaland.ui.withdrawal
 
+import android.widget.Toast
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -12,6 +13,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.jeju.nanaland.globalvalue.type.WithdrawalReasonType
@@ -32,7 +34,7 @@ import com.jeju.nanaland.util.ui.scrollableVerticalArrangement
 @Composable
 fun WithdrawalScreen(
     moveToBackScreen: () -> Unit,
-    moveToSignInScreen: () -> Unit,
+    moveToLanguageInitScreen: () -> Unit,
     viewModel: WithdrawalViewModel = hiltViewModel()
 ) {
     val selectedReason = viewModel.selectedReason.collectAsState().value
@@ -41,7 +43,7 @@ fun WithdrawalScreen(
         updateSelectedReason = viewModel::updateSelectedReason,
         withdraw = viewModel::withdraw,
         moveToBackScreen = moveToBackScreen,
-        moveToSignInScreen = moveToSignInScreen,
+        moveToLanguageInitScreen = moveToLanguageInitScreen,
         isContent = true
     )
 }
@@ -52,10 +54,11 @@ private fun WithdrawalScreen(
     updateSelectedReason: (WithdrawalReasonType) -> Unit,
     withdraw: (() -> Unit,) -> Unit,
     moveToBackScreen: () -> Unit,
-    moveToSignInScreen: () -> Unit,
+    moveToLanguageInitScreen: () -> Unit,
     isContent: Boolean
 ) {
     val isDialogShowing = remember { mutableStateOf(false) }
+
     CustomSurface {
         CustomTopBar(
             title = "회원탈퇴",
@@ -153,7 +156,11 @@ private fun WithdrawalScreen(
             item {
                 Column(Modifier.padding(start = 16.dp, end = 16.dp)) {
                     Row {
-                        WithdrawalScreenWithdrawButton { isDialogShowing.value = true }
+                        WithdrawalScreenWithdrawButton {
+                            if (selectedReason != WithdrawalReasonType.Idle) {
+                                isDialogShowing.value = true
+                            }
+                        }
 
                         Spacer(Modifier.weight(1f))
 
@@ -168,7 +175,7 @@ private fun WithdrawalScreen(
 
     if (isDialogShowing.value) {
         WithdrawalScreenConfirmDialog(
-            onConfirm = { withdraw(moveToSignInScreen) },
+            onConfirm = { withdraw(moveToLanguageInitScreen) },
             onCancel = { isDialogShowing.value = false }
         )
     }

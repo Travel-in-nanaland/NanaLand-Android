@@ -12,5 +12,7 @@ data class RecommendedPostData(
     @SerializedName("title")
     val title: String?,
     @SerializedName("introduction")
-    val intro: String?
+    val intro: String?,
+    @SerializedName("favorite")
+    val favorite: Boolean
 )

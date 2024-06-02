@@ -15,5 +15,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "NanaLand"
+rootProject.name = "nanaland in Jeju"
 include(":app")

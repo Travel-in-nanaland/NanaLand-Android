@@ -7,8 +7,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import com.jeju.nanaland.R
 import com.jeju.nanaland.ui.theme.caption01
 import com.jeju.nanaland.ui.theme.getColor
+import com.jeju.nanaland.util.resource.getString
 
 @Composable
 fun JejuMapNoticeText() {
@@ -16,7 +18,7 @@ fun JejuMapNoticeText() {
         modifier = Modifier
             .padding(end = 16.dp)
             .fillMaxWidth(),
-        text = "*참고용 사진입니다.",
+        text = getString(R.string.festival_list_screen_image_caption),
         color = getColor().gray01,
         textAlign = TextAlign.End,
         style = caption01

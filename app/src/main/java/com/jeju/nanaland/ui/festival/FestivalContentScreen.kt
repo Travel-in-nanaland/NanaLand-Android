@@ -24,6 +24,7 @@ import com.jeju.nanaland.ui.component.detailscreen.other.DetailScreenInformation
 import com.jeju.nanaland.ui.component.detailscreen.other.DetailScreenInformationModificationProposalButton
 import com.jeju.nanaland.ui.component.detailscreen.other.DetailScreenTopBannerImage
 import com.jeju.nanaland.ui.component.detailscreen.other.MoveToTopButton
+import com.jeju.nanaland.util.resource.getString
 import com.jeju.nanaland.util.ui.ScreenPreview
 import com.jeju.nanaland.util.ui.UiState
 import kotlinx.coroutines.launch
@@ -67,7 +68,7 @@ private fun FestivalContentScreen(
     val coroutineScope = rememberCoroutineScope()
     CustomSurface {
         CustomTopBar(
-            title = "축제",
+            title = getString(R.string.common_축제),
             onBackButtonClicked = moveToBackScreen
         )
         when (festivalContent) {
@@ -95,7 +96,7 @@ private fun FestivalContentScreen(
                                 if (!festivalContent.data.address.isNullOrEmpty()) {
                                     DetailScreenInformation(
                                         drawableId = R.drawable.ic_location_outlined,
-                                        title = "주소",
+                                        title = getString(R.string.detail_screen_common_주소),
                                         content = festivalContent.data.address
                                     )
 
@@ -106,7 +107,7 @@ private fun FestivalContentScreen(
                                 if (!festivalContent.data.contact.isNullOrEmpty()) {
                                     DetailScreenInformation(
                                         drawableId = R.drawable.ic_phone_outlined,
-                                        title = "연락처",
+                                        title = getString(R.string.detail_screen_common_연락처),
                                         content = festivalContent.data.contact
                                     )
 
@@ -116,7 +117,7 @@ private fun FestivalContentScreen(
                                 if (!festivalContent.data.period.isNullOrEmpty()) {
                                     DetailScreenInformation(
                                         drawableId = R.drawable.ic_calendar_outlined,
-                                        title = "기간",
+                                        title = getString(R.string.detail_screen_common_기간),
                                         content = festivalContent.data.period
                                     )
 
@@ -126,7 +127,7 @@ private fun FestivalContentScreen(
                                 if (!festivalContent.data.time.isNullOrEmpty()) {
                                     DetailScreenInformation(
                                         drawableId = R.drawable.ic_clock_outlined,
-                                        title = "이용 시간",
+                                        title = getString(R.string.detail_screen_common_이용_시간),
                                         content = festivalContent.data.time
                                     )
 
@@ -136,7 +137,7 @@ private fun FestivalContentScreen(
                                 if (!festivalContent.data.fee.isNullOrEmpty()) {
                                     DetailScreenInformation(
                                         drawableId = R.drawable.ic_ticket_outlined,
-                                        title = "입장료",
+                                        title = getString(R.string.detail_screen_common_입장료),
                                         content = festivalContent.data.fee
                                     )
 
@@ -146,7 +147,7 @@ private fun FestivalContentScreen(
                                 if (!festivalContent.data.homepage.isNullOrEmpty()) {
                                     DetailScreenInformation(
                                         drawableId = R.drawable.ic_clip_outlined,
-                                        title = "홈페이지",
+                                        title = getString(R.string.detail_screen_common_홈페이지),
                                         content = festivalContent.data.homepage
                                     )
 

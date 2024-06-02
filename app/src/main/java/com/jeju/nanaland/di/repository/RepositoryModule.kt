@@ -9,6 +9,7 @@ import com.jeju.nanaland.data.api.MarketApi
 import com.jeju.nanaland.data.api.MemberApi
 import com.jeju.nanaland.data.api.NanaPickApi
 import com.jeju.nanaland.data.api.NatureApi
+import com.jeju.nanaland.data.api.ReportApi
 import com.jeju.nanaland.data.api.SearchApi
 import com.jeju.nanaland.data.repository.AuthDataStoreRepositoryImpl
 import com.jeju.nanaland.data.repository.AuthRepositoryImpl
@@ -19,6 +20,7 @@ import com.jeju.nanaland.data.repository.MemberRepositoryImpl
 import com.jeju.nanaland.data.repository.NanaPickRepositoryImpl
 import com.jeju.nanaland.data.repository.NatureRepositoryImpl
 import com.jeju.nanaland.data.repository.RecentSearchDataStoreRepositoryImpl
+import com.jeju.nanaland.data.repository.ReportRepositoryImpl
 import com.jeju.nanaland.data.repository.SearchRepositoryImpl
 import com.jeju.nanaland.data.repository.UserSettingsDataStoreRepositoryImpl
 import com.jeju.nanaland.di.datastore.DataStoreModule
@@ -31,6 +33,7 @@ import com.jeju.nanaland.domain.repository.MemberRepository
 import com.jeju.nanaland.domain.repository.NanaPickRepository
 import com.jeju.nanaland.domain.repository.NatureRepository
 import com.jeju.nanaland.domain.repository.RecentSearchDataStoreRepository
+import com.jeju.nanaland.domain.repository.ReportRepository
 import com.jeju.nanaland.domain.repository.SearchRepository
 import com.jeju.nanaland.domain.repository.UserSettingsDataStoreRepository
 import dagger.Module
@@ -105,6 +108,14 @@ object RepositoryModule {
         authApi: AuthApi
     ): AuthRepository {
         return AuthRepositoryImpl(authApi)
+    }
+
+    @Singleton
+    @Provides
+    fun provideReportRepository(
+        reportApi: ReportApi
+    ): ReportRepository {
+        return ReportRepositoryImpl(reportApi)
     }
 
     @Singleton

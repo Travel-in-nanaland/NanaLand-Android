@@ -1,8 +1,9 @@
 package com.jeju.nanaland.di.usecase
 
 import com.jeju.nanaland.domain.repository.UserSettingsDataStoreRepository
-import com.jeju.nanaland.domain.usecase.settingsdatastore.GetLanguageUseCase
-import com.jeju.nanaland.domain.usecase.settingsdatastore.SaveLanguageUseCase
+import com.jeju.nanaland.domain.usecase.settingsdatastore.ClearUserSettingsDataStoreUseCase
+import com.jeju.nanaland.domain.usecase.settingsdatastore.GetValueUseCase
+import com.jeju.nanaland.domain.usecase.settingsdatastore.SaveValueUseCase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -15,17 +16,25 @@ object SettingsDataStoreUseCaseModule {
 
     @Singleton
     @Provides
-    fun provideGetLanguageUseCase(
+    fun provideGetValueUseCase(
         repository: UserSettingsDataStoreRepository
-    ): GetLanguageUseCase {
-        return GetLanguageUseCase(repository)
+    ): GetValueUseCase {
+        return GetValueUseCase(repository)
     }
 
     @Singleton
     @Provides
-    fun provideSaveLanguageUseCase(
+    fun provideSaveValueUseCase(
         repository: UserSettingsDataStoreRepository
-    ): SaveLanguageUseCase {
-        return SaveLanguageUseCase(repository)
+    ): SaveValueUseCase {
+        return SaveValueUseCase(repository)
+    }
+
+    @Singleton
+    @Provides
+    fun provideClearUserSettingsDataStoreUseCase(
+        repository: UserSettingsDataStoreRepository
+    ): ClearUserSettingsDataStoreUseCase {
+        return ClearUserSettingsDataStoreUseCase(repository)
     }
 }

@@ -12,7 +12,8 @@ import com.jeju.nanaland.domain.request.auth.SignUpRequest
 import com.jeju.nanaland.domain.usecase.auth.SignUpUseCase
 import com.jeju.nanaland.domain.usecase.authdatastore.SaveAccessTokenUseCase
 import com.jeju.nanaland.domain.usecase.authdatastore.SaveRefreshTokenUseCase
-import com.jeju.nanaland.domain.usecase.settingsdatastore.GetLanguageUseCase
+import com.jeju.nanaland.domain.usecase.settingsdatastore.GetValueUseCase
+import com.jeju.nanaland.globalvalue.constant.KEY_LANGUAGE
 import com.jeju.nanaland.globalvalue.type.InputNicknameState
 import com.jeju.nanaland.globalvalue.userdata.UserData
 import com.jeju.nanaland.util.log.LogUtil
@@ -33,7 +34,7 @@ import javax.inject.Inject
 @HiltViewModel
 class SignUpViewModel @Inject constructor(
     private val signUpUseCase: SignUpUseCase,
-    private val getLanguageUseCase: GetLanguageUseCase,
+    private val getValueUseCase: GetValueUseCase,
     private val saveAccessTokenUseCase: SaveAccessTokenUseCase,
     private val saveRefreshTokenUseCase: SaveRefreshTokenUseCase,
     private val application: Application
@@ -44,7 +45,7 @@ class SignUpViewModel @Inject constructor(
     private val _inputNicknameState = MutableStateFlow(InputNicknameState.Idle)
     val inputNicknameState = _inputNicknameState.asStateFlow()
     private val _profileImageUri = MutableStateFlow<String?>(null)
-    val profileImageUri: StateFlow<String?> = _profileImageUri
+    val profileImageUri = _profileImageUri.asStateFlow()
 
     fun updateInputNickname(nickname: String) {
         _inputNickname.update { nickname }
@@ -72,7 +73,7 @@ class SignUpViewModel @Inject constructor(
         if (_inputNickname.value.length > 8 || _inputNickname.value.isEmpty()) return
 
         var locale = "ENGLISH"
-        getLanguageUseCase()
+        getValueUseCase(key = KEY_LANGUAGE)
             .onEach {
                 locale = when (it) {
                     "en" -> "ENGLISH"
@@ -82,7 +83,7 @@ class SignUpViewModel @Inject constructor(
                     else -> "ENGLISH"
                 }
             }
-            .catch { LogUtil.e("flow Error", "getLanguageUseCase") }
+            .catch { LogUtil.e("flow Error", "getValueUseCase") }
             .launchIn(viewModelScope)
 
         var imageFile: File? = null

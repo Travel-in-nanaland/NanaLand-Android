@@ -20,6 +20,7 @@ import androidx.compose.ui.unit.dp
 import com.jeju.nanaland.R
 import com.jeju.nanaland.ui.theme.bodySemiBold
 import com.jeju.nanaland.ui.theme.getColor
+import com.jeju.nanaland.util.resource.getString
 import com.jeju.nanaland.util.ui.clickableNoEffect
 
 @Composable
@@ -37,7 +38,7 @@ fun NonMemberDialogBottomButton(onClick: () -> Unit) {
     ) {
         Row {
             Text(
-                text = "회원가입 하러 가기",
+                text = getString(R.string.non_member_dialog_go_sign_up),
                 color = getColor().white,
                 style = bodySemiBold
             )

@@ -18,9 +18,13 @@ import com.jeju.nanaland.ui.component.signup.typetestresult.TypeTestResultScreen
 
 @Composable
 fun TypeTestResultScreen(
+    travelType: String,
+    moveToRecommendedSpotScreen: () -> Unit,
     moveToMainScreen: () -> Unit,
 ) {
     TypeTestResultScreen(
+        travelType = travelType,
+        moveToRecommendedSpotScreen = moveToRecommendedSpotScreen,
         moveToMainScreen = moveToMainScreen,
         isContent = true
     )
@@ -28,6 +32,8 @@ fun TypeTestResultScreen(
 
 @Composable
 private fun TypeTestResultScreen(
+    travelType: String,
+    moveToRecommendedSpotScreen: () -> Unit,
     moveToMainScreen: () -> Unit,
     isContent: Boolean
 ) {
@@ -42,7 +48,7 @@ private fun TypeTestResultScreen(
 
             Spacer(Modifier.height(4.dp))
 
-            TypeTestResultScreenText2()
+            TypeTestResultScreenText2(travelType = travelType)
 
             Spacer(Modifier.height(75.dp))
 
@@ -50,13 +56,11 @@ private fun TypeTestResultScreen(
 
             Spacer(Modifier.height(32.dp))
 
-            TypeTestResultScreenText3()
+            TypeTestResultScreenText3(travelType = travelType)
 
             Spacer(Modifier.weight(1f))
 
-            TypeTestResultScreenBottomButton1 {
-
-            }
+            TypeTestResultScreenBottomButton1 { moveToRecommendedSpotScreen() }
 
             Spacer(Modifier.height(16.dp))
 

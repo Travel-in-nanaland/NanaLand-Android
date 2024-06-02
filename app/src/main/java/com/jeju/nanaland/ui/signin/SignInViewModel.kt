@@ -1,6 +1,5 @@
 package com.jeju.nanaland.ui.signin
 
-import android.provider.Settings
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.jeju.nanaland.domain.request.auth.SignInRequest
@@ -9,7 +8,9 @@ import com.jeju.nanaland.domain.usecase.auth.SignInUseCase
 import com.jeju.nanaland.domain.usecase.auth.SignUpUseCase
 import com.jeju.nanaland.domain.usecase.authdatastore.SaveAccessTokenUseCase
 import com.jeju.nanaland.domain.usecase.authdatastore.SaveRefreshTokenUseCase
-import com.jeju.nanaland.domain.usecase.settingsdatastore.GetLanguageUseCase
+import com.jeju.nanaland.domain.usecase.member.GetUserProfileUseCase
+import com.jeju.nanaland.domain.usecase.settingsdatastore.GetValueUseCase
+import com.jeju.nanaland.globalvalue.constant.KEY_LANGUAGE
 import com.jeju.nanaland.globalvalue.userdata.UserData
 import com.jeju.nanaland.util.log.LogUtil
 import com.jeju.nanaland.util.network.onError
@@ -24,7 +25,8 @@ import javax.inject.Inject
 @HiltViewModel
 class SignInViewModel @Inject constructor(
     private val signInUseCase: SignInUseCase,
-    private val getLanguageUseCase: GetLanguageUseCase,
+    private val getUserProfileUseCase: GetUserProfileUseCase,
+    private val getValueUseCase: GetValueUseCase,
     private val saveAccessTokenUseCase: SaveAccessTokenUseCase,
     private val saveRefreshTokenUseCase: SaveRefreshTokenUseCase,
     private val signUpUseCase: SignUpUseCase,
@@ -37,7 +39,7 @@ class SignInViewModel @Inject constructor(
         moveToSignUpScreen: () -> Unit,
     ) {
         var locale = "ENGLISH"
-        getLanguageUseCase()
+        getValueUseCase(key = KEY_LANGUAGE)
             .onEach {
                 locale = when (it) {
                     "en" -> "ENGLISH"
@@ -47,7 +49,7 @@ class SignInViewModel @Inject constructor(
                     else -> "ENGLISH"
                 }
             }
-            .catch { LogUtil.e("flow error", "getLanguageUseCase") }
+            .catch { LogUtil.e("flow error", "getValueUseCase") }
             .launchIn(viewModelScope)
         val requestData = SignInRequest(
             locale = locale,
@@ -60,6 +62,7 @@ class SignInViewModel @Inject constructor(
                     data?.let {
                         saveAccessTokenUseCase(data.data.accessToken ?: "")
                         saveRefreshTokenUseCase(data.data.refreshToken ?: "")
+                        getUserData()
                         moveToMainScreen()
                     }
                 }.onError { code, message ->
@@ -76,12 +79,28 @@ class SignInViewModel @Inject constructor(
             .launchIn(viewModelScope)
     }
 
+    private fun getUserData() {
+        getUserProfileUseCase()
+            .onEach { networkResult ->
+                networkResult.onSuccess { code, data ->
+                    data?.let {
+                        UserData.provider = data.data.provider ?: "GUEST"
+                        UserData.nickname = data.data.nickname ?: "GUEST"
+                    }
+                }.onError { code, message ->
+
+                }.onException {  }
+            }
+            .catch { LogUtil.e("flow error", "getUserProfileUseCase") }
+            .launchIn(viewModelScope)
+    }
+
     fun nonMemberSignUp(
         androidId: String,
         moveToMainScreen: () -> Unit,
     ) {
         var locale = "ENGLISH"
-        getLanguageUseCase()
+        getValueUseCase(key = KEY_LANGUAGE)
             .onEach {
                 locale = when (it) {
                     "en" -> "ENGLISH"
@@ -91,7 +110,7 @@ class SignInViewModel @Inject constructor(
                     else -> "ENGLISH"
                 }
             }
-            .catch { LogUtil.e("flow Error", "getLanguageUseCase") }
+            .catch { LogUtil.e("flow Error", "getValueUseCase") }
             .launchIn(viewModelScope)
 
         val requestData = SignUpRequest(

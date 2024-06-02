@@ -39,6 +39,7 @@ fun FestivalThumbnail(
     ) {
         Box {
             ThumbnailImage(imageUri = imageUri)
+
             Box(
                 modifier = Modifier
                     .align(Alignment.TopEnd)

@@ -3,7 +3,7 @@ package com.jeju.nanaland.ui.navigation
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
-import com.jeju.nanaland.globalvalue.constant.ROUTE_LANGUAGE_SELECTION
+import com.jeju.nanaland.globalvalue.constant.ROUTE_LANGUAGE_INITIALIZATION
 import com.jeju.nanaland.globalvalue.constant.ROUTE_MAIN
 import com.jeju.nanaland.globalvalue.constant.ROUTE_SIGN_IN
 import com.jeju.nanaland.globalvalue.constant.ROUTE_SPLASH
@@ -17,8 +17,8 @@ fun NavGraphBuilder.splashScreen(navController: NavController) = composable(rout
                 launchSingleTop = true
             }
         },
-        moveToLanguageSelectionScreen = {
-            navController.navigate(ROUTE_LANGUAGE_SELECTION) {
+        moveToLanguageInitScreen = {
+            navController.navigate(ROUTE_LANGUAGE_INITIALIZATION) {
                 popUpTo(ROUTE_SPLASH) { inclusive = true }
                 launchSingleTop = true
             }

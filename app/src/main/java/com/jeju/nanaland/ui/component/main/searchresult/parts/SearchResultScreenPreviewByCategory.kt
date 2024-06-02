@@ -69,11 +69,19 @@ fun SearchResultScreenPreviewByCategory(
             Modifier.fillMaxWidth(),
             contentAlignment = Alignment.Center
         ) {
+            Spacer(Modifier.height(32.dp))
+
             SearchResultScreenPreparingServiceContent()
+
+            Spacer(Modifier.height(32.dp))
         }
     } else {
         if ((allSearchResultList[category.name]?.data?.size ?: 0) == 0) {
+            Spacer(Modifier.height(32.dp))
+
             SearchResultScreenEmptySearchResultContent()
+
+            Spacer(Modifier.height(32.dp))
         } else {
             FlowRow {
                 allSearchResultList[category.name]?.data?.let { searchResult ->

@@ -13,6 +13,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.jeju.nanaland.R
 import com.jeju.nanaland.ui.theme.caption01
+import com.jeju.nanaland.ui.theme.caption01SemiBold
 import com.jeju.nanaland.ui.theme.getColor
 import com.jeju.nanaland.util.ui.clickableNoEffect
 
@@ -25,7 +26,7 @@ fun MyPageScreenTestAgainContent(onClick: () -> Unit) {
         Text(
             text = "테스트 다시하기",
             color = getColor().black,
-            style = caption01
+            style = caption01SemiBold
         )
 
         Spacer(Modifier.width(4.dp))

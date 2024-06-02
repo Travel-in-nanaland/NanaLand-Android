@@ -37,4 +37,10 @@ class AuthDataStoreRepositoryImpl(
         val key = stringPreferencesKey(KEY_REFRESH_TOKEN)
         dataStore.edit { it[key] = refreshToken }
     }
+
+    override suspend fun clearAll() {
+        dataStore.edit {
+            it.clear()
+        }
+    }
 }

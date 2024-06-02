@@ -10,6 +10,7 @@ import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.jeju.nanaland.ui.theme.body02
 import com.jeju.nanaland.ui.theme.getColor
 
 @Composable
@@ -30,7 +31,8 @@ fun ProfileUpdateScreenIntroductionTextField(
             )
             .padding(16.dp),
         value = inputText,
-        onValueChange = onValueChange
+        onValueChange = onValueChange,
+        textStyle = body02
     ) {
         it()
     }

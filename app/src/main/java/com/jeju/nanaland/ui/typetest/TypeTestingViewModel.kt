@@ -5,6 +5,22 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.jeju.nanaland.domain.request.member.UpdateUserTypeRequest
 import com.jeju.nanaland.domain.usecase.member.UpdateUserTypeUseCase
+import com.jeju.nanaland.globalvalue.constant.TYPE_GAMGYUL
+import com.jeju.nanaland.globalvalue.constant.TYPE_GAMGYUL_ADE
+import com.jeju.nanaland.globalvalue.constant.TYPE_GAMGYUL_AFFOKATO
+import com.jeju.nanaland.globalvalue.constant.TYPE_GAMGYUL_BUBBLE_TEA
+import com.jeju.nanaland.globalvalue.constant.TYPE_GAMGYUL_CHOCOLATE
+import com.jeju.nanaland.globalvalue.constant.TYPE_GAMGYUL_CIDER
+import com.jeju.nanaland.globalvalue.constant.TYPE_GAMGYUL_COCKTAIL
+import com.jeju.nanaland.globalvalue.constant.TYPE_GAMGYUL_FLATCCINO
+import com.jeju.nanaland.globalvalue.constant.TYPE_GAMGYUL_HANGWA
+import com.jeju.nanaland.globalvalue.constant.TYPE_GAMGYUL_ICECREAM
+import com.jeju.nanaland.globalvalue.constant.TYPE_GAMGYUL_JUICE
+import com.jeju.nanaland.globalvalue.constant.TYPE_GAMGYUL_LATTE
+import com.jeju.nanaland.globalvalue.constant.TYPE_GAMGYUL_RICECAKE
+import com.jeju.nanaland.globalvalue.constant.TYPE_GAMGYUL_SIKHYE
+import com.jeju.nanaland.globalvalue.constant.TYPE_GAMGYUL_YOGURT
+import com.jeju.nanaland.globalvalue.constant.TYPE_TANGERINE_PEEL_TEA
 import com.jeju.nanaland.util.log.LogUtil
 import com.jeju.nanaland.util.network.onError
 import com.jeju.nanaland.util.network.onException
@@ -31,24 +47,24 @@ class TypeTestingViewModel @Inject constructor(
         _level.update { level }
     }
 
-    fun updateUserType(moveToTypeTestCompletionScreen: () -> Unit) {
+    fun updateUserType(moveToTypeTestCompletionScreen: (String) -> Unit) {
         val type = when ("${selectionList[0]}${selectionList[2]}${selectionList[4]}") {
-            "111" -> "GAMGYUL_ICECREAM"
-            "112" -> "GAMGYUL_RICECAKE"
-            "113" -> "GAMGYUL"
-            "114" -> "GAMGYUL_CIDER"
-            "121" -> "GAMGYUL_AFFOKATO"
-            "122" -> "GAMGYUL_HANGWA"
-            "123" -> "GAMGYUL_JUICE"
-            "124" -> "GAMGYUL_CHOCOLATE"
-            "211" -> "GAMGYUL_COCKTAIL"
-            "212" -> "TANGERINE_PEEL_TEA"
-            "213" -> "GAMGYUL_YOGURT"
-            "214" -> "GAMGYUL_FLATCCINO"
-            "221" -> "GAMGYUL_LATTE"
-            "222" -> "GAMGYUL_SIKHYE"
-            "223" -> "GAMGYUL_ADE"
-            else -> "GAMGYUL_BUBBLE_TEA"
+            "111" -> TYPE_GAMGYUL_ICECREAM
+            "112" -> TYPE_GAMGYUL_RICECAKE
+            "113" -> TYPE_GAMGYUL
+            "114" -> TYPE_GAMGYUL_CIDER
+            "121" -> TYPE_GAMGYUL_AFFOKATO
+            "122" -> TYPE_GAMGYUL_HANGWA
+            "123" -> TYPE_GAMGYUL_JUICE
+            "124" -> TYPE_GAMGYUL_CHOCOLATE
+            "211" -> TYPE_GAMGYUL_COCKTAIL
+            "212" -> TYPE_TANGERINE_PEEL_TEA
+            "213" -> TYPE_GAMGYUL_YOGURT
+            "214" -> TYPE_GAMGYUL_FLATCCINO
+            "221" -> TYPE_GAMGYUL_LATTE
+            "222" -> TYPE_GAMGYUL_SIKHYE
+            "223" -> TYPE_GAMGYUL_ADE
+            else -> TYPE_GAMGYUL_BUBBLE_TEA
         }
         
         val requestData = UpdateUserTypeRequest(type = type)
@@ -56,7 +72,7 @@ class TypeTestingViewModel @Inject constructor(
         updateUserTypeUseCase(requestData)
             .onEach { networkResult ->  
                 networkResult.onSuccess { code, data ->
-                    moveToTypeTestCompletionScreen()
+                    moveToTypeTestCompletionScreen(type)
                 }.onError { code, message ->
 
                 }.onException {

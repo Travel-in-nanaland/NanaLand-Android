@@ -19,7 +19,7 @@ import kotlinx.coroutines.delay
 @Composable
 fun SplashScreen(
     moveToMainScreen: () -> Unit,
-    moveToLanguageSelectionScreen: () -> Unit,
+    moveToLanguageInitScreen: () -> Unit,
     moveToSignInScreen: () -> Unit,
     viewModel: SplashViewModel = hiltViewModel()
 ) {
@@ -32,7 +32,7 @@ fun SplashScreen(
         checkLanguageState = viewModel::checkLanguageState,
         checkSignInState = viewModel::checkSignInState,
         moveToMainScreen = moveToMainScreen,
-        moveToLanguageSelectionScreen = moveToLanguageSelectionScreen,
+        moveToLanguageInitScreen = moveToLanguageInitScreen,
         moveToSignInScreen = moveToSignInScreen,
         isContent = true
     )
@@ -46,7 +46,7 @@ private fun SplashScreen(
     checkLanguageState: (() -> Unit) -> Unit,
     checkSignInState: (() -> Unit, () -> Unit) -> Unit,
     moveToMainScreen: () -> Unit,
-    moveToLanguageSelectionScreen: () -> Unit,
+    moveToLanguageInitScreen: () -> Unit,
     moveToSignInScreen: () -> Unit,
     isContent: Boolean
 ) {
@@ -77,7 +77,7 @@ private fun SplashScreen(
 //                moveToMainScreen()
             }
             SplashCheckingState.Language -> {
-                checkLanguageState(moveToLanguageSelectionScreen)
+                checkLanguageState(moveToLanguageInitScreen)
             }
             SplashCheckingState.Authorization -> {
                 checkSignInState(moveToMainScreen, moveToSignInScreen)

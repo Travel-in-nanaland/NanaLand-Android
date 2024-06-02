@@ -41,7 +41,7 @@ class FestivalListViewModel @Inject constructor(
 
     private val _selectedCategoryType = MutableStateFlow(FestivalCategoryType.Monthly)
     val selectedCategoryType = _selectedCategoryType.asStateFlow()
-    private val locationList = getLocationList()
+    private val locationList = listOf("제주시", "애월", "조천", "한경", "구좌", "한림", "우도", "추자", "서귀포시", "대정", "안덕", "남원", "표선", "성산")
     val selectedLocationList = getLocationSelectionList()
     private val seasonList = listOf("spring", "summer", "autumn", "winter")
     val selectedSeasonList = mutableStateListOf(true, false, false, false)
@@ -217,7 +217,7 @@ class FestivalListViewModel @Inject constructor(
                     data?.let {
                         _festivalThumbnailList.update { uiState ->
                             if (uiState is UiState.Success) {
-                                val newList = uiState.data.map {  item ->
+                                val newList = uiState.data.map { item ->
                                     if (item.id == contentId) item.copy(favorite = data.data.favorite)
                                     else item
                                 }

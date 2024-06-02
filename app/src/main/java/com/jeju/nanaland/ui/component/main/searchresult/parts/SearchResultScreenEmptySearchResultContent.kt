@@ -16,6 +16,7 @@ import androidx.compose.ui.unit.dp
 import com.jeju.nanaland.R
 import com.jeju.nanaland.ui.theme.body02
 import com.jeju.nanaland.ui.theme.getColor
+import com.jeju.nanaland.util.resource.getString
 
 @Composable
 fun SearchResultScreenEmptySearchResultContent() {
@@ -26,14 +27,13 @@ fun SearchResultScreenEmptySearchResultContent() {
         Image(
             modifier = Modifier.size(48.dp),
             painter = painterResource(id = R.drawable.img_mandarine),
-            contentDescription = null,
-            colorFilter = ColorFilter.tint(getColor().gray01)
+            contentDescription = null
         )
 
         Spacer(Modifier.height(4.dp))
 
         Text(
-            text = "해당 검색 결과가 없습니다.",
+            text = getString(R.string.search_result_screen_no_result),
             color = getColor().gray01,
             style = body02
         )

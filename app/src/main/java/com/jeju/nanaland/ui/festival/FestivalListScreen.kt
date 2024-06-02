@@ -19,6 +19,7 @@ import androidx.compose.runtime.snapshots.SnapshotStateList
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.jeju.nanaland.R
 import com.jeju.nanaland.domain.entity.festival.FestivalThumbnailData
 import com.jeju.nanaland.globalvalue.constant.PAGING_THRESHOLD
 import com.jeju.nanaland.globalvalue.constant.getLocationList
@@ -39,6 +40,7 @@ import com.jeju.nanaland.ui.component.listscreen.filter.getLocationAnchoredDragg
 import com.jeju.nanaland.ui.component.listscreen.filter.getSeasonAnchoredDraggableState
 import com.jeju.nanaland.ui.component.listscreen.list.FestivalThumbnailList
 import com.jeju.nanaland.ui.theme.NanaLandTheme
+import com.jeju.nanaland.util.resource.getString
 import com.jeju.nanaland.util.ui.ScreenPreview
 import com.jeju.nanaland.util.ui.UiState
 import kotlinx.coroutines.launch
@@ -137,7 +139,7 @@ private fun FestivalListScreen(
                 modifier = Modifier.fillMaxSize()
             ) {
                 CustomTopBar(
-                    title = "축제",
+                    title = getString(R.string.common_축제),
                     onBackButtonClicked = moveToBackScreen
                 )
 

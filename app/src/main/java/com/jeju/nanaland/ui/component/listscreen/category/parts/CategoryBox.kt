@@ -12,9 +12,13 @@ import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import com.jeju.nanaland.R
 import com.jeju.nanaland.globalvalue.type.FestivalCategoryType
+import com.jeju.nanaland.ui.theme.body02
+import com.jeju.nanaland.ui.theme.body02SemiBold
 import com.jeju.nanaland.ui.theme.caption01
 import com.jeju.nanaland.ui.theme.getColor
+import com.jeju.nanaland.util.resource.getString
 import com.jeju.nanaland.util.ui.clickableNoEffect
 
 @Composable
@@ -51,12 +55,12 @@ fun RowScope.CategoryBox(
     ) {
         Text(
             text = when (categoryIdx) {
-                0 -> "월별 축제"
-                1 -> "종료된 축제"
-                else -> "계절별 축제"
+                0 -> getString(R.string.festival_list_screen_월별_축제)
+                1 -> getString(R.string.festival_list_screen_종료된_축제)
+                else -> getString(R.string.festival_list_screen_계절별_축제)
             },
             color = Color(0xFF000000),
-            style = caption01
+            style = if (selectedCategoryType == titleList[categoryIdx]) body02SemiBold else body02
         )
     }
 }

@@ -4,9 +4,9 @@ import kotlinx.coroutines.flow.Flow
 
 interface UserSettingsDataStoreRepository {
 
-    // 언어 설정 가져오기
-    fun getLanguage(): Flow<String?>
+    fun getValue(key: String): Flow<String?>
 
-    // 언어 설정 저장하기
-    suspend fun saveLanguage(language: String)
+    suspend fun saveValue(key: String, value: String)
+
+    suspend fun clearAll()
 }

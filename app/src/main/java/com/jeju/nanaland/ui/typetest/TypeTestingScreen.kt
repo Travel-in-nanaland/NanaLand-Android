@@ -23,7 +23,7 @@ import com.jeju.nanaland.ui.component.signup.typetest.TypeTestingScreenSkipTestT
 
 @Composable
 fun TypeTestingScreen(
-    moveToTypeTestCompletionScreen: () -> Unit,
+    moveToTypeTestCompletionScreen: (String) -> Unit,
     moveToMainScreen: () -> Unit,
     viewModel: TypeTestingViewModel = hiltViewModel()
 ) {
@@ -45,8 +45,8 @@ private fun TypeTestingScreen(
     level: Int,
     updateLevel: (Int) -> Unit,
     selectionList: SnapshotStateList<Int>,
-    updateUserType: (() -> Unit) -> Unit,
-    moveToTypeTestCompletionScreen: () -> Unit,
+    updateUserType: ((String) -> Unit) -> Unit,
+    moveToTypeTestCompletionScreen: (String) -> Unit,
     moveToMainScreen: () -> Unit,
     isContent: Boolean
 ) {
@@ -112,7 +112,7 @@ private fun TypeTestingScreen(
                     }
                 }
                 else -> {
-                    Spacer(Modifier.height(85.dp))
+                    Spacer(Modifier.height(100.dp))
 
                     Row(
                         modifier = Modifier.padding(start = 24.dp, end = 24.dp)

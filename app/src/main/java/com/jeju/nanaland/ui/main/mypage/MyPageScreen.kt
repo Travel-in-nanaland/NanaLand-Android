@@ -12,6 +12,8 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.geometry.Offset
@@ -44,6 +46,7 @@ fun MyPageScreen(
     moveToSettingsScreen: () -> Unit,
     moveToProfileModificationScreen: (String?, String?, String?) -> Unit,
     moveToSignInScreen: () -> Unit,
+    moveToTypeTestScreen: () -> Unit,
     viewModel: MyPageViewModel = hiltViewModel()
 ) {
     val userProfile = viewModel.userProfile.collectAsState().value
@@ -57,6 +60,7 @@ fun MyPageScreen(
         moveToSettingsScreen = moveToSettingsScreen,
         moveToProfileModificationScreen = moveToProfileModificationScreen,
         moveToSignInScreen = moveToSignInScreen,
+        moveToTypeTestScreen = moveToTypeTestScreen,
         isContent = true
     )
 }
@@ -69,8 +73,10 @@ private fun MyPageScreen(
     moveToSettingsScreen: () -> Unit,
     moveToProfileModificationScreen: (String?, String?, String?) -> Unit,
     moveToSignInScreen: () -> Unit,
+    moveToTypeTestScreen: () -> Unit,
     isContent: Boolean
 ) {
+    val isNonMemberGuideDialogShowing = remember { mutableStateOf(false) }
     val colorMain10 = getColor().main10
     val colorWhite = getColor().white
     val density = LocalDensity.current.density
@@ -104,7 +110,7 @@ private fun MyPageScreen(
 
                 Spacer(Modifier.height(8.dp))
 
-                MyPageScreenNickname(nickname = userProfile.data.nickname ?: "")
+                MyPageScreenNickname { isNonMemberGuideDialogShowing.value = true }
 
                 Spacer(Modifier.height(24.dp))
 
@@ -117,25 +123,27 @@ private fun MyPageScreen(
 
                     Spacer(Modifier.height(16.dp))
 
-                    MyPageScreenTravelType(text = userProfile.data.travelType ?: "")
+                    if (userProfile.data.travelType == null) {
+                        MyPageScreenTravelType(text = "없음")
+                    } else {
+                        MyPageScreenTravelType(text = userProfile.data.travelType)
 
-                    Spacer(Modifier.height(8.dp))
+                        Spacer(Modifier.height(8.dp))
 
-                    Row(
-                        modifier = Modifier.horizontalScroll(rememberScrollState())
-                    ) {
-                        userProfile.data.hashTags?.forEach {
-                            TagChip2("#${it}")
+                        Row(
+                            modifier = Modifier.horizontalScroll(rememberScrollState())
+                        ) {
+                            userProfile.data.hashTags?.forEach {
+                                TagChip2("#${it}")
 
-                            Spacer(Modifier.width(8.dp))
+                                Spacer(Modifier.width(8.dp))
+                            }
                         }
                     }
 
                     Spacer(Modifier.height(16.dp))
 
-                    MyPageScreenTestAgainContent {
-
-                    }
+                    MyPageScreenTestAgainContent { moveToTypeTestScreen() }
 
                     Spacer(Modifier.height(32.dp))
 
@@ -144,16 +152,20 @@ private fun MyPageScreen(
                     Spacer(Modifier.height(8.dp))
 
                     MyPageScreenIntroductionContent(text = userProfile.data.description ?: "")
-
-                    Spacer(Modifier.weight(1f))
                 }
 
+                Spacer(Modifier.weight(1f))
+
                 MyPageScreenBottomButton {
-                    moveToProfileModificationScreen(
-                        userProfile.data.profileImageUrl,
-                        userProfile.data.nickname,
-                        userProfile.data.description
-                    )
+                    if (UserData.provider == "GUEST") {
+                        isNonMemberGuideDialogShowing.value = true
+                    } else {
+                        moveToProfileModificationScreen(
+                            userProfile.data.profileImageUrl,
+                            userProfile.data.nickname,
+                            userProfile.data.description
+                        )
+                    }
                 }
 
                 Spacer(Modifier.height(20.dp))
@@ -162,13 +174,19 @@ private fun MyPageScreen(
         }
     }
 
-
-    if (UserData.provider == "GUEST") {
+    if (isNonMemberGuideDialogShowing.value) {
         NonMemberGuideDialog(
-            onCloseClick = { updateMainScreenViewType(prevViewType) },
+            onCloseClick = { isNonMemberGuideDialogShowing.value = false },
             moveToSignInScreen = moveToSignInScreen
         )
     }
+//
+//    if (UserData.provider == "GUEST") {
+//        NonMemberGuideDialog(
+//            onCloseClick = { updateMainScreenViewType(prevViewType) },
+//            moveToSignInScreen = moveToSignInScreen
+//        )
+//    }
 }
 
 @Preview

@@ -33,6 +33,7 @@ fun HomeContent(
     moveToMarketListScreen: () -> Unit,
     moveToExperienceScreen: () -> Unit,
     moveToNanaPickListScreen: () -> Unit,
+    moveToSignInScreen: () -> Unit,
     viewModel: HomeViewModel = hiltViewModel()
 ) {
     val homePreviewBanner = viewModel.homeBannerPreview.collectAsState().value
@@ -44,12 +45,14 @@ fun HomeContent(
     HomeContent(
         homePreviewBanner = homePreviewBanner,
         recommendedPosts = recommendedPosts,
+        toggleFavorite = viewModel::toggleFavorite,
         moveToCategoryContentScreen = moveToCategoryContentScreen,
         moveToNatureListScreen = moveToNatureListScreen,
         moveToFestivalListScreen = moveToFestivalListScreen,
         moveToMarketListScreen = moveToMarketListScreen,
         moveToExperienceScreen = moveToExperienceScreen,
         moveToNanaPickListScreen = moveToNanaPickListScreen,
+        moveToSignInScreen = moveToSignInScreen,
         isContent = true
     )
 }
@@ -58,12 +61,14 @@ fun HomeContent(
 private fun HomeContent(
     homePreviewBanner: UiState<List<NanaPickBannerData>>,
     recommendedPosts: UiState<List<RecommendedPostData>>,
+    toggleFavorite: (Long, String?) -> Unit,
     moveToCategoryContentScreen: (Long, String?, Boolean) -> Unit,
     moveToNatureListScreen: () -> Unit,
     moveToFestivalListScreen: () -> Unit,
     moveToMarketListScreen: () -> Unit,
     moveToExperienceScreen: () -> Unit,
     moveToNanaPickListScreen: () -> Unit,
+    moveToSignInScreen: () -> Unit,
     isContent: Boolean
 ) {
     Column(
@@ -79,7 +84,7 @@ private fun HomeContent(
         Spacer(Modifier.height(16.dp))
 
         Column(
-            modifier = Modifier.padding(start = 16.dp, end = 16.dp, bottom = 20.dp)
+            modifier = Modifier.padding(start = 16.dp, end = 16.dp)
         ) {
             HomeScreenCategoryButtons(
                 moveToNatureListScreen = moveToNatureListScreen,
@@ -88,10 +93,9 @@ private fun HomeContent(
                 moveToExperienceScreen = moveToExperienceScreen,
                 moveToNanaPickListScreen = moveToNanaPickListScreen,
             )
-
         }
 
-        Spacer(Modifier.height(20.dp))
+        Spacer(Modifier.height(32.dp))
 
         HomeScreenAdBanner(
             moveToNatureListScreen = moveToNatureListScreen,
@@ -99,19 +103,20 @@ private fun HomeContent(
             moveToMarketListScreen = moveToMarketListScreen
         )
 
+        Spacer(Modifier.height(32.dp))
+
         Column(
             modifier = Modifier.padding(start = 16.dp, end = 16.dp, bottom = 20.dp)
         ) {
-
-            Spacer(Modifier.height(24.dp))
-
             HomeScreenRecommendText(text = UserData.nickname)
 
             Spacer(Modifier.height(10.dp))
 
             HomeScreenRecommendedPosts(
                 recommendedPosts = recommendedPosts,
-                onClick = moveToCategoryContentScreen
+                onFavoriteButtonClick = toggleFavorite,
+                onClick = moveToCategoryContentScreen,
+                moveToSignInScreen = moveToSignInScreen,
             )
         }
     }
@@ -131,12 +136,14 @@ private fun HomeContentPreview() {
         HomeContent(
             homePreviewBanner = UiState.Success(data),
             recommendedPosts = UiState.Loading,
+            toggleFavorite = { _, _ -> },
             moveToCategoryContentScreen = { _, _, _->},
             moveToNatureListScreen = { /*TODO*/ },
             moveToFestivalListScreen = { /*TODO*/ },
             moveToMarketListScreen = { /*TODO*/ },
             moveToExperienceScreen = { /*TODO*/ },
             moveToNanaPickListScreen = { /*TODO*/ },
+            moveToSignInScreen = {},
             isContent = true
         )
     }

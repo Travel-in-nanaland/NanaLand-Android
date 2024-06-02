@@ -25,6 +25,7 @@ import com.jeju.nanaland.ui.component.detailscreen.other.DetailScreenInformation
 import com.jeju.nanaland.ui.component.detailscreen.other.DetailScreenNotice
 import com.jeju.nanaland.ui.component.detailscreen.other.DetailScreenTopBannerImage
 import com.jeju.nanaland.ui.component.detailscreen.other.MoveToTopButton
+import com.jeju.nanaland.util.resource.getString
 import com.jeju.nanaland.util.ui.ScreenPreview
 import com.jeju.nanaland.util.ui.UiState
 import kotlinx.coroutines.launch
@@ -68,7 +69,7 @@ private fun NatureContentScreen(
     val coroutineScope = rememberCoroutineScope()
     CustomSurface {
         CustomTopBar(
-            title = "7대 자연",
+            title = getString(R.string.common_7대_자연),
             onBackButtonClicked = moveToBackScreen
         )
         when (natureContent) {
@@ -94,7 +95,7 @@ private fun NatureContentScreen(
                                 Spacer(Modifier.height(24.dp))
 
                                 DetailScreenNotice(
-                                    title = "소개합니다!",
+                                    title = getString(R.string.detail_screen_common_소개합니다),
                                     content = natureContent.data.intro
                                 )
 
@@ -103,7 +104,7 @@ private fun NatureContentScreen(
                                 if (!natureContent.data.address.isNullOrEmpty()) {
                                     DetailScreenInformation(
                                         drawableId = R.drawable.ic_location_outlined,
-                                        title = "주소",
+                                        title = getString(R.string.detail_screen_common_주소),
                                         content = natureContent.data.address
                                     )
 
@@ -123,7 +124,7 @@ private fun NatureContentScreen(
                                 if (!natureContent.data.time.isNullOrEmpty()) {
                                     DetailScreenInformation(
                                         drawableId = R.drawable.ic_clock_outlined,
-                                        title = "이용 시간",
+                                        title = getString(R.string.detail_screen_common_이용_시간),
                                         content = natureContent.data.time
                                     )
 
@@ -133,7 +134,7 @@ private fun NatureContentScreen(
                                 if (!natureContent.data.fee.isNullOrEmpty()) {
                                     DetailScreenInformation(
                                         drawableId = R.drawable.ic_ticket_outlined,
-                                        title = "입장료",
+                                        title = getString(R.string.detail_screen_common_입장료),
                                         content = natureContent.data.fee
                                     )
 
@@ -143,7 +144,7 @@ private fun NatureContentScreen(
                                 if (!natureContent.data.details.isNullOrEmpty()) {
                                     DetailScreenInformation(
                                         drawableId = R.drawable.ic_clip_outlined,
-                                        title = "상세 정보",
+                                        title = getString(R.string.detail_screen_common_상세_정보),
                                         content = natureContent.data.details
                                     )
 
@@ -153,7 +154,7 @@ private fun NatureContentScreen(
                                 if (!natureContent.data.amenity.isNullOrEmpty()) {
                                     DetailScreenInformation(
                                         drawableId = R.drawable.ic_amenity_outlined,
-                                        title = "편의시설",
+                                        title = getString(R.string.detail_screen_common_편의시설),
                                         content = natureContent.data.amenity
                                     )
 

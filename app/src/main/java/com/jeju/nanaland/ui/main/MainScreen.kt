@@ -59,6 +59,7 @@ fun MainScreen(
     moveToSettingsScreen: () -> Unit,
     moveToProfileModificationScreen: (String?, String?, String?) -> Unit,
     moveToSignInScreen: () -> Unit,
+    moveToTypeTestScreen: () -> Unit,
     viewModel: MainViewModel = hiltViewModel(),
     homeViewModel: HomeViewModel = hiltViewModel(),
     searchViewModel: SearchViewModel = hiltViewModel(),
@@ -89,6 +90,7 @@ fun MainScreen(
         moveToSettingsScreen = moveToSettingsScreen,
         moveToProfileModificationScreen = moveToProfileModificationScreen,
         moveToSignInScreen = moveToSignInScreen,
+        moveToTypeTestScreen = moveToTypeTestScreen,
         isContent = true
     )
 }
@@ -111,6 +113,7 @@ private fun MainScreen(
     moveToSettingsScreen: () -> Unit,
     moveToProfileModificationScreen: (String?, String?, String?) -> Unit,
     moveToSignInScreen: () -> Unit,
+    moveToTypeTestScreen: () -> Unit,
     isContent: Boolean
 ) {
     CustomSurface { isImeKeyboardShowing ->
@@ -164,6 +167,7 @@ private fun MainScreen(
                             moveToSettingsScreen = moveToSettingsScreen,
                             moveToProfileModificationScreen = moveToProfileModificationScreen,
                             moveToSignInScreen = moveToSignInScreen,
+                            moveToTypeTestScreen = moveToTypeTestScreen,
                         )
                     }
                 }

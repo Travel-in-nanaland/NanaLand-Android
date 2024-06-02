@@ -12,7 +12,7 @@ class NanaLandApplication : Application() {
         super.onCreate()
 
         // Kakao SDK 초기화
-        KakaoSdk.init(this, "319c262a291562c6993e381b90508e20")
+        KakaoSdk.init(this, "bf7035e60f5541853f1e732e701fcc37")
     }
     init {
         instance = this

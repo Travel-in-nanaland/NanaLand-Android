@@ -16,6 +16,7 @@ import androidx.compose.ui.unit.dp
 import com.jeju.nanaland.R
 import com.jeju.nanaland.ui.theme.body01
 import com.jeju.nanaland.ui.theme.getColor
+import com.jeju.nanaland.util.resource.getString
 import com.jeju.nanaland.util.ui.clickableNoEffect
 
 @Composable
@@ -37,7 +38,7 @@ fun DateFilterDialogResetButton(onClick: () -> Unit) {
         Spacer(Modifier.width(8.dp))
 
         Text(
-            text = "초기화",
+            text = getString(R.string.date_filter_dialog_초기화),
             color = getColor().black,
             style = body01
         )
