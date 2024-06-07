@@ -16,6 +16,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.jeju.nanaland.R
 import com.jeju.nanaland.globalvalue.type.WithdrawalReasonType
 import com.jeju.nanaland.ui.component.common.CustomSurface
 import com.jeju.nanaland.ui.component.common.CustomTopBar
@@ -29,6 +30,7 @@ import com.jeju.nanaland.ui.component.withdrawal.WithdrawalScreenLogo
 import com.jeju.nanaland.ui.component.withdrawal.WithdrawalScreenReasonHeading
 import com.jeju.nanaland.ui.component.withdrawal.WithdrawalScreenReasonItem
 import com.jeju.nanaland.ui.component.withdrawal.WithdrawalScreenWithdrawButton
+import com.jeju.nanaland.util.resource.getString
 import com.jeju.nanaland.util.ui.scrollableVerticalArrangement
 
 @Composable
@@ -82,31 +84,31 @@ private fun WithdrawalScreen(
                     Spacer(Modifier.height(8.dp))
 
                     WithdrawalScreenGuideLineDescription(
-                        text = "1. 본 서비스를 탈퇴하시면 나나랜드인제주 서비스 기반으로 제공되는 모든 서비스로부터 해지 및 소멸되는 점을 안내드립니다."
+                        text = getString(R.string.withdrawal_screen_text1)
                     )
 
                     Spacer(Modifier.height(8.dp))
 
                     WithdrawalScreenGuideLineDescription(
-                        text = "2. 회원 탈퇴를 하시면, 보유하고 계신 각종 쿠폰, 포인트는 자동 소멸되며 재가입하실 경우에도 복원되지 않습니다."
+                        text = getString(R.string.withdrawal_screen_text2)
                     )
 
                     Spacer(Modifier.height(8.dp))
 
                     WithdrawalScreenGuideLineDescription(
-                        text = "3. 서비스 탈퇴 후 전자상거래법에 의해 보존해야 하는 거래기록은 90일간 보관됩니다."
+                        text = getString(R.string.withdrawal_screen_text3)
                     )
 
                     Spacer(Modifier.height(8.dp))
 
                     WithdrawalScreenGuideLineDescription(
-                        text = "4. 회원 탈퇴 시 회원가입 이벤트에는 재 참여하실 수 없습니다."
+                        text = getString(R.string.withdrawal_screen_text4)
                     )
 
                     Spacer(Modifier.height(8.dp))
 
                     WithdrawalScreenGuideLineDescription(
-                        text = "5. 탈퇴 후 90일 이내에 재가입을 하시면, 기존 계정으로 사용하실 수 있습니다."
+                        text = getString(R.string.withdrawal_screen_text5)
                     )
 
                     Spacer(Modifier.height(16.dp))
@@ -127,25 +129,25 @@ private fun WithdrawalScreen(
 
                     WithdrawalScreenReasonItem(
                         isSelected = selectedReason == WithdrawalReasonType.InsufficientContent,
-                        text = "콘텐츠 내용 부족",
+                        text = getString(R.string.withdrawal_screen_reason1),
                         onClick = { updateSelectedReason(WithdrawalReasonType.InsufficientContent) }
                     )
 
                     WithdrawalScreenReasonItem(
                         isSelected = selectedReason == WithdrawalReasonType.InconvenientService,
-                        text = "서비스 이용 불편",
+                        text = getString(R.string.withdrawal_screen_reason2),
                         onClick = { updateSelectedReason(WithdrawalReasonType.InconvenientService) }
                     )
 
                     WithdrawalScreenReasonItem(
                         isSelected = selectedReason == WithdrawalReasonType.InconvenientCommunity,
-                        text = "커뮤니티 사용 불편",
+                        text = getString(R.string.withdrawal_screen_reason3),
                         onClick = { updateSelectedReason(WithdrawalReasonType.InconvenientCommunity) }
                     )
 
                     WithdrawalScreenReasonItem(
                         isSelected = selectedReason == WithdrawalReasonType.RareVisits,
-                        text = "방문 횟수 거의 없음",
+                        text = getString(R.string.withdrawal_screen_reason4),
                         onClick = { updateSelectedReason(WithdrawalReasonType.RareVisits) }
                     )
 

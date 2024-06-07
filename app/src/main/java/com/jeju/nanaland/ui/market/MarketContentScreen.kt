@@ -28,6 +28,7 @@ import com.jeju.nanaland.ui.component.detailscreen.other.DetailScreenInformation
 import com.jeju.nanaland.ui.component.detailscreen.other.DetailScreenTopBannerImage
 import com.jeju.nanaland.ui.component.detailscreen.other.MoveToTopButton
 import com.jeju.nanaland.util.log.LogUtil
+import com.jeju.nanaland.util.resource.getString
 import com.jeju.nanaland.util.ui.ScreenPreview
 import com.jeju.nanaland.util.ui.UiState
 import com.kakao.sdk.common.util.KakaoCustomTabsClient
@@ -77,7 +78,7 @@ private fun MarketContentScreen(
     val coroutineScope = rememberCoroutineScope()
     CustomSurface {
         CustomTopBar(
-            title = "전통시장",
+            title = getString(R.string.common_전통시장),
             onBackButtonClicked = moveToBackScreen
         )
         when (marketContent) {
@@ -158,7 +159,7 @@ private fun MarketContentScreen(
                             if (!marketContent.data.address.isNullOrEmpty()) {
                                 DetailScreenInformation(
                                     drawableId = R.drawable.ic_location_outlined,
-                                    title = "주소",
+                                    title = getString(R.string.detail_screen_common_주소),
                                     content = marketContent.data.address
                                 )
 
@@ -168,7 +169,7 @@ private fun MarketContentScreen(
                             if (!marketContent.data.contact.isNullOrEmpty()) {
                                 DetailScreenInformation(
                                     drawableId = R.drawable.ic_phone_outlined,
-                                    title = "연락처",
+                                    title = getString(R.string.detail_screen_common_연락처),
                                     content = marketContent.data.contact
                                 )
 
@@ -178,7 +179,7 @@ private fun MarketContentScreen(
                             if (!marketContent.data.time.isNullOrEmpty()) {
                                 DetailScreenInformation(
                                     drawableId = R.drawable.ic_clock_outlined,
-                                    title = "이용 시간",
+                                    title = getString(R.string.detail_screen_common_이용_시간),
                                     content = marketContent.data.time
                                 )
 
@@ -188,7 +189,7 @@ private fun MarketContentScreen(
                             if (!marketContent.data.amenity.isNullOrEmpty()) {
                                 DetailScreenInformation(
                                     drawableId = R.drawable.ic_amenity_outlined,
-                                    title = "편의시설",
+                                    title = getString(R.string.detail_screen_common_편의시설),
                                     content = marketContent.data.amenity
                                 )
 
@@ -198,7 +199,7 @@ private fun MarketContentScreen(
                             if (!marketContent.data.homepage.isNullOrEmpty()) {
                                 DetailScreenInformation(
                                     drawableId = R.drawable.ic_clip_outlined,
-                                    title = "홈페이지",
+                                    title = getString(R.string.detail_screen_common_홈페이지),
                                     content = marketContent.data.homepage
                                 )
 

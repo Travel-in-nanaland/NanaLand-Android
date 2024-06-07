@@ -9,11 +9,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.jeju.nanaland.R
 import com.jeju.nanaland.ui.component.common.CustomSurface
 import com.jeju.nanaland.ui.component.common.CustomTopBar
 import com.jeju.nanaland.ui.component.settings.SettingsScreenCategoryItem
 import com.jeju.nanaland.ui.component.settings.policy.PolicySettingScreenCheckIcon
 import com.jeju.nanaland.ui.component.settings.policy.PolicySettingScreenWarningText
+import com.jeju.nanaland.util.resource.getString
 
 @Composable
 fun PolicySettingScreen(
@@ -51,7 +53,7 @@ private fun PolicySettingScreen(
             contentAlignment = Alignment.CenterEnd
         ) {
             SettingsScreenCategoryItem(
-                text = "마케팅 활용 동의",
+                text = getString(R.string.policy_agree_screen_marketing_policy),
                 onClick = { updatePolicyAgreement("MARKETING", !isMarketingPolicyAgreed) }
             )
 
@@ -64,7 +66,7 @@ private fun PolicySettingScreen(
             contentAlignment = Alignment.CenterEnd
         ) {
             SettingsScreenCategoryItem(
-                text = "위치기반 서비스 약관 동의",
+                text = getString(R.string.policy_agree_screen_location_policy),
                 onClick = { updatePolicyAgreement("LOCATION_SERVICE", !isLocationPolicyAgreed) }
             )
 

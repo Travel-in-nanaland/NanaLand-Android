@@ -12,6 +12,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.jeju.nanaland.R
 import com.jeju.nanaland.ui.component.common.CustomSurface
 import com.jeju.nanaland.ui.component.policyagree.PolicyAgreeScreenAgreeAllContent
 import com.jeju.nanaland.ui.component.policyagree.PolicyAgreeScreenBottomButton
@@ -19,6 +20,7 @@ import com.jeju.nanaland.ui.component.policyagree.PolicyAgreeScreenCategoryConte
 import com.jeju.nanaland.ui.component.policyagree.PolicyAgreeScreenLogo
 import com.jeju.nanaland.ui.component.policyagree.PolicyAgreeScreenWelcomeText
 import com.jeju.nanaland.ui.theme.getColor
+import com.jeju.nanaland.util.resource.getString
 
 @Composable
 fun PolicyAgreeScreen(
@@ -89,7 +91,7 @@ private fun PolicyAgreeScreen(
                 PolicyAgreeScreenCategoryContent(
                     isSelected = isPrivacyPolicyAgreed.value,
                     toggleIsSelected = { isPrivacyPolicyAgreed.value = !isPrivacyPolicyAgreed.value },
-                    text = "이용약관 동의 및 개인정보 처리방침",
+                    text = getString(R.string.policy_agree_screen_privacy_policy),
                     isNecessary = true,
                     moveToDetailsScreen = { moveToPrivacyPolicyDetailsScreen() }
                 )
@@ -97,7 +99,7 @@ private fun PolicyAgreeScreen(
                 PolicyAgreeScreenCategoryContent(
                     isSelected = isMarketingPolicyAgreed.value,
                     toggleIsSelected = { isMarketingPolicyAgreed.value = !isMarketingPolicyAgreed.value },
-                    text = "마케팅 활용 동의",
+                    text = getString(R.string.policy_agree_screen_marketing_policy),
                     isNecessary = false,
                     moveToDetailsScreen = { moveToMarketingPolicyScreen() }
                 )
@@ -105,7 +107,7 @@ private fun PolicyAgreeScreen(
                 PolicyAgreeScreenCategoryContent(
                     isSelected = isLocationPolicyAgreed.value,
                     toggleIsSelected = { isLocationPolicyAgreed.value = !isLocationPolicyAgreed.value },
-                    text = "위치기반 서비스 약관 동의",
+                    text = getString(R.string.policy_agree_screen_location_policy),
                     isNecessary = false,
                     moveToDetailsScreen = { moveToLocationPolicyScreen() }
                 )

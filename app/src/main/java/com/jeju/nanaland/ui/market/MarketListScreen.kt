@@ -16,6 +16,7 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.snapshots.SnapshotStateList
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.jeju.nanaland.R
 import com.jeju.nanaland.domain.entity.market.MarketThumbnailData
 import com.jeju.nanaland.globalvalue.constant.PAGING_THRESHOLD
 import com.jeju.nanaland.globalvalue.constant.getLocationList
@@ -27,6 +28,7 @@ import com.jeju.nanaland.ui.component.listscreen.filter.LocationFilterBottomDial
 import com.jeju.nanaland.ui.component.listscreen.filter.LocationFilterTopBar
 import com.jeju.nanaland.ui.component.listscreen.filter.getLocationAnchoredDraggableState
 import com.jeju.nanaland.ui.component.listscreen.list.MarketThumbnailList
+import com.jeju.nanaland.util.resource.getString
 import com.jeju.nanaland.util.ui.ScreenPreview
 import com.jeju.nanaland.util.ui.UiState
 import kotlinx.coroutines.launch
@@ -97,7 +99,7 @@ private fun MarketListScreen(
                 modifier = Modifier.fillMaxSize()
             ) {
                 CustomTopBar(
-                    title = "전통시장",
+                    title = getString(R.string.common_전통시장),
                     onBackButtonClicked = moveToBackScreen
                 )
 

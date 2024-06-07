@@ -21,6 +21,7 @@ import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.jeju.nanaland.R
 import com.jeju.nanaland.domain.entity.member.UserProfile
 import com.jeju.nanaland.globalvalue.type.MainScreenViewType
 import com.jeju.nanaland.globalvalue.userdata.UserData
@@ -37,6 +38,7 @@ import com.jeju.nanaland.ui.component.mypage.MyPageScreenTravelType
 import com.jeju.nanaland.ui.component.mypage.MyPageScreenTravelTypeText
 import com.jeju.nanaland.ui.component.nonmember.NonMemberGuideDialog
 import com.jeju.nanaland.ui.theme.getColor
+import com.jeju.nanaland.util.resource.getString
 import com.jeju.nanaland.util.ui.UiState
 
 @Composable
@@ -124,7 +126,7 @@ private fun MyPageScreen(
                     Spacer(Modifier.height(16.dp))
 
                     if (userProfile.data.travelType == null) {
-                        MyPageScreenTravelType(text = "없음")
+                        MyPageScreenTravelType(text = getString(R.string.mypage_screen_없음))
                     } else {
                         MyPageScreenTravelType(text = userProfile.data.travelType)
 

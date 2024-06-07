@@ -45,6 +45,7 @@ import com.jeju.nanaland.ui.theme.body02Bold
 import com.jeju.nanaland.ui.theme.caption01
 import com.jeju.nanaland.ui.theme.getColor
 import com.jeju.nanaland.ui.theme.title01Bold
+import com.jeju.nanaland.util.resource.getString
 import com.jeju.nanaland.util.ui.UiState
 import com.skydoves.landscapist.glide.GlideImage
 import kotlinx.coroutines.launch
@@ -145,7 +146,7 @@ private fun TipBox(
             )
             Spacer(Modifier.width(4.dp))
             Text(
-                text = "알아두면 좋아요!",
+                text = getString(R.string.detail_screen_common_알아두면_좋아요),
                 color = Color(0xFF583FF5),
                 style = body02Bold
             )

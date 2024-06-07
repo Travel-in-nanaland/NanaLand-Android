@@ -14,6 +14,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.jeju.nanaland.R
 import com.jeju.nanaland.domain.entity.member.RecommendedPostData
 import com.jeju.nanaland.globalvalue.userdata.UserData
 import com.jeju.nanaland.ui.component.common.CustomSurface
@@ -22,6 +23,7 @@ import com.jeju.nanaland.ui.component.recommendedspot.RecommendedSpotScreenBotto
 import com.jeju.nanaland.ui.component.recommendedspot.RecommendedSpotScreenItem
 import com.jeju.nanaland.ui.component.recommendedspot.RecommendedSpotScreenText1
 import com.jeju.nanaland.ui.component.recommendedspot.RecommendedSpotScreenText2
+import com.jeju.nanaland.util.resource.getString
 
 @Composable
 fun RecommendedSpotScreen(
@@ -61,7 +63,7 @@ private fun RecommendedSpotScreen(
 
                 Column(Modifier.padding(start = 16.dp, end = 16.dp)) {
                     RecommendedSpotScreenText1(
-                        text = "${UserData.nickname} 님을 위한"
+                        text = UserData.nickname + getString(R.string.type_test_recommended_spot_text1)
                     )
 
                     RecommendedSpotScreenText2()

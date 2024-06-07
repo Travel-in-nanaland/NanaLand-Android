@@ -11,6 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.jeju.nanaland.BuildConfig
+import com.jeju.nanaland.R
 import com.jeju.nanaland.globalvalue.userdata.UserData
 import com.jeju.nanaland.ui.component.common.CustomSurface
 import com.jeju.nanaland.ui.component.nonmember.NonMemberGuideDialog
@@ -20,6 +21,7 @@ import com.jeju.nanaland.ui.component.settings.SettingsScreenHorizontalDivider
 import com.jeju.nanaland.ui.component.settings.SettingsScreenTopBar
 import com.jeju.nanaland.ui.component.settings.SettingsScreenVersionText
 import com.jeju.nanaland.ui.component.signout.SignOutConfirmDialog
+import com.jeju.nanaland.util.resource.getString
 
 @Composable
 fun SettingsScreen(
@@ -67,12 +69,12 @@ private fun SettingsScreen(
 
         Spacer(Modifier.height(20.dp))
 
-        SettingsScreenCategoryTitle(text = "사용 설정")
+        SettingsScreenCategoryTitle(text = getString(R.string.settings_screen_사용_설정))
 
         Spacer(Modifier.height(6.dp))
 
         SettingsScreenCategoryItem(
-            text = "약관 및 정책",
+            text = getString(R.string.settings_screen_약관_및_정책),
             onClick = {
                 if (UserData.provider == "GUEST") {
                     isNonMemberGuideDialogShowing.value = true
@@ -83,12 +85,12 @@ private fun SettingsScreen(
         )
 
         SettingsScreenCategoryItem(
-            text = "접근권한 안내",
+            text = getString(R.string.settings_screen_접근권한_안내),
             onClick = { moveToPermissionCheckingScreen() }
         )
 
         SettingsScreenCategoryItem(
-            text = "언어 설정",
+            text = getString(R.string.settings_screen_언어_설정),
             onClick = { moveToLanguageChangeScreen() }
         )
 
@@ -96,7 +98,7 @@ private fun SettingsScreen(
             contentAlignment = Alignment.CenterEnd
         ) {
             SettingsScreenCategoryItem(
-                text = "버전 정보",
+                text = getString(R.string.settings_screen_버전_정보),
                 onClick = {}
             )
 
@@ -110,7 +112,7 @@ private fun SettingsScreen(
         Spacer(Modifier.height(4.dp))
 
         SettingsScreenCategoryItem(
-            text = "로그아웃",
+            text = getString(R.string.settings_screen_로그아웃),
             onClick = {
                 if (UserData.provider == "GUEST") {
                     isNonMemberGuideDialogShowing.value = true
@@ -121,7 +123,7 @@ private fun SettingsScreen(
         )
 
         SettingsScreenCategoryItem(
-            text = "회원 탈퇴",
+            text = getString(R.string.settings_screen_회원_탈퇴),
             onClick = { moveToWithdrawalScreen() }
         )
     }

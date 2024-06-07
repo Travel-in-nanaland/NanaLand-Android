@@ -20,6 +20,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.jeju.nanaland.R
 import com.jeju.nanaland.globalvalue.type.InputNicknameState
 import com.jeju.nanaland.ui.component.common.CustomSurface
 import com.jeju.nanaland.ui.component.common.CustomTopBar
@@ -30,6 +31,7 @@ import com.jeju.nanaland.ui.component.profileupdate.ProfileUpdateScreenNicknameT
 import com.jeju.nanaland.ui.component.profileupdate.ProfileUpdateScreenProfileContent
 import com.jeju.nanaland.ui.component.signup.profilesetting.SignUpScreenCharacterCount
 import com.jeju.nanaland.ui.component.signup.profilesetting.SignUpScreenTextField
+import com.jeju.nanaland.util.resource.getString
 import com.jeju.nanaland.util.ui.scrollableVerticalArrangement
 
 @Composable
@@ -87,7 +89,7 @@ private fun ProfileUpdateScreen(
 
     CustomSurface {
         CustomTopBar(
-            title = "프로필 수정",
+            title = getString(R.string.profile_update_screen_프로필_수정),
             onBackButtonClicked = {
                 moveToBackScreen()
             }
