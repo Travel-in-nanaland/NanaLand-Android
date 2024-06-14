@@ -19,6 +19,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.jeju.nanaland.R
 import com.jeju.nanaland.ui.component.common.CustomSurface
 import com.jeju.nanaland.ui.component.common.CustomTopBar
 import com.jeju.nanaland.ui.component.infomodification.writing.InfoModificationProposalWritingScreenDescription
@@ -26,6 +27,7 @@ import com.jeju.nanaland.ui.component.infomodification.writing.InfoModificationP
 import com.jeju.nanaland.ui.component.infomodification.writing.InfoModificationProposalWritingScreenImagePreview
 import com.jeju.nanaland.ui.component.infomodification.writing.InfoModificationProposalWritingScreenTextField
 import com.jeju.nanaland.ui.component.infomodification.writing.InfoModificationProposalWritingScreenBottomButton
+import com.jeju.nanaland.util.resource.getString
 import com.jeju.nanaland.util.ui.scrollableVerticalArrangement
 
 @Composable
@@ -86,7 +88,7 @@ private fun InformationModificationProposalWritingScreen(
 
     CustomSurface {
         CustomTopBar(
-            title = "정보 수정 제안",
+            title = getString(R.string.info_modification_proposal_정보_수정_제안),
             onBackButtonClicked = moveToBackScreen
         )
 
@@ -112,20 +114,20 @@ private fun InformationModificationProposalWritingScreen(
                 Spacer(Modifier.height(24.dp))
 
                 Column(Modifier.padding(start = 16.dp, end = 16.dp)) {
-                    InfoModificationProposalWritingScreenHeading(text = "정보 수정 제안")
+                    InfoModificationProposalWritingScreenHeading(text = getString(R.string.info_modification_proposal_정보_수정_제안))
 
                     Spacer(Modifier.height(8.dp))
 
                     InfoModificationProposalWritingScreenTextField(
                         height = 120,
-                        hint = "수정 요청하신 항목의 상세 내용이나 그 외 기타 사항이 있으시면 의견을 남겨주세요.",
+                        hint = getString(R.string.info_modification_proposal_hint1),
                         inputText = inputDescription,
                         onValueChange = updateInputDescription
                     )
 
                     Spacer(Modifier.height(48.dp))
 
-                    InfoModificationProposalWritingScreenHeading(text = "이메일")
+                    InfoModificationProposalWritingScreenHeading(text = getString(R.string.common_이메일))
 
                     Spacer(Modifier.height(4.dp))
 
@@ -135,7 +137,7 @@ private fun InformationModificationProposalWritingScreen(
 
                     InfoModificationProposalWritingScreenTextField(
                         height = 48,
-                        hint = "example@naver.com",
+                        hint = getString(R.string.info_modification_proposal_hint2),
                         inputText = inputEmail,
                         onValueChange = updateInputEmail
                     )

@@ -15,6 +15,7 @@ import com.jeju.nanaland.R
 import com.jeju.nanaland.ui.theme.caption01
 import com.jeju.nanaland.ui.theme.caption01SemiBold
 import com.jeju.nanaland.ui.theme.getColor
+import com.jeju.nanaland.util.resource.getString
 import com.jeju.nanaland.util.ui.clickableNoEffect
 
 @Composable
@@ -24,7 +25,7 @@ fun MyPageScreenTestAgainContent(onClick: () -> Unit) {
         verticalAlignment = Alignment.CenterVertically
     ) {
         Text(
-            text = "테스트 다시하기",
+            text = getString(R.string.mypage_screen_테스트_다시하기),
             color = getColor().black,
             style = caption01SemiBold
         )

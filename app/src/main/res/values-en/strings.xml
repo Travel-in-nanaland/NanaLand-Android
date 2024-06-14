@@ -1,5 +1,281 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">nanaland in Jeju</string>
-    <string name="select_language_please">영어</string>
+    <string name="all">전체</string>
+    <string name="nature">7대 자연</string>
+    <string name="festival">축제</string>
+    <string name="market">전통시장</string>
+    <string name="experience">이색 체험</string>
+    <string name="nanapick">나나\'s Pick</string>
+    <string name="jejustory">제주 이야기</string>
+
+    <!--언어 설정 화면-->
+    <string name="select_language_please">언어를 선택해주세요</string>
+
+    <string name="cdrp_mon">월</string>
+    <string name="cdrp_tue">화</string>
+    <string name="cdrp_wed">수</string>
+    <string name="cdrp_thu">목</string>
+    <string name="cdrp_fri">금</string>
+    <string name="cdrp_sat">토</string>
+    <string name="cdrp_sun">일</string>
+
+    <string-array name="week_sun_sat">
+        <item>@string/cdrp_sun</item>
+        <item>@string/cdrp_mon</item>
+        <item>@string/cdrp_tue</item>
+        <item>@string/cdrp_wed</item>
+        <item>@string/cdrp_thu</item>
+        <item>@string/cdrp_fri</item>
+        <item>@string/cdrp_sat</item>
+    </string-array>
+
+    <string name="cancel">Cancel</string>
+    <string name="done">Done</string>
+    <string name="title_time_picker">Select Time</string>
+    <string name="select_time">Select a Time</string>
+
+    <!--전체 공통-->
+    <string name="common_7대_자연">7대 자연</string>
+    <string name="common_축제">축제</string>
+    <string name="common_전통시장">전통시장</string>
+    <string name="common_이색_체험">이색 체험</string>
+    <string name="common_나나s_Pick">나나\'s Pick</string>
+    <string name="common_홈">홈</string>
+    <string name="common_찜">찜</string>
+    <string name="common_제주_이야기">제주 이야기</string>
+    <string name="common_나의_나나">나의 나나</string>
+    <string name="common_전체">전체</string>
+    <string name="common_건">건</string>
+    <string name="common_년">년</string>
+    <string name="common_월">월</string>
+    <string name="common_봄">봄</string>
+    <string name="common_여름">여름</string>
+    <string name="common_가을">가을</string>
+    <string name="common_겨울">겨울</string>
+    <string name="common_이메일">이메일</string>
+    <string name="common_확인">확인</string>
+    <string name="common_자">자</string>
+    <string name="common_한국어">한국어</string>
+    <string name="common_중국어">中国话</string>
+    <string name="common_영어">English</string>
+    <string name="common_말레이시아어">Melayu</string>
+    <string name="common_소개">소개</string>
+    <string name="common_닉네임">닉네임</string>
+    <string name="common_취소">취소</string>
+    <string name="common_삭제">삭제</string>
+    <string name="common_네">네</string>
+    <string name="common_아니오">아니오</string>
+
+    <!--홈 화면-->
+    <string name="home_screen_ad1_title">제주도에서 예쁜 바다 보고 싶다고?</string>
+    <string name="home_screen_ad1_content">서귀포시 성산의 자연으로 투어해보자!!</string>
+    <string name="home_screen_ad2_title">보기 귀한 별 보러 가지 않을래?💫</string>
+    <string name="home_screen_ad2_content">애월의 감성 가득 오름들 확인😯</string>
+    <string name="home_screen_ad3_title">한국의 정감을 느끼고 싶다면, 시장이지!</string>
+    <string name="home_screen_ad3_content">아직도 남은 전통 시장들은 뭐가 있을까?</string>
+    <string name="home_screen_ad4_title">제주도에서만 여는 7월 축제🎈</string>
+    <string name="home_screen_ad4_content">세계의 보물, 제주도가 가득 느껴지는 축제 보러가자</string>
+    <string name="home_screen_recommend">님을 위한 도민 추천 🍊</string>
+
+    <!--검색 화면-->
+    <string name="searching_screen_textfiled_hint">검색어를 입력해 주세요</string>
+    <string name="searching_screen_최근_검색어">최근 검색어</string>
+    <string name="searching_screen_모두_지우기">모두 지우기</string>
+    <string name="searching_screen_최근_검색어가_없습니다">최근 검색어가 없습니다.</string>
+    <string name="searching_screen_가장_많이">가장 많이</string>
+    <string name="searching_screen_검색하고_있어요">&#160;검색하고 있어요!</string>
+    <string name="searching_screen_hot_keywords">검색량 UP ! JEJU Place 🍊</string>
+
+    <!--검색 결과 화면-->
+    <string name="search_result_screen_no_result">해당 검색 결과가 없습니다.</string>
+    <string name="search_result_screen_preparing_service">해당 서비스 준비 중입니다.\n다음에 만나요!</string>
+
+    <!--비회원 회원가입 유도 다이얼로그-->
+    <string name="non_member_dialog_guide">나나랜드의 회원이 되셔야,\n모든 서비스를\n이용하실 수 있습니다✨</string>
+    <string name="non_member_dialog_go_sign_up">회원가입 하러 가기</string>
+
+
+    <!--날짜 선택 다이얼로그-->
+    <string name="date_filter_dialog_날짜_선택">날짜 선택</string>
+    <string name="date_filter_dialog_초기화">초기화</string>
+
+    <!--지역 선택 다이얼로그-->
+    <string name="location_filter_dialog_지역">지역</string>
+    <string name="location_filter_dialog_전체선택">전체선택</string>
+    <string name="location_filter_dialog_해제">해제</string>
+
+    <!--계절 선택 다이얼로그-->
+    <string name="season_filter_dialog_계절_선택">계절 선택</string>
+
+    <!--필터링 다이얼로그 공통-->
+    <string name="filter_dialog_common_적용하기">적용하기</string>
+
+    <!--리스트 화면 공통-->
+    <string name="list_screen_common_전_지역">전 지역</string>
+
+    <!--지역 공통-->
+    <string name="location_common_제주시">제주시</string>
+    <string name="location_common_애월">애월</string>
+    <string name="location_common_조천">조천</string>
+    <string name="location_common_한경">한경</string>
+    <string name="location_common_구좌">구좌</string>
+    <string name="location_common_한림">한림</string>
+    <string name="location_common_우도">우도</string>
+    <string name="location_common_추자">추자</string>
+    <string name="location_common_서귀포시">서귀포시</string>
+    <string name="location_common_대정">대정</string>
+    <string name="location_common_안덕">안덕</string>
+    <string name="location_common_남원">남원</string>
+    <string name="location_common_표선">표선</string>
+    <string name="location_common_성산">성산</string>
+
+    <!--축제 리스트 화면-->
+    <string name="festival_list_screen_월별_축제">월별 축제</string>
+    <string name="festival_list_screen_종료된_축제">종료된 축제</string>
+    <string name="festival_list_screen_계절별_축제">계절별 축제</string>
+    <string name="festival_list_screen_image_caption">*참고용 사진입니다.</string>
+
+    <!--상세 화면 공통-->
+    <string name="detail_screen_common_더_보기">더 보기</string>
+    <string name="detail_screen_common_접기">접기</string>
+    <string name="detail_screen_common_주소">주소</string>
+    <string name="detail_screen_common_연락처">연락처</string>
+    <string name="detail_screen_common_이용_시간">이용 시간</string>
+    <string name="detail_screen_common_편의시설">편의시설</string>
+    <string name="detail_screen_common_홈페이지">홈페이지</string>
+    <string name="detail_screen_common_입장료">입장료</string>
+    <string name="detail_screen_common_상세_정보">상세 정보</string>
+    <string name="detail_screen_common_기간">기간</string>
+    <string name="detail_screen_common_소개합니다">소개합니다!</string>
+    <string name="detail_screen_common_알아두면_좋아요">알아두면 좋아요!</string>
+
+    <!--정보 수정 제안-->
+    <string name="info_modification_proposal_정보_수정_제안">정보 수정 제안</string>
+    <string name="info_modification_proposal_heading1">수정해야 할 정보를 제안해 주세요!</string>
+    <string name="info_modification_proposal_text1">장소 제안 시 첨부한 사진이 장소 정보 확인에\n도움이 되면 혜택을 받을 수 있어요.</string>
+    <string name="info_modification_proposal_전화번호_및_홈페이지">전화번호 및 홈페이지</string>
+    <string name="info_modification_proposal_운영_시간">운영 시간</string>
+    <string name="info_modification_proposal_장소명_및_위치">장소명 및 위치</string>
+    <string name="info_modification_proposal_가격_정보">가격 정보</string>
+    <string name="info_modification_proposal_장소_삭제">장소 삭제</string>
+    <string name="info_modification_proposal_heading2">기타 정보를 공유해 주세요!</string>
+    <string name="info_modification_proposal_제공_서비스">제공 서비스</string>
+    <string name="info_modification_proposal_사진_추가하기">사진 추가하기</string>
+    <string name="info_modification_proposal_text2">실제 확인한 정보를 사진과 함께 첨부해주시면,\n좀 더 정확한 정보가 완성되어요</string>
+    <string name="info_modification_proposal_hint1">수정 요청하신 항목의 상세 내용이나 그 외 기타 사항이 있으시면 의견을 남겨주세요.</string>
+    <string name="info_modification_proposal_text3">정보 수정 제안 결과를 받을 이메일을 입력해주세요</string>
+    <string name="info_modification_proposal_hint2">example@gmail.com</string>
+    <string name="info_modification_proposal_보내기">보내기</string>
+    <string name="info_modification_proposal_heading3">정보 수정 제안 감사드립니다</string>
+    <string name="info_modification_proposal_text4">정보 수정 제안으로\n여행지의 매력도 함께 올라갔어요!\n\n점점 기대될 것 같아요🧚‍♀️</string>
+    <string name="info_modification_proposal_button1">콘텐츠 다시 보러 가기</string>
+    <string name="info_modification_proposal_button2">다른 항목 추가하기</string>
+
+    <!--약관 동의 화면-->
+    <string name="policy_agree_screen_heading">nanaland in Jeju에\n오신 것을 환영합니다.</string>
+    <string name="policy_agree_screen_전체_동의">전체 동의</string>
+    <string name="policy_agree_screen_privacy_policy">이용약관 동의 및 개인정보 처리방침</string>
+    <string name="policy_agree_screen_marketing_policy">마케팅 활용 동의</string>
+    <string name="policy_agree_screen_location_policy">위치기반 서비스 약관 동의</string>
+
+    <!--회원가입 프로필 설정 화면-->
+    <string name="sign_up_profile_setting_guide">사용할 이름을 작성 및\n프로필을 선택해 주세요.</string>
+    <string name="sign_up_profile_setting_hint">이름을 입력해 주세요</string>
+    <string name="sign_up_profile_setting_warning1">해당 닉네임은 사용할 수 없습니다.</string>
+    <string name="sign_up_profile_setting_warning2">해당 닉네임은 다른 사용자가 사용 중입니다.</string>
+
+    <!--여행지 유형 테스트 화면-->
+    <string name="type_test_screen_question1">"여행 장소를\n고를 때 "</string>
+    <string name="type_test_screen_question2">"여행 계획을\n세울 때 "</string>
+    <string name="type_test_screen_question3">"여행 경비를\n정할 때 "</string>
+    <string name="type_test_screen_question4">여행을 다닐 때\n</string>
+    <string name="type_test_screen_question5">여행에서 가장\n하고 싶은 것은?</string>
+    <string name="type_test_screen_question_님은">" 님은?"</string>
+    <string name="type_test_screen_item1">활발한 관광 장소</string>
+    <string name="type_test_screen_item2">한적한 로컬 장소</string>
+    <string name="type_test_screen_item3">유동적</string>
+    <string name="type_test_screen_item4">완전 계획적</string>
+    <string name="type_test_screen_item5">가성비 여행</string>
+    <string name="type_test_screen_item6">럭셔리 여행</string>
+    <string name="type_test_screen_item7">남는건 사진뿐!</string>
+    <string name="type_test_screen_item8">눈으로 담아야지</string>
+    <string name="type_test_screen_item9">감성 장소</string>
+    <string name="type_test_screen_item10">전통 문화</string>
+    <string name="type_test_screen_item11">자연 경관</string>
+    <string name="type_test_screen_item12">테마파크</string>
+    <string name="type_test_screen_테스트_건너뛰기">테스트 건너뛰기</string>
+    <string name="type_test_screen_다음">다음</string>
+    <string name="type_test_screen_님의">" 님의"</string>
+    <string name="type_test_screen_text1">취향은?</string>
+    <string name="type_test_screen_text2">하고 싶은 여행 스타일은?</string>
+    <string name="type_test_screen_text3">감귤이 착즙 되는 중...</string>
+    <string name="type_test_screen_text4">맛있는 여행 주스가 곧 나옵니다 !</string>
+    <string name="type_test_screen_text5">" 님의 여행 유형은"</string>
+    <string name="type_test_screen_text6">nanaland in Jeju 가 당신을 위해\n맞춤 여행 주스를 만들었어요!</string>
+    <string name="type_test_screen_button1">여행지</string>
+    <string name="type_test_screen_button2">메인 화면 바로가기</string>
+    <string name="type_test_screen_lets_go">Let\'s Go!</string>
+
+    <!--여행지 유형 테스트 추천 여행지 화면-->
+    <string name="type_test_recommended_spot_text1"> 님을 위한</string>
+    <string name="type_test_recommended_spot_text2">추천 여행지</string>
+
+    <!--언어 설정 화면-->
+    <string name="language_change_screen_guide">맨 위에 있는 언어로\n기본 설정 되어 있습니다.</string>
+
+    <!--설정 화면-->
+    <string name="settings_screen_설정">설정</string>
+    <string name="settings_screen_사용_설정">사용 설정</string>
+    <string name="settings_screen_약관_및_정책">약관 및 정책</string>
+    <string name="settings_screen_접근권한_안내">접근권한 안내</string>
+    <string name="settings_screen_언어_설정">언어 설정</string>
+    <string name="settings_screen_버전_정보">버전 정보</string>
+    <string name="settings_screen_로그아웃">로그아웃</string>
+    <string name="settings_screen_회원_탈퇴">회원 탈퇴</string>
+
+    <!--로그아웃 다이얼로그-->
+    <string name="sign_out_dialog_text">정말 로그아웃을\n하시겠습니까?</string>
+
+    <!--마이페이지 화면-->
+    <string name="mypage_screen_프로필_수정">프로필 수정</string>
+    <string name="mypage_screen_여행_유형">여행 유형</string>
+    <string name="mypage_screen_테스트_다시하기">테스트 다시하기</string>
+    <string name="mypage_screen_없음">없음</string>
+    <string name="mypage_screen_로그인이_필요해요">로그인이 필요해요</string>
+    <string name="mypage_screen_level">Lv.</string>
+
+    <!--프로필 수정 화면-->
+    <string name="profile_update_screen_프로필_수정">프로필 수정</string>
+    <string name="profile_update_screen_수정_완료">수정 완료</string>
+
+    <!--언어 초기화 화면-->
+    <string name="profile_initialization_screen_hello">안녕하세요!</string>
+    <string name="profile_initialization_screen_select_language">언어를 선택해주세요</string>
+
+    <!--약관 설정 화면-->
+    <string name="policy_setting_screen_warning">* 비동의시, 받지 못하는 서비스 또는 혜택이 있을 수 있으니 주의하시길 바랍니다.</string>
+
+    <!--회원 탈퇴 화면-->
+    <string name="withdrawal_screen_heading1">서비스 탈퇴 안내 사항</string>
+    <string name="withdrawal_screen_text1">1. 본 서비스를 탈퇴하시면 나나랜드인제주 서비스 기반으로 제공되는 모든 서비스로부터 해지 및 소멸되는 점을 안내드립니다.</string>
+    <string name="withdrawal_screen_text2">2. 회원 탈퇴를 하시면, 보유하고 계신 각종 쿠폰, 포인트는 자동 소멸되며 재가입하실 경우에도 복원되지 않습니다.</string>
+    <string name="withdrawal_screen_text3">3. 서비스 탈퇴 후 전자상거래법에 의해 보존해야 하는 거래기록은 90일간 보관됩니다.</string>
+    <string name="withdrawal_screen_text4">4. 회원 탈퇴 시 회원가입 이벤트에는 재 참여하실 수 없습니다.</string>
+    <string name="withdrawal_screen_text5">5. 탈퇴 후 90일 이내에 재가입을 하시면, 기존 계정으로 사용하실 수 있습니다.</string>
+    <string name="withdrawal_screen_heading2">서비스 탈퇴 사유</string>
+    <string name="withdrawal_screen_heading3"> (필수)</string>
+    <string name="withdrawal_screen_reason1">콘텐츠 내용 부족</string>
+    <string name="withdrawal_screen_reason2">서비스 이용 불편</string>
+    <string name="withdrawal_screen_reason3">커뮤니티 사용 불편</string>
+    <string name="withdrawal_screen_reason4">방문 횟수 거의 없음</string>
+    <string name="withdrawal_screen_탈퇴">탈퇴</string>
+    <string name="withdrawal_screen_warning">안내사항을 확인하였으며 동의합니다.</string>
+
+    <!--회원 탈퇴 다이얼로그-->
+    <string name="withdrawal_dialog_text1">정말 제주도 여행 정보와 헤택을\n받지 않으시겠습니까? 😢</string>
+    <string name="withdrawal_dialog_text2">*90일 이내에 재가입 시,\n기존 계정으로 로그인이 됩니다.</string>
+
+    <!--홈 화면-->
+    <string name="home_screen_hint"> 님을 위한 도민 추천 🍊</string>
 </resources>

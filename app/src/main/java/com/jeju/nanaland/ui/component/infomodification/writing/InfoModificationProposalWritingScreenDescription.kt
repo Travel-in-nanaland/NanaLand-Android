@@ -2,13 +2,15 @@ package com.jeju.nanaland.ui.component.infomodification.writing
 
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import com.jeju.nanaland.R
 import com.jeju.nanaland.ui.theme.body02
 import com.jeju.nanaland.ui.theme.getColor
+import com.jeju.nanaland.util.resource.getString
 
 @Composable
 fun InfoModificationProposalWritingScreenDescription() {
     Text(
-        text = "정보 수정 제안 결과를 받을 이메일을 입력해주세요",
+        text = getString(R.string.info_modification_proposal_text3),
         color = getColor().gray01,
         style = body02
     )

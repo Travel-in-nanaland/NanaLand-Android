@@ -45,6 +45,7 @@ import com.jeju.nanaland.ui.main.mypage.MyPageScreen
 import com.jeju.nanaland.ui.theme.NanaLandTheme
 import com.jeju.nanaland.ui.theme.caption02
 import com.jeju.nanaland.ui.theme.getColor
+import com.jeju.nanaland.util.resource.getString
 import com.jeju.nanaland.util.ui.drawColoredShadow
 import kotlinx.coroutines.flow.emptyFlow
 
@@ -262,25 +263,25 @@ private fun MainScreenPreview() {
             viewType = MainScreenViewType.Home,
             iconSelected = R.drawable.ic_home_filled,
             iconUnselected = R.drawable.ic_home_outlined,
-            label = "홈"
+            label = getString(R.string.common_홈)
         ),
         MainViewModel.NavigationItemContent(
             viewType = MainScreenViewType.Favorite,
             iconSelected = R.drawable.ic_heart_filled,
             iconUnselected = R.drawable.ic_heart_outlined,
-            label = "찜"
+            label = getString(R.string.common_찜)
         ),
         MainViewModel.NavigationItemContent(
             viewType = MainScreenViewType.JejuStory,
             iconSelected = R.drawable.ic_group_filled,
             iconUnselected = R.drawable.ic_group_outlined,
-            label = "제주 이야기"
+            label = getString(R.string.common_제주_이야기)
         ),
         MainViewModel.NavigationItemContent(
             viewType = MainScreenViewType.MyPage,
             iconSelected = R.drawable.ic_person_filled,
             iconUnselected = R.drawable.ic_person_outlined,
-            label = "나의 나나"
+            label = getString(R.string.common_나의_나나)
         )
     )
     NanaLandTheme {

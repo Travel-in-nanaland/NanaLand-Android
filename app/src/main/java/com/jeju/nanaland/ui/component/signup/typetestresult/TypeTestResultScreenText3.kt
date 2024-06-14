@@ -5,6 +5,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.withStyle
+import com.jeju.nanaland.R
 import com.jeju.nanaland.globalvalue.constant.TYPE_GAMGYUL
 import com.jeju.nanaland.globalvalue.constant.TYPE_GAMGYUL_ADE
 import com.jeju.nanaland.globalvalue.constant.TYPE_GAMGYUL_AFFOKATO
@@ -23,6 +24,7 @@ import com.jeju.nanaland.globalvalue.constant.TYPE_GAMGYUL_YOGURT
 import com.jeju.nanaland.globalvalue.constant.TYPE_TANGERINE_PEEL_TEA
 import com.jeju.nanaland.ui.theme.bodyBold
 import com.jeju.nanaland.ui.theme.getColor
+import com.jeju.nanaland.util.resource.getString
 
 @Composable
 fun TypeTestResultScreenText3(travelType: String) {
@@ -58,7 +60,7 @@ fun TypeTestResultScreenText3(travelType: String) {
                     color = getColor().black
                 )
             ) {
-                append("\n\n" + "nanaland in Jeju가 당신을 위해\n맞춤 여행 주스를 만들었어요!")
+                append("\n\n" + getString(R.string.type_test_screen_text6))
             }
         },
         textAlign = TextAlign.Center

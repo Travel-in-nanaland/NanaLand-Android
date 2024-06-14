@@ -14,6 +14,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
+import com.jeju.nanaland.R
 import com.jeju.nanaland.ui.component.settings.SettingsScreenHorizontalDivider
 import com.jeju.nanaland.ui.component.common.SettingsScreenDialogCancelButton
 import com.jeju.nanaland.ui.component.common.SettingsScreenDialogConfirmButton
@@ -21,6 +22,7 @@ import com.jeju.nanaland.ui.component.withdrawal.WithdrawalScreenDialogVerticalD
 import com.jeju.nanaland.ui.theme.NanaLandTheme
 import com.jeju.nanaland.ui.theme.getColor
 import com.jeju.nanaland.ui.theme.title01Bold
+import com.jeju.nanaland.util.resource.getString
 
 @Composable
 fun SignOutConfirmDialog(
@@ -47,8 +49,7 @@ fun SignOutConfirmDialog(
                         verticalArrangement = Arrangement.Center
                     ) {
                         Text(
-                            text = "정말 로그아웃을\n" +
-                                    "하시겠습니까?",
+                            text = getString(R.string.sign_out_dialog_text),
                             color = getColor().black,
                             style = title01Bold
                         )
@@ -58,7 +59,7 @@ fun SignOutConfirmDialog(
 
                     Row(Modifier.height(IntrinsicSize.Min)) {
                         SettingsScreenDialogConfirmButton(
-                            text = "네",
+                            text = getString(R.string.common_네),
                             onClick = {
                                 onCancel()
                                 onConfirm()
@@ -68,7 +69,7 @@ fun SignOutConfirmDialog(
                         WithdrawalScreenDialogVerticalDivider()
 
                         SettingsScreenDialogCancelButton(
-                            text = "아니오",
+                            text = getString(R.string.common_아니오),
                             onClick = onCancel
                         )
                     }

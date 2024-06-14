@@ -1,5 +1,281 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">nanaland in Jeju</string>
-    <string name="select_language_please">중국어</string>
+    <string name="all">全部</string>
+    <string name="nature">七大自然</string>
+    <string name="festival">庆典</string>
+    <string name="market">传统市场</string>
+    <string name="experience">特色体验</string>
+    <string name="nanapick">nana推荐</string>
+    <string name="jejustory">济州故事</string>
+
+    <!--언어 설정 화면-->
+    <string name="select_language_please">언어를 선택해주세요</string>
+
+    <string name="cdrp_mon">日</string>
+    <string name="cdrp_tue">一</string>
+    <string name="cdrp_wed">二</string>
+    <string name="cdrp_thu">三</string>
+    <string name="cdrp_fri">四</string>
+    <string name="cdrp_sat">五</string>
+    <string name="cdrp_sun">六</string>
+
+    <string-array name="week_sun_sat">
+        <item>@string/cdrp_sun</item>
+        <item>@string/cdrp_mon</item>
+        <item>@string/cdrp_tue</item>
+        <item>@string/cdrp_wed</item>
+        <item>@string/cdrp_thu</item>
+        <item>@string/cdrp_fri</item>
+        <item>@string/cdrp_sat</item>
+    </string-array>
+
+    <string name="cancel">Cancel</string>
+    <string name="done">Done</string>
+    <string name="title_time_picker">Select Time</string>
+    <string name="select_time">Select a Time</string>
+
+    <!--전체 공통-->
+    <string name="common_7대_자연">七大自然</string>
+    <string name="common_축제">庆典</string>
+    <string name="common_전통시장">传统市场</string>
+    <string name="common_이색_체험">特色体验</string>
+    <string name="common_나나s_Pick">nana推荐</string>
+    <string name="common_홈">首页</string>
+    <string name="common_찜">收藏</string>
+    <string name="common_제주_이야기">济州故事</string>
+    <string name="common_나의_나나">我的nana</string>
+    <string name="common_전체">全部</string>
+    <string name="common_건">件</string>
+    <string name="common_년">년</string>
+    <string name="common_월">月</string>
+    <string name="common_봄">春天</string>
+    <string name="common_여름">夏天</string>
+    <string name="common_가을">秋天</string>
+    <string name="common_겨울">冬天</string>
+    <string name="common_이메일">电子邮件</string>
+    <string name="common_확인">确认</string>
+    <string name="common_자">字</string>
+    <string name="common_한국어">한국어</string>
+    <string name="common_중국어">中国话</string>
+    <string name="common_영어">English</string>
+    <string name="common_말레이시아어">Melayu</string>
+    <string name="common_소개">介绍</string>
+    <string name="common_닉네임">昵称</string>
+    <string name="common_취소">取消</string>
+    <string name="common_삭제">删除</string>
+    <string name="common_네">是</string>
+    <string name="common_아니오">否</string>
+    <string name="common_필수">(必填)</string>
+    <string name="common_선택">(选填)</string>
+
+    <!--홈 화면-->
+    <string name="home_screen_ad1_title">想在济州岛看美丽的大海吗？</string>
+    <string name="home_screen_ad1_content">那就来西归浦市城山体验大自然吧！</string>
+    <string name="home_screen_ad2_title">想去看稀有的星星吗？💫</string>
+    <string name="home_screen_ad2_content">来确认一下充满感性的涯月的山丘吧😯</string>
+    <string name="home_screen_ad3_title">如果你想感受韩国的氛围，就去市场吧！</string>
+    <string name="home_screen_ad3_content">那些传统市场依然存在呢？</string>
+    <string name="home_screen_ad4_title">济州岛七月举办的独特节日🎈</string>
+    <string name="home_screen_ad4_content">来看看充满济州岛风情的世界宝藏节日吧！</string>
+    <string name="home_screen_recommend">님을 위한 도민 추천 🍊</string>
+
+    <!--검색 화면-->
+    <string name="searching_screen_textfiled_hint">请输入搜索词。</string>
+    <string name="searching_screen_최근_검색어">最近搜索词</string>
+    <string name="searching_screen_모두_지우기">全部清除</string>
+    <string name="searching_screen_최근_검색어가_없습니다">没有最近的搜索</string>
+    <string name="searching_screen_가장_많이"></string>
+    <string name="searching_screen_검색하고_있어요">搜索量最多</string>
+    <string name="searching_screen_hot_keywords">搜索量上升！ JEJU Place 🍊</string>
+
+    <!--검색 결과 화면-->
+    <string name="search_result_screen_no_result">没有符合条件的搜索结果</string>
+    <string name="search_result_screen_preparing_service">该服务正在准备中。下次见！</string>
+
+    <!--비회원 회원가입 유도 다이얼로그-->
+    <string name="non_member_dialog_guide">必须成为会员\n才能使用所有服务✨</string>
+    <string name="non_member_dialog_go_sign_up">去注册会员</string>
+
+
+    <!--날짜 선택 다이얼로그-->
+    <string name="date_filter_dialog_날짜_선택">选择日期</string>
+    <string name="date_filter_dialog_초기화">重置</string>
+
+    <!--지역 선택 다이얼로그-->
+    <string name="location_filter_dialog_지역">地点</string>
+    <string name="location_filter_dialog_전체선택">选择所有</string>
+    <string name="location_filter_dialog_해제">重置</string>
+
+    <!--계절 선택 다이얼로그-->
+    <string name="season_filter_dialog_계절_선택">季节选择</string>
+
+    <!--필터링 다이얼로그 공통-->
+    <string name="filter_dialog_common_적용하기">应用</string>
+
+    <!--리스트 화면 공통-->
+    <string name="list_screen_common_전_지역">全区域</string>
+
+    <!--지역 공통-->
+    <string name="location_common_제주시">济州市</string>
+    <string name="location_common_애월">涯月</string>
+    <string name="location_common_조천">朝天</string>
+    <string name="location_common_한경">汉京</string>
+    <string name="location_common_구좌">旧左</string>
+    <string name="location_common_한림">翰林</string>
+    <string name="location_common_우도">牛岛</string>
+    <string name="location_common_추자">楸子</string>
+    <string name="location_common_서귀포시">西归浦市</string>
+    <string name="location_common_대정">大静</string>
+    <string name="location_common_안덕">安德</string>
+    <string name="location_common_남원">南元</string>
+    <string name="location_common_표선">表善</string>
+    <string name="location_common_성산">城山</string>
+
+    <!--축제 리스트 화면-->
+    <string name="festival_list_screen_월별_축제">本月庆典</string>
+    <string name="festival_list_screen_종료된_축제">已结束的庆典</string>
+    <string name="festival_list_screen_계절별_축제">各季节的庆典</string>
+    <string name="festival_list_screen_image_caption">*参考照片。</string>
+
+    <!--상세 화면 공통-->
+    <string name="detail_screen_common_더_보기">更多</string>
+    <string name="detail_screen_common_접기">접기</string>
+    <string name="detail_screen_common_주소">地址</string>
+    <string name="detail_screen_common_연락처">电话</string>
+    <string name="detail_screen_common_이용_시간">使用时间</string>
+    <string name="detail_screen_common_편의시설">便利设施</string>
+    <string name="detail_screen_common_홈페이지">官方网站</string>
+    <string name="detail_screen_common_입장료">门票</string>
+    <string name="detail_screen_common_상세_정보">详细信息</string>
+    <string name="detail_screen_common_기간">日程</string>
+    <string name="detail_screen_common_소개합니다">为您介绍!</string>
+    <string name="detail_screen_common_알아두면_좋아요">알아두면 좋아요!</string>
+
+    <!--정보 수정 제안-->
+    <string name="info_modification_proposal_정보_수정_제안">建议修改信息</string>
+    <string name="info_modification_proposal_heading1">请提出需要修改的信息 !</string>
+    <string name="info_modification_proposal_text1">如果您在建议地点时附上的照片对确认地点信息有帮助，\n将有机会获得福利.</string>
+    <string name="info_modification_proposal_전화번호_및_홈페이지">电话号码和网站</string>
+    <string name="info_modification_proposal_운영_시간">使用时间</string>
+    <string name="info_modification_proposal_장소명_및_위치">地点名称及位置</string>
+    <string name="info_modification_proposal_가격_정보">价格信息</string>
+    <string name="info_modification_proposal_장소_삭제">删除地点</string>
+    <string name="info_modification_proposal_heading2">请分享其他信息！</string>
+    <string name="info_modification_proposal_제공_서비스">提供服务</string>
+    <string name="info_modification_proposal_사진_추가하기">添加照片</string>
+    <string name="info_modification_proposal_text2">如果您附上实际核实过的信息及照片，\n将能提供更准确的信息</string>
+    <string name="info_modification_proposal_hint1">如有修改请求的详细内容或其他事项，请留下您的意见</string>
+    <string name="info_modification_proposal_text3">请输入接收信息修改建议结果的电子邮件</string>
+    <string name="info_modification_proposal_hint2">example@gmail.com</string>
+    <string name="info_modification_proposal_보내기">发送</string>
+    <string name="info_modification_proposal_heading3">정感谢您的信息修改建议</string>
+    <string name="info_modification_proposal_text4">通过信息修改建议，\n旅行地的吸引力也提高了！\n\n越来越期待了🧚‍♀️</string>
+    <string name="info_modification_proposal_button1">重新查看内容</string>
+    <string name="info_modification_proposal_button2">添加其他项目</string>
+
+    <!--약관 동의 화면-->
+    <string name="policy_agree_screen_heading">欢迎来到济州的\nnanaland</string>
+    <string name="policy_agree_screen_전체_동의">全部同意</string>
+    <string name="policy_agree_screen_privacy_policy">同意使用条款及隐私政策</string>
+    <string name="policy_agree_screen_marketing_policy">同意营销使用</string>
+    <string name="policy_agree_screen_location_policy">同意基于位置的服务条款</string>
+
+    <!--회원가입 프로필 설정 화면-->
+    <string name="sign_up_profile_setting_guide">请填写要使用的名\n称并选择头像</string>
+    <string name="sign_up_profile_setting_hint">请输入名字</string>
+    <string name="sign_up_profile_setting_warning1">该昵称已被其他用户使用。</string>
+    <string name="sign_up_profile_setting_warning2">该昵称无法使用。</string>
+    <string name="sign_up_profile_setting_warning3">昵称只能包含字母、空格和数字。</string>
+
+    <!--여행지 유형 테스트 화면-->
+    <string name="type_test_screen_question1">"여행 장소를\n고를 때 "</string>
+    <string name="type_test_screen_question2">"여행 계획을\n세울 때 "</string>
+    <string name="type_test_screen_question3">"여행 경비를\n정할 때 "</string>
+    <string name="type_test_screen_question4">여행을 다닐 때\n</string>
+    <string name="type_test_screen_question5">여행에서 가장\n하고 싶은 것은?</string>
+    <string name="type_test_screen_question_님은">" 님은?"</string>
+    <string name="type_test_screen_item1">热闹的观赏景点</string>
+    <string name="type_test_screen_item2">悠闲自在的景点</string>
+    <string name="type_test_screen_item3">自由自在</string>
+    <string name="type_test_screen_item4">按照计划</string>
+    <string name="type_test_screen_item5">性价比高的旅游</string>
+    <string name="type_test_screen_item6">奢华的旅游</string>
+    <string name="type_test_screen_item7">剩下的只有照片！</string>
+    <string name="type_test_screen_item8">看在眼里，记在心中</string>
+    <string name="type_test_screen_item9">旅游景点</string>
+    <string name="type_test_screen_item10">传统文化</string>
+    <string name="type_test_screen_item11">自然景观</string>
+    <string name="type_test_screen_item12">主题公园</string>
+    <string name="type_test_screen_테스트_건너뛰기">跳过测试</string>
+    <string name="type_test_screen_다음">下一步</string>
+    <string name="type_test_screen_님의">" 님의"</string>
+    <string name="type_test_screen_text1">的偏好是？</string>
+    <string name="type_test_screen_text2">想要的旅游风格是？</string>
+    <string name="type_test_screen_text3">柑橘正在被榨汁……</string>
+    <string name="type_test_screen_text4">美味的旅游果汁马上出来！ </string>
+    <string name="type_test_screen_text5">的旅行类型是</string>
+    <string name="type_test_screen_text6">nanaland in Jeju 为您定制了旅行果汁！</string>
+    <string name="type_test_screen_button1">旅游地</string>
+    <string name="type_test_screen_button2">前往主屏幕</string>
+    <string name="type_test_screen_lets_go">Let\'s Go!</string>
+
+    <!--여행지 유형 테스트 추천 여행지 화면-->
+    <string name="type_test_recommended_spot_text1"> 님을 위한</string>
+    <string name="type_test_recommended_spot_text2">的旅游地</string>
+
+    <!--언어 설정 화면-->
+    <string name="language_change_screen_guide">맨 위에 있는 언어로\n기본 설정 되어 있습니다.</string>
+
+    <!--설정 화면-->
+    <string name="settings_screen_설정">设置</string>
+    <string name="settings_screen_사용_설정">应用设置</string>
+    <string name="settings_screen_약관_및_정책">条款与政策</string>
+    <string name="settings_screen_접근권한_안내">权限指南</string>
+    <string name="settings_screen_언어_설정">语言设置</string>
+    <string name="settings_screen_버전_정보">版本信息</string>
+    <string name="settings_screen_로그아웃">登出</string>
+    <string name="settings_screen_회원_탈퇴">注销会员</string>
+
+    <!--로그아웃 다이얼로그-->
+    <string name="sign_out_dialog_text">정말 로그아웃을\n하시겠습니까?</string>
+
+    <!--마이페이지 화면-->
+    <string name="mypage_screen_프로필_수정">编辑个人资料</string>
+    <string name="mypage_screen_여행_유형">旅行类型</string>
+    <string name="mypage_screen_테스트_다시하기">再次测试</string>
+    <string name="mypage_screen_테스트_하기">测试</string>
+    <string name="mypage_screen_없음">无</string>
+    <string name="mypage_screen_로그인이_필요해요">需要登录</string>
+    <string name="mypage_screen_level">Lv.</string>
+
+    <!--프로필 수정 화면-->
+    <string name="profile_update_screen_프로필_수정">编辑个人资料</string>
+    <string name="profile_update_screen_수정_완료">修改完成</string>
+
+    <!--언어 초기화 화면-->
+    <string name="profile_initialization_screen_hello">안녕하세요!</string>
+    <string name="profile_initialization_screen_select_language">언어를 선택해주세요</string>
+
+    <!--약관 설정 화면-->
+    <string name="policy_setting_screen_warning">*不同意时，可能无法享受某些服务或优惠，请注意</string>
+
+    <!--회원 탈퇴 화면-->
+    <string name="withdrawal_screen_heading1">服务退出指南</string>
+    <string name="withdrawal_screen_text1">1. 退出本服务后，将取消并终止基于Nanaland in Jeju服务提供的所有服务。</string>
+    <string name="withdrawal_screen_text2">2. 退出会员后，您持有的各类优惠券和积分将自动失效，即使重新加入也不会恢复。</string>
+    <string name="withdrawal_screen_text3">3. 服务退出后，根据电子商务法需保存的交易记录将保留5年。</string>
+    <string name="withdrawal_screen_text4">4. 退出会员后无法重新参加会员注册活动。</string>
+    <string name="withdrawal_screen_text5">5. 若在退出后90天内重新加入，您可以继续使用原账户。</string>
+    <string name="withdrawal_screen_heading2">服务退出原因</string>
+    <string name="withdrawal_screen_reason1">内容不足</string>
+    <string name="withdrawal_screen_reason2">服务使用不便</string>
+    <string name="withdrawal_screen_reason3">社区使用不便</string>
+    <string name="withdrawal_screen_reason4"> 几乎不访问</string>
+    <string name="withdrawal_screen_탈퇴">退出</string>
+    <string name="withdrawal_screen_warning">我已确认指南事项并同意。</string>
+
+    <!--회원 탈퇴 다이얼로그-->
+    <string name="withdrawal_dialog_text1">真的不想收到济州岛旅行信息和优惠吗？😢</string>
+    <string name="withdrawal_dialog_text2">*90天内重新加入时，可以用原账户登录。</string>
 </resources>

@@ -12,10 +12,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
+import com.jeju.nanaland.R
 import com.jeju.nanaland.globalvalue.constant.TOP_BAR_HEIGHT
 import com.jeju.nanaland.ui.component.mypage.parts.MyPageScreenSettingsIcon
 import com.jeju.nanaland.ui.theme.getColor
 import com.jeju.nanaland.ui.theme.title01Bold
+import com.jeju.nanaland.util.resource.getString
 import com.jeju.nanaland.util.ui.drawColoredShadow
 
 @Composable
@@ -45,7 +47,7 @@ fun MyPageScreenTopBar(onClick: () -> Unit) {
         contentAlignment = Alignment.Center
     ) {
         Text(
-            text = "나의 나나",
+            text = getString(R.string.common_나의_나나),
             color = getColor().black,
             style = title01Bold
         )

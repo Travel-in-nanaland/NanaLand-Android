@@ -27,6 +27,7 @@ import com.jeju.nanaland.globalvalue.type.InputNicknameState
 import com.jeju.nanaland.ui.component.signup.profilesetting.parts.SignUpScreenTextFieldHint
 import com.jeju.nanaland.ui.theme.caption01
 import com.jeju.nanaland.ui.theme.getColor
+import com.jeju.nanaland.util.resource.getString
 
 @Composable
 fun SignUpScreenTextField(
@@ -76,8 +77,8 @@ fun SignUpScreenTextField(
                     Spacer(Modifier.width(4.dp))
 
                     Text(
-                        text = if (inputState == InputNicknameState.Invalid) "해당 닉네임은 사용할 수 없습니다."
-                                else "해당 닉네임은 다른 사용자가 사용 중입니다.",
+                        text = if (inputState == InputNicknameState.Invalid) getString(R.string.sign_up_profile_setting_warning1)
+                                else getString(R.string.sign_up_profile_setting_warning2),
                         color = getColor().warning,
                         style = caption01
                     )

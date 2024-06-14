@@ -21,6 +21,7 @@ import androidx.compose.ui.unit.dp
 import com.jeju.nanaland.R
 import com.jeju.nanaland.ui.theme.body02Bold
 import com.jeju.nanaland.ui.theme.getColor
+import com.jeju.nanaland.util.resource.getString
 import com.jeju.nanaland.util.ui.clickableNoEffect
 import com.skydoves.landscapist.ImageOptions
 import com.skydoves.landscapist.glide.GlideImage
@@ -69,7 +70,7 @@ fun InfoModificationProposalWritingScreenImagePreview(
                 Spacer(Modifier.height(8.dp))
 
                 Text(
-                    text = "사진 추가하기",
+                    text = getString(R.string.info_modification_proposal_사진_추가하기),
                     color = getColor().white,
                     style = body02Bold
                 )
@@ -77,8 +78,7 @@ fun InfoModificationProposalWritingScreenImagePreview(
                 Spacer(Modifier.height(4.dp))
 
                 Text(
-                    text = "실제 확인한 정보를 사진과 함께 첨부해주시면,\n" +
-                            "좀 더 정확한 정보가 완성되어요",
+                    text = getString(R.string.info_modification_proposal_text2),
                     color = getColor().white,
                     style = body02Bold,
                     textAlign = TextAlign.Center

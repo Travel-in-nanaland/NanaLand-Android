@@ -24,7 +24,7 @@ class MainViewModel @Inject constructor() : ViewModel() {
             viewType = MainScreenViewType.Home,
             iconSelected = R.drawable.ic_home_filled,
             iconUnselected = R.drawable.ic_home_outlined,
-            label = getString(R.string.navigation_bar_홈)
+            label = getString(R.string.common_홈)
         ),
         NavigationItemContent(
             viewType = MainScreenViewType.Favorite,

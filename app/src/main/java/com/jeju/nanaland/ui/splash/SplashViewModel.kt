@@ -1,5 +1,8 @@
 package com.jeju.nanaland.ui.splash
 
+import android.app.Application
+import android.content.res.Configuration
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.jeju.nanaland.domain.usecase.auth.ReissueAccessTokenUseCase
@@ -11,6 +14,7 @@ import com.jeju.nanaland.domain.usecase.settingsdatastore.GetValueUseCase
 import com.jeju.nanaland.globalvalue.constant.KEY_LANGUAGE
 import com.jeju.nanaland.globalvalue.type.SplashCheckingState
 import com.jeju.nanaland.globalvalue.userdata.UserData
+import com.jeju.nanaland.util.language.customContext
 import com.jeju.nanaland.util.log.LogUtil
 import com.jeju.nanaland.util.network.NetworkManager
 import com.jeju.nanaland.util.network.onError
@@ -25,6 +29,7 @@ import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import java.util.Locale
 import javax.inject.Inject
 
 @HiltViewModel
@@ -35,8 +40,9 @@ class SplashViewModel @Inject constructor(
     private val reissueAccessTokenUseCase: ReissueAccessTokenUseCase,
     private val saveAccessTokenUseCase: SaveAccessTokenUseCase,
     private val saveRefreshTokenUseCase: SaveRefreshTokenUseCase,
-    private val getUserProfileUseCase: GetUserProfileUseCase
-) : ViewModel() {
+    private val getUserProfileUseCase: GetUserProfileUseCase,
+    private val application: Application,
+) : AndroidViewModel(application) {
 
     private val _checkingState = MutableStateFlow(SplashCheckingState.Network)
     val checkingState = _checkingState.asStateFlow()
@@ -62,6 +68,9 @@ class SplashViewModel @Inject constructor(
                 if (it.isNullOrEmpty()) {
                     moveToLanguageInitScreen()
                 } else {
+                    val conf: Configuration = application.resources.configuration
+                    conf.setLocale(Locale(it))
+                    customContext = application.createConfigurationContext(conf)
                     _checkingState.update { SplashCheckingState.Authorization }
                 }
             }

@@ -11,10 +11,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
+import com.jeju.nanaland.R
 import com.jeju.nanaland.globalvalue.userdata.UserData
 import com.jeju.nanaland.ui.theme.getColor
 import com.jeju.nanaland.ui.theme.largeTitle02
 import com.jeju.nanaland.ui.theme.largeTitle02Regular
+import com.jeju.nanaland.util.resource.getString
 
 @Composable
 fun TypeTestCompletionScreenText() {
@@ -36,7 +38,7 @@ fun TypeTestCompletionScreenText() {
                         color = getColor().black
                     )
                 ) {
-                    append(" 님의")
+                    append(getString(R.string.type_test_screen_님의))
                 }
             }
         )
@@ -44,7 +46,7 @@ fun TypeTestCompletionScreenText() {
         Spacer(Modifier.height(16.dp))
 
         Text(
-            text = "취향은?",
+            text = getString(R.string.type_test_screen_text1),
             color = getColor().black,
             style = largeTitle02Regular
         )
@@ -52,7 +54,7 @@ fun TypeTestCompletionScreenText() {
         Spacer(Modifier.height(16.dp))
 
         Text(
-            text = "하고 싶은 여행 스타일은?",
+            text = getString(R.string.type_test_screen_text2),
             color = getColor().black,
             style = largeTitle02Regular
         )

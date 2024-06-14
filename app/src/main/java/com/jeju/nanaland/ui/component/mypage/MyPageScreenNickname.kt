@@ -14,6 +14,7 @@ import com.jeju.nanaland.R
 import com.jeju.nanaland.globalvalue.userdata.UserData
 import com.jeju.nanaland.ui.theme.getColor
 import com.jeju.nanaland.ui.theme.largeTitle02
+import com.jeju.nanaland.util.resource.getString
 import com.jeju.nanaland.util.ui.clickableNoEffect
 
 @Composable
@@ -26,7 +27,7 @@ fun ColumnScope.MyPageScreenNickname(onClick: () -> Unit,) {
             verticalAlignment = Alignment.CenterVertically
         ) {
             Text(
-                text = "로그인이 필요해요",
+                text = getString(R.string.mypage_screen_로그인이_필요해요),
                 color = getColor().black,
                 style = largeTitle02
             )

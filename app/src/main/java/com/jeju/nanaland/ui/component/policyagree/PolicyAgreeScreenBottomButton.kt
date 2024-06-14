@@ -1,7 +1,9 @@
 package com.jeju.nanaland.ui.component.policyagree
 
 import androidx.compose.runtime.Composable
+import com.jeju.nanaland.R
 import com.jeju.nanaland.ui.component.common.BottomOkButton
+import com.jeju.nanaland.util.resource.getString
 
 @Composable
 fun PolicyAgreeScreenBottomButton(
@@ -9,7 +11,7 @@ fun PolicyAgreeScreenBottomButton(
     onClick: () -> Unit
 ) {
     BottomOkButton(
-        text = "확인",
+        text = getString(R.string.common_확인),
         isActivated = isActivated,
         onClick = onClick
     )

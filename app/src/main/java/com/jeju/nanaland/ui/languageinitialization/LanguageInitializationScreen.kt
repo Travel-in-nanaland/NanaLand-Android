@@ -9,9 +9,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.jeju.nanaland.R
 import com.jeju.nanaland.ui.component.languageinitialization.LanguageInitializationScreenLanguageBox
 import com.jeju.nanaland.ui.component.languageinitialization.LanguageInitializationScreenText1
 import com.jeju.nanaland.ui.component.languageinitialization.LanguageInitializationScreenText2
+import com.jeju.nanaland.util.resource.getString
 import com.jeju.nanaland.util.ui.ScreenPreview
 
 @Composable
@@ -47,7 +49,7 @@ private fun LanguageInitializationScreen(
         Spacer(Modifier.height(120.dp))
 
         LanguageInitializationScreenLanguageBox(
-            text = "English",
+            text = getString(R.string.common_영어),
             onClick = {
                 selectLanguage("en")
                 moveToSignInScreen()
@@ -57,7 +59,7 @@ private fun LanguageInitializationScreen(
         Spacer(Modifier.height(32.dp))
 
         LanguageInitializationScreenLanguageBox(
-            text = "중국어",
+            text = getString(R.string.common_중국어),
             onClick = {
                 selectLanguage("zh")
                 moveToSignInScreen()
@@ -67,7 +69,7 @@ private fun LanguageInitializationScreen(
         Spacer(Modifier.height(32.dp))
 
         LanguageInitializationScreenLanguageBox(
-            text = "말레이시아어",
+            text = getString(R.string.common_말레이시아어),
             onClick = {
                 selectLanguage("ms")
                 moveToSignInScreen()
@@ -77,7 +79,7 @@ private fun LanguageInitializationScreen(
         Spacer(Modifier.height(32.dp))
 
         LanguageInitializationScreenLanguageBox(
-            text = "한국어",
+            text = getString(R.string.common_한국어),
             onClick = {
                 selectLanguage("ko")
                 moveToSignInScreen()

@@ -17,6 +17,7 @@ import com.jeju.nanaland.ui.component.infomodification.category.InfoModification
 import com.jeju.nanaland.ui.component.infomodification.category.InfoModificationProposalScreenText1
 import com.jeju.nanaland.ui.component.infomodification.category.InfoModificationProposalScreenText2
 import com.jeju.nanaland.ui.component.infomodification.category.InfoModificationProposalScreenText3
+import com.jeju.nanaland.util.resource.getString
 
 @Composable
 fun InformationModificationProposalCategoryScreen(
@@ -38,7 +39,7 @@ private fun InformationModificationProposalCategoryScreen(
 ) {
     CustomSurface {
         CustomTopBar(
-            title = "정보 수정 제안",
+            title = getString(R.string.info_modification_proposal_정보_수정_제안),
             onBackButtonClicked = moveToBackScreen
         )
 
@@ -59,7 +60,7 @@ private fun InformationModificationProposalCategoryScreen(
 
             InfoModificationProposalScreenBox(
                 drawableId = R.drawable.ic_phone_outlined,
-                text = "전화번호 및 홈페이지",
+                text = getString(R.string.info_modification_proposal_전화번호_및_홈페이지),
                 onClick = { moveToInfoModificationProposalWritingScreen("CONTACT_OR_HOMEPAGE") }
             )
 
@@ -67,7 +68,7 @@ private fun InformationModificationProposalCategoryScreen(
 
             InfoModificationProposalScreenBox(
                 drawableId = R.drawable.ic_clock_outlined,
-                text = "운영 시간",
+                text = getString(R.string.info_modification_proposal_운영_시간),
                 onClick = { moveToInfoModificationProposalWritingScreen("TIME") }
             )
 
@@ -75,7 +76,7 @@ private fun InformationModificationProposalCategoryScreen(
 
             InfoModificationProposalScreenBox(
                 drawableId = R.drawable.ic_location_outlined,
-                text = "장소명 및 위치",
+                text = getString(R.string.info_modification_proposal_장소명_및_위치),
                 onClick = { moveToInfoModificationProposalWritingScreen("LOCATION") }
             )
 
@@ -83,7 +84,7 @@ private fun InformationModificationProposalCategoryScreen(
 
             InfoModificationProposalScreenBox(
                 drawableId = R.drawable.ic_coin,
-                text = "가격 정보",
+                text = getString(R.string.info_modification_proposal_가격_정보),
                 onClick = { moveToInfoModificationProposalWritingScreen("PRICE") }
             )
 
@@ -91,7 +92,7 @@ private fun InformationModificationProposalCategoryScreen(
 
             InfoModificationProposalScreenBox(
                 drawableId = R.drawable.ic_trashcan_outlined,
-                text = "장소 삭제",
+                text = getString(R.string.info_modification_proposal_장소_삭제),
                 onClick = { moveToInfoModificationProposalWritingScreen("DELETE_LOCATION") }
             )
 
@@ -103,7 +104,7 @@ private fun InformationModificationProposalCategoryScreen(
 
             InfoModificationProposalScreenBox(
                 drawableId = R.drawable.ic_present_outlined,
-                text = "제공 서비스",
+                text = getString(R.string.info_modification_proposal_제공_서비스),
                 onClick = { moveToInfoModificationProposalWritingScreen("ETC") }
             )
         }

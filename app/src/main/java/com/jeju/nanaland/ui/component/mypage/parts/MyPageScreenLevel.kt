@@ -11,8 +11,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.jeju.nanaland.R
 import com.jeju.nanaland.ui.theme.caption01
 import com.jeju.nanaland.ui.theme.getColor
+import com.jeju.nanaland.util.resource.getString
 
 @Composable
 fun BoxScope.MyPageScreenLevel(level: Long) {
@@ -28,7 +30,7 @@ fun BoxScope.MyPageScreenLevel(level: Long) {
         contentAlignment = Alignment.Center
     ) {
         Text(
-            text = "Lv.${level}",
+            text = getString(R.string.mypage_screen_level) + "$level",
             color = getColor().white,
             style = caption01
         )

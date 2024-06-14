@@ -36,6 +36,7 @@ import com.jeju.nanaland.globalvalue.type.SearchCategoryType
 import com.jeju.nanaland.ui.theme.NanaLandTheme
 import com.jeju.nanaland.ui.theme.body02
 import com.jeju.nanaland.ui.theme.getColor
+import com.jeju.nanaland.util.resource.getString
 import com.jeju.nanaland.util.ui.ScreenPreview
 import com.jeju.nanaland.util.ui.clickableNoEffect
 
@@ -118,7 +119,7 @@ fun HomeScreenTopBar(
                 if (inputText == "") {
                     if (isFocused) {
                         Text(
-                            text = "검색어를 입력해 주세요",
+                            text = getString(R.string.searching_screen_textfiled_hint),
                             color = getColor().gray01,
                             style = body02
                         )

@@ -30,7 +30,7 @@ fun DetailScreenInformationModificationProposalButton(onClick: () -> Unit) {
         contentAlignment = Alignment.Center
     ) {
         Text(
-            text = getString(R.string.detail_screen_common_정보_수정_제안),
+            text = getString(R.string.info_modification_proposal_정보_수정_제안),
             color = getColor().gray01,
             style = bodyBold
         )

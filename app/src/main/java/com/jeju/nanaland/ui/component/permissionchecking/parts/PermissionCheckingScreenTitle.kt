@@ -4,8 +4,10 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.withStyle
+import com.jeju.nanaland.R
 import com.jeju.nanaland.ui.theme.body02SemiBold
 import com.jeju.nanaland.ui.theme.getColor
+import com.jeju.nanaland.util.resource.getString
 
 @Composable
 fun PermissionCheckingScreenTitle(
@@ -26,7 +28,7 @@ fun PermissionCheckingScreenTitle(
                     color = if (isNecessary) getColor().main else getColor().black
                 )
             ) {
-                append(if (isNecessary) " (필수)" else " (선택)")
+                append(" " + if (isNecessary) getString(R.string.common_필수) else getString(R.string.common_선택))
             }
         }
     )

@@ -2,13 +2,15 @@ package com.jeju.nanaland.ui.component.signup.typetestloading
 
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import com.jeju.nanaland.R
 import com.jeju.nanaland.ui.theme.getColor
 import com.jeju.nanaland.ui.theme.title02
+import com.jeju.nanaland.util.resource.getString
 
 @Composable
 fun TypeTestLoadingScreenText2() {
     Text(
-        text = "맛있는 여행 주스가 곧 나옵니다 !",
+        text = getString(R.string.type_test_screen_text4),
         color = getColor().black,
         style = title02
     )

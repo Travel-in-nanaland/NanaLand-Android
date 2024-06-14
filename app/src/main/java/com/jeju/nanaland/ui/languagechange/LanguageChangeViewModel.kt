@@ -1,5 +1,8 @@
 package com.jeju.nanaland.ui.languagechange
 
+import android.app.Application
+import android.content.res.Configuration
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.jeju.nanaland.domain.request.member.UpdateLanguageRequest
@@ -7,6 +10,7 @@ import com.jeju.nanaland.domain.usecase.member.UpdateLanguageUseCase
 import com.jeju.nanaland.domain.usecase.settingsdatastore.GetValueUseCase
 import com.jeju.nanaland.domain.usecase.settingsdatastore.SaveValueUseCase
 import com.jeju.nanaland.globalvalue.constant.KEY_LANGUAGE
+import com.jeju.nanaland.util.language.customContext
 import com.jeju.nanaland.util.log.LogUtil
 import com.jeju.nanaland.util.network.onError
 import com.jeju.nanaland.util.network.onException
@@ -19,14 +23,16 @@ import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import java.util.Locale
 import javax.inject.Inject
 
 @HiltViewModel
 class LanguageChangeViewModel @Inject constructor(
     private val updateLanguageUseCase: UpdateLanguageUseCase,
     private val saveValueUseCase: SaveValueUseCase,
-    private val getValueUseCase: GetValueUseCase
-) : ViewModel() {
+    private val getValueUseCase: GetValueUseCase,
+    private val application: Application,
+) : AndroidViewModel(application) {
 
     private val _currLanguage = MutableStateFlow("en")
     val currLanguage = _currLanguage.asStateFlow()
@@ -50,16 +56,20 @@ class LanguageChangeViewModel @Inject constructor(
     }
 
     private fun saveLanguage(language: String) {
+        val languageCode = when (language) {
+            "ENGLISH" -> "en"
+            "CHINESE" -> "zh"
+            "MALAYSIA" -> "ms"
+            "KOREAN" -> "ko"
+            else -> "en"
+        }
         viewModelScope.launch { saveValueUseCase(
             key = KEY_LANGUAGE,
-            value = when (language) {
-                "ENGLISH" -> "en"
-                "CHINESE" -> "zh"
-                "MALAYSIA" -> "ms"
-                "KOREAN" -> "ko"
-                else -> "en"
-            }
-        ) }
+            value = languageCode
+        )
+        val conf: Configuration = application.resources.configuration
+        conf.setLocale(Locale(languageCode))
+        customContext = application.createConfigurationContext(conf)}
     }
 
     init {
