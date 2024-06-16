@@ -7,6 +7,7 @@ import com.jeju.nanaland.R
 import com.jeju.nanaland.globalvalue.userdata.UserData
 import com.jeju.nanaland.ui.theme.getColor
 import com.jeju.nanaland.ui.theme.largeTitle02
+import com.jeju.nanaland.util.language.customContext
 import com.jeju.nanaland.util.resource.getString
 
 @Composable
@@ -17,7 +18,12 @@ fun TypeTestingScreenQuestionText(level: Int) {
             2 -> getString(R.string.type_test_screen_question2) + UserData.nickname + getString(R.string.type_test_screen_question_님은)
             3 -> getString(R.string.type_test_screen_question3) + UserData.nickname + getString(R.string.type_test_screen_question_님은)
             4 -> getString(R.string.type_test_screen_question4) + UserData.nickname + getString(R.string.type_test_screen_question_님은)
-            else -> getString(R.string.type_test_screen_question5)
+            else -> when (customContext.resources.configuration.locales[0].language) {
+                "ko" -> getString(R.string.type_test_screen_question5)
+                "ms" -> getString(R.string.type_test_screen_question5) + UserData.nickname + getString(R.string.type_test_screen_question6)
+                "zh" -> ""
+                else -> ""
+            }
         },
         color = getColor().main,
         textAlign = TextAlign.Center,

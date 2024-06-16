@@ -22,6 +22,10 @@ val appleSdGothicNeo = FontFamily(
     Font(R.font.apple_neo_h, FontWeight.Black)
 )
 
+val nanumPen = FontFamily(
+    Font(R.font.nanum_pen_regular, FontWeight.Normal),
+)
+
 val Typography = Typography(
     displayLarge = TextStyle(
         fontFamily = appleSdGothicNeo,

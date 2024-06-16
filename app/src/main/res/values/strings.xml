@@ -1,12 +1,5 @@
 <resources>
     <string name="app_name">nanaland in Jeju</string>
-    <string name="all">전체</string>
-    <string name="nature">7대 자연</string>
-    <string name="festival">축제</string>
-    <string name="market">전통시장</string>
-    <string name="experience">이색 체험</string>
-    <string name="nanapick">나나\'s Pick</string>
-    <string name="jejustory">제주 이야기</string>
 
     <!--언어 설정 화면-->
     <string name="select_language_please">언어를 선택해주세요</string>
@@ -77,7 +70,9 @@
     <string name="home_screen_ad3_content">아직도 남은 전통 시장들은 뭐가 있을까?</string>
     <string name="home_screen_ad4_title">제주도에서만 여는 7월 축제🎈</string>
     <string name="home_screen_ad4_content">세계의 보물, 제주도가 가득 느껴지는 축제 보러가자</string>
-    <string name="home_screen_recommend">님을 위한 도민 추천 🍊</string>
+    <string name="home_screen_recommend1">""</string>
+    <string name="home_screen_recommend2">님을 위한 도민 추천 🍊</string>
+    <string name="home_screen_hint">제주도는 지금 유채꽃 축제🏵️</string>
 
     <!--검색 화면-->
     <string name="searching_screen_textfiled_hint">검색어를 입력해 주세요</string>
@@ -90,7 +85,7 @@
 
     <!--검색 결과 화면-->
     <string name="search_result_screen_no_result">해당 검색 결과가 없습니다.</string>
-    <string name="search_result_screen_preparing_service">해당 서비스 준비 중입니다.\n다음에 만나요!</string>
+    <string name="search_result_screen_preparing_service">해당 서비스는 준비 중입니다.\n다음에 만나요!</string>
 
     <!--비회원 회원가입 유도 다이얼로그-->
     <string name="non_member_dialog_guide">나나랜드의 회원이 되셔야,\n모든 서비스를\n이용하실 수 있습니다✨</string>
@@ -150,6 +145,7 @@
     <string name="detail_screen_common_기간">기간</string>
     <string name="detail_screen_common_소개합니다">소개합니다!</string>
     <string name="detail_screen_common_알아두면_좋아요">알아두면 좋아요!</string>
+    <string name="detail_screen_common_이_장소만의_매력_포인트">이 장소만의 매력 포인트✨</string>
 
     <!--정보 수정 제안-->
     <string name="info_modification_proposal_정보_수정_제안">정보 수정 제안</string>
@@ -188,12 +184,49 @@
     <string name="sign_up_profile_setting_warning2">해당 닉네임은 다른 사용자가 사용 중입니다.</string>
     <string name="sign_up_profile_setting_warning3">닉네임에는 문자, 띄어쓰기, 숫자만 가능합니다.</string>
 
+    <!--여행지 유형-->
+    <string name="type_감귤_아이스크림">감귤 아이스크림</string>
+    <string name="type_감귤_찹쌀떡">감귤 찹쌀떡</string>
+    <string name="type_감귤">감귤</string>
+    <string name="type_감귤_사이다">감귤 사이다</string>
+    <string name="type_감귤_아포가토">감귤 아포가토</string>
+    <string name="type_감귤_한과">감귤 한과</string>
+    <string name="type_감귤_주스">감귤 주스</string>
+    <string name="type_감귤_초콜릿">감귤 초콜릿</string>
+    <string name="type_감귤_칵테일">감귤 칵테일</string>
+    <string name="type_귤피차">귤피차</string>
+    <string name="type_감귤_요거트">감귤 요거트</string>
+    <string name="type_감귤_플랫치노">감귤 플랫치노</string>
+    <string name="type_감귤_라떼">감귤 라떼</string>
+    <string name="type_감귤_식혜">감귤 식혜</string>
+    <string name="type_감귤_에이드">감귤 에이드</string>
+    <string name="type_감귤_버블티">감귤 버블티</string>
+
+    <!--여행지 유형 설명-->
+    <string name="type_감귤_아이스크림_description">부드러우면서도, 달콤한 기억을 선사해주는 감귤 아이스크림 유형</string>
+    <string name="type_감귤_찹쌀떡_description">통통튀는 즐거움을 메모장에 하나씩 수 놓는, 감귤 찹쌀떡 유형</string>
+    <string name="type_감귤_description">가장 기본적이면서도 유명한 곳으로만! 감귤 유형</string>
+    <string name="type_감귤_사이다_description">톡톡쏘면서 상큼한 감귤 사이다 유형</string>
+    <string name="type_감귤_아포가토_description">열정적이면서 활발한 당신에게 창의성이 가득한 감귤 아포카토 유형</string>
+    <string name="type_감귤_한과_description">다채로운 제주의 맛을 담은 명품 감귤 한과</string>
+    <string name="type_감귤_주스_description">가장 기본적이면서도 유명한 곳으로만! 감귤 주스 유형</string>
+    <string name="type_감귤_초콜릿_description">취향이 확고하고 많은 것보다는 좋은 것이 중요한 감귤 초콜릿 유형</string>
+    <string name="type_감귤_칵테일_description">화려하고 익스트림한 감귤 칵테일 유형</string>
+    <string name="type_귤피차_description">고즈넉하게 풍경을 바라보는 귤피차 유형</string>
+    <string name="type_감귤_요거트_description">있는 그대로의 맛! 부드럽고 톡 쏘는 감귤 요거트 유형</string>
+    <string name="type_감귤_플랫치노_description">각종 과일들의 상큼함과 얼음의 차가움을 한번에, 창의적인 감귤 플랫치노 유형</string>
+    <string name="type_감귤_라떼_description">따뜻한 햇살 밑에서 유유자적 하는 감귤 라떼 유형!</string>
+    <string name="type_감귤_식혜_description">풍미 가득한! 느리지만, 깊은 감귤 식혜 유형!</string>
+    <string name="type_감귤_에이드_description">톡 쏘는 탄산수에 싱그러운 과일이 퐁당! 청량감이 느껴지는 감귤 에이드</string>
+    <string name="type_감귤_버블티_description">호기심 가득한 당신! 먹을수록 반전인 감귤 버블티 유형!</string>
+
     <!--여행지 유형 테스트 화면-->
     <string name="type_test_screen_question1">"여행 장소를\n고를 때 "</string>
     <string name="type_test_screen_question2">"여행 계획을\n세울 때 "</string>
     <string name="type_test_screen_question3">"여행 경비를\n정할 때 "</string>
     <string name="type_test_screen_question4">여행을 다닐 때\n</string>
     <string name="type_test_screen_question5">여행에서 가장\n하고 싶은 것은?</string>
+    <string name="type_test_screen_question6">""</string>
     <string name="type_test_screen_question_님은">" 님은?"</string>
     <string name="type_test_screen_item1">활발한 관광 장소</string>
     <string name="type_test_screen_item2">한적한 로컬 장소</string>
@@ -221,11 +254,15 @@
     <string name="type_test_screen_lets_go">Let\'s Go!</string>
 
     <!--여행지 유형 테스트 추천 여행지 화면-->
-    <string name="type_test_recommended_spot_text1"> 님을 위한</string>
-    <string name="type_test_recommended_spot_text2">추천 여행지</string>
+    <string name="type_test_recommended_spot_text1">""</string>
+    <string name="type_test_recommended_spot_text2"> 님을 위한</string>
+    <string name="type_test_recommended_spot_추천_여행지">추천 여행지</string>
 
     <!--언어 설정 화면-->
     <string name="language_change_screen_guide">맨 위에 있는 언어로\n기본 설정 되어 있습니다.</string>
+
+    <!--언어 설정 화면 다이얼로그-->
+    <string name="language_change_dialog_text">해당 언어로\n변경하시겠습니까?</string>
 
     <!--설정 화면-->
     <string name="settings_screen_설정">설정</string>
@@ -279,14 +316,13 @@
     <string name="withdrawal_dialog_text1">정말 제주도 여행 정보와 헤택을\n받지 않으시겠습니까? 😢</string>
     <string name="withdrawal_dialog_text2">*90일 이내에 재가입 시,\n기존 계정으로 로그인이 됩니다.</string>
 
-    <!--홈 화면-->
-    <string name="home_screen_hint"> 님을 위한 도민 추천 🍊</string>
-
     <!--접근 권한 안내 화면-->
     <string name="permission_checking_screen_접근_권한_안내">접근 권한 안내</string>
-    <string name="permission_checking_screen_text1">나나랜드인제주 사용을 위해\n다음 접근 권한 허용이 필요합니다.</string>
-    <string name="permission_checking_screen_text2">필수적 접근권한은 나나랜드인제주 서비스 이용에 반드시 필요하며, 권한이 거부되면 서비스 이용이 제한되는 점 안내드립니다.</string>
-    <string name="permission_checking_screen_text3">선택적 접근 권한에 동의하지 않으셨을 경우에, 나나랜드인제주 서비스의 일부 기능을 제한 받으실 수 있는 점 안내드립니다.</string>
+    <string name="permission_checking_screen_guide1">"나나랜드인제주 사용을 위해\n다음 "</string>
+    <string name="permission_checking_screen_guide2">접근 권한 허용</string>
+    <string name="permission_checking_screen_guide3">이 필요합니다.</string>
+    <string name="permission_checking_screen_text1">필수적 접근권한은 나나랜드인제주 서비스 이용에 반드시 필요하며, 권한이 거부되면 서비스 이용이 제한되는 점 안내드립니다.</string>
+    <string name="permission_checking_screen_text2">선택적 접근 권한에 동의하지 않으셨을 경우에, 나나랜드인제주 서비스의 일부 기능을 제한 받으실 수 있는 점 안내드립니다.</string>
     <string name="permission_checking_screen_알려드립니다">알려드립니다.</string>
     <string name="permission_checking_screen_전화_기기_정보">전화 기기 정보</string>
     <string name="permission_checking_screen_저장공간">저장공간</string>

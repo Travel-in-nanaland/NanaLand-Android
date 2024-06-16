@@ -11,6 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.jeju.nanaland.R
 import com.jeju.nanaland.domain.entity.favorite.FavoriteThumbnailData
 import com.jeju.nanaland.globalvalue.type.MainScreenViewType
 import com.jeju.nanaland.globalvalue.type.SearchCategoryType
@@ -20,6 +21,7 @@ import com.jeju.nanaland.ui.component.favorite.FavoriteScreenCategorySelectionTa
 import com.jeju.nanaland.ui.component.favorite.FavoriteScreenFavoritePosts
 import com.jeju.nanaland.ui.component.main.searchresult.parts.SearchResultScreenItemCount
 import com.jeju.nanaland.ui.component.nonmember.NonMemberGuideDialog
+import com.jeju.nanaland.util.resource.getString
 import com.jeju.nanaland.util.ui.UiState
 
 @Composable
@@ -66,7 +68,7 @@ private fun FavoriteScreen(
     isContent: Boolean
 ) {
     Column {
-        CustomTopBarNoBackButton(title = "찜")
+        CustomTopBarNoBackButton(title = getString(R.string.common_찜))
 
         Spacer(Modifier.height(16.dp))
 

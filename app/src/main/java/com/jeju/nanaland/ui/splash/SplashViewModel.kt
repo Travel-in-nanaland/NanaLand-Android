@@ -72,6 +72,7 @@ class SplashViewModel @Inject constructor(
                     conf.setLocale(Locale(it))
                     customContext = application.createConfigurationContext(conf)
                     _checkingState.update { SplashCheckingState.Authorization }
+                    LogUtil.e("locale", customContext.resources.configuration.locales[0].language)
                 }
             }
             .catch { LogUtil.e("flow Error", "checkLanguageState") }

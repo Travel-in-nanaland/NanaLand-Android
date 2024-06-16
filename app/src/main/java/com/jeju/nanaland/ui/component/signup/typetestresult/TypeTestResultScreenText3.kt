@@ -36,22 +36,22 @@ fun TypeTestResultScreenText3(travelType: String) {
                 )
             ) {
                 append(when (travelType) {
-                    TYPE_GAMGYUL_ICECREAM -> "부드러우면서도, 달콤한 기억을 선사해주는 감귤아이스크림 유형"
-                    TYPE_GAMGYUL_RICECAKE -> "통통튀는 즐거움을 메모장에 하나씩 수 놓는, 감귤 찹쌀떡 유형"
-                    TYPE_GAMGYUL -> "가장 기본적이면서도 유명한 곳으로만! 감귤유형"
-                    TYPE_GAMGYUL_CIDER -> "톡톡쏘면서 상큼한 감귤사이다유형"
-                    TYPE_GAMGYUL_AFFOKATO -> "열정적이면서 활발한 당신에게 창의성이 가득한 감귤 아포카토 유형"
-                    TYPE_GAMGYUL_HANGWA -> "다채로운 제주의 맛을 담은 명품 감귤한과"
-                    TYPE_GAMGYUL_JUICE -> "가장 기본적이면서도 유명한 곳으로만! 감귤주스 유형"
-                    TYPE_GAMGYUL_CHOCOLATE -> "취향이 확고하고 많은 것보다는 좋은 것이 중요한 감귤 초콜릿 유형"
-                    TYPE_GAMGYUL_COCKTAIL -> "화려하고 익스트림한 감귤 칵테일 유형"
-                    TYPE_TANGERINE_PEEL_TEA -> "고즈넉하게 풍경을 바라보는 귤피차 유형"
-                    TYPE_GAMGYUL_YOGURT -> "있는 그대로의 맛! 부드럽고 톡 쏘는 감귤요거트 유형"
-                    TYPE_GAMGYUL_FLATCCINO -> "각종 과일들의 상큼함과 얼음의 차가움을 한번에, 창의적인 감귤 플랫치노 유형"
-                    TYPE_GAMGYUL_LATTE -> "따뜻한 햇살 밑에서 유유자적 하는 감귤 라떼 유형!"
-                    TYPE_GAMGYUL_SIKHYE -> "풍미 가득한! 느리지만, 깊은 감귤식혜유형!"
-                    TYPE_GAMGYUL_ADE -> "톡 쏘는 탄산수에 싱그러운 과일이 퐁당! 청량감이 느껴지는 감귤에이드"
-                    TYPE_GAMGYUL_BUBBLE_TEA -> "호기심 가득한 당신! 먹을수록 반전인 감귤 버블티 유형!"
+                    TYPE_GAMGYUL_ICECREAM -> getString(R.string.type_감귤_아이스크림_description)
+                    TYPE_GAMGYUL_RICECAKE -> getString(R.string.type_감귤_찹쌀떡_description)
+                    TYPE_GAMGYUL -> getString(R.string.type_감귤_description)
+                    TYPE_GAMGYUL_CIDER -> getString(R.string.type_감귤_사이다_description)
+                    TYPE_GAMGYUL_AFFOKATO -> getString(R.string.type_감귤_아포가토_description)
+                    TYPE_GAMGYUL_HANGWA -> getString(R.string.type_감귤_한과_description)
+                    TYPE_GAMGYUL_JUICE -> getString(R.string.type_감귤_주스_description)
+                    TYPE_GAMGYUL_CHOCOLATE -> getString(R.string.type_감귤_초콜릿_description)
+                    TYPE_GAMGYUL_COCKTAIL -> getString(R.string.type_감귤_칵테일_description)
+                    TYPE_TANGERINE_PEEL_TEA -> getString(R.string.type_귤피차_description)
+                    TYPE_GAMGYUL_YOGURT -> getString(R.string.type_감귤_요거트_description)
+                    TYPE_GAMGYUL_FLATCCINO -> getString(R.string.type_감귤_플랫치노_description)
+                    TYPE_GAMGYUL_LATTE -> getString(R.string.type_감귤_라떼_description)
+                    TYPE_GAMGYUL_SIKHYE -> getString(R.string.type_감귤_식혜_description)
+                    TYPE_GAMGYUL_ADE -> getString(R.string.type_감귤_에이드_description)
+                    TYPE_GAMGYUL_BUBBLE_TEA -> getString(R.string.type_감귤_버블티_description)
                     else -> ""
                 })
             }

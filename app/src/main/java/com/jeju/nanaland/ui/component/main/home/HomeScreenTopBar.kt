@@ -125,7 +125,7 @@ fun HomeScreenTopBar(
                         )
                     } else {
                         Text(
-                            text = "제주도는 지금 유채꽃 축제",
+                            text = getString(R.string.home_screen_hint),
                             color = getColor().gray01,
                             style = body02
                         )

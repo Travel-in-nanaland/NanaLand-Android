@@ -21,6 +21,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.jeju.nanaland.R
+import com.jeju.nanaland.globalvalue.type.InputIntroductionState
 import com.jeju.nanaland.globalvalue.type.InputNicknameState
 import com.jeju.nanaland.ui.component.common.CustomSurface
 import com.jeju.nanaland.ui.component.common.CustomTopBar
@@ -50,12 +51,14 @@ fun ProfileUpdateScreen(
     val inputNickname = viewModel.inputNickname.collectAsState().value
     val inputNicknameState = viewModel.inputNicknameState.collectAsState().value
     val inputIntroduction = viewModel.inputIntroduction.collectAsState().value
+    val inputIntroductionState = viewModel.inputIntroductionState.collectAsState().value
     val profileImageUri = viewModel.profileImageUri.collectAsState().value
     ProfileUpdateScreen(
         inputNickname = inputNickname,
         updateInputNickname = viewModel::updateInputNickname,
         inputNicknameState = inputNicknameState,
         inputIntroduction = inputIntroduction,
+        inputIntroductionState = inputIntroductionState,
         updateInputIntroduction = viewModel::updateInputIntroduction,
         profileImageUri = profileImageUri,
         updateProfileImageUri = viewModel::updateProfileImageUri,
@@ -71,6 +74,7 @@ private fun ProfileUpdateScreen(
     updateInputNickname: (String) -> Unit,
     inputNicknameState: InputNicknameState,
     inputIntroduction: String,
+    inputIntroductionState: InputIntroductionState,
     updateInputIntroduction: (String) -> Unit,
     profileImageUri: String?,
     updateProfileImageUri: (Uri) -> Unit,
@@ -137,13 +141,23 @@ private fun ProfileUpdateScreen(
 
                     Spacer(Modifier.height(80.dp))
 
-                    MyPageScreenIntroductionText()
+                    Row {
+                        MyPageScreenIntroductionText()
+
+                        Spacer(Modifier.weight(1f))
+
+                        SignUpScreenCharacterCount(
+                            count = inputIntroduction.length,
+                            maxCount = 70
+                        )
+                    }
 
                     Spacer(Modifier.height(4.dp))
 
                     ProfileUpdateScreenIntroductionTextField(
                         inputText = inputIntroduction,
-                        onValueChange = updateInputIntroduction
+                        onValueChange = updateInputIntroduction,
+                        inputState = inputIntroductionState
                     )
 
                     Spacer(Modifier.height(40.dp))
@@ -151,7 +165,7 @@ private fun ProfileUpdateScreen(
             }
             item {
                 ProfileUpdateScreenBottomButton(
-                    isActivated = inputNickname.isNotEmpty() && inputNicknameState == InputNicknameState.Idle,
+                    isActivated = inputNickname.isNotEmpty() && inputNicknameState == InputNicknameState.Idle && inputIntroductionState == InputIntroductionState.Idle,
                     onClick = {
                         updateProfile(moveToBackScreen)
                     }

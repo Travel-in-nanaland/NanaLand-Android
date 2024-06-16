@@ -11,6 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.jeju.nanaland.R
 import com.jeju.nanaland.domain.entity.nanapick.NanaPickSubContentAdditionalInfoData
+import com.jeju.nanaland.ui.component.detailscreen.nanapick.NanaPickContentAttractivePoint
 import com.jeju.nanaland.ui.component.detailscreen.nanapick.parts.subcontent.NanaPickContentSubContentDescription
 import com.jeju.nanaland.ui.component.detailscreen.nanapick.parts.subcontent.NanaPickContentSubContentImage
 import com.jeju.nanaland.ui.component.detailscreen.nanapick.parts.subcontent.NanaPickContentSubContentNumber
@@ -75,5 +76,9 @@ fun NanaPickContentSubContent(
                 Spacer(Modifier.width(8.dp))
             }
         }
+
+        Spacer(Modifier.height(16.dp))
+
+        NanaPickContentAttractivePoint()
     }
 }

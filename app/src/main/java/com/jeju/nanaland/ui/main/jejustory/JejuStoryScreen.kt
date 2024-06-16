@@ -19,6 +19,7 @@ import com.jeju.nanaland.R
 import com.jeju.nanaland.ui.component.common.CustomTopBarNoBackButton
 import com.jeju.nanaland.ui.theme.body01
 import com.jeju.nanaland.ui.theme.getColor
+import com.jeju.nanaland.util.resource.getString
 
 @Composable
 fun JejuStoryScreen() {
@@ -32,7 +33,7 @@ private fun JejuStoryScreen(
     isContent: Boolean
 ) {
     Column(Modifier.fillMaxSize()) {
-        CustomTopBarNoBackButton(title = "제주 이야기")
+        CustomTopBarNoBackButton(title = getString(R.string.common_제주_이야기))
 
         Box(
             modifier = Modifier.fillMaxSize(),
@@ -50,10 +51,7 @@ private fun JejuStoryScreen(
                 Spacer(Modifier.height(4.dp))
 
                 Text(
-                    text = """
-                        해당 서비스는 준비 중입니다.
-                        다음에 만나요!
-                    """.trimIndent(),
+                    text = getString(R.string.search_result_screen_preparing_service),
                     color = getColor().gray01,
                     style = body01,
                     textAlign = TextAlign.Center

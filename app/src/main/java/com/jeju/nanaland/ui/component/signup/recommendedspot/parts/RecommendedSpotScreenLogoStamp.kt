@@ -1,4 +1,4 @@
-package com.jeju.nanaland.ui.component.recommendedspot.parts
+package com.jeju.nanaland.ui.component.signup.recommendedspot.parts
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.size

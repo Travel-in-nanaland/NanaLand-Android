@@ -64,7 +64,7 @@ private fun PermissionCheckingScreen(
 
                 DetailScreenNotice(
                     title = getString(R.string.permission_checking_screen_알려드립니다),
-                    content = getString(R.string.permission_checking_screen_text2)
+                    content = getString(R.string.permission_checking_screen_text1)
                 )
 
                 Spacer(Modifier.height(32.dp))
@@ -111,7 +111,7 @@ private fun PermissionCheckingScreen(
 
                 DetailScreenNotice(
                     title = getString(R.string.permission_checking_screen_알려드립니다),
-                    content = getString(R.string.permission_checking_screen_text3)
+                    content = getString(R.string.permission_checking_screen_text2)
                 )
 
                 Spacer(Modifier.height(20.dp))

@@ -1,4 +1,4 @@
-package com.jeju.nanaland.ui.recommendedspot
+package com.jeju.nanaland.ui.typetest.recommendedspot
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

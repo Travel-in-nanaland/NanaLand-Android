@@ -28,6 +28,7 @@ import com.jeju.nanaland.globalvalue.constant.TOTAL_SCREEN_HEIGHT
 import com.jeju.nanaland.ui.MainNavigation
 import com.jeju.nanaland.ui.theme.NanaLandTheme
 import com.jeju.nanaland.ui.theme.getColor
+import com.jeju.nanaland.util.language.customContext
 import com.jeju.nanaland.util.log.LogUtil
 import com.kakao.sdk.common.util.Utility
 import dagger.hilt.android.AndroidEntryPoint

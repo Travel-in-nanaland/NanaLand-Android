@@ -2,17 +2,19 @@ package com.jeju.nanaland.ui.component.main.home.parts
 
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import com.jeju.nanaland.R
 import com.jeju.nanaland.ui.theme.bodyBold
 import com.jeju.nanaland.ui.theme.getColor
+import com.jeju.nanaland.util.resource.getString
 
 @Composable
 fun HomeScreenAdText1(idx: Int) {
     Text(
         text = when (idx % 4) {
-            0 -> "제주도에서 예쁜 바다 보고 싶다고?"
-            1 -> "보기 귀한 별 보러 가지 않을래?"
-            2 -> "한국의 정감을 느끼고 싶다면, 시장이지!"
-            else -> "제주도에서만 여는 7월 축제\uD83C\uDF88"
+            0 -> getString(R.string.home_screen_ad1_title)
+            1 -> getString(R.string.home_screen_ad2_title)
+            2 -> getString(R.string.home_screen_ad3_title)
+            else -> getString(R.string.home_screen_ad4_title)
         },
         color = when (idx % 4) {
             1 -> getColor().white

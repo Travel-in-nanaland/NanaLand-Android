@@ -1,4 +1,4 @@
-package com.jeju.nanaland.ui.recommendedspot
+package com.jeju.nanaland.ui.typetest.recommendedspot
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -19,10 +19,10 @@ import com.jeju.nanaland.domain.entity.member.RecommendedPostData
 import com.jeju.nanaland.globalvalue.userdata.UserData
 import com.jeju.nanaland.ui.component.common.CustomSurface
 import com.jeju.nanaland.ui.component.common.CustomTopBar
-import com.jeju.nanaland.ui.component.recommendedspot.RecommendedSpotScreenBottomButton
-import com.jeju.nanaland.ui.component.recommendedspot.RecommendedSpotScreenItem
-import com.jeju.nanaland.ui.component.recommendedspot.RecommendedSpotScreenText1
-import com.jeju.nanaland.ui.component.recommendedspot.RecommendedSpotScreenText2
+import com.jeju.nanaland.ui.component.signup.recommendedspot.RecommendedSpotScreenBottomButton
+import com.jeju.nanaland.ui.component.signup.recommendedspot.RecommendedSpotScreenItem
+import com.jeju.nanaland.ui.component.signup.recommendedspot.RecommendedSpotScreenText1
+import com.jeju.nanaland.ui.component.signup.recommendedspot.RecommendedSpotScreenText2
 import com.jeju.nanaland.util.resource.getString
 
 @Composable
@@ -49,7 +49,7 @@ private fun RecommendedSpotScreen(
 ) {
     CustomSurface {
         CustomTopBar(
-            title = "추천 여행지",
+            title = getString(R.string.type_test_recommended_spot_추천_여행지),
             onBackButtonClicked = moveToBackScreen
         )
 
@@ -63,7 +63,7 @@ private fun RecommendedSpotScreen(
 
                 Column(Modifier.padding(start = 16.dp, end = 16.dp)) {
                     RecommendedSpotScreenText1(
-                        text = UserData.nickname + getString(R.string.type_test_recommended_spot_text1)
+                        text = getString(R.string.type_test_recommended_spot_text1) + UserData.nickname + getString(R.string.type_test_recommended_spot_text2)
                     )
 
                     RecommendedSpotScreenText2()

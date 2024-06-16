@@ -8,10 +8,13 @@ import com.jeju.nanaland.ui.theme.getColor
 import com.jeju.nanaland.util.resource.getString
 
 @Composable
-fun SignUpScreenCharacterCount(count: Int) {
+fun SignUpScreenCharacterCount(
+    count: Int,
+    maxCount: Int = 12,
+) {
     Text(
-        text = "${count} / 8 " + getString(R.string.common_자),
-        color = if (count > 8) getColor().warning else getColor().gray01,
+        text = "$count / $maxCount " + getString(R.string.common_자),
+        color = if (count > maxCount) getColor().warning else getColor().gray01,
         style = caption01
     )
 }

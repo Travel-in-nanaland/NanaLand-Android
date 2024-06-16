@@ -56,7 +56,7 @@ private fun NanaPickListScreen(
                         itemsIndexed(nanaPickList.data) { idx, item ->
                             HomeScreenNanaPickBanner(
                                 item = item,
-                                height = 180,
+                                height = 200,
                                 onClick = moveToNanaPickContentScreen
                             )
                             Spacer(Modifier.height(10.dp))

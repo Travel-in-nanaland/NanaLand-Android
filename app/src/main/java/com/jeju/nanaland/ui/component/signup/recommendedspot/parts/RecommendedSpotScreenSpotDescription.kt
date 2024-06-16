@@ -1,4 +1,4 @@
-package com.jeju.nanaland.ui.component.recommendedspot.parts
+package com.jeju.nanaland.ui.component.signup.recommendedspot.parts
 
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable

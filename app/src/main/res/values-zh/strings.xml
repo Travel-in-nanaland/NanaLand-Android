@@ -1,13 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">nanaland in Jeju</string>
-    <string name="all">全部</string>
-    <string name="nature">七大自然</string>
-    <string name="festival">庆典</string>
-    <string name="market">传统市场</string>
-    <string name="experience">特色体验</string>
-    <string name="nanapick">nana推荐</string>
-    <string name="jejustory">济州故事</string>
 
     <!--언어 설정 화면-->
     <string name="select_language_please">언어를 선택해주세요</string>
@@ -78,14 +71,16 @@
     <string name="home_screen_ad3_content">那些传统市场依然存在呢？</string>
     <string name="home_screen_ad4_title">济州岛七月举办的独特节日🎈</string>
     <string name="home_screen_ad4_content">来看看充满济州岛风情的世界宝藏节日吧！</string>
-    <string name="home_screen_recommend">님을 위한 도민 추천 🍊</string>
+    <string name="home_screen_recommend1">为</string>
+    <string name="home_screen_recommend2">的当地人推荐🍊</string>
+    <string name="home_screen_hint">제주도는 지금 유채꽃 축제🏵️</string>
 
     <!--검색 화면-->
     <string name="searching_screen_textfiled_hint">请输入搜索词。</string>
     <string name="searching_screen_최근_검색어">最近搜索词</string>
     <string name="searching_screen_모두_지우기">全部清除</string>
     <string name="searching_screen_최근_검색어가_없습니다">没有最近的搜索</string>
-    <string name="searching_screen_가장_많이"></string>
+    <string name="searching_screen_가장_많이">""</string>
     <string name="searching_screen_검색하고_있어요">搜索量最多</string>
     <string name="searching_screen_hot_keywords">搜索量上升！ JEJU Place 🍊</string>
 
@@ -140,7 +135,7 @@
 
     <!--상세 화면 공통-->
     <string name="detail_screen_common_더_보기">更多</string>
-    <string name="detail_screen_common_접기">접기</string>
+    <string name="detail_screen_common_접기">折叠</string>
     <string name="detail_screen_common_주소">地址</string>
     <string name="detail_screen_common_연락처">电话</string>
     <string name="detail_screen_common_이용_시간">使用时间</string>
@@ -150,7 +145,8 @@
     <string name="detail_screen_common_상세_정보">详细信息</string>
     <string name="detail_screen_common_기간">日程</string>
     <string name="detail_screen_common_소개합니다">为您介绍!</string>
-    <string name="detail_screen_common_알아두면_좋아요">알아두면 좋아요!</string>
+    <string name="detail_screen_common_알아두면_좋아요">了解更多</string>
+    <string name="detail_screen_common_이_장소만의_매력_포인트">这个地方的魅力✨</string>
 
     <!--정보 수정 제안-->
     <string name="info_modification_proposal_정보_수정_제안">建议修改信息</string>
@@ -188,13 +184,50 @@
     <string name="sign_up_profile_setting_warning2">该昵称无法使用。</string>
     <string name="sign_up_profile_setting_warning3">昵称只能包含字母、空格和数字。</string>
 
+    <!--여행지 유형-->
+    <string name="type_감귤_아이스크림">柑橘冰淇淋</string>
+    <string name="type_감귤_찹쌀떡">柑橘糯米糕</string>
+    <string name="type_감귤">柑橘</string>
+    <string name="type_감귤_사이다">柑橘雪碧</string>
+    <string name="type_감귤_아포가토">柑橘阿芙佳朵</string>
+    <string name="type_감귤_한과">柑橘油炸蜜果</string>
+    <string name="type_감귤_주스">柑橘果汁</string>
+    <string name="type_감귤_초콜릿">柑橘巧克力</string>
+    <string name="type_감귤_칵테일">柑橘鸡尾酒</string>
+    <string name="type_귤피차">橘皮茶</string>
+    <string name="type_감귤_요거트">柑橘酸奶</string>
+    <string name="type_감귤_플랫치노">柑橘冰沙</string>
+    <string name="type_감귤_라떼">柑橘拿铁</string>
+    <string name="type_감귤_식혜">柑橘甜米露</string>
+    <string name="type_감귤_에이드">柑橘汽水</string>
+    <string name="type_감귤_버블티">柑橘珍珠奶茶</string>
+
+    <!--여행지 유형 설명-->
+    <string name="type_감귤_아이스크림_description">柔和且献给甜蜜记忆的柑橘冰淇淋类型</string>
+    <string name="type_감귤_찹쌀떡_description">把每时每刻的乐趣记在记事本上的柑橘糯米糕类型</string>
+    <string name="type_감귤_description">要典型而有名的地方！柑橘类型</string>
+    <string name="type_감귤_사이다_description">清爽而新鲜的柑橘雪碧类型</string>
+    <string name="type_감귤_아포가토_description">热情活泼，充满创意的柑橘阿芙佳朵类型</string>
+    <string name="type_감귤_한과_description">蕴含多彩济州味道的名牌柑橘油炸蜜果</string>
+    <string name="type_감귤_주스_description">只去最基本、最有名的地方！ 柑橘汁类型</string>
+    <string name="type_감귤_초콜릿_description">口味坚定、好胜于多的一款柑橘巧克力类型</string>
+    <string name="type_감귤_칵테일_description">华丽极限的柑橘鸡尾酒类型</string>
+    <string name="type_귤피차_description">幽静地望着风景的橘皮茶类型</string>
+    <string name="type_감귤_요거트_description">原汁原味！柔软爽口的柑橘酸奶类型</string>
+    <string name="type_감귤_플랫치노_description">将各种水果的清爽与冰凉感一举实现，创意性的柑橘冰沙类型</string>
+    <string name="type_감귤_라떼_description">在温暖的阳光下悠然自在的柑橘拿铁类型！</string>
+    <string name="type_감귤_식혜_description">充满风味的！ 虽然耗时长，但味道浓郁的柑橘甜米露类型！</string>
+    <string name="type_감귤_에이드_description">在爽口的碳酸水中加入新鲜的水果！ 有清凉感的柑橘汽水</string>
+    <string name="type_감귤_버블티_description">充满好奇心的你！越吃越反转的柑橘珍珠奶茶类型！</string>
+
     <!--여행지 유형 테스트 화면-->
-    <string name="type_test_screen_question1">"여행 장소를\n고를 때 "</string>
-    <string name="type_test_screen_question2">"여행 계획을\n세울 때 "</string>
-    <string name="type_test_screen_question3">"여행 경비를\n정할 때 "</string>
-    <string name="type_test_screen_question4">여행을 다닐 때\n</string>
-    <string name="type_test_screen_question5">여행에서 가장\n하고 싶은 것은?</string>
-    <string name="type_test_screen_question_님은">" 님은?"</string>
+    <string name="type_test_screen_question1">选拔景点时\n</string>
+    <string name="type_test_screen_question2">制定旅行计划时\n</string>
+    <string name="type_test_screen_question3">定旅行经费时\n</string>
+    <string name="type_test_screen_question4">在旅游时\n</string>
+    <string name="type_test_screen_question5">在旅游中\n</string>
+    <string name="type_test_screen_question6">最想做什么?</string>
+    <string name="type_test_screen_question_님은">更注重什么？</string>
     <string name="type_test_screen_item1">热闹的观赏景点</string>
     <string name="type_test_screen_item2">悠闲自在的景点</string>
     <string name="type_test_screen_item3">自由自在</string>
@@ -209,7 +242,7 @@
     <string name="type_test_screen_item12">主题公园</string>
     <string name="type_test_screen_테스트_건너뛰기">跳过测试</string>
     <string name="type_test_screen_다음">下一步</string>
-    <string name="type_test_screen_님의">" 님의"</string>
+    <string name="type_test_screen_님의">""</string>
     <string name="type_test_screen_text1">的偏好是？</string>
     <string name="type_test_screen_text2">想要的旅游风格是？</string>
     <string name="type_test_screen_text3">柑橘正在被榨汁……</string>
@@ -221,11 +254,15 @@
     <string name="type_test_screen_lets_go">Let\'s Go!</string>
 
     <!--여행지 유형 테스트 추천 여행지 화면-->
-    <string name="type_test_recommended_spot_text1"> 님을 위한</string>
-    <string name="type_test_recommended_spot_text2">的旅游地</string>
+    <string name="type_test_recommended_spot_text1">为</string>
+    <string name="type_test_recommended_spot_text2">推荐</string>
+    <string name="type_test_recommended_spot_추천_여행지">的旅游地</string>
 
     <!--언어 설정 화면-->
-    <string name="language_change_screen_guide">맨 위에 있는 언어로\n기본 설정 되어 있습니다.</string>
+    <string name="language_change_screen_guide">以顶部的语言设为默认设置</string>
+
+    <!--언어 설정 화면 다이얼로그-->
+    <string name="language_change_dialog_text">您想更改为该语言吗？</string>
 
     <!--설정 화면-->
     <string name="settings_screen_설정">设置</string>
@@ -238,7 +275,7 @@
     <string name="settings_screen_회원_탈퇴">注销会员</string>
 
     <!--로그아웃 다이얼로그-->
-    <string name="sign_out_dialog_text">정말 로그아웃을\n하시겠습니까?</string>
+    <string name="sign_out_dialog_text">确定要登出吗？</string>
 
     <!--마이페이지 화면-->
     <string name="mypage_screen_프로필_수정">编辑个人资料</string>
@@ -276,6 +313,27 @@
     <string name="withdrawal_screen_warning">我已确认指南事项并同意。</string>
 
     <!--회원 탈퇴 다이얼로그-->
-    <string name="withdrawal_dialog_text1">真的不想收到济州岛旅行信息和优惠吗？😢</string>
+    <string name="withdrawal_dialog_text1">真的不想收到济州岛旅\n行信息和优惠吗？😢</string>
     <string name="withdrawal_dialog_text2">*90天内重新加入时，可以用原账户登录。</string>
+
+    <!--접근 권한 안내 화면-->
+    <string name="permission_checking_screen_접근_권한_안내">权限指南</string>
+    <string name="permission_checking_screen_guide1">使用nanaland in Jeju\n需要以下访问权限</string>
+    <string name="permission_checking_screen_guide2">""</string>
+    <string name="permission_checking_screen_guide3">""</string>
+    <string name="permission_checking_screen_text1">必要访问权限是使用Nanaland in Jeju服务所必需的，如果权限被拒绝，服务将受到限制。</string>
+    <string name="permission_checking_screen_text2">如不同意选择性访问权限，Nanaland in Jeju服务的部分功能将受到限制。</string>
+    <string name="permission_checking_screen_알려드립니다">提醒您</string>
+    <string name="permission_checking_screen_전화_기기_정보">电话设备信息</string>
+    <string name="permission_checking_screen_저장공간">存储空间</string>
+    <string name="permission_checking_screen_위치정보">位置信息</string>
+    <string name="permission_checking_screen_카메라">相机</string>
+    <string name="permission_checking_screen_알림">通知</string>
+    <string name="permission_checking_screen_오디오_및_음악">音频及音乐</string>
+    <string name="permission_checking_screen_전화_기기_정보_description">为验证手机状态和ID需要访问权限。在提供终端设备伪造检测解决方案时需要。</string>
+    <string name="permission_checking_screen_저장공간_description">为提供照片存储功能所需</string>
+    <string name="permission_checking_screen_위치정보_description">为提供基于当前位置的周边美食和旅游景点信息所需。</string>
+    <string name="permission_checking_screen_카메라_description">为注册评论照片和美食信息所需。</string>
+    <string name="permission_checking_screen_알림_description">为接收活动及优惠信息通知所需。</string>
+    <string name="permission_checking_screen_오디오_및_음악_description">注册视频内容所需。</string>
 </resources>

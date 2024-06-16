@@ -23,7 +23,7 @@ fun NanaPickContentSubContents(
             tagList = details.hashtags
         )
         if (idx != nanaPickContent.nanaDetails.size - 1) {
-            Spacer(Modifier.height(48.dp))
+            Spacer(Modifier.height(64.dp))
         }
     }
 }

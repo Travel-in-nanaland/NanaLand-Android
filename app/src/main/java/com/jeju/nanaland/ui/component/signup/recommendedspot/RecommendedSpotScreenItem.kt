@@ -1,4 +1,4 @@
-package com.jeju.nanaland.ui.component.recommendedspot
+package com.jeju.nanaland.ui.component.signup.recommendedspot
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -15,10 +15,10 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
-import com.jeju.nanaland.ui.component.recommendedspot.parts.RecommendedSpotScreenLogoStamp
-import com.jeju.nanaland.ui.component.recommendedspot.parts.RecommendedSpotScreenLogoTextStamp
-import com.jeju.nanaland.ui.component.recommendedspot.parts.RecommendedSpotScreenSpotDescription
-import com.jeju.nanaland.ui.component.recommendedspot.parts.RecommendedSpotScreenSpotName
+import com.jeju.nanaland.ui.component.signup.recommendedspot.parts.RecommendedSpotScreenLogoStamp
+import com.jeju.nanaland.ui.component.signup.recommendedspot.parts.RecommendedSpotScreenLogoTextStamp
+import com.jeju.nanaland.ui.component.signup.recommendedspot.parts.RecommendedSpotScreenSpotDescription
+import com.jeju.nanaland.ui.component.signup.recommendedspot.parts.RecommendedSpotScreenSpotName
 import com.jeju.nanaland.util.ui.TicketShape
 import com.skydoves.landscapist.ImageOptions
 import com.skydoves.landscapist.glide.GlideImage

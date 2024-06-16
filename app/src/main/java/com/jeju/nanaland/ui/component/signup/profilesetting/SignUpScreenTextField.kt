@@ -25,6 +25,7 @@ import androidx.compose.ui.unit.dp
 import com.jeju.nanaland.R
 import com.jeju.nanaland.globalvalue.type.InputNicknameState
 import com.jeju.nanaland.ui.component.signup.profilesetting.parts.SignUpScreenTextFieldHint
+import com.jeju.nanaland.ui.theme.body02
 import com.jeju.nanaland.ui.theme.caption01
 import com.jeju.nanaland.ui.theme.getColor
 import com.jeju.nanaland.util.resource.getString
@@ -38,7 +39,8 @@ fun SignUpScreenTextField(
     BasicTextField(
         value = inputText,
         onValueChange = { onValueChange(it) },
-        maxLines = 1
+        maxLines = 1,
+        textStyle = body02
     ) {
         Column(
             modifier = Modifier.animateContentSize()
@@ -77,8 +79,12 @@ fun SignUpScreenTextField(
                     Spacer(Modifier.width(4.dp))
 
                     Text(
-                        text = if (inputState == InputNicknameState.Invalid) getString(R.string.sign_up_profile_setting_warning1)
-                                else getString(R.string.sign_up_profile_setting_warning2),
+                        text = when (inputState) {
+                            InputNicknameState.TooLong -> getString(R.string.sign_up_profile_setting_warning1)
+                            InputNicknameState.Duplicated -> getString(R.string.sign_up_profile_setting_warning2)
+                            InputNicknameState.Invalid -> getString(R.string.sign_up_profile_setting_warning3)
+                            else -> ""
+                        },
                         color = getColor().warning,
                         style = caption01
                     )
