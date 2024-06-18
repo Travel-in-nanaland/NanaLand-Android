@@ -9,12 +9,15 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import com.jeju.nanaland.domain.request.member.UpdateUserProfileRequest
 import com.jeju.nanaland.domain.usecase.member.UpdateUserProfileUseCase
+import com.jeju.nanaland.globalvalue.constant.INTRODUCTION_CONSTRAINT
+import com.jeju.nanaland.globalvalue.constant.NICKNAME_CONSTRAINT
 import com.jeju.nanaland.globalvalue.type.InputIntroductionState
 import com.jeju.nanaland.globalvalue.type.InputNicknameState
 import com.jeju.nanaland.util.log.LogUtil
 import com.jeju.nanaland.util.network.onError
 import com.jeju.nanaland.util.network.onException
 import com.jeju.nanaland.util.network.onSuccess
+import com.jeju.nanaland.globalvalue.constant.nicknameRegex
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -32,8 +35,6 @@ class ProfileUpdateViewModel @Inject constructor(
     private val application: Application
 ) : AndroidViewModel(application) {
 
-    private val nicknameRegex = Regex("^[가-힇一-龥a-zA-Z0-9/s]+\$")
-
     private val _inputNickname = MutableStateFlow("")
     val inputNickname = _inputNickname.asStateFlow()
     private val _inputNicknameState = MutableStateFlow(InputNicknameState.Idle)
@@ -47,7 +48,7 @@ class ProfileUpdateViewModel @Inject constructor(
 
     fun updateInputNickname(nickname: String) {
         _inputNickname.update { nickname }
-        if (_inputNickname.value.length > 8) {
+        if (_inputNickname.value.length > NICKNAME_CONSTRAINT) {
             _inputNicknameState.update { InputNicknameState.TooLong }
         } else if (!_inputNickname.value.matches(nicknameRegex)) {
             _inputNicknameState.update { InputNicknameState.Invalid }
@@ -58,7 +59,7 @@ class ProfileUpdateViewModel @Inject constructor(
 
     fun updateInputIntroduction(introduction: String) {
         _inputIntroduction.update { introduction }
-        if (_inputIntroduction.value.length > 70) {
+        if (_inputIntroduction.value.length > INTRODUCTION_CONSTRAINT) {
             _inputIntroductionState.update { InputIntroductionState.Invalid }
         } else {
             _inputIntroductionState.update { InputIntroductionState.Idle }

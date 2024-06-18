@@ -12,8 +12,8 @@ import com.jeju.nanaland.R
 @Composable
 fun SignInScreenLogoImage() {
     Image(
-        modifier = Modifier.size(280.dp),
-        painter = painterResource(R.drawable.ic_logo),
+        modifier = Modifier.size(80.dp),
+        painter = painterResource(R.drawable.ic_logo_circle),
         contentDescription = null,
         contentScale = ContentScale.FillWidth
     )

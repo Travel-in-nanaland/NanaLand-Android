@@ -23,6 +23,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.jeju.nanaland.R
 import com.jeju.nanaland.ui.theme.appleSdGothicNeo
+import com.jeju.nanaland.util.resource.getString
 import com.jeju.nanaland.util.ui.clickableNoEffect
 
 @Composable
@@ -51,7 +52,7 @@ fun SignInScreenGoogleLoginButton(onClick: () -> Unit) {
         Spacer(Modifier.width(8.dp))
 
         Text(
-            text = "Google 로그인",
+            text = getString(R.string.sign_in_screen_google_sign_in),
             color = Color(0xFF000000),
             fontFamily = appleSdGothicNeo,
             fontSize = 14.sp,

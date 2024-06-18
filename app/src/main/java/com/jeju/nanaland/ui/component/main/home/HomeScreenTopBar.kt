@@ -36,9 +36,11 @@ import com.jeju.nanaland.globalvalue.type.SearchCategoryType
 import com.jeju.nanaland.ui.theme.NanaLandTheme
 import com.jeju.nanaland.ui.theme.body02
 import com.jeju.nanaland.ui.theme.getColor
+import com.jeju.nanaland.util.language.customContext
 import com.jeju.nanaland.util.resource.getString
 import com.jeju.nanaland.util.ui.ScreenPreview
 import com.jeju.nanaland.util.ui.clickableNoEffect
+import kotlin.random.Random
 
 @Composable
 fun HomeScreenTopBar(
@@ -125,7 +127,7 @@ fun HomeScreenTopBar(
                         )
                     } else {
                         Text(
-                            text = getString(R.string.home_screen_hint),
+                            text = customContext.resources.getStringArray(R.array.home_screen_hint)[Random.nextInt(0, 11)],
                             color = getColor().gray01,
                             style = body02
                         )

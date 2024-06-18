@@ -2,25 +2,17 @@
 <resources>
     <string name="app_name">nanaland in Jeju</string>
 
-    <!--언어 설정 화면-->
+    <!--언어 초기화 화면-->
     <string name="select_language_please">언어를 선택해주세요</string>
 
-    <string name="cdrp_mon">日</string>
-    <string name="cdrp_tue">一</string>
-    <string name="cdrp_wed">二</string>
-    <string name="cdrp_thu">三</string>
-    <string name="cdrp_fri">四</string>
-    <string name="cdrp_sat">五</string>
-    <string name="cdrp_sun">六</string>
-
     <string-array name="week_sun_sat">
-        <item>@string/cdrp_sun</item>
-        <item>@string/cdrp_mon</item>
-        <item>@string/cdrp_tue</item>
-        <item>@string/cdrp_wed</item>
-        <item>@string/cdrp_thu</item>
-        <item>@string/cdrp_fri</item>
-        <item>@string/cdrp_sat</item>
+        <item>日</item>
+        <item>一</item>
+        <item>二</item>
+        <item>三</item>
+        <item>四</item>
+        <item>五</item>
+        <item>六</item>
     </string-array>
 
     <string name="cancel">Cancel</string>
@@ -62,6 +54,10 @@
     <string name="common_필수">(必填)</string>
     <string name="common_선택">(选填)</string>
 
+    <!--로그인 화면-->
+    <string name="sign_in_screen_로그인_없이_둘러보기">无需登录浏览 </string>
+    <string name="sign_in_screen_google_sign_in">Sign in with Google</string>
+
     <!--홈 화면-->
     <string name="home_screen_ad1_title">想在济州岛看美丽的大海吗？</string>
     <string name="home_screen_ad1_content">那就来西归浦市城山体验大自然吧！</string>
@@ -73,7 +69,19 @@
     <string name="home_screen_ad4_content">来看看充满济州岛风情的世界宝藏节日吧！</string>
     <string name="home_screen_recommend1">为</string>
     <string name="home_screen_recommend2">的当地人推荐🍊</string>
-    <string name="home_screen_hint">제주도는 지금 유채꽃 축제🏵️</string>
+
+    <string-array name="home_screen_hint">
+        <item>济州岛的油菜花节正进行中！🏵️</item>
+        <item>一起去济州的绿茶田吧！😎</item>
+        <item>济州五日集什么时候开？❓</item>
+        <item>今天在牛岛做什么？🏝️</item>
+        <item>探访热门的翰林邑！👒</item>
+        <item>征服汉拿山小径！🏔️</item>
+        <item>济州的夜间兜风最浪漫！🌉</item>
+        <item>最后一站，在济州机场附近玩！🛫</item>
+        <item>济州的夏天是绣球花之日！😀</item>
+        <item>住在济州充满情调的韩屋！🏠</item>
+    </string-array>
 
     <!--검색 화면-->
     <string name="searching_screen_textfiled_hint">请输入搜索词。</string>
@@ -169,6 +177,7 @@
     <string name="info_modification_proposal_text4">通过信息修改建议，\n旅行地的吸引力也提高了！\n\n越来越期待了🧚‍♀️</string>
     <string name="info_modification_proposal_button1">重新查看内容</string>
     <string name="info_modification_proposal_button2">添加其他项目</string>
+    <string name="info_modification_proposal_warning">电子邮件格式不正确。请重新输入！</string>
 
     <!--약관 동의 화면-->
     <string name="policy_agree_screen_heading">欢迎来到济州的\nnanaland</string>
@@ -227,7 +236,10 @@
     <string name="type_test_screen_question4">在旅游时\n</string>
     <string name="type_test_screen_question5">在旅游中\n</string>
     <string name="type_test_screen_question6">最想做什么?</string>
-    <string name="type_test_screen_question_님은">更注重什么？</string>
+    <string name="type_test_screen_question_님은1">更注重什么？</string>
+    <string name="type_test_screen_question_님은2">更注重什么？</string>
+    <string name="type_test_screen_question_님은3">更注重什么？</string>
+    <string name="type_test_screen_question_님은4">更注重什么？</string>
     <string name="type_test_screen_item1">热闹的观赏景点</string>
     <string name="type_test_screen_item2">悠闲自在的景点</string>
     <string name="type_test_screen_item3">自由自在</string>
@@ -290,6 +302,10 @@
     <string name="profile_update_screen_프로필_수정">编辑个人资料</string>
     <string name="profile_update_screen_수정_완료">修改完成</string>
 
+    <!--프로필 수정 화면 다이얼로그-->
+    <string name="profile_update_dialog_text1">要删除更改内容吗？</string>
+    <string name="profile_update_dialog_text2">现在返回的话更改内容将被删除</string>
+
     <!--언어 초기화 화면-->
     <string name="profile_initialization_screen_hello">안녕하세요!</string>
     <string name="profile_initialization_screen_select_language">언어를 선택해주세요</string>
@@ -298,6 +314,7 @@
     <string name="policy_setting_screen_warning">*不同意时，可能无法享受某些服务或优惠，请注意</string>
 
     <!--회원 탈퇴 화면-->
+    <string name="withdrawal_screen_회원탈퇴">注销会员</string>
     <string name="withdrawal_screen_heading1">服务退出指南</string>
     <string name="withdrawal_screen_text1">1. 退出本服务后，将取消并终止基于Nanaland in Jeju服务提供的所有服务。</string>
     <string name="withdrawal_screen_text2">2. 退出会员后，您持有的各类优惠券和积分将自动失效，即使重新加入也不会恢复。</string>
@@ -330,7 +347,7 @@
     <string name="permission_checking_screen_카메라">相机</string>
     <string name="permission_checking_screen_알림">通知</string>
     <string name="permission_checking_screen_오디오_및_음악">音频及音乐</string>
-    <string name="permission_checking_screen_전화_기기_정보_description">为验证手机状态和ID需要访问权限。在提供终端设备伪造检测解决方案时需要。</string>
+    <string name="permission_checking_screen_전화_기기_정보_description">为验证手机状态和ID需要访问权限。\n在提供终端设备伪造检测解决方案时需要。</string>
     <string name="permission_checking_screen_저장공간_description">为提供照片存储功能所需</string>
     <string name="permission_checking_screen_위치정보_description">为提供基于当前位置的周边美食和旅游景点信息所需。</string>
     <string name="permission_checking_screen_카메라_description">为注册评论照片和美食信息所需。</string>

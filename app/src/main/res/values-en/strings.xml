@@ -2,4 +2,355 @@
 <resources>
     <string name="app_name">nanaland in Jeju</string>
 
+    <!--언어 초기화 화면-->
+    <string name="select_language_please">언어를 선택해주세요</string>
+
+    <string-array name="week_sun_sat">
+        <item>MON</item>
+        <item>TUE</item>
+        <item>WEN</item>
+        <item>TUR</item>
+        <item>FRI</item>
+        <item>SAT</item>
+        <item>SUN</item>
+    </string-array>
+
+    <string name="cancel">Cancel</string>
+    <string name="done">Done</string>
+    <string name="title_time_picker">Select Time</string>
+    <string name="select_time">Select a Time</string>
+
+    <!--전체 공통-->
+    <string name="common_7대_자연">7 Natural Wonders</string>
+    <string name="common_축제">Festival</string>
+    <string name="common_전통시장">Traditional Markets</string>
+    <string name="common_이색_체험">Unique activity</string>
+    <string name="common_나나s_Pick">nana’s Pick</string>
+    <string name="common_홈">Home</string>
+    <string name="common_찜">Favorite</string>
+    <string name="common_제주_이야기">Jeju\'s Story</string>
+    <string name="common_나의_나나">My nana</string>
+    <string name="common_전체">ALL</string>
+    <string name="common_건">Results</string>
+    <string name="common_년">년</string>
+    <string name="common_월">월</string>
+    <string name="common_봄">Spring</string>
+    <string name="common_여름">Summer</string>
+    <string name="common_가을">Autumn</string>
+    <string name="common_겨울">Winter</string>
+    <string name="common_이메일">Email</string>
+    <string name="common_확인">Confirm</string>
+    <string name="common_자">characters</string>
+    <string name="common_한국어">한국어</string>
+    <string name="common_중국어">中国话</string>
+    <string name="common_영어">English</string>
+    <string name="common_말레이시아어">Melayu</string>
+    <string name="common_소개">Introduction</string>
+    <string name="common_닉네임">Nickname</string>
+    <string name="common_취소">Cancel</string>
+    <string name="common_삭제">삭제</string>
+    <string name="common_네">Yes</string>
+    <string name="common_아니오">No</string>
+    <string name="common_필수">(Required)</string>
+    <string name="common_선택">(Optional)</string>
+
+    <!--로그인 화면-->
+    <string name="sign_in_screen_로그인_없이_둘러보기">Browse Without Logging In</string>
+    <string name="sign_in_screen_google_sign_in">Sign in with Google</string>
+
+    <!--홈 화면-->
+    <string name="home_screen_ad1_title">Want to see the beautiful sea in Jeju Island?</string>
+    <string name="home_screen_ad1_content">Let\'s tour the nature in Seogwipo-si, Seongsan!</string>
+    <string name="home_screen_ad2_title">How about going to see rare stars?💫</string>
+    <string name="home_screen_ad2_content">Check out the emotional hills of Aewol😯</string>
+    <string name="home_screen_ad3_title">If you want to feel the sentiment of Korea,\nthe market is the place!</string>
+    <string name="home_screen_ad3_content">Which traditional markets are still around?</string>
+    <string name="home_screen_ad4_title">Jeju\'s unique festival in July🎈</string>
+    <string name="home_screen_ad4_content">Let\'s go see the festival full of the treasures of the world, feeling Jeju Island!</string>
+    <string name="home_screen_recommend1">"Local Recommendations for Our "</string>
+    <string name="home_screen_recommend2">" 🍊"</string>
+
+    <string-array name="home_screen_hint">
+        <item>Jeju\'s Canola Festival is on now! 🏵️</item>
+        <item>Let\'s visit Jeju\'s green tea fields! 😎</item>
+        <item>When is the Jeju 5-day market? ❓</item>
+        <item>What to do in Udo today? 🏝️</item>
+        <item>Exploring the trendy Gujwa! 👒</item>
+        <item>Conquer the Hallasan trails! 🏔️</item>
+        <item>Nothing beats a night drive in Jeju! 🌉</item>
+        <item>Last stop, fun near Jeju Airport! 🛫</item>
+        <item>Summer in Jeju means Hydrangea Day! 😀</item>
+        <item>Stay in a charming hanok in Jeju! 🏠</item>
+    </string-array>
+
+    <!--검색 화면-->
+    <string name="searching_screen_textfiled_hint">Please enter a search</string>
+    <string name="searching_screen_최근_검색어">Recent searches</string>
+    <string name="searching_screen_모두_지우기">Clear All</string>
+    <string name="searching_screen_최근_검색어가_없습니다">There are no recent searches</string>
+    <string name="searching_screen_가장_많이">""</string>
+    <string name="searching_screen_검색하고_있어요">Most Searched!</string>
+    <string name="searching_screen_hot_keywords">Search Volume UP! JEJU Place 🍊</string>
+
+    <!--검색 결과 화면-->
+    <string name="search_result_screen_no_result">There are no results for that search. </string>
+    <string name="search_result_screen_preparing_service">This service is being prepared.\nSee you next time!</string>
+
+    <!--비회원 회원가입 유도 다이얼로그-->
+    <string name="non_member_dialog_guide">You need to become a\nmember to use all services✨</string>
+    <string name="non_member_dialog_go_sign_up">Sign Up for Membership</string>
+
+    <!--날짜 선택 다이얼로그-->
+    <string name="date_filter_dialog_날짜_선택">Select date</string>
+    <string name="date_filter_dialog_초기화">Reset</string>
+
+    <!--지역 선택 다이얼로그-->
+    <string name="location_filter_dialog_지역">Region</string>
+    <string name="location_filter_dialog_전체선택">Select all</string>
+    <string name="location_filter_dialog_해제">Release</string>
+
+    <!--계절 선택 다이얼로그-->
+    <string name="season_filter_dialog_계절_선택">Select Season</string>
+
+    <!--필터링 다이얼로그 공통-->
+    <string name="filter_dialog_common_적용하기">Apply</string>
+
+    <!--리스트 화면 공통-->
+    <string name="list_screen_common_전_지역">All Regions</string>
+
+    <!--지역 공통-->
+    <string name="location_common_제주시">Jeju City</string>
+    <string name="location_common_애월">Aewol</string>
+    <string name="location_common_조천">Jocheon</string>
+    <string name="location_common_한경">Hangye-ong</string>
+    <string name="location_common_구좌">Gujwa</string>
+    <string name="location_common_한림">Hallim</string>
+    <string name="location_common_우도">Udo</string>
+    <string name="location_common_추자">Chuja</string>
+    <string name="location_common_서귀포시">Seogw-ipo City</string>
+    <string name="location_common_대정">Daejeong</string>
+    <string name="location_common_안덕">Andeok</string>
+    <string name="location_common_남원">Namwon</string>
+    <string name="location_common_표선">Pyoseon</string>
+    <string name="location_common_성산">Seongsan</string>
+
+    <!--축제 리스트 화면-->
+    <string name="festival_list_screen_월별_축제">Monthly Festival</string>
+    <string name="festival_list_screen_종료된_축제">Ended Festival</string>
+    <string name="festival_list_screen_계절별_축제">Seasonal Festival</string>
+    <string name="festival_list_screen_image_caption">*Reference photos.</string>
+
+    <!--상세 화면 공통-->
+    <string name="detail_screen_common_더_보기">more</string>
+    <string name="detail_screen_common_접기">close</string>
+    <string name="detail_screen_common_주소">Address</string>
+    <string name="detail_screen_common_연락처">Contact</string>
+    <string name="detail_screen_common_이용_시간">Hours of use</string>
+    <string name="detail_screen_common_편의시설">Facilities</string>
+    <string name="detail_screen_common_홈페이지">Website</string>
+    <string name="detail_screen_common_입장료">Admission Fee</string>
+    <string name="detail_screen_common_상세_정보">Details</string>
+    <string name="detail_screen_common_기간">Period</string>
+    <string name="detail_screen_common_소개합니다">Introduce !</string>
+    <string name="detail_screen_common_알아두면_좋아요">Good to know</string>
+    <string name="detail_screen_common_이_장소만의_매력_포인트">The charm of this place✨</string>
+
+    <!--정보 수정 제안-->
+    <string name="info_modification_proposal_정보_수정_제안">Information Update Suggestions</string>
+    <string name="info_modification_proposal_heading1">Suggest an Information Update!</string>
+    <string name="info_modification_proposal_text1">You may receive rewards if photos attached with your suggestions help verify location information.</string>
+    <string name="info_modification_proposal_전화번호_및_홈페이지">Phone Number and Website</string>
+    <string name="info_modification_proposal_운영_시간">Name and Location</string>
+    <string name="info_modification_proposal_장소명_및_위치">Operating Hours</string>
+    <string name="info_modification_proposal_가격_정보">Price Information</string>
+    <string name="info_modification_proposal_장소_삭제">Delete Location</string>
+    <string name="info_modification_proposal_heading2">Share Other Information!</string>
+    <string name="info_modification_proposal_제공_서비스">Offering service</string>
+    <string name="info_modification_proposal_사진_추가하기">Add Photos</string>
+    <string name="info_modification_proposal_text2">Attach photos of verified information for more accurate details.</string>
+    <string name="info_modification_proposal_hint1">Leave detailed information on the items you want to update or any other comments.</string>
+    <string name="info_modification_proposal_text3">Enter your email to receive the results of your suggestion.</string>
+    <string name="info_modification_proposal_hint2">example@gmail.com</string>
+    <string name="info_modification_proposal_보내기">Submit</string>
+    <string name="info_modification_proposal_heading3">Thank you for your information correction suggestion</string>
+    <string name="info_modification_proposal_text4">With the information correction suggestion, the attractiveness of the travel destination has also increased!\n\nIt’s getting more and more exciting🧚‍♀️</string>
+    <string name="info_modification_proposal_button1">View Content Again</string>
+    <string name="info_modification_proposal_button2">Add Another Item</string>
+    <string name="info_modification_proposal_warning">The email format is incorrect. Please re-enter!</string>
+
+    <!--약관 동의 화면-->
+    <string name="policy_agree_screen_heading">Welcome to\nnanaland in Jeju</string>
+    <string name="policy_agree_screen_전체_동의">Agree to All</string>
+    <string name="policy_agree_screen_privacy_policy">Agree to Terms of Use and\nPrivacy Policy</string>
+    <string name="policy_agree_screen_marketing_policy">Agree to Marketing Use</string>
+    <string name="policy_agree_screen_location_policy">Agree to Location-Based Service Terms\n</string>
+
+
+    <!--회원가입 프로필 설정 화면-->
+    <string name="sign_up_profile_setting_guide">Enter your name and\nselect a profile picture.</string>
+    <string name="sign_up_profile_setting_hint">Please enter your name</string>
+    <string name="sign_up_profile_setting_warning1">This nickname cannot be used.</string>
+    <string name="sign_up_profile_setting_warning2">This nickname is already in use by another user.</string>
+    <string name="sign_up_profile_setting_warning3">Nicknames can only contain letters, spaces, and numbers.</string>
+
+    <!--여행지 유형-->
+    <string name="type_감귤_아이스크림">Tangerine Ice Cream</string>
+    <string name="type_감귤_찹쌀떡">Tangerine Rice Cake</string>
+    <string name="type_감귤">Tangerine</string>
+    <string name="type_감귤_사이다">Tangerine Soda</string>
+    <string name="type_감귤_아포가토">Tangerine Affogato</string>
+    <string name="type_감귤_한과">Tangerine Traditional Sweets</string>
+    <string name="type_감귤_주스">Tangerine Juice</string>
+    <string name="type_감귤_초콜릿">Tangerine Chocolate</string>
+    <string name="type_감귤_칵테일">Tangerine Cocktail</string>
+    <string name="type_귤피차">Tangerine Peel Tea</string>
+    <string name="type_감귤_요거트">Tangerine Yogurt</string>
+    <string name="type_감귤_플랫치노">Tangerine Frappuccino</string>
+    <string name="type_감귤_라떼">Tangerine Latte</string>
+    <string name="type_감귤_식혜">Tangerine Shikhye</string>
+    <string name="type_감귤_에이드">Tangerine Ade</string>
+    <string name="type_감귤_버블티">Tapioca Tangerine Tea</string>
+
+    <!--여행지 유형 설명-->
+    <string name="type_감귤_아이스크림_description">A type that brings sweet memories with its smooth and creamy texture.</string>
+    <string name="type_감귤_찹쌀떡_description">A type that stitches joy into a notepad, one by one, with its bouncy charm.</string>
+    <string name="type_감귤_description"> A type that sticks to the basics and the most famous spots.</string>
+    <string name="type_감귤_사이다_description">A type that is fizzy and refreshing.</string>
+    <string name="type_감귤_아포가토_description">A type brimming with creativity, passionate and lively.</string>
+    <string name="type_감귤_한과_description">A type that encapsulates the diverse and exquisite flavors of Jeju.</string>
+    <string name="type_감귤_주스_description">A type that sticks to the basics and the most famous spots.</string>
+    <string name="type_감귤_초콜릿_description">A type with firm tastes, preferring quality over quantity.</string>
+    <string name="type_감귤_칵테일_description">A type that is flashy and extreme.</string>
+    <string name="type_귤피차_description">A type that enjoys serene scenery in a calm manner.</string>
+    <string name="type_감귤_요거트_description"> A type that enjoys the pure taste, soft and tangy.</string>
+    <string name="type_감귤_플랫치노_description"> A type that combines the zest of various fruits with the chill of ice, very creative.</string>
+    <string name="type_감귤_라떼_description">A type that leisurely enjoys life under the warm sunshine.</string>
+    <string name="type_감귤_식혜_description"> A type full of rich flavors, slow but profound.</string>
+    <string name="type_감귤_에이드_description">A type that is fizzy with sparkling water and fresh fruit, exuding a sense of freshness.</string>
+    <string name="type_감귤_버블티_description">A type full of curiosity, surprising with each bite.</string>
+
+    <!--여행지 유형 테스트 화면-->
+    <string name="type_test_screen_question1">""</string>
+    <string name="type_test_screen_question2">""</string>
+    <string name="type_test_screen_question3">""</string>
+    <string name="type_test_screen_question4">""</string>
+    <string name="type_test_screen_question5">""</string>
+    <string name="type_test_screen_question6">, What do you most\nwant to do on a trip?</string>
+    <string name="type_test_screen_question_님은1">\nyour travel style?</string>
+    <string name="type_test_screen_question_님은2">\nhow do you plan your trips?</string>
+    <string name="type_test_screen_question_님은3">" how do you set\nyour travel budget?"</string>
+    <string name="type_test_screen_question_님은4">\nwhat\'s your travel style?</string>
+    <string name="type_test_screen_item1">Busy tourist spot</string>
+    <string name="type_test_screen_item2">Quiet local spot</string>
+    <string name="type_test_screen_item3">Flexible</string>
+    <string name="type_test_screen_item4">Fully planned</string>
+    <string name="type_test_screen_item5">Budget-friendly travel</string>
+    <string name="type_test_screen_item6">Luxury travel</string>
+    <string name="type_test_screen_item7">Shutterbug</string>
+    <string name="type_test_screen_item8">Take it all in with their eyes.</string>
+    <string name="type_test_screen_item9">Atmospheric place</string>
+    <string name="type_test_screen_item10">Traditional culture</string>
+    <string name="type_test_screen_item11">Natural scenery</string>
+    <string name="type_test_screen_item12">Theme park</string>
+    <string name="type_test_screen_테스트_건너뛰기">Skip Test</string>
+    <string name="type_test_screen_다음">next</string>
+    <string name="type_test_screen_님의">""</string>
+    <string name="type_test_screen_text1">what travel style</string>
+    <string name="type_test_screen_text2">do you prefer?</string>
+    <string name="type_test_screen_text3">Squeezing the citrus...</string>
+    <string name="type_test_screen_text4">Delicious travel juice coming up soon!</string>
+    <string name="type_test_screen_text5">\'s travel type is</string>
+    <string name="type_test_screen_text6">nanaland in Jeju has created a custom travel juice for you!</string>
+    <string name="type_test_screen_button1">" Destination"</string>
+    <string name="type_test_screen_button2">Go to the main screen</string>
+    <string name="type_test_screen_lets_go">Let\'s Go!</string>
+
+    <!--여행지 유형 테스트 추천 여행지 화면-->
+    <string name="type_test_recommended_spot_text1">""</string>
+    <string name="type_test_recommended_spot_text2">Recommended Travel</string>
+    <string name="type_test_recommended_spot_추천_여행지">Recommended\nTravel Destinations</string>
+
+    <!--언어 설정 화면-->
+    <string name="language_change_screen_guide">The language at the top is set as default.</string>
+
+    <!--언어 설정 화면 다이얼로그-->
+    <string name="language_change_dialog_text">Do you want to change\nto this language?</string>
+
+    <!--설정 화면-->
+    <string name="settings_screen_설정">Settings</string>
+    <string name="settings_screen_사용_설정">Set usage</string>
+    <string name="settings_screen_약관_및_정책">Terms and policies</string>
+    <string name="settings_screen_접근권한_안내">Access permission guide</string>
+    <string name="settings_screen_언어_설정">Language settings</string>
+    <string name="settings_screen_버전_정보">Version Information</string>
+    <string name="settings_screen_로그아웃">Log out</string>
+    <string name="settings_screen_회원_탈퇴">Withdraw membership</string>
+
+    <!--로그아웃 다이얼로그-->
+    <string name="sign_out_dialog_text">Are you sure\nyou want to log out?</string>
+
+    <!--마이페이지 화면-->
+    <string name="mypage_screen_프로필_수정">Edit Profile</string>
+    <string name="mypage_screen_여행_유형">Travel Type</string>
+    <string name="mypage_screen_테스트_다시하기">Retest</string>
+    <string name="mypage_screen_테스트_하기">Testing</string>
+    <string name="mypage_screen_없음">None</string>
+    <string name="mypage_screen_로그인이_필요해요">Login is required</string>
+    <string name="mypage_screen_level">Lv.</string>
+
+    <!--프로필 수정 화면-->
+    <string name="profile_update_screen_프로필_수정">Edit Profile</string>
+    <string name="profile_update_screen_수정_완료">Update</string>
+
+    <!--프로필 수정 화면 다이얼로그-->
+    <string name="profile_update_dialog_text1">Discard Changes?</string>
+    <string name="profile_update_dialog_text2">If you go back now, your changes will be discarded.</string>
+
+    <!--언어 초기화 화면-->
+    <string name="profile_initialization_screen_hello">안녕하세요!</string>
+    <string name="profile_initialization_screen_select_language">언어를 선택해주세요</string>
+
+    <!--약관 설정 화면-->
+    <string name="policy_setting_screen_warning">* If you disagree, you may not be able to receive some services or benefits, please be aware.</string>
+
+    <!--회원 탈퇴 화면-->
+    <string name="withdrawal_screen_회원탈퇴">Account Deletion </string>
+    <string name="withdrawal_screen_heading1">Service Cancellation Information</string>
+    <string name="withdrawal_screen_text1">1. By deleting your account, you will be unsubscribed from all services provided by Nanaland in Jeju.</string>
+    <string name="withdrawal_screen_text2">2. Upon account deletion, all coupons and points will be lost and will not be restored even if you re-register.</string>
+    <string name="withdrawal_screen_text3">3. Transaction records that must be preserved under the e-commerce law will be kept for 5 years after account deletion.</string>
+    <string name="withdrawal_screen_text4">4. You will not be able to participate in membership events again after account deletion.</string>
+    <string name="withdrawal_screen_text5">5. If you re-register within 90 days after withdrawal, you can use your previous account.</string>
+    <string name="withdrawal_screen_heading2">Reason for Account Deletion</string>
+    <string name="withdrawal_screen_reason1">Lack of Content</string>
+    <string name="withdrawal_screen_reason2">Service Inconvenience</string>
+    <string name="withdrawal_screen_reason3">Community Usage Inconvenience</string>
+    <string name="withdrawal_screen_reason4">Rarely Visit</string>
+    <string name="withdrawal_screen_탈퇴">Delete Account</string>
+    <string name="withdrawal_screen_warning">I have read and agree to the information provided.</string>
+
+    <!--회원 탈퇴 다이얼로그-->
+    <string name="withdrawal_dialog_text1">Are you sure you don\'t want to receive Jeju travel information and benefits?😢</string>
+    <string name="withdrawal_dialog_text2">*If you rejoin within 90 days, you can log in with your existing account.</string>
+
+    <!--접근 권한 안내 화면-->
+    <string name="permission_checking_screen_접근_권한_안내">Access Permission Notice</string>
+    <string name="permission_checking_screen_guide1">"The following "</string>
+    <string name="permission_checking_screen_guide2">permissions are required</string>
+    <string name="permission_checking_screen_guide3">\nto use Nanaland in Jeju.</string>
+    <string name="permission_checking_screen_text1">Required permissions are essential for using Nanaland in Jeju. Service usage may be restricted if permissions are denied.</string>
+    <string name="permission_checking_screen_text2">Note that if you do not agree to optional permissions, some features of Nanaland in Jeju may be restricted.</string>
+    <string name="permission_checking_screen_알려드립니다">Notice</string>
+    <string name="permission_checking_screen_전화_기기_정보">Phone Information</string>
+    <string name="permission_checking_screen_저장공간">Storage</string>
+    <string name="permission_checking_screen_위치정보">Location Information</string>
+    <string name="permission_checking_screen_카메라">Camera</string>
+    <string name="permission_checking_screen_알림">Notifications</string>
+    <string name="permission_checking_screen_오디오_및_음악">Audio and Music</string>
+    <string name="permission_checking_screen_전화_기기_정보_description">Access is required to verify phone status and ID.\nNeeded for device tampering detection solutions</string>
+    <string name="permission_checking_screen_저장공간_description">Needed to provide photo storage functions.</string>
+    <string name="permission_checking_screen_위치정보_description">Needed to provide information on nearby restaurants and attractions based on current location.</string>
+    <string name="permission_checking_screen_카메라_description">Needed to upload review photos and restaurant information.</string>
+    <string name="permission_checking_screen_알림_description">Needed to receive notifications about events and benefits.</string>
+    <string name="permission_checking_screen_오디오_및_음악_description">Needed to upload video content.</string>
 </resources>

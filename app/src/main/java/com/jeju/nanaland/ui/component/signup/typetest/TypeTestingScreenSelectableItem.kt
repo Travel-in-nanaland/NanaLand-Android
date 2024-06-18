@@ -5,9 +5,11 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -19,13 +21,15 @@ import com.jeju.nanaland.ui.theme.getColor
 import com.jeju.nanaland.util.ui.clickableNoEffect
 
 @Composable
-fun TypeTestingScreenSelectableItem(
+fun RowScope.TypeTestingScreenSelectableItem(
     isSelected: Boolean,
     itemIdx: Int,
     onClick: () -> Unit,
 ) {
     Column(
-        modifier = Modifier.clickableNoEffect { onClick() },
+        modifier = Modifier
+            .weight(1f)
+            .clickableNoEffect { onClick() },
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Box(

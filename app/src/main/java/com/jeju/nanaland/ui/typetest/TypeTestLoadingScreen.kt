@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
@@ -15,6 +16,7 @@ import com.jeju.nanaland.ui.component.signup.typetestloading.TypeTestLoadingScre
 import com.jeju.nanaland.ui.component.signup.typetestloading.TypeTestLoadingScreenText1
 import com.jeju.nanaland.ui.component.signup.typetestloading.TypeTestLoadingScreenText2
 import kotlinx.coroutines.delay
+import kotlin.random.Random
 
 @Composable
 fun TypeTestLoadingScreen(

@@ -25,6 +25,7 @@ import com.jeju.nanaland.ui.navigation.nanaPickContentScreen
 import com.jeju.nanaland.ui.navigation.nanaPickListScreen
 import com.jeju.nanaland.ui.navigation.natureContentScreen
 import com.jeju.nanaland.ui.navigation.natureListScreen
+import com.jeju.nanaland.ui.navigation.notificationScreen
 import com.jeju.nanaland.ui.navigation.permissionCheckingRoute
 import com.jeju.nanaland.ui.navigation.policyAgreeScreen
 import com.jeju.nanaland.ui.navigation.policySettingScreen
@@ -92,6 +93,9 @@ fun MainNavigation(
 
         // 메인 화면
         mainScreen(navController)
+
+        // 알림 화면
+        notificationScreen(navController)
 
         // 자연 리스트 화면
         natureListScreen(navController)

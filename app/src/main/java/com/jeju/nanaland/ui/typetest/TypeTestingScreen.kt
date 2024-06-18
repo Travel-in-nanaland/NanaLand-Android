@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.snapshots.SnapshotStateList
@@ -81,7 +82,7 @@ private fun TypeTestingScreen(
                                 onClick = { selectionList[level - 1] = 1 }
                             )
 
-                            Spacer(Modifier.weight(1f))
+                            Spacer(Modifier.width(40.dp))
 
                             TypeTestingScreenSelectableItem(
                                 isSelected = selectionList[level - 1] == 2,
@@ -101,7 +102,7 @@ private fun TypeTestingScreen(
                                 onClick = { selectionList[level - 1] = 3 }
                             )
 
-                            Spacer(Modifier.weight(1f))
+                            Spacer(Modifier.width(40.dp))
 
                             TypeTestingScreenSelectableItem(
                                 isSelected = selectionList[level - 1] == 4,
@@ -123,7 +124,7 @@ private fun TypeTestingScreen(
                             onClick = { selectionList[level - 1] = 1 }
                         )
 
-                        Spacer(Modifier.weight(1f))
+                        Spacer(Modifier.width(40.dp))
 
                         TypeTestingScreenSelectableItem(
                             isSelected = selectionList[level - 1] == 2,

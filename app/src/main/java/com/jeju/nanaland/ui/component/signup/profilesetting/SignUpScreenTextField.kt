@@ -38,7 +38,7 @@ fun SignUpScreenTextField(
 ) {
     BasicTextField(
         value = inputText,
-        onValueChange = { onValueChange(it) },
+        onValueChange = onValueChange,
         maxLines = 1,
         textStyle = body02
     ) {

@@ -1,5 +1,357 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">nanaland in Jeju</string>
-    <string name="select_language_please">말레이시아어</string>
+
+    <!--언어 초기화 화면-->
+    <string name="select_language_please">언어를 선택해주세요</string>
+
+    <string-array name="week_sun_sat">
+        <item>월</item>
+        <item>화</item>
+        <item>수</item>
+        <item>목</item>
+        <item>금</item>
+        <item>토</item>
+        <item>일</item>
+    </string-array>
+
+    <string name="cancel">Cancel</string>
+    <string name="done">Done</string>
+    <string name="title_time_picker">Select Time</string>
+    <string name="select_time">Select a Time</string>
+
+    <!--전체 공통-->
+    <string name="common_7대_자연">7Keajaiban Alam</string>
+    <string name="common_축제">Festival</string>
+    <string name="common_전통시장">Pasaran Tradisional</string>
+    <string name="common_이색_체험">Aktiviti Menarik</string>
+    <string name="common_나나s_Pick">Pilihan Nana</string>
+    <string name="common_홈">Laman Utama</string>
+    <string name="common_찜">Simpan</string>
+    <string name="common_제주_이야기">Cerita Jeju</string>
+    <string name="common_나의_나나">nana saya</string>
+    <string name="common_전체">Seluruh</string>
+    <string name="common_건">perkara</string>
+    <string name="common_년">년</string>
+    <string name="common_월">월</string>
+    <string name="common_봄">Musim bunga</string>
+    <string name="common_여름">Musim panas</string>
+    <string name="common_가을">Musim luruh</string>
+    <string name="common_겨울">Musim sejuk</string>
+    <string name="common_이메일">E-mel</string>
+    <string name="common_확인">Sahkan</string>
+    <string name="common_자">aksara</string>
+    <string name="common_한국어">한국어</string>
+    <string name="common_중국어">中国话</string>
+    <string name="common_영어">English</string>
+    <string name="common_말레이시아어">Melayu</string>
+    <string name="common_소개">Perkenalan</string>
+    <string name="common_닉네임">Jenis Perjalanan</string>
+    <string name="common_취소">Batal</string>
+    <string name="common_삭제">Padam</string>
+    <string name="common_네">Ya</string>
+    <string name="common_아니오">Tidak</string>
+    <string name="common_필수">(Wajib)</string>
+    <string name="common_선택">(Opsional)</string>
+
+    <!--로그인 화면-->
+    <string name="sign_in_screen_로그인_없이_둘러보기">Guna Tanpa Log Masuk</string>
+    <string name="sign_in_screen_google_sign_in">Sign in with Google</string>
+
+    <!--홈 화면-->
+    <string name="home_screen_ad1_title">Nak lihat laut yang cantik di Pulau Jeju?</string>
+    <string name="home_screen_ad1_content">Mari kita lawati alam semula jadi di Seogwipo-si, Seongsan!</string>
+    <string name="home_screen_ad2_title">Mahu lihat bintang yang jarang dilihat?💫</string>
+    <string name="home_screen_ad2_content">Jom periksa bukit-bukit yang penuh dengan emosi di Aewol😯</string>
+    <string name="home_screen_ad3_title">Jika ingin merasai suasana Korea, pasar adalah tempatnya!</string>
+    <string name="home_screen_ad3_content">Pasar tradisional apa yang masih ada?</string>
+    <string name="home_screen_ad4_title">Festival khas di Jeju pada bulan Julai🎈</string>
+    <string name="home_screen_ad4_content">Mari saksikan festival yang penuh dengan harta karun dunia, rasa Pulau Jeju!</string>
+    <string name="home_screen_recommend1">"Cadangan untuk "</string>
+    <string name="home_screen_recommend2">" kami 🍊"</string>
+
+    <string-array name="home_screen_hint">
+        <item>Festival Bunga Canola di Jeju sedang berlangsung! 🏵️</item>
+        <item>Jom lawati ladang teh hijau Jeju! 😎</item>
+        <item>Bila pasar 5 hari Jeju buka? ❓</item>
+        <item>Apa nak buat di Udo hari ini? 🏝️</item>
+        <item>Meneroka Gujwa-eup yang trendy! 👒</item>
+        <item>Takluki laluan Hallasan! 🏔️</item>
+        <item>Tiada yang lebih romantis dari pemanduan malam di Jeju! 🌉</item>
+        <item>Hentian terakhir, seronok di sekitar Lapangan Terbang Jeju! 🛫</item>
+        <item>Musim panas di Jeju bermaksud Hari Hydrangea! 😀</item>
+        <item>Menginap di hanok yang menawan di Jeju! 🏠</item>
+    </string-array>
+
+    <!--검색 화면-->
+    <string name="searching_screen_textfiled_hint">Sila masukkan kata carian.</string>
+    <string name="searching_screen_최근_검색어">Carian terkini</string>
+    <string name="searching_screen_모두_지우기">Kosongkan semua</string>
+    <string name="searching_screen_최근_검색어가_없습니다">Tiada carian terkini.</string>
+    <string name="searching_screen_가장_많이">""</string>
+    <string name="searching_screen_검색하고_있어요">Paling Banyak Dicari!</string>
+    <string name="searching_screen_hot_keywords">eningkatan Pencarian! Tempat Jeju 🍊</string>
+
+    <!--검색 결과 화면-->
+    <string name="search_result_screen_no_result">Carian anda tidak\nmengembalikan sebarang hasil.</string>
+    <string name="search_result_screen_preparing_service">Perkhidmatan ini sedang disediakan.\nJumpa lagi!</string>
+
+    <!--비회원 회원가입 유도 다이얼로그-->
+    <string name="non_member_dialog_guide">Anda perlu menjadi ahli untuk menggunakan semua perkhidmatan✨</string>
+    <string name="non_member_dialog_go_sign_up">Daftar Ahli</string>
+
+
+    <!--날짜 선택 다이얼로그-->
+    <string name="date_filter_dialog_날짜_선택">Tarikh</string>
+    <string name="date_filter_dialog_초기화">Set Semula</string>
+
+    <!--지역 선택 다이얼로그-->
+    <string name="location_filter_dialog_지역">Kawasan</string>
+    <string name="location_filter_dialog_전체선택">Pilih semua</string>
+    <string name="location_filter_dialog_해제">Memulakan</string>
+
+    <!--계절 선택 다이얼로그-->
+    <string name="season_filter_dialog_계절_선택">pilih musim</string>
+
+    <!--필터링 다이얼로그 공통-->
+    <string name="filter_dialog_common_적용하기">Terapkan</string>
+
+    <!--리스트 화면 공통-->
+    <string name="list_screen_common_전_지역">Semua Kawasan</string>
+
+    <!--지역 공통-->
+    <string name="location_common_제주시">Jeju City</string>
+    <string name="location_common_애월">Aewol</string>
+    <string name="location_common_조천">Jocheon</string>
+    <string name="location_common_한경">Hangye-ong</string>
+    <string name="location_common_구좌">Gujwa</string>
+    <string name="location_common_한림">Hallim</string>
+    <string name="location_common_우도">Udo</string>
+    <string name="location_common_추자">Chuja</string>
+    <string name="location_common_서귀포시">Seogw-ipo City</string>
+    <string name="location_common_대정">Daejeong</string>
+    <string name="location_common_안덕">Andeok</string>
+    <string name="location_common_남원">Namwon</string>
+    <string name="location_common_표선">Pyoseon</string>
+    <string name="location_common_성산">Seongsan</string>
+
+    <!--축제 리스트 화면-->
+    <string name="festival_list_screen_월별_축제">Festival Bulanan</string>
+    <string name="festival_list_screen_종료된_축제">Festival yang\nTelah Berakhir</string>
+    <string name="festival_list_screen_계절별_축제">Festival Musim</string>
+    <string name="festival_list_screen_image_caption">*Gambar untuk rujukan.</string>
+
+    <!--상세 화면 공통-->
+    <string name="detail_screen_common_더_보기">Lihat Lagi</string>
+    <string name="detail_screen_common_접기">Sembunyi</string>
+    <string name="detail_screen_common_주소">Alamat</string>
+    <string name="detail_screen_common_연락처">Hubungi</string>
+    <string name="detail_screen_common_이용_시간">Waktu Penggunaan</string>
+    <string name="detail_screen_common_편의시설">Kemudahan</string>
+    <string name="detail_screen_common_홈페이지">Laman Web</string>
+    <string name="detail_screen_common_입장료">Bayaran Masuk</string>
+    <string name="detail_screen_common_상세_정보">Maklumat Terperinci</string>
+    <string name="detail_screen_common_기간">Tempoh</string>
+    <string name="detail_screen_common_소개합니다">Memperkenalkan !</string>
+    <string name="detail_screen_common_알아두면_좋아요">Untuk Pengetahuan Anda</string>
+    <string name="detail_screen_common_이_장소만의_매력_포인트">Daya tarikan tempat ini✨</string>
+
+    <!--정보 수정 제안-->
+    <string name="info_modification_proposal_정보_수정_제안">Cadangan Pembetulan</string>
+    <string name="info_modification_proposal_heading1">Sila berikan cadangan maklumat yang perlu dibetulkan.</string>
+    <string name="info_modification_proposal_text1">Jika foto yang dilampirkan untuk cadangan lokasi membantu mengesahkan maklumat lokasi, anda boleh mendapat faedah.</string>
+    <string name="info_modification_proposal_전화번호_및_홈페이지">Nombor Telefon &amp; Laman Web</string>
+    <string name="info_modification_proposal_운영_시간">Waktu Penggunaan</string>
+    <string name="info_modification_proposal_장소명_및_위치">Alamat &amp; Nama Tempat</string>
+    <string name="info_modification_proposal_가격_정보">Maklumat Harga</string>
+    <string name="info_modification_proposal_장소_삭제">Padam Lokasi</string>
+    <string name="info_modification_proposal_heading2">Sila kongsi maklumat tambahan!</string>
+    <string name="info_modification_proposal_제공_서비스">Perkhidmatan yang Disediakan</string>
+    <string name="info_modification_proposal_사진_추가하기">Tambah Gambar</string>
+    <string name="info_modification_proposal_text2">Jika anda melampirkan maklumat yang disahkan\nbersama foto, maklumat yang lebih tepat akan\ndilengkapkan.</string>
+    <string name="info_modification_proposal_hint1">Sila lampirkan gambar bersama dengan maklumat yang telah disahkan untuk melengkapkan maklumat yang lebih tepat</string>
+    <string name="info_modification_proposal_text3">Sila tinggalkan komen jika ada butiran mengenai item yang anda minta untuk diubah atau apa-apa isu lain</string>
+    <string name="info_modification_proposal_hint2">example@gmail.com</string>
+    <string name="info_modification_proposal_보내기">Hantar</string>
+    <string name="info_modification_proposal_heading3">Terima kasih atas cadangan pembetulan maklumat anda</string>
+    <string name="info_modification_proposal_text4">Dengan cadangan pembetulan maklumat, daya tarikan destinasi pelancongan turut meningkat!\n\nSemakin dinanti-nantikan🧚‍♀️</string>
+    <string name="info_modification_proposal_button1">Tengok Kandungan Semula</string>
+    <string name="info_modification_proposal_button2">Tambah Item Lain</string>
+    <string name="info_modification_proposal_warning">Format e-mel tidak betul. Sila masukkan semula!</string>
+
+    <!--약관 동의 화면-->
+    <string name="policy_agree_screen_heading">Selamat datang ke\n\nnanaland in Jeju</string>
+    <string name="policy_agree_screen_전체_동의">Setuju Semua</string>
+    <string name="policy_agree_screen_privacy_policy">Terma Penggunaan &amp; Dasar Privasi</string>
+    <string name="policy_agree_screen_marketing_policy">Persetujuan Pemasaran</string>
+    <string name="policy_agree_screen_location_policy">Terma Perkhidmatan Berasaskan Lokasi</string>
+
+
+    <!--회원가입 프로필 설정 화면-->
+    <string name="sign_up_profile_setting_guide"> Sila tulis nama penggunaan\ndan pilih profil.</string>
+    <string name="sign_up_profile_setting_hint">Sila masukkan nama</string>
+    <string name="sign_up_profile_setting_warning1">Nama panggilan ini sudah digunakan oleh pengguna lain.</string>
+    <string name="sign_up_profile_setting_warning2">Nama panggilan ini tidak boleh digunakan.</string>
+    <string name="sign_up_profile_setting_warning3">Nama panggilan hanya boleh mengandungi huruf, ruang, dan nombor.</string>
+
+    <!--여행지 유형-->
+    <string name="type_감귤_아이스크림">Ais Krim Mandarin</string>
+    <string name="type_감귤_찹쌀떡">Mochi Mandarin</string>
+    <string name="type_감귤">Mandarin</string>
+    <string name="type_감귤_사이다">Sida Mandarin</string>
+    <string name="type_감귤_아포가토">Jenis Affogato Mandarin</string>
+    <string name="type_감귤_한과">Kuih Tradisional Mandarin</string>
+    <string name="type_감귤_주스">Jus Mandarin</string>
+    <string name="type_감귤_초콜릿">Coklat Mandarin</string>
+    <string name="type_감귤_칵테일">Koktel Mandarin</string>
+    <string name="type_귤피차">Teh Kulit Mandarin</string>
+    <string name="type_감귤_요거트">Yogurt Mandarin</string>
+    <string name="type_감귤_플랫치노">Frappuccino Mandarin</string>
+    <string name="type_감귤_라떼">Latte Mandarin</string>
+    <string name="type_감귤_식혜">Sikhye Mandarin</string>
+    <string name="type_감귤_에이드">Aid Mandarin</string>
+    <string name="type_감귤_버블티">Bubble Tea Mandarin</string>
+
+    <!--여행지 유형 설명-->
+    <string name="type_감귤_아이스크림_description">Sejenis Ais Krim Mandarin lembut yang dapat meninggalkan kenangan manis</string>
+    <string name="type_감귤_찹쌀떡_description">Sejenis Mochi Mandarin yang mampu menghiasi buku nota anda dengan keseronokan tidak terhingga</string>
+    <string name="type_감귤_description"> Satu-satunya tempat terkenal yang menghidangkan perisa asli Mandarin</string>
+    <string name="type_감귤_사이다_description">Sejenis Air Gas Sitrus yang menyegarkan</string>
+    <string name="type_감귤_아포가토_description">Jenis Affogato Mandarin yang penuh dengan kreativiti untuk anda yang penuh semangat dan aktif.</string>
+    <string name="type_감귤_한과_description">Kuih Tradisional Mandarin yang mengandungi kepelbagaian rasa Jeju yang indah</string>
+    <string name="type_감귤_주스_description">Sejenis Jus Mandarin Asli tetapi terkenal</string>
+    <string name="type_감귤_초콜릿_description">Sejenis Coklat Mandarin yang mengutamakan kualiti daripada kuantiti.</string>
+    <string name="type_감귤_칵테일_description">Sejenis Koktel Mandarin yang mewah dan extreme</string>
+    <string name="type_귤피차_description">Sejenis Teh Kulit Mandarin yang dapat menenangkan jiwa sambil menikmati pemandangan</string>
+    <string name="type_감귤_요거트_description">Sejenis Yogurt Mandarin lembut yang menawarkan rasa asli Jeju dan menyegarkan!</string>
+    <string name="type_감귤_플랫치노_description">Sejenis Frappuccino Mandarin dihidangkan sejuk dengan kesegaran pelbagai buah</string>
+    <string name="type_감귤_라떼_description">Sejenis Latte Mandarin yang sesuai diminum di bawah keterikan cahaya matahari</string>
+    <string name="type_감귤_식혜_description"> Sejenis Sikhye Mandarin yang kaya dengan rasa</string>
+    <string name="type_감귤_에이드_description">Sejenis minuman Ade Mandarin dengan kesegaran air soda di samping buah yang menyegarkan!</string>
+    <string name="type_감귤_버블티_description">Sejenis Bubble Tea Mandaring yang penuh dengan kejutan semakin anda minum!</string>
+
+    <!--여행지 유형 테스트 화면-->
+    <string name="type_test_screen_question1">"Apakah pilihan "</string>
+    <string name="type_test_screen_question2">"Apakah pilihan "</string>
+    <string name="type_test_screen_question3">"Apakah pilihan "</string>
+    <string name="type_test_screen_question4">"Apakah pilihan "</string>
+    <string name="type_test_screen_question5">Apa yang paling ingin\ndilakukan dalam perjalanan?</string>
+    <string name="type_test_screen_question6">""</string>
+    <string name="type_test_screen_question_님은1">" ketika\nmemilih destinasi perjalanan?"</string>
+    <string name="type_test_screen_question_님은2">" ketika\nmerancang perjalanan?"</string>
+    <string name="type_test_screen_question_님은3">" ketika\nmenetapkan bajet\nperjalanan?"</string>
+    <string name="type_test_screen_question_님은4">" ketika\nberjalan?"</string>
+    <string name="type_test_screen_item1">Tempat Pelancongan Yang Sibuk</string>
+    <string name="type_test_screen_item2">Tempat Tempatan Yang Sunyi</string>
+    <string name="type_test_screen_item3">Fleksibel</string>
+    <string name="type_test_screen_item4">Terancang Sepenuhnya</string>
+    <string name="type_test_screen_item5">Perjalanan Nilai Terbaik</string>
+    <string name="type_test_screen_item6">Perjalanan Mewah</string>
+    <string name="type_test_screen_item7">Hanya Foto Yang Tinggal!</string>
+    <string name="type_test_screen_item8">Perlu Dikenang Dengan Mata</string>
+    <string name="type_test_screen_item9">Tempat Emosi</string>
+    <string name="type_test_screen_item10">Budaya Tradisional</string>
+    <string name="type_test_screen_item11">Pemandangan Semula Jadi</string>
+    <string name="type_test_screen_item12">Taman Tema</string>
+    <string name="type_test_screen_테스트_건너뛰기">Langkau ujian</string>
+    <string name="type_test_screen_다음">Seterusnya</string>
+    <string name="type_test_screen_님의">Apakah pilihan</string>
+    <string name="type_test_screen_text1">""</string>
+    <string name="type_test_screen_text2">Apakah gaya perjalanan yang\ningin dilakukan?</string>
+    <string name="type_test_screen_text3">Jus Tangerin Sedang Diperah...</string>
+    <string name="type_test_screen_text4">Jus Perjalanan yang Sedap Akan Segera Tersedia!</string>
+    <string name="type_test_screen_text5">" adalah"</string>
+    <string name="type_test_screen_text6">nanaland in Jeju telah membuat jus perjalanan khas untuk anda!</string>
+    <string name="type_test_screen_button1">\nDestinasi Perjalanan</string>
+    <string name="type_test_screen_button2">Terus ke Laman Utama</string>
+    <string name="type_test_screen_lets_go">Let\'s Go!</string>
+
+    <!--여행지 유형 테스트 추천 여행지 화면-->
+    <string name="type_test_recommended_spot_text1">""</string>
+    <string name="type_test_recommended_spot_text2">""</string>
+    <string name="type_test_recommended_spot_추천_여행지">Destinasi\nPelancongan Disyorkan</string>
+
+    <!--언어 설정 화면-->
+    <string name="language_change_screen_guide">Bahasa di atas telah\nditetapkan sebagai lalai.</string>
+
+    <!--언어 설정 화면 다이얼로그-->
+    <string name="language_change_dialog_text">Adakah anda ingin menukar\nkepada bahasa tersebut?</string>
+
+    <!--설정 화면-->
+    <string name="settings_screen_설정">Tetapan</string>
+    <string name="settings_screen_사용_설정">Tetapkan penggunaan</string>
+    <string name="settings_screen_약관_및_정책">Terma dan dasar</string>
+    <string name="settings_screen_접근권한_안내">Panduan akses kebenaran</string>
+    <string name="settings_screen_언어_설정">Tetapan bahasa</string>
+    <string name="settings_screen_버전_정보">Maklumat versi</string>
+    <string name="settings_screen_로그아웃">Log keluar</string>
+    <string name="settings_screen_회원_탈퇴">Daftar keluar</string>
+
+    <!--로그아웃 다이얼로그-->
+    <string name="sign_out_dialog_text">Adakah anda benar-benar ingin log keluar?</string>
+
+    <!--마이페이지 화면-->
+    <string name="mypage_screen_프로필_수정">Ubah Profil</string>
+    <string name="mypage_screen_여행_유형">Jenis Perjalanan</string>
+    <string name="mypage_screen_테스트_다시하기">Uji semula</string>
+    <string name="mypage_screen_테스트_하기">Ujian</string>
+    <string name="mypage_screen_없음">Tiada</string>
+    <string name="mypage_screen_로그인이_필요해요">Log masuk diperlukan</string>
+    <string name="mypage_screen_level">Lv.</string>
+
+    <!--프로필 수정 화면-->
+    <string name="profile_update_screen_프로필_수정">Ubah Profil</string>
+    <string name="profile_update_screen_수정_완료">Pembetulan selesai</string>
+
+    <!--프로필 수정 화면 다이얼로그-->
+    <string name="profile_update_dialog_text1">Adakah anda ingin\nmemadam perubahan?</string>
+    <string name="profile_update_dialog_text2">Kembali sekarang akan memadamkan perubahan.</string>
+
+    <!--언어 초기화 화면-->
+    <string name="profile_initialization_screen_hello">안녕하세요!</string>
+    <string name="profile_initialization_screen_select_language">언어를 선택해주세요</string>
+
+    <!--약관 설정 화면-->
+    <string name="policy_setting_screen_warning">*Jika tidak bersetuju, beberapa perkhidmatan atau tawaran\nmungkin tidak dapat diterima, sila ambil perhatian.</string>
+
+    <!--회원 탈퇴 화면-->
+    <string name="withdrawal_screen_회원탈퇴">Pengeluaran Ahli</string>
+    <string name="withdrawal_screen_heading1">Panduan Penarikan Servis</string>
+    <string name="withdrawal_screen_text1">1. Jika anda menarik diri dari perkhidmatan ini, semua perkhidmatan yang disediakan berdasarkan nanaland in Jeju akan ditamatkan dan dihapuskan.</string>
+    <string name="withdrawal_screen_text2">2. Jika anda menarik diri, semua kupon dan mata yang anda miliki akan dihapuskan secara automatik dan tidak akan dipulihkan jika anda mendaftar semula.</string>
+    <string name="withdrawal_screen_text3">3. Rekod transaksi yang perlu disimpan menurut undang-undang e-dagang akan disimpan selama 5 tahun selepas menarik diri daripada perkhidmatan.</string>
+    <string name="withdrawal_screen_text4">4. Anda tidak boleh menyertai semula acara pendaftaran ahli selepas menarik diri.</string>
+    <string name="withdrawal_screen_text5">5. Jika anda mendaftar kembali dalam 90 hari selepas penarikan diri, anda boleh menggunakan akaun lama anda.</string>
+    <string name="withdrawal_screen_heading2">Sebab Penarikan Perkhidmatan</string>
+    <string name="withdrawal_screen_reason1">Kandungan Tidak Cukup</string>
+    <string name="withdrawal_screen_reason2">Ketidakselesaan Penggunaan Servis</string>
+    <string name="withdrawal_screen_reason3">Ketidakselesaan Penggunaan Komuniti</string>
+    <string name="withdrawal_screen_reason4">Jarang Berkunjung</string>
+    <string name="withdrawal_screen_탈퇴">Berhenti</string>
+    <string name="withdrawal_screen_warning">Saya telah membaca dan\nbersetuju dengan panduan ini</string>
+
+    <!--회원 탈퇴 다이얼로그-->
+    <string name="withdrawal_dialog_text1">Betul-betul tidak mahu menerima maklumat dan tawaran perjalanan ke Jeju?😢</string>
+    <string name="withdrawal_dialog_text2">*Jika menyertai semula dalam masa 90 hari,</string>
+
+    <!--접근 권한 안내 화면-->
+    <string name="permission_checking_screen_접근_권한_안내">Panduan Keizinan Akses</string>
+    <string name="permission_checking_screen_guide1">Untuk menggunakan aplikasi nanaland in Jeju, Keizinan Akses berikut diperlukan.</string>
+    <string name="permission_checking_screen_guide2">""</string>
+    <string name="permission_checking_screen_guide3">""</string>
+    <string name="permission_checking_screen_text1">Keizinan akses yang wajib diperlukan untuk menggunakan perkhidmatan nanaland in Jeju, dan jika ditolak, penggunaan perkhidmatan akan terhad.</string>
+    <string name="permission_checking_screen_text2">Jika anda tidak bersetuju dengan keizinan akses pilihan, beberapa fungsi dalam perkhidmatan nanaland in Jeju mungkin terhad.</string>
+    <string name="permission_checking_screen_알려드립니다">Makluman</string>
+    <string name="permission_checking_screen_전화_기기_정보">Maklumat Peranti Telefon</string>
+    <string name="permission_checking_screen_저장공간">Ruang Simpanan</string>
+    <string name="permission_checking_screen_위치정보">Maklumat Lokasi</string>
+    <string name="permission_checking_screen_카메라">Kamera</string>
+    <string name="permission_checking_screen_알림">Notifikasi</string>
+    <string name="permission_checking_screen_오디오_및_음악">Audio dan Musik</string>
+    <string name="permission_checking_screen_전화_기기_정보_description">Keizinan akses diperlukan untuk mengesahkan status telefon bimbit dan ID. Diperlukan untuk menyediakan penyelesaian pengesanan pengubahan peranti.</string>
+    <string name="permission_checking_screen_저장공간_description">Diperlukan untuk menyediakan fungsi simpanan gambar.</string>
+    <string name="permission_checking_screen_위치정보_description">Diperlukan untuk menyediakan maklumat seperti restoran dan tempat menarik berdekatan berdasarkan lokasi semasa.</string>
+    <string name="permission_checking_screen_카메라_description">Diperlukan untuk mendaftar gambar ulasan dan maklumat restoran.</string>
+    <string name="permission_checking_screen_알림_description">Diperlukan untuk menerima pemberitahuan acara dan maklumat tawaran.</string>
+    <string name="permission_checking_screen_오디오_및_음악_description">Diperlukan untuk mendaftar kandungan video.</string>
 </resources>

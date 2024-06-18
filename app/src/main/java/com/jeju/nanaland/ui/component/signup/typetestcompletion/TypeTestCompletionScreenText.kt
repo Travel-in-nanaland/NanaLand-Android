@@ -16,6 +16,8 @@ import com.jeju.nanaland.globalvalue.userdata.UserData
 import com.jeju.nanaland.ui.theme.getColor
 import com.jeju.nanaland.ui.theme.largeTitle02
 import com.jeju.nanaland.ui.theme.largeTitle02Regular
+import com.jeju.nanaland.util.language.customContext
+import com.jeju.nanaland.util.language.getLanguage
 import com.jeju.nanaland.util.resource.getString
 
 @Composable
@@ -31,7 +33,10 @@ fun TypeTestCompletionScreenText() {
                         color = getColor().main
                     )
                 ) {
-                    append(UserData.nickname)
+                    append(when (getLanguage()) {
+                        "ko", "en", "zh" -> UserData.nickname
+                        else -> ""
+                    })
                 }
                 withStyle(
                     style = largeTitle02.toSpanStyle().copy(
@@ -46,9 +51,18 @@ fun TypeTestCompletionScreenText() {
         Spacer(Modifier.height(16.dp))
 
         Text(
-            text = getString(R.string.type_test_screen_text1),
-            color = getColor().black,
-            style = largeTitle02Regular
+            text = when (getLanguage()) {
+                "ko", "en", "zh" -> getString(R.string.type_test_screen_text1)
+                else -> UserData.nickname
+            },
+            color = when (getLanguage()) {
+                "ko", "en", "zh" -> getColor().black
+                else -> getColor().main
+            } ,
+            style = when (getLanguage()) {
+                "ko", "en", "zh" -> largeTitle02Regular
+                else -> largeTitle02
+            }
         )
 
         Spacer(Modifier.height(16.dp))

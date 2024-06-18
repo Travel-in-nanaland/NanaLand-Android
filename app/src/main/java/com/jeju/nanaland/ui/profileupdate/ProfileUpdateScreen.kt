@@ -2,6 +2,7 @@ package com.jeju.nanaland.ui.profileupdate
 
 import android.net.Uri
 import android.util.Log
+import androidx.activity.compose.BackHandler
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
@@ -16,11 +17,13 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.jeju.nanaland.R
+import com.jeju.nanaland.globalvalue.constant.INTRODUCTION_CONSTRAINT
 import com.jeju.nanaland.globalvalue.type.InputIntroductionState
 import com.jeju.nanaland.globalvalue.type.InputNicknameState
 import com.jeju.nanaland.ui.component.common.CustomSurface
@@ -30,8 +33,10 @@ import com.jeju.nanaland.ui.component.profileupdate.ProfileUpdateScreenBottomBut
 import com.jeju.nanaland.ui.component.profileupdate.ProfileUpdateScreenIntroductionTextField
 import com.jeju.nanaland.ui.component.profileupdate.ProfileUpdateScreenNicknameText
 import com.jeju.nanaland.ui.component.profileupdate.ProfileUpdateScreenProfileContent
+import com.jeju.nanaland.ui.component.profileupdate.ProfileUpdateScreenWaringDialog
 import com.jeju.nanaland.ui.component.signup.profilesetting.SignUpScreenCharacterCount
 import com.jeju.nanaland.ui.component.signup.profilesetting.SignUpScreenTextField
+import com.jeju.nanaland.util.log.LogUtil
 import com.jeju.nanaland.util.resource.getString
 import com.jeju.nanaland.util.ui.scrollableVerticalArrangement
 
@@ -54,6 +59,8 @@ fun ProfileUpdateScreen(
     val inputIntroductionState = viewModel.inputIntroductionState.collectAsState().value
     val profileImageUri = viewModel.profileImageUri.collectAsState().value
     ProfileUpdateScreen(
+        prevNickname = nickname,
+        prevIntroduction = introduction,
         inputNickname = inputNickname,
         updateInputNickname = viewModel::updateInputNickname,
         inputNicknameState = inputNicknameState,
@@ -70,6 +77,8 @@ fun ProfileUpdateScreen(
 
 @Composable
 private fun ProfileUpdateScreen(
+    prevNickname: String,
+    prevIntroduction: String,
     inputNickname: String,
     updateInputNickname: (String) -> Unit,
     inputNicknameState: InputNicknameState,
@@ -82,6 +91,14 @@ private fun ProfileUpdateScreen(
     moveToBackScreen: () -> Unit,
     isContent: Boolean
 ) {
+    val isWarningDialogShowing = remember { mutableStateOf(false) }
+    BackHandler {
+        if (prevNickname != inputNickname || prevIntroduction != inputIntroduction) {
+            isWarningDialogShowing.value = true
+        } else {
+            moveToBackScreen()
+        }
+    }
     val takePhotoFromAlbumLauncher =
         rememberLauncherForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri ->
             Log.e("PickImage", "success")
@@ -95,7 +112,12 @@ private fun ProfileUpdateScreen(
         CustomTopBar(
             title = getString(R.string.profile_update_screen_프로필_수정),
             onBackButtonClicked = {
-                moveToBackScreen()
+                if (prevNickname != inputNickname || prevIntroduction != inputIntroduction) {
+                    LogUtil.e("", prevNickname + "," + inputNickname + "," + prevIntroduction + "," + inputIntroduction)
+                    isWarningDialogShowing.value = true
+                } else {
+                    moveToBackScreen()
+                }
             }
         )
 
@@ -148,7 +170,7 @@ private fun ProfileUpdateScreen(
 
                         SignUpScreenCharacterCount(
                             count = inputIntroduction.length,
-                            maxCount = 70
+                            maxCount = INTRODUCTION_CONSTRAINT
                         )
                     }
 
@@ -174,5 +196,12 @@ private fun ProfileUpdateScreen(
                 Spacer(Modifier.height(20.dp))
             }
         }
+    }
+
+    if (isWarningDialogShowing.value) {
+        ProfileUpdateScreenWaringDialog(
+            onConfirm = moveToBackScreen,
+            onCancel = { isWarningDialogShowing.value = false }
+        )
     }
 }

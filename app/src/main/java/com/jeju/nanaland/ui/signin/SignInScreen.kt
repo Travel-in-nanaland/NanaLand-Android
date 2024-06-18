@@ -23,6 +23,7 @@ import com.jeju.nanaland.ui.component.signin.SignInScreenKakaoLoginButton
 import com.jeju.nanaland.ui.component.signin.SignInScreenLogoImage
 import com.jeju.nanaland.ui.component.signin.SignInScreenLogoText1
 import com.jeju.nanaland.ui.component.signin.SignInScreenLogoText2
+import com.jeju.nanaland.util.language.customContext
 import com.jeju.nanaland.util.log.LogUtil
 import com.jeju.nanaland.util.signin.AuthResultContract
 import com.jeju.nanaland.util.signin.getGoogleSignInClient
@@ -84,42 +85,46 @@ private fun SignInScreen(
             modifier = Modifier.padding(start = 16.dp, end = 16.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Spacer(Modifier.height(40.dp))
+            Spacer(Modifier.height(150.dp))
 
             SignInScreenLogoImage()
+
+            Spacer(Modifier.height(16.dp))
 
             SignInScreenLogoText1()
 
             SignInScreenLogoText2()
 
-            Spacer(Modifier.height(60.dp))
+            Spacer(Modifier.weight(1f))
 
-            SignInScreenKakaoLoginButton {
-                if (UserApiClient.instance.isKakaoTalkLoginAvailable(context)) {
-                    // 카카오톡 실행이 가능할 때
-                    UserApiClient.instance.loginWithKakaoTalk(context) { token, error ->
-                        if (error != null) {
-                            LogUtil.e("KakaoLoginError", "${error}")
-                        } else if (token != null) {
-                            LogUtil.e("KakaoLoginSuccess", "accessToken: ${token.accessToken}\n" +
-                                    "refreshToken: ${token.refreshToken}")
-                            UserApiClient.instance.me { user, error ->
-                                if (error != null) {
-                                    LogUtil.e("KakaoGetUserInfoError", "$error")
-                                }
-                                else if (user != null) {
-                                    LogUtil.e("KakaoGetUserInfoSuccess", "회원번호: ${user.id}" +
-                                            "\n이메일: ${user.kakaoAccount?.email}" +
-                                            "\n닉네임: ${user.kakaoAccount?.profile?.nickname}" +
-                                            "\n프로필사진: ${user.kakaoAccount?.profile?.thumbnailImageUrl}")
+            if (customContext.resources.configuration.locales[0].language == "ko") {
+                SignInScreenKakaoLoginButton {
+                    if (UserApiClient.instance.isKakaoTalkLoginAvailable(context)) {
+                        // 카카오톡 실행이 가능할 때
+                        UserApiClient.instance.loginWithKakaoTalk(context) { token, error ->
+                            if (error != null) {
+                                LogUtil.e("KakaoLoginError", "${error}")
+                            } else if (token != null) {
+                                LogUtil.e("KakaoLoginSuccess", "accessToken: ${token.accessToken}\n" +
+                                        "refreshToken: ${token.refreshToken}")
+                                UserApiClient.instance.me { user, error ->
+                                    if (error != null) {
+                                        LogUtil.e("KakaoGetUserInfoError", "$error")
+                                    }
+                                    else if (user != null) {
+                                        LogUtil.e("KakaoGetUserInfoSuccess", "회원번호: ${user.id}" +
+                                                "\n이메일: ${user.kakaoAccount?.email}" +
+                                                "\n닉네임: ${user.kakaoAccount?.profile?.nickname}" +
+                                                "\n프로필사진: ${user.kakaoAccount?.profile?.thumbnailImageUrl}")
 
-                                    if (user.id != null) {
-                                        signIn(
-                                            "KAKAO",
-                                            user.id.toString(),
-                                            moveToMainScreen,
-                                            { moveToSignUpScreen("KAKAO", user.kakaoAccount?.email!!, user.id.toString()) }
-                                        )
+                                        if (user.id != null) {
+                                            signIn(
+                                                "KAKAO",
+                                                user.id.toString(),
+                                                moveToMainScreen,
+                                                { moveToSignUpScreen("KAKAO", user.kakaoAccount?.email!!, user.id.toString()) }
+                                            )
+                                        }
                                     }
                                 }
                             }
@@ -143,6 +148,8 @@ private fun SignInScreen(
                     moveToMainScreen
                 )
             }
+
+            Spacer(Modifier.height(40.dp))
         }
     }
 }

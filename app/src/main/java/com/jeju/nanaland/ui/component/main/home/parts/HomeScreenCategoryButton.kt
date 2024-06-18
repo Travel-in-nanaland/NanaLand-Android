@@ -14,6 +14,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.jeju.nanaland.ui.theme.caption01SemiBold
 import com.jeju.nanaland.util.ui.clickableNoEffect
@@ -26,12 +27,10 @@ fun HomeScreenCategoryButton(
 ) {
     Column(
         modifier = Modifier
-            .width(60.dp)
-            .height(65.dp)
+            .width(56.dp)
             .clip(RoundedCornerShape(8.dp))
             .clickableNoEffect { onClick() },
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center
+        horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Image(
             modifier = Modifier
@@ -43,7 +42,8 @@ fun HomeScreenCategoryButton(
         Text(
             text = text,
             color = Color(0xFF1A1A1A),
-            style = caption01SemiBold
+            style = caption01SemiBold,
+            textAlign = TextAlign.Center
         )
     }
 }

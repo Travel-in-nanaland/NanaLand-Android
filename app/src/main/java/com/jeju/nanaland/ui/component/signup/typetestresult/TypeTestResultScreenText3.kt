@@ -22,6 +22,7 @@ import com.jeju.nanaland.globalvalue.constant.TYPE_GAMGYUL_RICECAKE
 import com.jeju.nanaland.globalvalue.constant.TYPE_GAMGYUL_SIKHYE
 import com.jeju.nanaland.globalvalue.constant.TYPE_GAMGYUL_YOGURT
 import com.jeju.nanaland.globalvalue.constant.TYPE_TANGERINE_PEEL_TEA
+import com.jeju.nanaland.ui.theme.body01
 import com.jeju.nanaland.ui.theme.bodyBold
 import com.jeju.nanaland.ui.theme.getColor
 import com.jeju.nanaland.util.resource.getString
@@ -56,7 +57,7 @@ fun TypeTestResultScreenText3(travelType: String) {
                 })
             }
             withStyle(
-                style = bodyBold.toSpanStyle().copy(
+                style = body01.toSpanStyle().copy(
                     color = getColor().black
                 )
             ) {

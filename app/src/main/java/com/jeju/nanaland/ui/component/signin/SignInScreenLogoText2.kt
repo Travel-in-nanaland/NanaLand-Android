@@ -10,7 +10,7 @@ import com.jeju.nanaland.ui.theme.getColor
 @Composable
 fun SignInScreenLogoText2() {
     Text(
-        text = "IN JEJU",
+        text = "in Jeju",
         color = getColor().main,
         fontFamily = appleSdGothicNeo,
         fontSize = 25.sp,

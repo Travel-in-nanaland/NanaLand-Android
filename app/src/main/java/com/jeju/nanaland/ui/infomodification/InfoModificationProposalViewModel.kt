@@ -9,6 +9,8 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import com.jeju.nanaland.domain.request.report.InformationModificationProposalRequest
 import com.jeju.nanaland.domain.usecase.report.InformationModificationProposalUseCase
+import com.jeju.nanaland.globalvalue.constant.emailRegex
+import com.jeju.nanaland.globalvalue.type.InputEmailState
 import com.jeju.nanaland.util.log.LogUtil
 import com.jeju.nanaland.util.network.onError
 import com.jeju.nanaland.util.network.onException
@@ -35,6 +37,8 @@ class InfoModificationProposalViewModel @Inject constructor(
     val inputDescription = _inputDescription.asStateFlow()
     private val _inputEmail = MutableStateFlow("")
     val inputEmail = _inputEmail.asStateFlow()
+    private val _inputEmailState = MutableStateFlow(InputEmailState.Idle)
+    val inputEmailState = _inputEmailState.asStateFlow()
 
     fun updateImageUri(uri: Uri) {
         _imageUri.update { uri.toString() }
@@ -46,6 +50,11 @@ class InfoModificationProposalViewModel @Inject constructor(
 
     fun updateInputEmail(email: String) {
         _inputEmail.update { email }
+        if (email.matches(emailRegex)) {
+            _inputEmailState.update { InputEmailState.Idle }
+        } else {
+            _inputEmailState.update { InputEmailState.Invalid }
+        }
     }
 
     @SuppressLint("Range", "Recycle")

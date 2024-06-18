@@ -62,9 +62,7 @@ private fun RecommendedSpotScreen(
                 Spacer(Modifier.height(32.dp))
 
                 Column(Modifier.padding(start = 16.dp, end = 16.dp)) {
-                    RecommendedSpotScreenText1(
-                        text = getString(R.string.type_test_recommended_spot_text1) + UserData.nickname + getString(R.string.type_test_recommended_spot_text2)
-                    )
+                    RecommendedSpotScreenText1()
 
                     RecommendedSpotScreenText2()
                 }

@@ -22,6 +22,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
+import com.jeju.nanaland.R
 import com.jeju.nanaland.globalvalue.constant.SYSTEM_NAVIGATION_BAR_HEIGHT
 import com.jeju.nanaland.globalvalue.constant.SYSTEM_STATUS_BAR_HEIGHT
 import com.jeju.nanaland.globalvalue.constant.TOTAL_SCREEN_HEIGHT
@@ -30,6 +31,7 @@ import com.jeju.nanaland.ui.component.listscreen.filter.parts.FilterDialogCloseB
 import com.jeju.nanaland.ui.component.listscreen.filter.parts.season.SeasonFilterDialogTitle
 import com.jeju.nanaland.ui.component.listscreen.filter.parts.season.SeasonSelectableBox
 import com.jeju.nanaland.ui.theme.getColor
+import com.jeju.nanaland.util.resource.getString
 import com.jeju.nanaland.util.ui.clickableNoEffect
 import kotlinx.coroutines.launch
 import kotlin.math.roundToInt
@@ -86,11 +88,11 @@ fun SeasonFilterBottomDialog(
             SeasonSelectableBox(
                 seasonText = seasonList[seasonIdx],
                 monthText = when (seasonIdx) {
-                    0 -> "3, 4월"
-                    1 -> "5, 6, 7, 8월"
-                    2 -> "9, 10월"
-                    else -> "11, 12, 1, 2월"
-                },
+                    0 -> "3, 4"
+                    1 -> "5, 6, 7, 8"
+                    2 -> "9, 10"
+                    else -> "11, 12, 1, 2"
+                } + getString(R.string.common_월),
                 onClick = {
                     // 이미 같은 계절이 선택되어 있으면 새로고침 안한다.
                     if (!selectedSeasonList[seasonIdx]) {

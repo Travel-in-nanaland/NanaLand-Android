@@ -20,6 +20,8 @@ import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.jeju.nanaland.R
+import com.jeju.nanaland.globalvalue.constant.emailRegex
+import com.jeju.nanaland.globalvalue.type.InputEmailState
 import com.jeju.nanaland.ui.component.common.CustomSurface
 import com.jeju.nanaland.ui.component.common.CustomTopBar
 import com.jeju.nanaland.ui.component.infomodification.writing.InfoModificationProposalWritingScreenDescription
@@ -42,10 +44,12 @@ fun InformationModificationProposalWritingScreen(
     val imageUri = viewModel.imageUri.collectAsState().value
     val inputDescription = viewModel.inputDescription.collectAsState().value
     val inputEmail = viewModel.inputEmail.collectAsState().value
+    val inputEmailState = viewModel.inputEmailState.collectAsState().value
     InformationModificationProposalWritingScreen(
         imageUri = imageUri,
         inputDescription = inputDescription,
         inputEmail = inputEmail,
+        inputEmailState = inputEmailState,
         updateImageUri = viewModel::updateImageUri,
         updateInputDescription = viewModel::updateInputDescription,
         updateInputEmail = viewModel::updateInputEmail,
@@ -68,6 +72,7 @@ private fun InformationModificationProposalWritingScreen(
     imageUri: String?,
     inputDescription: String,
     inputEmail: String,
+    inputEmailState: InputEmailState,
     updateImageUri: (Uri) -> Unit,
     updateInputDescription: (String) -> Unit,
     updateInputEmail: (String) -> Unit,
@@ -139,7 +144,8 @@ private fun InformationModificationProposalWritingScreen(
                         height = 48,
                         hint = getString(R.string.info_modification_proposal_hint2),
                         inputText = inputEmail,
-                        onValueChange = updateInputEmail
+                        onValueChange = updateInputEmail,
+                        isValid = inputEmailState == InputEmailState.Idle
                     )
                 }
 

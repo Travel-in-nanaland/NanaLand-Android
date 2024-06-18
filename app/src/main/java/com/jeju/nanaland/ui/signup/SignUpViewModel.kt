@@ -14,6 +14,8 @@ import com.jeju.nanaland.domain.usecase.authdatastore.SaveAccessTokenUseCase
 import com.jeju.nanaland.domain.usecase.authdatastore.SaveRefreshTokenUseCase
 import com.jeju.nanaland.domain.usecase.settingsdatastore.GetValueUseCase
 import com.jeju.nanaland.globalvalue.constant.KEY_LANGUAGE
+import com.jeju.nanaland.globalvalue.constant.NICKNAME_CONSTRAINT
+import com.jeju.nanaland.globalvalue.constant.nicknameRegex
 import com.jeju.nanaland.globalvalue.type.InputNicknameState
 import com.jeju.nanaland.globalvalue.userdata.UserData
 import com.jeju.nanaland.util.log.LogUtil
@@ -22,7 +24,6 @@ import com.jeju.nanaland.util.network.onException
 import com.jeju.nanaland.util.network.onSuccess
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.launchIn
@@ -49,10 +50,12 @@ class SignUpViewModel @Inject constructor(
 
     fun updateInputNickname(nickname: String) {
         _inputNickname.update { nickname }
-        if (_inputNickname.value.length <= 8) {
-            _inputNicknameState.update { InputNicknameState.Idle }
-        } else {
+        if (_inputNickname.value.length > NICKNAME_CONSTRAINT) {
+            _inputNicknameState.update { InputNicknameState.TooLong }
+        } else if (!_inputNickname.value.matches(nicknameRegex)) {
             _inputNicknameState.update { InputNicknameState.Invalid }
+        } else {
+            _inputNicknameState.update { InputNicknameState.Idle }
         }
     }
 

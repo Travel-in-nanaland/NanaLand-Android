@@ -7,3 +7,5 @@ import com.jeju.nanaland.NanaLandApplication
 
 
 var customContext by mutableStateOf(NanaLandApplication.applicationContext())
+
+fun getLanguage(): String = customContext.resources.configuration.locales[0].language

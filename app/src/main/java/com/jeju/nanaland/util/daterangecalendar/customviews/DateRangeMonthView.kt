@@ -30,6 +30,8 @@ import com.jeju.nanaland.util.daterangecalendar.models.CalendarStyleAttributes.D
 import com.jeju.nanaland.util.daterangecalendar.models.DateTiming
 import com.jeju.nanaland.util.daterangecalendar.timepicker.AwesomeTimePickerDialog
 import com.jeju.nanaland.util.daterangecalendar.timepicker.AwesomeTimePickerDialog.TimePickerCallback
+import com.jeju.nanaland.util.language.customContext
+import com.jeju.nanaland.util.resource.getString
 import java.util.Calendar
 
 /**
@@ -105,6 +107,7 @@ internal class DateRangeMonthView : LinearLayout {
         llDaysContainer = mainView.findViewById(R.id.llDaysContainer)
 //        llDaysContainer.layoutParams.height = 200 * 360 / dpi
         llTitleWeekContainer = mainView.findViewById(R.id.llTitleWeekContainer)
+//        mainView.findViewById<CustomTextView>(R.id.tvDayOfWeek1).text =
     }
 
     private fun setSelectedDate(selectedDate: Calendar) {
@@ -185,7 +188,7 @@ internal class DateRangeMonthView : LinearLayout {
             currentCalendarMonth,
             DateTiming.NONE
         )
-        val weekTitle = context.resources.getStringArray(R.array.week_sun_sat)
+        val weekTitle = customContext.resources.getStringArray(R.array.week_sun_sat)
 
         //To set week day title as per offset
         for (i in 0 until TOTAL_DAYS_IN_A_WEEK) {

@@ -67,7 +67,7 @@ fun NanaLandTheme(
     val view = LocalView.current
     val density = LocalDensity.current.density
     val customDensity = LocalContext.current.resources.displayMetrics.widthPixels.toFloat() / 360f
-    LogUtil.e("customDensity", "${customDensity}")
+//    LogUtil.e("customDensity", "${customDensity}")
     if (!view.isInEditMode) {
         SideEffect {
             // 타입 캐스팅이 가능한지 확인. 다이얼로그는 이걸 확인 안해주면 에러가 발생.
@@ -80,8 +80,8 @@ fun NanaLandTheme(
     }
     val rippleIndication = androidx.compose.material.ripple.rememberRipple()
     val local = LocalContext.current.resources.configuration.locales
-    LogUtil.e("aaaaaaaaaa", "${darkTheme}")
-    LogUtil.e("aaaaaaaaaa", "${local}")
+//    LogUtil.e("aaaaaaaaaa", "${darkTheme}")
+//    LogUtil.e("aaaaaaaaaa", "${local}")
     val customContext = remember {
         customContext
     }

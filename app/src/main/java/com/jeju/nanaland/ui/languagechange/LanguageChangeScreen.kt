@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.mutableStateListOf
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
@@ -14,6 +15,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.jeju.nanaland.R
 import com.jeju.nanaland.ui.component.common.CustomSurface
 import com.jeju.nanaland.ui.component.common.CustomTopBar
+import com.jeju.nanaland.ui.component.languagechange.LanguageChangeScreenDialog
 import com.jeju.nanaland.ui.component.languagechange.LanguageChangeScreenGuideText
 import com.jeju.nanaland.ui.component.languagechange.LanguageChangeScreenItem
 import com.jeju.nanaland.util.resource.getString
@@ -42,6 +44,8 @@ private fun LanguageChangeScreen(
     val languageList = remember { mutableStateListOf("ko", "en", "zh", "ms") }.apply {
         sortBy { it != currLanguage }
     }
+    val selectedLanguage = remember { mutableStateOf(currLanguage) }
+    val isConfirmDialogShowing = remember { mutableStateOf(false) }
     CustomSurface {
         CustomTopBar(
             title = "언어 설정",
@@ -66,14 +70,24 @@ private fun LanguageChangeScreen(
                 },
                 isSelected = currLanguage == it,
                 onClick = {
-                    updateLanguage(when (it) {
-                        "ko" -> "KOREAN"
-                        "en" -> "ENGLISH"
-                        "zh" -> "CHINESE"
-                        else -> "MALAYSIA"
-                    })
+                    selectedLanguage.value = it
+                    isConfirmDialogShowing.value = true
                 }
             )
         }
+    }
+
+    if (isConfirmDialogShowing.value) {
+        LanguageChangeScreenDialog(
+            onConfirm = {
+                updateLanguage(when (selectedLanguage.value) {
+                    "ko" -> "KOREAN"
+                    "en" -> "ENGLISH"
+                    "zh" -> "CHINESE"
+                    else -> "MALAYSIA"
+                })
+            },
+            onCancel = { isConfirmDialogShowing.value = false }
+        )
     }
 }

@@ -36,7 +36,9 @@ fun NonMemberDialogBottomButton(onClick: () -> Unit) {
             .clickableNoEffect { onClick() },
         contentAlignment = Alignment.Center
     ) {
-        Row {
+        Row(
+            verticalAlignment = Alignment.CenterVertically
+        ) {
             Text(
                 text = getString(R.string.non_member_dialog_go_sign_up),
                 color = getColor().white,

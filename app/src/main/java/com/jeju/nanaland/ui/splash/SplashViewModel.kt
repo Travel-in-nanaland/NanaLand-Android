@@ -67,12 +67,13 @@ class SplashViewModel @Inject constructor(
             .onEach {
                 if (it.isNullOrEmpty()) {
                     moveToLanguageInitScreen()
+                    LogUtil.e("checkLanguageState", "언어 선택 안됨")
                 } else {
                     val conf: Configuration = application.resources.configuration
                     conf.setLocale(Locale(it))
                     customContext = application.createConfigurationContext(conf)
                     _checkingState.update { SplashCheckingState.Authorization }
-                    LogUtil.e("locale", customContext.resources.configuration.locales[0].language)
+                    LogUtil.e("checkLanguageState", "선택된 언어:" + customContext.resources.configuration.locales[0].language)
                 }
             }
             .catch { LogUtil.e("flow Error", "checkLanguageState") }

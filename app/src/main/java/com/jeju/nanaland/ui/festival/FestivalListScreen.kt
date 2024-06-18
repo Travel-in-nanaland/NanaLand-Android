@@ -111,7 +111,12 @@ private fun FestivalListScreen(
     val locationFilterDialogAnchoredDraggableState = remember { getLocationAnchoredDraggableState() }
     val seasonFilterDialogAnchoredDraggableState = remember { getSeasonAnchoredDraggableState() }
     val locationList = remember { getLocationList() }
-    val seasonList = remember { listOf("봄", "여름", "가을", "겨울") }
+    val seasonList = remember { listOf(
+        getString(R.string.common_봄),
+        getString(R.string.common_여름),
+        getString(R.string.common_가을),
+        getString(R.string.common_겨울)
+    ) }
     val lazyGridState = rememberLazyGridState()
     val loadMore = remember {
         derivedStateOf {
