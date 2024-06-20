@@ -16,6 +16,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
 import com.jeju.nanaland.R
@@ -76,7 +77,8 @@ fun CustomTopBar(
         Text(
             text = title,
             color = getColor().black,
-            style = title01Bold
+            style = title01Bold,
+            textAlign = TextAlign.Center
         )
     }
 }

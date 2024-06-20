@@ -9,5 +9,7 @@ import com.jeju.nanaland.ui.experience.ExperienceContentScreen
 import com.jeju.nanaland.ui.notification.NotificationScreen
 
 fun NavGraphBuilder.notificationScreen(navController: NavController) = composable(route = ROUTE_NOTIFICATION) {
-    NotificationScreen()
+    NotificationScreen(
+        moveToBackScreen = { navController.popBackStack() }
+    )
 }

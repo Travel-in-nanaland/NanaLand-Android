@@ -14,6 +14,7 @@ import com.jeju.nanaland.R
 import com.jeju.nanaland.globalvalue.userdata.UserData
 import com.jeju.nanaland.ui.theme.getColor
 import com.jeju.nanaland.ui.theme.largeTitle02
+import com.jeju.nanaland.ui.theme.title01Bold
 import com.jeju.nanaland.util.resource.getString
 import com.jeju.nanaland.util.ui.clickableNoEffect
 
@@ -43,7 +44,7 @@ fun ColumnScope.MyPageScreenNickname(onClick: () -> Unit,) {
             modifier = Modifier.align(Alignment.CenterHorizontally),
             text = UserData.nickname,
             color = getColor().black,
-            style = largeTitle02
+            style = title01Bold
         )
     }
 }

@@ -15,7 +15,7 @@ fun FilterDialogCloseButton(
 ) {
     Image(
         modifier = Modifier
-            .size(32.dp)
+            .size(28.dp)
             .clickableNoEffect { onClick() },
         painter = painterResource(R.drawable.ic_close),
         contentDescription = null

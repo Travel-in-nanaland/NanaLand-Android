@@ -12,10 +12,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.jeju.nanaland.R
 import com.jeju.nanaland.domain.entity.nanapick.NanaPickBannerData
 import com.jeju.nanaland.ui.component.common.CustomSurface
 import com.jeju.nanaland.ui.component.common.CustomTopBar
 import com.jeju.nanaland.ui.component.main.home.parts.HomeScreenNanaPickBanner
+import com.jeju.nanaland.util.resource.getString
 import com.jeju.nanaland.util.ui.UiState
 
 @Composable
@@ -46,7 +48,7 @@ private fun NanaPickListScreen(
     CustomSurface {
         Column {
             CustomTopBar(
-                title = "나나's Pick",
+                title = getString(R.string.common_나나s_Pick),
                 onBackButtonClicked = moveToMainScreen
             )
             LazyColumn {

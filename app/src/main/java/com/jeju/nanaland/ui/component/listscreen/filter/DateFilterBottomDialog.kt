@@ -72,7 +72,7 @@ fun DateFilterBottomDialog(
     Column(
         modifier = Modifier
             .fillMaxWidth()
-            .height(530.dp)
+            .height(540.dp)
             .offset {
                 IntOffset(
                     x = 0,

@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
@@ -23,20 +24,32 @@ import com.jeju.nanaland.ui.component.signin.SignInScreenKakaoLoginButton
 import com.jeju.nanaland.ui.component.signin.SignInScreenLogoImage
 import com.jeju.nanaland.ui.component.signin.SignInScreenLogoText1
 import com.jeju.nanaland.ui.component.signin.SignInScreenLogoText2
+import com.jeju.nanaland.util.intent.DeepLinkData
 import com.jeju.nanaland.util.language.customContext
 import com.jeju.nanaland.util.log.LogUtil
 import com.jeju.nanaland.util.signin.AuthResultContract
 import com.jeju.nanaland.util.signin.getGoogleSignInClient
 import com.jeju.nanaland.util.ui.ScreenPreview
+import com.kakao.sdk.common.KakaoSdk
 import com.kakao.sdk.user.UserApiClient
 
 
 @Composable
 fun SignInScreen(
+    deepLinkData: DeepLinkData,
     moveToMainScreen: () -> Unit,
     moveToSignUpScreen: (String, String, String) -> Unit,
     viewModel: SignInViewModel = hiltViewModel()
 ) {
+    val context = LocalContext.current
+    LaunchedEffect(Unit) {
+        if (deepLinkData.contentId != null) {
+            viewModel.nonMemberSignUp(
+                Settings.Secure.getString(context.contentResolver, Settings.Secure.ANDROID_ID),
+                moveToMainScreen
+            )
+        }
+    }
     SignInScreen(
         signIn = viewModel::signIn,
         nonMemberSignUp = viewModel::nonMemberSignUp,
@@ -99,6 +112,7 @@ private fun SignInScreen(
 
             if (customContext.resources.configuration.locales[0].language == "ko") {
                 SignInScreenKakaoLoginButton {
+                    LogUtil.e("keyHash", "${KakaoSdk.keyHash}")
                     if (UserApiClient.instance.isKakaoTalkLoginAvailable(context)) {
                         // 카카오톡 실행이 가능할 때
                         UserApiClient.instance.loginWithKakaoTalk(context) { token, error ->

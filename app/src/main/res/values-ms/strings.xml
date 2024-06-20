@@ -15,6 +15,21 @@
         <item>일</item>
     </string-array>
 
+    <string-array name="month_name">
+        <item>January</item>
+        <item>February</item>
+        <item>March</item>
+        <item>April</item>
+        <item>May</item>
+        <item>June</item>
+        <item>July</item>
+        <item>August</item>
+        <item>September</item>
+        <item>October</item>
+        <item>November</item>
+        <item>December</item>
+    </string-array>
+
     <string name="cancel">Cancel</string>
     <string name="done">Done</string>
     <string name="title_time_picker">Select Time</string>
@@ -33,7 +48,7 @@
     <string name="common_전체">Seluruh</string>
     <string name="common_건">perkara</string>
     <string name="common_년">년</string>
-    <string name="common_월">월</string>
+    <string name="common_월">""</string>
     <string name="common_봄">Musim bunga</string>
     <string name="common_여름">Musim panas</string>
     <string name="common_가을">Musim luruh</string>
@@ -123,12 +138,12 @@
     <string name="location_common_제주시">Jeju City</string>
     <string name="location_common_애월">Aewol</string>
     <string name="location_common_조천">Jocheon</string>
-    <string name="location_common_한경">Hangye-ong</string>
+    <string name="location_common_한경">Hangye\n-ong</string>
     <string name="location_common_구좌">Gujwa</string>
     <string name="location_common_한림">Hallim</string>
     <string name="location_common_우도">Udo</string>
     <string name="location_common_추자">Chuja</string>
-    <string name="location_common_서귀포시">Seogw-ipo City</string>
+    <string name="location_common_서귀포시">Seogw\n-ipo City</string>
     <string name="location_common_대정">Daejeong</string>
     <string name="location_common_안덕">Andeok</string>
     <string name="location_common_남원">Namwon</string>
@@ -158,6 +173,7 @@
 
     <!--정보 수정 제안-->
     <string name="info_modification_proposal_정보_수정_제안">Cadangan Pembetulan</string>
+    <string name="info_modification_proposal_정보_수정_제안2">Cadangan Pembetulan</string>
     <string name="info_modification_proposal_heading1">Sila berikan cadangan maklumat yang perlu dibetulkan.</string>
     <string name="info_modification_proposal_text1">Jika foto yang dilampirkan untuk cadangan lokasi membantu mengesahkan maklumat lokasi, anda boleh mendapat faedah.</string>
     <string name="info_modification_proposal_전화번호_및_홈페이지">Nombor Telefon &amp; Laman Web</string>
@@ -169,12 +185,13 @@
     <string name="info_modification_proposal_제공_서비스">Perkhidmatan yang Disediakan</string>
     <string name="info_modification_proposal_사진_추가하기">Tambah Gambar</string>
     <string name="info_modification_proposal_text2">Jika anda melampirkan maklumat yang disahkan\nbersama foto, maklumat yang lebih tepat akan\ndilengkapkan.</string>
+    <string name="info_modification_proposal_heading3">Cadangan Pembetulan Maklumat</string>
     <string name="info_modification_proposal_hint1">Sila lampirkan gambar bersama dengan maklumat yang telah disahkan untuk melengkapkan maklumat yang lebih tepat</string>
     <string name="info_modification_proposal_text3">Sila tinggalkan komen jika ada butiran mengenai item yang anda minta untuk diubah atau apa-apa isu lain</string>
     <string name="info_modification_proposal_hint2">example@gmail.com</string>
     <string name="info_modification_proposal_보내기">Hantar</string>
-    <string name="info_modification_proposal_heading3">Terima kasih atas cadangan pembetulan maklumat anda</string>
-    <string name="info_modification_proposal_text4">Dengan cadangan pembetulan maklumat, daya tarikan destinasi pelancongan turut meningkat!\n\nSemakin dinanti-nantikan🧚‍♀️</string>
+    <string name="info_modification_proposal_heading4">Terima kasih atas cadangan pembetulan maklumat anda</string>
+    <string name="info_modification_proposal_text4">Dengan cadangan pembetulan maklumat,\ndaya tarikan destinasi pelancongan turut\nmeningkat!\n\nSemakin dinanti-nantikan🧚‍♀️</string>
     <string name="info_modification_proposal_button1">Tengok Kandungan Semula</string>
     <string name="info_modification_proposal_button2">Tambah Item Lain</string>
     <string name="info_modification_proposal_warning">Format e-mel tidak betul. Sila masukkan semula!</string>
@@ -259,16 +276,16 @@
     <string name="type_test_screen_text1">""</string>
     <string name="type_test_screen_text2">Apakah gaya perjalanan yang\ningin dilakukan?</string>
     <string name="type_test_screen_text3">Jus Tangerin Sedang Diperah...</string>
-    <string name="type_test_screen_text4">Jus Perjalanan yang Sedap Akan Segera Tersedia!</string>
+    <string name="type_test_screen_text4">Jus Perjalanan yang Sedap Akan\nSegera Tersedia!</string>
     <string name="type_test_screen_text5">" adalah"</string>
-    <string name="type_test_screen_text6">nanaland in Jeju telah membuat jus perjalanan khas untuk anda!</string>
+    <string name="type_test_screen_text6">nanaland in Jeju telah membuat jus perjalanan\nkhas untuk anda!</string>
     <string name="type_test_screen_button1">\nDestinasi Perjalanan</string>
     <string name="type_test_screen_button2">Terus ke Laman Utama</string>
     <string name="type_test_screen_lets_go">Let\'s Go!</string>
 
     <!--여행지 유형 테스트 추천 여행지 화면-->
-    <string name="type_test_recommended_spot_text1">""</string>
-    <string name="type_test_recommended_spot_text2">""</string>
+    <string name="type_test_recommended_spot_text1">"Disyorkan untuk "</string>
+    <string name="type_test_recommended_spot_text2">Destinasi Pelancongan</string>
     <string name="type_test_recommended_spot_추천_여행지">Destinasi\nPelancongan Disyorkan</string>
 
     <!--언어 설정 화면-->
@@ -288,7 +305,7 @@
     <string name="settings_screen_회원_탈퇴">Daftar keluar</string>
 
     <!--로그아웃 다이얼로그-->
-    <string name="sign_out_dialog_text">Adakah anda benar-benar ingin log keluar?</string>
+    <string name="sign_out_dialog_text">Adakah anda benar\n-benar ingin log keluar?</string>
 
     <!--마이페이지 화면-->
     <string name="mypage_screen_프로필_수정">Ubah Profil</string>
@@ -302,10 +319,11 @@
     <!--프로필 수정 화면-->
     <string name="profile_update_screen_프로필_수정">Ubah Profil</string>
     <string name="profile_update_screen_수정_완료">Pembetulan selesai</string>
+    <string name="profile_update_screen_warning">소개글은 70자 이내로 작성 가능합니다.</string>
 
     <!--프로필 수정 화면 다이얼로그-->
     <string name="profile_update_dialog_text1">Adakah anda ingin\nmemadam perubahan?</string>
-    <string name="profile_update_dialog_text2">Kembali sekarang akan memadamkan perubahan.</string>
+    <string name="profile_update_dialog_text2">Kembali sekarang akan memadamkan\nperubahan.</string>
 
     <!--언어 초기화 화면-->
     <string name="profile_initialization_screen_hello">안녕하세요!</string>
@@ -317,11 +335,11 @@
     <!--회원 탈퇴 화면-->
     <string name="withdrawal_screen_회원탈퇴">Pengeluaran Ahli</string>
     <string name="withdrawal_screen_heading1">Panduan Penarikan Servis</string>
-    <string name="withdrawal_screen_text1">1. Jika anda menarik diri dari perkhidmatan ini, semua perkhidmatan yang disediakan berdasarkan nanaland in Jeju akan ditamatkan dan dihapuskan.</string>
-    <string name="withdrawal_screen_text2">2. Jika anda menarik diri, semua kupon dan mata yang anda miliki akan dihapuskan secara automatik dan tidak akan dipulihkan jika anda mendaftar semula.</string>
-    <string name="withdrawal_screen_text3">3. Rekod transaksi yang perlu disimpan menurut undang-undang e-dagang akan disimpan selama 5 tahun selepas menarik diri daripada perkhidmatan.</string>
-    <string name="withdrawal_screen_text4">4. Anda tidak boleh menyertai semula acara pendaftaran ahli selepas menarik diri.</string>
-    <string name="withdrawal_screen_text5">5. Jika anda mendaftar kembali dalam 90 hari selepas penarikan diri, anda boleh menggunakan akaun lama anda.</string>
+    <string name="withdrawal_screen_text1">1. Jika anda menarik diri dari perkhidmatan ini, semua\nperkhidmatan yang disediakan berdasarkan nanaland in Jeju\nakan ditamatkan dan dihapuskan.</string>
+    <string name="withdrawal_screen_text2">2. Jika anda menarik diri, semua kupon dan mata yang anda\nmiliki akan dihapuskan secara automatik dan tidak akan\ndipulihkan jika anda mendaftar semula.</string>
+    <string name="withdrawal_screen_text3">3. Rekod transaksi yang perlu disimpan menurut undang\n-undang e-dagang akan disimpan selama 5 tahun selepas\nmenarik diri daripada perkhidmatan.</string>
+    <string name="withdrawal_screen_text4">4. Anda tidak boleh menyertai semula acara pendaftaran ahli\nselepas menarik diri.</string>
+    <string name="withdrawal_screen_text5">5. Jika anda mendaftar kembali dalam 90 hari selepas penarikan\ndiri, anda boleh menggunakan akaun lama anda.</string>
     <string name="withdrawal_screen_heading2">Sebab Penarikan Perkhidmatan</string>
     <string name="withdrawal_screen_reason1">Kandungan Tidak Cukup</string>
     <string name="withdrawal_screen_reason2">Ketidakselesaan Penggunaan Servis</string>
@@ -331,7 +349,7 @@
     <string name="withdrawal_screen_warning">Saya telah membaca dan\nbersetuju dengan panduan ini</string>
 
     <!--회원 탈퇴 다이얼로그-->
-    <string name="withdrawal_dialog_text1">Betul-betul tidak mahu menerima maklumat dan tawaran perjalanan ke Jeju?😢</string>
+    <string name="withdrawal_dialog_text1">Betul-betul tidak mahu\nmenerima maklumat dan\ntawaran perjalanan ke Jeju?😢</string>
     <string name="withdrawal_dialog_text2">*Jika menyertai semula dalam masa 90 hari,</string>
 
     <!--접근 권한 안내 화면-->

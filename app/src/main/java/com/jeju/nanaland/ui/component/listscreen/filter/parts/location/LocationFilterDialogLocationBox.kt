@@ -12,10 +12,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.jeju.nanaland.ui.theme.NanaLandTheme
 import com.jeju.nanaland.ui.theme.body01
+import com.jeju.nanaland.ui.theme.body02
 import com.jeju.nanaland.ui.theme.getColor
+import com.jeju.nanaland.util.language.getLanguage
 import com.jeju.nanaland.util.ui.ComponentPreview
 import com.jeju.nanaland.util.ui.clickableNoEffect
 
@@ -46,7 +49,11 @@ fun LocationFilterDialogLocationBox(
         Text(
             text = locationName ?: "",
             color = getColor().gray01,
-            style = body01
+            style = when (getLanguage()) {
+                "en", "ms" -> body02
+                else -> body01
+            },
+            textAlign = TextAlign.Center
         )
     }
 }

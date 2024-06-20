@@ -4,6 +4,7 @@ plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
     id("com.google.dagger.hilt.android")
+    id("kotlin-parcelize")
     id("kotlin-kapt")
 }
 
@@ -11,11 +12,18 @@ android {
     namespace = "com.jeju.nanaland"
     compileSdk = 34
 
+    // 설정하지 않으면, 플레이스토어에 배포할 때 리소스 관련(언어별 string) 문제가 발생할 수 있다.
+    bundle {
+        language {
+            enableSplit = false
+        }
+    }
+
     defaultConfig {
         applicationId = "com.jeju.nanaland"
         minSdk = 24
         targetSdk = 34
-        versionCode = 16
+        versionCode = 21
         versionName = "1.0.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
@@ -29,6 +37,8 @@ android {
     buildTypes {
         release {
             isMinifyEnabled = false
+//            isShrinkResources = false
+//            isDebuggable = true
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"

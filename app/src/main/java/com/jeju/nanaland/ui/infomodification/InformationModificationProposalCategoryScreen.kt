@@ -39,7 +39,7 @@ private fun InformationModificationProposalCategoryScreen(
 ) {
     CustomSurface {
         CustomTopBar(
-            title = getString(R.string.info_modification_proposal_정보_수정_제안),
+            title = getString(R.string.info_modification_proposal_정보_수정_제안2),
             onBackButtonClicked = moveToBackScreen
         )
 

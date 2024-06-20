@@ -22,6 +22,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.jeju.nanaland.R
 import com.jeju.nanaland.domain.entity.festival.FestivalThumbnailData
 import com.jeju.nanaland.globalvalue.constant.PAGING_THRESHOLD
+import com.jeju.nanaland.globalvalue.constant.getLocationIdx
 import com.jeju.nanaland.globalvalue.constant.getLocationList
 import com.jeju.nanaland.globalvalue.type.AnchoredDraggableContentState
 import com.jeju.nanaland.globalvalue.type.FestivalCategoryType
@@ -40,6 +41,7 @@ import com.jeju.nanaland.ui.component.listscreen.filter.getLocationAnchoredDragg
 import com.jeju.nanaland.ui.component.listscreen.filter.getSeasonAnchoredDraggableState
 import com.jeju.nanaland.ui.component.listscreen.list.FestivalThumbnailList
 import com.jeju.nanaland.ui.theme.NanaLandTheme
+import com.jeju.nanaland.util.listfilter.ListFilter
 import com.jeju.nanaland.util.resource.getString
 import com.jeju.nanaland.util.ui.ScreenPreview
 import com.jeju.nanaland.util.ui.UiState
@@ -48,6 +50,7 @@ import java.util.Calendar
 
 @Composable
 fun FestivalListScreen(
+    filter: ListFilter?,
     moveToBackScreen: () -> Unit,
     moveToFestivalContentScreen: (Long) -> Unit,
     moveToSignInScreen: () -> Unit,
@@ -60,6 +63,26 @@ fun FestivalListScreen(
     val endCalendar = viewModel.endCalendar.collectAsState().value
     val festivalThumbnailList = viewModel.festivalThumbnailList.collectAsState().value
     val festivalThumbnailCount = viewModel.festivalThumbnailCount.collectAsState().value
+
+    LaunchedEffect(Unit) {
+        if (filter?.filter != null) {
+            val startYear = filter.filter!!.split("~")[0].split(".")[0]
+            val startMonth = filter.filter!!.split("~")[0].split(".")[1]
+            val startDate = filter.filter!!.split("~")[0].split(".")[2]
+            val endYear = filter.filter!!.split("~")[1].split(".")[0]
+            val endMonth = filter.filter!!.split("~")[1].split(".")[1]
+            val endDate = filter.filter!!.split("~")[1].split(".")[2]
+            viewModel.updateStartCalendar(Calendar.getInstance().apply {
+                set(startYear.toInt(), startMonth.toInt() - 1, startDate.toInt())
+            })
+            viewModel.updateEndCalendar(Calendar.getInstance().apply {
+                set(endYear.toInt(), endMonth.toInt() - 1, endDate.toInt())
+            })
+            filter.filter = null
+        }
+        viewModel.getMonthlyFestivalList()
+    }
+
     FestivalListScreen(
         selectedCategoryType = selectedCategoryType,
         updateSelectedCategoryType = viewModel::updateSelectedCategoryType,

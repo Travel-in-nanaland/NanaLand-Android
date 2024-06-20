@@ -15,6 +15,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.jeju.nanaland.R
 import com.jeju.nanaland.ui.theme.body01
+import com.jeju.nanaland.ui.theme.body02
 import com.jeju.nanaland.ui.theme.getColor
 import com.jeju.nanaland.util.resource.getString
 import com.jeju.nanaland.util.ui.clickableNoEffect
@@ -30,7 +31,7 @@ fun LocationFilterDialogSelectAllButton(onClick: () -> Unit) {
         horizontalArrangement = Arrangement.Center
     ) {
         Image(
-            modifier = Modifier.size(24.dp),
+            modifier = Modifier.size(20.dp),
             painter = painterResource(R.drawable.ic_check),
             contentDescription = null
         )
@@ -40,7 +41,7 @@ fun LocationFilterDialogSelectAllButton(onClick: () -> Unit) {
         Text(
             text = getString(R.string.location_filter_dialog_전체선택),
             color = getColor().black,
-            style = body01
+            style = body02
         )
     }
 }

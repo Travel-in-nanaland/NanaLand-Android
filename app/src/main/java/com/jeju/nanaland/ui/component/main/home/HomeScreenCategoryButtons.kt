@@ -6,12 +6,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import com.jeju.nanaland.R
 import com.jeju.nanaland.ui.component.main.home.parts.HomeScreenCategoryButton
+import com.jeju.nanaland.util.listfilter.ListFilter
 import com.jeju.nanaland.util.resource.getString
 
 @Composable
 fun HomeScreenCategoryButtons(
-    moveToNatureListScreen: () -> Unit,
-    moveToFestivalListScreen: () -> Unit,
+    moveToNatureListScreen: (ListFilter) -> Unit,
+    moveToFestivalListScreen: (ListFilter) -> Unit,
     moveToMarketListScreen: () -> Unit,
     moveToExperienceScreen: () -> Unit,
     moveToNanaPickListScreen: () -> Unit,
@@ -20,13 +21,13 @@ fun HomeScreenCategoryButtons(
         HomeScreenCategoryButton(
             resId = R.drawable.img_nature,
             text = getString(R.string.common_7대_자연),
-            onClick = moveToNatureListScreen
+            onClick = { moveToNatureListScreen(ListFilter()) }
         )
         Spacer(Modifier.weight(1f))
         HomeScreenCategoryButton(
             resId = R.drawable.img_festival,
             text = getString(R.string.common_축제),
-            onClick = moveToFestivalListScreen
+            onClick = { moveToFestivalListScreen(ListFilter()) }
         )
         Spacer(Modifier.weight(1f))
         HomeScreenCategoryButton(

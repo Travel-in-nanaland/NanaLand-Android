@@ -76,7 +76,7 @@ fun LocationFilterBottomDialog(
     Column(
         modifier = Modifier
             .fillMaxWidth()
-            .height(620.dp)
+            .height(630.dp)
             .offset {
                 IntOffset(
                     x = 0,

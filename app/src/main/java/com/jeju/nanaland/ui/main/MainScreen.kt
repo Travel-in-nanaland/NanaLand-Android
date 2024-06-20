@@ -20,6 +20,7 @@ import androidx.compose.material3.NavigationBarItemDefaults
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -45,16 +46,20 @@ import com.jeju.nanaland.ui.main.mypage.MyPageScreen
 import com.jeju.nanaland.ui.theme.NanaLandTheme
 import com.jeju.nanaland.ui.theme.caption02
 import com.jeju.nanaland.ui.theme.getColor
+import com.jeju.nanaland.util.intent.DeepLinkData
+import com.jeju.nanaland.util.listfilter.ListFilter
 import com.jeju.nanaland.util.resource.getString
 import com.jeju.nanaland.util.ui.drawColoredShadow
 import kotlinx.coroutines.flow.emptyFlow
 
 @Composable
 fun MainScreen(
+    deepLinkData: DeepLinkData,
+    moveToNotificationScreen: () -> Unit,
     moveToCategoryContentScreen: (Long, String?, Boolean) -> Unit,
     moveToNanaPickListScreen: () -> Unit,
-    moveToNatureListScreen: () -> Unit,
-    moveToFestivalListScreen: () -> Unit,
+    moveToNatureListScreen: (ListFilter) -> Unit,
+    moveToFestivalListScreen: (ListFilter) -> Unit,
     moveToMarketListScreen: () -> Unit,
     moveToExperienceListScreen: () -> Unit,
     moveToSettingsScreen: () -> Unit,
@@ -66,6 +71,30 @@ fun MainScreen(
     searchViewModel: SearchViewModel = hiltViewModel(),
     favoriteViewModel: FavoriteViewModel = hiltViewModel()
 ) {
+    LaunchedEffect(Unit) {
+        if (deepLinkData.contentId != null) {
+            val language = deepLinkData.language
+            val category = deepLinkData.category
+            val contentId = deepLinkData.contentId
+            deepLinkData.language = null
+            deepLinkData.category = null
+            deepLinkData.contentId = null
+            when (category) {
+                "nature" -> {
+                    moveToCategoryContentScreen(contentId ?: 0, "NATURE", false)
+                }
+                "festival" -> {
+                    moveToCategoryContentScreen(contentId ?: 0, "FESTIVAL", false)
+                }
+                "market" -> {
+                    moveToCategoryContentScreen(contentId ?: 0, "MARKET", false)
+                }
+                else -> {
+                    moveToCategoryContentScreen(contentId ?: 0, "NANAPICK", false)
+                }
+            }
+        }
+    }
     val viewType = viewModel.viewType.collectAsState().value
     val prevViewType = viewModel.prevViewType.collectAsState().value
     val navigationItemContentList = viewModel.getNavigationItemContentList()
@@ -82,6 +111,7 @@ fun MainScreen(
         initFavoriteScreen = {
             favoriteViewModel.updateSelectedCategoryType(SearchCategoryType.All)
         },
+        moveToNotificationScreen = moveToNotificationScreen,
         moveToCategoryContentScreen = moveToCategoryContentScreen,
         moveToNanaPickListScreen = moveToNanaPickListScreen,
         moveToNatureListScreen = moveToNatureListScreen,
@@ -105,10 +135,11 @@ private fun MainScreen(
     updateMainScreenViewType: (MainScreenViewType) -> Unit,
     initHomeScreen: () -> Unit,
     initFavoriteScreen: () -> Unit,
+    moveToNotificationScreen: () -> Unit,
     moveToCategoryContentScreen: (Long, String?, Boolean) -> Unit,
     moveToNanaPickListScreen: () -> Unit,
-    moveToNatureListScreen: () -> Unit,
-    moveToFestivalListScreen: () -> Unit,
+    moveToNatureListScreen: (ListFilter) -> Unit,
+    moveToFestivalListScreen: (ListFilter) -> Unit,
     moveToMarketListScreen: () -> Unit,
     moveToExperienceListScreen: () -> Unit,
     moveToSettingsScreen: () -> Unit,
@@ -141,6 +172,7 @@ private fun MainScreen(
                 when (viewType) {
                     MainScreenViewType.Home -> {
                         HomeScreen(
+                            moveToNotificationScreen = moveToNotificationScreen,
                             moveToCategoryContentScreen = moveToCategoryContentScreen,
                             moveToNanaPickListScreen = moveToNanaPickListScreen,
                             moveToNatureListScreen = moveToNatureListScreen,

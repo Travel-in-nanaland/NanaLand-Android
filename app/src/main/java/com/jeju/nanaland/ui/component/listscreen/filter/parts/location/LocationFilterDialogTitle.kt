@@ -6,6 +6,7 @@ import com.jeju.nanaland.R
 import com.jeju.nanaland.ui.theme.NanaLandTheme
 import com.jeju.nanaland.ui.theme.getColor
 import com.jeju.nanaland.ui.theme.largeTitle02
+import com.jeju.nanaland.ui.theme.title02Bold
 import com.jeju.nanaland.util.resource.getString
 import com.jeju.nanaland.util.ui.ComponentPreview
 
@@ -14,7 +15,7 @@ fun LocationFilterDialogTitle() {
     Text(
         text = getString(R.string.location_filter_dialog_지역),
         color = getColor().black,
-        style = largeTitle02
+        style = title02Bold
     )
 }
 

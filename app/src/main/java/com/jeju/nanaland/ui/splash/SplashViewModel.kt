@@ -11,9 +11,11 @@ import com.jeju.nanaland.domain.usecase.authdatastore.SaveAccessTokenUseCase
 import com.jeju.nanaland.domain.usecase.authdatastore.SaveRefreshTokenUseCase
 import com.jeju.nanaland.domain.usecase.member.GetUserProfileUseCase
 import com.jeju.nanaland.domain.usecase.settingsdatastore.GetValueUseCase
+import com.jeju.nanaland.domain.usecase.settingsdatastore.SaveValueUseCase
 import com.jeju.nanaland.globalvalue.constant.KEY_LANGUAGE
 import com.jeju.nanaland.globalvalue.type.SplashCheckingState
 import com.jeju.nanaland.globalvalue.userdata.UserData
+import com.jeju.nanaland.util.intent.DeepLinkData
 import com.jeju.nanaland.util.language.customContext
 import com.jeju.nanaland.util.log.LogUtil
 import com.jeju.nanaland.util.network.NetworkManager
@@ -41,6 +43,7 @@ class SplashViewModel @Inject constructor(
     private val saveAccessTokenUseCase: SaveAccessTokenUseCase,
     private val saveRefreshTokenUseCase: SaveRefreshTokenUseCase,
     private val getUserProfileUseCase: GetUserProfileUseCase,
+    private val saveValueUseCase: SaveValueUseCase,
     private val application: Application,
 ) : AndroidViewModel(application) {
 
@@ -48,10 +51,6 @@ class SplashViewModel @Inject constructor(
     val checkingState = _checkingState.asStateFlow()
     private val _isNetworkConnected = MutableStateFlow(false)
     val isNetworkConnected = _isNetworkConnected.asStateFlow()
-
-    fun updateCheckingState(state: SplashCheckingState) {
-        _checkingState.update { state }
-    }
 
     fun checkNetworkState() {
         _isNetworkConnected.update { networkManager.isNetworkConnected }
@@ -61,12 +60,24 @@ class SplashViewModel @Inject constructor(
     }
 
     fun checkLanguageState(
+        deepLinkData: DeepLinkData,
         moveToLanguageInitScreen: () -> Unit
     ) {
         getValueUseCase(KEY_LANGUAGE)
             .onEach {
                 if (it.isNullOrEmpty()) {
-                    moveToLanguageInitScreen()
+                    if (deepLinkData.language != null) {
+                        viewModelScope.launch { saveValueUseCase(
+                            key = KEY_LANGUAGE,
+                            value = deepLinkData.language!!
+                        ) }
+                        val conf: Configuration = application.resources.configuration
+                        conf.setLocale(Locale(deepLinkData.language!!))
+                        customContext = application.createConfigurationContext(conf)
+                        _checkingState.update { SplashCheckingState.Authorization }
+                    } else {
+                        moveToLanguageInitScreen()
+                    }
                     LogUtil.e("checkLanguageState", "언어 선택 안됨")
                 } else {
                     val conf: Configuration = application.resources.configuration

@@ -48,7 +48,7 @@ private fun LanguageChangeScreen(
     val isConfirmDialogShowing = remember { mutableStateOf(false) }
     CustomSurface {
         CustomTopBar(
-            title = "언어 설정",
+            title = getString(R.string.settings_screen_언어_설정),
             onBackButtonClicked = { moveToBackScreen() }
         )
 

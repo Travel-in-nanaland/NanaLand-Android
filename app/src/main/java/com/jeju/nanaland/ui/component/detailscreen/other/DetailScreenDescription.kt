@@ -58,7 +58,7 @@ fun DetailScreenDescription(
             .animateContentSize()
     ) {
         Column(
-            modifier = Modifier.padding(start = 16.dp, top = 28.dp, end = 16.dp, bottom = 16.dp)
+            modifier = Modifier.padding(start = 16.dp, top = 36.dp, end = 16.dp, bottom = 16.dp)
         ) {
             TagChip1(text = tag)
 
@@ -66,7 +66,7 @@ fun DetailScreenDescription(
 
             DetailScreenDescriptionTitle(text = title)
 
-            Spacer(Modifier.height(4.dp))
+            Spacer(Modifier.height(8.dp))
 
             DetailScreenDescriptionContent(
                 isMoreOpen = isMoreOpen.value,
@@ -95,7 +95,7 @@ fun DetailScreenDescription(
                 moveToSignInScreen = moveToSignInScreen
             )
 
-            Spacer(Modifier.width(8.dp))
+            Spacer(Modifier.width(12.dp))
 
             DetailScreenShareButton { onShareButtonClicked() }
         }

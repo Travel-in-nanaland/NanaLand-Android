@@ -250,8 +250,4 @@ class FestivalListViewModel @Inject constructor(
             }
         }
     }
-
-    init {
-        getMonthlyFestivalList()
-    }
 }

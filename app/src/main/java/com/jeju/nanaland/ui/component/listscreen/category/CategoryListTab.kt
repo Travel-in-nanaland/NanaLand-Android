@@ -17,7 +17,7 @@ fun CategoryListTab(
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .height(32.dp)
+            .height(40.dp)
     ) {
         repeat(3) {
             CategoryBox(

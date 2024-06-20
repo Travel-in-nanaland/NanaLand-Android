@@ -2,9 +2,9 @@ package com.jeju.nanaland
 
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.provider.Settings
-import android.util.Log
 import android.view.WindowManager
 import android.widget.Toast
 import androidx.activity.ComponentActivity
@@ -28,9 +28,8 @@ import com.jeju.nanaland.globalvalue.constant.TOTAL_SCREEN_HEIGHT
 import com.jeju.nanaland.ui.MainNavigation
 import com.jeju.nanaland.ui.theme.NanaLandTheme
 import com.jeju.nanaland.ui.theme.getColor
-import com.jeju.nanaland.util.language.customContext
+import com.jeju.nanaland.util.intent.DeepLinkData
 import com.jeju.nanaland.util.log.LogUtil
-import com.kakao.sdk.common.util.Utility
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -49,22 +48,26 @@ class MainActivity : ComponentActivity() {
             WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS
         )
 
-        LogUtil.e("", "${Settings.Secure.getString(contentResolver, Settings.Secure.ANDROID_ID)}")
+        onBackPressedDispatcher.addCallback(this, onBackPressedCallback)
 
-        val deepLintIntent = intent
-        if (Intent.ACTION_VIEW == deepLintIntent.action) {
+        val deepLinkData = DeepLinkData()
+        LogUtil.e("deepLink", "${intent}")
+        if (Intent.ACTION_VIEW == intent.action) {
             val data = intent.data
             LogUtil.e("deepLink", "${data}")
             val category = data?.getQueryParameter("category") ?: ""
             LogUtil.e("deepLink", "${category}")
             val id = data?.getQueryParameter("id") ?: ""
             LogUtil.e("deepLink", "${id}")
+            val language = data?.getQueryParameter("lang") ?: ""
+            LogUtil.e("deepLink", "${language}")
+            deepLinkData.language = language
+            deepLinkData.category = category
+            deepLinkData.contentId = id.toLong()
         }
 //
 //        val keyHash = Utility.getKeyHash(this)
 //        Toast.makeText(this, keyHash, Toast.LENGTH_LONG).show()
-
-        onBackPressedDispatcher.addCallback(this, onBackPressedCallback)
 
         // 개발용 액세스 토큰
 //        viewModel.saveAccessToken("aa")
@@ -91,7 +94,9 @@ class MainActivity : ComponentActivity() {
                             updateScreenSizeValue(it.size, density)
                         },
                 ) {
-                    MainNavigation()
+                    MainNavigation(
+                        deepLinkData = deepLinkData
+                    )
                 }
             }
         }

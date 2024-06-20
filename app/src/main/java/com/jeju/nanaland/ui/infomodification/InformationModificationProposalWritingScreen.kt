@@ -93,7 +93,7 @@ private fun InformationModificationProposalWritingScreen(
 
     CustomSurface {
         CustomTopBar(
-            title = getString(R.string.info_modification_proposal_정보_수정_제안),
+            title = getString(R.string.info_modification_proposal_정보_수정_제안2),
             onBackButtonClicked = moveToBackScreen
         )
 
@@ -119,7 +119,7 @@ private fun InformationModificationProposalWritingScreen(
                 Spacer(Modifier.height(24.dp))
 
                 Column(Modifier.padding(start = 16.dp, end = 16.dp)) {
-                    InfoModificationProposalWritingScreenHeading(text = getString(R.string.info_modification_proposal_정보_수정_제안))
+                    InfoModificationProposalWritingScreenHeading(text = getString(R.string.info_modification_proposal_heading3))
 
                     Spacer(Modifier.height(8.dp))
 
@@ -154,7 +154,7 @@ private fun InformationModificationProposalWritingScreen(
 
             item {
                 InfoModificationProposalWritingScreenBottomButton(
-                    isActivated = (imageUri != null && inputDescription.isNotEmpty() && inputEmail.isNotEmpty()),
+                    isActivated = (inputDescription.isNotEmpty() && inputEmail.isNotEmpty() && inputEmailState == InputEmailState.Idle),
                     onClick = { sendReport(moveToCompleteScreen) }
                 )
 

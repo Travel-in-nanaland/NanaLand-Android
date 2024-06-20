@@ -14,6 +14,21 @@
         <item>일</item>
     </string-array>
 
+    <string-array name="month_name">
+        <item>1월</item>
+        <item>2월</item>
+        <item>3월</item>
+        <item>4월</item>
+        <item>5월</item>
+        <item>6월</item>
+        <item>7월</item>
+        <item>8월</item>
+        <item>9월</item>
+        <item>10월</item>
+        <item>11월</item>
+        <item>12월</item>
+    </string-array>
+
     <string name="cancel">Cancel</string>
     <string name="done">Done</string>
     <string name="title_time_picker">Select Time</string>
@@ -52,6 +67,7 @@
     <string name="common_아니오">아니오</string>
     <string name="common_필수">(필수)</string>
     <string name="common_선택">(선택)</string>
+    <string name="common_알림">알림</string>
 
     <!--로그인 화면-->
     <string name="sign_in_screen_로그인_없이_둘러보기">로그인 없이 둘러보기</string>
@@ -67,7 +83,7 @@
     <string name="home_screen_ad4_title">제주도에서만 여는 7월 축제🎈</string>
     <string name="home_screen_ad4_content">세계의 보물, 제주도가 가득 느껴지는 축제 보러가자</string>
     <string name="home_screen_recommend1">""</string>
-    <string name="home_screen_recommend2">님을 위한 도민 추천 🍊</string>
+    <string name="home_screen_recommend2">" 님을 위한 도민 추천 🍊"</string>
 
     <string-array name="home_screen_hint">
         <item>제주도는 지금 유채꽃 축제🏵️</item>
@@ -157,6 +173,7 @@
 
     <!--정보 수정 제안-->
     <string name="info_modification_proposal_정보_수정_제안">정보 수정 제안</string>
+    <string name="info_modification_proposal_정보_수정_제안2">정보 수정 제안</string>
     <string name="info_modification_proposal_heading1">수정해야 할 정보를 제안해 주세요!</string>
     <string name="info_modification_proposal_text1">장소 제안 시 첨부한 사진이 장소 정보 확인에\n도움이 되면 혜택을 받을 수 있어요.</string>
     <string name="info_modification_proposal_전화번호_및_홈페이지">전화번호 및 홈페이지</string>
@@ -168,11 +185,12 @@
     <string name="info_modification_proposal_제공_서비스">제공 서비스</string>
     <string name="info_modification_proposal_사진_추가하기">사진 추가하기</string>
     <string name="info_modification_proposal_text2">실제 확인한 정보를 사진과 함께 첨부해주시면,\n좀 더 정확한 정보가 완성되어요</string>
+    <string name="info_modification_proposal_heading3">정보 수정 제안</string>
     <string name="info_modification_proposal_hint1">수정 요청하신 항목의 상세 내용이나 그 외 기타 사항이 있으시면 의견을 남겨주세요.</string>
     <string name="info_modification_proposal_text3">정보 수정 제안 결과를 받을 이메일을 입력해주세요</string>
     <string name="info_modification_proposal_hint2">example@gmail.com</string>
     <string name="info_modification_proposal_보내기">보내기</string>
-    <string name="info_modification_proposal_heading3">정보 수정 제안 감사드립니다</string>
+    <string name="info_modification_proposal_heading4">정보 수정 제안 감사드립니다</string>
     <string name="info_modification_proposal_text4">정보 수정 제안으로\n여행지의 매력도 함께 올라갔어요!\n\n점점 기대될 것 같아요🧚‍♀️</string>
     <string name="info_modification_proposal_button1">콘텐츠 다시 보러 가기</string>
     <string name="info_modification_proposal_button2">다른 항목 추가하기</string>
@@ -301,6 +319,7 @@
     <!--프로필 수정 화면-->
     <string name="profile_update_screen_프로필_수정">프로필 수정</string>
     <string name="profile_update_screen_수정_완료">수정 완료</string>
+    <string name="profile_update_screen_warning">소개글은 70자 이내로 작성 가능합니다.</string>
 
     <!--프로필 수정 화면 다이얼로그-->
     <string name="profile_update_dialog_text1">변경 내용을\n삭제하시겠습니까?</string>

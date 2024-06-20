@@ -10,10 +10,12 @@ import com.jeju.nanaland.globalvalue.constant.ROUTE_NATURE_CONTENT
 import com.jeju.nanaland.globalvalue.constant.ROUTE_NATURE_LIST
 import com.jeju.nanaland.globalvalue.constant.ROUTE_SIGN_IN
 import com.jeju.nanaland.ui.nature.NatureListScreen
+import com.jeju.nanaland.util.listfilter.ListFilter
 import com.jeju.nanaland.util.navigation.navigate
 
 fun NavGraphBuilder.natureListScreen(navController: NavController) = composable(route = ROUTE_NATURE_LIST) {
     NatureListScreen(
+        filter = it.arguments?.getParcelable("filter") as? ListFilter,
         moveToBackScreen = { navController.popBackStack() },
         moveToNatureContentScreen = { contentId ->
             val bundle = bundleOf(

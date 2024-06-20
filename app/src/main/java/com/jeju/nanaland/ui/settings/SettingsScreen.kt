@@ -1,13 +1,17 @@
 package com.jeju.nanaland.ui.settings
 
+import android.os.Build
+import android.widget.Toast
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.jeju.nanaland.BuildConfig
@@ -21,6 +25,7 @@ import com.jeju.nanaland.ui.component.settings.SettingsScreenHorizontalDivider
 import com.jeju.nanaland.ui.component.settings.SettingsScreenTopBar
 import com.jeju.nanaland.ui.component.settings.SettingsScreenVersionText
 import com.jeju.nanaland.ui.component.signout.SignOutConfirmDialog
+import com.jeju.nanaland.util.log.LogUtil
 import com.jeju.nanaland.util.resource.getString
 
 @Composable
@@ -59,8 +64,10 @@ private fun SettingsScreen(
     moveToSignInScreen: () -> Unit,
     isContent: Boolean
 ) {
+    val context = LocalContext.current
     val isSignOutDialogShowing = remember { mutableStateOf(false) }
     val isNonMemberGuideDialogShowing = remember { mutableStateOf(false) }
+    val versionClickedCount = remember { mutableIntStateOf(0) }
 
     CustomSurface {
         SettingsScreenTopBar {
@@ -99,7 +106,16 @@ private fun SettingsScreen(
         ) {
             SettingsScreenCategoryItem(
                 text = getString(R.string.settings_screen_버전_정보),
-                onClick = {}
+                onClick = {
+                    versionClickedCount.value++
+                    if (versionClickedCount.value >= 20) {
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+                            Toast.makeText(context, "${context.packageManager.getPackageInfo(context.packageName, 0).longVersionCode}", Toast.LENGTH_SHORT).show()
+                        } else {
+                            Toast.makeText(context, "${context.packageManager.getPackageInfo(context.packageName, 0).versionCode}", Toast.LENGTH_SHORT).show()
+                        }
+                    }
+                }
             )
 
             SettingsScreenVersionText(BuildConfig.VERSION_NAME)

@@ -19,8 +19,10 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.jeju.nanaland.R
+import com.jeju.nanaland.ui.theme.appleSdGothicNeo
 import com.jeju.nanaland.ui.theme.getColor
 import com.jeju.nanaland.ui.theme.nanumPen
+import com.jeju.nanaland.util.language.getLanguage
 import com.jeju.nanaland.util.resource.getString
 import com.jeju.nanaland.util.ui.drawColoredShadow
 
@@ -46,7 +48,10 @@ fun NanaPickContentAttractivePoint() {
 
         Text(
             text = getString(R.string.detail_screen_common_이_장소만의_매력_포인트),
-            fontFamily = nanumPen,
+            fontFamily = when (getLanguage()) {
+                "zh" -> appleSdGothicNeo
+                else -> nanumPen
+            },
             fontSize = 20.sp,
             color = getColor().main
         )

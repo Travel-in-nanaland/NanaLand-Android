@@ -8,9 +8,14 @@ import com.jeju.nanaland.globalvalue.constant.ROUTE_MAIN
 import com.jeju.nanaland.globalvalue.constant.ROUTE_SIGN_IN
 import com.jeju.nanaland.globalvalue.constant.ROUTE_SPLASH
 import com.jeju.nanaland.ui.splash.SplashScreen
+import com.jeju.nanaland.util.intent.DeepLinkData
 
-fun NavGraphBuilder.splashScreen(navController: NavController) = composable(route = ROUTE_SPLASH) {
+fun NavGraphBuilder.splashScreen(
+    deepLinkData: DeepLinkData,
+    navController: NavController
+) = composable(route = ROUTE_SPLASH) {
     SplashScreen(
+        deepLinkData = deepLinkData,
         moveToMainScreen = {
             navController.navigate(ROUTE_MAIN) {
                 popUpTo(ROUTE_SPLASH) { inclusive = true }

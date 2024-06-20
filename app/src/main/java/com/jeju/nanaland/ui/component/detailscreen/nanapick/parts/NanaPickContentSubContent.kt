@@ -31,40 +31,50 @@ fun NanaPickContentSubContent(
     tagList: List<String?>
 ) {
     Column {
-        Row(
-            verticalAlignment = Alignment.Bottom
-        ) {
+        NanaPickContentSubContentSubTitle(text = subTitle)
+
+        Spacer(Modifier.height(4.dp))
+
+        Row {
             NanaPickContentSubContentNumber(index = index)
 
             Spacer(Modifier.width(8.dp))
 
-            Column {
-                NanaPickContentSubContentSubTitle(text = subTitle)
-
-                Spacer(Modifier.height(4.dp))
-
-                NanaPickContentSubContentTitle(text = title)
-            }
+            NanaPickContentSubContentTitle(text = title)
         }
 
-        Spacer(Modifier.height(8.dp))
+        Spacer(Modifier.height(20.dp))
 
         NanaPickContentSubContentImage(imageUri = imageUri)
 
-        Spacer(Modifier.height(8.dp))
+        Spacer(Modifier.height(16.dp))
 
         NanaPickContentSubContentDescription(text = content)
 
-        Spacer(Modifier.height(8.dp))
+        Spacer(Modifier.height(24.dp))
 
         additionalInfoList.forEach { info ->
-            NanaPickContentSubContentAdditionalInfo(
-                drawableId = R.drawable.ic_check,
-                infoKey = info.infoKey,
-                infoValue = info.infoValue
-            )
+            if (info.infoEmoji != "SPECIAL") {
+                NanaPickContentSubContentAdditionalInfo(
+                    drawableId = when (info.infoEmoji) {
+                        "ADDRESS" -> R.drawable.ic_location_outlined
+                        "PARKING" -> R.drawable.ic_car_outlined
+                        "AMENITY" -> R.drawable.ic_warning_outlined
+                        "WEBSITE" -> R.drawable.ic_home_filled
+                        "RESERVATION_LINK" -> R.drawable.ic_clip_outlined_2
+                        "AGE" -> R.drawable.ic_age
+                        "TIME" -> R.drawable.ic_clock_filled
+                        "FEE" -> R.drawable.ic_fee
+                        "DATE" -> R.drawable.ic_calendar_filled
+                        "DESCRIPTION" -> R.drawable.ic_speech_bubble
+                        else -> R.drawable.ic_phone_outlined
+                    },
+                    infoKey = info.infoKey,
+                    infoValue = info.infoValue
+                )
 
-            Spacer(Modifier.height(8.dp))
+                Spacer(Modifier.height(8.dp))
+            }
         }
 
         Spacer(Modifier.height(8.dp))
@@ -79,6 +89,8 @@ fun NanaPickContentSubContent(
 
         Spacer(Modifier.height(16.dp))
 
-        NanaPickContentAttractivePoint()
+//        if (additionalInfoList.map { it.infoEmoji }.contains("SPECIAL")) {
+            NanaPickContentAttractivePoint()
+//        }
     }
 }

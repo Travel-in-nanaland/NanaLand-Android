@@ -18,7 +18,7 @@ fun RecommendedSpotScreenText2() {
         modifier = Modifier.fillMaxWidth(),
         text = when (customContext.resources.configuration.locales[0].language) {
             "ko" -> getString(R.string.type_test_recommended_spot_추천_여행지)
-            "ms" -> getString(R.string.type_test_recommended_spot_text1) + UserData.nickname + getString(R.string.type_test_recommended_spot_text2)
+            "ms" -> getString(R.string.type_test_recommended_spot_text2)
             "zh" -> getString(R.string.type_test_recommended_spot_추천_여행지)
             else -> "Destinations for ${UserData.nickname}"
         },

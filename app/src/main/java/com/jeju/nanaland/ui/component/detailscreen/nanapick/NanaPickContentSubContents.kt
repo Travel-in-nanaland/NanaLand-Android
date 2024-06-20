@@ -14,7 +14,7 @@ fun NanaPickContentSubContents(
 ) {
     nanaPickContent.nanaDetails.forEachIndexed { idx, details ->
         NanaPickContentSubContent(
-            index = idx,
+            index = idx + 1,
             subTitle = details.subTitle,
             title = details.title,
             imageUri = details.imageUrl,

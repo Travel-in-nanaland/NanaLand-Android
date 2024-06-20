@@ -10,10 +10,12 @@ import com.jeju.nanaland.globalvalue.constant.ROUTE_LANGUAGE_INITIALIZATION
 import com.jeju.nanaland.globalvalue.constant.ROUTE_MAIN
 import com.jeju.nanaland.globalvalue.constant.ROUTE_SIGN_IN
 import com.jeju.nanaland.ui.festival.FestivalListScreen
+import com.jeju.nanaland.util.listfilter.ListFilter
 import com.jeju.nanaland.util.navigation.navigate
 
 fun NavGraphBuilder.festivalListScreen(navController: NavController) = composable(route = ROUTE_FESTIVAL_LIST) {
     FestivalListScreen(
+        filter = it.arguments?.getParcelable("filter") as? ListFilter,
         moveToBackScreen = { navController.popBackStack() },
         moveToFestivalContentScreen = { contentId ->
             val bundle = bundleOf(

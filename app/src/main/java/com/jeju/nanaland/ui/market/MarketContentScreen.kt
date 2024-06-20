@@ -1,6 +1,7 @@
 package com.jeju.nanaland.ui.market
 
 import android.content.ActivityNotFoundException
+import android.content.Intent
 import android.util.Log
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -27,6 +28,7 @@ import com.jeju.nanaland.ui.component.detailscreen.other.DetailScreenInformation
 import com.jeju.nanaland.ui.component.detailscreen.other.DetailScreenInformationModificationProposalButton
 import com.jeju.nanaland.ui.component.detailscreen.other.DetailScreenTopBannerImage
 import com.jeju.nanaland.ui.component.detailscreen.other.MoveToTopButton
+import com.jeju.nanaland.util.language.getLanguage
 import com.jeju.nanaland.util.log.LogUtil
 import com.jeju.nanaland.util.resource.getString
 import com.jeju.nanaland.util.ui.ScreenPreview
@@ -53,6 +55,7 @@ fun MarketContentScreen(
     }
     val marketContent = viewModel.marketContent.collectAsState().value
     MarketContentScreen(
+        contentId = contentId,
         marketContent = marketContent,
         toggleFavorite = viewModel::toggleFavorite,
         updatePrevScreenListFavorite = updatePrevScreenListFavorite,
@@ -65,6 +68,7 @@ fun MarketContentScreen(
 
 @Composable
 private fun MarketContentScreen(
+    contentId: Long?,
     marketContent: UiState<MarketContentData>,
     toggleFavorite: (Long, (Long, Boolean) -> Unit) -> Unit,
     updatePrevScreenListFavorite: (Long, Boolean) -> Unit,
@@ -98,63 +102,69 @@ private fun MarketContentScreen(
                                 content = marketContent.data.content,
                                 onFavoriteButtonClicked = { toggleFavorite(marketContent.data.id, updatePrevScreenListFavorite) },
                                 onShareButtonClicked = {
-
-                                    val defaultText = TextTemplate(
-                                    text = """
-                                        나나랜드 콘텐츠 공유.
-                                        """.trimIndent(),
-                                        buttonTitle = "커스텀 버튼 제목",
-                                        link = Link(
-                                            webUrl = "nanaland://main",
-                                            mobileWebUrl = "nanaland://main"
-                                        )
-                                    )
-                                    // 피드 메시지 보내기
-
-                                    // 카카오톡 설치여부 확인
-                                    if (ShareClient.instance.isKakaoTalkSharingAvailable(context)) {
-                                        // 카카오톡으로 카카오톡 공유 가능
-                                        ShareClient.instance.shareDefault(context, defaultText) { sharingResult, error ->
-                                            if (error != null) {
-                                                LogUtil.e("kakaoShare", "카카오톡 공유 실패")
-                                            }
-                                            else if (sharingResult != null) {
-                                                Log.d("kakaoShare", "카카오톡 공유 성공 ${sharingResult.intent}")
-                                                context.startActivity(sharingResult.intent)
-
-                                                // 카카오톡 공유에 성공했지만 아래 경고 메시지가 존재할 경우 일부 컨텐츠가 정상 동작하지 않을 수 있습니다.
-                                                Log.w("kakaoShare", "Warning Msg: ${sharingResult.warningMsg}")
-                                                Log.w("kakaoShare", "Argument Msg: ${sharingResult.argumentMsg}")
-                                            }
-                                        }
-                                    } else {
-                                        // 카카오톡 미설치: 웹 공유 사용 권장
-                                        // 웹 공유 예시 코드
-                                        val sharerUrl = WebSharerClient.instance.makeDefaultUrl(defaultText)
-
-                                        // CustomTabs으로 웹 브라우저 열기
-
-                                        // 1. CustomTabsServiceConnection 지원 브라우저 열기
-                                        // ex) Chrome, 삼성 인터넷, FireFox, 웨일 등
-                                        try {
-                                            KakaoCustomTabsClient.openWithDefault(context, sharerUrl)
-                                        } catch(e: UnsupportedOperationException) {
-                                            // CustomTabsServiceConnection 지원 브라우저가 없을 때 예외처리
-                                        }
-
-                                        // 2. CustomTabsServiceConnection 미지원 브라우저 열기
-                                        // ex) 다음, 네이버 등
-                                        try {
-                                            KakaoCustomTabsClient.open(context, sharerUrl)
-                                        } catch (e: ActivityNotFoundException) {
-                                            // 디바이스에 설치된 인터넷 브라우저가 없을 때 예외처리
-                                        }
+                                    val sendIntent: Intent = Intent().apply {
+                                        action = Intent.ACTION_SEND
+                                        putExtra(Intent.EXTRA_TEXT, "http://13.125.110.80:8080/share/${getLanguage()}?category=market&id=${contentId}")
+                                        type = "text/plain"
                                     }
+                                    val shareIntent = Intent.createChooser(sendIntent, null)
+                                    context.startActivity(shareIntent)
+//                                    val defaultText = TextTemplate(
+//                                    text = """
+//                                        나나랜드 콘텐츠 공유.
+//                                        """.trimIndent(),
+//                                        buttonTitle = "커스텀 버튼 제목",
+//                                        link = Link(
+//                                            webUrl = "nanaland://main",
+//                                            mobileWebUrl = "nanaland://main"
+//                                        )
+//                                    )
+//                                    // 피드 메시지 보내기
+//
+//                                    // 카카오톡 설치여부 확인
+//                                    if (ShareClient.instance.isKakaoTalkSharingAvailable(context)) {
+//                                        // 카카오톡으로 카카오톡 공유 가능
+//                                        ShareClient.instance.shareDefault(context, defaultText) { sharingResult, error ->
+//                                            if (error != null) {
+//                                                LogUtil.e("kakaoShare", "카카오톡 공유 실패")
+//                                            }
+//                                            else if (sharingResult != null) {
+//                                                Log.d("kakaoShare", "카카오톡 공유 성공 ${sharingResult.intent}")
+//                                                context.startActivity(sharingResult.intent)
+//
+//                                                // 카카오톡 공유에 성공했지만 아래 경고 메시지가 존재할 경우 일부 컨텐츠가 정상 동작하지 않을 수 있습니다.
+//                                                Log.w("kakaoShare", "Warning Msg: ${sharingResult.warningMsg}")
+//                                                Log.w("kakaoShare", "Argument Msg: ${sharingResult.argumentMsg}")
+//                                            }
+//                                        }
+//                                    } else {
+//                                        // 카카오톡 미설치: 웹 공유 사용 권장
+//                                        // 웹 공유 예시 코드
+//                                        val sharerUrl = WebSharerClient.instance.makeDefaultUrl(defaultText)
+//
+//                                        // CustomTabs으로 웹 브라우저 열기
+//
+//                                        // 1. CustomTabsServiceConnection 지원 브라우저 열기
+//                                        // ex) Chrome, 삼성 인터넷, FireFox, 웨일 등
+//                                        try {
+//                                            KakaoCustomTabsClient.openWithDefault(context, sharerUrl)
+//                                        } catch(e: UnsupportedOperationException) {
+//                                            // CustomTabsServiceConnection 지원 브라우저가 없을 때 예외처리
+//                                        }
+//
+//                                        // 2. CustomTabsServiceConnection 미지원 브라우저 열기
+//                                        // ex) 다음, 네이버 등
+//                                        try {
+//                                            KakaoCustomTabsClient.open(context, sharerUrl)
+//                                        } catch (e: ActivityNotFoundException) {
+//                                            // 디바이스에 설치된 인터넷 브라우저가 없을 때 예외처리
+//                                        }
+//                                    }
                                 },
                                 moveToSignInScreen = moveToSignInScreen,
                             )
 
-                            Spacer(Modifier.height(24.dp))
+                            Spacer(Modifier.height(32.dp))
 
                             if (!marketContent.data.address.isNullOrEmpty()) {
                                 DetailScreenInformation(
@@ -163,7 +173,7 @@ private fun MarketContentScreen(
                                     content = marketContent.data.address
                                 )
 
-                                Spacer(Modifier.height(16.dp))
+                                Spacer(Modifier.height(24.dp))
                             }
 
                             if (!marketContent.data.contact.isNullOrEmpty()) {
@@ -173,7 +183,7 @@ private fun MarketContentScreen(
                                     content = marketContent.data.contact
                                 )
 
-                                Spacer(Modifier.height(16.dp))
+                                Spacer(Modifier.height(24.dp))
                             }
 
                             if (!marketContent.data.time.isNullOrEmpty()) {
@@ -183,7 +193,7 @@ private fun MarketContentScreen(
                                     content = marketContent.data.time
                                 )
 
-                                Spacer(Modifier.height(16.dp))
+                                Spacer(Modifier.height(24.dp))
                             }
 
                             if (!marketContent.data.amenity.isNullOrEmpty()) {
@@ -193,7 +203,7 @@ private fun MarketContentScreen(
                                     content = marketContent.data.amenity
                                 )
 
-                                Spacer(Modifier.height(16.dp))
+                                Spacer(Modifier.height(24.dp))
                             }
 
                             if (!marketContent.data.homepage.isNullOrEmpty()) {
@@ -203,7 +213,7 @@ private fun MarketContentScreen(
                                     content = marketContent.data.homepage
                                 )
 
-                                Spacer(Modifier.height(16.dp))
+                                Spacer(Modifier.height(24.dp))
                             }
 
                             Spacer(Modifier.height(16.dp))

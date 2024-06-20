@@ -33,7 +33,7 @@
     <string name="common_전체">ALL</string>
     <string name="common_건">Results</string>
     <string name="common_년">년</string>
-    <string name="common_월">월</string>
+    <string name="common_월">""</string>
     <string name="common_봄">Spring</string>
     <string name="common_여름">Summer</string>
     <string name="common_가을">Autumn</string>
@@ -83,6 +83,21 @@
         <item>Stay in a charming hanok in Jeju! 🏠</item>
     </string-array>
 
+    <string-array name="month_name">
+        <item>January</item>
+        <item>February</item>
+        <item>March</item>
+        <item>April</item>
+        <item>May</item>
+        <item>June</item>
+        <item>July</item>
+        <item>August</item>
+        <item>September</item>
+        <item>October</item>
+        <item>November</item>
+        <item>December</item>
+    </string-array>
+
     <!--검색 화면-->
     <string name="searching_screen_textfiled_hint">Please enter a search</string>
     <string name="searching_screen_최근_검색어">Recent searches</string>
@@ -122,12 +137,12 @@
     <string name="location_common_제주시">Jeju City</string>
     <string name="location_common_애월">Aewol</string>
     <string name="location_common_조천">Jocheon</string>
-    <string name="location_common_한경">Hangye-ong</string>
+    <string name="location_common_한경">Hangye\n-ong</string>
     <string name="location_common_구좌">Gujwa</string>
     <string name="location_common_한림">Hallim</string>
     <string name="location_common_우도">Udo</string>
     <string name="location_common_추자">Chuja</string>
-    <string name="location_common_서귀포시">Seogw-ipo City</string>
+    <string name="location_common_서귀포시">Seogw\n-ipo City</string>
     <string name="location_common_대정">Daejeong</string>
     <string name="location_common_안덕">Andeok</string>
     <string name="location_common_남원">Namwon</string>
@@ -157,6 +172,7 @@
 
     <!--정보 수정 제안-->
     <string name="info_modification_proposal_정보_수정_제안">Information Update Suggestions</string>
+    <string name="info_modification_proposal_정보_수정_제안2">Information Update\nSuggestions</string>
     <string name="info_modification_proposal_heading1">Suggest an Information Update!</string>
     <string name="info_modification_proposal_text1">You may receive rewards if photos attached with your suggestions help verify location information.</string>
     <string name="info_modification_proposal_전화번호_및_홈페이지">Phone Number and Website</string>
@@ -167,13 +183,14 @@
     <string name="info_modification_proposal_heading2">Share Other Information!</string>
     <string name="info_modification_proposal_제공_서비스">Offering service</string>
     <string name="info_modification_proposal_사진_추가하기">Add Photos</string>
-    <string name="info_modification_proposal_text2">Attach photos of verified information for more accurate details.</string>
+    <string name="info_modification_proposal_text2">Attach photos of verified information for more\naccurate details.</string>
+    <string name="info_modification_proposal_heading3">Suggest an Information Update</string>
     <string name="info_modification_proposal_hint1">Leave detailed information on the items you want to update or any other comments.</string>
-    <string name="info_modification_proposal_text3">Enter your email to receive the results of your suggestion.</string>
+    <string name="info_modification_proposal_text3">Enter your email to receive the results of your\nsuggestion.</string>
     <string name="info_modification_proposal_hint2">example@gmail.com</string>
     <string name="info_modification_proposal_보내기">Submit</string>
-    <string name="info_modification_proposal_heading3">Thank you for your information correction suggestion</string>
-    <string name="info_modification_proposal_text4">With the information correction suggestion, the attractiveness of the travel destination has also increased!\n\nIt’s getting more and more exciting🧚‍♀️</string>
+    <string name="info_modification_proposal_heading4">Thank you for your information correction suggestion</string>
+    <string name="info_modification_proposal_text4">With the information correction\nsuggestion, the attractiveness of the travel\ndestination has also increased!\n\nIt’s getting more and more exciting🧚‍♀️</string>
     <string name="info_modification_proposal_button1">View Content Again</string>
     <string name="info_modification_proposal_button2">Add Another Item</string>
     <string name="info_modification_proposal_warning">The email format is incorrect. Please re-enter!</string>
@@ -301,6 +318,7 @@
     <!--프로필 수정 화면-->
     <string name="profile_update_screen_프로필_수정">Edit Profile</string>
     <string name="profile_update_screen_수정_완료">Update</string>
+    <string name="profile_update_screen_warning">소개글은 70자 이내로 작성 가능합니다.</string>
 
     <!--프로필 수정 화면 다이얼로그-->
     <string name="profile_update_dialog_text1">Discard Changes?</string>
@@ -319,8 +337,8 @@
     <string name="withdrawal_screen_text1">1. By deleting your account, you will be unsubscribed from all services provided by Nanaland in Jeju.</string>
     <string name="withdrawal_screen_text2">2. Upon account deletion, all coupons and points will be lost and will not be restored even if you re-register.</string>
     <string name="withdrawal_screen_text3">3. Transaction records that must be preserved under the e-commerce law will be kept for 5 years after account deletion.</string>
-    <string name="withdrawal_screen_text4">4. You will not be able to participate in membership events again after account deletion.</string>
-    <string name="withdrawal_screen_text5">5. If you re-register within 90 days after withdrawal, you can use your previous account.</string>
+    <string name="withdrawal_screen_text4">4. You will not be able to participate in membership events\nagain after account deletion.</string>
+    <string name="withdrawal_screen_text5">5. If you re-register within 90 days after withdrawal, you can\nuse your previous account.</string>
     <string name="withdrawal_screen_heading2">Reason for Account Deletion</string>
     <string name="withdrawal_screen_reason1">Lack of Content</string>
     <string name="withdrawal_screen_reason2">Service Inconvenience</string>
@@ -330,8 +348,8 @@
     <string name="withdrawal_screen_warning">I have read and agree to the information provided.</string>
 
     <!--회원 탈퇴 다이얼로그-->
-    <string name="withdrawal_dialog_text1">Are you sure you don\'t want to receive Jeju travel information and benefits?😢</string>
-    <string name="withdrawal_dialog_text2">*If you rejoin within 90 days, you can log in with your existing account.</string>
+    <string name="withdrawal_dialog_text1">Are you sure you don\'t want\nto receive Jeju travel\ninformation and benefits?😢</string>
+    <string name="withdrawal_dialog_text2">*If you rejoin within 90 days, you can log in with\nyour existing account.</string>
 
     <!--접근 권한 안내 화면-->
     <string name="permission_checking_screen_접근_권한_안내">Access Permission Notice</string>

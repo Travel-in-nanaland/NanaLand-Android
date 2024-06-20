@@ -31,6 +31,7 @@ import com.jeju.nanaland.ui.component.listscreen.filter.parts.FilterDialogCloseB
 import com.jeju.nanaland.ui.component.listscreen.filter.parts.season.SeasonFilterDialogTitle
 import com.jeju.nanaland.ui.component.listscreen.filter.parts.season.SeasonSelectableBox
 import com.jeju.nanaland.ui.theme.getColor
+import com.jeju.nanaland.util.language.getLanguage
 import com.jeju.nanaland.util.resource.getString
 import com.jeju.nanaland.util.ui.clickableNoEffect
 import kotlinx.coroutines.launch
@@ -88,10 +89,22 @@ fun SeasonFilterBottomDialog(
             SeasonSelectableBox(
                 seasonText = seasonList[seasonIdx],
                 monthText = when (seasonIdx) {
-                    0 -> "3, 4"
-                    1 -> "5, 6, 7, 8"
-                    2 -> "9, 10"
-                    else -> "11, 12, 1, 2"
+                    0 -> when (getLanguage()) {
+                        "ko", "zh" -> "3, 4"
+                        else -> "March, April"
+                    }
+                    1 -> when (getLanguage()) {
+                        "ko", "zh" -> "5, 6, 7, 8"
+                        else -> "May, June, July, August"
+                    }
+                    2 -> when (getLanguage()) {
+                        "ko", "zh" -> "9, 10"
+                        else -> "September, October"
+                    }
+                    else -> when (getLanguage()) {
+                        "ko", "zh" -> "11, 12, 1, 2"
+                        else -> "November, December, January, February"
+                    }
                 } + getString(R.string.common_월),
                 onClick = {
                     // 이미 같은 계절이 선택되어 있으면 새로고침 안한다.

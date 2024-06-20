@@ -8,10 +8,15 @@ import com.jeju.nanaland.globalvalue.constant.ROUTE_MAIN
 import com.jeju.nanaland.globalvalue.constant.ROUTE_POLICY_AGREE
 import com.jeju.nanaland.globalvalue.constant.ROUTE_SIGN_IN
 import com.jeju.nanaland.ui.signin.SignInScreen
+import com.jeju.nanaland.util.intent.DeepLinkData
 import com.jeju.nanaland.util.navigation.navigate
 
-fun NavGraphBuilder.signInScreen(navController: NavController) = composable(route = ROUTE_SIGN_IN) {
+fun NavGraphBuilder.signInScreen(
+    deepLinkData: DeepLinkData,
+    navController: NavController
+) = composable(route = ROUTE_SIGN_IN) {
     SignInScreen(
+        deepLinkData = deepLinkData,
         moveToMainScreen = {
             navController.navigate(ROUTE_MAIN) {
                 popUpTo(ROUTE_SIGN_IN) { inclusive = true }

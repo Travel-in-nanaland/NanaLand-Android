@@ -5,6 +5,7 @@ import androidx.compose.runtime.Composable
 import com.jeju.nanaland.ui.theme.NanaLandTheme
 import com.jeju.nanaland.ui.theme.getColor
 import com.jeju.nanaland.ui.theme.title01Bold
+import com.jeju.nanaland.ui.theme.title02Bold
 import com.jeju.nanaland.util.ui.ComponentPreviewBlack
 
 @Composable
@@ -12,7 +13,7 @@ fun NanaPickContentTopBannerSubTitle(text: String?) {
     Text(
         text = text ?: "",
         color = getColor().white,
-        style = title01Bold
+        style = title02Bold
     )
 }
 

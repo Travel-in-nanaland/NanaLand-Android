@@ -15,46 +15,57 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.jeju.nanaland.R
+import com.jeju.nanaland.ui.component.common.CustomSurface
+import com.jeju.nanaland.ui.component.common.CustomTopBar
 import com.jeju.nanaland.ui.component.common.CustomTopBarNoBackButton
 import com.jeju.nanaland.ui.theme.body01
 import com.jeju.nanaland.ui.theme.getColor
 import com.jeju.nanaland.util.resource.getString
 
 @Composable
-fun NotificationScreen() {
+fun NotificationScreen(
+    moveToBackScreen: () -> Unit,
+) {
     NotificationScreen(
+        moveToBackScreen = moveToBackScreen,
         isContent = true
     )
 }
 
 @Composable
 private fun NotificationScreen(
+    moveToBackScreen: () -> Unit,
     isContent: Boolean
 ) {
-    Column(Modifier.fillMaxSize()) {
-        CustomTopBarNoBackButton(title = getString(R.string.common_제주_이야기))
+    CustomSurface {
+        Column(Modifier.fillMaxSize()) {
+            CustomTopBar(
+                title = getString(R.string.common_알림),
+                onBackButtonClicked = moveToBackScreen
+            )
 
-        Box(
-            modifier = Modifier.fillMaxSize(),
-            contentAlignment = Alignment.Center
-        ) {
-            Column(
-                horizontalAlignment = Alignment.CenterHorizontally
+            Box(
+                modifier = Modifier.fillMaxSize(),
+                contentAlignment = Alignment.Center
             ) {
-                Image(
-                    modifier = Modifier.size(100.dp),
-                    painter = painterResource(R.drawable.img_airplane),
-                    contentDescription = null
-                )
+                Column(
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+                    Image(
+                        modifier = Modifier.size(100.dp),
+                        painter = painterResource(R.drawable.img_airplane),
+                        contentDescription = null
+                    )
 
-                Spacer(Modifier.height(4.dp))
+                    Spacer(Modifier.height(4.dp))
 
-                Text(
-                    text = getString(R.string.search_result_screen_preparing_service),
-                    color = getColor().gray01,
-                    style = body01,
-                    textAlign = TextAlign.Center
-                )
+                    Text(
+                        text = getString(R.string.search_result_screen_preparing_service),
+                        color = getColor().gray01,
+                        style = body01,
+                        textAlign = TextAlign.Center
+                    )
+                }
             }
         }
     }

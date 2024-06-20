@@ -22,14 +22,15 @@ import com.jeju.nanaland.ui.component.main.home.HomeScreenRecommendText
 import com.jeju.nanaland.ui.component.main.home.HomeScreenRecommendedPosts
 import com.jeju.nanaland.ui.component.main.home.HomeScreenTopBanner
 import com.jeju.nanaland.ui.theme.NanaLandTheme
+import com.jeju.nanaland.util.listfilter.ListFilter
 import com.jeju.nanaland.util.ui.ScreenPreview
 import com.jeju.nanaland.util.ui.UiState
 
 @Composable
 fun HomeContent(
     moveToCategoryContentScreen: (Long, String?, Boolean) -> Unit,
-    moveToNatureListScreen: () -> Unit,
-    moveToFestivalListScreen: () -> Unit,
+    moveToNatureListScreen: (ListFilter) -> Unit,
+    moveToFestivalListScreen: (ListFilter) -> Unit,
     moveToMarketListScreen: () -> Unit,
     moveToExperienceScreen: () -> Unit,
     moveToNanaPickListScreen: () -> Unit,
@@ -63,8 +64,8 @@ private fun HomeContent(
     recommendedPosts: UiState<List<RecommendedPostData>>,
     toggleFavorite: (Long, String?) -> Unit,
     moveToCategoryContentScreen: (Long, String?, Boolean) -> Unit,
-    moveToNatureListScreen: () -> Unit,
-    moveToFestivalListScreen: () -> Unit,
+    moveToNatureListScreen: (ListFilter) -> Unit,
+    moveToFestivalListScreen: (ListFilter) -> Unit,
     moveToMarketListScreen: () -> Unit,
     moveToExperienceScreen: () -> Unit,
     moveToNanaPickListScreen: () -> Unit,

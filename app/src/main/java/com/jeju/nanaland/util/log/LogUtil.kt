@@ -31,7 +31,7 @@ object LogUtil {
         }
     }
 
-    fun e(tag: String, message: String) {
+    fun e (tag: String, message: String) {
         if (BuildConfig.DEBUG) Log.e(tag, message) else Unit
     }
 }

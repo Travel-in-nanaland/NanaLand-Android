@@ -20,6 +20,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.jeju.nanaland.R
 import com.jeju.nanaland.ui.theme.body02Bold
+import com.jeju.nanaland.ui.theme.caption01
 import com.jeju.nanaland.ui.theme.getColor
 import com.jeju.nanaland.util.resource.getString
 import com.jeju.nanaland.util.ui.clickableNoEffect
@@ -80,7 +81,7 @@ fun InfoModificationProposalWritingScreenImagePreview(
                 Text(
                     text = getString(R.string.info_modification_proposal_text2),
                     color = getColor().white,
-                    style = body02Bold,
+                    style = caption01,
                     textAlign = TextAlign.Center
                 )
             }

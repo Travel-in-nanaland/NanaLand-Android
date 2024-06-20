@@ -71,7 +71,7 @@ fun SearchResultScreenPreviewByCategory(
         ) {
             Spacer(Modifier.height(32.dp))
 
-            SearchResultScreenPreparingServiceContent()
+            SearchResultScreenPreparingServiceContent(isImageSmall = true)
 
             Spacer(Modifier.height(32.dp))
         }
@@ -79,7 +79,7 @@ fun SearchResultScreenPreviewByCategory(
         if ((allSearchResultList[category.name]?.data?.size ?: 0) == 0) {
             Spacer(Modifier.height(32.dp))
 
-            SearchResultScreenEmptySearchResultContent()
+            SearchResultScreenEmptySearchResultContent(isImageSmall = true)
 
             Spacer(Modifier.height(32.dp))
         } else {

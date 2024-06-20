@@ -1,5 +1,6 @@
 package com.jeju.nanaland.ui.nature
 
+import android.content.Intent
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -13,6 +14,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.jeju.nanaland.R
@@ -25,6 +27,7 @@ import com.jeju.nanaland.ui.component.detailscreen.other.DetailScreenInformation
 import com.jeju.nanaland.ui.component.detailscreen.other.DetailScreenNotice
 import com.jeju.nanaland.ui.component.detailscreen.other.DetailScreenTopBannerImage
 import com.jeju.nanaland.ui.component.detailscreen.other.MoveToTopButton
+import com.jeju.nanaland.util.language.getLanguage
 import com.jeju.nanaland.util.resource.getString
 import com.jeju.nanaland.util.ui.ScreenPreview
 import com.jeju.nanaland.util.ui.UiState
@@ -45,6 +48,7 @@ fun NatureContentScreen(
     }
     val natureContent = viewModel.natureContent.collectAsState().value
     NatureContentScreen(
+        contentId = contentId,
         natureContent = natureContent,
         toggleFavorite = viewModel::toggleFavorite,
         updatePrevScreenListFavorite = updatePrevScreenListFavorite,
@@ -57,6 +61,7 @@ fun NatureContentScreen(
 
 @Composable
 private fun NatureContentScreen(
+    contentId: Long?,
     natureContent: UiState<NatureContentData>,
     toggleFavorite: (Long, (Long, Boolean) -> Unit) -> Unit,
     updatePrevScreenListFavorite: (Long, Boolean) -> Unit,
@@ -65,6 +70,7 @@ private fun NatureContentScreen(
     moveToSignInScreen: () -> Unit,
     isContent: Boolean
 ) {
+    val context = LocalContext.current
     val scrollState = rememberScrollState()
     val coroutineScope = rememberCoroutineScope()
     CustomSurface {
@@ -88,7 +94,15 @@ private fun NatureContentScreen(
                                     title = natureContent.data.title,
                                     content = natureContent.data.content,
                                     onFavoriteButtonClicked = { toggleFavorite(natureContent.data.id, updatePrevScreenListFavorite) },
-                                    onShareButtonClicked = {},
+                                    onShareButtonClicked = {
+                                        val sendIntent: Intent = Intent().apply {
+                                            action = Intent.ACTION_SEND
+                                            putExtra(Intent.EXTRA_TEXT, "http://13.125.110.80:8080/share/${getLanguage()}?category=nature&id=${contentId}")
+                                            type = "text/plain"
+                                        }
+                                        val shareIntent = Intent.createChooser(sendIntent, null)
+                                        context.startActivity(shareIntent)
+                                    },
                                     moveToSignInScreen = moveToSignInScreen,
                                 )
 
@@ -99,7 +113,7 @@ private fun NatureContentScreen(
                                     content = natureContent.data.intro
                                 )
 
-                                Spacer(Modifier.height(16.dp))
+                                Spacer(Modifier.height(32.dp))
 
                                 if (!natureContent.data.address.isNullOrEmpty()) {
                                     DetailScreenInformation(
@@ -108,17 +122,17 @@ private fun NatureContentScreen(
                                         content = natureContent.data.address
                                     )
 
-                                    Spacer(Modifier.height(16.dp))
+                                    Spacer(Modifier.height(24.dp))
                                 }
 
                                 if (!natureContent.data.contact.isNullOrEmpty()) {
                                     DetailScreenInformation(
                                         drawableId = R.drawable.ic_phone_outlined,
-                                        title = "연락처",
+                                        title = getString(R.string.detail_screen_common_연락처),
                                         content = natureContent.data.contact
                                     )
 
-                                    Spacer(Modifier.height(16.dp))
+                                    Spacer(Modifier.height(24.dp))
                                 }
 
                                 if (!natureContent.data.time.isNullOrEmpty()) {
@@ -128,7 +142,7 @@ private fun NatureContentScreen(
                                         content = natureContent.data.time
                                     )
 
-                                    Spacer(Modifier.height(16.dp))
+                                    Spacer(Modifier.height(24.dp))
                                 }
 
                                 if (!natureContent.data.fee.isNullOrEmpty()) {
@@ -138,7 +152,7 @@ private fun NatureContentScreen(
                                         content = natureContent.data.fee
                                     )
 
-                                    Spacer(Modifier.height(16.dp))
+                                    Spacer(Modifier.height(24.dp))
                                 }
 
                                 if (!natureContent.data.details.isNullOrEmpty()) {
@@ -148,7 +162,7 @@ private fun NatureContentScreen(
                                         content = natureContent.data.details
                                     )
 
-                                    Spacer(Modifier.height(16.dp))
+                                    Spacer(Modifier.height(24.dp))
                                 }
 
                                 if (!natureContent.data.amenity.isNullOrEmpty()) {
@@ -158,7 +172,7 @@ private fun NatureContentScreen(
                                         content = natureContent.data.amenity
                                     )
 
-                                    Spacer(Modifier.height(16.dp))
+                                    Spacer(Modifier.height(24.dp))
                                 }
 
                                 Spacer(Modifier.height(16.dp))

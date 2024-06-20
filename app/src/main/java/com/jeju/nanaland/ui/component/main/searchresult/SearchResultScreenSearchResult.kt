@@ -15,6 +15,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.jeju.nanaland.domain.entity.search.SearchResultData
 import com.jeju.nanaland.globalvalue.type.SearchCategoryType
+import com.jeju.nanaland.ui.component.main.searchresult.parts.SearchResultScreenEmptySearchResultContent
 import com.jeju.nanaland.ui.component.main.searchresult.parts.SearchResultScreenItemCount
 import com.jeju.nanaland.ui.component.main.searchresult.parts.SearchResultScreenPreviewByCategory
 import com.jeju.nanaland.util.ui.UiState
@@ -79,14 +80,23 @@ fun SearchResultScreenSearchResult(
 
                     Spacer(Modifier.height(16.dp))
 
-                    SearchResultScreenSearchResultList(
-                        selectedCategory = selectedCategory,
-                        categorizedSearchResultList = categorizedSearchResultList.data,
-                        getSearchResult = getSearchResult,
-                        onFavoriteButtonClick = toggleSearchResultFavorite,
-                        onPostClick = onPostClick,
-                        moveToSignInScreen = moveToSignInScreen,
-                    )
+                    if (categorizedSearchResultList.data.count.toInt() == 0) {
+                        Box(
+                            Modifier.fillMaxSize(),
+                            contentAlignment = Alignment.Center
+                        ) {
+                            SearchResultScreenEmptySearchResultContent()
+                        }
+                    } else {
+                        SearchResultScreenSearchResultList(
+                            selectedCategory = selectedCategory,
+                            categorizedSearchResultList = categorizedSearchResultList.data,
+                            getSearchResult = getSearchResult,
+                            onFavoriteButtonClick = toggleSearchResultFavorite,
+                            onPostClick = onPostClick,
+                            moveToSignInScreen = moveToSignInScreen,
+                        )
+                    }
                 }
                 is UiState.Failure -> {}
             }

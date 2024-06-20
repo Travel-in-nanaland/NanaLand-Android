@@ -33,9 +33,9 @@ import com.jeju.nanaland.globalvalue.constant.TYPE_TANGERINE_PEEL_TEA
 fun TypeTestResultScreenImage(travelType: String) {
     Image(
         modifier = Modifier
-            .fillMaxWidth(),
-//            .size(200.dp)
-//            .clip(CircleShape),
+//            .fillMaxWidth(),
+            .size(200.dp)
+            .clip(CircleShape),
         painter = painterResource(when (travelType) {
             TYPE_GAMGYUL_ICECREAM -> R.drawable.img_type_gamgyul_icecream
             TYPE_GAMGYUL_RICECAKE -> R.drawable.img_type_gamgyul_ricecake

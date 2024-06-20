@@ -19,6 +19,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.jeju.nanaland.R
 import com.jeju.nanaland.domain.entity.nature.NatureThumbnailData
 import com.jeju.nanaland.globalvalue.constant.PAGING_THRESHOLD
+import com.jeju.nanaland.globalvalue.constant.getLocationIdx
 import com.jeju.nanaland.globalvalue.constant.getLocationList
 import com.jeju.nanaland.globalvalue.type.AnchoredDraggableContentState
 import com.jeju.nanaland.ui.component.common.CustomSurface
@@ -28,6 +29,7 @@ import com.jeju.nanaland.ui.component.listscreen.filter.LocationFilterBottomDial
 import com.jeju.nanaland.ui.component.listscreen.filter.LocationFilterTopBar
 import com.jeju.nanaland.ui.component.listscreen.filter.getLocationAnchoredDraggableState
 import com.jeju.nanaland.ui.component.listscreen.list.NatureThumbnailList
+import com.jeju.nanaland.util.listfilter.ListFilter
 import com.jeju.nanaland.util.resource.getString
 import com.jeju.nanaland.util.ui.ScreenPreview
 import com.jeju.nanaland.util.ui.UiState
@@ -35,6 +37,7 @@ import kotlinx.coroutines.launch
 
 @Composable
 fun NatureListScreen(
+    filter: ListFilter?,
     moveToBackScreen: () -> Unit,
     moveToNatureContentScreen: (Long) -> Unit,
     moveToSignInScreen: () -> Unit,
@@ -43,6 +46,14 @@ fun NatureListScreen(
     val selectedLocationList = viewModel.selectedLocationList
     val natureThumbnailCount = viewModel.natureThumbnailCount.collectAsState().value
     val natureThumbnailList = viewModel.natureThumbnailList.collectAsState().value
+
+    LaunchedEffect(Unit) {
+        if (filter?.filter != null) {
+            selectedLocationList[getLocationIdx(filter.filter)] = true
+            filter.filter = null
+        }
+    }
+
     NatureListScreen(
         selectedLocationList = selectedLocationList,
         natureThumbnailCount = natureThumbnailCount,

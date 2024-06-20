@@ -41,9 +41,11 @@ import com.jeju.nanaland.ui.navigation.typeTestLoadingScreen
 import com.jeju.nanaland.ui.navigation.typeTestResultScreen
 import com.jeju.nanaland.ui.navigation.typeTestingScreen
 import com.jeju.nanaland.ui.navigation.withdrawalScreen
+import com.jeju.nanaland.util.intent.DeepLinkData
 
 @Composable
 fun MainNavigation(
+    deepLinkData: DeepLinkData,
     navController: NavHostController = rememberNavController()
 ) {
     NavHost(
@@ -53,13 +55,19 @@ fun MainNavigation(
         startDestination = ROUTE_SPLASH
     ) {
         // 스플래시 화면
-        splashScreen(navController)
+        splashScreen(
+            deepLinkData = deepLinkData,
+            navController = navController
+        )
 
         // 언어 선택 화면
         languageInitializationScreen(navController)
 
         // 로그인 화면
-        signInScreen(navController)
+        signInScreen(
+            deepLinkData = deepLinkData,
+            navController = navController
+        )
 
         // 약관 동의 화면
         policyAgreeScreen(navController)
@@ -92,7 +100,10 @@ fun MainNavigation(
         recommendedSpotScreen(navController)
 
         // 메인 화면
-        mainScreen(navController)
+        mainScreen(
+            deepLinkData = deepLinkData,
+            navController = navController
+        )
 
         // 알림 화면
         notificationScreen(navController)

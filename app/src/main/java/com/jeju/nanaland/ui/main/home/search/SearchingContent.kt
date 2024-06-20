@@ -89,11 +89,11 @@ private fun SearchingContent(
                 addRecentSearch = addRecentSearch,
             )
 
-            Spacer(Modifier.height(20.dp))
+            Spacer(Modifier.height(32.dp))
 
             SearchingScreenTopKeywordsText()
 
-            Spacer(Modifier.height(32.dp))
+            Spacer(Modifier.height(16.dp))
 
             SearchingScreenTopKeywords(
                 topKeywordList = topKeywordList,
@@ -107,7 +107,7 @@ private fun SearchingContent(
 
             SearchingScreenHotPostsText()
 
-            Spacer(Modifier.height(20.dp))
+            Spacer(Modifier.height(8.dp))
 
             SearchingScreenHotPosts(
                 hotPosts = hotPostList,

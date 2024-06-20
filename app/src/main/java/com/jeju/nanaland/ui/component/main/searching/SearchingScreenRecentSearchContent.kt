@@ -49,16 +49,11 @@ fun SearchingScreenRecentSearchContent(
         if (recentSearchList.isEmpty()) {
             Spacer(Modifier.height(16.dp))
 
-            Box(
-                modifier = Modifier.height(26.dp),
-                contentAlignment = Alignment.TopStart
-            ) {
-                Text(
-                    text = getString(R.string.searching_screen_최근_검색어가_없습니다),
-                    color = getColor().gray01,
-                    style = body02
-                )
-            }
+            Text(
+                text = getString(R.string.searching_screen_최근_검색어가_없습니다),
+                color = getColor().gray01,
+                style = body02
+            )
         } else {
             Spacer(Modifier.height(8.dp))
 

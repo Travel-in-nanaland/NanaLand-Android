@@ -13,11 +13,13 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.jeju.nanaland.R
 import com.jeju.nanaland.globalvalue.type.SplashCheckingState
+import com.jeju.nanaland.util.intent.DeepLinkData
 import com.skydoves.landscapist.glide.GlideImage
 import kotlinx.coroutines.delay
 
 @Composable
 fun SplashScreen(
+    deepLinkData: DeepLinkData,
     moveToMainScreen: () -> Unit,
     moveToLanguageInitScreen: () -> Unit,
     moveToSignInScreen: () -> Unit,
@@ -29,7 +31,12 @@ fun SplashScreen(
         checkingState = checkingState,
         isNetworkConnected = isNetworkConnected,
         checkNetworkState = viewModel::checkNetworkState,
-        checkLanguageState = viewModel::checkLanguageState,
+        checkLanguageState = {
+            viewModel.checkLanguageState(
+                deepLinkData,
+                it
+            )
+        },
         checkSignInState = viewModel::checkSignInState,
         moveToMainScreen = moveToMainScreen,
         moveToLanguageInitScreen = moveToLanguageInitScreen,

@@ -18,7 +18,7 @@ fun SearchResultScreenItemCount(
 ) {
     Text(
         modifier = modifier,
-        text = "$count" + getString(R.string.common_건),
+        text = "$count " + getString(R.string.common_건),
         color = getColor().gray01,
         style = body02
     )

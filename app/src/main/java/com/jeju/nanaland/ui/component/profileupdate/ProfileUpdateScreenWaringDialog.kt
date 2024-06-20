@@ -63,7 +63,8 @@ fun ProfileUpdateScreenWaringDialog(
                         Text(
                             text = getString(R.string.profile_update_dialog_text2),
                             color = getColor().black,
-                            style = body01
+                            style = body01,
+                            textAlign = TextAlign.Center
                         )
                     }
 

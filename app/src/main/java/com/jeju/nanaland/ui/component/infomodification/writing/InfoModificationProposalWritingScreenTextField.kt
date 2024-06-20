@@ -41,7 +41,8 @@ fun InfoModificationProposalWritingScreenTextField(
     BasicTextField(
         value = inputText,
         onValueChange = onValueChange,
-        textStyle = body02
+        textStyle = body02,
+        singleLine = true
     ) {
         Column(
             modifier = Modifier.animateContentSize()

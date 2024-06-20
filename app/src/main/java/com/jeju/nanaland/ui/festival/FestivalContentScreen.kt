@@ -1,5 +1,6 @@
 package com.jeju.nanaland.ui.festival
 
+import android.content.Intent
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -13,6 +14,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.jeju.nanaland.R
@@ -24,6 +26,7 @@ import com.jeju.nanaland.ui.component.detailscreen.other.DetailScreenInformation
 import com.jeju.nanaland.ui.component.detailscreen.other.DetailScreenInformationModificationProposalButton
 import com.jeju.nanaland.ui.component.detailscreen.other.DetailScreenTopBannerImage
 import com.jeju.nanaland.ui.component.detailscreen.other.MoveToTopButton
+import com.jeju.nanaland.util.language.getLanguage
 import com.jeju.nanaland.util.resource.getString
 import com.jeju.nanaland.util.ui.ScreenPreview
 import com.jeju.nanaland.util.ui.UiState
@@ -44,6 +47,7 @@ fun FestivalContentScreen(
     }
     val festivalContent = viewModel.festivalContent.collectAsState().value
     FestivalContentScreen(
+        contentId = contentId,
         festivalContent = festivalContent,
         toggleFavorite = viewModel::toggleFavorite,
         updatePrevScreenListFavorite = updatePrevScreenListFavorite,
@@ -56,6 +60,7 @@ fun FestivalContentScreen(
 
 @Composable
 private fun FestivalContentScreen(
+    contentId: Long?,
     festivalContent: UiState<FestivalContentData>,
     toggleFavorite: (Long, (Long, Boolean) -> Unit) -> Unit,
     updatePrevScreenListFavorite: (Long, Boolean) -> Unit,
@@ -64,6 +69,7 @@ private fun FestivalContentScreen(
     moveToSignInScreen: () -> Unit,
     isContent: Boolean
 ) {
+    val context = LocalContext.current
     val scrollState = rememberScrollState()
     val coroutineScope = rememberCoroutineScope()
     CustomSurface {
@@ -87,11 +93,19 @@ private fun FestivalContentScreen(
                                     title = festivalContent.data.title,
                                     content = festivalContent.data.content,
                                     onFavoriteButtonClicked = { toggleFavorite(festivalContent.data.id, updatePrevScreenListFavorite) },
-                                    onShareButtonClicked = {},
+                                    onShareButtonClicked = {
+                                        val sendIntent: Intent = Intent().apply {
+                                            action = Intent.ACTION_SEND
+                                            putExtra(Intent.EXTRA_TEXT, "http://13.125.110.80:8080/share/${getLanguage()}?category=festival&id=${contentId}")
+                                            type = "text/plain"
+                                        }
+                                        val shareIntent = Intent.createChooser(sendIntent, null)
+                                        context.startActivity(shareIntent)
+                                    },
                                     moveToSignInScreen = moveToSignInScreen,
                                 )
 
-                                Spacer(Modifier.height(24.dp))
+                                Spacer(Modifier.height(32.dp))
 
                                 if (!festivalContent.data.address.isNullOrEmpty()) {
                                     DetailScreenInformation(
@@ -100,7 +114,7 @@ private fun FestivalContentScreen(
                                         content = festivalContent.data.address
                                     )
 
-                                    Spacer(Modifier.height(16.dp))
+                                    Spacer(Modifier.height(24.dp))
                                 }
 
 
@@ -111,7 +125,7 @@ private fun FestivalContentScreen(
                                         content = festivalContent.data.contact
                                     )
 
-                                    Spacer(Modifier.height(16.dp))
+                                    Spacer(Modifier.height(24.dp))
                                 }
 
                                 if (!festivalContent.data.period.isNullOrEmpty()) {
@@ -121,7 +135,7 @@ private fun FestivalContentScreen(
                                         content = festivalContent.data.period
                                     )
 
-                                    Spacer(Modifier.height(16.dp))
+                                    Spacer(Modifier.height(24.dp))
                                 }
 
                                 if (!festivalContent.data.time.isNullOrEmpty()) {
@@ -131,7 +145,7 @@ private fun FestivalContentScreen(
                                         content = festivalContent.data.time
                                     )
 
-                                    Spacer(Modifier.height(16.dp))
+                                    Spacer(Modifier.height(24.dp))
                                 }
 
                                 if (!festivalContent.data.fee.isNullOrEmpty()) {
@@ -141,7 +155,7 @@ private fun FestivalContentScreen(
                                         content = festivalContent.data.fee
                                     )
 
-                                    Spacer(Modifier.height(16.dp))
+                                    Spacer(Modifier.height(24.dp))
                                 }
 
                                 if (!festivalContent.data.homepage.isNullOrEmpty()) {
@@ -151,7 +165,7 @@ private fun FestivalContentScreen(
                                         content = festivalContent.data.homepage
                                     )
 
-                                    Spacer(Modifier.height(16.dp))
+                                    Spacer(Modifier.height(24.dp))
                                 }
 
                                 Spacer(Modifier.height(16.dp))

@@ -21,9 +21,9 @@ fun TypeTestingScreenQuestionText(level: Int) {
             4 -> getString(R.string.type_test_screen_question4) + UserData.nickname + getString(R.string.type_test_screen_question_님은4)
             else -> when (getLanguage()) {
                 "ko" -> getString(R.string.type_test_screen_question5)
-                "ms" -> getString(R.string.type_test_screen_question5) + UserData.nickname + getString(R.string.type_test_screen_question6)
-                "zh" -> ""
-                else -> ""
+                "ms" -> getString(R.string.type_test_screen_question5)
+                "zh" -> getString(R.string.type_test_screen_question5) + UserData.nickname + getString(R.string.type_test_screen_question6)
+                else -> UserData.nickname + getString(R.string.type_test_screen_question6)
             }
         },
         color = getColor().main,

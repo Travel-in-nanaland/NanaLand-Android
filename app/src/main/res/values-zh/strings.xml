@@ -83,6 +83,21 @@
         <item>住在济州充满情调的韩屋！🏠</item>
     </string-array>
 
+    <string-array name="month_name">
+        <item>1月</item>
+        <item>2月</item>
+        <item>3月</item>
+        <item>4月</item>
+        <item>5月</item>
+        <item>6月</item>
+        <item>7月</item>
+        <item>8月</item>
+        <item>9月</item>
+        <item>10月</item>
+        <item>11月</item>
+        <item>12月</item>
+    </string-array>
+
     <!--검색 화면-->
     <string name="searching_screen_textfiled_hint">请输入搜索词。</string>
     <string name="searching_screen_최근_검색어">最近搜索词</string>
@@ -158,6 +173,7 @@
 
     <!--정보 수정 제안-->
     <string name="info_modification_proposal_정보_수정_제안">建议修改信息</string>
+    <string name="info_modification_proposal_정보_수정_제안2">建议修改信息</string>
     <string name="info_modification_proposal_heading1">请提出需要修改的信息 !</string>
     <string name="info_modification_proposal_text1">如果您在建议地点时附上的照片对确认地点信息有帮助，\n将有机会获得福利.</string>
     <string name="info_modification_proposal_전화번호_및_홈페이지">电话号码和网站</string>
@@ -169,11 +185,12 @@
     <string name="info_modification_proposal_제공_서비스">提供服务</string>
     <string name="info_modification_proposal_사진_추가하기">添加照片</string>
     <string name="info_modification_proposal_text2">如果您附上实际核实过的信息及照片，\n将能提供更准确的信息</string>
+    <string name="info_modification_proposal_heading3">建议修改信息</string>
     <string name="info_modification_proposal_hint1">如有修改请求的详细内容或其他事项，请留下您的意见</string>
     <string name="info_modification_proposal_text3">请输入接收信息修改建议结果的电子邮件</string>
     <string name="info_modification_proposal_hint2">example@gmail.com</string>
     <string name="info_modification_proposal_보내기">发送</string>
-    <string name="info_modification_proposal_heading3">정感谢您的信息修改建议</string>
+    <string name="info_modification_proposal_heading4">感谢您的信息修改建议</string>
     <string name="info_modification_proposal_text4">通过信息修改建议，\n旅行地的吸引力也提高了！\n\n越来越期待了🧚‍♀️</string>
     <string name="info_modification_proposal_button1">重新查看内容</string>
     <string name="info_modification_proposal_button2">添加其他项目</string>
@@ -255,8 +272,8 @@
     <string name="type_test_screen_테스트_건너뛰기">跳过测试</string>
     <string name="type_test_screen_다음">下一步</string>
     <string name="type_test_screen_님의">""</string>
-    <string name="type_test_screen_text1">的偏好是？</string>
-    <string name="type_test_screen_text2">想要的旅游风格是？</string>
+    <string name="type_test_screen_text1">爱好是..</string>
+    <string name="type_test_screen_text2">想要的旅游风格是..</string>
     <string name="type_test_screen_text3">柑橘正在被榨汁……</string>
     <string name="type_test_screen_text4">美味的旅游果汁马上出来！ </string>
     <string name="type_test_screen_text5">的旅行类型是</string>
@@ -301,6 +318,7 @@
     <!--프로필 수정 화면-->
     <string name="profile_update_screen_프로필_수정">编辑个人资料</string>
     <string name="profile_update_screen_수정_완료">修改完成</string>
+    <string name="profile_update_screen_warning">소개글은 70자 이내로 작성 가능합니다.</string>
 
     <!--프로필 수정 화면 다이얼로그-->
     <string name="profile_update_dialog_text1">要删除更改内容吗？</string>

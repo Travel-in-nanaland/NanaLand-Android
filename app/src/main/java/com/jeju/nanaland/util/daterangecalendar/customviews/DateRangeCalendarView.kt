@@ -14,6 +14,7 @@ import androidx.viewpager.widget.ViewPager.OnPageChangeListener
 import com.jeju.nanaland.R
 import com.jeju.nanaland.util.daterangecalendar.models.CalendarStyleAttrImpl
 import com.jeju.nanaland.util.daterangecalendar.models.CalendarStyleAttributes
+import com.jeju.nanaland.util.language.customContext
 import com.jeju.nanaland.util.resource.getString
 import java.text.DateFormatSymbols
 import java.util.Calendar
@@ -132,7 +133,7 @@ class DateRangeCalendarView : LinearLayout, DateRangeCalendarViewApi {
      */
     private fun setCalendarYearTitle(position: Int) {
         val currentCalendarMonth = mDateRangeCalendarManager.getVisibleMonthDataList()[position]
-        var dateText = currentCalendarMonth[Calendar.MONTH].toString() + getString(R.string.common_월)
+        var dateText = customContext.resources.getStringArray(R.array.month_name)[currentCalendarMonth[Calendar.MONTH]]
         dateText = dateText.substring(0, 1).toUpperCase() + dateText.subSequence(1, dateText.length)
         val yearTitle = "${currentCalendarMonth[Calendar.YEAR]}"
         tvYearTitle.text = yearTitle

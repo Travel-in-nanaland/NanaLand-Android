@@ -9,6 +9,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.buildAnnotatedString
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import com.jeju.nanaland.R
@@ -39,9 +40,14 @@ fun TypeTestCompletionScreenText() {
                     })
                 }
                 withStyle(
-                    style = largeTitle02.toSpanStyle().copy(
-                        color = getColor().black
-                    )
+                    style = when (getLanguage()) {
+                        "ms" -> largeTitle02Regular.toSpanStyle().copy(
+                            color = getColor().black
+                        )
+                        else -> largeTitle02.toSpanStyle().copy(
+                            color = getColor().black
+                        )
+                    }
                 ) {
                     append(getString(R.string.type_test_screen_님의))
                 }
@@ -62,7 +68,8 @@ fun TypeTestCompletionScreenText() {
             style = when (getLanguage()) {
                 "ko", "en", "zh" -> largeTitle02Regular
                 else -> largeTitle02
-            }
+            },
+            textAlign = TextAlign.Center
         )
 
         Spacer(Modifier.height(16.dp))
@@ -70,7 +77,8 @@ fun TypeTestCompletionScreenText() {
         Text(
             text = getString(R.string.type_test_screen_text2),
             color = getColor().black,
-            style = largeTitle02Regular
+            style = largeTitle02Regular,
+            textAlign = TextAlign.Center
         )
     }
 }

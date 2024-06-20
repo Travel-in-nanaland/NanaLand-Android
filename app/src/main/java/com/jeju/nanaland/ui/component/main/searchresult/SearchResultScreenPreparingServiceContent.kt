@@ -18,12 +18,12 @@ import com.jeju.nanaland.ui.theme.getColor
 import com.jeju.nanaland.util.resource.getString
 
 @Composable
-fun SearchResultScreenPreparingServiceContent() {
+fun SearchResultScreenPreparingServiceContent(isImageSmall: Boolean = false) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Image(
-            modifier = Modifier.size(48.dp),
+            modifier = Modifier.size((if (isImageSmall) 48 else 100).dp),
             painter = painterResource(R.drawable.img_airplane),
             contentDescription = null
         )

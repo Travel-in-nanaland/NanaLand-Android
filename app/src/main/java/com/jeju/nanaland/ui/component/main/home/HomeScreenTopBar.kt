@@ -1,14 +1,17 @@
 package com.jeju.nanaland.ui.component.main.home
 
+import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.text.KeyboardActions
@@ -36,6 +39,7 @@ import com.jeju.nanaland.globalvalue.type.SearchCategoryType
 import com.jeju.nanaland.ui.theme.NanaLandTheme
 import com.jeju.nanaland.ui.theme.body02
 import com.jeju.nanaland.ui.theme.getColor
+import com.jeju.nanaland.ui.theme.searchText
 import com.jeju.nanaland.util.language.customContext
 import com.jeju.nanaland.util.resource.getString
 import com.jeju.nanaland.util.ui.ScreenPreview
@@ -51,6 +55,7 @@ fun HomeScreenTopBar(
     updateSearchCategoryType: (SearchCategoryType) -> Unit,
     getSearchResult: (String) -> Unit,
     addRecentSearch: (String) -> Unit,
+    moveToNotificationScreen: () -> Unit,
 ) {
     val focusManager = LocalFocusManager.current
     val focusRequester = FocusRequester()
@@ -104,7 +109,7 @@ fun HomeScreenTopBar(
                 }
             )
         ) {
-            Box(
+            Row(
                 modifier = Modifier
                     .height(TOP_BAR_HEIGHT.dp)
                     .border(
@@ -113,36 +118,61 @@ fun HomeScreenTopBar(
                             color = getColor().main
                         ),
                         shape = RoundedCornerShape(50)
-                    )
-                    .padding(start = 20.dp, end = 20.dp),
-                contentAlignment = Alignment.CenterStart
+                    ),
+                verticalAlignment = Alignment.CenterVertically
             ) {
-                it()
-                if (inputText == "") {
-                    if (isFocused) {
-                        Text(
-                            text = getString(R.string.searching_screen_textfiled_hint),
-                            color = getColor().gray01,
-                            style = body02
-                        )
-                    } else {
-                        Text(
-                            text = customContext.resources.getStringArray(R.array.home_screen_hint)[Random.nextInt(0, 11)],
-                            color = getColor().gray01,
-                            style = body02
-                        )
+                Spacer(Modifier.width(12.dp))
+
+                Box(
+                    modifier = Modifier.weight(1f),
+                    contentAlignment = Alignment.CenterStart
+                ) {
+                    it()
+                    if (inputText == "") {
+                        if (isFocused) {
+                            Text(
+                                text = getString(R.string.searching_screen_textfiled_hint),
+                                color = getColor().gray01,
+                                style = body02
+                            )
+                        } else {
+                            Text(
+                                text = customContext.resources.getStringArray(R.array.home_screen_hint)[Random.nextInt(0, 10)],
+                                color = getColor().gray01,
+                                style = searchText
+                            )
+                        }
                     }
                 }
+
+                if (inputText != "") {
+                    Image(
+                        modifier = Modifier
+                            .size(12.dp)
+                            .clickableNoEffect { onValueChange("") },
+                        painter = painterResource(R.drawable.ic_close_circled),
+                        contentDescription = null
+                    )
+                }
+
+                Spacer(Modifier.width(12.dp))
             }
         }
-        Image(
-            modifier = Modifier
-                .padding(start = 8.dp, end = 16.dp)
-                .size(32.dp),
-            painter = painterResource(id = R.drawable.ic_bell_outlined),
-            contentDescription = null,
-            colorFilter = ColorFilter.tint(getColor().main)
-        )
+
+        Spacer(Modifier.width(8.dp))
+
+        if (currentViewType == HomeScreenViewType.Home) {
+            Image(
+                modifier = Modifier
+                    .size(32.dp)
+                    .clickableNoEffect { moveToNotificationScreen() },
+                painter = painterResource(id = R.drawable.ic_bell_outlined),
+                contentDescription = null,
+                colorFilter = ColorFilter.tint(getColor().main)
+            )
+        }
+
+        Spacer(Modifier.width(16.dp))
     }
 }
 
@@ -157,7 +187,8 @@ private fun HomeScreenTopBarPreview_Home() {
             updateHomeScreenViewType = {},
             updateSearchCategoryType = {},
             getSearchResult = {},
-            addRecentSearch = {}
+            addRecentSearch = {},
+            moveToNotificationScreen = {}
         )
     }
 }
@@ -173,7 +204,8 @@ private fun HomeScreenTopBarPreview_Searching() {
             updateHomeScreenViewType = {},
             updateSearchCategoryType = {},
             getSearchResult = {},
-            addRecentSearch = {}
+            addRecentSearch = {},
+            moveToNotificationScreen = {}
         )
     }
 }
@@ -189,7 +221,8 @@ private fun HomeScreenTopBarPreview_SearchResult() {
             updateHomeScreenViewType = {},
             updateSearchCategoryType = {},
             getSearchResult = {},
-            addRecentSearch = {}
+            addRecentSearch = {},
+            moveToNotificationScreen = {}
         )
     }
 }

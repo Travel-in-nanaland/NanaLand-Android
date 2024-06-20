@@ -16,14 +16,16 @@ import com.jeju.nanaland.ui.component.main.home.HomeScreenTopBar
 import com.jeju.nanaland.ui.main.home.search.SearchResultContent
 import com.jeju.nanaland.ui.main.home.search.SearchViewModel
 import com.jeju.nanaland.ui.main.home.search.SearchingContent
+import com.jeju.nanaland.util.listfilter.ListFilter
 import com.jeju.nanaland.util.ui.ScreenPreview
 
 @Composable
 fun HomeScreen(
+    moveToNotificationScreen: () -> Unit,
     moveToCategoryContentScreen: (Long, String?, Boolean) -> Unit,
     moveToNanaPickListScreen: () -> Unit,
-    moveToNatureListScreen: () -> Unit,
-    moveToFestivalListScreen: () -> Unit,
+    moveToNatureListScreen: (ListFilter) -> Unit,
+    moveToFestivalListScreen: (ListFilter) -> Unit,
     moveToMarketListScreen: () -> Unit,
     moveToExperienceListScreen: () -> Unit,
     moveToSignInScreen: () -> Unit,
@@ -40,6 +42,7 @@ fun HomeScreen(
         addRecentSearch = searchViewModel::addRecentSearch,
         updateHomeScreenViewType = homeViewModel::updateHomeScreenViewType,
         updateSearchCategoryType = searchViewModel::updateSelectedCategoryType,
+        moveToNotificationScreen = moveToNotificationScreen,
         moveToCategoryContentScreen = moveToCategoryContentScreen,
         moveToNanaPickListScreen = moveToNanaPickListScreen,
         moveToNatureListScreen = moveToNatureListScreen,
@@ -60,10 +63,11 @@ private fun HomeScreen(
     addRecentSearch: (String) -> Unit,
     updateHomeScreenViewType: (HomeScreenViewType) -> Unit,
     updateSearchCategoryType: (SearchCategoryType) -> Unit,
+    moveToNotificationScreen: () -> Unit,
     moveToCategoryContentScreen: (Long, String?, Boolean) -> Unit,
     moveToNanaPickListScreen: () -> Unit,
-    moveToNatureListScreen: () -> Unit,
-    moveToFestivalListScreen: () -> Unit,
+    moveToNatureListScreen: (ListFilter) -> Unit,
+    moveToFestivalListScreen: (ListFilter) -> Unit,
     moveToMarketListScreen: () -> Unit,
     moveToExperienceScreen: () -> Unit,
     moveToSignInScreen: () -> Unit,
@@ -77,7 +81,8 @@ private fun HomeScreen(
             updateHomeScreenViewType = updateHomeScreenViewType,
             updateSearchCategoryType = updateSearchCategoryType,
             getSearchResult = getSearchResult,
-            addRecentSearch = addRecentSearch
+            addRecentSearch = addRecentSearch,
+            moveToNotificationScreen = moveToNotificationScreen
         )
 
         Spacer(Modifier.height(10.dp))
