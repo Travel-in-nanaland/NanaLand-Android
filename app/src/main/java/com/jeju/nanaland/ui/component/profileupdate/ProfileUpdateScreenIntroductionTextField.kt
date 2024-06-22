@@ -76,7 +76,7 @@ fun ProfileUpdateScreenIntroductionTextField(
                     Spacer(Modifier.width(4.dp))
 
                     Text(
-                        text = if (inputState == InputIntroductionState.Invalid) getString(R.string.sign_up_profile_setting_warning1)
+                        text = if (inputState == InputIntroductionState.Invalid) getString(R.string.profile_update_screen_warning)
                         else "",
                         color = getColor().warning,
                         style = caption01

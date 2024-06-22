@@ -17,6 +17,7 @@ import com.jeju.nanaland.util.network.NetworkResult
 import java.io.File
 
 interface MemberRepository {
+
     // 유저 프로필 조회
     suspend fun getUserProfile(): NetworkResult<GetUserProfileResponse>
 

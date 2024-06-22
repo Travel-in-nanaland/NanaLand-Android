@@ -56,19 +56,7 @@ fun NanaPickContentSubContent(
         additionalInfoList.forEach { info ->
             if (info.infoEmoji != "SPECIAL") {
                 NanaPickContentSubContentAdditionalInfo(
-                    drawableId = when (info.infoEmoji) {
-                        "ADDRESS" -> R.drawable.ic_location_outlined
-                        "PARKING" -> R.drawable.ic_car_outlined
-                        "AMENITY" -> R.drawable.ic_warning_outlined
-                        "WEBSITE" -> R.drawable.ic_home_filled
-                        "RESERVATION_LINK" -> R.drawable.ic_clip_outlined_2
-                        "AGE" -> R.drawable.ic_age
-                        "TIME" -> R.drawable.ic_clock_filled
-                        "FEE" -> R.drawable.ic_fee
-                        "DATE" -> R.drawable.ic_calendar_filled
-                        "DESCRIPTION" -> R.drawable.ic_speech_bubble
-                        else -> R.drawable.ic_phone_outlined
-                    },
+                    infoEmoji = info.infoEmoji,
                     infoKey = info.infoKey,
                     infoValue = info.infoValue
                 )
