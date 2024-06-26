@@ -13,6 +13,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.jeju.nanaland.ui.theme.getColor
+import com.jeju.nanaland.util.language.getLanguage
 import com.jeju.nanaland.util.ui.clickableNoEffect
 
 @Composable
@@ -49,7 +50,9 @@ fun HomeScreenAdContent(
 
             Spacer(Modifier.weight(1f))
 
-            HomeScreenAdImage(idx = idx)
+            if (getLanguage() == "ko" || getLanguage() == "zh") {
+                HomeScreenAdImage(idx = idx)
+            }
         }
     }
 }

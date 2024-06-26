@@ -6,8 +6,14 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.drawBehind
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.geometry.Size
+import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.jeju.nanaland.domain.entity.nanapick.NanaPickBannerData
 import com.jeju.nanaland.ui.theme.NanaLandTheme
@@ -20,6 +26,7 @@ fun HomeScreenNanaPickBanner(
     height: Int = 220,
     onClick: (Long) -> Unit,
 ) {
+    val brush = remember { Brush.verticalGradient(listOf(Color.Transparent, Color(0x99262627))) }
     Box(
         modifier = Modifier
             .fillMaxWidth()
@@ -27,6 +34,19 @@ fun HomeScreenNanaPickBanner(
             .clickableNoEffect { onClick(item.id) }
     ) {
         HomeScreenNanaPickBannerImage(imageUri = item.thumbnailUrl)
+
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(height.dp)
+                .drawBehind {
+                    drawRect(
+                        brush = brush,
+                        topLeft = Offset.Zero,
+                        size = Size(this.size.width, this.size.height)
+                    )
+                }
+        )
 
         Column(
             modifier = Modifier

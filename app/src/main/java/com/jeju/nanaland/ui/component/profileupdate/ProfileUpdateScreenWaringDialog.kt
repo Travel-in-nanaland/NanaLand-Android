@@ -62,7 +62,7 @@ fun ProfileUpdateScreenWaringDialog(
 
                         Text(
                             text = getString(R.string.profile_update_dialog_text2),
-                            color = getColor().black,
+                            color = getColor().gray01,
                             style = body01,
                             textAlign = TextAlign.Center
                         )
@@ -71,18 +71,18 @@ fun ProfileUpdateScreenWaringDialog(
                     SettingsScreenHorizontalDivider()
 
                     Row(Modifier.height(IntrinsicSize.Min)) {
-                        SettingsScreenDialogConfirmButton(
+                        SettingsScreenDialogCancelButton(
                             text = getString(R.string.common_취소),
                             onClick = onCancel
                         )
 
                         WithdrawalScreenDialogVerticalDivider()
 
-                        SettingsScreenDialogCancelButton(
+                        SettingsScreenDialogConfirmButton(
                             text = getString(R.string.common_삭제),
                             onClick = {
-                                onCancel()
                                 onConfirm()
+                                onCancel()
                             }
                         )
                     }

@@ -5,6 +5,7 @@ import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import com.jeju.nanaland.globalvalue.constant.ROUTE_EXPERIENCE_CONTENT
+import com.jeju.nanaland.globalvalue.constant.ROUTE_EXPERIENCE_LIST
 import com.jeju.nanaland.globalvalue.constant.ROUTE_FESTIVAL_CONTENT
 import com.jeju.nanaland.globalvalue.constant.ROUTE_FESTIVAL_LIST
 import com.jeju.nanaland.globalvalue.constant.ROUTE_MAIN
@@ -59,7 +60,7 @@ fun NavGraphBuilder.mainScreen(
             navController.navigate(ROUTE_FESTIVAL_LIST, bundle)
         },
         moveToMarketListScreen = { navController.navigate(ROUTE_MARKET_LIST) { launchSingleTop = true } },
-        moveToExperienceListScreen = { /* MVP2 구현 예정 */ },
+        moveToExperienceListScreen = { navController.navigate(ROUTE_EXPERIENCE_LIST) { launchSingleTop = true } },
         moveToSettingsScreen = { navController.navigate(ROUTE_SETTINGS) { launchSingleTop = true } },
         moveToProfileModificationScreen = { profileImageUri, nickname, introduction ->
             val bundle = bundleOf(

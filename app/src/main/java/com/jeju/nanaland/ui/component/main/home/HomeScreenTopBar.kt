@@ -139,6 +139,7 @@ fun HomeScreenTopBar(
                             Text(
                                 text = customContext.resources.getStringArray(R.array.home_screen_hint)[Random.nextInt(0, 10)],
                                 color = getColor().gray01,
+
                                 style = searchText
                             )
                         }
@@ -149,7 +150,10 @@ fun HomeScreenTopBar(
                     Image(
                         modifier = Modifier
                             .size(12.dp)
-                            .clickableNoEffect { onValueChange("") },
+                            .clickableNoEffect {
+                                onValueChange("")
+                                focusRequester.requestFocus()
+                            },
                         painter = painterResource(R.drawable.ic_close_circled),
                         contentDescription = null
                     )

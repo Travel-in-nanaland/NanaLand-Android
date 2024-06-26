@@ -60,33 +60,18 @@ fun NanaPickContentSubContentAdditionalInfo(
 //            style = body02
 //        )
 
-        if (infoEmoji == "WEBSITE" || infoEmoji == "RESERVATION_LINK") {
-            Text(
-                modifier = Modifier
-                    .clickableNoEffect {
+        Text(
+            modifier = Modifier
+                .clickableNoEffect {
+                    if (infoEmoji == "WEBSITE" || infoEmoji == "RESERVATION_LINK") {
                         uriHandler.openUri(infoValue ?: "")
-                    },
-                text = buildAnnotatedString {
-                    append("${infoKey ?: ""} : ${infoValue ?: ""}".useNonBreakingSpace())
-                    addStringAnnotation(
-                        tag = "URL",
-                        annotation = infoValue ?: "",
-                        start = 0,
-                        end = infoValue?.length ?: 0
-                    )
+                    }
                 },
-                color = getColor().gray01,
-                style = body02,
-                textAlign = TextAlign.Justify
-            )
-        } else {
-            Text(
-                text = "${infoKey ?: ""} : ${infoValue ?: ""}".useNonBreakingSpace(),
-                color = getColor().gray01,
-                style = body02,
-                textAlign = TextAlign.Justify
-            )
-        }
+            text = "${infoKey ?: ""} : ${infoValue ?: ""}".useNonBreakingSpace(),
+            color = getColor().gray01,
+            style = body02,
+            textAlign = TextAlign.Justify
+        )
     }
 }
 

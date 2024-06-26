@@ -48,7 +48,7 @@ fun LocationFilterDialogLocationBox(
     ) {
         Text(
             text = locationName ?: "",
-            color = getColor().gray01,
+            color = if (isSelected) getColor().main else getColor().gray01,
             style = when (getLanguage()) {
                 "en", "ms" -> body02
                 else -> body01

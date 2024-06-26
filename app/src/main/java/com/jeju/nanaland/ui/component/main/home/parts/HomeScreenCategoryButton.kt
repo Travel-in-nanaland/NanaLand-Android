@@ -27,7 +27,7 @@ fun HomeScreenCategoryButton(
 ) {
     Column(
         modifier = Modifier
-            .width(56.dp)
+            .width(60.dp)
             .clip(RoundedCornerShape(8.dp))
             .clickableNoEffect { onClick() },
         horizontalAlignment = Alignment.CenterHorizontally

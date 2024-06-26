@@ -60,7 +60,7 @@ fun SignOutConfirmDialog(
                     SettingsScreenHorizontalDivider()
 
                     Row(Modifier.height(IntrinsicSize.Min)) {
-                        SettingsScreenDialogConfirmButton(
+                        SettingsScreenDialogCancelButton(
                             text = getString(R.string.common_네),
                             onClick = {
                                 onCancel()
@@ -70,7 +70,7 @@ fun SignOutConfirmDialog(
 
                         WithdrawalScreenDialogVerticalDivider()
 
-                        SettingsScreenDialogCancelButton(
+                        SettingsScreenDialogConfirmButton(
                             text = getString(R.string.common_아니오),
                             onClick = onCancel
                         )

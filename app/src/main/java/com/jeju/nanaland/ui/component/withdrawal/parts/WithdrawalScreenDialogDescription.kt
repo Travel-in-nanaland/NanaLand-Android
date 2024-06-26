@@ -14,7 +14,7 @@ fun WithdrawalScreenDialogDescription() {
     Text(
         text = getString(R.string.withdrawal_dialog_text2),
         color = getColor().gray01,
-        style = caption01SemiBold,
+        style = body01,
         textAlign = TextAlign.Center
     )
 }

@@ -1,10 +1,13 @@
 package com.jeju.nanaland.ui.component.signup.typetestresult
 
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.withStyle
+import androidx.compose.ui.unit.dp
 import com.jeju.nanaland.R
 import com.jeju.nanaland.globalvalue.constant.TYPE_GAMGYUL
 import com.jeju.nanaland.globalvalue.constant.TYPE_GAMGYUL_ADE
@@ -30,6 +33,7 @@ import com.jeju.nanaland.util.resource.getString
 @Composable
 fun TypeTestResultScreenText3(travelType: String) {
     Text(
+        modifier = Modifier.padding(start = 20.dp, end = 20.dp),
         text = buildAnnotatedString {
             withStyle(
                 style = bodyBold.toSpanStyle().copy(
