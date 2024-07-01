@@ -71,13 +71,13 @@ fun RecommendedSpotScreenItem(
                 }
         )
 
-        Box(
-            modifier = Modifier
-                .align(Alignment.TopStart)
-                .padding(start = 24.dp, top = 24.dp)
-        ) {
-            RecommendedSpotScreenLogoStamp()
-        }
+//        Box(
+//            modifier = Modifier
+//                .align(Alignment.TopStart)
+//                .padding(start = 24.dp, top = 24.dp)
+//        ) {
+//            RecommendedSpotScreenLogoStamp()
+//        }
 
         Column(Modifier.padding(start = 16.dp, end = 16.dp)) {
             Spacer(Modifier.weight(1f))
