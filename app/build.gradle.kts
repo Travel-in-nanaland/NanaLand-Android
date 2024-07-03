@@ -23,7 +23,7 @@ android {
         applicationId = "com.jeju.nanaland"
         minSdk = 24
         targetSdk = 34
-        versionCode = 23
+        versionCode = 25
         versionName = "1.0.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"

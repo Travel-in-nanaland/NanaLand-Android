@@ -51,19 +51,21 @@ class MainActivity : ComponentActivity() {
         onBackPressedDispatcher.addCallback(this, onBackPressedCallback)
 
         val deepLinkData = DeepLinkData()
-        LogUtil.e("deepLink", "${intent}")
+        LogUtil.e("deepLink", "${intent.data}")
         if (Intent.ACTION_VIEW == intent.action) {
             val data = intent.data
-            LogUtil.e("deepLink", "${data}")
-            val category = data?.getQueryParameter("category") ?: ""
-            LogUtil.e("deepLink", "${category}")
-            val id = data?.getQueryParameter("id") ?: ""
-            LogUtil.e("deepLink", "${id}")
-            val language = data?.getQueryParameter("lang") ?: ""
-            LogUtil.e("deepLink", "${language}")
-            deepLinkData.language = language
-            deepLinkData.category = category
-            deepLinkData.contentId = id.toLong()
+            if (data.toString().contains("nanaland")) {
+                LogUtil.e("deepLink", "${data}")
+                val category = data?.getQueryParameter("category") ?: ""
+                LogUtil.e("deepLink", "${category}")
+                val id = data?.getQueryParameter("id") ?: ""
+                LogUtil.e("deepLink", "${id}")
+                val language = data?.getQueryParameter("lang") ?: ""
+                LogUtil.e("deepLink", "${language}")
+                deepLinkData.language = language
+                deepLinkData.category = category
+                deepLinkData.contentId = id.toLong()
+            }
         }
 //
 //        val keyHash = Utility.getKeyHash(this)

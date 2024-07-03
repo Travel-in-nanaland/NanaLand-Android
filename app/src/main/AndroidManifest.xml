@@ -33,14 +33,6 @@
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
-                <!-- 카카오 로그인 -->
-                <data android:scheme="kakaobf7035e60f5541853f1e732e701fcc37"/>
-                <data android:host="oauth"/>
-            </intent-filter>
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
                 <!-- 카카오톡으로 앱 실행 -->
                 <data android:scheme="kakaobf7035e60f5541853f1e732e701fcc37"/>
                 <data android:host="kakaolink"/>
@@ -52,6 +44,18 @@
                 <!-- 딥링크로 앱 실행 -->
                 <data android:scheme="nanaland"/>
                 <data android:host="detail"/>
+            </intent-filter>
+        </activity>
+        <activity android:name="com.kakao.sdk.auth.AuthCodeHandlerActivity"
+            android:exported="true"
+            android:launchMode="singleTask">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <!-- 카카오 로그인 -->
+                <data android:scheme="kakaobf7035e60f5541853f1e732e701fcc37"/>
+                <data android:host="oauth"/>
             </intent-filter>
         </activity>
     </application>

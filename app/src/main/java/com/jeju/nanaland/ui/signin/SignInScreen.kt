@@ -2,6 +2,7 @@ package com.jeju.nanaland.ui.signin
 
 import android.annotation.SuppressLint
 import android.provider.Settings
+import android.widget.Toast
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -68,6 +69,20 @@ private fun SignInScreen(
     moveToSignUpScreen: (String, String, String) -> Unit,
     isContent: Boolean
 ) {
+    LaunchedEffect(Unit) {
+        UserApiClient.instance.me { user, error ->
+            if (user != null) {
+                LogUtil.e(
+                    "KakaoGetUserInfoSuccess", "회원번호: ${user.id}" +
+                            "\n이메일: ${user.kakaoAccount?.email}" +
+                            "\n닉네임: ${user.kakaoAccount?.profile?.nickname}" +
+                            "\n프로필사진: ${user.kakaoAccount?.profile?.thumbnailImageUrl}"
+                )
+            } else {
+                LogUtil.e("", "로그인 안됨")
+            }
+        }
+    }
     val context = LocalContext.current
     val startForResult =
         rememberLauncherForActivityResult(contract = AuthResultContract()) { task: Task<GoogleSignInAccount>? ->
@@ -118,9 +133,63 @@ private fun SignInScreen(
                         UserApiClient.instance.loginWithKakaoTalk(context) { token, error ->
                             if (error != null) {
                                 LogUtil.e("KakaoLoginError", "${error}")
+                                // 카톡은 깔려있는데 에러가 날 경우
+                                UserApiClient.instance.loginWithKakaoAccount(context) { token, error ->
+                                    if (error != null) {
+                                        Toast.makeText(context, "로그인 실패", Toast.LENGTH_SHORT).show()
+                                    } else if (token != null) {
+                                        UserApiClient.instance.me { user, error ->
+                                            if (error != null) {
+                                                LogUtil.e("KakaoGetUserInfoError", "$error")
+                                            }
+                                            else if (user != null) {
+                                                LogUtil.e("KakaoGetUserInfoSuccess", "회원번호: ${user.id}" +
+                                                        "\n이메일: ${user.kakaoAccount?.email}" +
+                                                        "\n닉네임: ${user.kakaoAccount?.profile?.nickname}" +
+                                                        "\n프로필사진: ${user.kakaoAccount?.profile?.thumbnailImageUrl}")
+
+                                                if (user.id != null) {
+                                                    signIn(
+                                                        "KAKAO",
+                                                        user.id.toString(),
+                                                        moveToMainScreen,
+                                                        { moveToSignUpScreen("KAKAO", user.kakaoAccount?.email!!, user.id.toString()) }
+                                                    )
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
                             } else if (token != null) {
                                 LogUtil.e("KakaoLoginSuccess", "accessToken: ${token.accessToken}\n" +
                                         "refreshToken: ${token.refreshToken}")
+                                UserApiClient.instance.me { user, error ->
+                                    if (error != null) {
+                                        LogUtil.e("KakaoGetUserInfoError", "$error")
+                                    }
+                                    else if (user != null) {
+                                        LogUtil.e("KakaoGetUserInfoSuccess", "회원번호: ${user.id}" +
+                                                "\n이메일: ${user.kakaoAccount?.email}" +
+                                                "\n닉네임: ${user.kakaoAccount?.profile?.nickname}" +
+                                                "\n프로필사진: ${user.kakaoAccount?.profile?.thumbnailImageUrl}")
+
+                                        if (user.id != null) {
+                                            signIn(
+                                                "KAKAO",
+                                                user.id.toString(),
+                                                moveToMainScreen,
+                                                { moveToSignUpScreen("KAKAO", user.kakaoAccount?.email!!, user.id.toString()) }
+                                            )
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    } else {
+                        UserApiClient.instance.loginWithKakaoAccount(context) { token, error ->
+                            if (error != null) {
+                                Toast.makeText(context, "로그인 실패", Toast.LENGTH_SHORT).show()
+                            } else if (token != null) {
                                 UserApiClient.instance.me { user, error ->
                                     if (error != null) {
                                         LogUtil.e("KakaoGetUserInfoError", "$error")
