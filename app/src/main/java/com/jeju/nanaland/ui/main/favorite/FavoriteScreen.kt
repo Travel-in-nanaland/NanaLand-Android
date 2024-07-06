@@ -85,7 +85,12 @@ private fun FavoriteScreen(
             is UiState.Success -> {
                 SearchResultScreenItemCount(
                     modifier = Modifier.padding(start = 16.dp),
-                    count = favoriteThumbnailCount.data
+                    count = when (selectedCategory) {
+                        SearchCategoryType.JejuStory,
+                        SearchCategoryType.NanaPick,
+                        SearchCategoryType.Experience -> 0
+                        else -> favoriteThumbnailCount.data
+                    }
                 )
             }
             is UiState.Failure -> {}

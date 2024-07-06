@@ -21,9 +21,9 @@ android {
 
     defaultConfig {
         applicationId = "com.jeju.nanaland"
-        minSdk = 24
+        minSdk = 26
         targetSdk = 34
-        versionCode = 25
+        versionCode = 26
         versionName = "1.0.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"

@@ -107,8 +107,11 @@ private fun MarketListScreen(
                     count = marketThumbnailCount,
                     selectedLocationList = selectedLocationList,
                     locationList = locationList,
-                    openLocationFilterDialog = { coroutineScope.launch { locationFilterDialogAnchoredDraggableState.animateTo(
-                        AnchoredDraggableContentState.Open) } },
+                    openLocationFilterDialog = {
+                        coroutineScope.launch {
+                            locationFilterDialogAnchoredDraggableState.animateTo(AnchoredDraggableContentState.Open)
+                        }
+                    },
                     showDimBackground = { isDimBackgroundShowing.value = true }
                 )
 

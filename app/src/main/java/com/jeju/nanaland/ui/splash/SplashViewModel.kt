@@ -71,6 +71,7 @@ class SplashViewModel @Inject constructor(
                             key = KEY_LANGUAGE,
                             value = deepLinkData.language!!
                         ) }
+
                         val conf: Configuration = application.resources.configuration
                         conf.setLocale(Locale(deepLinkData.language!!))
                         customContext = application.createConfigurationContext(conf)
