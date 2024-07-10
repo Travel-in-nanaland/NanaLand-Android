@@ -11,7 +11,11 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -20,6 +24,7 @@ import com.jeju.nanaland.R
 import com.jeju.nanaland.domain.entity.nanapick.NanaPickContentData
 import com.jeju.nanaland.ui.component.common.CustomSurface
 import com.jeju.nanaland.ui.component.common.CustomTopBar
+import com.jeju.nanaland.ui.component.detailscreen.nanapick.NanaPickContentAttractivePointDialog
 import com.jeju.nanaland.ui.component.detailscreen.nanapick.NanaPickContentSubContents
 import com.jeju.nanaland.ui.component.detailscreen.nanapick.NanaPickContentTopBanner
 import com.jeju.nanaland.ui.component.detailscreen.other.DetailScreenNotice
@@ -60,6 +65,13 @@ private fun NanaPickContentScreen(
 ) {
     val scrollState = rememberScrollState()
     val coroutineScope = rememberCoroutineScope()
+    var attractiveDialogText by remember { mutableStateOf("") }
+
+    if(attractiveDialogText.isNotBlank())
+        NanaPickContentAttractivePointDialog(attractiveDialogText) {
+            attractiveDialogText = ""
+        }
+
     CustomSurface {
         CustomTopBar(
             title = getString(R.string.common_나나s_Pick),
@@ -90,7 +102,9 @@ private fun NanaPickContentScreen(
 
                             Spacer(Modifier.height(48.dp))
 
-                            NanaPickContentSubContents(nanaPickContent = nanaPickContent.data)
+                            NanaPickContentSubContents(nanaPickContent = nanaPickContent.data) {
+                                attractiveDialogText = it
+                            }
                         }
 
                         Spacer(Modifier.height(80.dp))
