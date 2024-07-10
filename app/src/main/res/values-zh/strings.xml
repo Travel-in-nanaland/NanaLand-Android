@@ -244,7 +244,7 @@
     <string name="type_감귤_라떼_description">在温暖的阳光下悠然自在的柑橘拿铁类型！</string>
     <string name="type_감귤_식혜_description">充满风味的！ 虽然耗时长，但味道浓郁的柑橘甜米露类型！</string>
     <string name="type_감귤_에이드_description">在爽口的碳酸水中加入新鲜的水果！ 有清凉感的柑橘汽水</string>
-    <string name="type_감귤_버블티_description">充满好奇心的你！越吃越反转的柑橘珍珠奶茶类型！</string>
+    <string name="type_감귤_버블티_description">充满好奇心的你！\n越吃越反转的柑橘珍珠奶茶类型！</string>
 
     <!--여행지 유형 테스트 화면-->
     <string name="type_test_screen_question1">选拔景点时\n</string>
