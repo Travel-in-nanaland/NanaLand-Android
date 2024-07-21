@@ -22,7 +22,9 @@ data class ReviewWriteUiState(
 
     val reviewRating: Int = 0,
     val reviewImage: List<Uri> = emptyList(),
-    val reviewKeyword: List<String> = emptyList()
+    val reviewKeyword: List<String> = emptyList(),
+
+    val canSubmit: Boolean = false
 )
 
 @HiltViewModel
@@ -94,7 +96,8 @@ class ReviewWriteViewModel @Inject constructor(
 
     fun updateRating(arg: Int) {
         viewModelState.update {
-            it.copy(reviewRating = arg)
+            it.copy(reviewRating = arg).setCanSubmit()
+
         }
     }
 
@@ -117,26 +120,32 @@ class ReviewWriteViewModel @Inject constructor(
         viewModelState.update {
             it.copy(
                 reviewKeyword = arg.take(MAX_KEYWORD_CNT)
-            )
+            ).setCanSubmit()
         }
     }
     fun removeKeyword(arg: String) {
         viewModelState.update {
             it.copy(
                 reviewKeyword = it.reviewKeyword.minus(arg)
-            )
+            ).setCanSubmit()
         }
     }
 
     fun updateReviewText(arg: String) {
         reviewText = arg
+        viewModelState.update {
+            it.setCanSubmit()
+        }
     }
 
-    fun checkIsComplete() =
-        with(viewModelState.value) {
-            0 < reviewRating &&
-            reviewImage.size <= MAX_IMAGE_CNT &&
-            reviewText.length <= MAX_TEXT_LENGTH &&
-            reviewKeyword.size in MIN_KEYWORD_CNT..MAX_KEYWORD_CNT
-        }
+    private fun ReviewWriteUiState.setCanSubmit(): ReviewWriteUiState {
+        val canSubmit = reviewRating > 0 &&
+                reviewText.isNotEmpty() && reviewText.length <= MAX_TEXT_LENGTH &&
+                reviewKeyword.size in (MIN_KEYWORD_CNT..MAX_KEYWORD_CNT)
+
+        return if (this.canSubmit != canSubmit)
+            copy(canSubmit = canSubmit)
+        else
+            this
+    }
 }

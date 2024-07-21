@@ -7,8 +7,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableIntStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
@@ -16,6 +14,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.jeju.nanaland.R
+import com.jeju.nanaland.globalvalue.type.CategoryType
 import com.jeju.nanaland.ui.component.common.BottomOkButton
 import com.jeju.nanaland.ui.component.common.BottomOkButtonOutlined
 import com.jeju.nanaland.ui.component.common.CustomSurface
@@ -28,16 +27,16 @@ import com.jeju.nanaland.util.ui.ScreenPreview
 @ScreenPreview
 @Composable
 private fun ReviewWriteCompleteScreenPreview() {
-    ReviewWriteCompleteUI(1, {}, {})
+    ReviewWriteCompleteUI(CategoryType.Experience, {}, {})
 }
 
 @Composable
 fun ReviewWriteCompleteScreen(
     navController: NavController,
+    categoryType: CategoryType = CategoryType.Experience // TODO
 ) {
-    val version = remember { mutableIntStateOf( (1..2).random()) }
     ReviewWriteCompleteUI(
-        version = version.intValue,
+        cateogry = categoryType,
         onAgain = { navController.popBackStack() },
         onAdd = {}
     )
@@ -46,10 +45,11 @@ fun ReviewWriteCompleteScreen(
 
 @Composable
 private fun ReviewWriteCompleteUI(
-    version: Int = 1,
+    cateogry: CategoryType,
     onAgain: () -> Unit,
     onAdd: () -> Unit,
 ) {
+    val uiData = getUiDataByCategory(cateogry)
 
     CustomSurface {
         Column(
@@ -59,24 +59,14 @@ private fun ReviewWriteCompleteUI(
 
             Image(
                 modifier = Modifier.width(250.dp),
-                painter = painterResource(
-                    when(version){
-                        1 -> R.drawable.img_star
-                        else -> R.drawable.img_salad
-                    }
-                ),
+                painter = painterResource(uiData.first),
                 contentDescription = null,
             )
 
             Spacer(Modifier.height(40.dp))
 
             Text(
-                text = getString(
-                    when(version){
-                        1 -> R.string.review_write_keyword_complete_title1
-                        else -> R.string.review_write_keyword_complete_title2
-                    }
-                ),
+                text = uiData.second,
                 color = getColor().main,
                 style = largeTitle02,
                 textAlign = TextAlign.Center
@@ -85,12 +75,7 @@ private fun ReviewWriteCompleteUI(
             Spacer(Modifier.height(8.dp))
 
             Text(
-                text = getString(
-                    when(version){
-                        1 -> R.string.review_write_keyword_complete_sub1
-                        else -> R.string.review_write_keyword_complete_sub2
-                    }
-                ),
+                text = uiData.third,
                 color = getColor().black,
                 style = title02,
                 textAlign = TextAlign.Center
@@ -113,5 +98,22 @@ private fun ReviewWriteCompleteUI(
 
             Spacer(Modifier.height(20.dp))
         }
+    }
+}
+
+private fun getUiDataByCategory(
+    categoryType: CategoryType
+): Triple<Int/* image id */,String/* title */,String/* sub text */> {
+    return when(categoryType) { // TODO
+        CategoryType.Experience -> Triple(
+            R.drawable.img_star,
+            getString(R.string.review_write_keyword_complete_title1),
+            getString(R.string.review_write_keyword_complete_sub1),
+        )
+        else ->  Triple(
+            R.drawable.img_salad,
+            getString(R.string.review_write_keyword_complete_title2),
+            getString(R.string.review_write_keyword_complete_sub2),
+        )
     }
 }

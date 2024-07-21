@@ -8,4 +8,4 @@ import com.jeju.nanaland.util.language.customContext
 //    .resources.configuration).getString(id)
 
 
-fun getString(@StringRes id: Int) = customContext.getString(id)
+fun getString(@StringRes id: Int, vararg formatArgs: Any) = customContext.getString(id, *formatArgs)

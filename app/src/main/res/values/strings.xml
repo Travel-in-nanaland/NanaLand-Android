@@ -379,9 +379,10 @@
     <string name="review_write_writing" translatable="false">\"방문 후기\"를 \"작성\"해주세요!</string>
     <string name="review_write_add_keyword" translatable="false">키워드 추가</string>
     <string name="review_write_complete" translatable="false">올리기</string>
+    <string name="review_write_error_maximum_picture" translatable="false">사진은 %d개까지 선택 가능합니다</string>
+    <string name="review_write_error_maximum_text" translatable="false">내용은 %d자 이내로 작성 가능합니다</string>
     <string name="review_write_keyword_title" translatable="false">키워드</string>
     <string name="review_write_keyword_guide" translatable="false">*최소 %d개 이상 선택해야하며, 최대 %d개까지 선택 가능합니다.</string>
-    <string name="review_write_keyword_error_under" translatable="false">%d개 이상 선택해 주세요!</string>
     <string name="review_write_keyword_error_over" translatable="false">최대 %d개까지 선택 가능합니다!</string>
     <string name="review_write_keyword_complete_title1" translatable="false">당신의 매력적인 글 고마워요 👻</string>
     <string name="review_write_keyword_complete_sub1" translatable="false">당신의 매력만큼이나\n여행지의 매력도 함께 올라갔어요!\n\n점점 기대될 것 같아요🧚‍♀️</string>

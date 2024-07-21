@@ -1,6 +1,7 @@
 package com.jeju.nanaland.ui.reviewwrite
 
 import android.net.Uri
+import android.widget.Toast
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
@@ -39,6 +40,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
@@ -73,6 +75,7 @@ fun ReviewWriteScreen(
     navController: NavController,
     viewModel: ReviewWriteViewModel = hiltViewModel()
 ) {
+    val context = LocalContext.current
     val uiState = viewModel.uiState.collectAsStateWithLifecycle()
 
     ReviewWriteUI(
@@ -81,15 +84,21 @@ fun ReviewWriteScreen(
         moveToBackScreen = { navController.popBackStack() },
         moveToKeywordScreen = { navController.navigate(ROUTE_REVIEW_WRITE_KEYWORD) },
         moveToCompleteScreen = {
-            if(viewModel.checkIsComplete())
-                navController.navigate(ROUTE_REVIEW_WRITE_COMPLETE) {
-                    popUpTo(ROUTE_REVIEW_WRITE) { inclusive = true}
-                }
+            navController.navigate(ROUTE_REVIEW_WRITE_COMPLETE) {
+                popUpTo(ROUTE_REVIEW_WRITE) { inclusive = true}
+            }
         },
-        onChangedRating = viewModel::updateRating,
-        onAddImage = viewModel::addImage,
-        onRemoveImage = viewModel::removeImage,
-        onChangedText = viewModel::updateReviewText,
+            onChangedRating = viewModel::updateRating,
+            onAddImage = viewModel::addImage,
+            onRemoveImage = viewModel::removeImage,
+            onChangedText = {
+                if(it.length > ReviewWriteViewModel.MAX_TEXT_LENGTH) {
+                    Toast.makeText(context, getString(R.string.review_write_error_maximum_text, ReviewWriteViewModel.MAX_TEXT_LENGTH ), Toast.LENGTH_SHORT).show()
+                    viewModel.updateReviewText(it.substring(0, ReviewWriteViewModel.MAX_TEXT_LENGTH + 1))
+                }
+                else
+                    viewModel.updateReviewText(it)
+            },
         onRemoveKeyword = viewModel::removeKeyword
     )
 }
@@ -109,6 +118,7 @@ private fun ReviewWriteUI(
     onRemoveKeyword: (String) -> Unit,
 ) {
 
+    val context = LocalContext.current
     val scrollState = rememberScrollState()
     val takePhotoFromAlbumLauncher =
         rememberLauncherForActivityResult(
@@ -186,6 +196,8 @@ private fun ReviewWriteUI(
                                 ActivityResultContracts.PickVisualMedia.ImageOnly,
                             )
                         )
+                    else
+                        Toast.makeText(context, getString(R.string.review_write_error_maximum_picture, ReviewWriteViewModel.MAX_IMAGE_CNT ), Toast.LENGTH_SHORT).show()
                 },
                 onRemoveImage = onRemoveImage
             )
@@ -202,7 +214,7 @@ private fun ReviewWriteUI(
                 moveToKeywordScreen = moveToKeywordScreen
             )
             Spacer(modifier = Modifier.height(32.dp))
-            BottomOkButton(getString(R.string.review_write_complete),true){
+            BottomOkButton(getString(R.string.review_write_complete),uiState.canSubmit){
                 moveToCompleteScreen()
             }
             Spacer(modifier = Modifier.height(16.dp))
@@ -248,11 +260,8 @@ private fun AnnotatedStringConvertQuotes(text: String) {
 private fun StarRating(
     rating: Int,
     maxStars: Int = 5,
-    initialRating: Int = 0,
     onRatingChanged: (Int) -> Unit
 ) {
-//    val rating = remember { mutableIntStateOf(initialRating) }
-
     Row {
         for (i in 1..maxStars) {
             Icon(
@@ -261,9 +270,9 @@ private fun StarRating(
                 modifier = Modifier
                     .clickable {
                         if(rating == i)
-                            return@clickable
-
-                        onRatingChanged(i)
+                            onRatingChanged(i - 1)
+                        else
+                            onRatingChanged(i)
                     },
                 tint = if (i <= rating) getColor().yellow
                     else getColor().gray02
@@ -360,7 +369,7 @@ private fun ReviewImage(
 @Composable
 private fun ReviewText(
     text: String,
-    maxTextLength: Int = 200,
+    maxTextLength: Int,
     onText: (String) -> Unit
 ) {
     val tl = text.length

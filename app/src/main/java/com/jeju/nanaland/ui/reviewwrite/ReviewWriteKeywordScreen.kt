@@ -55,9 +55,6 @@ fun ReviewWriteKeywordScreen(
     var selectKeyword by remember {
         mutableStateOf(viewModel.uiState.value.reviewKeyword)
     }
-    //TODO
-    val errorUnderText = stringResource(R.string.review_write_keyword_error_under, ReviewWriteViewModel.MIN_KEYWORD_CNT)
-    val errorOverText = stringResource(R.string.review_write_keyword_error_over, ReviewWriteViewModel.MAX_KEYWORD_CNT)
 
     ReviewWriteKeywordUI(
         moveToBackScreen = { navController.popBackStack() },
@@ -65,7 +62,7 @@ fun ReviewWriteKeywordScreen(
         onKeyword = {
             val isSelect = it in selectKeyword
             if(ReviewWriteViewModel.MAX_KEYWORD_CNT <= selectKeyword.size && !isSelect)
-                Toast.makeText(context, errorOverText, Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, getString(R.string.review_write_keyword_error_over, ReviewWriteViewModel.MAX_KEYWORD_CNT), Toast.LENGTH_SHORT).show()
             else {
                 selectKeyword = if(isSelect)
                     selectKeyword.minus(it)
@@ -74,14 +71,8 @@ fun ReviewWriteKeywordScreen(
             }
         },
         onComplete = {
-            if(selectKeyword.size < ReviewWriteViewModel.MIN_KEYWORD_CNT)
-                Toast.makeText(context, errorUnderText, Toast.LENGTH_SHORT).show()
-            else if(ReviewWriteViewModel.MAX_KEYWORD_CNT <= selectKeyword.size)
-                Toast.makeText(context, errorOverText, Toast.LENGTH_SHORT).show()
-            else {
-                viewModel.setKeyword(selectKeyword)
-                navController.popBackStack()
-            }
+            viewModel.setKeyword(selectKeyword)
+            navController.popBackStack()
         }
     )
 }
@@ -154,7 +145,10 @@ private fun ReviewWriteKeywordUI(
             }
 
 
-            BottomOkButton(getString(R.string.filter_dialog_common_적용하기),true){
+            BottomOkButton(
+                getString(R.string.filter_dialog_common_적용하기),
+                selectKeyword.size in (ReviewWriteViewModel.MIN_KEYWORD_CNT .. ReviewWriteViewModel.MAX_KEYWORD_CNT)
+            ) {
                 onComplete()
             }
             Spacer(modifier = Modifier.height(16.dp))
