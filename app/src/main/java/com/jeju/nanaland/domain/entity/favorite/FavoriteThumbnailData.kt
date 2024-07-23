@@ -1,14 +1,17 @@
 package com.jeju.nanaland.domain.entity.favorite
 
 import com.google.gson.annotations.SerializedName
+import com.jeju.nanaland.domain.entity.common.ImageUrl
 
 data class FavoriteThumbnailData(
     @SerializedName("id")
-    val id: Long,
-    @SerializedName("thumbnailUrl")
-    val thumbnailUrl: String?,
-    @SerializedName("title")
-    val title: String?,
+    val id: Int,
     @SerializedName("category")
     val category: String?,
+    @SerializedName("firstImage")
+    val firstImage: ImageUrl?,
+    @SerializedName("title")
+    val title: String?,
+    @SerializedName("favorite")
+    val favorite: Boolean
 )

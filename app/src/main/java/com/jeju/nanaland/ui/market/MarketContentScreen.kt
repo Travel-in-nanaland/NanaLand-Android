@@ -1,8 +1,6 @@
 package com.jeju.nanaland.ui.market
 
-import android.content.ActivityNotFoundException
 import android.content.Intent
-import android.util.Log
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -20,7 +18,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.jeju.nanaland.R
-import com.jeju.nanaland.domain.entity.market.MarketContentData
+import com.jeju.nanaland.domain.entity.market.MarketContent
 import com.jeju.nanaland.ui.component.common.CustomSurface
 import com.jeju.nanaland.ui.component.common.CustomTopBar
 import com.jeju.nanaland.ui.component.detailscreen.other.DetailScreenDescription
@@ -29,22 +27,16 @@ import com.jeju.nanaland.ui.component.detailscreen.other.DetailScreenInformation
 import com.jeju.nanaland.ui.component.detailscreen.other.DetailScreenTopBannerImage
 import com.jeju.nanaland.ui.component.detailscreen.other.MoveToTopButton
 import com.jeju.nanaland.util.language.getLanguage
-import com.jeju.nanaland.util.log.LogUtil
 import com.jeju.nanaland.util.resource.getString
 import com.jeju.nanaland.util.ui.ScreenPreview
 import com.jeju.nanaland.util.ui.UiState
-import com.kakao.sdk.common.util.KakaoCustomTabsClient
-import com.kakao.sdk.share.ShareClient
-import com.kakao.sdk.share.WebSharerClient
-import com.kakao.sdk.template.model.Link
-import com.kakao.sdk.template.model.TextTemplate
 import kotlinx.coroutines.launch
 
 @Composable
 fun MarketContentScreen(
-    contentId: Long?,
+    contentId: Int?,
     isSearch: Boolean,
-    updatePrevScreenListFavorite: (Long, Boolean) -> Unit,
+    updatePrevScreenListFavorite: (Int, Boolean) -> Unit,
     moveToBackScreen: () -> Unit,
     moveToInfoModificationProposalScreen: () -> Unit,
     moveToSignInScreen: () -> Unit,
@@ -68,10 +60,10 @@ fun MarketContentScreen(
 
 @Composable
 private fun MarketContentScreen(
-    contentId: Long?,
-    marketContent: UiState<MarketContentData>,
-    toggleFavorite: (Long, (Long, Boolean) -> Unit) -> Unit,
-    updatePrevScreenListFavorite: (Long, Boolean) -> Unit,
+    contentId: Int?,
+    marketContent: UiState<MarketContent>,
+    toggleFavorite: (Int, (Int, Boolean) -> Unit) -> Unit,
+    updatePrevScreenListFavorite: (Int, Boolean) -> Unit,
     moveToBackScreen: () -> Unit,
     moveToInfoModificationProposalScreen: () -> Unit,
     moveToSignInScreen: () -> Unit,
@@ -90,7 +82,7 @@ private fun MarketContentScreen(
             is UiState.Success -> {
                 Box(Modifier.fillMaxSize()) {
                     Column(Modifier.verticalScroll(scrollState)) {
-                        DetailScreenTopBannerImage(imageUri = marketContent.data.originUrl)
+                        DetailScreenTopBannerImage(imageUri = marketContent.data.images[0]?.thumbnailUrl)
 
                         Spacer(Modifier.height(24.dp))
 

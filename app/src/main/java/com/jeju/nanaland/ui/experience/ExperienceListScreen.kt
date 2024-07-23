@@ -26,6 +26,7 @@ import com.jeju.nanaland.util.ui.ScreenPreview
 @Composable
 fun ExperienceListScreen(
     moveToBackScreen: () -> Unit,
+    viewModel: ExperienceListViewModel = hiltViewModel()
 ) {
     ExperienceListScreen(
         moveToBackScreen = moveToBackScreen,
@@ -39,34 +40,18 @@ private fun ExperienceListScreen(
     isContent: Boolean
 ) {
     CustomSurface {
-        Column(Modifier.fillMaxSize()) {
-            CustomTopBar(
-                title = getString(R.string.common_이색_체험),
-                onBackButtonClicked = moveToBackScreen
-            )
-
-            Box(
-                modifier = Modifier.fillMaxSize(),
-                contentAlignment = Alignment.Center
+        Box(
+            modifier = Modifier.fillMaxSize()
+        ) {
+            Column(
+                modifier = Modifier.fillMaxSize()
             ) {
-                Column(
-                    horizontalAlignment = Alignment.CenterHorizontally
-                ) {
-                    Image(
-                        modifier = Modifier.size(100.dp),
-                        painter = painterResource(R.drawable.img_airplane),
-                        contentDescription = null
-                    )
+                CustomTopBar(
+                    title = "이색 체험",
+                    onBackButtonClicked = moveToBackScreen
+                )
 
-                    Spacer(Modifier.height(4.dp))
-
-                    Text(
-                        text = getString(R.string.search_result_screen_preparing_service),
-                        color = getColor().gray01,
-                        style = body01,
-                        textAlign = TextAlign.Center
-                    )
-                }
+                Spacer(Modifier.height(16.dp))
             }
         }
     }

@@ -34,9 +34,9 @@ import kotlinx.coroutines.launch
 
 @Composable
 fun FestivalContentScreen(
-    contentId: Long?,
+    contentId: Int?,
     isSearch: Boolean,
-    updatePrevScreenListFavorite: (Long, Boolean) -> Unit,
+    updatePrevScreenListFavorite: (Int, Boolean) -> Unit,
     moveToBackScreen: () -> Unit,
     moveToInfoModificationProposalScreen: () -> Unit,
     moveToSignInScreen: () -> Unit,
@@ -60,10 +60,10 @@ fun FestivalContentScreen(
 
 @Composable
 private fun FestivalContentScreen(
-    contentId: Long?,
+    contentId: Int?,
     festivalContent: UiState<FestivalContentData>,
-    toggleFavorite: (Long, (Long, Boolean) -> Unit) -> Unit,
-    updatePrevScreenListFavorite: (Long, Boolean) -> Unit,
+    toggleFavorite: (Int, (Int, Boolean) -> Unit) -> Unit,
+    updatePrevScreenListFavorite: (Int, Boolean) -> Unit,
     moveToBackScreen: () -> Unit,
     moveToInfoModificationProposalScreen: () -> Unit,
     moveToSignInScreen: () -> Unit,
@@ -82,7 +82,7 @@ private fun FestivalContentScreen(
             is UiState.Success -> {
                 Box(modifier = Modifier.fillMaxSize()) {
                         Column(modifier = Modifier.verticalScroll(scrollState)) {
-                            DetailScreenTopBannerImage(imageUri = festivalContent.data.originUrl)
+                            DetailScreenTopBannerImage(imageUri = festivalContent.data.images[0]?.thumbnailUrl)
 
                             Spacer(Modifier.height(24.dp))
 

@@ -30,7 +30,7 @@ import kotlinx.coroutines.launch
 
 @Composable
 fun NanaPickContentScreen(
-    contentId: Long?,
+    contentId: Int?,
     moveToBackScreen: () -> Unit,
     moveToSignInScreen: () -> Unit,
     viewModel: NanaPickContentViewModel = hiltViewModel()
@@ -51,7 +51,7 @@ fun NanaPickContentScreen(
 
 @Composable
 private fun NanaPickContentScreen(
-    contentId: Long?,
+    contentId: Int?,
     nanaPickContent: UiState<NanaPickContentData>,
     toggleFavorite: () -> Unit,
     moveToBackScreen: () -> Unit,

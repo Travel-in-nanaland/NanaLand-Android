@@ -17,7 +17,7 @@ import com.jeju.nanaland.util.ui.UiState
 
 @Composable
 fun SearchResultContent(
-    moveToCategoryContentScreen: (Long, String?, Boolean) -> Unit,
+    moveToCategoryContentScreen: (Int, String?, Boolean) -> Unit,
     moveToSignInScreen: () -> Unit,
     searchViewModel: SearchViewModel = hiltViewModel(),
     homeViewModel: HomeViewModel = hiltViewModel()
@@ -49,9 +49,9 @@ private fun SearchResultContent(
     allSearchResultList: UiState<Map<String, SearchResultData>>,
     categorizedSearchResultList: UiState<SearchResultData>,
     updateSelectedCategory: (SearchCategoryType) -> Unit,
-    toggleAllSearchResultFavorite: (Long, String?) -> Unit,
-    toggleSearchResultFavorite: (Long, String?) -> Unit,
-    onPostClick: (Long, String?, Boolean) -> Unit,
+    toggleAllSearchResultFavorite: (Int, String?) -> Unit,
+    toggleSearchResultFavorite: (Int, String?) -> Unit,
+    onPostClick: (Int, String?, Boolean) -> Unit,
     moveToSignInScreen: () -> Unit,
     isContent: Boolean
 ) {

@@ -65,10 +65,10 @@ class SearchViewModel @Inject constructor(
     val categorizedSearchResultList = _categorizedSearchResultList.asStateFlow()
     private val _recentSearchList = MutableStateFlow<List<Pair<String, String>>>(emptyList())
     val recentSearchList = _recentSearchList.asStateFlow()
-    private var page = 0L
+    private var page = 0
 
     fun updateSelectedCategoryType(category: SearchCategoryType) {
-        page = 0L
+        page = 0
         _categorizedSearchResultList.update { UiState.Loading }
         _selectedCategory.update { category }
     }
@@ -77,10 +77,10 @@ class SearchViewModel @Inject constructor(
         _topKeywordList.update { UiState.Loading }
         getTopKeywordsUseCase()
             .onEach { networkResult ->
-                networkResult.onSuccess { _, data ->
+                networkResult.onSuccess { code, message, data ->
                     data?.let {
                         _topKeywordList.update {
-                            UiState.Success(data.data)
+                            UiState.Success(data)
                         }
                     }
                 }.onError { code, message ->
@@ -116,7 +116,7 @@ class SearchViewModel @Inject constructor(
             SearchCategoryType.NanaPick -> { return }
             SearchCategoryType.JejuStory -> { return }
         }.onEach { networkResult ->
-            networkResult.onSuccess { _, data ->
+            networkResult.onSuccess { code, message, data ->
                 data?.let {
                     when (_selectedCategory.value) {
                         SearchCategoryType.All -> {
@@ -189,10 +189,10 @@ class SearchViewModel @Inject constructor(
     fun getHotPosts() {
         getHotPostsUseCase()
             .onEach { networkResult ->
-                networkResult.onSuccess { code, data ->
+                networkResult.onSuccess { code, message, data ->
                     data?.let {
                         _hotPostList.update {
-                            UiState.Success(data.data)
+                            UiState.Success(data)
                         }
                     }
                 }.onError { code, message ->
@@ -204,7 +204,7 @@ class SearchViewModel @Inject constructor(
             .launchIn(viewModelScope)
     }
 
-    fun toggleHotPostFavorite(contentId: Long, category: String?) {
+    fun toggleHotPostFavorite(contentId: Int, category: String?) {
         LogUtil.e("toggleHotPostFavorite", "toggleHotPostFavorite")
         if (category == null) return
         val requestData = ToggleFavoriteRequest(
@@ -213,12 +213,12 @@ class SearchViewModel @Inject constructor(
         )
         toggleFavoriteUseCase(requestData)
             .onEach { networkResult ->
-                networkResult.onSuccess { code, data ->
+                networkResult.onSuccess { code, message, data ->
                     data?.let {
                         _hotPostList.update { uiState ->
                             if (uiState is UiState.Success) {
                                 val newList = uiState.data.map { item ->
-                                    if (item.id == contentId && item.category == category) item.copy(favorite = data.data.favorite)
+                                    if (item.id == contentId && item.category == category) item.copy(favorite = data.favorite)
                                     else item
                                 }
                                 UiState.Success(newList)
@@ -237,7 +237,7 @@ class SearchViewModel @Inject constructor(
             .launchIn(viewModelScope)
     }
 
-    fun toggleSearchResultFavorite(contentId: Long, category: String?) {
+    fun toggleSearchResultFavorite(contentId: Int, category: String?) {
         LogUtil.e("toggleSearchResultFavorite", "toggleSearchResultFavorite")
         if (category == null) return
         val requestData = ToggleFavoriteRequest(
@@ -246,12 +246,12 @@ class SearchViewModel @Inject constructor(
         )
         toggleFavoriteUseCase(requestData)
             .onEach { networkResult ->
-                networkResult.onSuccess { code, data ->
+                networkResult.onSuccess { code, message, data ->
                     data?.let {
                         _categorizedSearchResultList.update { uiState ->
                             if (uiState is UiState.Success) {
                                 val newList = uiState.data.data.map { item ->
-                                    if (item.id == contentId) item.copy(favorite = data.data.favorite)
+                                    if (item.id == contentId) item.copy(favorite = data.favorite)
                                     else item
                                 }
                                 UiState.Success(uiState.data.copy(data = newList))
@@ -270,7 +270,7 @@ class SearchViewModel @Inject constructor(
             .launchIn(viewModelScope)
     }
 
-    fun toggleSearchResultFavoriteWithNoApi(contentId: Long, isFavorite: Boolean) {
+    fun toggleSearchResultFavoriteWithNoApi(contentId: Int, isFavorite: Boolean) {
         _categorizedSearchResultList.update { uiState ->
             if (uiState is UiState.Success) {
                 val newList = uiState.data.data.map { item ->
@@ -284,7 +284,7 @@ class SearchViewModel @Inject constructor(
         }
     }
 
-    fun toggleAllSearchResultFavorite(contentId: Long, category: String?) {
+    fun toggleAllSearchResultFavorite(contentId: Int, category: String?) {
         LogUtil.e("toggleAllSearchResultFavorite", "toggleAllSearchResultFavorite")
         if (category == null) return
         val requestData = ToggleFavoriteRequest(
@@ -293,7 +293,7 @@ class SearchViewModel @Inject constructor(
         )
         toggleFavoriteUseCase(requestData)
             .onEach { networkResult ->
-                networkResult.onSuccess { code, data ->
+                networkResult.onSuccess { code, message, data ->
                     data?.let {
                         _allSearchResultList.update { uiState ->
                             if (uiState is UiState.Success) {
@@ -309,7 +309,7 @@ class SearchViewModel @Inject constructor(
                                 if (newMap.containsKey(categoryString)) {
                                     val newSearchResultData = newMap[categoryString]!!.copy(
                                         data = newMap[categoryString]!!.data.map { item ->
-                                            if (item.id == contentId) item.copy(favorite = data.data.favorite)
+                                            if (item.id == contentId) item.copy(favorite = data.favorite)
                                             else item
                                         }
                                     )
@@ -332,7 +332,7 @@ class SearchViewModel @Inject constructor(
             .launchIn(viewModelScope)
     }
 
-    fun toggleAllSearchResultFavoriteWithNoApi(contentId: Long, isFavorite: Boolean, category: String?) {
+    fun toggleAllSearchResultFavoriteWithNoApi(contentId: Int, isFavorite: Boolean, category: String?) {
         if (category == null) return
         _allSearchResultList.update { uiState ->
             if (uiState is UiState.Success) {

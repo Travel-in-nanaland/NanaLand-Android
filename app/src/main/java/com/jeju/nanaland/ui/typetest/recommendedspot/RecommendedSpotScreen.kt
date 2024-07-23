@@ -16,7 +16,6 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.jeju.nanaland.R
 import com.jeju.nanaland.domain.entity.member.RecommendedPostData
-import com.jeju.nanaland.globalvalue.userdata.UserData
 import com.jeju.nanaland.ui.component.common.CustomSurface
 import com.jeju.nanaland.ui.component.common.CustomTopBar
 import com.jeju.nanaland.ui.component.signup.recommendedspot.RecommendedSpotScreenBottomButton
@@ -82,7 +81,7 @@ private fun RecommendedSpotScreen(
                 if (recommendedPostList.isNotEmpty()) {
                     Column(Modifier.padding(start = 30.dp, end = 30.dp)) {
                         RecommendedSpotScreenItem(
-                            imageUri = recommendedPostList[0].thumbnailUrl,
+                            imageUri = recommendedPostList[0].firstImage?.thumbnailUrl,
                             title = recommendedPostList[0].title ?: "",
                             description = recommendedPostList[0].intro ?: ""
                         )
@@ -90,7 +89,7 @@ private fun RecommendedSpotScreen(
                         Spacer(Modifier.height(32.dp))
 
                         RecommendedSpotScreenItem(
-                            imageUri = recommendedPostList[1].thumbnailUrl,
+                            imageUri = recommendedPostList[1].firstImage?.thumbnailUrl,
                             title = recommendedPostList[1].title ?: "",
                             description = recommendedPostList[1].intro ?: ""
                         )

@@ -103,10 +103,10 @@ class SplashViewModel @Inject constructor(
             } else {
                 reissueAccessTokenUseCase(refreshToken)
                     .onEach { networkResult ->
-                        networkResult.onSuccess { code, data ->
+                        networkResult.onSuccess { code, message, data ->
                             data?.let {
-                                saveAccessTokenUseCase(data.data.accessToken ?: "")
-                                saveRefreshTokenUseCase(data.data.refreshToken ?: "")
+                                saveAccessTokenUseCase(data.accessToken ?: "")
+                                saveRefreshTokenUseCase(data.refreshToken ?: "")
                                 getUserData()
                             }
                             moveToMainScreen()
@@ -132,13 +132,13 @@ class SplashViewModel @Inject constructor(
     private fun getUserData() {
         getUserProfileUseCase()
             .onEach { networkResult ->
-                networkResult.onSuccess { code, data ->
+                networkResult.onSuccess { code, message, data ->
                     data?.let {
-                        UserData.provider = data.data.provider ?: "GUEST"
+                        UserData.provider = data.provider ?: "GUEST"
                         if (UserData.provider == "GUEST") {
                             UserData.nickname = "GUEST"
                         } else {
-                            UserData.nickname = data.data.nickname ?: "GUEST"
+                            UserData.nickname = data.nickname ?: "GUEST"
                         }
                     }
                 }.onError { code, message ->

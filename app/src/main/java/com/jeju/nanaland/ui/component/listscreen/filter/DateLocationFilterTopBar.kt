@@ -19,7 +19,7 @@ import java.util.Calendar
 
 @Composable
 fun DateLocationFilterTopBar(
-    count: UiState<Long>,
+    count: UiState<Int>,
     selectedLocationList: SnapshotStateList<Boolean>,
     locationList: List<String>,
     openDateFilterDialog: () -> Unit,

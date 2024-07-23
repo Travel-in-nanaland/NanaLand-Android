@@ -22,7 +22,7 @@ import com.jeju.nanaland.util.ui.ScreenPreview
 @Composable
 fun HomeScreen(
     moveToNotificationScreen: () -> Unit,
-    moveToCategoryContentScreen: (Long, String?, Boolean) -> Unit,
+    moveToCategoryContentScreen: (Int, String?, Boolean) -> Unit,
     moveToNanaPickListScreen: () -> Unit,
     moveToNatureListScreen: (ListFilter) -> Unit,
     moveToFestivalListScreen: (ListFilter) -> Unit,
@@ -64,7 +64,7 @@ private fun HomeScreen(
     updateHomeScreenViewType: (HomeScreenViewType) -> Unit,
     updateSearchCategoryType: (SearchCategoryType) -> Unit,
     moveToNotificationScreen: () -> Unit,
-    moveToCategoryContentScreen: (Long, String?, Boolean) -> Unit,
+    moveToCategoryContentScreen: (Int, String?, Boolean) -> Unit,
     moveToNanaPickListScreen: () -> Unit,
     moveToNatureListScreen: (ListFilter) -> Unit,
     moveToFestivalListScreen: (ListFilter) -> Unit,

@@ -74,10 +74,10 @@ interface DateView {
 
     companion object {
 
-        fun getContainerKey(cal: Calendar): Long {
+        fun getContainerKey(cal: Calendar): Int {
             val simpleDateFormat = SimpleDateFormat(CalendarDateRangeManager.DATE_FORMAT, Locale.getDefault())
             val str = simpleDateFormat.format(cal.time)
-            return str.toLong()
+            return str.toInt()
         }
     }
 }

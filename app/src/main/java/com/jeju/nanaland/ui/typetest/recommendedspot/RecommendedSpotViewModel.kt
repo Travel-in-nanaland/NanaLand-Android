@@ -28,9 +28,9 @@ class RecommendedSpotViewModel @Inject constructor(
     private fun getRecommendedSpot() {
         getRecommendedPostUseCase()
             .onEach { networkResult ->
-                networkResult.onSuccess { code, data ->
+                networkResult.onSuccess { code, message, data ->
                     data?.let {
-                        _recommendedPostList.update { data.data }
+                        _recommendedPostList.update { data }
                     }
                 }.onError { code, message ->
 

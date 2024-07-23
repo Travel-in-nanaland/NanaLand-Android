@@ -60,7 +60,7 @@ class InfoModificationProposalViewModel @Inject constructor(
     }
 
     @SuppressLint("Range", "Recycle")
-    fun sendReport(postId: Long, fixType: String, category: String, moveToCompleteScreen: () -> Unit) {
+    fun sendReport(postId: Int, fixType: String, category: String, moveToCompleteScreen: () -> Unit) {
         val requestData = InformationModificationProposalRequest(
             postId = postId,
             fixType = fixType,
@@ -98,7 +98,7 @@ class InfoModificationProposalViewModel @Inject constructor(
 
         infoModificationUseCase(requestData, imageFile)
             .onEach { networkResult ->
-                networkResult.onSuccess { code, data ->
+                networkResult.onSuccess { code, message, data ->
                     moveToCompleteScreen()
                 }.onError { code, message ->
 

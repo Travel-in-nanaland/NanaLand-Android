@@ -2,7 +2,7 @@ package com.jeju.nanaland.ui.nature
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.jeju.nanaland.domain.entity.nature.NatureContentData
+import com.jeju.nanaland.domain.entity.nature.NatureContent
 import com.jeju.nanaland.domain.request.favorite.ToggleFavoriteRequest
 import com.jeju.nanaland.domain.request.nature.GetNatureContentRequest
 import com.jeju.nanaland.domain.usecase.favorite.ToggleFavoriteUseCase
@@ -27,10 +27,10 @@ class NatureContentViewModel @Inject constructor(
     private val toggleFavoriteUseCase: ToggleFavoriteUseCase
 ) : ViewModel() {
 
-    private val _natureContent = MutableStateFlow<UiState<NatureContentData>>(UiState.Loading)
+    private val _natureContent = MutableStateFlow<UiState<NatureContent>>(UiState.Loading)
     val natureContent = _natureContent.asStateFlow()
 
-    fun getNatureContent(contentId: Long?, isSearch: Boolean) {
+    fun getNatureContent(contentId: Int?, isSearch: Boolean) {
         if (contentId == null) return
         _natureContent.update { UiState.Loading }
         val requestData = GetNatureContentRequest(
@@ -39,10 +39,10 @@ class NatureContentViewModel @Inject constructor(
         )
         getNatureContentUseCase(requestData)
             .onEach { networkResult ->
-                networkResult.onSuccess { code, data ->
+                networkResult.onSuccess { code, message, data ->
                     data?.let {
                         _natureContent.update {
-                            UiState.Success(data.data)
+                            UiState.Success(data)
                         }
                     }
                 }.onError { code, message ->
@@ -55,19 +55,19 @@ class NatureContentViewModel @Inject constructor(
             .launchIn(viewModelScope)
     }
 
-    fun toggleFavorite(contentId: Long, updateList: (Long, Boolean) -> Unit) {
+    fun toggleFavorite(contentId: Int, updateList: (Int, Boolean) -> Unit) {
         val requestData = ToggleFavoriteRequest(
             id = contentId,
             category = "NATURE"
         )
         toggleFavoriteUseCase(requestData)
             .onEach { networkResult ->
-                networkResult.onSuccess { code, data ->
+                networkResult.onSuccess { code, message, data ->
                     data?.let {
                         _natureContent.update { uiState ->
                             if (uiState is UiState.Success) {
-                                updateList(contentId, data.data.favorite)
-                                UiState.Success(uiState.data.copy(favorite = data.data.favorite))
+                                updateList(contentId, data.favorite)
+                                UiState.Success(uiState.data.copy(favorite = data.favorite))
                             } else {
                                 uiState
                             }

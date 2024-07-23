@@ -6,7 +6,7 @@ data class GetSearchResultListRequest(
     @SerializedName("keyword")
     val keyword: String,
     @SerializedName("page")
-    val page: Long,
+    val page: Int,
     @SerializedName("size")
-    val size: Long
+    val size: Int
 )

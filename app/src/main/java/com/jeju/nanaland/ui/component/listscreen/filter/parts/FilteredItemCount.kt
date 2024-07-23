@@ -11,7 +11,7 @@ import com.jeju.nanaland.util.ui.ComponentPreview
 
 @Composable
 fun FilteredItemCount(
-    count: Long
+    count: Int
 ) {
     Text(
         text = "$count " + getString(R.string.common_건),

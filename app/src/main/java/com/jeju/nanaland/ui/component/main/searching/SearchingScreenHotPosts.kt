@@ -17,8 +17,8 @@ import com.jeju.nanaland.util.ui.UiState
 @Composable
 fun SearchingScreenHotPosts(
     hotPosts: UiState<List<HotPostThumbnailData>>,
-    onFavoriteButtonClick: (Long, String?) -> Unit,
-    onPostClick: (Long, String?, Boolean) -> Unit,
+    onFavoriteButtonClick: (Int, String?) -> Unit,
+    onPostClick: (Int, String?, Boolean) -> Unit,
     moveToSignInScreen: () -> Unit,
 ) {
     when (hotPosts) {
@@ -29,7 +29,7 @@ fun SearchingScreenHotPosts(
                     val item = hotPosts.data[idx]
                     Column {
                         SearchThumbnail(
-                            imageUri = item.thumbnailUrl,
+                            imageUri = item.firstImage?.thumbnailUrl,
                             isFavorite = item.favorite,
                             title = item.title,
                             onFavoriteButtonClick = { onFavoriteButtonClick(item.id, item.category) },

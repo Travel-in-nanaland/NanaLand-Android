@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName
 
 data class GetNanaPickListRequest(
     @SerializedName("page")
-    val page: Long,
+    val page: Int,
     @SerializedName("size")
-    val size: Long
+    val size: Int
 )

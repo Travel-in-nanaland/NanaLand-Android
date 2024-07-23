@@ -28,7 +28,7 @@ import com.jeju.nanaland.util.ui.UiState
 
 @Composable
 fun HomeContent(
-    moveToCategoryContentScreen: (Long, String?, Boolean) -> Unit,
+    moveToCategoryContentScreen: (Int, String?, Boolean) -> Unit,
     moveToNatureListScreen: (ListFilter) -> Unit,
     moveToFestivalListScreen: (ListFilter) -> Unit,
     moveToMarketListScreen: () -> Unit,
@@ -62,8 +62,8 @@ fun HomeContent(
 private fun HomeContent(
     homePreviewBanner: UiState<List<NanaPickBannerData>>,
     recommendedPosts: UiState<List<RecommendedPostData>>,
-    toggleFavorite: (Long, String?) -> Unit,
-    moveToCategoryContentScreen: (Long, String?, Boolean) -> Unit,
+    toggleFavorite: (Int, String?) -> Unit,
+    moveToCategoryContentScreen: (Int, String?, Boolean) -> Unit,
     moveToNatureListScreen: (ListFilter) -> Unit,
     moveToFestivalListScreen: (ListFilter) -> Unit,
     moveToMarketListScreen: () -> Unit,
@@ -127,8 +127,8 @@ private fun HomeContent(
 @Composable
 private fun HomeContentPreview() {
     val data = listOf(NanaPickBannerData(
-        id = 0L,
-        thumbnailUrl = null,
+        id = 0,
+        firstImage = null,
         version = "Version",
         subHeading = "SubHeading",
         heading = "Heading"

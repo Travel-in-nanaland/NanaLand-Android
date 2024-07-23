@@ -33,7 +33,7 @@ import com.skydoves.landscapist.glide.GlideImage
 
 @Composable
 fun NanaPickContentTopBanner(
-    contentId: Long?,
+    contentId: Int?,
     nanaPickContent: UiState.Success<NanaPickContentData>,
     toggleFavorite: () -> Unit,
     moveToSignInScreen: () -> Unit,
@@ -48,7 +48,7 @@ fun NanaPickContentTopBanner(
     ) {
         GlideImage(
             modifier = Modifier.fillMaxSize(),
-            imageModel = { nanaPickContent.data.originUrl }
+            imageModel = { nanaPickContent.data.firstImage }
         )
 
         Box(

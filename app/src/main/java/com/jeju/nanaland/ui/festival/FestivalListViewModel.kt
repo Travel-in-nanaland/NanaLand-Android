@@ -49,11 +49,11 @@ class FestivalListViewModel @Inject constructor(
     val startCalendar = _startCalendar.asStateFlow()
     private val _endCalendar = MutableStateFlow<Calendar>(Calendar.getInstance())
     val endCalendar = _endCalendar.asStateFlow()
-    private val _festivalThumbnailCount = MutableStateFlow<UiState<Long>>(UiState.Loading)
+    private val _festivalThumbnailCount = MutableStateFlow<UiState<Int>>(UiState.Loading)
     val festivalThumbnailCount = _festivalThumbnailCount.asStateFlow()
     private val _festivalThumbnailList = MutableStateFlow<UiState<List<FestivalThumbnailData>>>(UiState.Loading)
     val festivalThumbnailList = _festivalThumbnailList.asStateFlow()
-    private var page = 0L
+    private var page = 0
 
     fun updateSelectedCategoryType(type: FestivalCategoryType) {
         clearFestivalList()
@@ -106,16 +106,16 @@ class FestivalListViewModel @Inject constructor(
         )
         getMonthlyFestivalListUseCase(requestData)
             .onEach { networkResult ->
-                networkResult.onSuccess { _, data ->
+                networkResult.onSuccess { code, message, data ->
                     data?.let {
                         _festivalThumbnailCount.update {
-                            UiState.Success(data.data.totalElements)
+                            UiState.Success(data.totalElements)
                         }
                         _festivalThumbnailList.update {
                             if (prevList.isNullOrEmpty()) {
-                                UiState.Success(data.data.data)
+                                UiState.Success(data.data)
                             } else {
-                                UiState.Success(prevList + data.data.data)
+                                UiState.Success(prevList + data.data)
                             }
                         }
                     }
@@ -137,20 +137,23 @@ class FestivalListViewModel @Inject constructor(
         }
         val requestData = GetEndedFestivalListRequest(
             page = page,
-            size = 12
+            size = 12,
+            addressFilterList = selectedLocationList.mapIndexedNotNull { idx, value ->
+                if (value) locationList[idx] else null
+            }
         )
         getEndedFestivalListUseCase(requestData)
             .onEach { networkResult ->
-                networkResult.onSuccess { _, data ->
+                networkResult.onSuccess { code, message, data ->
                     data?.let {
                         _festivalThumbnailCount.update {
-                            UiState.Success(data.data.totalElements)
+                            UiState.Success(data.totalElements)
                         }
                         _festivalThumbnailList.update {
                             if (prevList.isNullOrEmpty()) {
-                                UiState.Success(data.data.data)
+                                UiState.Success(data.data)
                             } else {
-                                UiState.Success(prevList + data.data.data)
+                                UiState.Success(prevList + data.data)
                             }
                         }
                     }
@@ -178,16 +181,16 @@ class FestivalListViewModel @Inject constructor(
         )
         getSeasonalFestivalListUseCase(requestData)
             .onEach { networkResult ->
-                networkResult.onSuccess { _, data ->
+                networkResult.onSuccess { code, message, data ->
                     data?.let {
                         _festivalThumbnailCount.update {
-                            UiState.Success(data.data.totalElements)
+                            UiState.Success(data.totalElements)
                         }
                         _festivalThumbnailList.update {
                             if (prevList.isNullOrEmpty()) {
-                                UiState.Success(data.data.data)
+                                UiState.Success(data.data)
                             } else {
-                                UiState.Success(prevList + data.data.data)
+                                UiState.Success(prevList + data.data)
                             }
                         }
                     }
@@ -206,19 +209,19 @@ class FestivalListViewModel @Inject constructor(
         page = 0
     }
 
-    fun toggleFavorite(contentId: Long) {
+    fun toggleFavorite(contentId: Int) {
         val requestData = ToggleFavoriteRequest(
             id = contentId,
             category = "FESTIVAL"
         )
         toggleFavoriteUseCase(requestData)
             .onEach { networkResult ->
-                networkResult.onSuccess { code, data ->
+                networkResult.onSuccess { code, message, data ->
                     data?.let {
                         _festivalThumbnailList.update { uiState ->
                             if (uiState is UiState.Success) {
                                 val newList = uiState.data.map { item ->
-                                    if (item.id == contentId) item.copy(favorite = data.data.favorite)
+                                    if (item.id == contentId) item.copy(favorite = data.favorite)
                                     else item
                                 }
                                 UiState.Success(newList)
@@ -237,7 +240,7 @@ class FestivalListViewModel @Inject constructor(
             .launchIn(viewModelScope)
     }
 
-    fun toggleFavoriteWithNoApi(contentId: Long, isFavorite: Boolean) {
+    fun toggleFavoriteWithNoApi(contentId: Int, isFavorite: Boolean) {
         _festivalThumbnailList.update { uiState ->
             if (uiState is UiState.Success) {
                 val newList = uiState.data.map { item ->

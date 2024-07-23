@@ -34,7 +34,7 @@ import com.jeju.nanaland.util.ui.scrollableVerticalArrangement
 
 @Composable
 fun InformationModificationProposalWritingScreen(
-    postId: Long,
+    postId: Int,
     fixType: String,
     category: String,
     moveToBackScreen: () -> Unit,

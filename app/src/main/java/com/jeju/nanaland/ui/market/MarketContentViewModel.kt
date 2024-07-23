@@ -2,7 +2,7 @@ package com.jeju.nanaland.ui.market
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.jeju.nanaland.domain.entity.market.MarketContentData
+import com.jeju.nanaland.domain.entity.market.MarketContent
 import com.jeju.nanaland.domain.request.favorite.ToggleFavoriteRequest
 import com.jeju.nanaland.domain.request.market.GetMarketContentRequest
 import com.jeju.nanaland.domain.usecase.favorite.ToggleFavoriteUseCase
@@ -27,10 +27,10 @@ class MarketContentViewModel @Inject constructor(
     private val toggleFavoriteUseCase: ToggleFavoriteUseCase
 ) : ViewModel() {
 
-    private val _marketContent = MutableStateFlow<UiState<MarketContentData>>(UiState.Loading)
+    private val _marketContent = MutableStateFlow<UiState<MarketContent>>(UiState.Loading)
     val marketContent = _marketContent.asStateFlow()
 
-    fun getMarketContent(contentId: Long?, isSearch: Boolean) {
+    fun getMarketContent(contentId: Int?, isSearch: Boolean) {
         if (contentId == null) return
         _marketContent.update { UiState.Loading }
         val requestData = GetMarketContentRequest(
@@ -39,10 +39,10 @@ class MarketContentViewModel @Inject constructor(
         )
         getMarketContentUseCase(requestData)
             .onEach { networkResult ->
-                networkResult.onSuccess { code, data ->
+                networkResult.onSuccess { code, message, data ->
                     data?.let {
                         _marketContent.update {
-                            UiState.Success(data.data)
+                            UiState.Success(data)
                         }
                     }
                 }.onError { code, message ->
@@ -55,19 +55,19 @@ class MarketContentViewModel @Inject constructor(
             .launchIn(viewModelScope)
     }
 
-    fun toggleFavorite(contentId: Long, updateList: (Long, Boolean) -> Unit) {
+    fun toggleFavorite(contentId: Int, updateList: (Int, Boolean) -> Unit) {
         val requestData = ToggleFavoriteRequest(
             id = contentId,
             category = "MARKET"
         )
         toggleFavoriteUseCase(requestData)
             .onEach { networkResult ->
-                networkResult.onSuccess { code, data ->
+                networkResult.onSuccess { code, message, data ->
                     data?.let {
                         _marketContent.update { uiState ->
                             if (uiState is UiState.Success) {
-                                updateList(contentId, data.data.favorite)
-                                UiState.Success(uiState.data.copy(favorite = data.data.favorite))
+                                updateList(contentId, data.favorite)
+                                UiState.Success(uiState.data.copy(favorite = data.favorite))
                             } else {
                                 uiState
                             }

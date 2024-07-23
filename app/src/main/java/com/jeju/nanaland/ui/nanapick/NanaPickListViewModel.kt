@@ -35,10 +35,10 @@ class NanaPickListViewModel @Inject constructor(
         )
         getNanaPickListUseCase(requestData)
             .onEach { networkResult ->
-                networkResult.onSuccess { _, data ->
+                networkResult.onSuccess { code, message, data ->
                     data?.let {
                         _nanaPickList.update {
-                            UiState.Success(data.data.data)
+                            UiState.Success(data.data)
                         }
                     }
                 }.onError { code, message ->

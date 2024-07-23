@@ -31,8 +31,8 @@ fun SearchResultScreenPreviewByCategory(
     allSearchResultList: Map<String, SearchResultData>,
     getSearchResult: () -> Unit,
     updateSearchCategoryType: (SearchCategoryType) -> Unit,
-    onFavoriteButtonClick: (Long, String?) -> Unit,
-    onPostClick: (Long, String?, Boolean) -> Unit,
+    onFavoriteButtonClick: (Int, String?) -> Unit,
+    onPostClick: (Int, String?, Boolean) -> Unit,
     moveToSignInScreen: () -> Unit,
 ) {
     Row(
@@ -87,7 +87,7 @@ fun SearchResultScreenPreviewByCategory(
                 allSearchResultList[category.name]?.data?.let { searchResult ->
                     searchResult.forEachIndexed { idx, item ->
                         SearchThumbnail(
-                            imageUri = item.thumbnailUrl,
+                            imageUri = item.firstImage?.thumbnailUrl,
                             isFavorite = item.favorite,
                             title = item.title,
                             onFavoriteButtonClick = {
