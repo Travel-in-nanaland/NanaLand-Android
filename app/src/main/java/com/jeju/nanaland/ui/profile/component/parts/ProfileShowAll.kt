@@ -1,4 +1,4 @@
-package com.jeju.nanaland.ui.component.mypage.parts
+package com.jeju.nanaland.ui.profile.component.parts
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
@@ -17,7 +17,7 @@ import com.jeju.nanaland.util.resource.getString
 import com.jeju.nanaland.util.ui.clickableNoEffect
 
 @Composable
-fun MyPageShowAll(
+fun ProfileShowAll(
     cnt: Int,
     onClick: () -> Unit
 ) {

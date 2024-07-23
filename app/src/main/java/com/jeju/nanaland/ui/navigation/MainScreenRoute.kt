@@ -16,10 +16,13 @@ import com.jeju.nanaland.globalvalue.constant.ROUTE_NANAPICK_LIST
 import com.jeju.nanaland.globalvalue.constant.ROUTE_NATURE_CONTENT
 import com.jeju.nanaland.globalvalue.constant.ROUTE_NATURE_LIST
 import com.jeju.nanaland.globalvalue.constant.ROUTE_NOTIFICATION
+import com.jeju.nanaland.globalvalue.constant.ROUTE_PROFILE_NOTICE
+import com.jeju.nanaland.globalvalue.constant.ROUTE_PROFILE_REVIEW
 import com.jeju.nanaland.globalvalue.constant.ROUTE_PROFILE_UPDATE
 import com.jeju.nanaland.globalvalue.constant.ROUTE_SETTINGS
 import com.jeju.nanaland.globalvalue.constant.ROUTE_SIGN_IN
 import com.jeju.nanaland.globalvalue.constant.ROUTE_TYPE_TESTING
+import com.jeju.nanaland.globalvalue.constant.ROUTE_TYPE_TEST_RESULT
 import com.jeju.nanaland.globalvalue.type.CategoryType
 import com.jeju.nanaland.ui.main.MainScreen
 import com.jeju.nanaland.util.intent.DeepLinkData
@@ -77,6 +80,13 @@ fun NavGraphBuilder.mainScreen(
         moveToTypeTestScreen = { navController.navigate(ROUTE_TYPE_TESTING) {
             popUpTo(ROUTE_MAIN) { inclusive = true }
             launchSingleTop = true
-        } }
+        } },
+        moveToTypeTestResultScreen = { navController.navigate(ROUTE_TYPE_TEST_RESULT) },
+        moveToProfileNoticeListScreen = {
+            navController.navigate(ROUTE_PROFILE_NOTICE, bundleOf("id" to (it ?: -1)))
+        },
+        moveToProfileReviewListScreen = {
+            navController.navigate(ROUTE_PROFILE_REVIEW, bundleOf("id" to (it ?: -1)))
+        }
     )
 }

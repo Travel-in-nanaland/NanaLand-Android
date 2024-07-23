@@ -1,4 +1,4 @@
-package com.jeju.nanaland.ui.component.mypage.parts
+package com.jeju.nanaland.ui.profile.component.parts
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
@@ -21,25 +21,27 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import com.jeju.nanaland.ui.component.mypage.TempReviewData
+import com.jeju.nanaland.ui.profile.component.TempReviewData
 import com.jeju.nanaland.ui.theme.body02Bold
 import com.jeju.nanaland.ui.theme.caption01
 import com.jeju.nanaland.ui.theme.getColor
 import com.jeju.nanaland.util.string.getDotYearMonthDate
+import com.jeju.nanaland.util.ui.clickableNoEffect
 import com.jeju.nanaland.util.ui.conditional
 import com.jeju.nanaland.util.ui.drawColoredShadow
 import com.skydoves.landscapist.glide.GlideImage
 
 @Composable
-fun MyPageReviewRow(
+fun ProfileReviewRow(
     data: TempReviewData,
-    onClick: () -> Unit
+    onClick: (Int) -> Unit
 ) {
     val haveImg = data.img != null
     Column(
         modifier = Modifier
             .fillMaxWidth()
             .height(if (haveImg) 210.dp else 105.dp)
+            .clickableNoEffect { onClick(data.id) }
             .drawColoredShadow(
                 color = Color.Black,
                 shadowRadius = 8.dp,

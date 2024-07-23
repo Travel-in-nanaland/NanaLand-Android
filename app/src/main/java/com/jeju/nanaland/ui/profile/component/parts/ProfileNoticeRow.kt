@@ -1,4 +1,4 @@
-package com.jeju.nanaland.ui.component.mypage.parts
+package com.jeju.nanaland.ui.profile.component.parts
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
@@ -20,7 +20,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.jeju.nanaland.R
-import com.jeju.nanaland.ui.component.mypage.TempNoticeData
+import com.jeju.nanaland.ui.profile.component.TempNoticeData
 import com.jeju.nanaland.ui.theme.body02Bold
 import com.jeju.nanaland.ui.theme.caption01SemiBold
 import com.jeju.nanaland.ui.theme.caption02
@@ -30,14 +30,14 @@ import com.jeju.nanaland.util.ui.clickableNoEffect
 import com.jeju.nanaland.util.ui.drawColoredShadow
 
 @Composable
-fun MyPageNoticeRow(
+fun ProfileNoticeRow(
     data: TempNoticeData,
-    onClick: () -> Unit
+    onClick: (Int) -> Unit
 ) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .clickableNoEffect { onClick() }
+            .clickableNoEffect { onClick(data.id) }
             .drawColoredShadow(
                 color = Color.Black,
                 shadowRadius = 8.dp,
