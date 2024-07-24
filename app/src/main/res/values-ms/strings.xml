@@ -227,7 +227,7 @@
     <string name="type_감귤_라떼">Latte Mandarin</string>
     <string name="type_감귤_식혜">Sikhye Mandarin</string>
     <string name="type_감귤_에이드">Aid Mandarin</string>
-    <string name="type_감귤_버블티">Bubble Tea Mandarin</string>
+    <string name="type_감귤_버블티">Bubble Tea\nMandarin</string>
 
     <!--여행지 유형 설명-->
     <string name="type_감귤_아이스크림_description">Sejenis Ais Krim Mandarin lembut yang dapat meninggalkan kenangan manis</string>
