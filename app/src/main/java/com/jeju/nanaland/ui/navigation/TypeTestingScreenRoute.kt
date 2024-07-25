@@ -19,9 +19,11 @@ fun NavGraphBuilder.typeTestingScreen(navController: NavController) = composable
             navController.popBackStack(ROUTE_TYPE_TESTING, true)
             navController.navigate(ROUTE_TYPE_TEST_COMPLETION, bundle)
         },
-        moveToMainScreen = { navController.navigate(ROUTE_MAIN) {
-            popUpTo(ROUTE_TYPE_TESTING) { inclusive = true }
-            launchSingleTop = true
-        } }
+        moveToBackScreen = {
+            if(!navController.popBackStack())
+                navController.navigate(ROUTE_MAIN) {
+                    popUpTo(ROUTE_TYPE_TESTING) { inclusive = true }
+                }
+        }
     )
 }

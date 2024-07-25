@@ -245,7 +245,7 @@
     <string name="type_감귤_라떼_description">Sejenis Latte Mandarin yang sesuai diminum di bawah keterikan cahaya matahari</string>
     <string name="type_감귤_식혜_description"> Sejenis Sikhye Mandarin yang kaya dengan rasa</string>
     <string name="type_감귤_에이드_description">Sejenis minuman Ade Mandarin dengan kesegaran air soda di samping buah yang menyegarkan!</string>
-    <string name="type_감귤_버블티_description">Sejenis Bubble Tea Mandaring yang penuh dengan kejutan semakin anda minum!</string>
+    <string name="type_감귤_버블티_description">Sejenis Bubble Tea\nMandaring yang penuh dengan kejutan semakin anda minum!</string>
 
     <!--여행지 유형 테스트 화면-->
     <string name="type_test_screen_question1">"Apakah pilihan "</string>

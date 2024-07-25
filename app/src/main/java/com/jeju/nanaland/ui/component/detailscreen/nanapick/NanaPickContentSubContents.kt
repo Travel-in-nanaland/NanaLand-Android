@@ -10,7 +10,8 @@ import com.jeju.nanaland.ui.component.detailscreen.nanapick.parts.NanaPickConten
 
 @Composable
 fun NanaPickContentSubContents(
-    nanaPickContent: NanaPickContentData
+    nanaPickContent: NanaPickContentData,
+    attractivePointOnClick: (String) -> Unit
 ) {
     nanaPickContent.nanaDetails.forEachIndexed { idx, details ->
         NanaPickContentSubContent(
@@ -20,7 +21,8 @@ fun NanaPickContentSubContents(
             imageUri = details.imageUrl,
             content = details.content,
             additionalInfoList = details.nanaPickSubContentAdditionalInfoList,
-            tagList = details.hashtags
+            tagList = details.hashtags,
+            attractivePointOnClick = attractivePointOnClick
         )
         if (idx != nanaPickContent.nanaDetails.size - 1) {
             Spacer(Modifier.height(64.dp))
