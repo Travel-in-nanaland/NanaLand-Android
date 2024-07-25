@@ -1,6 +1,6 @@
 package com.jeju.nanaland.data.api
 
-import com.jeju.nanaland.domain.response.report.InformationModificationProposalResponse
+import com.jeju.nanaland.domain.response.ResponseWrapper
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.Response
@@ -16,5 +16,5 @@ interface ReportApi {
     suspend fun informationModificationProposal(
         @Part("reqDto") data: RequestBody,
         @Part image: MultipartBody.Part?
-    ): Response<InformationModificationProposalResponse>
+    ): Response<ResponseWrapper<String?>>
 }

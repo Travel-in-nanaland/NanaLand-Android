@@ -16,7 +16,7 @@ import com.jeju.nanaland.util.ui.UiState
 
 @Composable
 fun LocationFilterTopBar(
-    count: UiState<Long>,
+    count: UiState<Int>,
     selectedLocationList: SnapshotStateList<Boolean>,
     locationList: List<String>,
     openLocationFilterDialog: () -> Unit,

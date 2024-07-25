@@ -80,7 +80,7 @@ fun SignUpScreenTextField(
 
                     Text(
                         text = when (inputState) {
-                            InputNicknameState.TooLong -> getString(R.string.sign_up_profile_setting_warning1)
+                            InputNicknameState.TooInt -> getString(R.string.sign_up_profile_setting_warning1)
                             InputNicknameState.Duplicated -> getString(R.string.sign_up_profile_setting_warning2)
                             InputNicknameState.Invalid -> getString(R.string.sign_up_profile_setting_warning3)
                             else -> ""

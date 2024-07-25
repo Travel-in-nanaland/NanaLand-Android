@@ -51,7 +51,7 @@ class ProfileUpdateViewModel @Inject constructor(
     fun updateInputNickname(nickname: String) {
         _inputNickname.update { nickname }
         if (_inputNickname.value.length > NICKNAME_CONSTRAINT) {
-            _inputNicknameState.update { InputNicknameState.TooLong }
+            _inputNicknameState.update { InputNicknameState.TooInt }
         } else if (!_inputNickname.value.matches(nicknameRegex)) {
             _inputNicknameState.update { InputNicknameState.Invalid }
         } else {
@@ -100,7 +100,7 @@ class ProfileUpdateViewModel @Inject constructor(
 
         updateProfileUseCase(requestData, imageFile)
             .onEach { networkResult ->
-                networkResult.onSuccess { code, data ->
+                networkResult.onSuccess { code, message, data ->
                     data?.let {
 
                     }

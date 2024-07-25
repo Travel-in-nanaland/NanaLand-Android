@@ -38,11 +38,11 @@ class FavoriteViewModel @Inject constructor(
 
     private val _selectedCategory = MutableStateFlow(SearchCategoryType.All)
     val selectedCategory = _selectedCategory.asStateFlow()
-    private val _favoriteThumbnailCount = MutableStateFlow<UiState<Long>>(UiState.Loading)
+    private val _favoriteThumbnailCount = MutableStateFlow<UiState<Int>>(UiState.Loading)
     val favoriteThumbnailCount = _favoriteThumbnailCount.asStateFlow()
     private val _favoriteThumbnailList = MutableStateFlow<UiState<List<FavoriteThumbnailData>>>(UiState.Loading)
     val favoriteThumbnailList = _favoriteThumbnailList.asStateFlow()
-    private var page = 0L
+    private var page = 0
 
     fun updateSelectedCategoryType(category: SearchCategoryType) {
         clearFavoriteList()
@@ -68,16 +68,16 @@ class FavoriteViewModel @Inject constructor(
             SearchCategoryType.NanaPick -> { return }
             SearchCategoryType.JejuStory -> { return }
         }.onEach {  networkResult ->
-            networkResult.onSuccess { code, data ->
+            networkResult.onSuccess { code, message, data ->
                 data?.let {
                     _favoriteThumbnailCount.update {
-                        UiState.Success(data.data.totalElements)
+                        UiState.Success(data.totalElements)
                     }
                     _favoriteThumbnailList.update {
                         if (prevList.isNullOrEmpty()) {
-                            UiState.Success(data.data.data)
+                            UiState.Success(data.data)
                         } else {
-                            UiState.Success(prevList + data.data.data)
+                            UiState.Success(prevList + data.data)
                         }
                     }
                 }
@@ -96,7 +96,7 @@ class FavoriteViewModel @Inject constructor(
         page = 0
     }
 
-    fun toggleFavorite(contentId: Long, category: String?) {
+    fun toggleFavorite(contentId: Int, category: String?) {
         if (category == null) return
         val requestData = ToggleFavoriteRequest(
             id = contentId,
@@ -104,7 +104,7 @@ class FavoriteViewModel @Inject constructor(
         )
         toggleFavoriteUseCase(requestData)
             .onEach { networkResult ->
-                networkResult.onSuccess { code, data ->
+                networkResult.onSuccess { code, message, data ->
                     data?.let {
                         _favoriteThumbnailList.update { uiState ->
                             if (uiState is UiState.Success) {
@@ -132,7 +132,7 @@ class FavoriteViewModel @Inject constructor(
             .launchIn(viewModelScope)
     }
 
-    fun toggleFavoriteWithNoApi(contentId: Long) {
+    fun toggleFavoriteWithNoApi(contentId: Int) {
         _favoriteThumbnailList.update { uiState ->
             if (uiState is UiState.Success) {
                 val newList = uiState.data.filter {  item ->

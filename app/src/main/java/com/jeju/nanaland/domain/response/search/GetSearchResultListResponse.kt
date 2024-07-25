@@ -5,7 +5,7 @@ import com.jeju.nanaland.domain.entity.search.SearchResultData
 
 data class GetSearchResultListResponse(
     @SerializedName("status")
-    val status: Long,
+    val status: Int,
     @SerializedName("message")
     val message: String?,
     @SerializedName("data")

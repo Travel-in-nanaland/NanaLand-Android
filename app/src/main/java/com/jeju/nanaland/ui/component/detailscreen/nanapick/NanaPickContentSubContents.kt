@@ -18,7 +18,7 @@ fun NanaPickContentSubContents(
             index = idx + 1,
             subTitle = details.subTitle,
             title = details.title,
-            imageUri = details.imageUrl,
+            imageUri = details.images[0]!!.thumbnailUrl,
             content = details.content,
             additionalInfoList = details.nanaPickSubContentAdditionalInfoList,
             tagList = details.hashtags,

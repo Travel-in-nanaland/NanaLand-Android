@@ -6,6 +6,7 @@ import com.jeju.nanaland.domain.usecase.search.GetExperienceSearchResultListUseC
 import com.jeju.nanaland.domain.usecase.search.GetFestivalSearchResultListUseCase
 import com.jeju.nanaland.domain.usecase.search.GetHotPostsUseCase
 import com.jeju.nanaland.domain.usecase.search.GetMarketSearchResultListUseCase
+import com.jeju.nanaland.domain.usecase.search.GetNanaPickSearchResultListUseCase
 import com.jeju.nanaland.domain.usecase.search.GetNatureSearchResultListUseCase
 import com.jeju.nanaland.domain.usecase.search.GetTopKeywordsUseCase
 import dagger.Module
@@ -44,6 +45,14 @@ object SearchUseCaseModule {
         repository: SearchRepository
     ): GetNatureSearchResultListUseCase {
         return GetNatureSearchResultListUseCase(repository)
+    }
+
+    @Singleton
+    @Provides
+    fun provideGetNanaPickSearchResultListUseCase(
+        repository: SearchRepository
+    ): GetNanaPickSearchResultListUseCase {
+        return GetNanaPickSearchResultListUseCase(repository)
     }
 
     // 전통시장 검색 결과

@@ -20,8 +20,8 @@ import com.jeju.nanaland.util.ui.UiState
 fun FestivalThumbnailList(
     listState: LazyGridState,
     thumbnailList: UiState<List<FestivalThumbnailData>>,
-    toggleFavorite: (Long) -> Unit,
-    moveToFestivalContentScreen: (Long) -> Unit,
+    toggleFavorite: (Int) -> Unit,
+    moveToFestivalContentScreen: (Int) -> Unit,
     moveToSignInScreen: () -> Unit,
 ) {
     when (thumbnailList) {
@@ -40,7 +40,7 @@ fun FestivalThumbnailList(
                         contentAlignment = if (idx % 2 == 0) Alignment.CenterStart else Alignment.CenterEnd
                     ) {
                         FestivalThumbnail(
-                            imageUri = item.thumbnailUrl,
+                            imageUri = item.firstImage[0]?.thumbnailUrl,
                             isFavorite = item.favorite,
                             title = item.title,
                             subTitle = item.period,

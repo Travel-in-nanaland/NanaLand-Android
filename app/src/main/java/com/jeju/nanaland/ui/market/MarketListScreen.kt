@@ -17,7 +17,7 @@ import androidx.compose.runtime.snapshots.SnapshotStateList
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.jeju.nanaland.R
-import com.jeju.nanaland.domain.entity.market.MarketThumbnailData
+import com.jeju.nanaland.domain.entity.market.MarketThumbnail
 import com.jeju.nanaland.globalvalue.constant.PAGING_THRESHOLD
 import com.jeju.nanaland.globalvalue.constant.getLocationList
 import com.jeju.nanaland.globalvalue.type.AnchoredDraggableContentState
@@ -36,7 +36,7 @@ import kotlinx.coroutines.launch
 @Composable
 fun MarketListScreen(
     moveToBackScreen: () -> Unit,
-    moveToMarketContentScreen: (Long) -> Unit,
+    moveToMarketContentScreen: (Int) -> Unit,
     moveToSignInScreen: () -> Unit,
     viewModel: MarketListViewModel = hiltViewModel()
 ) {
@@ -61,13 +61,13 @@ fun MarketListScreen(
 @Composable
 private fun MarketListScreen(
     selectedLocationList: SnapshotStateList<Boolean>,
-    marketThumbnailCount: UiState<Long>,
-    marketThumbnailList: UiState<List<MarketThumbnailData>>,
+    marketThumbnailCount: UiState<Int>,
+    marketThumbnailList: UiState<List<MarketThumbnail>>,
     getMarketList: () -> Unit,
-    toggleFavorite: (Long) -> Unit,
+    toggleFavorite: (Int) -> Unit,
     clearMarketList: () -> Unit,
     moveToBackScreen: () -> Unit,
-    moveToMarketContentScreen: (Long) -> Unit,
+    moveToMarketContentScreen: (Int) -> Unit,
     moveToSignInScreen: () -> Unit,
     isContent: Boolean
 ) {

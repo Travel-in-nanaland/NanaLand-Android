@@ -17,7 +17,7 @@ import com.jeju.nanaland.ui.theme.getColor
 import com.jeju.nanaland.util.resource.getString
 
 @Composable
-fun BoxScope.MyPageScreenLevel(level: Long) {
+fun BoxScope.MyPageScreenLevel(level: Int) {
     Box(
         modifier = Modifier
             .align(Alignment.BottomCenter)

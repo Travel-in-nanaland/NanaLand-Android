@@ -22,7 +22,7 @@ import com.jeju.nanaland.util.ui.UiState
 
 @Composable
 fun NanaPickListScreen(
-    moveToNanaPickContentScreen: (Long) -> Unit,
+    moveToNanaPickContentScreen: (Int) -> Unit,
     moveToMainScreen: () -> Unit,
     viewModel: NanaPickListViewModel = hiltViewModel()
 ) {
@@ -42,7 +42,7 @@ fun NanaPickListScreen(
 private fun NanaPickListScreen(
     nanaPickList: UiState<List<NanaPickBannerData>>,
     moveToMainScreen: () -> Unit,
-    moveToNanaPickContentScreen: (Long) -> Unit,
+    moveToNanaPickContentScreen: (Int) -> Unit,
     isContent: Boolean
 ) {
     CustomSurface {

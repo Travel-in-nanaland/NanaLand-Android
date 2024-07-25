@@ -30,7 +30,7 @@ class FestivalContentViewModel @Inject constructor(
     private val _festivalContent = MutableStateFlow<UiState<FestivalContentData>>(UiState.Loading)
     val festivalContent = _festivalContent.asStateFlow()
 
-    fun getFestivalContent(contentId: Long?, isSearch: Boolean) {
+    fun getFestivalContent(contentId: Int?, isSearch: Boolean) {
         if (contentId == null) return
         _festivalContent.update { UiState.Loading }
         val requestData = GetFestivalContentRequest(
@@ -39,10 +39,10 @@ class FestivalContentViewModel @Inject constructor(
         )
         getFestivalContentUseCase(requestData)
             .onEach { networkResult ->
-                networkResult.onSuccess { code, data ->
+                networkResult.onSuccess { code, message, data ->
                     data?.let {
                         _festivalContent.update {
-                            UiState.Success(data.data)
+                            UiState.Success(data)
                         }
                     }
                 }.onError { code, message ->
@@ -55,19 +55,19 @@ class FestivalContentViewModel @Inject constructor(
             .launchIn(viewModelScope)
     }
 
-    fun toggleFavorite(contentId: Long, updateList: (Long, Boolean) -> Unit) {
+    fun toggleFavorite(contentId: Int, updateList: (Int, Boolean) -> Unit) {
         val requestData = ToggleFavoriteRequest(
             id = contentId,
             category = "FESTIVAL"
         )
         toggleFavoriteUseCase(requestData)
             .onEach { networkResult ->
-                networkResult.onSuccess { code, data ->
+                networkResult.onSuccess { code, message, data ->
                     data?.let {
                         _festivalContent.update { uiState ->
                             if (uiState is UiState.Success) {
-                                updateList(contentId, data.data.favorite)
-                                UiState.Success(uiState.data.copy(favorite = data.data.favorite))
+                                updateList(contentId, data.favorite)
+                                UiState.Success(uiState.data.copy(favorite = data.favorite))
                             } else {
                                 uiState
                             }

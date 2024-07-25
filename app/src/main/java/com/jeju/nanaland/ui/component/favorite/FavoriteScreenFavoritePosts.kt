@@ -21,8 +21,8 @@ import com.jeju.nanaland.ui.component.thumbnail.SearchThumbnail
 fun FavoriteScreenFavoritePosts(
     favoriteThumbnailList: List<FavoriteThumbnailData>,
     getFavoriteList: () -> Unit,
-    onFavoriteButtonClick: (Long, String?) -> Unit,
-    onPostClick: (Long, String?, Boolean) -> Unit,
+    onFavoriteButtonClick: (Int, String?) -> Unit,
+    onPostClick: (Int, String?, Boolean) -> Unit,
     moveToSignInScreen: () -> Unit,
 ) {
     val lazyGridState = rememberLazyGridState()
@@ -51,7 +51,7 @@ fun FavoriteScreenFavoritePosts(
                 modifier = Modifier.padding(start = 4.dp, end = 4.dp, bottom = 16.dp)
             ) {
                 SearchThumbnail(
-                    imageUri = item.thumbnailUrl,
+                    imageUri = item.firstImage?.thumbnailUrl,
                     isFavorite = true,
                     title = item.title,
                     onFavoriteButtonClick = {

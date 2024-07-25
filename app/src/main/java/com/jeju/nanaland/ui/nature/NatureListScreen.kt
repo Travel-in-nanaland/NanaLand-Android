@@ -17,7 +17,7 @@ import androidx.compose.runtime.snapshots.SnapshotStateList
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.jeju.nanaland.R
-import com.jeju.nanaland.domain.entity.nature.NatureThumbnailData
+import com.jeju.nanaland.domain.entity.nature.NatureThumbnail
 import com.jeju.nanaland.globalvalue.constant.PAGING_THRESHOLD
 import com.jeju.nanaland.globalvalue.constant.getLocationIdx
 import com.jeju.nanaland.globalvalue.constant.getLocationList
@@ -39,7 +39,7 @@ import kotlinx.coroutines.launch
 fun NatureListScreen(
     filter: ListFilter?,
     moveToBackScreen: () -> Unit,
-    moveToNatureContentScreen: (Long) -> Unit,
+    moveToNatureContentScreen: (Int) -> Unit,
     moveToSignInScreen: () -> Unit,
     viewModel: NatureListViewModel = hiltViewModel()
 ) {
@@ -72,13 +72,13 @@ fun NatureListScreen(
 @Composable
 private fun NatureListScreen(
     selectedLocationList: SnapshotStateList<Boolean>,
-    natureThumbnailCount: UiState<Long>,
-    natureThumbnailList: UiState<List<NatureThumbnailData>>,
-    toggleFavorite: (Long) -> Unit,
+    natureThumbnailCount: UiState<Int>,
+    natureThumbnailList: UiState<List<NatureThumbnail>>,
+    toggleFavorite: (Int) -> Unit,
     clearNatureList: () -> Unit,
     getNatureList: () -> Unit,
     moveToBackScreen: () -> Unit,
-    moveToNatureContentScreen: (Long) -> Unit,
+    moveToNatureContentScreen: (Int) -> Unit,
     moveToSignInScreen: () -> Unit,
     isContent: Boolean
 ) {

@@ -46,9 +46,9 @@ class TokenInterceptor @Inject constructor(
                             response = errorResponse(chain.request())
                             LogUtil.e("Network Error", "Refresh Token is Null or Empty")
                         } else {
-                            reissueAccessTokenUseCase(refreshToken).first().onSuccess { code, data ->
-                                val newAccessToken = data?.data?.accessToken ?: ""
-                                val newRefreshToken = data?.data?.refreshToken ?: ""
+                            reissueAccessTokenUseCase(refreshToken).first().onSuccess { code, message, data ->
+                                val newAccessToken = data?.accessToken ?: ""
+                                val newRefreshToken = data?.refreshToken ?: ""
                                 saveRefreshTokenUseCase(newRefreshToken)
                                 saveAccessTokenUseCase(newAccessToken)
                                 val newRequest = chain.request().newBuilder().header("Authorization", "Bearer $newAccessToken").build()

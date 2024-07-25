@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName
 
 data class ConsentItem(
     @SerializedName("consentType")
-    val consentType: String,
+    val consentType: String?,
     @SerializedName("consent")
     val consent: Boolean
 )

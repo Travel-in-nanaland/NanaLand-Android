@@ -30,16 +30,16 @@ class NanaPickContentViewModel @Inject constructor(
     private val _nanaPickContent = MutableStateFlow<UiState<NanaPickContentData>>(UiState.Loading)
     val nanaPickContent = _nanaPickContent.asStateFlow()
 
-    fun getNanaPickContent(contentId: Long?) {
+    fun getNanaPickContent(contentId: Int?) {
         if (contentId == null) return;
         _nanaPickContent.update { UiState.Loading }
         val requestData = GetNanaPickContentRequest(contentId)
         getNanaPickContentUseCase(requestData)
             .onEach { networkResult ->
-                networkResult.onSuccess { _, data ->
+                networkResult.onSuccess { code, message, data ->
                     data?.let {
                         _nanaPickContent.update {
-                            UiState.Success(data.data)
+                            UiState.Success(data)
                         }
                     }
                 }.onError { code, message ->
@@ -52,7 +52,7 @@ class NanaPickContentViewModel @Inject constructor(
             .launchIn(viewModelScope)
     }
 
-    fun toggleFavorite(contentId: Long?) {
+    fun toggleFavorite(contentId: Int?) {
         if (contentId == null) return
         val requestData = ToggleFavoriteRequest(
             id = contentId,
@@ -60,11 +60,11 @@ class NanaPickContentViewModel @Inject constructor(
         )
         toggleFavoriteUseCase(requestData)
             .onEach { networkResult ->
-                networkResult.onSuccess { code, data ->
+                networkResult.onSuccess { code, message, data ->
                     data?.let {
                         _nanaPickContent.update { uiState ->
                             if (uiState is UiState.Success) {
-                                UiState.Success(uiState.data.copy(favorite = data.data.favorite))
+                                UiState.Success(uiState.data.copy(favorite = data.favorite))
                             } else {
                                 uiState
                             }

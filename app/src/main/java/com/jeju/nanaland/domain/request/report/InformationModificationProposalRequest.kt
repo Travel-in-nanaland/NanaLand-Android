@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName
 
 data class InformationModificationProposalRequest(
     @SerializedName("postId")
-    val postId: Long,
+    val postId: Int,
     @SerializedName("fixType")
     val fixType: String,
     @SerializedName("category")

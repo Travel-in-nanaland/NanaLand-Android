@@ -16,7 +16,7 @@ import com.jeju.nanaland.util.ui.UiState
 
 @Composable
 fun SeasonFilterTopBar(
-    count: UiState<Long>,
+    count: UiState<Int>,
     selectedSeasonList: SnapshotStateList<Boolean>,
     seasonList: List<String>,
     openSeasonFilterDialog: () -> Unit,

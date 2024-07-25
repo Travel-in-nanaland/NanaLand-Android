@@ -5,14 +5,14 @@ import com.jeju.nanaland.domain.entity.search.SearchResultData
 
 data class GetAllSearchResultListResponse(
     @SerializedName("status")
-    val status: Long,
+    val status: Int,
     @SerializedName("message")
     val message: String?,
     @SerializedName("data")
-    val data: GetAllSearchResultListResponseData
+    val data: AllSearchResultListData
 )
 
-data class GetAllSearchResultListResponseData(
+data class AllSearchResultListData(
     @SerializedName("festival")
     val festival: SearchResultData,
     @SerializedName("nature")

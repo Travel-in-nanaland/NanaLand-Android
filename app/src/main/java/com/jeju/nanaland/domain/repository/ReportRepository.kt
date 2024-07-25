@@ -1,7 +1,6 @@
 package com.jeju.nanaland.domain.repository
 
 import com.jeju.nanaland.domain.request.report.InformationModificationProposalRequest
-import com.jeju.nanaland.domain.response.report.InformationModificationProposalResponse
 import com.jeju.nanaland.util.network.NetworkResult
 import java.io.File
 
@@ -11,5 +10,5 @@ interface ReportRepository {
     suspend fun informationModificationProposal(
         data: InformationModificationProposalRequest,
         image: File?
-    ): NetworkResult<InformationModificationProposalResponse>
+    ): NetworkResult<String?>
 }
