@@ -2,7 +2,7 @@ package com.jeju.nanaland.ui.market
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.jeju.nanaland.domain.entity.market.MarketThumbnailData
+import com.jeju.nanaland.domain.entity.market.MarketThumbnail
 import com.jeju.nanaland.domain.request.favorite.ToggleFavoriteRequest
 import com.jeju.nanaland.domain.request.market.GetMarketListRequest
 import com.jeju.nanaland.domain.usecase.favorite.ToggleFavoriteUseCase
@@ -31,14 +31,14 @@ class MarketListViewModel @Inject constructor(
 
     private val locationList = getLocationList()
     val selectedLocationList = getLocationSelectionList()
-    private val _marketThumbnailCount = MutableStateFlow<UiState<Long>>(UiState.Loading)
+    private val _marketThumbnailCount = MutableStateFlow<UiState<Int>>(UiState.Loading)
     val marketThumbnailCount = _marketThumbnailCount.asStateFlow()
-    private val _marketThumbnailList = MutableStateFlow<UiState<List<MarketThumbnailData>>>(UiState.Loading)
+    private val _marketThumbnailList = MutableStateFlow<UiState<List<MarketThumbnail>>>(UiState.Loading)
     val marketThumbnailList = _marketThumbnailList.asStateFlow()
-    private var page = 0L
+    private var page = 0
 
     fun getMarketList() {
-        var prevList: List<MarketThumbnailData>? = null
+        var prevList: List<MarketThumbnail>? = null
         if (_marketThumbnailList.value is UiState.Success) {
             page++
             prevList = (_marketThumbnailList.value as UiState.Success).data
@@ -52,16 +52,16 @@ class MarketListViewModel @Inject constructor(
         )
         getMarketListUseCase(requestData)
             .onEach { networkResult ->
-                networkResult.onSuccess { code, data ->
+                networkResult.onSuccess { code, message, data ->
                     data?.let {
                         _marketThumbnailCount.update {
-                            UiState.Success(data.data.totalElements)
+                            UiState.Success(data.totalElements)
                         }
                         _marketThumbnailList.update {
                             if (prevList.isNullOrEmpty()) {
-                                UiState.Success(data.data.data)
+                                UiState.Success(data.data)
                             } else {
-                                UiState.Success(prevList + data.data.data)
+                                UiState.Success(prevList + data.data)
                             }
                         }
                     }
@@ -80,19 +80,19 @@ class MarketListViewModel @Inject constructor(
         page = 0
     }
 
-    fun toggleFavorite(contentId: Long) {
+    fun toggleFavorite(contentId: Int) {
         val requestData = ToggleFavoriteRequest(
             id = contentId,
             category = "MARKET"
         )
         toggleFavoriteUseCase(requestData)
             .onEach { networkResult ->
-                networkResult.onSuccess { code, data ->
+                networkResult.onSuccess { code, message, data ->
                     data?.let {
                         _marketThumbnailList.update { uiState ->
                             if (uiState is UiState.Success) {
                                 val newList = uiState.data.map {  item ->
-                                    if (item.id == contentId) item.copy(favorite = data.data.favorite)
+                                    if (item.id == contentId) item.copy(favorite = data.favorite)
                                     else item
                                 }
                                 UiState.Success(newList)
@@ -111,7 +111,7 @@ class MarketListViewModel @Inject constructor(
             .launchIn(viewModelScope)
     }
 
-    fun toggleFavoriteWithNoApi(contentId: Long, isFavorite: Boolean) {
+    fun toggleFavoriteWithNoApi(contentId: Int, isFavorite: Boolean) {
         _marketThumbnailList.update { uiState ->
             if (uiState is UiState.Success) {
                 val newList = uiState.data.map {  item ->

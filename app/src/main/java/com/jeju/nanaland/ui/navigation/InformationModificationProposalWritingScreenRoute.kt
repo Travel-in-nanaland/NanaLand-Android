@@ -9,7 +9,7 @@ import com.jeju.nanaland.ui.infomodification.InformationModificationProposalWrit
 
 fun NavGraphBuilder.informationModificationProposalWritingScreen(navController: NavController) = composable(route = ROUTE_INFORMATION_MODIFICATION_PROPOSAL_WRITING) {
     InformationModificationProposalWritingScreen(
-        postId = (it.arguments?.getLong("postId") ?: 0),
+        postId = (it.arguments?.getInt("postId") ?: 0),
         fixType = (it.arguments?.getString("fixType") ?: ""),
         category = (it.arguments?.getString("category") ?: ""),
         moveToBackScreen = { navController.popBackStack() },

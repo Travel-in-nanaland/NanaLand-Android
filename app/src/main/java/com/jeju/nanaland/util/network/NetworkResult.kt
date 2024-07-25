@@ -4,7 +4,7 @@ import com.jeju.nanaland.util.log.LogUtil
 import java.util.Arrays
 
 sealed class NetworkResult<out T> {
-    data class Success<out T>(val code: Int, val data: T?) : NetworkResult<T>()
+    data class Success<out T>(val code: Int, val message: String?, val data: T?) : NetworkResult<T>()
     data class Error(val code: Int, val message: String?) : NetworkResult<Nothing>()
     data class Exception(val e: Throwable) : NetworkResult<Nothing>()
 
@@ -13,9 +13,9 @@ sealed class NetworkResult<out T> {
     val isException get() = this is Exception
 }
 
-inline fun <T> NetworkResult<T>.onSuccess(action: (code: Int, data: T?) -> Unit): NetworkResult<T> {
+inline fun <T> NetworkResult<T>.onSuccess(action: (code: Int, message: String?, data: T?) -> Unit): NetworkResult<T> {
     if (this is NetworkResult.Success) {
-        action(this.code, this.data)
+        action(this.code, this.message, this.data)
     }
     return this
 }

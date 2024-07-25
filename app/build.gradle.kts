@@ -21,9 +21,9 @@ android {
 
     defaultConfig {
         applicationId = "com.jeju.nanaland"
-        minSdk = 24
+        minSdk = 26
         targetSdk = 34
-        versionCode = 25
+        versionCode = 26
         versionName = "1.0.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
@@ -31,6 +31,7 @@ android {
             useSupportLibrary = true
         }
         buildConfigField("String", "BASE_URL", getProperty("baseUrl"))
+        buildConfigField("String", "NEXT_URL", getProperty("nextUrl"))
         buildConfigField("String", "DEV_ACCESS_TOKEN", getProperty("accessToken"))
     }
 

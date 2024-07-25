@@ -2,12 +2,10 @@ package com.jeju.nanaland.data.repository
 
 import com.google.gson.GsonBuilder
 import com.jeju.nanaland.data.api.AuthApi
+import com.jeju.nanaland.domain.entity.auth.AuthTokenData
 import com.jeju.nanaland.domain.repository.AuthRepository
 import com.jeju.nanaland.domain.request.auth.SignInRequest
 import com.jeju.nanaland.domain.request.auth.SignUpRequest
-import com.jeju.nanaland.domain.response.auth.ReissueAccessTokenResponse
-import com.jeju.nanaland.domain.response.auth.SignInResponse
-import com.jeju.nanaland.domain.response.auth.SignUpResponse
 import com.jeju.nanaland.util.network.NetworkResult
 import com.jeju.nanaland.util.network.NetworkResultHandler
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
@@ -23,21 +21,21 @@ class AuthRepositoryImpl(
     // AccessToken 재발급
     override suspend fun reissueAccessToken(
         refreshToken: String
-    ): NetworkResult<ReissueAccessTokenResponse> {
+    ): NetworkResult<AuthTokenData> {
         return handleResult { authApi.reissueAccessToken("Bearer $refreshToken") }
     }
 
     // 로그인
     override suspend fun signIn(
         data: SignInRequest
-    ): NetworkResult<SignInResponse> {
+    ): NetworkResult<AuthTokenData> {
         return handleResult { authApi.signIn(body = data) }
     }
 
     override suspend fun signUp(
         data: SignUpRequest,
         image: File?
-    ): NetworkResult<SignUpResponse> {
+    ): NetworkResult<AuthTokenData> {
         val multipartImage: MultipartBody.Part? = image?.let {
             val imageBody = image.asRequestBody("image/png".toMediaTypeOrNull())
             MultipartBody.Part.createFormData("multipartFile", imageBody.toString(), imageBody)

@@ -1,20 +1,22 @@
 package com.jeju.nanaland.util.network
 
+import com.jeju.nanaland.domain.entity.nature.NatureContent
+import com.jeju.nanaland.domain.response.ResponseWrapper
 import retrofit2.HttpException
 import retrofit2.Response
 import java.text.SimpleDateFormat
 
 interface NetworkResultHandler {
-    suspend fun <T:Any> handleResult(
-        responseFunction: suspend () -> Response<T>
+    suspend fun <T : Any?> handleResult(
+        responseFunction: suspend () -> Response<ResponseWrapper<T>>
     ): NetworkResult<T> {
         return try {
             val response = responseFunction()
             if (response.isSuccessful) {
                 if (response.body() == null) {
-                    NetworkResult.Success(response.code(), null)
+                    NetworkResult.Success(response.code(), response.body()?.message, null)
                 } else {
-                    NetworkResult.Success(response.code(), response.body())
+                    NetworkResult.Success(response.code(), response.body()!!.message, response.body()!!.data)
                 }
             } else {
                 val message = ""

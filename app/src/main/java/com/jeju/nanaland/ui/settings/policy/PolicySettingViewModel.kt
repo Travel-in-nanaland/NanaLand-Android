@@ -32,13 +32,13 @@ class PolicySettingViewModel @Inject constructor(
     private fun getUserProfile() {
         getUserProfileUseCase()
             .onEach { networkResult ->
-                networkResult.onSuccess { code, data ->
+                networkResult.onSuccess { code, message, data ->
                     data?.let {
                         _isMarketingPolicyAgreed.update {
-                            data.data.consentItem.first { it.consentType == "MARKETING" }.consent
+                            data.consentItem.first { it.consentType == "MARKETING" }.consent
                         }
                         _isLocationPolicyAgreed.update {
-                            data.data.consentItem.first { it.consentType == "LOCATION_SERVICE" }.consent
+                            data.consentItem.first { it.consentType == "LOCATION_SERVICE" }.consent
                         }
                     }
                 }.onError { code, message ->
@@ -58,7 +58,7 @@ class PolicySettingViewModel @Inject constructor(
         )
         updatePolicyAgreementUseCase(requestData)
             .onEach { networkResult ->
-                networkResult.onSuccess { code, data ->
+                networkResult.onSuccess { code, message, data ->
                     if (consentType == "MARKETING") {
                         _isMarketingPolicyAgreed.update { consent }
                     } else {

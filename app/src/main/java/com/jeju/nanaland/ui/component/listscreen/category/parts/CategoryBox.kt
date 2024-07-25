@@ -11,6 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.jeju.nanaland.R
 import com.jeju.nanaland.globalvalue.type.FestivalCategoryType
@@ -60,7 +61,8 @@ fun RowScope.CategoryBox(
                 else -> getString(R.string.festival_list_screen_계절별_축제)
             },
             color = Color(0xFF000000),
-            style = if (selectedCategoryType == titleList[categoryIdx]) body02SemiBold else body02
+            style = if (selectedCategoryType == titleList[categoryIdx]) body02SemiBold else body02,
+            textAlign = TextAlign.Center
         )
     }
 }

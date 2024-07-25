@@ -2,20 +2,14 @@ package com.jeju.nanaland.data.repository
 
 import com.google.gson.GsonBuilder
 import com.jeju.nanaland.data.api.MemberApi
+import com.jeju.nanaland.domain.entity.member.RecommendedPostData
+import com.jeju.nanaland.domain.entity.member.UserProfile
 import com.jeju.nanaland.domain.repository.MemberRepository
 import com.jeju.nanaland.domain.request.member.UpdateLanguageRequest
 import com.jeju.nanaland.domain.request.member.UpdatePolicyAgreementRequest
 import com.jeju.nanaland.domain.request.member.UpdateUserProfileRequest
 import com.jeju.nanaland.domain.request.member.UpdateUserTypeRequest
 import com.jeju.nanaland.domain.request.member.WithdrawalRequest
-import com.jeju.nanaland.domain.response.member.GetRecommendedPostResponse
-import com.jeju.nanaland.domain.response.member.GetUserProfileResponse
-import com.jeju.nanaland.domain.response.member.SignOutResponse
-import com.jeju.nanaland.domain.response.member.UpdateLanguageResponse
-import com.jeju.nanaland.domain.response.member.UpdatePolicyAgreementResponse
-import com.jeju.nanaland.domain.response.member.UpdateUserProfileResponse
-import com.jeju.nanaland.domain.response.member.UpdateUserTypeResponse
-import com.jeju.nanaland.domain.response.member.WithdrawalResponse
 import com.jeju.nanaland.util.network.NetworkResult
 import com.jeju.nanaland.util.network.NetworkResultHandler
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
@@ -28,23 +22,23 @@ class MemberRepositoryImpl(
     private val memberApi: MemberApi
 ) : MemberRepository, NetworkResultHandler {
 
-    override suspend fun getUserProfile(): NetworkResult<GetUserProfileResponse> {
+    override suspend fun getUserProfile(): NetworkResult<UserProfile> {
         return handleResult { memberApi.getUserProfile() }
     }
 
     // 유저 타입에 따른 추천 게시물 2개 반환
-    override suspend fun getRecommendedPost(): NetworkResult<GetRecommendedPostResponse> {
+    override suspend fun getRecommendedPost(): NetworkResult<List<RecommendedPostData>> {
         return handleResult { memberApi.getRecommendedPost() }
     }
 
-    override suspend fun getRandomRecommendedPost(): NetworkResult<GetRecommendedPostResponse> {
+    override suspend fun getRandomRecommendedPost(): NetworkResult<List<RecommendedPostData>> {
         return handleResult { memberApi.getRandomRecommendedPost() }
     }
 
     // 테스트 결과에 따른 유저 타입 갱신
     override suspend fun updateUserType(
         data: UpdateUserTypeRequest
-    ): NetworkResult<UpdateUserTypeResponse> {
+    ): NetworkResult<Any?> {
         return handleResult {
             memberApi.updateUserType(
                 body = data
@@ -55,7 +49,7 @@ class MemberRepositoryImpl(
     override suspend fun updateUserProfile(
         data: UpdateUserProfileRequest,
         image: File?
-    ): NetworkResult<UpdateUserProfileResponse> {
+    ): NetworkResult<String?> {
         val multipartImage: MultipartBody.Part? = image?.let {
             val imageBody = image.asRequestBody("image/png".toMediaTypeOrNull())
             MultipartBody.Part.createFormData("multipartFile", imageBody.toString(), imageBody)
@@ -70,21 +64,21 @@ class MemberRepositoryImpl(
 
     override suspend fun withdraw(
         data: WithdrawalRequest
-    ): NetworkResult<WithdrawalResponse> {
+    ): NetworkResult<Any?> {
         return handleResult { memberApi.withdraw(data) }
     }
 
-    override suspend fun signOut(): NetworkResult<SignOutResponse> {
+    override suspend fun signOut(): NetworkResult<Any?> {
         return handleResult { memberApi.signOut() }
     }
 
     override suspend fun updateLanguage(
         data: UpdateLanguageRequest
-    ): NetworkResult<UpdateLanguageResponse> {
+    ): NetworkResult<Any?> {
         return handleResult { memberApi.updateLanguage(data) }
     }
 
-    override suspend fun updatePolicyAgreement(data: UpdatePolicyAgreementRequest): NetworkResult<UpdatePolicyAgreementResponse> {
+    override suspend fun updatePolicyAgreement(data: UpdatePolicyAgreementRequest): NetworkResult<Any?> {
         return handleResult { memberApi.updatePolicyAgreement(data) }
     }
 }

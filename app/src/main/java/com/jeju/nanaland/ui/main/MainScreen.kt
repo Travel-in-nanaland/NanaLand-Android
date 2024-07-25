@@ -56,7 +56,7 @@ import kotlinx.coroutines.flow.emptyFlow
 fun MainScreen(
     deepLinkData: DeepLinkData,
     moveToNotificationScreen: () -> Unit,
-    moveToCategoryContentScreen: (Long, String?, Boolean) -> Unit,
+    moveToCategoryContentScreen: (Int, String?, Boolean) -> Unit,
     moveToNanaPickListScreen: () -> Unit,
     moveToNatureListScreen: (ListFilter) -> Unit,
     moveToFestivalListScreen: (ListFilter) -> Unit,
@@ -136,7 +136,7 @@ private fun MainScreen(
     initHomeScreen: () -> Unit,
     initFavoriteScreen: () -> Unit,
     moveToNotificationScreen: () -> Unit,
-    moveToCategoryContentScreen: (Long, String?, Boolean) -> Unit,
+    moveToCategoryContentScreen: (Int, String?, Boolean) -> Unit,
     moveToNanaPickListScreen: () -> Unit,
     moveToNatureListScreen: (ListFilter) -> Unit,
     moveToFestivalListScreen: (ListFilter) -> Unit,

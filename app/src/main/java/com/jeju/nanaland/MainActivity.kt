@@ -64,7 +64,7 @@ class MainActivity : ComponentActivity() {
                 LogUtil.e("deepLink", "${language}")
                 deepLinkData.language = language
                 deepLinkData.category = category
-                deepLinkData.contentId = id.toLong()
+                deepLinkData.contentId = id.toInt()
             }
         }
 //

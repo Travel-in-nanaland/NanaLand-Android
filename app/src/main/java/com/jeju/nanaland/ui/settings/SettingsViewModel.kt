@@ -35,7 +35,7 @@ class SettingsViewModel @Inject constructor(
     ) {
         signOutUseCase()
             .onEach { networkResult ->
-                networkResult.onSuccess { code, data ->
+                networkResult.onSuccess { code, message, data ->
                     clearAuthDataStoreUseCase()
                     clearUserSettingsDataStoreUseCase()
                     clearRecentSearchDataStoreUseCase()

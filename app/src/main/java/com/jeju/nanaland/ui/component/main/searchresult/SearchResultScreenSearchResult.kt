@@ -27,9 +27,9 @@ fun SearchResultScreenSearchResult(
     categorizedSearchResultList: UiState<SearchResultData>,
     getSearchResult: () -> Unit,
     updateSearchCategoryType: (SearchCategoryType) -> Unit,
-    toggleAllSearchResultFavorite: (Long, String?) -> Unit,
-    toggleSearchResultFavorite: (Long, String?) -> Unit,
-    onPostClick: (Long, String?, Boolean) -> Unit,
+    toggleAllSearchResultFavorite: (Int, String?) -> Unit,
+    toggleSearchResultFavorite: (Int, String?) -> Unit,
+    onPostClick: (Int, String?, Boolean) -> Unit,
     moveToSignInScreen: () -> Unit,
 ) {
     if (selectedCategory == SearchCategoryType.All) {

@@ -245,7 +245,7 @@
     <string name="type_감귤_라떼_description">따뜻한 햇살 밑에서 유유자적 하는 감귤 라떼 유형!</string>
     <string name="type_감귤_식혜_description">풍미 가득한! 느리지만, 깊은 감귤 식혜 유형!</string>
     <string name="type_감귤_에이드_description">톡 쏘는 탄산수에 싱그러운 과일이 퐁당! 청량감이 느껴지는 감귤 에이드</string>
-    <string name="type_감귤_버블티_description">호기심 가득한 당신! 먹을수록 반전인 감귤 버블티 유형!</string>
+    <string name="type_감귤_버블티_description">호기심 가득한 당신!\n먹을수록 반전인 감귤 버블티 유형!</string>
 
     <!--여행지 유형 테스트 화면-->
     <string name="type_test_screen_question1">"여행 장소를\n고를 때 "</string>

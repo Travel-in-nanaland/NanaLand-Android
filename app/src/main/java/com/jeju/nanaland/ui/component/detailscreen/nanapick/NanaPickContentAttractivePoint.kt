@@ -2,7 +2,7 @@ package com.jeju.nanaland.ui.component.detailscreen.nanapick
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -27,7 +27,9 @@ import com.jeju.nanaland.util.resource.getString
 import com.jeju.nanaland.util.ui.drawColoredShadow
 
 @Composable
-fun NanaPickContentAttractivePoint() {
+fun NanaPickContentAttractivePoint(
+    onClick: () -> Unit
+) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -41,7 +43,7 @@ fun NanaPickContentAttractivePoint() {
             .background(
                 color = getColor().white,
                 shape = RoundedCornerShape(50)
-            ),
+            ).clickable { onClick() },
         verticalAlignment = Alignment.CenterVertically
     ) {
         Spacer(Modifier.width(16.dp))

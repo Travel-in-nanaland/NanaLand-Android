@@ -30,16 +30,16 @@ class MyPageViewModel @Inject constructor(
     fun getUserProfile() {
         getUserProfileUseCase()
             .onEach { networkResult ->
-                networkResult.onSuccess { code, data ->
+                networkResult.onSuccess { code, message, data ->
                     data?.let {
                         _userProfile.update {
-                            UiState.Success(data.data)
+                            UiState.Success(data)
                         }
-                        UserData.provider = data.data.provider ?: "GUEST"
+                        UserData.provider = data.provider ?: "GUEST"
                         if (UserData.provider == "GUEST") {
                             UserData.nickname = "GUEST"
                         } else {
-                            UserData.nickname = data.data.nickname ?: "GUEST"
+                            UserData.nickname = data.nickname ?: "GUEST"
                         }
                     }
                 }.onError { code, message ->

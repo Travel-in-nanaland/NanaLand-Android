@@ -57,13 +57,13 @@ class TypeTestingViewModel @Inject constructor(
             "122" -> TYPE_GAMGYUL_HANGWA
             "123" -> TYPE_GAMGYUL_JUICE
             "124" -> TYPE_GAMGYUL_CHOCOLATE
-            "211" -> TYPE_GAMGYUL_COCKTAIL
-            "212" -> TYPE_TANGERINE_PEEL_TEA
-            "213" -> TYPE_GAMGYUL_YOGURT
-            "214" -> TYPE_GAMGYUL_FLATCCINO
-            "221" -> TYPE_GAMGYUL_LATTE
-            "222" -> TYPE_GAMGYUL_SIKHYE
-            "223" -> TYPE_GAMGYUL_ADE
+            "221" -> TYPE_GAMGYUL_COCKTAIL
+            "222" -> TYPE_TANGERINE_PEEL_TEA
+            "223" -> TYPE_GAMGYUL_YOGURT
+            "224" -> TYPE_GAMGYUL_FLATCCINO
+            "211" -> TYPE_GAMGYUL_LATTE
+            "212" -> TYPE_GAMGYUL_SIKHYE
+            "213" -> TYPE_GAMGYUL_ADE
             else -> TYPE_GAMGYUL_BUBBLE_TEA
         }
         
@@ -71,7 +71,7 @@ class TypeTestingViewModel @Inject constructor(
         
         updateUserTypeUseCase(requestData)
             .onEach { networkResult ->  
-                networkResult.onSuccess { code, data ->
+                networkResult.onSuccess { code, message, data ->
                     moveToTypeTestCompletionScreen(type)
                 }.onError { code, message ->
 

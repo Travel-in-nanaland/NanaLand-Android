@@ -14,7 +14,7 @@ fun NavGraphBuilder.informationModificationProposalCategoryScreen(navController:
         moveToBackScreen = { navController.popBackStack() },
         moveToInfoModificationProposalWritingScreen = { fixType ->
             val bundle = bundleOf(
-                "postId" to it.arguments?.getLong("postId"),
+                "postId" to it.arguments?.getInt("postId"),
                 "fixType" to fixType,
                 "category" to it.arguments?.getString("category")
             )

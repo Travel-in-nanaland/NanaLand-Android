@@ -2,7 +2,7 @@ package com.jeju.nanaland.ui.nature
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.jeju.nanaland.domain.entity.nature.NatureThumbnailData
+import com.jeju.nanaland.domain.entity.nature.NatureThumbnail
 import com.jeju.nanaland.domain.request.favorite.ToggleFavoriteRequest
 import com.jeju.nanaland.domain.request.nature.GetNatureListRequest
 import com.jeju.nanaland.domain.usecase.favorite.ToggleFavoriteUseCase
@@ -31,14 +31,14 @@ class NatureListViewModel @Inject constructor(
 
     private val locationList = getLocationList()
     val selectedLocationList = getLocationSelectionList()
-    private val _natureThumbnailCount = MutableStateFlow<UiState<Long>>(UiState.Loading)
+    private val _natureThumbnailCount = MutableStateFlow<UiState<Int>>(UiState.Loading)
     val natureThumbnailCount = _natureThumbnailCount.asStateFlow()
-    private val _natureThumbnailList = MutableStateFlow<UiState<List<NatureThumbnailData>>>(UiState.Loading)
+    private val _natureThumbnailList = MutableStateFlow<UiState<List<NatureThumbnail>>>(UiState.Loading)
     val natureThumbnailList = _natureThumbnailList.asStateFlow()
-    private var page = 0L
+    private var page = 0
 
     fun getNatureList() {
-        var prevList: List<NatureThumbnailData>? = null
+        var prevList: List<NatureThumbnail>? = null
         if (_natureThumbnailList.value is UiState.Success) {
             page++
             prevList = (_natureThumbnailList.value as UiState.Success).data
@@ -52,16 +52,16 @@ class NatureListViewModel @Inject constructor(
         )
         getNatureListUseCase(requestData)
             .onEach { networkResult ->
-                networkResult.onSuccess { code, data ->
+                networkResult.onSuccess { code, message, data ->
                     data?.let {
                         _natureThumbnailCount.update {
-                            UiState.Success(data.data.totalElements)
+                            UiState.Success(data.totalElements)
                         }
                         _natureThumbnailList.update {
                             if (prevList.isNullOrEmpty()) {
-                                UiState.Success(data.data.data)
+                                UiState.Success(data.data)
                             } else {
-                                UiState.Success(prevList + data.data.data)
+                                UiState.Success(prevList + data.data)
                             }
                         }
                     }
@@ -80,19 +80,19 @@ class NatureListViewModel @Inject constructor(
         page = 0
     }
 
-    fun toggleFavorite(contentId: Long) {
+    fun toggleFavorite(contentId: Int) {
         val requestData = ToggleFavoriteRequest(
             id = contentId,
             category = "NATURE"
         )
         toggleFavoriteUseCase(requestData)
             .onEach { networkResult ->
-                networkResult.onSuccess { code, data ->
+                networkResult.onSuccess { code, message, data ->
                     data?.let {
                         _natureThumbnailList.update { uiState ->
                             if (uiState is UiState.Success) {
                                 val newList = uiState.data.map {  item ->
-                                    if (item.id == contentId) item.copy(favorite = data.data.favorite)
+                                    if (item.id == contentId) item.copy(favorite = data.favorite)
                                     else item
                                 }
                                 UiState.Success(newList)
@@ -111,7 +111,7 @@ class NatureListViewModel @Inject constructor(
             .launchIn(viewModelScope)
     }
 
-    fun toggleFavoriteWithNoApi(contentId: Long, isFavorite: Boolean) {
+    fun toggleFavoriteWithNoApi(contentId: Int, isFavorite: Boolean) {
         _natureThumbnailList.update { uiState ->
             if (uiState is UiState.Success) {
                 val newList = uiState.data.map {  item ->

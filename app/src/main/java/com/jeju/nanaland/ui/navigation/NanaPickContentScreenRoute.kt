@@ -10,7 +10,7 @@ import com.jeju.nanaland.ui.nanapick.NanaPickContentScreen
 
 fun NavGraphBuilder.nanaPickContentScreen(navController: NavController) = composable(route = ROUTE_NANAPICK_CONTENT) {
     NanaPickContentScreen(
-        contentId = it.arguments?.getLong("contentId"),
+        contentId = it.arguments?.getInt("contentId"),
         moveToBackScreen = { navController.popBackStack() },
         moveToSignInScreen = { navController.navigate(ROUTE_SIGN_IN) {
             popUpTo(ROUTE_MAIN) { inclusive = true }

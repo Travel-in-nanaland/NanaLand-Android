@@ -1,16 +1,22 @@
 package com.jeju.nanaland.ui.component.main.home
 
 import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.background
 import androidx.compose.foundation.interaction.collectIsDraggedAsState
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 import com.jeju.nanaland.domain.entity.nanapick.NanaPickBannerData
 import com.jeju.nanaland.ui.component.main.home.parts.HomeScreenNanaPickBanner
 import com.jeju.nanaland.ui.component.main.home.parts.HomeScreenTopBannerPageIndicator
+import com.jeju.nanaland.ui.theme.getColor
 import com.jeju.nanaland.util.ui.UiState
 import kotlinx.coroutines.delay
 
@@ -18,7 +24,7 @@ import kotlinx.coroutines.delay
 @Composable
 fun HomeScreenTopBanner(
     topBanner: UiState<List<NanaPickBannerData>>,
-    onBannerClick: (Long, String?, Boolean) -> Unit,
+    onBannerClick: (Int, String?, Boolean) -> Unit,
 ) {
     Box {
         val pagerState = rememberPagerState(
@@ -51,6 +57,13 @@ fun HomeScreenTopBanner(
                     HomeScreenTopBannerPageIndicator(
                         itemCnt = topBanner.data.size,
                         pageNum = pagerState.currentPage
+                    )
+                } else {
+                    Box(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .height(220.dp)
+                            .background(getColor().skeleton)
                     )
                 }
             }

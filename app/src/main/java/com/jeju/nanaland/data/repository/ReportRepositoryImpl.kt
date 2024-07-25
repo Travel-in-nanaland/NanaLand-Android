@@ -4,7 +4,6 @@ import com.google.gson.GsonBuilder
 import com.jeju.nanaland.data.api.ReportApi
 import com.jeju.nanaland.domain.repository.ReportRepository
 import com.jeju.nanaland.domain.request.report.InformationModificationProposalRequest
-import com.jeju.nanaland.domain.response.report.InformationModificationProposalResponse
 import com.jeju.nanaland.util.network.NetworkResult
 import com.jeju.nanaland.util.network.NetworkResultHandler
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
@@ -20,7 +19,7 @@ class ReportRepositoryImpl(
     override suspend fun informationModificationProposal(
         data: InformationModificationProposalRequest,
         image: File?
-    ): NetworkResult<InformationModificationProposalResponse> {
+    ): NetworkResult<String?> {
         val multipartImage: MultipartBody.Part? = image?.let {
             val imageBody = image.asRequestBody("image/png".toMediaTypeOrNull())
             MultipartBody.Part.createFormData("multipartFile", imageBody.toString(), imageBody)

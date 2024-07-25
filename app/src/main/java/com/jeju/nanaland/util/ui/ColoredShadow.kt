@@ -1,5 +1,7 @@
 package com.jeju.nanaland.util.ui
 
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.geometry.Offset
@@ -10,6 +12,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import kotlin.math.absoluteValue
 
+@RequiresApi(Build.VERSION_CODES.O)
 fun Modifier.drawColoredShadow(
     color: Color,
     alpha: Float = 0.2f,

@@ -244,7 +244,7 @@
     <string name="type_감귤_라떼_description">A type that leisurely enjoys life under the warm sunshine.</string>
     <string name="type_감귤_식혜_description"> A type full of rich flavors, slow but profound.</string>
     <string name="type_감귤_에이드_description">A type that is fizzy with sparkling water and fresh fruit, exuding a sense of freshness.</string>
-    <string name="type_감귤_버블티_description">A type full of curiosity, surprising with each bite.</string>
+    <string name="type_감귤_버블티_description">A type full of curiosity,\nsurprising with each bite.</string>
 
     <!--여행지 유형 테스트 화면-->
     <string name="type_test_screen_question1">""</string>

@@ -22,7 +22,7 @@ import com.jeju.nanaland.ui.theme.getColor
 @Composable
 fun ColumnScope.MyPageScreenProfileImageWithLevel(
     imageUri: String,
-    level: Long
+    level: Int
 ) {
     Box(
         modifier = Modifier

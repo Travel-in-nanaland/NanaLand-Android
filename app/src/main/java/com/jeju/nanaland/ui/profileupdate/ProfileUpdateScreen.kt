@@ -57,7 +57,7 @@ fun ProfileUpdateScreen(
     val inputNicknameState = viewModel.inputNicknameState.collectAsState().value
     val inputIntroduction = viewModel.inputIntroduction.collectAsState().value
     val inputIntroductionState = viewModel.inputIntroductionState.collectAsState().value
-    val profileImageUri = viewModel.profileImageUri.collectAsState().value
+    val profileImageUri = viewModel.imageUri.collectAsState().value
     ProfileUpdateScreen(
         prevNickname = nickname,
         prevIntroduction = introduction,

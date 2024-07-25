@@ -52,10 +52,10 @@ class HomeViewModel @Inject constructor(
         _homeBannerPreview.update { UiState.Loading }
         getHomePreviewBannerUseCase()
             .onEach { networkResult ->
-                networkResult.onSuccess { _, data ->
+                networkResult.onSuccess { code, message, data ->
                     data?.let {
                         _homeBannerPreview.update {
-                            UiState.Success(data.data)
+                            UiState.Success(data)
                         }
                     }
                 }.onError { code, message ->
@@ -72,10 +72,10 @@ class HomeViewModel @Inject constructor(
         _recommendedPost.update { UiState.Loading }
         getRandomRecommendedPostUseCase()
             .onEach { networkResult ->
-                networkResult.onSuccess { code, data ->
+                networkResult.onSuccess { code, message, data ->
                     data?.let {
                         _recommendedPost.update {
-                            UiState.Success(data.data)
+                            UiState.Success(data)
                         }
                     }
                 }.onError { code, message ->
@@ -88,7 +88,7 @@ class HomeViewModel @Inject constructor(
             .launchIn(viewModelScope)
     }
 
-    fun toggleFavorite(contentId: Long, category: String?) {
+    fun toggleFavorite(contentId: Int, category: String?) {
         if (category == null) return
         val requestData = ToggleFavoriteRequest(
             id = contentId,
@@ -96,12 +96,12 @@ class HomeViewModel @Inject constructor(
         )
         toggleFavoriteUseCase(requestData)
             .onEach { networkResult ->
-                networkResult.onSuccess { code, data ->
+                networkResult.onSuccess { code, message, data ->
                     data?.let {
                         _recommendedPost.update { uiState ->
                             if (uiState is UiState.Success) {
                                 val newList = uiState.data.map { item ->
-                                    if (item.id == contentId) item.copy(favorite = data.data.favorite)
+                                    if (item.id == contentId) item.copy(favorite = data.favorite)
                                     else item
                                 }
                                 UiState.Success(newList)
