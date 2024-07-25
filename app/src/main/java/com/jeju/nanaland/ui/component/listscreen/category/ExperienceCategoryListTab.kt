@@ -20,12 +20,12 @@ fun ExperienceCategoryListTab(
             .fillMaxWidth()
             .height(40.dp)
     ) {
-        repeat(2) {
-            CategoryBox(
-                categoryIdx = it,
-                selectedCategoryType = selectedCategoryType,
-                updateSelectedCategoryType = updateSelectedCategoryType
-            )
-        }
+//        repeat(2) {
+//            CategoryBox(
+//                categoryIdx = it,
+//                selectedCategoryType = selectedCategoryType,
+//                updateSelectedCategoryType = updateSelectedCategoryType
+//            )
+//        }
     }
 }
