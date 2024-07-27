@@ -40,7 +40,7 @@ fun ExperienceThumbnailList(
                         contentAlignment = if (idx % 2 == 0) Alignment.CenterStart else Alignment.CenterEnd
                     ) {
                         FestivalThumbnail(
-                            imageUri = item.firstImage[0]?.thumbnailUrl,
+                            imageUri = item.firstImage?.thumbnailUrl,
                             isFavorite = item.favorite,
                             title = item.title,
                             subTitle = item.period,

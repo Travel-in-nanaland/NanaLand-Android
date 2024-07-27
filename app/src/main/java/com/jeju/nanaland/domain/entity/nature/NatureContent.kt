@@ -7,27 +7,27 @@ data class NatureContent(
     @SerializedName("id")
     val id: Int,
     @SerializedName("addressTag")
-    val addressTag: String?,
+    val addressTag: String,
     @SerializedName("title")
-    val title: String?,
+    val title: String,
     @SerializedName("content")
-    val content: String?,
+    val content: String,
     @SerializedName("intro")
-    val intro: String?,
+    val intro: String,
     @SerializedName("address")
-    val address: String?,
+    val address: String,
     @SerializedName("contact")
-    val contact: String?,
+    val contact: String,
     @SerializedName("time")
-    val time: String?,
+    val time: String,
     @SerializedName("fee")
-    val fee: String?,
+    val fee: String,
     @SerializedName("details")
-    val details: String?,
+    val details: String,
     @SerializedName("amenity")
-    val amenity: String?,
+    val amenity: String,
     @SerializedName("images")
-    val images: List<ImageUrl?>,
+    val images: List<ImageUrl>,
     @SerializedName("favorite")
     val favorite: Boolean
 )

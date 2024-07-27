@@ -9,9 +9,9 @@ data class ExperienceThumbnail(
     @SerializedName("firstImage")
     val firstImage: ImageUrl?,
     @SerializedName("title")
-    val title: String?,
+    val title: String,
     @SerializedName("addressTag")
-    val addressTag: String?,
+    val addressTag: String,
     @SerializedName("ratingAvg")
     val ratingAvg: Double,
     @SerializedName("favorite")

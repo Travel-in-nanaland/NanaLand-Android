@@ -7,27 +7,27 @@ data class ExperienceContent(
     @SerializedName("id")
     val id: Int,
     @SerializedName("title")
-    val title: String?,
+    val title: String,
     @SerializedName("content")
-    val content: String?,
+    val content: String,
     @SerializedName("address")
-    val address: String?,
+    val address: String,
     @SerializedName("addressTag")
-    val addressTag: String?,
+    val addressTag: String,
     @SerializedName("contact")
-    val contact: String?,
+    val contact: String,
     @SerializedName("homepage")
-    val homepage: String?,
+    val homepage: String,
     @SerializedName("time")
-    val time: String?,
+    val time: String,
     @SerializedName("amenity")
-    val amenity: String?,
+    val amenity: String,
     @SerializedName("details")
-    val details: String?,
+    val details: String,
     @SerializedName("keywords")
     val keywords: List<String>,
     @SerializedName("images")
-    val images: List<ImageUrl?>,
+    val images: List<ImageUrl>,
     @SerializedName("favorite")
     val favorite: Boolean
 )

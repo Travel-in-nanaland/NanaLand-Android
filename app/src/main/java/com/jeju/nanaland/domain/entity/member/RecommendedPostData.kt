@@ -7,13 +7,13 @@ data class RecommendedPostData(
     @SerializedName("id")
     val id: Int,
     @SerializedName("category")
-    val category: String?,
+    val category: String,
     @SerializedName("firstImage")
-    val firstImage: ImageUrl?,
+    val firstImage: ImageUrl,
     @SerializedName("title")
-    val title: String?,
+    val title: String,
     @SerializedName("introduction")
-    val intro: String?,
+    val intro: String,
     @SerializedName("favorite")
     val favorite: Boolean
 )

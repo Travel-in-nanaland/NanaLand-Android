@@ -7,11 +7,11 @@ data class MarketThumbnail(
     @SerializedName("id")
     val id: Int,
     @SerializedName("firstImage")
-    val firstImage: ImageUrl?,
+    val firstImage: ImageUrl,
     @SerializedName("title")
-    val title: String?,
+    val title: String,
     @SerializedName("addressTag")
-    val addressTag: String?,
+    val addressTag: String,
     @SerializedName("favorite")
     val favorite: Boolean
 )

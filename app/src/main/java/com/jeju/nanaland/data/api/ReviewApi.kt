@@ -31,7 +31,7 @@ interface ReviewApi {
         @Query("category") category: String,
         @Part("createReviewDto") data: RequestBody,
         @Part image: MutableList<MultipartBody.Part?>
-    ): Response<ResponseWrapper<String?>>
+    ): Response<ResponseWrapper<String>>
 
     // 리뷰 좋아요 토글
     @POST("review/heart/{id}")
