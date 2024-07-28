@@ -139,6 +139,7 @@ private fun FestivalListScreen(
         getString(R.string.common_가을),
         getString(R.string.common_겨울)
     ) }
+    val isDimBackgroundShowing = remember { mutableStateOf(false) }
     val lazyGridState = rememberLazyGridState()
     val loadMore = remember {
         derivedStateOf {
@@ -157,7 +158,6 @@ private fun FestivalListScreen(
             }
         }
     }
-    val isDimBackgroundShowing = remember { mutableStateOf(false) }
     CustomSurface {
         Box(
             modifier = Modifier.fillMaxSize()

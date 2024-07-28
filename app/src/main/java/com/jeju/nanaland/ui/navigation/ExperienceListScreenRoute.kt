@@ -9,6 +9,8 @@ import com.jeju.nanaland.ui.experience.ExperienceListScreen
 
 fun NavGraphBuilder.experienceListScreen(navController: NavController) = composable(route = ROUTE_EXPERIENCE_LIST) {
     ExperienceListScreen(
-        moveToBackScreen = { navController.popBackStack() }
+        moveToBackScreen = { navController.popBackStack() },
+        moveToExperienceContentScreen = {  },
+        moveToSignInScreen = {  }
     )
 }

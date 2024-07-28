@@ -3,6 +3,7 @@ package com.jeju.nanaland.di.repository
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import com.jeju.nanaland.data.api.AuthApi
+import com.jeju.nanaland.data.api.ExperienceApi
 import com.jeju.nanaland.data.api.FavoriteApi
 import com.jeju.nanaland.data.api.FestivalApi
 import com.jeju.nanaland.data.api.MarketApi
@@ -13,6 +14,7 @@ import com.jeju.nanaland.data.api.ReportApi
 import com.jeju.nanaland.data.api.SearchApi
 import com.jeju.nanaland.data.repository.AuthDataStoreRepositoryImpl
 import com.jeju.nanaland.data.repository.AuthRepositoryImpl
+import com.jeju.nanaland.data.repository.ExperienceRepositoryImpl
 import com.jeju.nanaland.data.repository.FavoriteRepositoryImpl
 import com.jeju.nanaland.data.repository.FestivalRepositoryImpl
 import com.jeju.nanaland.data.repository.MarketRepositoryImpl
@@ -26,6 +28,7 @@ import com.jeju.nanaland.data.repository.UserSettingsDataStoreRepositoryImpl
 import com.jeju.nanaland.di.datastore.DataStoreModule
 import com.jeju.nanaland.domain.repository.AuthDataStoreRepository
 import com.jeju.nanaland.domain.repository.AuthRepository
+import com.jeju.nanaland.domain.repository.ExperienceRepository
 import com.jeju.nanaland.domain.repository.FavoriteRepository
 import com.jeju.nanaland.domain.repository.FestivalRepository
 import com.jeju.nanaland.domain.repository.MarketRepository
@@ -140,5 +143,13 @@ object RepositoryModule {
         @DataStoreModule.UserSettingsDataStore dataStore: DataStore<Preferences>
     ): UserSettingsDataStoreRepository {
         return UserSettingsDataStoreRepositoryImpl(dataStore)
+    }
+
+    @Singleton
+    @Provides
+    fun provideExperienceRepository(
+        experienceApi: ExperienceApi
+    ): ExperienceRepository {
+        return ExperienceRepositoryImpl(experienceApi)
     }
 }

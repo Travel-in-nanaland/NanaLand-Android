@@ -3,7 +3,7 @@ package com.jeju.nanaland.domain.entity.experience
 import com.google.gson.annotations.SerializedName
 import com.jeju.nanaland.domain.entity.common.ImageUrl
 
-data class ExperienceThumbnail(
+data class ExperienceThumbnailData(
     @SerializedName("id")
     val id: Int,
     @SerializedName("firstImage")
