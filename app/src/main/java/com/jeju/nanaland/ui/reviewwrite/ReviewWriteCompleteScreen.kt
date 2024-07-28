@@ -14,7 +14,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.jeju.nanaland.R
-import com.jeju.nanaland.globalvalue.type.CategoryType
+import com.jeju.nanaland.globalvalue.type.ReviewCategoryType
 import com.jeju.nanaland.ui.component.common.BottomOkButton
 import com.jeju.nanaland.ui.component.common.BottomOkButtonOutlined
 import com.jeju.nanaland.ui.component.common.CustomSurface
@@ -27,16 +27,16 @@ import com.jeju.nanaland.util.ui.ScreenPreview
 @ScreenPreview
 @Composable
 private fun ReviewWriteCompleteScreenPreview() {
-    ReviewWriteCompleteUI(CategoryType.Experience, {}, {})
+    ReviewWriteCompleteUI(ReviewCategoryType.EXPERIENCE, {}, {})
 }
 
 @Composable
 fun ReviewWriteCompleteScreen(
     navController: NavController,
-    categoryType: CategoryType = CategoryType.Experience // TODO
+    categoryType: ReviewCategoryType
 ) {
     ReviewWriteCompleteUI(
-        cateogry = categoryType,
+        category = categoryType,
         onAgain = { navController.popBackStack() },
         onAdd = {}
     )
@@ -45,11 +45,11 @@ fun ReviewWriteCompleteScreen(
 
 @Composable
 private fun ReviewWriteCompleteUI(
-    cateogry: CategoryType,
+    category: ReviewCategoryType,
     onAgain: () -> Unit,
     onAdd: () -> Unit,
 ) {
-    val uiData = getUiDataByCategory(cateogry)
+    val uiData = getUiDataByCategory(category)
 
     CustomSurface {
         Column(
@@ -102,18 +102,19 @@ private fun ReviewWriteCompleteUI(
 }
 
 private fun getUiDataByCategory(
-    categoryType: CategoryType
+    categoryType: ReviewCategoryType
 ): Triple<Int/* image id */,String/* title */,String/* sub text */> {
     return when(categoryType) { // TODO
-        CategoryType.Experience -> Triple(
+        ReviewCategoryType.EXPERIENCE -> Triple(
             R.drawable.img_star,
             getString(R.string.review_write_keyword_complete_title1),
             getString(R.string.review_write_keyword_complete_sub1),
         )
-        else ->  Triple(
+        ReviewCategoryType.RESTAURANT ->  Triple(
             R.drawable.img_salad,
             getString(R.string.review_write_keyword_complete_title2),
             getString(R.string.review_write_keyword_complete_sub2),
         )
+        else -> throw Exception("unsupported ui")
     }
 }

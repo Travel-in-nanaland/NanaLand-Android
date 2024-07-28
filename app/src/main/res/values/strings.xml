@@ -390,4 +390,29 @@
     <string name="review_write_keyword_complete_sub2" translatable="false">당신의 세심한 글이\n누군가의 여행 선택지를\n풍요롭게 해줬어요 !\n\n다음번도 기대할게요</string>
     <string name="review_write_keyword_complete_btn_again" translatable="false">콘텐츠 다시 보러 가기</string>
     <string name="review_write_keyword_complete_btn_add" translatable="false">다른 리뷰 추가하기</string>
+
+
+    <!--리뷰 키워드-->
+    <!--TODO 번역-->
+    <string name="review_keyword_mood" translatable="false">분위기</string>
+    <string name="review_keyword_with" translatable="false">동반자</string>
+    <string name="review_keyword_infra" translatable="false">편의 시설</string>
+    <string-array name="review_keyword" translatable="false">
+        <item>기념일에 가면 좋아요</item>
+        <item>아기자기해요</item>
+        <item>고급스러워요</item>
+        <item>풍경이 예뻐요</item>
+        <item>친절해요</item>
+        <item>자녀</item>
+        <item>친구</item>
+        <item>부모님</item>
+        <item>혼자</item>
+        <item>연인, 배우자</item>
+        <item>친척/형제</item>
+        <item>반려동물</item>
+        <item>콘센트 사용 가능</item>
+        <item>넓은 장소</item>
+        <item>주차장</item>
+        <item>깨끗한 화장실</item>
+    </string-array>
 </resources>

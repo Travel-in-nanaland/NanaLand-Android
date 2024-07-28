@@ -25,11 +25,13 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringArrayResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.jeju.nanaland.R
+import com.jeju.nanaland.globalvalue.type.ReviewKeyword
 import com.jeju.nanaland.ui.component.common.BottomOkButton
 import com.jeju.nanaland.ui.component.common.CustomSurface
 import com.jeju.nanaland.ui.component.common.CustomTopBar
@@ -81,12 +83,17 @@ fun ReviewWriteKeywordScreen(
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
 private fun ReviewWriteKeywordUI(
-    selectKeyword: List<String>,
+    selectKeyword: List<ReviewKeyword>,
     moveToBackScreen: () -> Unit,
-    onKeyword:(String) -> Unit,
+    onKeyword:(ReviewKeyword) -> Unit,
     onComplete:() -> Unit,
 ) {
     val scrollState = rememberScrollState()
+    val keywords = remember { listOf(
+        Pair(getString(R.string.review_keyword_mood), ReviewKeyword.Mood.entries),
+        Pair(getString(R.string.review_keyword_with), ReviewKeyword.With.entries),
+        Pair(getString(R.string.review_keyword_infra), ReviewKeyword.Infra.entries)
+    ) }
 
     CustomSurface {
         CustomTopBar(
@@ -107,7 +114,7 @@ private fun ReviewWriteKeywordUI(
                 style = caption01
             )
 
-            ReviewWriteViewModel.TEMP_KEYWORD_LIST.forEach { category ->
+            keywords.forEach { category ->
                 Text(
                     modifier = Modifier.padding(bottom = 12.dp),
                     text = category.first,
@@ -136,7 +143,7 @@ private fun ReviewWriteKeywordUI(
                                 )
                                 .clickable { onKeyword(keyword) }
                                 .padding(horizontal = 16.dp, vertical = 8.dp),
-                            text = keyword,
+                            text = stringArrayResource(R.array.review_keyword)[keyword.stringIndex],
                             color = if(isSelect) getColor().main else getColor().gray02,
                             style = body02
                         )

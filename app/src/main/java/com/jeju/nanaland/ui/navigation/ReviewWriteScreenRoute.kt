@@ -10,6 +10,7 @@ import com.jeju.nanaland.globalvalue.constant.ROUTE_REVIEW_WRITE
 import com.jeju.nanaland.globalvalue.constant.ROUTE_REVIEW_WRITE_COMPLETE
 import com.jeju.nanaland.globalvalue.constant.ROUTE_REVIEW_WRITE_KEYWORD
 import com.jeju.nanaland.globalvalue.constant.ROUTE_REVIEW_WRITE_ROUTE
+import com.jeju.nanaland.globalvalue.type.ReviewCategoryType
 import com.jeju.nanaland.ui.reviewwrite.ReviewWriteCompleteScreen
 import com.jeju.nanaland.ui.reviewwrite.ReviewWriteKeywordScreen
 import com.jeju.nanaland.ui.reviewwrite.ReviewWriteScreen
@@ -21,7 +22,12 @@ fun NavGraphBuilder.reviewWriteRoute(navController: NavController) {
     ) {
         composable(ROUTE_REVIEW_WRITE){
             val parentEntry = remember(it) { navController.getBackStackEntry(ROUTE_REVIEW_WRITE_ROUTE) }
-            ReviewWriteScreen(navController, hiltViewModel(parentEntry))
+            ReviewWriteScreen(
+                navController = navController,
+                id = it.arguments?.getInt("id")!!,
+                category = ReviewCategoryType.valueOf(it.arguments?.getString("category")!!),
+                viewModel = hiltViewModel(parentEntry)
+            )
         }
 
         composable(ROUTE_REVIEW_WRITE_KEYWORD){
@@ -30,7 +36,10 @@ fun NavGraphBuilder.reviewWriteRoute(navController: NavController) {
         }
 
         composable(ROUTE_REVIEW_WRITE_COMPLETE){
-            ReviewWriteCompleteScreen(navController)
+            ReviewWriteCompleteScreen(
+                navController,
+                ReviewCategoryType.valueOf(it.arguments?.getString("category")!!)
+            )
         }
     }
 }

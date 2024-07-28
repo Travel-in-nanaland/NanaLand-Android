@@ -42,41 +42,44 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringArrayResource
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
+import androidx.core.os.bundleOf
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
+import androidx.navigation.navOptions
 import com.jeju.nanaland.R
 import com.jeju.nanaland.globalvalue.constant.ROUTE_REVIEW_WRITE
 import com.jeju.nanaland.globalvalue.constant.ROUTE_REVIEW_WRITE_COMPLETE
 import com.jeju.nanaland.globalvalue.constant.ROUTE_REVIEW_WRITE_KEYWORD
+import com.jeju.nanaland.globalvalue.type.ReviewCategoryType
+import com.jeju.nanaland.globalvalue.type.ReviewKeyword
 import com.jeju.nanaland.ui.component.common.BottomOkButton
 import com.jeju.nanaland.ui.component.common.CustomSurface
 import com.jeju.nanaland.ui.component.common.CustomTopBar
 import com.jeju.nanaland.ui.theme.body02
 import com.jeju.nanaland.ui.theme.bodyBold
 import com.jeju.nanaland.ui.theme.getColor
+import com.jeju.nanaland.util.navigation.navigate
 import com.jeju.nanaland.util.resource.getString
-import com.jeju.nanaland.util.ui.ScreenPreview
+import com.jeju.nanaland.util.ui.UiState
 import com.skydoves.landscapist.ImageOptions
 import com.skydoves.landscapist.glide.GlideImage
-
-@ScreenPreview
-@Composable
-private fun ReviewWriteScreenPreview() {
-    ReviewWriteUI(ReviewWriteUiState(), "", { }, { }, { }, { }, { }, { }, { }, { })
-}
 
 @Composable
 fun ReviewWriteScreen(
     navController: NavController,
+    id: Int,
+    category: ReviewCategoryType,
     viewModel: ReviewWriteViewModel = hiltViewModel()
 ) {
     val context = LocalContext.current
     val uiState = viewModel.uiState.collectAsStateWithLifecycle()
+    val callState = viewModel.callState.collectAsStateWithLifecycle()
 
     ReviewWriteUI(
         uiState = uiState.value,
@@ -84,23 +87,40 @@ fun ReviewWriteScreen(
         moveToBackScreen = { navController.popBackStack() },
         moveToKeywordScreen = { navController.navigate(ROUTE_REVIEW_WRITE_KEYWORD) },
         moveToCompleteScreen = {
-            navController.navigate(ROUTE_REVIEW_WRITE_COMPLETE) {
-                popUpTo(ROUTE_REVIEW_WRITE) { inclusive = true}
-            }
+            viewModel.submit(
+                id,
+                category,
+                uiState.value,
+                viewModel.reviewText
+            )
         },
-            onChangedRating = viewModel::updateRating,
-            onAddImage = viewModel::addImage,
-            onRemoveImage = viewModel::removeImage,
-            onChangedText = {
-                if(it.length > ReviewWriteViewModel.MAX_TEXT_LENGTH) {
-                    Toast.makeText(context, getString(R.string.review_write_error_maximum_text, ReviewWriteViewModel.MAX_TEXT_LENGTH ), Toast.LENGTH_SHORT).show()
-                    viewModel.updateReviewText(it.substring(0, ReviewWriteViewModel.MAX_TEXT_LENGTH + 1))
-                }
-                else
-                    viewModel.updateReviewText(it)
-            },
+        onChangedRating = viewModel::updateRating,
+        onAddImage = viewModel::addImage,
+        onRemoveImage = viewModel::removeImage,
+        onChangedText = {
+            if(it.length > ReviewWriteViewModel.MAX_TEXT_LENGTH) {
+                Toast.makeText(context, getString(R.string.review_write_error_maximum_text, ReviewWriteViewModel.MAX_TEXT_LENGTH ), Toast.LENGTH_SHORT).show()
+                viewModel.updateReviewText(it.substring(0, ReviewWriteViewModel.MAX_TEXT_LENGTH + 1))
+            }
+            else
+                viewModel.updateReviewText(it)
+        },
         onRemoveKeyword = viewModel::removeKeyword
     )
+    callState.value?.let {
+        when (it) {
+            is UiState.Loading -> {}
+            is UiState.Success -> {
+                val bundle = bundleOf(
+                    "category" to category.toString()
+                )
+                navController.navigate(ROUTE_REVIEW_WRITE_COMPLETE, bundle, navOptions = navOptions{
+                    popUpTo(ROUTE_REVIEW_WRITE) { inclusive = true}
+                })
+            }
+            is UiState.Failure -> {}
+        }
+    }
 }
 
 
@@ -115,7 +135,7 @@ private fun ReviewWriteUI(
     onAddImage: (List<Uri>) -> Unit,
     onRemoveImage: (Uri) -> Unit,
     onChangedText: (String) -> Unit,
-    onRemoveKeyword: (String) -> Unit,
+    onRemoveKeyword: (ReviewKeyword) -> Unit,
 ) {
 
     val context = LocalContext.current
@@ -428,8 +448,8 @@ private fun ReviewText(
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
 private fun ReviewKeywordChip(
-    keywords: List<String>,
-    onRemoveKeyword: (String) -> Unit,
+    keywords: List<ReviewKeyword>,
+    onRemoveKeyword: (ReviewKeyword) -> Unit,
     moveToKeywordScreen: () -> Unit
 ) {
     FlowRow(
@@ -476,7 +496,7 @@ private fun ReviewKeywordChip(
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Text(
-                    text = it,
+                    text = stringArrayResource(R.array.review_keyword)[it.stringIndex],
                     color = getColor().main,
                     style = body02
                 )
