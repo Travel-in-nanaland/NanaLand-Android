@@ -390,6 +390,8 @@
     <string name="review_write_keyword_complete_sub2" translatable="false">당신의 세심한 글이\n누군가의 여행 선택지를\n풍요롭게 해줬어요 !\n\n다음번도 기대할게요</string>
     <string name="review_write_keyword_complete_btn_again" translatable="false">콘텐츠 다시 보러 가기</string>
     <string name="review_write_keyword_complete_btn_add" translatable="false">다른 리뷰 추가하기</string>
+    <string name="review_write_cancel_dialog_title" translatable="false">정말 나가시겠습니까?</string>
+    <string name="review_write_cancel_dialog_subtitle" translatable="false">지금 나가시면,\n작성 중인 내용이 삭제됩니다.</string>
 
 
     <!--리뷰 키워드-->

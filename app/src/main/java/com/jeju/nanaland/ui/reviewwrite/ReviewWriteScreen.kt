@@ -2,6 +2,7 @@ package com.jeju.nanaland.ui.reviewwrite
 
 import android.net.Uri
 import android.widget.Toast
+import androidx.activity.compose.BackHandler
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
@@ -36,6 +37,10 @@ import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -61,6 +66,7 @@ import com.jeju.nanaland.globalvalue.type.ReviewKeyword
 import com.jeju.nanaland.ui.component.common.BottomOkButton
 import com.jeju.nanaland.ui.component.common.CustomSurface
 import com.jeju.nanaland.ui.component.common.CustomTopBar
+import com.jeju.nanaland.ui.component.common.DialogCommon
 import com.jeju.nanaland.ui.theme.body02
 import com.jeju.nanaland.ui.theme.bodyBold
 import com.jeju.nanaland.ui.theme.getColor
@@ -80,11 +86,15 @@ fun ReviewWriteScreen(
     val context = LocalContext.current
     val uiState = viewModel.uiState.collectAsStateWithLifecycle()
     val callState = viewModel.callState.collectAsStateWithLifecycle()
+    var cancelDialogVisible by remember { mutableStateOf(false) }
+    BackHandler {
+        cancelDialogVisible = true
+    }
 
     ReviewWriteUI(
         uiState = uiState.value,
         reviewText = viewModel.reviewText,
-        moveToBackScreen = { navController.popBackStack() },
+        moveToBackScreen = { cancelDialogVisible = true },
         moveToKeywordScreen = { navController.navigate(ROUTE_REVIEW_WRITE_KEYWORD) },
         moveToCompleteScreen = {
             viewModel.submit(
@@ -120,6 +130,15 @@ fun ReviewWriteScreen(
             }
             is UiState.Failure -> {}
         }
+    }
+    if(cancelDialogVisible) {
+        DialogCommon(
+            title = getString(R.string.review_write_cancel_dialog_title),
+            subTitle = getString(R.string.review_write_cancel_dialog_subtitle),
+            onDismissRequest = { cancelDialogVisible = false },
+            onPositive = { navController.popBackStack() },
+            onNegative = { cancelDialogVisible = false }
+        )
     }
 }
 
