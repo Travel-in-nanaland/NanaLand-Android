@@ -51,7 +51,7 @@ class SignUpViewModel @Inject constructor(
     fun updateInputNickname(nickname: String) {
         _inputNickname.update { nickname }
         if (_inputNickname.value.length > NICKNAME_CONSTRAINT) {
-            _inputNicknameState.update { InputNicknameState.TooLong }
+            _inputNicknameState.update { InputNicknameState.TooInt }
         } else if (!_inputNickname.value.matches(nicknameRegex)) {
             _inputNicknameState.update { InputNicknameState.Invalid }
         } else {
@@ -112,10 +112,10 @@ class SignUpViewModel @Inject constructor(
 
         signUpUseCase(requestData, imageFile)
             .onEach { networkResult ->
-                networkResult.onSuccess { code, data ->
+                networkResult.onSuccess { code, message, data ->
                     data?.let {
-                        saveAccessTokenUseCase(it.data.accessToken ?: "")
-                        saveRefreshTokenUseCase(it.data.refreshToken ?: "")
+                        saveAccessTokenUseCase(it.accessToken ?: "")
+                        saveRefreshTokenUseCase(it.refreshToken ?: "")
                         UserData.nickname = _inputNickname.value
                         UserData.provider = provider
                         moveToTypeTestingScreen()

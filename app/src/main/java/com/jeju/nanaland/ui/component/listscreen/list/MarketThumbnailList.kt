@@ -12,16 +12,16 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.jeju.nanaland.domain.entity.market.MarketThumbnailData
+import com.jeju.nanaland.domain.entity.market.MarketThumbnail
 import com.jeju.nanaland.ui.component.thumbnail.MarketThumbnail
 import com.jeju.nanaland.util.ui.UiState
 
 @Composable
 fun MarketThumbnailList(
     listState: LazyGridState,
-    thumbnailList: UiState<List<MarketThumbnailData>>,
-    toggleFavorite: (Long) -> Unit,
-    moveToMarketContentScreen: (Long) -> Unit,
+    thumbnailList: UiState<List<MarketThumbnail>>,
+    toggleFavorite: (Int) -> Unit,
+    moveToMarketContentScreen: (Int) -> Unit,
     moveToSignInScreen: () -> Unit,
 ) {
     when (thumbnailList) {
@@ -40,7 +40,7 @@ fun MarketThumbnailList(
                         contentAlignment = if (idx % 2 == 0) Alignment.CenterStart else Alignment.CenterEnd
                     ) {
                         MarketThumbnail(
-                            imageUri = item.thumbnailUrl,
+                            imageUri = item.firstImage?.thumbnailUrl,
                             isFavorite = item.favorite,
                             title = item.title,
                             tag = item.addressTag,

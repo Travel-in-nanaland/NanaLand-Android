@@ -9,8 +9,14 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.drawBehind
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.geometry.Size
+import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import com.jeju.nanaland.domain.entity.nanapick.NanaPickContentData
@@ -27,12 +33,13 @@ import com.skydoves.landscapist.glide.GlideImage
 
 @Composable
 fun NanaPickContentTopBanner(
-    contentId: Long?,
+    contentId: Int?,
     nanaPickContent: UiState.Success<NanaPickContentData>,
     toggleFavorite: () -> Unit,
     moveToSignInScreen: () -> Unit,
 ) {
     val context = LocalContext.current
+    val brush = remember { Brush.verticalGradient(listOf(Color.Transparent, Color(0x99262627))) }
     Box(
         modifier = Modifier
             .fillMaxWidth()
@@ -41,7 +48,20 @@ fun NanaPickContentTopBanner(
     ) {
         GlideImage(
             modifier = Modifier.fillMaxSize(),
-            imageModel = { nanaPickContent.data.originUrl }
+            imageModel = { nanaPickContent.data.firstImage }
+        )
+
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(240.dp)
+                .drawBehind {
+                    drawRect(
+                        brush = brush,
+                        topLeft = Offset.Zero,
+                        size = Size(this.size.width, this.size.height)
+                    )
+                }
         )
 
         NanaPickContentTopBannerVersion(

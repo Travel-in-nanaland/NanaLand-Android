@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName
 
 data class SearchResultData(
     @SerializedName("totalElements")
-    val count: Long,
+    val count: Int,
     @SerializedName("data")
     val data: List<SearchResultThumbnailData>
 )

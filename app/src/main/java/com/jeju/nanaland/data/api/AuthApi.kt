@@ -1,9 +1,8 @@
 package com.jeju.nanaland.data.api
 
+import com.jeju.nanaland.domain.entity.auth.AuthTokenData
 import com.jeju.nanaland.domain.request.auth.SignInRequest
-import com.jeju.nanaland.domain.response.auth.ReissueAccessTokenResponse
-import com.jeju.nanaland.domain.response.auth.SignInResponse
-import com.jeju.nanaland.domain.response.auth.SignUpResponse
+import com.jeju.nanaland.domain.response.ResponseWrapper
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.Response
@@ -20,13 +19,13 @@ interface AuthApi {
     @GET("member/reissue")
     suspend fun reissueAccessToken(
         @Header("Authorization") refreshToken: String
-    ): Response<ReissueAccessTokenResponse>
+    ): Response<ResponseWrapper<AuthTokenData>>
 
     // 로그인
     @POST("member/login")
     suspend fun signIn(
         @Body body: SignInRequest
-    ): Response<SignInResponse>
+    ): Response<ResponseWrapper<AuthTokenData>>
 
     // 회원가입
     @Multipart
@@ -34,5 +33,5 @@ interface AuthApi {
     suspend fun signUp(
         @Part("reqDto") data: RequestBody,
         @Part image: MultipartBody.Part?
-    ): Response<SignUpResponse>
+    ): Response<ResponseWrapper<AuthTokenData>>
 }

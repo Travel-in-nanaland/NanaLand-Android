@@ -13,8 +13,8 @@ import com.jeju.nanaland.util.ui.UiState
 @Composable
 fun HomeScreenRecommendedPosts(
     recommendedPosts: UiState<List<RecommendedPostData>>,
-    onFavoriteButtonClick: (Long, String?) -> Unit,
-    onClick: (Long, String?, Boolean) -> Unit,
+    onFavoriteButtonClick: (Int, String?) -> Unit,
+    onClick: (Int, String?, Boolean) -> Unit,
     moveToSignInScreen: () -> Unit,
 ) {
     when (recommendedPosts) {
@@ -24,7 +24,7 @@ fun HomeScreenRecommendedPosts(
                 repeat(recommendedPosts.data.size) { idx ->
                     val item = recommendedPosts.data[idx]
                     MainHomeThumbnail(
-                        imageUri = item.thumbnailUrl,
+                        imageUri = item.firstImage?.thumbnailUrl,
                         isFavorite = item.favorite,
                         title = item.title,
                         onFavoriteButtonClick = { onFavoriteButtonClick(item.id, item.category) },

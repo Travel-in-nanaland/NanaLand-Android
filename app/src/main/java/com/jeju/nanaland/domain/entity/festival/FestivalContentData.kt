@@ -1,12 +1,13 @@
 package com.jeju.nanaland.domain.entity.festival
 
 import com.google.gson.annotations.SerializedName
+import com.jeju.nanaland.domain.entity.common.ImageUrl
 
 data class FestivalContentData(
     @SerializedName("id")
-    val id: Long,
-    @SerializedName("originUrl")
-    val originUrl: String?,
+    val id: Int,
+    @SerializedName("images")
+    val images: List<ImageUrl?>,
     @SerializedName("addressTag")
     val addressTag: String?,
     @SerializedName("title")

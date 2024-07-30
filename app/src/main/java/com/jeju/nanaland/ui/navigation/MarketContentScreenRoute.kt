@@ -23,7 +23,7 @@ import com.jeju.nanaland.util.navigation.navigate
 fun NavGraphBuilder.marketContentScreen(navController: NavController) = composable(route = ROUTE_MARKET_CONTENT) {
     val parentEntry = remember(it) { navController.previousBackStackEntry!! }
     val isSearch = it.arguments?.getBoolean("isSearch") ?: false
-    val updatePrevScreenListFavorite: (Long, Boolean) -> Unit = when (parentEntry.destination.route) {
+    val updatePrevScreenListFavorite: (Int, Boolean) -> Unit = when (parentEntry.destination.route) {
         ROUTE_MARKET_LIST -> {
             val viewModel: MarketListViewModel = hiltViewModel(parentEntry)
             viewModel::toggleFavoriteWithNoApi
@@ -33,7 +33,7 @@ fun NavGraphBuilder.marketContentScreen(navController: NavController) = composab
             val func = when (mainViewModel.viewType.collectAsState().value) {
                 MainScreenViewType.Home -> {
                     val viewModel: SearchViewModel = hiltViewModel(parentEntry)
-                    val tmp = { contentId: Long, isFavorite: Boolean ->
+                    val tmp = { contentId: Int, isFavorite: Boolean ->
                         viewModel.toggleSearchResultFavoriteWithNoApi(contentId, isFavorite)
                         viewModel.toggleAllSearchResultFavoriteWithNoApi(contentId, isFavorite, "NATURE")
                     }
@@ -41,18 +41,18 @@ fun NavGraphBuilder.marketContentScreen(navController: NavController) = composab
                 }
                 MainScreenViewType.Favorite -> {
                     val viewModel: FavoriteViewModel = hiltViewModel(parentEntry)
-                    val tmp = { contentId: Long, _: Boolean ->
+                    val tmp = { contentId: Int, _: Boolean ->
                         viewModel.toggleFavoriteWithNoApi(contentId)
                     }
                     tmp
                 }
                 MainScreenViewType.JejuStory -> {
-                    val tmp = { _: Long, _: Boolean ->
+                    val tmp = { _: Int, _: Boolean ->
                     }
                     tmp
                 }
                 MainScreenViewType.MyPage -> {
-                    val tmp = { _: Long, _: Boolean ->
+                    val tmp = { _: Int, _: Boolean ->
                     }
                     tmp
                 }
@@ -62,13 +62,13 @@ fun NavGraphBuilder.marketContentScreen(navController: NavController) = composab
         else -> { _, _ -> }
     }
     MarketContentScreen(
-        contentId = it.arguments?.getLong("contentId"),
+        contentId = it.arguments?.getInt("contentId"),
         isSearch = isSearch,
         updatePrevScreenListFavorite = updatePrevScreenListFavorite,
         moveToBackScreen = { navController.popBackStack() },
         moveToInfoModificationProposalScreen = {
             val bundle = bundleOf(
-                "postId" to it.arguments?.getLong("contentId"),
+                "postId" to it.arguments?.getInt("contentId"),
                 "category" to "MARKET"
             )
             navController.navigate(ROUTE_INFORMATION_MODIFICATION_PROPOSAL_CATEGORY, bundle) },

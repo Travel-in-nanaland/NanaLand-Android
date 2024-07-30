@@ -4,5 +4,5 @@ import com.google.gson.annotations.SerializedName
 
 data class GetNanaPickContentRequest(
     @SerializedName("id")
-    val id: Long
+    val id: Int
 )

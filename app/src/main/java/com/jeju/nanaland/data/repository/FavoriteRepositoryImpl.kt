@@ -1,11 +1,11 @@
 package com.jeju.nanaland.data.repository
 
 import com.jeju.nanaland.data.api.FavoriteApi
+import com.jeju.nanaland.domain.entity.favorite.ToggleFavoriteData
 import com.jeju.nanaland.domain.repository.FavoriteRepository
 import com.jeju.nanaland.domain.request.favorite.GetFavoriteListRequest
 import com.jeju.nanaland.domain.request.favorite.ToggleFavoriteRequest
-import com.jeju.nanaland.domain.response.favorite.GetFavoriteListResponse
-import com.jeju.nanaland.domain.response.favorite.ToggleFavoriteResponse
+import com.jeju.nanaland.domain.entity.favorite.FavoriteListData
 import com.jeju.nanaland.util.network.NetworkResult
 import com.jeju.nanaland.util.network.NetworkResultHandler
 
@@ -16,7 +16,7 @@ class FavoriteRepositoryImpl(
     // 7대자연 찜리스토 조회
     override suspend fun getFavoriteNatureList(
         data: GetFavoriteListRequest
-    ): NetworkResult<GetFavoriteListResponse> {
+    ): NetworkResult<FavoriteListData> {
         return handleResult {
             favoriteApi.getFavoriteNatureList(
                 page = data.page,
@@ -28,7 +28,7 @@ class FavoriteRepositoryImpl(
     // 전통시장 찜리스트 조회
     override suspend fun getFavoriteMarketList(
         data: GetFavoriteListRequest
-    ): NetworkResult<GetFavoriteListResponse> {
+    ): NetworkResult<FavoriteListData> {
         return handleResult {
             favoriteApi.getFavoriteMarketList(
                 page = data.page,
@@ -40,7 +40,7 @@ class FavoriteRepositoryImpl(
     // 축제 찜리스트 조회
     override suspend fun getFavoriteFestivalList(
         data: GetFavoriteListRequest
-    ): NetworkResult<GetFavoriteListResponse> {
+    ): NetworkResult<FavoriteListData> {
         return handleResult {
             favoriteApi.getFavoriteFestivalList(
                 page = data.page,
@@ -52,7 +52,7 @@ class FavoriteRepositoryImpl(
     // 이색체험 찜리스트 조회
     override suspend fun getFavoriteExperienceList(
         data: GetFavoriteListRequest
-    ): NetworkResult<GetFavoriteListResponse> {
+    ): NetworkResult<FavoriteListData> {
         return handleResult {
             favoriteApi.getFavoriteExperienceList(
                 page = data.page,
@@ -64,7 +64,7 @@ class FavoriteRepositoryImpl(
     // 전체 찜리스트 조회
     override suspend fun getAllFavoriteList(
         data: GetFavoriteListRequest
-    ): NetworkResult<GetFavoriteListResponse> {
+    ): NetworkResult<FavoriteListData> {
         return handleResult {
             favoriteApi.getAllFavoriteList(
                 page = data.page,
@@ -76,7 +76,7 @@ class FavoriteRepositoryImpl(
     // 좋아요 토글
     override suspend fun toggleFavorite(
         data: ToggleFavoriteRequest
-    ): NetworkResult<ToggleFavoriteResponse> {
+    ): NetworkResult<ToggleFavoriteData> {
         return handleResult {
             favoriteApi.toggleFavorite(
                 body = data

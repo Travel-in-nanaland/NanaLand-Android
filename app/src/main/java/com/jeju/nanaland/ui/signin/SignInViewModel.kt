@@ -58,10 +58,10 @@ class SignInViewModel @Inject constructor(
         )
         signInUseCase(requestData)
             .onEach { networkResult ->
-                networkResult.onSuccess { code, data ->
+                networkResult.onSuccess { code, message, data ->
                     data?.let {
-                        saveAccessTokenUseCase(data.data.accessToken ?: "")
-                        saveRefreshTokenUseCase(data.data.refreshToken ?: "")
+                        saveAccessTokenUseCase(data.accessToken ?: "")
+                        saveRefreshTokenUseCase(data.refreshToken ?: "")
                         getUserData()
                         moveToMainScreen()
                     }
@@ -82,10 +82,10 @@ class SignInViewModel @Inject constructor(
     private fun getUserData() {
         getUserProfileUseCase()
             .onEach { networkResult ->
-                networkResult.onSuccess { code, data ->
+                networkResult.onSuccess { code, message, data ->
                     data?.let {
-                        UserData.provider = data.data.provider ?: "GUEST"
-                        UserData.nickname = data.data.nickname ?: "GUEST"
+                        UserData.provider = data.provider ?: "GUEST"
+                        UserData.nickname = data.nickname ?: "GUEST"
                     }
                 }.onError { code, message ->
 
@@ -124,12 +124,12 @@ class SignInViewModel @Inject constructor(
 
         signUpUseCase(requestData, null)
             .onEach { networkResult ->
-                networkResult.onSuccess { code, data ->
+                networkResult.onSuccess { code, message, data ->
                     data?.let {
                         UserData.nickname = "GUEST"
                         UserData.provider = "GUEST"
-                        saveAccessTokenUseCase(data.data.accessToken ?: "")
-                        saveRefreshTokenUseCase(data.data.refreshToken ?: "")
+                        saveAccessTokenUseCase(data.accessToken ?: "")
+                        saveRefreshTokenUseCase(data.refreshToken ?: "")
                         moveToMainScreen()
                     }
                 }.onError { code, message ->
@@ -162,12 +162,12 @@ class SignInViewModel @Inject constructor(
         )
         signInUseCase(signInData)
             .onEach { networkResult ->
-                networkResult.onSuccess { code, data ->
+                networkResult.onSuccess { code, message, data ->
                     data?.let {
                         UserData.nickname = "GUEST"
                         UserData.provider = "GUEST"
-                        saveAccessTokenUseCase(data.data.accessToken ?: "")
-                        saveRefreshTokenUseCase(data.data.refreshToken ?: "")
+                        saveAccessTokenUseCase(data.accessToken ?: "")
+                        saveRefreshTokenUseCase(data.refreshToken ?: "")
                         moveToMainScreen()
                     }
                 }.onError { code, message ->

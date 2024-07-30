@@ -77,10 +77,7 @@ fun NavGraphBuilder.mainScreen(
             popUpTo(ROUTE_MAIN) { inclusive = true }
             launchSingleTop = true
         } },
-        moveToTypeTestScreen = { navController.navigate(ROUTE_TYPE_TESTING) {
-            popUpTo(ROUTE_MAIN) { inclusive = true }
-            launchSingleTop = true
-        } },
+        moveToTypeTestScreen = { navController.navigate(ROUTE_TYPE_TESTING) },
         moveToTypeTestResultScreen = { navController.navigate(ROUTE_TYPE_TEST_RESULT) },
         moveToProfileNoticeListScreen = {
             navController.navigate(ROUTE_PROFILE_NOTICE, bundleOf("id" to (it ?: -1)))

@@ -14,7 +14,7 @@ import dagger.Component
 @Composable
 fun SearchResultScreenItemCount(
     modifier: Modifier = Modifier,
-    count: Long
+    count: Int
 ) {
     Text(
         modifier = modifier,

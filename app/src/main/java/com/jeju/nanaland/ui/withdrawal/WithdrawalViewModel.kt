@@ -57,7 +57,7 @@ class WithdrawalViewModel @Inject constructor(
         )
         withdrawUseCase(requestData)
             .onEach { networkResult ->
-                networkResult.onSuccess { code, data ->
+                networkResult.onSuccess { code, message, data ->
                     clearAuthDataStoreUseCase()
                     clearUserSettingsDataStoreUseCase()
                     clearRecentSearchDataStoreUseCase()

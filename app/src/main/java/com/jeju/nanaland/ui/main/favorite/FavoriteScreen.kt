@@ -28,7 +28,7 @@ import com.jeju.nanaland.util.ui.UiState
 fun FavoriteScreen(
     prevViewType: MainScreenViewType,
     updateMainScreenViewType: (MainScreenViewType) -> Unit,
-    moveToCategoryContentScreen: (Long, String?, Boolean) -> Unit,
+    moveToCategoryContentScreen: (Int, String?, Boolean) -> Unit,
     moveToSignInScreen: () -> Unit,
     viewModel: FavoriteViewModel = hiltViewModel()
 ) {
@@ -58,12 +58,12 @@ private fun FavoriteScreen(
     prevViewType: MainScreenViewType,
     updateMainScreenViewType: (MainScreenViewType) -> Unit,
     selectedCategory: SearchCategoryType,
-    favoriteThumbnailCount: UiState<Long>,
+    favoriteThumbnailCount: UiState<Int>,
     favoriteThumbnailList: UiState<List<FavoriteThumbnailData>>,
     updateSelectedCategory: (SearchCategoryType) -> Unit,
     getFavoriteList: () -> Unit,
-    toggleFavorite: (Long, String?) -> Unit,
-    onPostClick: (Long, String?, Boolean) -> Unit,
+    toggleFavorite: (Int, String?) -> Unit,
+    onPostClick: (Int, String?, Boolean) -> Unit,
     moveToSignInScreen: () -> Unit,
     isContent: Boolean
 ) {

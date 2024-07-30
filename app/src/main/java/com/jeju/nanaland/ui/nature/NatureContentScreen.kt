@@ -18,7 +18,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.jeju.nanaland.R
-import com.jeju.nanaland.domain.entity.nature.NatureContentData
+import com.jeju.nanaland.domain.entity.nature.NatureContent
 import com.jeju.nanaland.ui.component.common.CustomSurface
 import com.jeju.nanaland.ui.component.common.CustomTopBar
 import com.jeju.nanaland.ui.component.detailscreen.other.DetailScreenDescription
@@ -35,9 +35,9 @@ import kotlinx.coroutines.launch
 
 @Composable
 fun NatureContentScreen(
-    contentId: Long?,
+    contentId: Int?,
     isSearch: Boolean,
-    updatePrevScreenListFavorite: (Long, Boolean) -> Unit,
+    updatePrevScreenListFavorite: (Int, Boolean) -> Unit,
     moveToBackScreen: () -> Unit,
     moveToInfoModificationProposalScreen: () -> Unit,
     moveToSignInScreen: () -> Unit,
@@ -61,10 +61,10 @@ fun NatureContentScreen(
 
 @Composable
 private fun NatureContentScreen(
-    contentId: Long?,
-    natureContent: UiState<NatureContentData>,
-    toggleFavorite: (Long, (Long, Boolean) -> Unit) -> Unit,
-    updatePrevScreenListFavorite: (Long, Boolean) -> Unit,
+    contentId: Int?,
+    natureContent: UiState<NatureContent>,
+    toggleFavorite: (Int, (Int, Boolean) -> Unit) -> Unit,
+    updatePrevScreenListFavorite: (Int, Boolean) -> Unit,
     moveToBackScreen: () -> Unit,
     moveToInfoModificationProposalScreen: () -> Unit,
     moveToSignInScreen: () -> Unit,
@@ -83,7 +83,7 @@ private fun NatureContentScreen(
             is UiState.Success -> {
                 Box(modifier = Modifier.fillMaxSize()) {
                         Column(modifier = Modifier.verticalScroll(scrollState)) {
-                            DetailScreenTopBannerImage(imageUri = natureContent.data.originUrl)
+                            DetailScreenTopBannerImage(imageUri = natureContent.data.images[0]?.thumbnailUrl)
 
                             Spacer(Modifier.height(24.dp))
 

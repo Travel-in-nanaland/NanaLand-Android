@@ -43,7 +43,7 @@ class LanguageChangeViewModel @Inject constructor(
         )
         updateLanguageUseCase(requestData)
             .onEach { networkResult ->
-                networkResult.onSuccess { code, data ->
+                networkResult.onSuccess { code, message, data ->
                     saveLanguage(language)
                 }.onError { code, message ->
 

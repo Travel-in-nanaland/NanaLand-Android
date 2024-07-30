@@ -71,7 +71,7 @@ class TypeTestingViewModel @Inject constructor(
         
         updateUserTypeUseCase(requestData)
             .onEach { networkResult ->  
-                networkResult.onSuccess { code, data ->
+                networkResult.onSuccess { code, message, data ->
                     moveToTypeTestCompletionScreen(type)
                 }.onError { code, message ->
 

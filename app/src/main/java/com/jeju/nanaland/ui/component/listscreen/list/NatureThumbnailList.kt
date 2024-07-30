@@ -12,16 +12,16 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.jeju.nanaland.domain.entity.nature.NatureThumbnailData
+import com.jeju.nanaland.domain.entity.nature.NatureThumbnail
 import com.jeju.nanaland.ui.component.thumbnail.NatureThumbnail
 import com.jeju.nanaland.util.ui.UiState
 
 @Composable
 fun NatureThumbnailList(
     listState: LazyGridState,
-    thumbnailList: UiState<List<NatureThumbnailData>>,
-    toggleFavorite: (Long) -> Unit,
-    moveToNatureContentScreen: (Long) -> Unit,
+    thumbnailList: UiState<List<NatureThumbnail>>,
+    toggleFavorite: (Int) -> Unit,
+    moveToNatureContentScreen: (Int) -> Unit,
     moveToSignInScreen: () -> Unit,
 ) {
     when (thumbnailList) {
@@ -40,7 +40,7 @@ fun NatureThumbnailList(
                         contentAlignment = if (idx % 2 == 0) Alignment.CenterStart else Alignment.CenterEnd
                     ) {
                         NatureThumbnail(
-                            imageUri = item.thumbnailUrl,
+                            imageUri = item.firstImage?.thumbnailUrl,
                             isFavorite = item.favorite,
                             title = item.title,
                             tag = item.addressTag,

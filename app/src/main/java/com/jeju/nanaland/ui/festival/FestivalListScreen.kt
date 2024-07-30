@@ -22,13 +22,12 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.jeju.nanaland.R
 import com.jeju.nanaland.domain.entity.festival.FestivalThumbnailData
 import com.jeju.nanaland.globalvalue.constant.PAGING_THRESHOLD
-import com.jeju.nanaland.globalvalue.constant.getLocationIdx
 import com.jeju.nanaland.globalvalue.constant.getLocationList
 import com.jeju.nanaland.globalvalue.type.AnchoredDraggableContentState
 import com.jeju.nanaland.globalvalue.type.FestivalCategoryType
 import com.jeju.nanaland.ui.component.common.CustomSurface
 import com.jeju.nanaland.ui.component.common.CustomTopBar
-import com.jeju.nanaland.ui.component.listscreen.category.CategoryListTab
+import com.jeju.nanaland.ui.component.listscreen.category.FestivalCategoryListTab
 import com.jeju.nanaland.ui.component.listscreen.filter.DateFilterBottomDialog
 import com.jeju.nanaland.ui.component.listscreen.filter.DateLocationFilterTopBar
 import com.jeju.nanaland.ui.component.listscreen.filter.FilterDialogDimBackground
@@ -52,7 +51,7 @@ import java.util.Calendar
 fun FestivalListScreen(
     filter: ListFilter?,
     moveToBackScreen: () -> Unit,
-    moveToFestivalContentScreen: (Long) -> Unit,
+    moveToFestivalContentScreen: (Int) -> Unit,
     moveToSignInScreen: () -> Unit,
     viewModel: FestivalListViewModel = hiltViewModel()
 ) {
@@ -118,14 +117,14 @@ private fun FestivalListScreen(
     selectedLocationList: SnapshotStateList<Boolean>,
     selectedSeasonList: SnapshotStateList<Boolean>,
     festivalThumbnailList: UiState<List<FestivalThumbnailData>>,
-    festivalThumbnailCount: UiState<Long>,
-    toggleFavorite: (Long) -> Unit,
+    festivalThumbnailCount: UiState<Int>,
+    toggleFavorite: (Int) -> Unit,
     getMonthlyFestivalList: () -> Unit,
     getEndedFestivalList: () -> Unit,
     getSeasonalFestivalList: () -> Unit,
     clearFestivalList: () -> Unit,
     moveToBackScreen: () -> Unit,
-    moveToFestivalContentScreen: (Long) -> Unit,
+    moveToFestivalContentScreen: (Int) -> Unit,
     moveToSignInScreen: () -> Unit,
     isContent: Boolean
 ) {
@@ -173,7 +172,7 @@ private fun FestivalListScreen(
 
                 Spacer(Modifier.height(16.dp))
 
-                CategoryListTab(
+                FestivalCategoryListTab(
                     selectedCategoryType = selectedCategoryType,
                     updateSelectedCategoryType = updateSelectedCategoryType
                 )
