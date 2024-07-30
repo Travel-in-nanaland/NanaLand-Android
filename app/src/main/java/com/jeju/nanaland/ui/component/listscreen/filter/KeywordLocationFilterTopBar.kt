@@ -23,7 +23,7 @@ fun KeywordLocationFilterTopBar(
     keywordList: List<String>,
     selectedLocationList: SnapshotStateList<Boolean>,
     locationList: List<String>,
-    openKeywordFilterDialog: () -> Unit,
+    openActivityFilterDialog: () -> Unit,
     openLocationFilterDialog: () -> Unit,
     showDimBackground: () -> Unit,
 ) {
@@ -45,7 +45,7 @@ fun KeywordLocationFilterTopBar(
         KeywordFilterBox(
             showDimBackground = showDimBackground,
             keywordList = keywordList,
-            openKeywordFilterDialog = openKeywordFilterDialog,
+            openKeywordFilterDialog = openActivityFilterDialog,
             selectedKeywordList = selectedKeywordList
         )
 

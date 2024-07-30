@@ -33,17 +33,15 @@ import androidx.compose.ui.unit.dp
 import com.jeju.nanaland.globalvalue.constant.SYSTEM_NAVIGATION_BAR_HEIGHT
 import com.jeju.nanaland.globalvalue.constant.SYSTEM_STATUS_BAR_HEIGHT
 import com.jeju.nanaland.globalvalue.constant.TOTAL_SCREEN_HEIGHT
-import com.jeju.nanaland.globalvalue.constant.getLocationSelectionList
+import com.jeju.nanaland.globalvalue.constant.getCultureArtKeywordSelectionList
 import com.jeju.nanaland.globalvalue.type.AnchoredDraggableContentState
 import com.jeju.nanaland.ui.component.listscreen.filter.parts.FilterDialogApplyButton
 import com.jeju.nanaland.ui.component.listscreen.filter.parts.FilterDialogCloseButton
-import com.jeju.nanaland.ui.component.listscreen.filter.parts.JejuMapImage
-import com.jeju.nanaland.ui.component.listscreen.filter.parts.JejuMapNoticeText
+import com.jeju.nanaland.ui.component.listscreen.filter.parts.FilterDialogSelectedCount
 import com.jeju.nanaland.ui.component.listscreen.filter.parts.LocationFilterDialogResetButton
 import com.jeju.nanaland.ui.component.listscreen.filter.parts.LocationFilterDialogSelectAllButton
+import com.jeju.nanaland.ui.component.listscreen.filter.parts.keyword.KeywordFilterDialogTitle
 import com.jeju.nanaland.ui.component.listscreen.filter.parts.location.LocationFilterDialogLocationBox
-import com.jeju.nanaland.ui.component.listscreen.filter.parts.FilterDialogSelectedCount
-import com.jeju.nanaland.ui.component.listscreen.filter.parts.location.LocationFilterDialogTitle
 import com.jeju.nanaland.ui.theme.getColor
 import com.jeju.nanaland.util.ui.clickableNoEffect
 import kotlinx.coroutines.launch
@@ -51,27 +49,27 @@ import kotlin.math.roundToInt
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun LocationFilterBottomDialog(
-    locationList: List<String>,
+fun CultureArtKeywordFilterDialog(
+    keywordList: List<String>,
     hideDimBackground: () -> Unit,
     anchoredDraggableState: AnchoredDraggableState<AnchoredDraggableContentState>,
-    selectedLocationList: SnapshotStateList<Boolean>,
+    selectedKeywordList: SnapshotStateList<Boolean>,
     updateList: () -> Unit,
     clearList: () -> Unit
 ) {
-    val tmpSelectedLocationList = remember { getLocationSelectionList() }
+    val tmpSelectedKeywordList = remember { getCultureArtKeywordSelectionList() }
     val coroutineScope = rememberCoroutineScope()
     val density = LocalDensity.current.density
     LaunchedEffect(anchoredDraggableState.targetValue) {
         if (anchoredDraggableState.targetValue == AnchoredDraggableContentState.Open) {
-            tmpSelectedLocationList.forEachIndexed { idx, _ -> tmpSelectedLocationList[idx] = selectedLocationList[idx] }
+            tmpSelectedKeywordList.forEachIndexed { idx, _ -> tmpSelectedKeywordList[idx] = selectedKeywordList[idx] }
         }
     }
 
     Column(
         modifier = Modifier
             .fillMaxWidth()
-            .height(630.dp)
+            .height(370.dp)
             .offset {
                 IntOffset(
                     x = 0,
@@ -92,13 +90,13 @@ fun LocationFilterBottomDialog(
             modifier = Modifier.padding(start = 16.dp, end = 16.dp),
             verticalAlignment = Alignment.Bottom
         ) {
-            LocationFilterDialogTitle()
+            KeywordFilterDialogTitle()
 
             Spacer(Modifier.width(8.dp))
 
             FilterDialogSelectedCount(
-                count = tmpSelectedLocationList.count { it },
-                maxCount = 14
+                count = tmpSelectedKeywordList.count { it },
+                maxCount = 9
             )
 
             Spacer(Modifier.weight(1f))
@@ -111,12 +109,6 @@ fun LocationFilterBottomDialog(
             }
         }
 
-        Spacer(Modifier.height(24.dp))
-
-        JejuMapImage()
-
-        JejuMapNoticeText()
-
         Spacer(Modifier.height(16.dp))
 
         Box(
@@ -124,21 +116,21 @@ fun LocationFilterBottomDialog(
             contentAlignment = Alignment.Center
         ) {
             LazyVerticalGrid(
-                contentPadding = PaddingValues(start = 8.dp, end = 8.dp),
-                columns = GridCells.Fixed(4)
+                contentPadding = PaddingValues(start = 6.dp, end = 6.dp),
+                columns = GridCells.Fixed(3)
             ) {
-                itemsIndexed(locationList) { idx, item ->
+                itemsIndexed(keywordList) { idx, item ->
                     Box(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .padding(start = 8.dp, end = 8.dp)
+                            .padding(start = 10.dp, end = 10.dp)
                             .height(56.dp),
                         contentAlignment = Alignment.Center
                     ) {
                         LocationFilterDialogLocationBox(
                             locationName = item,
-                            isSelected = tmpSelectedLocationList[idx],
-                            updateIsSelected = { tmpSelectedLocationList[idx] = !tmpSelectedLocationList[idx] }
+                            isSelected = tmpSelectedKeywordList[idx],
+                            updateIsSelected = { tmpSelectedKeywordList[idx] = !tmpSelectedKeywordList[idx] }
                         )
                     }
                 }
@@ -153,16 +145,16 @@ fun LocationFilterBottomDialog(
                 .height(48.dp)
         ) {
             LocationFilterDialogSelectAllButton {
-                tmpSelectedLocationList.forEachIndexed { idx, _ ->
-                    tmpSelectedLocationList[idx] = true
+                tmpSelectedKeywordList.forEachIndexed { idx, _ ->
+                    tmpSelectedKeywordList[idx] = true
                 }
             }
 
             Spacer(Modifier.weight(1f))
 
             LocationFilterDialogResetButton {
-                tmpSelectedLocationList.forEachIndexed { idx, _ ->
-                    tmpSelectedLocationList[idx] = false
+                tmpSelectedKeywordList.forEachIndexed { idx, _ ->
+                    tmpSelectedKeywordList[idx] = false
                 }
             }
         }
@@ -171,10 +163,10 @@ fun LocationFilterBottomDialog(
 
         Box(Modifier.padding(start = 16.dp, end = 16.dp)) {
             FilterDialogApplyButton {
-                val differentCount = selectedLocationList.zip(tmpSelectedLocationList).count { (x, y) -> x != y }
+                val differentCount = selectedKeywordList.zip(tmpSelectedKeywordList).count { (x, y) -> x != y }
                 if (differentCount != 0) {
-                    tmpSelectedLocationList.forEachIndexed { idx, _ ->
-                        selectedLocationList[idx] = tmpSelectedLocationList[idx]
+                    tmpSelectedKeywordList.forEachIndexed { idx, _ ->
+                        selectedKeywordList[idx] = tmpSelectedKeywordList[idx]
                     }
                     clearList()
                     updateList()
@@ -193,7 +185,7 @@ fun LocationFilterBottomDialog(
 // anchoredDraggableState의 offset은 pixel단위로 측정됨.
 // y offset이 0일 때 statusbar 바로 아래부터 시작됨.
 @OptIn(ExperimentalFoundationApi::class)
-fun getLocationAnchoredDraggableState() = AnchoredDraggableState(
+fun getCultureKeywordArtAnchoredDraggableState() = AnchoredDraggableState(
     initialValue = AnchoredDraggableContentState.Closed,
     positionalThreshold = { it: Float -> it * 0.5f },
     velocityThreshold = { 100f },
@@ -201,7 +193,7 @@ fun getLocationAnchoredDraggableState() = AnchoredDraggableState(
 ).apply {
     updateAnchors(
         DraggableAnchors {
-            AnchoredDraggableContentState.Open at TOTAL_SCREEN_HEIGHT - 628f - SYSTEM_STATUS_BAR_HEIGHT - SYSTEM_NAVIGATION_BAR_HEIGHT
+            AnchoredDraggableContentState.Open at TOTAL_SCREEN_HEIGHT - 368f - SYSTEM_STATUS_BAR_HEIGHT - SYSTEM_NAVIGATION_BAR_HEIGHT
             AnchoredDraggableContentState.Closed at TOTAL_SCREEN_HEIGHT - SYSTEM_STATUS_BAR_HEIGHT
         }
     )

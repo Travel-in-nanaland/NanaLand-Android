@@ -5,8 +5,12 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.jeju.nanaland.domain.entity.experience.ExperienceThumbnailData
 import com.jeju.nanaland.domain.request.experience.GetExperienceListRequest
+import com.jeju.nanaland.domain.request.favorite.ToggleFavoriteRequest
 import com.jeju.nanaland.domain.usecase.experience.GetExperienceContentUseCase
 import com.jeju.nanaland.domain.usecase.experience.GetExperienceListUseCase
+import com.jeju.nanaland.domain.usecase.favorite.ToggleFavoriteUseCase
+import com.jeju.nanaland.globalvalue.constant.getActivityKeywordSelectionList
+import com.jeju.nanaland.globalvalue.constant.getCultureArtKeywordSelectionList
 import com.jeju.nanaland.globalvalue.constant.getLocationSelectionList
 import com.jeju.nanaland.globalvalue.type.ExperienceCategoryType
 import com.jeju.nanaland.util.log.LogUtil
@@ -26,15 +30,18 @@ import javax.inject.Inject
 @HiltViewModel
 class ExperienceListViewModel @Inject constructor(
     private val getExperienceListUseCase: GetExperienceListUseCase,
-    private val getExperienceContentUseCase: GetExperienceContentUseCase
+    private val getExperienceContentUseCase: GetExperienceContentUseCase,
+    private val toggleFavoriteUseCase: ToggleFavoriteUseCase
 ) : ViewModel() {
 
     private val _selectedCategoryType = MutableStateFlow(ExperienceCategoryType.Activity)
     val selectedCategoryType = _selectedCategoryType.asStateFlow()
     private val locationList = listOf("제주시", "애월", "조천", "한경", "구좌", "한림", "우도", "추자", "서귀포시", "대정", "안덕", "남원", "표선", "성산")
     val selectedLocationList = getLocationSelectionList()
-    private val keywordList = listOf("지상레저", "수상레저", "항공레저", "해양체험", "농촌체험", "힐링테라피")
-    val selectedKeywordList = mutableStateListOf(false, false, false, false, false, false)
+    private val activityKeywordList = listOf("LAND_LEISURE", "WATER_LEISURE", "AIR_LEISURE", "MARINE_EXPERIENCE", "RURAL_EXPERIENCE", "HEALING_THERAPY")
+    val selectedActivityKeywordList = getActivityKeywordSelectionList()
+    private val cultureArtKeywordList = listOf("HISTORY", "EXHIBITION", "WORKSHOP", "ART_MUSEUM", "MUSEUM", "PARK", "PERFORMANCE", "RELIGIOUS_FACILITY", "THEME_PARK")
+    val selectedCultureArtKeywordList = getCultureArtKeywordSelectionList()
     private val _experienceThumbnailCount = MutableStateFlow<UiState<Int>>(UiState.Loading)
     val experienceThumbnailCount = _experienceThumbnailCount.asStateFlow()
     private val _experienceThumbnailDataList = MutableStateFlow<UiState<List<ExperienceThumbnailData>>>(UiState.Loading)
@@ -44,16 +51,10 @@ class ExperienceListViewModel @Inject constructor(
     fun updateSelectedCategoryType(type: ExperienceCategoryType) {
         clearExperienceList()
         _selectedCategoryType.update { type }
-        repeat(selectedKeywordList.size) { selectedKeywordList[it] = false }
+        repeat(selectedActivityKeywordList.size) { selectedActivityKeywordList[it] = false }
+        repeat(selectedCultureArtKeywordList.size) { selectedCultureArtKeywordList[it] = false }
         repeat(selectedLocationList.size) { selectedLocationList[it] = false }
-        getExperienceList(type = when (type) {
-            ExperienceCategoryType.Activity -> {
-                "ACTIVITY"
-            }
-            ExperienceCategoryType.CultureArt -> {
-                "CULTURE_AND_ARTS"
-            }
-        })
+        getExperienceList()
     }
 
     fun clearExperienceList() {
@@ -61,23 +62,31 @@ class ExperienceListViewModel @Inject constructor(
         page = 0
     }
 
-    fun getExperienceList(type: String) {
+    fun getExperienceList() {
         var prevList: List<ExperienceThumbnailData>? = null
         if (_experienceThumbnailDataList.value is UiState.Success) {
             page++
             prevList = (_experienceThumbnailDataList.value as UiState.Success).data
         }
         val requestData = GetExperienceListRequest(
-            experienceType = type,
-            keywordFilterList = selectedKeywordList.mapIndexedNotNull { idx, value ->
-                if (value) keywordList[idx] else null
-            },
+            experienceType = if (_selectedCategoryType.value == ExperienceCategoryType.Activity) "ACTIVITY"
+                else "CULTURE_AND_ARTS",
+            keywordFilterList = if (_selectedCategoryType.value == ExperienceCategoryType.Activity) {
+                    selectedActivityKeywordList.mapIndexedNotNull { idx, value ->
+                        if (value) activityKeywordList[idx] else null
+                    }
+                }
+                else {
+                    selectedCultureArtKeywordList.mapIndexedNotNull { idx, value ->
+                        if (value) cultureArtKeywordList[idx] else null
+                    }
+                },
             addressFilterList = selectedLocationList.mapIndexedNotNull { idx, value ->
                 if (value) locationList[idx] else null
             },
             page = page,
             size = 12
-        )
+            )
         getExperienceListUseCase(requestData)
             .onEach { networkResult ->
                 networkResult.onSuccess { code, message, data ->
@@ -104,6 +113,47 @@ class ExperienceListViewModel @Inject constructor(
     }
 
     fun toggleFavorite(contentId: Int) {
+        val requestData = ToggleFavoriteRequest(
+            id = contentId,
+            category = "EXPERIENCE"
+        )
+        toggleFavoriteUseCase(requestData)
+            .onEach { networkResult ->
+                networkResult.onSuccess { code, message, data ->
+                    data?.let {
+                        _experienceThumbnailDataList.update { uiState ->
+                            if (uiState is UiState.Success) {
+                                val newList = uiState.data.map { item ->
+                                    if (item.id == contentId) item.copy(favorite = data.favorite)
+                                    else item
+                                }
+                                UiState.Success(newList)
+                            } else {
+                                uiState
+                            }
+                        }
+                    }
+                }.onError { code, message ->
 
+                }.onException {
+
+                }
+            }
+            .catch { LogUtil.e("flow Error", "toggleFavoriteUseCase") }
+            .launchIn(viewModelScope)
+    }
+
+    fun toggleFavoriteWithNoApi(contentId: Int, isFavorite: Boolean) {
+        _experienceThumbnailDataList.update { uiState ->
+            if (uiState is UiState.Success) {
+                val newList = uiState.data.map { item ->
+                    if (item.id == contentId) item.copy(favorite = isFavorite)
+                    else item
+                }
+                UiState.Success(newList)
+            } else {
+                uiState
+            }
+        }
     }
 }

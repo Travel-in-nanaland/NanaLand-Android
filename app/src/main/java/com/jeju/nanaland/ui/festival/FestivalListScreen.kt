@@ -30,7 +30,7 @@ import com.jeju.nanaland.ui.component.common.CustomTopBar
 import com.jeju.nanaland.ui.component.listscreen.category.FestivalCategoryListTab
 import com.jeju.nanaland.ui.component.listscreen.filter.DateFilterBottomDialog
 import com.jeju.nanaland.ui.component.listscreen.filter.DateLocationFilterTopBar
-import com.jeju.nanaland.ui.component.listscreen.filter.FilterDialogDimBackground
+import com.jeju.nanaland.ui.component.listscreen.filter.FestivalFilterDialogDimBackground
 import com.jeju.nanaland.ui.component.listscreen.filter.LocationFilterBottomDialog
 import com.jeju.nanaland.ui.component.listscreen.filter.LocationFilterTopBar
 import com.jeju.nanaland.ui.component.listscreen.filter.SeasonFilterBottomDialog
@@ -220,11 +220,11 @@ private fun FestivalListScreen(
             }
 
             if (isDimBackgroundShowing.value) {
-                FilterDialogDimBackground(
+                FestivalFilterDialogDimBackground(
                     isDimBackgroundShowing = isDimBackgroundShowing,
                     dateAnchoredDraggableState = dateFilterDialogAnchoredDraggableState,
                     locationAnchoredDraggableState = locationFilterDialogAnchoredDraggableState,
-                    seasonAnchoredDraggableState = seasonFilterDialogAnchoredDraggableState
+                    keywordAnchoredDraggableState = seasonFilterDialogAnchoredDraggableState
                 )
             }
 

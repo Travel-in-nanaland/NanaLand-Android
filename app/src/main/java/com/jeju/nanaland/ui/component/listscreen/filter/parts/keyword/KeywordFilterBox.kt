@@ -3,6 +3,7 @@ package com.jeju.nanaland.ui.component.listscreen.filter.parts.keyword
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -39,7 +40,11 @@ fun KeywordFilterBox(
                     color = borderColor
                 ),
                 shape = RoundedCornerShape(50)
-            ),
+            )
+            .clickable {
+                showDimBackground()
+                openKeywordFilterDialog()
+            },
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.Center
     ) {
