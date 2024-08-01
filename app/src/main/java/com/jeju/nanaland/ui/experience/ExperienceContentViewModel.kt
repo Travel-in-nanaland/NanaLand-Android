@@ -24,7 +24,8 @@ import javax.inject.Inject
 @HiltViewModel
 class ExperienceContentViewModel @Inject constructor(
     private val getExperienceContentUseCase: GetExperienceContentUseCase,
-    private val toggleFavoriteUseCase: ToggleFavoriteUseCase
+    private val toggleFavoriteUseCase: ToggleFavoriteUseCase,
+    private val getReviewListUseCase: GetReview
 ) : ViewModel() {
 
     private val _experienceContent = MutableStateFlow<UiState<ExperienceContent>>(UiState.Loading)
