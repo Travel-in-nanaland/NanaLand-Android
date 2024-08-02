@@ -81,102 +81,102 @@ private fun FestivalContentScreen(
             is UiState.Loading -> {}
             is UiState.Success -> {
                 Box(modifier = Modifier.fillMaxSize()) {
-                        Column(modifier = Modifier.verticalScroll(scrollState)) {
-                            DetailScreenTopBannerImage(imageUri = festivalContent.data.images[0]?.thumbnailUrl)
+                    Column(modifier = Modifier.verticalScroll(scrollState)) {
+                        DetailScreenTopBannerImage(imageUri = festivalContent.data.images[0].thumbnailUrl)
 
-                            Spacer(Modifier.height(24.dp))
+                        Spacer(Modifier.height(24.dp))
 
-                            Column(modifier = Modifier.padding(start = 16.dp, end = 16.dp)) {
-                                DetailScreenDescription(
-                                    isFavorite = festivalContent.data.favorite,
-                                    tag = festivalContent.data.addressTag,
-                                    title = festivalContent.data.title,
-                                    content = festivalContent.data.content,
-                                    onFavoriteButtonClicked = { toggleFavorite(festivalContent.data.id, updatePrevScreenListFavorite) },
-                                    onShareButtonClicked = {
-                                        val sendIntent: Intent = Intent().apply {
-                                            action = Intent.ACTION_SEND
-                                            putExtra(Intent.EXTRA_TEXT, "http://13.125.110.80:8080/share/${getLanguage()}?category=festival&id=${contentId}")
-                                            type = "text/plain"
-                                        }
-                                        val shareIntent = Intent.createChooser(sendIntent, null)
-                                        context.startActivity(shareIntent)
-                                    },
-                                    moveToSignInScreen = moveToSignInScreen,
+                        Column(modifier = Modifier.padding(start = 16.dp, end = 16.dp)) {
+                            DetailScreenDescription(
+                                isFavorite = festivalContent.data.favorite,
+                                tag = festivalContent.data.addressTag,
+                                title = festivalContent.data.title,
+                                content = festivalContent.data.content,
+                                onFavoriteButtonClicked = { toggleFavorite(festivalContent.data.id, updatePrevScreenListFavorite) },
+                                onShareButtonClicked = {
+                                    val sendIntent: Intent = Intent().apply {
+                                        action = Intent.ACTION_SEND
+                                        putExtra(Intent.EXTRA_TEXT, "http://13.125.110.80:8080/share/${getLanguage()}?category=festival&id=${contentId}")
+                                        type = "text/plain"
+                                    }
+                                    val shareIntent = Intent.createChooser(sendIntent, null)
+                                    context.startActivity(shareIntent)
+                                },
+                                moveToSignInScreen = moveToSignInScreen,
+                            )
+
+                            Spacer(Modifier.height(32.dp))
+
+                            if (festivalContent.data.address.isNotEmpty()) {
+                                DetailScreenInformation(
+                                    drawableId = R.drawable.ic_location_outlined,
+                                    title = getString(R.string.detail_screen_common_주소),
+                                    content = festivalContent.data.address
                                 )
 
-                                Spacer(Modifier.height(32.dp))
-
-                                if (!festivalContent.data.address.isNullOrEmpty()) {
-                                    DetailScreenInformation(
-                                        drawableId = R.drawable.ic_location_outlined,
-                                        title = getString(R.string.detail_screen_common_주소),
-                                        content = festivalContent.data.address
-                                    )
-
-                                    Spacer(Modifier.height(24.dp))
-                                }
-
-
-                                if (!festivalContent.data.contact.isNullOrEmpty()) {
-                                    DetailScreenInformation(
-                                        drawableId = R.drawable.ic_phone_outlined,
-                                        title = getString(R.string.detail_screen_common_연락처),
-                                        content = festivalContent.data.contact
-                                    )
-
-                                    Spacer(Modifier.height(24.dp))
-                                }
-
-                                if (!festivalContent.data.period.isNullOrEmpty()) {
-                                    DetailScreenInformation(
-                                        drawableId = R.drawable.ic_calendar_outlined,
-                                        title = getString(R.string.detail_screen_common_기간),
-                                        content = festivalContent.data.period
-                                    )
-
-                                    Spacer(Modifier.height(24.dp))
-                                }
-
-                                if (!festivalContent.data.time.isNullOrEmpty()) {
-                                    DetailScreenInformation(
-                                        drawableId = R.drawable.ic_clock_outlined,
-                                        title = getString(R.string.detail_screen_common_이용_시간),
-                                        content = festivalContent.data.time
-                                    )
-
-                                    Spacer(Modifier.height(24.dp))
-                                }
-
-                                if (!festivalContent.data.fee.isNullOrEmpty()) {
-                                    DetailScreenInformation(
-                                        drawableId = R.drawable.ic_ticket_outlined,
-                                        title = getString(R.string.detail_screen_common_입장료),
-                                        content = festivalContent.data.fee
-                                    )
-
-                                    Spacer(Modifier.height(24.dp))
-                                }
-
-                                if (!festivalContent.data.homepage.isNullOrEmpty()) {
-                                    DetailScreenInformation(
-                                        drawableId = R.drawable.ic_clip_outlined,
-                                        title = getString(R.string.detail_screen_common_홈페이지),
-                                        content = festivalContent.data.homepage
-                                    )
-
-                                    Spacer(Modifier.height(24.dp))
-                                }
-
-                                Spacer(Modifier.height(16.dp))
-
-                                DetailScreenInformationModificationProposalButton {
-                                    moveToInfoModificationProposalScreen()
-                                }
+                                Spacer(Modifier.height(24.dp))
                             }
 
-                            Spacer(Modifier.height(80.dp))
+
+                            if (festivalContent.data.contact.isNotEmpty()) {
+                                DetailScreenInformation(
+                                    drawableId = R.drawable.ic_phone_outlined,
+                                    title = getString(R.string.detail_screen_common_연락처),
+                                    content = festivalContent.data.contact
+                                )
+
+                                Spacer(Modifier.height(24.dp))
+                            }
+
+                            if (festivalContent.data.period.isNotEmpty()) {
+                                DetailScreenInformation(
+                                    drawableId = R.drawable.ic_calendar_outlined,
+                                    title = getString(R.string.detail_screen_common_기간),
+                                    content = festivalContent.data.period
+                                )
+
+                                Spacer(Modifier.height(24.dp))
+                            }
+
+                            if (festivalContent.data.time.isNotEmpty()) {
+                                DetailScreenInformation(
+                                    drawableId = R.drawable.ic_clock_outlined,
+                                    title = getString(R.string.detail_screen_common_이용_시간),
+                                    content = festivalContent.data.time
+                                )
+
+                                Spacer(Modifier.height(24.dp))
+                            }
+
+                            if (festivalContent.data.fee.isNotEmpty()) {
+                                DetailScreenInformation(
+                                    drawableId = R.drawable.ic_ticket_outlined,
+                                    title = getString(R.string.detail_screen_common_입장료),
+                                    content = festivalContent.data.fee
+                                )
+
+                                Spacer(Modifier.height(24.dp))
+                            }
+
+                            if (festivalContent.data.homepage.isNotEmpty()) {
+                                DetailScreenInformation(
+                                    drawableId = R.drawable.ic_clip_outlined,
+                                    title = getString(R.string.detail_screen_common_홈페이지),
+                                    content = festivalContent.data.homepage
+                                )
+
+                                Spacer(Modifier.height(24.dp))
+                            }
+
+                            Spacer(Modifier.height(16.dp))
+
+                            DetailScreenInformationModificationProposalButton {
+                                moveToInfoModificationProposalScreen()
+                            }
                         }
+
+                        Spacer(Modifier.height(80.dp))
+                    }
 
                     MoveToTopButton {
                         coroutineScope.launch { scrollState.animateScrollTo(0) }

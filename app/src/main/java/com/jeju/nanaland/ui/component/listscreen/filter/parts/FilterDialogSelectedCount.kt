@@ -1,4 +1,4 @@
-package com.jeju.nanaland.ui.component.listscreen.filter.parts.location
+package com.jeju.nanaland.ui.component.listscreen.filter.parts
 
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -8,9 +8,12 @@ import com.jeju.nanaland.ui.theme.body02
 import com.jeju.nanaland.util.ui.ComponentPreview
 
 @Composable
-fun LocationFilterDialogSelectedCount(count: Int) {
+fun FilterDialogSelectedCount(
+    count: Int,
+    maxCount: Int
+) {
     Text(
-        text = "($count / 14)",
+        text = "($count / $maxCount)",
         color = Color(0xFF717171),
         style = body02
     )
@@ -18,8 +21,11 @@ fun LocationFilterDialogSelectedCount(count: Int) {
 
 @ComponentPreview
 @Composable
-private fun LocationFilterDialogSelectedCountPreview() {
+private fun FilterDialogSelectedCountPreview() {
     NanaLandTheme {
-        LocationFilterDialogSelectedCount(count = 4)
+        FilterDialogSelectedCount(
+            count = 4,
+            maxCount = 6
+        )
     }
 }

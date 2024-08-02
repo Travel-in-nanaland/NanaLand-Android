@@ -7,25 +7,25 @@ data class FestivalContentData(
     @SerializedName("id")
     val id: Int,
     @SerializedName("images")
-    val images: List<ImageUrl?>,
+    val images: List<ImageUrl>,
     @SerializedName("addressTag")
-    val addressTag: String?,
+    val addressTag: String,
     @SerializedName("title")
-    val title: String?,
+    val title: String,
     @SerializedName("content")
-    val content: String?,
+    val content: String,
     @SerializedName("address")
-    val address: String?,
+    val address: String,
     @SerializedName("contact")
-    val contact: String?,
+    val contact: String,
     @SerializedName("time")
-    val time: String?,
+    val time: String,
     @SerializedName("fee")
-    val fee: String?,
+    val fee: String,
     @SerializedName("homepage")
-    val homepage: String?,
+    val homepage: String,
     @SerializedName("period")
-    val period: String?,
+    val period: String,
     @SerializedName("favorite")
     val favorite: Boolean
 )

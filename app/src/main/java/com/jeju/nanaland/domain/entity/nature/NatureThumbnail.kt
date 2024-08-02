@@ -7,11 +7,11 @@ data class NatureThumbnail(
     @SerializedName("id")
     val id: Int,
     @SerializedName("title")
-    val title: String?,
+    val title: String,
     @SerializedName("firstImage")
-    val firstImage: ImageUrl?,
+    val firstImage: ImageUrl,
     @SerializedName("addressTag")
-    val addressTag: String?,
+    val addressTag: String,
     @SerializedName("favorite")
     val favorite: Boolean
 )

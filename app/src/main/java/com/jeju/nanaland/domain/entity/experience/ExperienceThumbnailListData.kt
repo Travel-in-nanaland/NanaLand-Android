@@ -6,5 +6,5 @@ data class ExperienceThumbnailListData(
     @SerializedName("totalElements")
     val totalElements: Int,
     @SerializedName("data")
-    val data: List<ExperienceThumbnail>
+    val data: List<ExperienceThumbnailData>
 )

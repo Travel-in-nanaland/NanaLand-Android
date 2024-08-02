@@ -2,7 +2,6 @@ package com.jeju.nanaland.ui.component.listscreen.filter
 
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.ExperimentalFoundationApi
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.gestures.AnchoredDraggableState
 import androidx.compose.foundation.gestures.DraggableAnchors
@@ -23,18 +22,14 @@ import androidx.compose.foundation.lazy.grid.itemsIndexed
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.snapshots.SnapshotStateList
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalDensity
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
-import com.jeju.nanaland.R
 import com.jeju.nanaland.globalvalue.constant.SYSTEM_NAVIGATION_BAR_HEIGHT
 import com.jeju.nanaland.globalvalue.constant.SYSTEM_STATUS_BAR_HEIGHT
 import com.jeju.nanaland.globalvalue.constant.TOTAL_SCREEN_HEIGHT
@@ -42,13 +37,12 @@ import com.jeju.nanaland.globalvalue.constant.getLocationSelectionList
 import com.jeju.nanaland.globalvalue.type.AnchoredDraggableContentState
 import com.jeju.nanaland.ui.component.listscreen.filter.parts.FilterDialogApplyButton
 import com.jeju.nanaland.ui.component.listscreen.filter.parts.FilterDialogCloseButton
-import com.jeju.nanaland.ui.component.listscreen.filter.parts.DateFilterDialogResetButton
 import com.jeju.nanaland.ui.component.listscreen.filter.parts.JejuMapImage
 import com.jeju.nanaland.ui.component.listscreen.filter.parts.JejuMapNoticeText
 import com.jeju.nanaland.ui.component.listscreen.filter.parts.LocationFilterDialogResetButton
 import com.jeju.nanaland.ui.component.listscreen.filter.parts.LocationFilterDialogSelectAllButton
 import com.jeju.nanaland.ui.component.listscreen.filter.parts.location.LocationFilterDialogLocationBox
-import com.jeju.nanaland.ui.component.listscreen.filter.parts.location.LocationFilterDialogSelectedCount
+import com.jeju.nanaland.ui.component.listscreen.filter.parts.FilterDialogSelectedCount
 import com.jeju.nanaland.ui.component.listscreen.filter.parts.location.LocationFilterDialogTitle
 import com.jeju.nanaland.ui.theme.getColor
 import com.jeju.nanaland.util.ui.clickableNoEffect
@@ -73,6 +67,7 @@ fun LocationFilterBottomDialog(
             tmpSelectedLocationList.forEachIndexed { idx, _ -> tmpSelectedLocationList[idx] = selectedLocationList[idx] }
         }
     }
+
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -101,7 +96,10 @@ fun LocationFilterBottomDialog(
 
             Spacer(Modifier.width(8.dp))
 
-            LocationFilterDialogSelectedCount(count = tmpSelectedLocationList.count { it })
+            FilterDialogSelectedCount(
+                count = tmpSelectedLocationList.count { it },
+                maxCount = 14
+            )
 
             Spacer(Modifier.weight(1f))
 
@@ -132,7 +130,8 @@ fun LocationFilterBottomDialog(
                 itemsIndexed(locationList) { idx, item ->
                     Box(
                         modifier = Modifier
-                            .width(86.dp)
+                            .fillMaxWidth()
+                            .padding(start = 8.dp, end = 8.dp)
                             .height(56.dp),
                         contentAlignment = Alignment.Center
                     ) {
@@ -202,7 +201,7 @@ fun getLocationAnchoredDraggableState() = AnchoredDraggableState(
 ).apply {
     updateAnchors(
         DraggableAnchors {
-            AnchoredDraggableContentState.Open at TOTAL_SCREEN_HEIGHT - 620f - SYSTEM_STATUS_BAR_HEIGHT - SYSTEM_NAVIGATION_BAR_HEIGHT
+            AnchoredDraggableContentState.Open at TOTAL_SCREEN_HEIGHT - 628f - SYSTEM_STATUS_BAR_HEIGHT - SYSTEM_NAVIGATION_BAR_HEIGHT
             AnchoredDraggableContentState.Closed at TOTAL_SCREEN_HEIGHT - SYSTEM_STATUS_BAR_HEIGHT
         }
     )

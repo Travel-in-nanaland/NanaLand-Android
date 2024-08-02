@@ -16,5 +16,5 @@ interface ReportApi {
     suspend fun informationModificationProposal(
         @Part("reqDto") data: RequestBody,
         @Part image: MultipartBody.Part?
-    ): Response<ResponseWrapper<String?>>
+    ): Response<ResponseWrapper<String>>
 }

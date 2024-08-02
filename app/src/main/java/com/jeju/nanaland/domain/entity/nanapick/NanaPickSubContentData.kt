@@ -7,13 +7,13 @@ data class NanaPickSubContentData(
     @SerializedName("number")
     val number: Int,
     @SerializedName("subTitle")
-    val subTitle: String?,
+    val subTitle: String,
     @SerializedName("title")
-    val title: String?,
+    val title: String,
     @SerializedName("images")
-    val images: List<ImageUrl?>,
+    val images: List<ImageUrl>,
     @SerializedName("content")
-    val content: String?,
+    val content: String,
     @SerializedName("additionalInfoList")
     val nanaPickSubContentAdditionalInfoList: List<NanaPickSubContentAdditionalInfoData>,
     @SerializedName("hashtags")

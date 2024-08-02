@@ -24,25 +24,20 @@ import com.jeju.nanaland.util.ui.clickableNoEffect
 
 @Composable
 fun RowScope.CategoryBox(
-    categoryIdx: Int,
-    selectedCategoryType: FestivalCategoryType,
-    updateSelectedCategoryType: (FestivalCategoryType) -> Unit,
+    text: String,
+    isSelected: Boolean,
+    updateSelectedCategoryType: () -> Unit,
 ) {
     val mainColor = getColor().main
-    val titleList = remember {
-        listOf(FestivalCategoryType.Monthly, FestivalCategoryType.Ended, FestivalCategoryType.Seasonal)
-    }
     Box(
         modifier = Modifier
             .weight(1f)
             .fillMaxHeight()
             .clickableNoEffect {
-                if (selectedCategoryType != titleList[categoryIdx]) {
-                    updateSelectedCategoryType(titleList[categoryIdx])
-                }
+                updateSelectedCategoryType()
             }
             .drawBehind {
-                if (titleList[categoryIdx] == selectedCategoryType) {
+                if (isSelected) {
                     val borderSize = 2.dp.toPx()
                     drawLine(
                         color = mainColor,
@@ -55,13 +50,9 @@ fun RowScope.CategoryBox(
         contentAlignment = Alignment.Center
     ) {
         Text(
-            text = when (categoryIdx) {
-                0 -> getString(R.string.festival_list_screen_월별_축제)
-                1 -> getString(R.string.festival_list_screen_종료된_축제)
-                else -> getString(R.string.festival_list_screen_계절별_축제)
-            },
+            text = text,
             color = Color(0xFF000000),
-            style = if (selectedCategoryType == titleList[categoryIdx]) body02SemiBold else body02,
+            style = if (isSelected) body02SemiBold else body02,
             textAlign = TextAlign.Center
         )
     }

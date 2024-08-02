@@ -7,7 +7,7 @@ data class GetAllSearchResultListResponse(
     @SerializedName("status")
     val status: Int,
     @SerializedName("message")
-    val message: String?,
+    val message: String,
     @SerializedName("data")
     val data: AllSearchResultListData
 )

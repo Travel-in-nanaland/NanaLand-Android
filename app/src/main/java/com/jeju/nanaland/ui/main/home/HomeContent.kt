@@ -126,26 +126,26 @@ private fun HomeContent(
 @ScreenPreview
 @Composable
 private fun HomeContentPreview() {
-    val data = listOf(NanaPickBannerData(
-        id = 0,
-        firstImage = null,
-        version = "Version",
-        subHeading = "SubHeading",
-        heading = "Heading"
-    ))
-    NanaLandTheme {
-        HomeContent(
-            homePreviewBanner = UiState.Success(data),
-            recommendedPosts = UiState.Loading,
-            toggleFavorite = { _, _ -> },
-            moveToCategoryContentScreen = { _, _, _->},
-            moveToNatureListScreen = { /*TODO*/ },
-            moveToFestivalListScreen = { /*TODO*/ },
-            moveToMarketListScreen = { /*TODO*/ },
-            moveToExperienceScreen = { /*TODO*/ },
-            moveToNanaPickListScreen = { /*TODO*/ },
-            moveToSignInScreen = {},
-            isContent = true
-        )
-    }
+//    val data = listOf(NanaPickBannerData(
+//        id = 0,
+//        firstImage = null,
+//        version = "Version",
+//        subHeading = "SubHeading",
+//        heading = "Heading"
+//    ))
+//    NanaLandTheme {
+//        HomeContent(
+//            homePreviewBanner = UiState.Success(data),
+//            recommendedPosts = UiState.Loading,
+//            toggleFavorite = { _, _ -> },
+//            moveToCategoryContentScreen = { _, _, _->},
+//            moveToNatureListScreen = { /*TODO*/ },
+//            moveToFestivalListScreen = { /*TODO*/ },
+//            moveToMarketListScreen = { /*TODO*/ },
+//            moveToExperienceScreen = { /*TODO*/ },
+//            moveToNanaPickListScreen = { /*TODO*/ },
+//            moveToSignInScreen = {},
+//            isContent = true
+//        )
+//    }
 }

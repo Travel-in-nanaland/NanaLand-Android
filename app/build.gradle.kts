@@ -31,8 +31,8 @@ android {
             useSupportLibrary = true
         }
         buildConfigField("String", "BASE_URL", getProperty("baseUrl"))
-        buildConfigField("String", "NEXT_URL", getProperty("nextUrl"))
-        buildConfigField("String", "DEV_ACCESS_TOKEN", getProperty("accessToken"))
+//        buildConfigField("String", "NEXT_URL", getProperty("nextUrl"))
+//        buildConfigField("String", "DEV_ACCESS_TOKEN", getProperty("accessToken"))
     }
 
     buildTypes {
@@ -85,6 +85,7 @@ dependencies {
     implementation("androidx.compose.ui:ui-tooling-preview")
     implementation("androidx.compose.material3:material3")
     implementation("androidx.appcompat:appcompat:1.6.1")
+    implementation("androidx.lifecycle:lifecycle-runtime-compose-android:2.8.4")
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")

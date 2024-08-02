@@ -7,13 +7,13 @@ data class FestivalThumbnailData(
     @SerializedName("id")
     val id: Int,
     @SerializedName("title")
-    val title: String?,
+    val title: String,
     @SerializedName("firstImage")
-    val firstImage: List<ImageUrl?>,
+    val firstImage: ImageUrl,
     @SerializedName("addressTag")
-    val addressTag: String?,
+    val addressTag: String,
     @SerializedName("period")
-    val period: String?,
+    val period: String,
     @SerializedName("favorite")
     val favorite: Boolean
 )

@@ -38,7 +38,7 @@ class AuthRepositoryImpl(
     ): NetworkResult<AuthTokenData> {
         val multipartImage: MultipartBody.Part? = image?.let {
             val imageBody = image.asRequestBody("image/png".toMediaTypeOrNull())
-            MultipartBody.Part.createFormData("multipartFile", imageBody.toString(), imageBody)
+            MultipartBody.Part.createFormData("multipartFile", "tmpImageName.jpg", imageBody)
         }
 
         val gson = GsonBuilder().setLenient().setPrettyPrinting().create();
