@@ -12,14 +12,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.jeju.nanaland.domain.entity.festival.FestivalThumbnailData
-import com.jeju.nanaland.ui.component.thumbnail.FestivalThumbnail
+import com.jeju.nanaland.domain.entity.experience.ExperienceThumbnailData
+import com.jeju.nanaland.ui.component.thumbnail.ExperienceThumbnail
 import com.jeju.nanaland.util.ui.UiState
 
 @Composable
 fun ExperienceThumbnailList(
     listState: LazyGridState,
-    thumbnailList: UiState<List<FestivalThumbnailData>>,
+    thumbnailList: UiState<List<ExperienceThumbnailData>>,
     toggleFavorite: (Int) -> Unit,
     moveToExperienceContentScreen: (Int) -> Unit,
     moveToSignInScreen: () -> Unit
@@ -39,12 +39,12 @@ fun ExperienceThumbnailList(
                             .padding(bottom = 16.dp),
                         contentAlignment = if (idx % 2 == 0) Alignment.CenterStart else Alignment.CenterEnd
                     ) {
-                        FestivalThumbnail(
-                            imageUri = item.firstImage[0]?.thumbnailUrl,
+                        ExperienceThumbnail(
+                            imageUri = item.firstImage?.thumbnailUrl,
                             isFavorite = item.favorite,
                             title = item.title,
-                            subTitle = item.period,
-                            tag = item.addressTag,
+                            place = item.addressTag,
+                            rating = item.ratingAvg.toString(),
                             onFavoriteButtonClick = { toggleFavorite(item.id) },
                             onClick = { moveToExperienceContentScreen(item.id) },
                             moveToSignInScreen = moveToSignInScreen,

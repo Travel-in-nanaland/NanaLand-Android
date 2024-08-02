@@ -7,11 +7,11 @@ data class FavoriteThumbnailData(
     @SerializedName("id")
     val id: Int,
     @SerializedName("category")
-    val category: String?,
+    val category: String,
     @SerializedName("firstImage")
     val firstImage: ImageUrl?,
     @SerializedName("title")
-    val title: String?,
+    val title: String,
     @SerializedName("favorite")
     val favorite: Boolean
 )

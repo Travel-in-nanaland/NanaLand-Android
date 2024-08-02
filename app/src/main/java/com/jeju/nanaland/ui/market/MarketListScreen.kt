@@ -23,7 +23,7 @@ import com.jeju.nanaland.globalvalue.constant.getLocationList
 import com.jeju.nanaland.globalvalue.type.AnchoredDraggableContentState
 import com.jeju.nanaland.ui.component.common.CustomSurface
 import com.jeju.nanaland.ui.component.common.CustomTopBar
-import com.jeju.nanaland.ui.component.listscreen.filter.FilterDialogDimBackground
+import com.jeju.nanaland.ui.component.listscreen.filter.FestivalFilterDialogDimBackground
 import com.jeju.nanaland.ui.component.listscreen.filter.LocationFilterBottomDialog
 import com.jeju.nanaland.ui.component.listscreen.filter.LocationFilterTopBar
 import com.jeju.nanaland.ui.component.listscreen.filter.getLocationAnchoredDraggableState
@@ -125,7 +125,7 @@ private fun MarketListScreen(
             }
 
             if (isDimBackgroundShowing.value) {
-                FilterDialogDimBackground(
+                FestivalFilterDialogDimBackground(
                     isDimBackgroundShowing = isDimBackgroundShowing,
                     locationAnchoredDraggableState = locationFilterDialogAnchoredDraggableState
                 )

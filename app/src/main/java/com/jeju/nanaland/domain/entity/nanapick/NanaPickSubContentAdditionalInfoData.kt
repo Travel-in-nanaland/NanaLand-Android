@@ -4,9 +4,9 @@ import com.google.gson.annotations.SerializedName
 
 data class NanaPickSubContentAdditionalInfoData(
     @SerializedName("infoEmoji")
-    val infoEmoji: String?,
+    val infoEmoji: String,
     @SerializedName("infoKey")
-    val infoKey: String?,
+    val infoKey: String,
     @SerializedName("infoValue")
-    val infoValue: String?
+    val infoValue: String
 )

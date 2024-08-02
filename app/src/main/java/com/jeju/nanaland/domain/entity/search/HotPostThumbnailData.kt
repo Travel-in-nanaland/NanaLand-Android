@@ -7,11 +7,11 @@ data class HotPostThumbnailData(
     @SerializedName("id")
     val id: Int,
     @SerializedName("title")
-    val title: String?,
+    val title: String,
     @SerializedName("firstImage")
-    val firstImage: ImageUrl?,
+    val firstImage: ImageUrl,
     @SerializedName("category")
-    val category: String?,
+    val category: String,
     @SerializedName("favorite")
     val favorite: Boolean
 )

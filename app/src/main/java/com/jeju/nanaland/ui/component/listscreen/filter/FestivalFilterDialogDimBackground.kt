@@ -26,11 +26,11 @@ import kotlin.math.roundToInt
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun FilterDialogDimBackground(
+fun FestivalFilterDialogDimBackground(
     isDimBackgroundShowing: MutableState<Boolean>,
     dateAnchoredDraggableState: AnchoredDraggableState<AnchoredDraggableContentState>? = null,
     locationAnchoredDraggableState: AnchoredDraggableState<AnchoredDraggableContentState>? = null,
-    seasonAnchoredDraggableState: AnchoredDraggableState<AnchoredDraggableContentState>? = null
+    keywordAnchoredDraggableState: AnchoredDraggableState<AnchoredDraggableContentState>? = null
     ) {
     val density = LocalDensity.current.density
     val coroutineScope = rememberCoroutineScope()
@@ -46,8 +46,8 @@ fun FilterDialogDimBackground(
                         ((locationAnchoredDraggableState?.anchors?.maxAnchor() ?: 1f) - (locationAnchoredDraggableState?.anchors?.minAnchor() ?: 0f)) +
                         ((dateAnchoredDraggableState?.anchors?.maxAnchor() ?: 0f) - (dateAnchoredDraggableState?.offset ?: 0f)) /
                         ((dateAnchoredDraggableState?.anchors?.maxAnchor() ?: 1f) - (dateAnchoredDraggableState?.anchors?.minAnchor() ?: 0f)) +
-                        ((seasonAnchoredDraggableState?.anchors?.maxAnchor() ?: 0f) - (seasonAnchoredDraggableState?.offset ?: 0f)) /
-                        ((seasonAnchoredDraggableState?.anchors?.maxAnchor() ?: 1f) - (seasonAnchoredDraggableState?.anchors?.minAnchor() ?: 0f))
+                        ((keywordAnchoredDraggableState?.anchors?.maxAnchor() ?: 0f) - (keywordAnchoredDraggableState?.offset ?: 0f)) /
+                        ((keywordAnchoredDraggableState?.anchors?.maxAnchor() ?: 1f) - (keywordAnchoredDraggableState?.anchors?.minAnchor() ?: 0f))
             )
             .background(color = Color(0xAA000000))
             .clickableNoEffect {
@@ -58,8 +58,8 @@ fun FilterDialogDimBackground(
                     if (dateAnchoredDraggableState?.targetValue == AnchoredDraggableContentState.Open) {
                         dateAnchoredDraggableState.animateTo(AnchoredDraggableContentState.Closed)
                     }
-                    if (seasonAnchoredDraggableState?.targetValue == AnchoredDraggableContentState.Open) {
-                        seasonAnchoredDraggableState.animateTo(AnchoredDraggableContentState.Closed)
+                    if (keywordAnchoredDraggableState?.targetValue == AnchoredDraggableContentState.Open) {
+                        keywordAnchoredDraggableState.animateTo(AnchoredDraggableContentState.Closed)
                     }
                     isDimBackgroundShowing.value = false
                 }

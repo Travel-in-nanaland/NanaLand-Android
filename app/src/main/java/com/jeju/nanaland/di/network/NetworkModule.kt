@@ -3,6 +3,7 @@ package com.jeju.nanaland.di.network
 import com.google.gson.GsonBuilder
 import com.jeju.nanaland.BuildConfig
 import com.jeju.nanaland.data.api.AuthApi
+import com.jeju.nanaland.data.api.ExperienceApi
 import com.jeju.nanaland.data.api.FavoriteApi
 import com.jeju.nanaland.data.api.FestivalApi
 import com.jeju.nanaland.data.api.MarketApi
@@ -152,5 +153,11 @@ object NetworkModule {
     @Provides
     fun provideReviewApi(@AccessTokenAutoAdded retrofit: Retrofit): ReviewApi {
         return retrofit.create(ReviewApi::class.java)
+    }
+
+    @Singleton
+    @Provides
+    fun provideExperienceApi(@AccessTokenAutoAdded retrofit: Retrofit): ExperienceApi {
+        return retrofit.create(ExperienceApi::class.java)
     }
 }

@@ -4,6 +4,7 @@ import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -30,7 +31,7 @@ fun LocationFilterDialogLocationBox(
 ) {
     Box(
         modifier = Modifier
-            .width(70.dp)
+            .fillMaxWidth()
             .height(40.dp)
             .border(
                 border = BorderStroke(

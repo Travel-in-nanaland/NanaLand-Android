@@ -20,7 +20,7 @@ interface ExperienceApi {
     // 이색체험 리스트 조회
     @GET("experience/list")
     suspend fun getExperienceList(
-        @Query("experienceType") type: String,
+        @Query("experienceType") experienceType: String,
         @Query("keywordFilterList") keywordFilterList: List<String>,
         @Query("addressFilterList") addressFilterList: List<String>,
         @Query("page") page: Int,

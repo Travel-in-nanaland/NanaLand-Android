@@ -7,11 +7,11 @@ data class NanaPickBannerData(
     @SerializedName("id")
     val id: Int,
     @SerializedName("firstImage")
-    val firstImage: ImageUrl?,
+    val firstImage: ImageUrl,
     @SerializedName("version")
-    val version: String?,
+    val version: String,
     @SerializedName("subHeading")
-    val subHeading: String?,
+    val subHeading: String,
     @SerializedName("heading")
-    val heading: String?,
+    val heading: String,
 )
