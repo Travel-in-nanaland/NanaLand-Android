@@ -3,12 +3,14 @@ package com.jeju.nanaland.ui.experience
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.jeju.nanaland.domain.entity.experience.ExperienceContent
+import com.jeju.nanaland.domain.entity.review.ReviewListData
 import com.jeju.nanaland.domain.request.experience.GetExperienceContentRequest
 import com.jeju.nanaland.domain.request.favorite.ToggleFavoriteRequest
 import com.jeju.nanaland.domain.request.review.GetReviewListByPostRequest
 import com.jeju.nanaland.domain.usecase.experience.GetExperienceContentUseCase
 import com.jeju.nanaland.domain.usecase.favorite.ToggleFavoriteUseCase
 import com.jeju.nanaland.domain.usecase.review.GetReviewListByPostUseCase
+import com.jeju.nanaland.globalvalue.type.ReviewCategoryType
 import com.jeju.nanaland.util.log.LogUtil
 import com.jeju.nanaland.util.network.onError
 import com.jeju.nanaland.util.network.onException
@@ -32,6 +34,8 @@ class ExperienceContentViewModel @Inject constructor(
 
     private val _experienceContent = MutableStateFlow<UiState<ExperienceContent>>(UiState.Loading)
     val experienceContent = _experienceContent.asStateFlow()
+    private val _reviewList = MutableStateFlow<UiState<ReviewListData>>(UiState.Loading)
+    val reviewList = _reviewList.asStateFlow()
 
     fun getExperienceContent(contentId: Int?, isSearch: Boolean) {
         if (contentId == null) return
@@ -87,6 +91,27 @@ class ExperienceContentViewModel @Inject constructor(
             .launchIn(viewModelScope)
     }
 
-    fun getReview() {
+    fun getReview(contentId: Int?) {
+        if (contentId == null) return
+        val requestData = GetReviewListByPostRequest(
+            id = contentId,
+            category = ReviewCategoryType.EXPERIENCE,
+            page = 0,
+            size = 3
+        )
+        getReviewListUseCase(requestData)
+            .onEach { networkResult ->
+                networkResult.onSuccess { code, message, data ->
+                    data?.let {
+                        _reviewList.update {
+                            UiState.Success(data)
+                        }
+                    }
+                }.onError { code, message ->
+
+                }.onException {  }
+            }
+            .catch { LogUtil.e("flow Error", "getReviewListUseCase") }
+            .launchIn(viewModelScope)
     }
 }

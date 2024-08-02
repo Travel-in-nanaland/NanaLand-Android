@@ -2,8 +2,10 @@ package com.jeju.nanaland.ui.experience
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
@@ -18,13 +20,19 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.jeju.nanaland.R
 import com.jeju.nanaland.domain.entity.experience.ExperienceContent
+import com.jeju.nanaland.domain.entity.review.ReviewData
+import com.jeju.nanaland.domain.entity.review.ReviewListData
 import com.jeju.nanaland.ui.component.common.CustomSurface
 import com.jeju.nanaland.ui.component.common.CustomTopBar
+import com.jeju.nanaland.ui.component.common.ReviewBottomBar
 import com.jeju.nanaland.ui.component.detailscreen.other.DetailScreenDescription
 import com.jeju.nanaland.ui.component.detailscreen.other.DetailScreenInformation
 import com.jeju.nanaland.ui.component.detailscreen.other.DetailScreenInformationModificationProposalButton
 import com.jeju.nanaland.ui.component.detailscreen.other.DetailScreenTopBannerImage
 import com.jeju.nanaland.ui.component.detailscreen.other.MoveToTopButton
+import com.jeju.nanaland.ui.component.review.ReviewCard
+import com.jeju.nanaland.ui.component.review.TotalRatingStar
+import com.jeju.nanaland.ui.component.review.TotalReviewCountText
 import com.jeju.nanaland.util.ui.ScreenPreview
 import com.jeju.nanaland.util.ui.UiState
 import kotlinx.coroutines.launch
@@ -41,13 +49,16 @@ fun ExperienceContentScreen(
 ) {
     LaunchedEffect(Unit) {
         viewModel.getExperienceContent(contentId, isSearch)
+        viewModel.getReview(contentId)
     }
     val experienceContent = viewModel.experienceContent.collectAsState().value
+    val reviewList = viewModel.reviewList.collectAsState().value
     ExperienceContentScreen(
         contentId = contentId,
         experienceContent = experienceContent,
         toggleFavorite = viewModel::toggleFavorite,
         updatePrevScreenListFavorite = updatePrevScreenListFavorite,
+        reviewList = reviewList,
         moveToBackScreen = moveToBackScreen,
         moveToInfoModificationProposalScreen = moveToInfoModificationProposalScreen,
         moveToSignInScreen = moveToSignInScreen,
@@ -61,6 +72,7 @@ private fun ExperienceContentScreen(
     experienceContent: UiState<ExperienceContent>,
     toggleFavorite: (Int, (Int, Boolean) -> Unit) -> Unit,
     updatePrevScreenListFavorite: (Int, Boolean) -> Unit,
+    reviewList: UiState<ReviewListData>,
     moveToBackScreen: () -> Unit,
     moveToInfoModificationProposalScreen: () -> Unit,
     moveToSignInScreen: () -> Unit,
@@ -74,11 +86,16 @@ private fun ExperienceContentScreen(
             title = "액티비티",
             onBackButtonClicked = moveToBackScreen
         )
-        when (experienceContent) {
-            is UiState.Loading -> {}
-            is UiState.Success -> {
-                Box(modifier = Modifier.fillMaxSize()) {
-                    Column(modifier = Modifier.verticalScroll(scrollState)) {
+
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .weight(1f)
+        ) {
+            Column(modifier = Modifier.verticalScroll(scrollState)) {
+                when (experienceContent) {
+                    is UiState.Loading -> {}
+                    is UiState.Success -> {
                         DetailScreenTopBannerImage(imageUri = experienceContent.data.images[0].thumbnailUrl)
 
                         Spacer(Modifier.height(24.dp))
@@ -89,7 +106,12 @@ private fun ExperienceContentScreen(
                                 tag = experienceContent.data.addressTag,
                                 title = experienceContent.data.title,
                                 content = experienceContent.data.content,
-                                onFavoriteButtonClicked = { toggleFavorite(experienceContent.data.id, updatePrevScreenListFavorite) },
+                                onFavoriteButtonClicked = {
+                                    toggleFavorite(
+                                        experienceContent.data.id,
+                                        updatePrevScreenListFavorite
+                                    )
+                                },
                                 onShareButtonClicked = {},
                                 moveToSignInScreen = moveToSignInScreen
                             )
@@ -143,16 +165,50 @@ private fun ExperienceContentScreen(
                             moveToInfoModificationProposalScreen()
                         }
 
-                        Spacer(Modifier.height(80.dp))
-                    }
+                        Spacer(Modifier.height(40.dp))
 
-                    MoveToTopButton {
-                        coroutineScope.launch { scrollState.animateScrollTo(0) }
                     }
+                    is UiState.Failure -> {}
+                }
+        
+                        
+                when (reviewList) {
+                    is UiState.Loading -> {}
+                    is UiState.Success -> {
+                        Column(
+                            modifier = Modifier.padding(start = 16.dp, end = 16.dp)
+                        ) {
+                            Row {
+                                TotalReviewCountText(count = reviewList.data.totalElements)
+
+                                Spacer(Modifier.weight(1f))
+
+                                TotalRatingStar(rating = reviewList.data.totalAvgRating)
+                            }
+
+                            Spacer(Modifier.height(24.dp))
+
+                            reviewList.data.data.forEach {
+                                ReviewCard(data = it)
+
+                                Spacer(Modifier.height(16.dp))
+                            }
+                        }
+                    }
+                    is UiState.Failure -> {}
                 }
             }
-            is UiState.Failure -> {}
+
+            MoveToTopButton {
+                coroutineScope.launch { scrollState.animateScrollTo(0) }
+            }
         }
+
+        ReviewBottomBar(
+            isFavorite = false,
+            toggleFavorite = {},
+            moveToReviewWritingScreen = {}
+        )
     }
 }
 
