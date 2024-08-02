@@ -1,5 +1,7 @@
 package com.jeju.nanaland.domain.repository
 
+import androidx.paging.PagingSource
+import com.jeju.nanaland.domain.entity.review.MemberReviewDetail
 import com.jeju.nanaland.domain.entity.review.MyReviewData
 import com.jeju.nanaland.domain.entity.review.ReviewDataByUser
 import com.jeju.nanaland.domain.entity.review.ReviewFavorite
@@ -40,15 +42,15 @@ interface ReviewRepository {
         data: GetReviewThumbnailListByUserRequest
     ): NetworkResult<ReviewThumbnailData>
 
-    // 회원 별 리뷰 리스트 조회
-    suspend fun getReviewByUser(
-        data: GetReviewByUserRequest
-    ): NetworkResult<ReviewDataByUser>
-
     // 리뷰 리스트 조회
     suspend fun getReviewListByPost(
         data: GetReviewListByPostRequest
     ): NetworkResult<ReviewListData>
+
+    // 회원별 리뷰 리스트 조회
+    fun getReviewListByUser(
+        id: Int?
+    ): PagingSource<Int, MemberReviewDetail>
 
     // 리뷰 생성
     suspend fun createReview(

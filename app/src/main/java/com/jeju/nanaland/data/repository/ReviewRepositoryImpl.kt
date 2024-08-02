@@ -99,6 +99,20 @@ class ReviewRepositoryImpl(
         }
     }
 
+    // 회원별 리뷰 리스트 조회
+    override fun getReviewListByUser(
+        id: Int?,
+    ): PagingSource<Int, MemberReviewDetail> {
+        return handleResultPaging { page, size ->
+            Thread.sleep(1000)
+            api.getReviewListByUser(
+                id = id,
+                page = page,
+                size = size,
+            )
+        }
+    }
+
     // 리뷰 생성
     override suspend fun createReview(
         id: Int,
