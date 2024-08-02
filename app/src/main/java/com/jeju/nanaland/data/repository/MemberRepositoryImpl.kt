@@ -22,8 +22,8 @@ class MemberRepositoryImpl(
     private val memberApi: MemberApi
 ) : MemberRepository, NetworkResultHandler {
 
-    override suspend fun getUserProfile(): NetworkResult<UserProfile> {
-        return handleResult { memberApi.getUserProfile() }
+    override suspend fun getUserProfile(id: Int?): NetworkResult<UserProfile> {
+        return handleResult { memberApi.getUserProfile(id) }
     }
 
     // 유저 타입에 따른 추천 게시물 2개 반환

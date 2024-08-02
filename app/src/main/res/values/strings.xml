@@ -70,6 +70,7 @@
     <string name="common_알림">알림</string>
     <string name="common_후기" translatable="false">후기</string> <!--  TODO  -->
     <string name="common_공지사항" translatable="false">공지사항</string> <!--  TODO  -->
+    <string name="common_수정" translatable="false">수정</string> <!--  TODO  -->
 
     <!--로그인 화면-->
     <string name="sign_in_screen_로그인_없이_둘러보기">로그인 없이 둘러보기</string>
@@ -320,6 +321,9 @@
     <!--  TODO  -->
     <string name="mypage_screen_모두보기" translatable="false">모두보기</string>
     <string name="mypage_screen_리뷰작성하기" translatable="false">리뷰 작성하기</string>
+    <string name="mypage_screen_desc_default" translatable="false">안녕하세요! 반가워요🖐️\n함께 제주 여행을 즐겨봐요 :D</string>
+    <string name="mypage_screen_desc_hint" translatable="false">나를 한 줄로 표현해보세요!</string>
+
 
     <!--프로필 수정 화면-->
     <string name="profile_update_screen_프로필_수정">프로필 수정</string>

@@ -1,6 +1,7 @@
 package com.jeju.nanaland.domain.entity.member
 
 import com.google.gson.annotations.SerializedName
+import com.jeju.nanaland.domain.entity.common.ImageUrl
 
 data class UserProfile(
     @SerializedName("consentItems")
@@ -9,8 +10,8 @@ data class UserProfile(
     val email: String,
     @SerializedName("provider")
     val provider: String,
-    @SerializedName("profileImageUrl")
-    val profileImageUrl: String,
+    @SerializedName("profileImage")
+    val profileImage: ImageUrl,
     @SerializedName("nickname")
     val nickname: String,
     @SerializedName("description")

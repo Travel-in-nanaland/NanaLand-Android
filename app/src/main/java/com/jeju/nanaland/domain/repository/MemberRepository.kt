@@ -13,7 +13,7 @@ import java.io.File
 interface MemberRepository {
 
     // 유저 프로필 조회
-    suspend fun getUserProfile(): NetworkResult<UserProfile>
+    suspend fun getUserProfile(id: Int? = null): NetworkResult<UserProfile>
 
     // 유저 타입에 따른 추천 게시물 2개 반환
     suspend fun getRecommendedPost(): NetworkResult<List<RecommendedPostData>>

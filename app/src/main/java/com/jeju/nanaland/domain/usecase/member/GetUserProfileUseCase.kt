@@ -6,8 +6,8 @@ import kotlinx.coroutines.flow.flow
 class GetUserProfileUseCase(
     private val repository: MemberRepository
 ) {
-    operator fun invoke() = flow {
-        val response = repository.getUserProfile()
+    operator fun invoke(id: Int? = null) = flow {
+        val response = repository.getUserProfile(id)
         emit(response)
     }
 }
