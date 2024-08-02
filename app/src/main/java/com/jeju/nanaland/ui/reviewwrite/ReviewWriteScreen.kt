@@ -37,6 +37,7 @@ import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -81,8 +82,14 @@ fun ReviewWriteScreen(
     navController: NavController,
     id: Int,
     category: ReviewCategoryType,
+    image: String,
+    title: String,
+    address: String,
     viewModel: ReviewWriteViewModel = hiltViewModel()
 ) {
+    LaunchedEffect(image, title, address) {
+        viewModel.setUI(image, title, address)
+    }
     val context = LocalContext.current
     val uiState = viewModel.uiState.collectAsStateWithLifecycle()
     val callState = viewModel.callState.collectAsStateWithLifecycle()

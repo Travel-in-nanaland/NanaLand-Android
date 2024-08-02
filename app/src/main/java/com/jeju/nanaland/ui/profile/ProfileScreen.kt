@@ -45,6 +45,7 @@ fun ProfileScreen(
     moveToSignInScreen: () -> Unit,
     moveToTypeTestScreen: () -> Unit,
     moveToTypeTestResultScreen: () -> Unit,
+    moveToReviewWriteScreen: () -> Unit,
     moveToProfileReviewListScreen: (Int?) -> Unit,
     moveToProfileNoticeListScreen: (Int?) -> Unit,
 ) {
@@ -55,6 +56,7 @@ fun ProfileScreen(
         moveToSignInScreen = moveToSignInScreen,
         moveToTypeTestScreen = moveToTypeTestScreen,
         moveToTypeTestResultScreen = moveToTypeTestResultScreen,
+        moveToReviewWriteScreen = moveToReviewWriteScreen,
         moveToProfileReviewListScreen = moveToProfileReviewListScreen,
         moveToProfileNoticeListScreen = moveToProfileNoticeListScreen,
 
@@ -75,6 +77,7 @@ fun ProfileScreen(
         moveToProfileReviewListScreen = moveToProfileReviewListScreen,
 
         moveToSettingsScreen = {},
+        moveToReviewWriteScreen = {},
         moveToProfileModificationScreen = {_,_,_ -> },
         moveToSignInScreen = {},
         moveToTypeTestScreen = {},
@@ -91,6 +94,7 @@ private fun ProfileScreen(
     moveToSignInScreen: () -> Unit,
     moveToTypeTestScreen: () -> Unit,
     moveToTypeTestResultScreen: () -> Unit,
+    moveToReviewWriteScreen: () -> Unit,
     moveToProfileReviewListScreen: (Int?) -> Unit,
     moveToProfileNoticeListScreen: (Int?) -> Unit,
     viewModel: ProfileViewModel = hiltViewModel()
@@ -132,8 +136,7 @@ private fun ProfileScreen(
         }
         when (val up = userProfile.value) {
             is UiState.Loading -> {}
-            is UiState.Success -> {
-                Spacer(Modifier.height(24.dp))
+            is UiState.Success -> {                Spacer(Modifier.height(24.dp))
 
                 ProfileScreenProfileSection(
                     profile = up.data,
@@ -155,7 +158,7 @@ private fun ProfileScreen(
                 ProfileScreenListSection(
                     reviews = reviews.itemSnapshotList.items.take(12),
                     notices = notices?.itemSnapshotList?.items?.take(12),
-                    moveToReviewWriteScreen = { /*TODO*/ },
+                    moveToReviewWriteScreen = moveToReviewWriteScreen,
                     moveToReviewScreen = moveToProfileReviewListScreen,
                     moveToNoticeScreen = moveToProfileNoticeListScreen
                 )

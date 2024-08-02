@@ -67,6 +67,7 @@ fun MainScreen(
     moveToSignInScreen: () -> Unit,
     moveToTypeTestScreen: () -> Unit,
     moveToTypeTestResultScreen: () -> Unit,
+    moveToReviewWriteScreen: () -> Unit,
     moveToProfileNoticeListScreen: (Int?) -> Unit,
     moveToProfileReviewListScreen: (Int?) -> Unit,
     viewModel: MainViewModel = hiltViewModel(),
@@ -126,6 +127,7 @@ fun MainScreen(
         moveToSignInScreen = moveToSignInScreen,
         moveToTypeTestScreen = moveToTypeTestScreen,
         moveToTypeTestResultScreen = moveToTypeTestResultScreen,
+        moveToReviewWriteScreen = moveToReviewWriteScreen,
         moveToProfileNoticeListScreen = moveToProfileNoticeListScreen,
         moveToProfileReviewListScreen = moveToProfileReviewListScreen,
         isContent = true
@@ -153,6 +155,7 @@ private fun MainScreen(
     moveToSignInScreen: () -> Unit,
     moveToTypeTestScreen: () -> Unit,
     moveToTypeTestResultScreen: () -> Unit,
+    moveToReviewWriteScreen: () -> Unit,
     moveToProfileNoticeListScreen: (Int?) -> Unit,
     moveToProfileReviewListScreen: (Int?) -> Unit,
     isContent: Boolean
@@ -209,6 +212,7 @@ private fun MainScreen(
                             moveToSignInScreen = moveToSignInScreen,
                             moveToTypeTestScreen = moveToTypeTestScreen,
                             moveToTypeTestResultScreen = moveToTypeTestResultScreen,
+                            moveToReviewWriteScreen = moveToReviewWriteScreen,
                             moveToProfileNoticeListScreen = moveToProfileNoticeListScreen,
                             moveToProfileReviewListScreen = moveToProfileReviewListScreen,
                         )
