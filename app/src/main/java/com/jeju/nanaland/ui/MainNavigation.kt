@@ -32,6 +32,7 @@ import com.jeju.nanaland.ui.navigation.policySettingScreen
 import com.jeju.nanaland.ui.navigation.privacyPolicyDetailsScreen
 import com.jeju.nanaland.ui.navigation.profileNoticeScreenRoute
 import com.jeju.nanaland.ui.navigation.profileReviewScreenRoute
+import com.jeju.nanaland.ui.navigation.profileScreenRoute
 import com.jeju.nanaland.ui.navigation.profileUpdateScreen
 import com.jeju.nanaland.ui.navigation.recommendedSpotScreen
 import com.jeju.nanaland.ui.navigation.reviewWriteRoute
@@ -171,6 +172,9 @@ fun MainNavigation(
 
         // 후기 작성 화면
         reviewWriteRoute(navController)
+
+        // 타인 프로필 화면
+        profileScreenRoute(navController)
 
         // 프로필 공지사항 리스트 화면
         profileNoticeScreenRoute(navController)

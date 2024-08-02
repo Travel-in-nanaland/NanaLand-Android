@@ -34,6 +34,8 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.jeju.nanaland.R
+import com.jeju.nanaland.domain.entity.notice.NoticeSummery
+import com.jeju.nanaland.domain.entity.review.MemberReviewDetail
 import com.jeju.nanaland.ui.profile.component.parts.ProfileNoticeRow
 import com.jeju.nanaland.ui.profile.component.parts.ProfileReviewRow
 import com.jeju.nanaland.ui.profile.component.parts.ProfileShowAll
@@ -44,26 +46,11 @@ import com.jeju.nanaland.ui.theme.getColor
 import com.jeju.nanaland.util.resource.getString
 import com.jeju.nanaland.util.ui.clickableNoEffect
 import com.jeju.nanaland.util.ui.drawColoredShadow
-import java.util.Date
-
-data class TempReviewData(
-    val id:Int,
-    val title: String,
-    val img: String?,
-    val date: Date,
-    val like: Int,
-)
-data class TempNoticeData(
-    val id:Int,
-    val category: Int,
-    val title: String,
-    val date: Date,
-)
 
 @Composable
 fun ProfileScreenListSection(
-    reviews: List<TempReviewData>,
-    notices: List<TempNoticeData>?,
+    reviews: List<MemberReviewDetail>,
+    notices: List<NoticeSummery>?,
     moveToReviewWriteScreen: () -> Unit,
     moveToReviewScreen: (Int?) -> Unit,
     moveToNoticeScreen: (Int?) -> Unit,
@@ -110,7 +97,7 @@ fun ProfileScreenListSection(
             }
         else if(notices != null)
             Notices(notices) {
-                moveToReviewScreen(it)
+                moveToNoticeScreen(it)
             }
     }
 }
@@ -242,14 +229,19 @@ private fun MoreInfoParts(
 
 @Composable
 private fun Reviews(
-    data: List<TempReviewData>,
+    reviews: List<MemberReviewDetail>,
     onClick: (Int) -> Unit
 ) {
     val verticalItemSpacing = 16
-
+    val data = reviews.take(calculateMaximumItemCount(
+        reviews.map {
+            if(it.images.isNotEmpty()) 2
+            else 1
+        }
+    ))
     val height = calculateFinalHeight(
         data.map {
-            if(it.img != null) 210
+            if(it.images.isNotEmpty()) 210
             else 105
         },
         verticalItemSpacing
@@ -271,7 +263,16 @@ private fun Reviews(
         },
     )
 }
-
+private fun calculateMaximumItemCount(cnts: List<Int>): Int{
+    val MAX = 12
+    var sum = 0
+    cnts.forEachIndexed { index, c ->
+        if(MAX < sum + c)
+            return index
+        sum += c
+    }
+    return MAX
+}
 private fun calculateFinalHeight(heights: List<Int>, verticalItemSpacing: Int): Int {
     val result = IntArray(2) { 0 }
 
@@ -287,7 +288,7 @@ private fun calculateFinalHeight(heights: List<Int>, verticalItemSpacing: Int): 
 
 @Composable
 private fun Notices(
-    data: List<TempNoticeData>,
+    data: List<NoticeSummery>,
     onClick: (Int) -> Unit
 ) {
     Column(

@@ -92,7 +92,6 @@ class ReviewRepositoryImpl(
         id: Int?,
     ): PagingSource<Int, MemberReviewDetail> {
         return handleResultPaging { page, size ->
-            Thread.sleep(1000)
             api.getReviewListByUser(
                 id = id,
                 page = page,

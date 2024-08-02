@@ -20,18 +20,17 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.jeju.nanaland.R
-import com.jeju.nanaland.ui.profile.component.TempNoticeData
+import com.jeju.nanaland.domain.entity.notice.NoticeSummery
 import com.jeju.nanaland.ui.theme.body02Bold
 import com.jeju.nanaland.ui.theme.caption01SemiBold
 import com.jeju.nanaland.ui.theme.caption02
 import com.jeju.nanaland.ui.theme.getColor
-import com.jeju.nanaland.util.string.getDotYearMonthDate
 import com.jeju.nanaland.util.ui.clickableNoEffect
 import com.jeju.nanaland.util.ui.drawColoredShadow
 
 @Composable
 fun ProfileNoticeRow(
-    data: TempNoticeData,
+    data: NoticeSummery,
     onClick: (Int) -> Unit
 ) {
     Row(
@@ -59,8 +58,8 @@ fun ProfileNoticeRow(
                 .background(getColor().main)
                 .padding(4.dp),
             painter = painterResource(
-                when(data.category){
-                    1 -> R.drawable.ic_alarm_notice
+                when(data.noticeCategory){
+                    "공지 사항" -> R.drawable.ic_alarm_notice
                     else -> R.drawable.ic_alarm_fix
                 }
             ),
@@ -72,11 +71,7 @@ fun ProfileNoticeRow(
             modifier = Modifier.weight(1f)
         ) {
             Text(
-                text =
-                when(data.category){
-                    1 -> "공지사항"
-                    else -> "개편사항"
-                },
+                text = data.noticeCategory,
                 color = getColor().main,
                 style = caption01SemiBold
             )
@@ -87,7 +82,7 @@ fun ProfileNoticeRow(
             )
             Spacer(modifier = Modifier.width(4.dp))
             Text(
-                text = getDotYearMonthDate(data.date),
+                text = data.createdAt,
                 color = getColor().gray01,
                 style = caption02
             )

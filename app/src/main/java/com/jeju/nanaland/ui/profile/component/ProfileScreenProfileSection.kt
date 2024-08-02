@@ -11,7 +11,6 @@ import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
@@ -52,32 +51,17 @@ fun ProfileScreenProfileSection(
     moveToTypeTestScreen: () -> Unit,
     moveToTypeTestResultScreen: () -> Unit
 ) {
-    Row ( // TODO 배경색
+    Row (
         modifier = Modifier
             .fillMaxWidth()
             .padding(horizontal = 16.dp)
     ) {
-        Box(
-            Modifier
+        GlideImage (
+            modifier = Modifier
                 .size(70.dp)
-                .clip(CircleShape)
-                .background(getColor().main)
-        ) {
-            if(profile.provider == "GUEST")
-                Icon(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .padding(10.dp),
-                    painter = painterResource(R.drawable.ic_logo),
-                    contentDescription = null,
-                    tint = getColor().white
-                )
-            else
-                GlideImage (
-                    modifier = Modifier.fillMaxSize(),
-                    imageModel = { profile.profileImageUrl }
-                )
-        }
+                .clip(CircleShape),
+            imageModel = { profile.profileImage.originUrl }
+        )
 
         Spacer(modifier = Modifier.width(20.dp))
 
@@ -117,8 +101,7 @@ fun ProfileScreenProfileSection(
                 modifier = Modifier.horizontalScroll(rememberScrollState()),
                 horizontalArrangement = Arrangement.spacedBy(8.dp)
             ) {
-                //profile.hashTags?
-                listOf("럭셔리", "관광장소", "감성").forEach {
+                profile.hashTags.forEach {
                     Text(
                         text = "#$it",
                         color = getColor().main,
@@ -156,6 +139,7 @@ fun ProfileScreenProfileSection(
     }
     if(profile.provider != "GUEST")
         DescriptionPart(
+            isMine = isMine,
             text = profile.description ?: ""
         )
 }
@@ -206,6 +190,7 @@ private fun NicknamePart(
 
 @Composable
 private fun DescriptionPart(
+    isMine: Boolean,
     text: String
 ) {
     Box(
@@ -218,9 +203,16 @@ private fun DescriptionPart(
             .padding(horizontal = 12.dp, vertical = 8.dp)
     ) {
         Text(
-            text = text,
-            color = getColor().black,
+            text = text.ifBlank {
+                if(isMine) getString(R.string.mypage_screen_desc_hint)
+                else getString(R.string.mypage_screen_desc_default)
+            },
+            color = if(text.isBlank())
+                getColor().gray02
+            else
+                getColor().black,
             style = body02,
+            minLines = 3
         )
     }
 }

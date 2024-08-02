@@ -21,11 +21,10 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import com.jeju.nanaland.ui.profile.component.TempReviewData
+import com.jeju.nanaland.domain.entity.review.MemberReviewDetail
 import com.jeju.nanaland.ui.theme.body02Bold
 import com.jeju.nanaland.ui.theme.caption01
 import com.jeju.nanaland.ui.theme.getColor
-import com.jeju.nanaland.util.string.getDotYearMonthDate
 import com.jeju.nanaland.util.ui.clickableNoEffect
 import com.jeju.nanaland.util.ui.conditional
 import com.jeju.nanaland.util.ui.drawColoredShadow
@@ -33,10 +32,10 @@ import com.skydoves.landscapist.glide.GlideImage
 
 @Composable
 fun ProfileReviewRow(
-    data: TempReviewData,
+    data: MemberReviewDetail,
     onClick: (Int) -> Unit
 ) {
-    val haveImg = data.img != null
+    val haveImg = data.images.isNotEmpty()
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -61,7 +60,7 @@ fun ProfileReviewRow(
                     .fillMaxWidth()
                     .weight(1f)
                     .clip(RoundedCornerShape(8.dp)),
-                imageModel = { data.img }
+                imageModel = { data.images.firstOrNull()?.thumbnailUrl }
             )
 
         Text(
@@ -69,7 +68,7 @@ fun ProfileReviewRow(
                 .padding(horizontal = 8.dp)
                 .padding(top = 8.dp)
                 .conditional(!haveImg) { weight(1f) },
-            text = data.title,
+            text = data.placeName,
             color = getColor().black,
             style = body02Bold,
             overflow = TextOverflow.Ellipsis
@@ -79,7 +78,7 @@ fun ProfileReviewRow(
             verticalAlignment = Alignment.CenterVertically
         ) {
             Text(
-                text = getDotYearMonthDate(data.date),
+                text = data.createdAt.toString(),
                 color = getColor().black,
                 style = caption01,
             )
@@ -92,7 +91,7 @@ fun ProfileReviewRow(
             )
             Spacer(modifier = Modifier.width(4.dp))
             Text(
-                text = data.like.toString(),
+                text = data.heartCount.toString(),
                 color = getColor().black,
                 style = caption01,
             )

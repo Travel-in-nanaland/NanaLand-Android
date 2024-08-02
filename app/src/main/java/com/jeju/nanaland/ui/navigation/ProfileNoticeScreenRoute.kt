@@ -12,6 +12,11 @@ fun NavGraphBuilder.profileNoticeScreenRoute(
     navController: NavController,
 ) = composable(route = ROUTE_PROFILE_NOTICE) {
     val parentEntry = remember(it) { navController.previousBackStackEntry!! }
-    val id = it.arguments?.getInt("id")
-    ProfileNoticeListScreen(if(id == -1) null else id, hiltViewModel(parentEntry))
+    val id = it.arguments?.getInt("id", -1) ?: -1
+
+    ProfileNoticeListScreen(
+        moveToBackScreen = { navController.popBackStack() },
+        initialScrollToItemId = id,
+        viewModel = hiltViewModel(parentEntry)
+    )
 }

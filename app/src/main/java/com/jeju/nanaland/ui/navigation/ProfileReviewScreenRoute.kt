@@ -12,6 +12,11 @@ fun NavGraphBuilder.profileReviewScreenRoute(
     navController: NavController
 ) = composable(route = ROUTE_PROFILE_REVIEW) {
     val parentEntry = remember(it) { navController.previousBackStackEntry!! }
-    val id = it.arguments?.getInt("id")
-    ProfileReviewListScreen(if(id == -1) null else id, hiltViewModel(parentEntry))
+    val id = it.arguments?.getInt("id", -1) ?: -1
+
+    ProfileReviewListScreen(
+        moveToBackScreen = { navController.popBackStack() },
+        initialScrollToItemId = id,
+        viewModel = hiltViewModel(parentEntry)
+    )
 }

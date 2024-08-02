@@ -1,12 +1,20 @@
 package com.jeju.nanaland.ui.profile
 
+import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.paging.PagingData
+import androidx.paging.cachedIn
 import com.jeju.nanaland.domain.entity.member.UserProfile
+import com.jeju.nanaland.domain.entity.notice.NoticeSummery
+import com.jeju.nanaland.domain.request.review.DeleteReviewRequest
+import com.jeju.nanaland.domain.usecase.board.GetNoticeListUseCase
+import com.jeju.nanaland.domain.usecase.board.GetNoticeUseCase
 import com.jeju.nanaland.domain.usecase.member.GetUserProfileUseCase
+import com.jeju.nanaland.domain.usecase.review.DeleteReviewUseCase
+import com.jeju.nanaland.domain.usecase.review.GetReviewListByUserUseCase
+import com.jeju.nanaland.domain.usecase.review.ToggleReviewFavoriteUseCase
 import com.jeju.nanaland.globalvalue.userdata.UserData
-import com.jeju.nanaland.ui.profile.component.TempNoticeData
-import com.jeju.nanaland.ui.profile.component.TempReviewData
 import com.jeju.nanaland.util.log.LogUtil
 import com.jeju.nanaland.util.network.onError
 import com.jeju.nanaland.util.network.onException
@@ -16,45 +24,71 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.update
-import java.text.SimpleDateFormat
-import java.util.Date
 import javax.inject.Inject
-import kotlin.random.Random
 
 @HiltViewModel
 class ProfileViewModel @Inject constructor(
-    private val getUserProfileUseCase: GetUserProfileUseCase
+    private val getUserProfileUseCase: GetUserProfileUseCase,
+    private val getReviewListByUserUseCase: GetReviewListByUserUseCase,
+    private val getNoticeUseCase: GetNoticeUseCase,
+    private val getNoticeListUseCase: GetNoticeListUseCase,
+    private val toggleReviewFavoriteUseCase: ToggleReviewFavoriteUseCase,
+    private val deleteReviewUseCase: DeleteReviewUseCase,
+    private val savedStateHandle: SavedStateHandle
 ) : ViewModel() {
+    val userId: Int?
+        get() = savedStateHandle["userId"]
 
     private val _userProfile = MutableStateFlow<UiState<UserProfile>>(UiState.Loading)
     val userProfile = _userProfile.asStateFlow()
 
-    private val _reviews = MutableStateFlow<List<TempReviewData>>(emptyList())
-    val reviews = _reviews.asStateFlow()
-    private val _notices = MutableStateFlow<List<TempNoticeData>>(emptyList())
-    val notices = _notices.asStateFlow()
+    val reviews = getReviewListByUserUseCase(userId)
+        .flow
+        .cachedIn(viewModelScope)
 
-    init {
-        getUserProfile()
-        fakeApiCall()
+    val notices = run {
+        if(userId != null) flow { PagingData.empty<NoticeSummery>() }
+        else getNoticeListUseCase()
+                .flow
+                .cachedIn(viewModelScope)
     }
 
-    fun getUserProfile() {
-        getUserProfileUseCase()
+    init {
+        getUserProfile(userId)
+    }
+
+    fun setLike(id: Int){
+        toggleReviewFavoriteUseCase(id)
+            .onEach {
+                it.onError { code, message ->  }
+            }
+    }
+    fun setRemove(id: Int){
+        deleteReviewUseCase(DeleteReviewRequest(id))
+            .onEach {
+                it
+                    .onSuccess { code, message, data ->  }
+                    .onError { code, message ->  }
+            }
+    }
+
+    private fun getUserProfile(userId: Int?) {
+        getUserProfileUseCase(userId)
             .onEach { networkResult ->
-                networkResult.onSuccess { code, data ->
+                networkResult.onSuccess { _, _, data ->
                     data?.let {
                         _userProfile.update {
-                            UiState.Success(data.data)
+                            UiState.Success(data)
                         }
-                        UserData.provider = data.data.provider ?: "GUEST"
+                        UserData.provider = data.provider ?: "GUEST"
                         if (UserData.provider == "GUEST") {
                             UserData.nickname = "GUEST"
                         } else {
-                            UserData.nickname = data.data.nickname ?: "GUEST"
+                            UserData.nickname = data.nickname ?: "GUEST"
                         }
                     }
                 }.onError { code, message ->
@@ -67,27 +101,4 @@ class ProfileViewModel @Inject constructor(
             .launchIn(viewModelScope)
     }
 
-    private fun fakeApiCall() {
-        _reviews.update {
-            List(10) {
-                TempReviewData(
-                    it,
-                    "우진이네 해장국",
-                    if(Random.nextBoolean()) "https://picsum.photos/100" else null,
-                    Date(),
-                    it
-                )
-            }
-        }
-        _notices.update {
-            List(8) {
-                TempNoticeData(
-                    it,
-                    Random.nextInt(1,3),
-                    "${it + 1}월 1주차 공지 or 개편",
-                    SimpleDateFormat("yyyy.MM.dd").parse("2024.0${it + 1}.01")!!
-                )
-            }
-        }
-    }
 }
