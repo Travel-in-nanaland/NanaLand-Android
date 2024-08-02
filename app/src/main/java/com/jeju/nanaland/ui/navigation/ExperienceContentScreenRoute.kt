@@ -65,7 +65,7 @@ fun NavGraphBuilder.experienceContentScreen(navController: NavController) = comp
         contentId = it.arguments?.getInt("contentId"),
         isSearch = isSearch,
         updatePrevScreenListFavorite = updatePrevScreenListFavorite,
-        moveToBackScreen = {},
+        moveToBackScreen = { navController.popBackStack() },
         moveToInfoModificationProposalScreen = {
             val bundle = bundleOf(
                 "postId" to it.arguments?.getInt("contentId"),

@@ -5,8 +5,10 @@ import androidx.lifecycle.viewModelScope
 import com.jeju.nanaland.domain.entity.experience.ExperienceContent
 import com.jeju.nanaland.domain.request.experience.GetExperienceContentRequest
 import com.jeju.nanaland.domain.request.favorite.ToggleFavoriteRequest
+import com.jeju.nanaland.domain.request.review.GetReviewListByPostRequest
 import com.jeju.nanaland.domain.usecase.experience.GetExperienceContentUseCase
 import com.jeju.nanaland.domain.usecase.favorite.ToggleFavoriteUseCase
+import com.jeju.nanaland.domain.usecase.review.GetReviewListByPostUseCase
 import com.jeju.nanaland.util.log.LogUtil
 import com.jeju.nanaland.util.network.onError
 import com.jeju.nanaland.util.network.onException
@@ -25,7 +27,7 @@ import javax.inject.Inject
 class ExperienceContentViewModel @Inject constructor(
     private val getExperienceContentUseCase: GetExperienceContentUseCase,
     private val toggleFavoriteUseCase: ToggleFavoriteUseCase,
-//    private val getReviewListUseCase: GetReview
+    private val getReviewListUseCase: GetReviewListByPostUseCase
 ) : ViewModel() {
 
     private val _experienceContent = MutableStateFlow<UiState<ExperienceContent>>(UiState.Loading)
@@ -83,5 +85,8 @@ class ExperienceContentViewModel @Inject constructor(
             }
             .catch { LogUtil.e("flow Error", "toggleFavoriteUseCase") }
             .launchIn(viewModelScope)
+    }
+
+    fun getReview() {
     }
 }
