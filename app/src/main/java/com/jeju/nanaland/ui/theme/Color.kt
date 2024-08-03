@@ -24,6 +24,7 @@ fun customLightColorScheme(
     main90: Color = Color(0xE6583FF5),
     main50: Color = Color(0x7F583FF5),
     main10: Color = Color(0x19583FF5),
+    main5: Color = Color(0x0D583FF5),
     black: Color = Color(0xFF262627),
     black50: Color = Color(0x80262627),
     black25: Color = Color(0x3F262627),
@@ -46,6 +47,7 @@ fun customLightColorScheme(
         main90 = main90,
         main50 = main50,
         main10 = main10,
+        main5 = main5,
         black = black,
         black50 = black50,
         black25 = black25,
@@ -69,6 +71,7 @@ fun customDarkColorScheme(
     main90: Color = Color(0xE6583FF5),
     main50: Color = Color(0x7F583FF5),
     main10: Color = Color(0x19583FF5),
+    main5: Color = Color(0x0D583FF5),
     black: Color = Color(0xFF262627),
     black50: Color = Color(0x80262627),
     black25: Color = Color(0x3F262627),
@@ -91,6 +94,7 @@ fun customDarkColorScheme(
         main90 = main90,
         main50 = main50,
         main10 = main10,
+        main5 = main5,
         black = black,
         black50 = black50,
         black25 = black25,
@@ -115,6 +119,7 @@ class CustomColorScheme(
     main90: Color,
     main50: Color,
     main10: Color,
+    main5: Color,
     black: Color,
     black50: Color,
     black25: Color,
@@ -136,6 +141,7 @@ class CustomColorScheme(
     var main90 by mutableStateOf(main90, structuralEqualityPolicy())
     var main50 by mutableStateOf(main50, structuralEqualityPolicy())
     var main10 by mutableStateOf(main10, structuralEqualityPolicy())
+    var main5 by mutableStateOf(main5, structuralEqualityPolicy())
     var black by mutableStateOf(black, structuralEqualityPolicy())
     var black50 by mutableStateOf(black50, structuralEqualityPolicy())
     var black25 by mutableStateOf(black25, structuralEqualityPolicy())

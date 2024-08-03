@@ -1,9 +1,10 @@
 package com.jeju.nanaland.data.repository
 
+import androidx.paging.PagingSource
 import com.google.gson.Gson
 import com.jeju.nanaland.data.api.ReviewApi
+import com.jeju.nanaland.domain.entity.review.MemberReviewDetail
 import com.jeju.nanaland.domain.entity.review.MyReviewData
-import com.jeju.nanaland.domain.entity.review.ReviewDataByUser
 import com.jeju.nanaland.domain.entity.review.ReviewFavorite
 import com.jeju.nanaland.domain.entity.review.ReviewKeywordResult
 import com.jeju.nanaland.domain.entity.review.ReviewListData
@@ -14,7 +15,6 @@ import com.jeju.nanaland.domain.request.review.CreateReviewRequest
 import com.jeju.nanaland.domain.request.review.DeleteReviewRequest
 import com.jeju.nanaland.domain.request.review.GetMyReviewListRequest
 import com.jeju.nanaland.domain.request.review.GetReviewAutoCompleteKeywordRequest
-import com.jeju.nanaland.domain.request.review.GetReviewByUserRequest
 import com.jeju.nanaland.domain.request.review.GetReviewListByPostRequest
 import com.jeju.nanaland.domain.request.review.GetReviewThumbnailListByUserRequest
 import com.jeju.nanaland.domain.request.review.ModifyUserReviewRequest
@@ -73,18 +73,6 @@ class ReviewRepositoryImpl(
         }
     }
 
-    // 회원 별 리뷰 리스트 조회
-    override suspend fun getReviewByUser(
-        data: GetReviewByUserRequest
-    ): NetworkResult<ReviewDataByUser> {
-        return handleResult {
-            api.getReviewByUser(
-                memberId = data.memberId,
-                page = data.page,
-                size = data.size
-            )
-        }
-    }
     // 리뷰 리스트 조회
     override suspend fun getReviewListByPost(
         data: GetReviewListByPostRequest
@@ -95,6 +83,19 @@ class ReviewRepositoryImpl(
                 category = data.category,
                 page = data.page,
                 size = data.size,
+            )
+        }
+    }
+
+    // 회원별 리뷰 리스트 조회
+    override fun getReviewListByUser(
+        id: Int?,
+    ): PagingSource<Int, MemberReviewDetail> {
+        return handleResultPaging { page, size ->
+            api.getReviewListByUser(
+                id = id,
+                page = page,
+                size = size,
             )
         }
     }
@@ -115,7 +116,7 @@ class ReviewRepositoryImpl(
                 data = reqData,
                 images = images.ifEmpty { null }?.map {
                     MultipartBody.Part.createFormData(
-                        "imageList",null,it
+                        "multipartFileList",null,it
                     )
                 }
             )

@@ -67,21 +67,17 @@ class ReviewWriteViewModel @Inject constructor(
     private val _callState = MutableStateFlow<UiState<Unit>?>(null)
     val callState = _callState.asStateFlow()
 
-    init {
-        viewModelScope.launch {
-            fakeGetDataFromAPI()
-        }
-    }
 
-    private suspend fun fakeGetDataFromAPI() {
+    fun setUI(image: String, title: String, address: String) {
         viewModelState.update {
             it.copy(
-                titleImg = "https://picsum.photos/200/300" ,
-                titleTxt = "월정 투명카약" ,
-                subTitleTxt = "제주특별자치도 제주시 구좌읍 월정리 1400-33" ,
+               titleImg = image,
+               titleTxt = title,
+                subTitleTxt = address,
             )
         }
     }
+
 
     fun submit(
         id: Int,

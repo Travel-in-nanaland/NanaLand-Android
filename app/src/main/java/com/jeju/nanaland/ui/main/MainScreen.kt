@@ -42,7 +42,7 @@ import com.jeju.nanaland.ui.main.home.HomeScreen
 import com.jeju.nanaland.ui.main.home.HomeViewModel
 import com.jeju.nanaland.ui.main.home.search.SearchViewModel
 import com.jeju.nanaland.ui.main.jejustory.JejuStoryScreen
-import com.jeju.nanaland.ui.main.mypage.MyPageScreen
+import com.jeju.nanaland.ui.profile.ProfileScreen
 import com.jeju.nanaland.ui.theme.NanaLandTheme
 import com.jeju.nanaland.ui.theme.caption02
 import com.jeju.nanaland.ui.theme.getColor
@@ -66,6 +66,10 @@ fun MainScreen(
     moveToProfileModificationScreen: (String?, String?, String?) -> Unit,
     moveToSignInScreen: () -> Unit,
     moveToTypeTestScreen: () -> Unit,
+    moveToTypeTestResultScreen: () -> Unit,
+    moveToReviewWriteScreen: () -> Unit,
+    moveToProfileNoticeListScreen: (Int?) -> Unit,
+    moveToProfileReviewListScreen: (Int?) -> Unit,
     viewModel: MainViewModel = hiltViewModel(),
     homeViewModel: HomeViewModel = hiltViewModel(),
     searchViewModel: SearchViewModel = hiltViewModel(),
@@ -122,6 +126,10 @@ fun MainScreen(
         moveToProfileModificationScreen = moveToProfileModificationScreen,
         moveToSignInScreen = moveToSignInScreen,
         moveToTypeTestScreen = moveToTypeTestScreen,
+        moveToTypeTestResultScreen = moveToTypeTestResultScreen,
+        moveToReviewWriteScreen = moveToReviewWriteScreen,
+        moveToProfileNoticeListScreen = moveToProfileNoticeListScreen,
+        moveToProfileReviewListScreen = moveToProfileReviewListScreen,
         isContent = true
     )
 }
@@ -146,6 +154,10 @@ private fun MainScreen(
     moveToProfileModificationScreen: (String?, String?, String?) -> Unit,
     moveToSignInScreen: () -> Unit,
     moveToTypeTestScreen: () -> Unit,
+    moveToTypeTestResultScreen: () -> Unit,
+    moveToReviewWriteScreen: () -> Unit,
+    moveToProfileNoticeListScreen: (Int?) -> Unit,
+    moveToProfileReviewListScreen: (Int?) -> Unit,
     isContent: Boolean
 ) {
     CustomSurface { isImeKeyboardShowing ->
@@ -194,13 +206,15 @@ private fun MainScreen(
                         JejuStoryScreen()
                     }
                     MainScreenViewType.MyPage -> {
-                        MyPageScreen(
-                            prevViewType = prevViewType,
-                            updateMainScreenViewType = updateMainScreenViewType,
+                        ProfileScreen(
                             moveToSettingsScreen = moveToSettingsScreen,
                             moveToProfileModificationScreen = moveToProfileModificationScreen,
                             moveToSignInScreen = moveToSignInScreen,
                             moveToTypeTestScreen = moveToTypeTestScreen,
+                            moveToTypeTestResultScreen = moveToTypeTestResultScreen,
+                            moveToReviewWriteScreen = moveToReviewWriteScreen,
+                            moveToProfileNoticeListScreen = moveToProfileNoticeListScreen,
+                            moveToProfileReviewListScreen = moveToProfileReviewListScreen,
                         )
                     }
                 }

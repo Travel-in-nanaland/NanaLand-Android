@@ -2,10 +2,12 @@ package com.jeju.nanaland.data.api
 
 import com.jeju.nanaland.domain.entity.review.MyReviewData
 import com.jeju.nanaland.domain.entity.review.ReviewDataByUser
+import com.jeju.nanaland.domain.entity.review.MemberReviewDetail
 import com.jeju.nanaland.domain.entity.review.ReviewFavorite
 import com.jeju.nanaland.domain.entity.review.ReviewKeywordResult
 import com.jeju.nanaland.domain.entity.review.ReviewListData
 import com.jeju.nanaland.domain.entity.review.ReviewThumbnailData
+import com.jeju.nanaland.domain.response.ResponsePagingWrapper
 import com.jeju.nanaland.domain.response.ResponseWrapper
 import com.jeju.nanaland.globalvalue.type.ReviewCategoryType
 import okhttp3.MultipartBody
@@ -46,14 +48,6 @@ interface ReviewApi {
         @Query("memberId") memberId: Int,
     ): Response<ResponseWrapper<ReviewThumbnailData>>
 
-    // 회원 별 리뷰 리스트 조회
-    @GET("review/list")
-    suspend fun getReviewByUser(
-        @Query("memberId") memberId: Int,
-        @Query("page") page: Int,
-        @Query("size") size: Int,
-    ): Response<ResponseWrapper<ReviewDataByUser>>
-
     // 게시물 별 리뷰 리스트 조회
     @GET("review/list/{id}")
     suspend fun getReviewListByPost(
@@ -62,6 +56,14 @@ interface ReviewApi {
         @Query("page") page: Int,
         @Query("size") size: Int,
     ): Response<ResponseWrapper<ReviewListData>>
+
+    // 회원별 리뷰 리스트 조회
+    @GET("review/list")
+    suspend fun getReviewListByUser(
+        @Query("memberId") id: Int?,
+        @Query("page") page: Int,
+        @Query("size") size: Int,
+    ): Response<ResponseWrapper<ResponsePagingWrapper<MemberReviewDetail>>>
 
     // 리뷰 생성
     @Multipart

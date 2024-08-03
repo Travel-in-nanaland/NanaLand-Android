@@ -30,6 +30,9 @@ import com.jeju.nanaland.ui.navigation.permissionCheckingRoute
 import com.jeju.nanaland.ui.navigation.policyAgreeScreen
 import com.jeju.nanaland.ui.navigation.policySettingScreen
 import com.jeju.nanaland.ui.navigation.privacyPolicyDetailsScreen
+import com.jeju.nanaland.ui.navigation.profileNoticeScreenRoute
+import com.jeju.nanaland.ui.navigation.profileReviewScreenRoute
+import com.jeju.nanaland.ui.navigation.profileScreenRoute
 import com.jeju.nanaland.ui.navigation.profileUpdateScreen
 import com.jeju.nanaland.ui.navigation.recommendedSpotScreen
 import com.jeju.nanaland.ui.navigation.reviewWriteRoute
@@ -55,6 +58,7 @@ fun MainNavigation(
 //        startDestination = ROUTE_SIGN_UP,
         startDestination = ROUTE_SPLASH
     ) {
+
         // 스플래시 화면
         splashScreen(
             deepLinkData = deepLinkData,
@@ -168,5 +172,14 @@ fun MainNavigation(
 
         // 후기 작성 화면
         reviewWriteRoute(navController)
+
+        // 타인 프로필 화면
+        profileScreenRoute(navController)
+
+        // 프로필 공지사항 리스트 화면
+        profileNoticeScreenRoute(navController)
+
+        // 프로필 리뷰 리스트 화면
+        profileReviewScreenRoute(navController)
     }
 }

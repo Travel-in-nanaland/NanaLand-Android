@@ -14,6 +14,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
@@ -28,7 +29,6 @@ import com.jeju.nanaland.globalvalue.type.InputIntroductionState
 import com.jeju.nanaland.globalvalue.type.InputNicknameState
 import com.jeju.nanaland.ui.component.common.CustomSurface
 import com.jeju.nanaland.ui.component.common.CustomTopBar
-import com.jeju.nanaland.ui.component.mypage.MyPageScreenIntroductionText
 import com.jeju.nanaland.ui.component.profileupdate.ProfileUpdateScreenBottomButton
 import com.jeju.nanaland.ui.component.profileupdate.ProfileUpdateScreenIntroductionTextField
 import com.jeju.nanaland.ui.component.profileupdate.ProfileUpdateScreenNicknameText
@@ -36,6 +36,8 @@ import com.jeju.nanaland.ui.component.profileupdate.ProfileUpdateScreenProfileCo
 import com.jeju.nanaland.ui.component.profileupdate.ProfileUpdateScreenWaringDialog
 import com.jeju.nanaland.ui.component.signup.profilesetting.SignUpScreenCharacterCount
 import com.jeju.nanaland.ui.component.signup.profilesetting.SignUpScreenTextField
+import com.jeju.nanaland.ui.theme.bodyBold
+import com.jeju.nanaland.ui.theme.getColor
 import com.jeju.nanaland.util.log.LogUtil
 import com.jeju.nanaland.util.resource.getString
 import com.jeju.nanaland.util.ui.scrollableVerticalArrangement
@@ -164,7 +166,11 @@ private fun ProfileUpdateScreen(
                     Spacer(Modifier.height(80.dp))
 
                     Row {
-                        MyPageScreenIntroductionText()
+                        Text(
+                            text = getString(R.string.common_소개),
+                            color = getColor().black,
+                            style = bodyBold
+                        )
 
                         Spacer(Modifier.weight(1f))
 

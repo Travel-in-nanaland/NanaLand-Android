@@ -16,12 +16,14 @@ import retrofit2.http.Multipart
 import retrofit2.http.PATCH
 import retrofit2.http.POST
 import retrofit2.http.Part
+import retrofit2.http.Query
 
 interface MemberApi {
 
     // 유저 프로필 조회
     @GET("member/profile")
     suspend fun getUserProfile(
+        @Query("id") id: Int? = null
     ): Response<ResponseWrapper<UserProfile>>
 
     // 유저 타입에 따른 추천 게시물 2개 반환

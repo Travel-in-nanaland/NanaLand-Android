@@ -26,6 +26,9 @@ fun NavGraphBuilder.reviewWriteRoute(navController: NavController) {
                 navController = navController,
                 id = it.arguments?.getInt("id")!!,
                 category = ReviewCategoryType.valueOf(it.arguments?.getString("category")!!),
+                image = it.arguments?.getString("image") ?: "",
+                title = it.arguments?.getString("title") ?: "",
+                address = it.arguments?.getString("address") ?: "",
                 viewModel = hiltViewModel(parentEntry)
             )
         }
