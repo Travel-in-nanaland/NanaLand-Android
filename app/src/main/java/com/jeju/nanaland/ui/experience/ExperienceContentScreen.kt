@@ -4,7 +4,6 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -20,7 +19,6 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.jeju.nanaland.R
 import com.jeju.nanaland.domain.entity.experience.ExperienceContent
-import com.jeju.nanaland.domain.entity.review.ReviewData
 import com.jeju.nanaland.domain.entity.review.ReviewListData
 import com.jeju.nanaland.ui.component.common.CustomSurface
 import com.jeju.nanaland.ui.component.common.CustomTopBar
@@ -45,6 +43,7 @@ fun ExperienceContentScreen(
     moveToBackScreen: () -> Unit,
     moveToInfoModificationProposalScreen: () -> Unit,
     moveToSignInScreen: () -> Unit,
+    moveToReviewWritingScreen: (Int, String, String, String) -> Unit,
     viewModel: ExperienceContentViewModel = hiltViewModel()
 ) {
     LaunchedEffect(Unit) {
@@ -62,6 +61,15 @@ fun ExperienceContentScreen(
         moveToBackScreen = moveToBackScreen,
         moveToInfoModificationProposalScreen = moveToInfoModificationProposalScreen,
         moveToSignInScreen = moveToSignInScreen,
+        moveToReviewWritingScreen = {
+            if(experienceContent is UiState.Success)
+                moveToReviewWritingScreen(
+                    experienceContent.data.id,
+                    experienceContent.data.images.firstOrNull()?.thumbnailUrl ?: "",
+                    experienceContent.data.title,
+                    experienceContent.data.address,
+                )
+        },
         isContent = true
     )
 }
@@ -74,6 +82,7 @@ private fun ExperienceContentScreen(
     updatePrevScreenListFavorite: (Int, Boolean) -> Unit,
     reviewList: UiState<ReviewListData>,
     moveToBackScreen: () -> Unit,
+    moveToReviewWritingScreen: () -> Unit,
     moveToInfoModificationProposalScreen: () -> Unit,
     moveToSignInScreen: () -> Unit,
     isContent: Boolean
@@ -207,7 +216,7 @@ private fun ExperienceContentScreen(
         ReviewBottomBar(
             isFavorite = false,
             toggleFavorite = {},
-            moveToReviewWritingScreen = {}
+            moveToReviewWritingScreen = moveToReviewWritingScreen
         )
     }
 }

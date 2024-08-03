@@ -10,3 +10,10 @@ data class ResponseWrapper<T> (
     @SerializedName("data")
     val data: T
 )
+
+data class ResponsePagingWrapper<T> (
+    @SerializedName("totalElements")
+    val totalElements: Int,
+    @SerializedName("data")
+    val data: List<T>
+)

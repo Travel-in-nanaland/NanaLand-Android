@@ -3,8 +3,9 @@ package com.jeju.nanaland.domain.usecase.review
 import com.jeju.nanaland.domain.repository.ReviewRepository
 import com.jeju.nanaland.domain.request.review.DeleteReviewRequest
 import kotlinx.coroutines.flow.flow
+import javax.inject.Inject
 
-class DeleteReviewUseCase(
+class DeleteReviewUseCase @Inject constructor(
     private val repository: ReviewRepository
 ) {
     operator fun invoke(
