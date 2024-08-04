@@ -1,8 +1,7 @@
 package com.jeju.nanaland.data.api
 
-import com.jeju.nanaland.domain.entity.review.MyReviewData
-import com.jeju.nanaland.domain.entity.review.ReviewDataByUser
 import com.jeju.nanaland.domain.entity.review.MemberReviewDetail
+import com.jeju.nanaland.domain.entity.review.MyReviewData
 import com.jeju.nanaland.domain.entity.review.ReviewFavorite
 import com.jeju.nanaland.domain.entity.review.ReviewKeywordResult
 import com.jeju.nanaland.domain.entity.review.ReviewListData
