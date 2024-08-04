@@ -12,7 +12,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.jeju.nanaland.R
 import com.jeju.nanaland.ui.component.common.CustomSurface
-import com.jeju.nanaland.ui.component.common.CustomTopBar
+import com.jeju.nanaland.ui.component.common.topbar.CustomTopBar
 import com.jeju.nanaland.ui.component.detailscreen.other.DetailScreenNotice
 import com.jeju.nanaland.ui.component.permissionchecking.PermissionCheckingScreenGuideText
 import com.jeju.nanaland.ui.component.permissionchecking.PermissionCheckingScreenHorizontalDivider

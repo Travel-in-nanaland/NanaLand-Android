@@ -14,16 +14,16 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.jeju.nanaland.R
 import com.jeju.nanaland.domain.entity.experience.ExperienceContent
 import com.jeju.nanaland.domain.entity.review.ReviewListData
+import com.jeju.nanaland.ui.component.common.BottomOkButton
 import com.jeju.nanaland.ui.component.common.CustomSurface
-import com.jeju.nanaland.ui.component.common.CustomTopBar
 import com.jeju.nanaland.ui.component.common.ReviewBottomBar
-import com.jeju.nanaland.ui.component.detailscreen.other.DetailScreenDescription
+import com.jeju.nanaland.ui.component.common.topbar.CustomTopBarWithShareButton
+import com.jeju.nanaland.ui.component.detailscreen.other.ExperienceDetailScreenDescription
 import com.jeju.nanaland.ui.component.detailscreen.other.DetailScreenInformation
 import com.jeju.nanaland.ui.component.detailscreen.other.DetailScreenInformationModificationProposalButton
 import com.jeju.nanaland.ui.component.detailscreen.other.DetailScreenTopBannerImage
@@ -34,6 +34,7 @@ import com.jeju.nanaland.ui.component.review.TotalReviewCountText
 import com.jeju.nanaland.util.ui.ScreenPreview
 import com.jeju.nanaland.util.ui.UiState
 import kotlinx.coroutines.launch
+import kotlin.math.exp
 
 @Composable
 fun ExperienceContentScreen(
@@ -43,6 +44,7 @@ fun ExperienceContentScreen(
     moveToBackScreen: () -> Unit,
     moveToInfoModificationProposalScreen: () -> Unit,
     moveToSignInScreen: () -> Unit,
+    moveToReviewListScreen: () -> Unit,
     moveToReviewWritingScreen: (Int, String, String, String) -> Unit,
     viewModel: ExperienceContentViewModel = hiltViewModel()
 ) {
@@ -61,6 +63,7 @@ fun ExperienceContentScreen(
         moveToBackScreen = moveToBackScreen,
         moveToInfoModificationProposalScreen = moveToInfoModificationProposalScreen,
         moveToSignInScreen = moveToSignInScreen,
+        moveToReviewListScreen = moveToReviewListScreen,
         moveToReviewWritingScreen = {
             if(experienceContent is UiState.Success)
                 moveToReviewWritingScreen(
@@ -82,18 +85,19 @@ private fun ExperienceContentScreen(
     updatePrevScreenListFavorite: (Int, Boolean) -> Unit,
     reviewList: UiState<ReviewListData>,
     moveToBackScreen: () -> Unit,
+    moveToReviewListScreen: () -> Unit,
     moveToReviewWritingScreen: () -> Unit,
     moveToInfoModificationProposalScreen: () -> Unit,
     moveToSignInScreen: () -> Unit,
     isContent: Boolean
 ) {
-    val context = LocalContext.current
     val scrollState = rememberScrollState()
     val coroutineScope = rememberCoroutineScope()
     CustomSurface {
-        CustomTopBar(
+        CustomTopBarWithShareButton(
             title = "액티비티",
-            onBackButtonClicked = moveToBackScreen
+            onBackButtonClicked = moveToBackScreen,
+            onShareButtonClicked = {}
         )
 
         Box(
@@ -110,19 +114,10 @@ private fun ExperienceContentScreen(
                         Spacer(Modifier.height(24.dp))
 
                         Column(modifier = Modifier.padding(start = 16.dp, end = 16.dp)) {
-                            DetailScreenDescription(
-                                isFavorite = experienceContent.data.favorite,
+                            ExperienceDetailScreenDescription(
                                 tag = experienceContent.data.addressTag,
                                 title = experienceContent.data.title,
                                 content = experienceContent.data.content,
-                                onFavoriteButtonClicked = {
-                                    toggleFavorite(
-                                        experienceContent.data.id,
-                                        updatePrevScreenListFavorite
-                                    )
-                                },
-                                onShareButtonClicked = {},
-                                moveToSignInScreen = moveToSignInScreen
                             )
 
                             Spacer(Modifier.height(32.dp))
@@ -202,6 +197,18 @@ private fun ExperienceContentScreen(
 
                                 Spacer(Modifier.height(16.dp))
                             }
+
+                            Spacer(Modifier.height(24.dp))
+                        }
+
+                        if (reviewList.data.totalElements > 3) {
+                            BottomOkButton(
+                                text = "후기 더보기",
+                                isActivated = true,
+                                onClick = moveToReviewListScreen
+                            )
+
+                            Spacer(Modifier.height(80.dp))
                         }
                     }
                     is UiState.Failure -> {}
@@ -213,11 +220,25 @@ private fun ExperienceContentScreen(
             }
         }
 
-        ReviewBottomBar(
-            isFavorite = false,
-            toggleFavorite = {},
-            moveToReviewWritingScreen = moveToReviewWritingScreen
-        )
+
+        when (experienceContent) {
+            is UiState.Loading -> {}
+            is UiState.Success -> {
+                ReviewBottomBar(
+                    isFavorite = experienceContent.data.favorite,
+                    toggleFavorite = {
+                        if (contentId == null) return@ReviewBottomBar
+                        toggleFavorite(
+                            contentId,
+                            updatePrevScreenListFavorite
+                        )
+                    },
+                    moveToReviewWritingScreen = moveToReviewWritingScreen,
+                    moveToSignInScreen = moveToSignInScreen
+                )
+            }
+            is UiState.Failure -> {}
+        }
     }
 }
 

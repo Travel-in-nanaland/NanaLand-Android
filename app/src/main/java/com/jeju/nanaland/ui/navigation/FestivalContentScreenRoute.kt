@@ -46,7 +46,7 @@ fun NavGraphBuilder.festivalContentScreen(navController: NavController) = compos
                     }
                     tmp
                 }
-                MainScreenViewType.JejuStory -> {
+                MainScreenViewType.NanaPick -> {
                     val tmp = { _: Int, _: Boolean ->
                     }
                     tmp

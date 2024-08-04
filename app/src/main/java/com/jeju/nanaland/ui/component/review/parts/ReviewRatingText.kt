@@ -25,7 +25,7 @@ fun ReviewRatingText(rating: Double) {
             contentDescription = null
         )
         Text(
-            text = String.format("%.2f", rating),
+            text = String.format("%.1f", rating),
             color = getColor().black,
             style = caption01
         )

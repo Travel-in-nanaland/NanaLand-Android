@@ -16,7 +16,7 @@ import com.jeju.nanaland.util.ui.ComponentPreview
 @Composable
 fun DetailScreenInformationIcon(@DrawableRes id: Int) {
     Image(
-        modifier = Modifier.size(32.dp),
+        modifier = Modifier.size(24.dp),
         painter = painterResource(id),
         contentDescription = null,
         colorFilter = ColorFilter.tint(getColor().main)

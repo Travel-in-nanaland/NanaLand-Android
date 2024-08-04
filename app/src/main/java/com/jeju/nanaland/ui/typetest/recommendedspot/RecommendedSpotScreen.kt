@@ -17,7 +17,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.jeju.nanaland.R
 import com.jeju.nanaland.domain.entity.member.RecommendedPostData
 import com.jeju.nanaland.ui.component.common.CustomSurface
-import com.jeju.nanaland.ui.component.common.CustomTopBar
+import com.jeju.nanaland.ui.component.common.topbar.CustomTopBar
 import com.jeju.nanaland.ui.component.signup.recommendedspot.RecommendedSpotScreenBottomButton
 import com.jeju.nanaland.ui.component.signup.recommendedspot.RecommendedSpotScreenItem
 import com.jeju.nanaland.ui.component.signup.recommendedspot.RecommendedSpotScreenText1

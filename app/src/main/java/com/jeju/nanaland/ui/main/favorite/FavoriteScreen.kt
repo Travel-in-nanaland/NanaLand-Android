@@ -16,7 +16,7 @@ import com.jeju.nanaland.domain.entity.favorite.FavoriteThumbnailData
 import com.jeju.nanaland.globalvalue.type.MainScreenViewType
 import com.jeju.nanaland.globalvalue.type.SearchCategoryType
 import com.jeju.nanaland.globalvalue.userdata.UserData
-import com.jeju.nanaland.ui.component.common.CustomTopBarNoBackButton
+import com.jeju.nanaland.ui.component.common.topbar.CustomTopBarNoBackButton
 import com.jeju.nanaland.ui.component.favorite.FavoriteScreenCategorySelectionTab
 import com.jeju.nanaland.ui.component.favorite.FavoriteScreenFavoritePosts
 import com.jeju.nanaland.ui.component.main.searchresult.parts.SearchResultScreenItemCount

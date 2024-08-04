@@ -12,6 +12,7 @@ import com.jeju.nanaland.data.api.MemberApi
 import com.jeju.nanaland.data.api.NanaPickApi
 import com.jeju.nanaland.data.api.NatureApi
 import com.jeju.nanaland.data.api.ReportApi
+import com.jeju.nanaland.data.api.RestaurantApi
 import com.jeju.nanaland.data.api.ReviewApi
 import com.jeju.nanaland.data.api.SearchApi
 import com.jeju.nanaland.data.repository.AuthDataStoreRepositoryImpl
@@ -26,6 +27,7 @@ import com.jeju.nanaland.data.repository.NanaPickRepositoryImpl
 import com.jeju.nanaland.data.repository.NatureRepositoryImpl
 import com.jeju.nanaland.data.repository.RecentSearchDataStoreRepositoryImpl
 import com.jeju.nanaland.data.repository.ReportRepositoryImpl
+import com.jeju.nanaland.data.repository.RestaurantRepositoryImpl
 import com.jeju.nanaland.data.repository.ReviewRepositoryImpl
 import com.jeju.nanaland.data.repository.SearchRepositoryImpl
 import com.jeju.nanaland.data.repository.UserSettingsDataStoreRepositoryImpl
@@ -42,6 +44,7 @@ import com.jeju.nanaland.domain.repository.NanaPickRepository
 import com.jeju.nanaland.domain.repository.NatureRepository
 import com.jeju.nanaland.domain.repository.RecentSearchDataStoreRepository
 import com.jeju.nanaland.domain.repository.ReportRepository
+import com.jeju.nanaland.domain.repository.RestaurantRepository
 import com.jeju.nanaland.domain.repository.ReviewRepository
 import com.jeju.nanaland.domain.repository.SearchRepository
 import com.jeju.nanaland.domain.repository.UserSettingsDataStoreRepository
@@ -173,5 +176,13 @@ object RepositoryModule {
         boardApi: BoardApi
     ): BoardRepository {
         return BoardRepositoryImpl(boardApi)
+    }
+
+    @Singleton
+    @Provides
+    fun provideRestaurantRepository(
+        restaurantApi: RestaurantApi
+    ): RestaurantRepository {
+        return RestaurantRepositoryImpl(restaurantApi)
     }
 }

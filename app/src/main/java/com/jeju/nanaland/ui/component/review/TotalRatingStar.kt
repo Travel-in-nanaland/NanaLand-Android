@@ -31,7 +31,7 @@ fun TotalRatingStar(rating: Double) {
         Spacer(Modifier.width(8.dp))
 
         Text(
-            text = String.format("%.2f", rating),
+            text = String.format("%.1f", rating),
             color = getColor().black,
             style = body02Bold
         )

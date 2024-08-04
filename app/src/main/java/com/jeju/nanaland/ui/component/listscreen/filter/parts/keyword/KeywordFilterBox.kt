@@ -25,6 +25,7 @@ import com.jeju.nanaland.ui.theme.getColor
 
 @Composable
 fun KeywordFilterBox(
+    text: String,
     showDimBackground: () -> Unit,
     keywordList: List<String>,
     openKeywordFilterDialog: () -> Unit,
@@ -52,7 +53,7 @@ fun KeywordFilterBox(
 
         Text(
             text = when (selectedKeywordList.count { it }) {
-                0 -> "키워드"
+                0 -> text
                 1, 2 -> selectedKeywordList.withIndex()
                     .filter { selectedKeywordList[it.index] }.take(2)
                     .joinToString(separator = ", ") { keywordList[it.index] }

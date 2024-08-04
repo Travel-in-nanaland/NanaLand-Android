@@ -30,7 +30,6 @@ import javax.inject.Inject
 @HiltViewModel
 class ExperienceListViewModel @Inject constructor(
     private val getExperienceListUseCase: GetExperienceListUseCase,
-//    private val getExperienceContentUseCase: GetExperienceContentUseCase,
     private val toggleFavoriteUseCase: ToggleFavoriteUseCase
 ) : ViewModel() {
 

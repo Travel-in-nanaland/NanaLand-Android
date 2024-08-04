@@ -20,7 +20,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.jeju.nanaland.R
 import com.jeju.nanaland.domain.entity.nature.NatureContent
 import com.jeju.nanaland.ui.component.common.CustomSurface
-import com.jeju.nanaland.ui.component.common.CustomTopBar
+import com.jeju.nanaland.ui.component.common.topbar.CustomTopBar
 import com.jeju.nanaland.ui.component.detailscreen.other.DetailScreenDescription
 import com.jeju.nanaland.ui.component.detailscreen.other.DetailScreenInformation
 import com.jeju.nanaland.ui.component.detailscreen.other.DetailScreenInformationModificationProposalButton

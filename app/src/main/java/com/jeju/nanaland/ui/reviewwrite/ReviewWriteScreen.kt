@@ -66,7 +66,7 @@ import com.jeju.nanaland.globalvalue.type.ReviewCategoryType
 import com.jeju.nanaland.globalvalue.type.ReviewKeyword
 import com.jeju.nanaland.ui.component.common.BottomOkButton
 import com.jeju.nanaland.ui.component.common.CustomSurface
-import com.jeju.nanaland.ui.component.common.CustomTopBar
+import com.jeju.nanaland.ui.component.common.topbar.CustomTopBar
 import com.jeju.nanaland.ui.component.common.DialogCommon
 import com.jeju.nanaland.ui.theme.body02
 import com.jeju.nanaland.ui.theme.bodyBold

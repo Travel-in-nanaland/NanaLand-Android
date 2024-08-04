@@ -35,6 +35,9 @@ import com.jeju.nanaland.ui.navigation.profileReviewScreenRoute
 import com.jeju.nanaland.ui.navigation.profileScreenRoute
 import com.jeju.nanaland.ui.navigation.profileUpdateScreen
 import com.jeju.nanaland.ui.navigation.recommendedSpotScreen
+import com.jeju.nanaland.ui.navigation.restaurantContentScreen
+import com.jeju.nanaland.ui.navigation.restaurantListScreen
+import com.jeju.nanaland.ui.navigation.reviewListScreen
 import com.jeju.nanaland.ui.navigation.reviewWriteRoute
 import com.jeju.nanaland.ui.navigation.settingsScreen
 import com.jeju.nanaland.ui.navigation.signInScreen
@@ -143,6 +146,12 @@ fun MainNavigation(
         // 나나 Pick 상세 화면
         nanaPickContentScreen(navController)
 
+        // 제주 맛집 리스트 화면
+        restaurantListScreen(navController)
+
+        // 제주 맛집 상세 화면
+        restaurantContentScreen(navController)
+
         // 정보 수정 제안 카테고리 선택 화면
         informationModificationProposalCategoryScreen(navController)
 
@@ -181,5 +190,8 @@ fun MainNavigation(
 
         // 프로필 리뷰 리스트 화면
         profileReviewScreenRoute(navController)
+
+        // 리뷰 리스트 화면
+        reviewListScreen(navController)
     }
 }

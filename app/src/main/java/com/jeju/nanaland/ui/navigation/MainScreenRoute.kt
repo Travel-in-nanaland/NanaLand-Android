@@ -19,6 +19,7 @@ import com.jeju.nanaland.globalvalue.constant.ROUTE_NOTIFICATION
 import com.jeju.nanaland.globalvalue.constant.ROUTE_PROFILE_NOTICE
 import com.jeju.nanaland.globalvalue.constant.ROUTE_PROFILE_REVIEW
 import com.jeju.nanaland.globalvalue.constant.ROUTE_PROFILE_UPDATE
+import com.jeju.nanaland.globalvalue.constant.ROUTE_RESTAURANT_LIST
 import com.jeju.nanaland.globalvalue.constant.ROUTE_SETTINGS
 import com.jeju.nanaland.globalvalue.constant.ROUTE_SIGN_IN
 import com.jeju.nanaland.globalvalue.constant.ROUTE_TYPE_TESTING
@@ -49,7 +50,7 @@ fun NavGraphBuilder.mainScreen(
                 CategoryType.Nana -> { navController.navigate(ROUTE_NANAPICK_CONTENT, bundle) }
             }
         },
-        moveToNanaPickListScreen = { navController.navigate(ROUTE_NANAPICK_LIST) { launchSingleTop = true } },
+        moveToRestaurantListScreen = { navController.navigate(ROUTE_RESTAURANT_LIST) { launchSingleTop = true } },
         moveToNatureListScreen = { filter ->
             val bundle = bundleOf(
                 "filter" to filter

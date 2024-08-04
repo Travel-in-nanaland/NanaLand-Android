@@ -15,7 +15,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.jeju.nanaland.R
 import com.jeju.nanaland.domain.entity.nanapick.NanaPickBannerData
 import com.jeju.nanaland.ui.component.common.CustomSurface
-import com.jeju.nanaland.ui.component.common.CustomTopBar
+import com.jeju.nanaland.ui.component.common.topbar.CustomTopBar
 import com.jeju.nanaland.ui.component.main.home.parts.HomeScreenNanaPickBanner
 import com.jeju.nanaland.util.resource.getString
 import com.jeju.nanaland.util.ui.UiState
@@ -45,27 +45,25 @@ private fun NanaPickListScreen(
     moveToNanaPickContentScreen: (Int) -> Unit,
     isContent: Boolean
 ) {
-    CustomSurface {
-        Column {
-            CustomTopBar(
-                title = getString(R.string.common_나나s_Pick),
-                onBackButtonClicked = moveToMainScreen
-            )
-            LazyColumn {
-                when (nanaPickList) {
-                    is UiState.Loading -> {}
-                    is UiState.Success -> {
-                        itemsIndexed(nanaPickList.data) { idx, item ->
-                            HomeScreenNanaPickBanner(
-                                item = item,
-                                height = 200,
-                                onClick = moveToNanaPickContentScreen
-                            )
-                            Spacer(Modifier.height(10.dp))
-                        }
+    Column {
+        CustomTopBar(
+            title = getString(R.string.common_나나s_Pick),
+            onBackButtonClicked = moveToMainScreen
+        )
+        LazyColumn {
+            when (nanaPickList) {
+                is UiState.Loading -> {}
+                is UiState.Success -> {
+                    itemsIndexed(nanaPickList.data) { idx, item ->
+                        HomeScreenNanaPickBanner(
+                            item = item,
+                            height = 200,
+                            onClick = moveToNanaPickContentScreen
+                        )
+                        Spacer(Modifier.height(10.dp))
                     }
-                    is UiState.Failure -> {}
                 }
+                is UiState.Failure -> {}
             }
         }
     }

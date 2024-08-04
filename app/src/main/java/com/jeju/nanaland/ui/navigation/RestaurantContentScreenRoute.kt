@@ -1,0 +1,100 @@
+package com.jeju.nanaland.ui.navigation
+
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.remember
+import androidx.core.os.bundleOf
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavController
+import androidx.navigation.NavGraphBuilder
+import androidx.navigation.compose.composable
+import com.jeju.nanaland.globalvalue.constant.ROUTE_INFORMATION_MODIFICATION_PROPOSAL_CATEGORY
+import com.jeju.nanaland.globalvalue.constant.ROUTE_MAIN
+import com.jeju.nanaland.globalvalue.constant.ROUTE_RESTAURANT_CONTENT
+import com.jeju.nanaland.globalvalue.constant.ROUTE_RESTAURANT_LIST
+import com.jeju.nanaland.globalvalue.constant.ROUTE_REVIEW_LIST
+import com.jeju.nanaland.globalvalue.constant.ROUTE_REVIEW_WRITE_ROUTE
+import com.jeju.nanaland.globalvalue.type.MainScreenViewType
+import com.jeju.nanaland.globalvalue.type.ReviewCategoryType
+import com.jeju.nanaland.ui.main.MainViewModel
+import com.jeju.nanaland.ui.main.favorite.FavoriteViewModel
+import com.jeju.nanaland.ui.main.home.search.SearchViewModel
+import com.jeju.nanaland.ui.restaurant.RestaurantContentScreen
+import com.jeju.nanaland.ui.restaurant.RestaurantListViewModel
+import com.jeju.nanaland.util.log.LogUtil
+import com.jeju.nanaland.util.navigation.navigate
+
+fun NavGraphBuilder.restaurantContentScreen(navController: NavController) = composable(route = ROUTE_RESTAURANT_CONTENT) {
+    val parentEntry = remember(it) { navController.previousBackStackEntry!! }
+    val isSearch = it.arguments?.getBoolean("isSearch") ?: false
+    val updatePrevScreenListFavorite: (Int, Boolean) -> Unit = when (parentEntry.destination.route) {
+        ROUTE_RESTAURANT_LIST -> {
+            val viewModel: RestaurantListViewModel = hiltViewModel(parentEntry)
+            viewModel::toggleFavoriteWithNoApi
+        }
+        ROUTE_MAIN -> {
+            val mainViewModel: MainViewModel = hiltViewModel(parentEntry)
+            val func = when (mainViewModel.viewType.collectAsState().value) {
+                MainScreenViewType.Home -> {
+                    val viewModel: SearchViewModel = hiltViewModel(parentEntry)
+                    val tmp = { contentId: Int, isFavorite: Boolean ->
+                        viewModel.toggleSearchResultFavoriteWithNoApi(contentId, isFavorite)
+                        viewModel.toggleAllSearchResultFavoriteWithNoApi(contentId, isFavorite, "NATURE")
+                    }
+                    tmp
+                }
+                MainScreenViewType.Favorite -> {
+                    val viewModel: FavoriteViewModel = hiltViewModel(parentEntry)
+                    val tmp = { contentId: Int, _: Boolean ->
+                        viewModel.toggleFavoriteWithNoApi(contentId)
+                    }
+                    tmp
+                }
+                MainScreenViewType.NanaPick -> {
+                    val tmp = { _: Int, _: Boolean ->
+                    }
+                    tmp
+                }
+                MainScreenViewType.MyPage -> {
+                    val tmp = { _: Int, _: Boolean ->
+                    }
+                    tmp
+                }
+            }
+            func
+        }
+        else -> { _, _ -> }
+    }
+
+    RestaurantContentScreen(
+        contentId = it.arguments?.getInt("contentId"),
+        isSearch = isSearch,
+        updatePrevScreenListFavorite = updatePrevScreenListFavorite,
+        moveToBackScreen = { navController.popBackStack() },
+        moveToInfoModificationProposalScreen = {
+            val bundle = bundleOf(
+                "postId" to it.arguments?.getInt("contentId"),
+                "category" to "RESTAURANT"
+            )
+            navController.navigate(ROUTE_INFORMATION_MODIFICATION_PROPOSAL_CATEGORY, bundle)
+        },
+        moveToReviewWritingScreen = { id, image, title, address ->
+            LogUtil.e("moveToReviewWritingScreen", "moveToReviewWritingScreen")
+            val bundle = bundleOf(
+                "id" to id,
+                "category" to ReviewCategoryType.RESTAURANT.toString(),
+                "image" to image,
+                "title" to title,
+                "address" to address,
+            )
+            navController.navigate(ROUTE_REVIEW_WRITE_ROUTE, bundle)
+        },
+        moveToSignInScreen = {},
+        moveToReviewListScreen = {
+            val bundle = bundleOf(
+                "contentId" to it.arguments?.getInt("contentId"),
+                "category" to "RESTAURANT"
+            )
+            navController.navigate(ROUTE_REVIEW_LIST, bundle)
+        }
+    )
+}

@@ -16,7 +16,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.jeju.nanaland.R
-import com.jeju.nanaland.ui.component.common.CustomTopBarNoBackButton
+import com.jeju.nanaland.ui.component.common.topbar.CustomTopBarNoBackButton
 import com.jeju.nanaland.ui.theme.body01
 import com.jeju.nanaland.ui.theme.getColor
 import com.jeju.nanaland.util.resource.getString

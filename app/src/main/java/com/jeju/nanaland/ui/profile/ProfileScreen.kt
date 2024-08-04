@@ -28,7 +28,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.paging.compose.collectAsLazyPagingItems
 import com.jeju.nanaland.R
-import com.jeju.nanaland.ui.component.common.CustomTopBarWithMenu
+import com.jeju.nanaland.ui.component.common.topbar.CustomTopBarWithMenu
 import com.jeju.nanaland.ui.profile.component.ProfileScreenListSection
 import com.jeju.nanaland.ui.profile.component.ProfileScreenProfileSection
 import com.jeju.nanaland.ui.theme.body01

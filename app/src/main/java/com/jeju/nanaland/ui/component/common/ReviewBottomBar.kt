@@ -23,6 +23,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
 import com.jeju.nanaland.R
 import com.jeju.nanaland.globalvalue.constant.TOP_BAR_HEIGHT
+import com.jeju.nanaland.ui.component.detailscreen.other.parts.description.DetailScreenFavoriteButton
 import com.jeju.nanaland.ui.theme.bodyBold
 import com.jeju.nanaland.ui.theme.getColor
 import com.jeju.nanaland.util.ui.clickableNoEffect
@@ -33,6 +34,7 @@ fun ReviewBottomBar(
     isFavorite: Boolean,
     toggleFavorite: () -> Unit,
     moveToReviewWritingScreen: () -> Unit,
+    moveToSignInScreen: () -> Unit
 ) {
     Row(
         modifier = Modifier
@@ -60,13 +62,10 @@ fun ReviewBottomBar(
     ) {
         Spacer(Modifier.width(16.dp))
 
-        Image(
-            modifier = Modifier
-                .size(36.dp)
-                .clickableNoEffect { toggleFavorite() },
-            painter = painterResource(if (isFavorite) R.drawable.ic_heart_filled else R.drawable.ic_heart_outlined),
-            contentDescription = null,
-            colorFilter = ColorFilter.tint(getColor().main)
+        DetailScreenFavoriteButton(
+            isFavorite = isFavorite,
+            onClick = toggleFavorite,
+            moveToSignInScreen = moveToSignInScreen
         )
 
         Spacer(Modifier.width(10.dp))

@@ -23,7 +23,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.jeju.nanaland.R
 import com.jeju.nanaland.domain.entity.nanapick.NanaPickContentData
 import com.jeju.nanaland.ui.component.common.CustomSurface
-import com.jeju.nanaland.ui.component.common.CustomTopBar
+import com.jeju.nanaland.ui.component.common.topbar.CustomTopBar
 import com.jeju.nanaland.ui.component.detailscreen.nanapick.NanaPickContentAttractivePointDialog
 import com.jeju.nanaland.ui.component.detailscreen.nanapick.NanaPickContentSubContents
 import com.jeju.nanaland.ui.component.detailscreen.nanapick.NanaPickContentTopBanner

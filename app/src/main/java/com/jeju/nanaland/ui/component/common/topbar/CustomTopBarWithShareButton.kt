@@ -1,17 +1,17 @@
-package com.jeju.nanaland.ui.component.common
+package com.jeju.nanaland.ui.component.common.topbar
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.RowScope
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.GenericShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Menu
-import androidx.compose.material3.Icon
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -20,7 +20,6 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
 import com.jeju.nanaland.R
@@ -30,21 +29,13 @@ import com.jeju.nanaland.ui.theme.title01Bold
 import com.jeju.nanaland.util.ui.clickableNoEffect
 import com.jeju.nanaland.util.ui.drawColoredShadow
 
-@Preview
 @Composable
-private fun CustomTopBarWithMenuPreview(){
-    CustomTopBarWithMenu("Title", true, {}, { Icon(Icons.Default.Menu, null)})
-}
-
-@Composable
-fun CustomTopBarWithMenu(
-    title: String = "",
-    drawShadow: Boolean = true,
-    onBackButtonClicked: (() -> Unit)? = null,
-    menus: @Composable RowScope.() -> Unit = { }
+fun CustomTopBarWithShareButton(
+    title: String,
+    onBackButtonClicked: () -> Unit,
+    onShareButtonClicked: () -> Unit,
 ) {
-
-    Row(
+    Box(
         modifier = Modifier
             .fillMaxWidth()
             .height(TOP_BAR_HEIGHT.dp)
@@ -59,33 +50,50 @@ fun CustomTopBarWithMenu(
             .zIndex(10f)
             .drawColoredShadow(
                 color = getColor().black,
-                alpha = if(drawShadow) 0.1f else 0f,
+                alpha = 0.1f,
                 shadowRadius = 10.dp,
                 offsetX = 0.dp,
                 offsetY = 0.dp
             )
             .background(getColor().white)
-            .padding(horizontal = 16.dp),
-        verticalAlignment = Alignment.CenterVertically
+        ,
+        contentAlignment = Alignment.Center
     ) {
-        if(onBackButtonClicked != null)
+        Row(
+            modifier = Modifier
+                .padding(start = 16.dp, end = 16.dp)
+                .fillMaxWidth()
+                .align(Alignment.CenterStart),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
             Image(
                 modifier = Modifier
-                    .clickableNoEffect { onBackButtonClicked() }
-                    .size(32.dp),
+                    .width(32.dp)
+                    .height(32.dp)
+                    .clickableNoEffect { onBackButtonClicked() },
                 painter = painterResource(id = R.drawable.ic_arrow_left),
                 contentDescription = null,
                 colorFilter = ColorFilter.tint(getColor().black)
             )
 
+            Spacer(Modifier.weight(1f))
+
+            Image(
+                modifier = Modifier
+                    .width(32.dp)
+                    .height(32.dp)
+                    .clickableNoEffect { onShareButtonClicked() },
+                painter = painterResource(id = R.drawable.ic_share),
+                contentDescription = null,
+                colorFilter = ColorFilter.tint(getColor().black)
+            )
+        }
+
         Text(
-            modifier = Modifier.weight(1f),
             text = title,
             color = getColor().black,
             style = title01Bold,
             textAlign = TextAlign.Center
         )
-
-        menus()
     }
 }

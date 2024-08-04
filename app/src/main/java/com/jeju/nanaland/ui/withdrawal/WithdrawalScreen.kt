@@ -1,6 +1,5 @@
 package com.jeju.nanaland.ui.withdrawal
 
-import android.widget.Toast
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -13,13 +12,12 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.jeju.nanaland.R
 import com.jeju.nanaland.globalvalue.type.WithdrawalReasonType
 import com.jeju.nanaland.ui.component.common.CustomSurface
-import com.jeju.nanaland.ui.component.common.CustomTopBar
+import com.jeju.nanaland.ui.component.common.topbar.CustomTopBar
 import com.jeju.nanaland.ui.component.permissionchecking.PermissionCheckingScreenHorizontalDivider
 import com.jeju.nanaland.ui.component.withdrawal.WithdrawalScreenAgreeText
 import com.jeju.nanaland.ui.component.withdrawal.WithdrawalScreenCancelButton

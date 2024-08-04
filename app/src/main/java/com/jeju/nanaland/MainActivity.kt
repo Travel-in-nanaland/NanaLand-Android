@@ -30,6 +30,7 @@ import com.jeju.nanaland.ui.theme.NanaLandTheme
 import com.jeju.nanaland.ui.theme.getColor
 import com.jeju.nanaland.util.intent.DeepLinkData
 import com.jeju.nanaland.util.log.LogUtil
+import com.kakao.sdk.common.util.Utility
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -70,6 +71,7 @@ class MainActivity : ComponentActivity() {
 //
 //        val keyHash = Utility.getKeyHash(this)
 //        Toast.makeText(this, keyHash, Toast.LENGTH_LONG).show()
+//        LogUtil.e("keyHash", keyHash)
 
         // 개발용 액세스 토큰
 //        viewModel.saveAccessToken("aa")
