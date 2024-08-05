@@ -6,7 +6,7 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
-import com.jeju.nanaland.globalvalue.constant.ROUTE_REPORT
+import com.jeju.nanaland.globalvalue.constant.ROUTE_SPLASH
 import com.jeju.nanaland.ui.navigation.experienceContentScreen
 import com.jeju.nanaland.ui.navigation.experienceListScreen
 import com.jeju.nanaland.ui.navigation.festivalContentScreen

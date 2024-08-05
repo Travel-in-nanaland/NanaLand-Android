@@ -8,7 +8,7 @@ import com.jeju.nanaland.ui.report.ReportScreen
 
 fun NavGraphBuilder.reportScreen(navController: NavController) = composable(route = ROUTE_REPORT) {
     ReportScreen(
-        reviewId = it.arguments?.getInt("reviewId", 1) ?: 1,
+        reviewId = it.arguments!!.getInt("reviewId"),
         moveToBackScreen = { navController.popBackStack() },
     )
 }
