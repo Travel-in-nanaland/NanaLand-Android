@@ -116,17 +116,10 @@ class ReviewWriteViewModel @Inject constructor(
         }
     }
 
-    fun addImage(arg: List<Uri>) {
+    fun changeImage(arg: List<Uri>) {
         viewModelState.update {
             it.copy(
-                reviewImage = it.reviewImage.plus(arg).take(MAX_IMAGE_CNT)
-            )
-        }
-    }
-    fun removeImage(arg: Uri) {
-        viewModelState.update {
-            it.copy(
-                reviewImage = it.reviewImage.minus(arg)
+                reviewImage = arg.take(MAX_IMAGE_CNT)
             )
         }
     }
