@@ -6,7 +6,7 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
-import com.jeju.nanaland.globalvalue.constant.ROUTE_SPLASH
+import com.jeju.nanaland.globalvalue.constant.ROUTE_REPORT
 import com.jeju.nanaland.ui.navigation.experienceContentScreen
 import com.jeju.nanaland.ui.navigation.experienceListScreen
 import com.jeju.nanaland.ui.navigation.festivalContentScreen
@@ -35,6 +35,7 @@ import com.jeju.nanaland.ui.navigation.profileReviewScreenRoute
 import com.jeju.nanaland.ui.navigation.profileScreenRoute
 import com.jeju.nanaland.ui.navigation.profileUpdateScreen
 import com.jeju.nanaland.ui.navigation.recommendedSpotScreen
+import com.jeju.nanaland.ui.navigation.reportScreen
 import com.jeju.nanaland.ui.navigation.reviewWriteRoute
 import com.jeju.nanaland.ui.navigation.settingsScreen
 import com.jeju.nanaland.ui.navigation.signInScreen
@@ -181,5 +182,8 @@ fun MainNavigation(
 
         // 프로필 리뷰 리스트 화면
         profileReviewScreenRoute(navController)
+
+        // 신고 화면
+        reportScreen(navController)
     }
 }

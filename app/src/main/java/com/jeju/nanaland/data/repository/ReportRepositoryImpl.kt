@@ -1,9 +1,12 @@
 package com.jeju.nanaland.data.repository
 
+import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.jeju.nanaland.data.api.ReportApi
 import com.jeju.nanaland.domain.repository.ReportRepository
+import com.jeju.nanaland.domain.request.UriRequestBody
 import com.jeju.nanaland.domain.request.report.InformationModificationProposalRequest
+import com.jeju.nanaland.globalvalue.type.ReportType
 import com.jeju.nanaland.util.network.NetworkResult
 import com.jeju.nanaland.util.network.NetworkResultHandler
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
@@ -30,5 +33,23 @@ class ReportRepositoryImpl(
         val requestBody = json.toRequestBody("application/json".toMediaTypeOrNull())
 
         return handleResult { reportApi.informationModificationProposal(requestBody, multipartImage) }
+    }
+
+    override suspend fun reportReview(
+        reviewId: Int,
+        claimType: ReportType,
+        content: String,
+        images: List<UriRequestBody>
+    ): NetworkResult<String?> {
+        val multipartImage: List<MultipartBody.Part>? = images.takeIf{ it.isNotEmpty() }?.map {
+            it.toMultipartBody("multipartFileList")
+        }
+        val reqData = Gson().toJson(mapOf(
+            "reviewId" to reviewId,
+            "claimType" to claimType,
+            "content" to content,
+        )).toRequestBody("application/json".toMediaTypeOrNull())
+
+        return handleResult { reportApi.reportReview(reqData, multipartImage) }
     }
 }
