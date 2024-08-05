@@ -21,11 +21,13 @@ import androidx.compose.ui.unit.dp
 import com.jeju.nanaland.R
 import com.jeju.nanaland.ui.theme.caption01
 import com.jeju.nanaland.ui.theme.getColor
+import com.jeju.nanaland.util.ui.clickableNoEffect
 
 @Composable
 fun RowScope.ReviewFavoriteButton(
     isFavorite: Boolean,
-    favoriteCount: Int
+    favoriteCount: Int,
+    toggleFavorite: () -> Unit,
 ) {
     Row(
         modifier = Modifier
@@ -38,7 +40,8 @@ fun RowScope.ReviewFavoriteButton(
                 ),
                 shape = RoundedCornerShape(50)
             )
-            .padding(start = 8.dp, end = 8.dp),
+            .padding(start = 8.dp, end = 8.dp)
+            .clickableNoEffect { toggleFavorite() },
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.Center
     ) {

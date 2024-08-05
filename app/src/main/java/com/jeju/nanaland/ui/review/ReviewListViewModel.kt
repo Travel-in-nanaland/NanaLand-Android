@@ -4,7 +4,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.jeju.nanaland.domain.entity.review.ReviewData
 import com.jeju.nanaland.domain.request.review.GetReviewListByPostRequest
+import com.jeju.nanaland.domain.request.review.ToggleReviewFavoriteRequest
 import com.jeju.nanaland.domain.usecase.review.GetReviewListByPostUseCase
+import com.jeju.nanaland.domain.usecase.review.ToggleReviewFavoriteUseCase
 import com.jeju.nanaland.globalvalue.type.ReviewCategoryType
 import com.jeju.nanaland.util.log.LogUtil
 import com.jeju.nanaland.util.network.onError
@@ -22,7 +24,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class ReviewListViewModel @Inject constructor(
-    private val getReviewListUseCase: GetReviewListByPostUseCase
+    private val getReviewListUseCase: GetReviewListByPostUseCase,
+    private val toggleReviewFavoriteUseCase: ToggleReviewFavoriteUseCase
 ) : ViewModel() {
 
     private var page = 0
@@ -77,6 +80,39 @@ class ReviewListViewModel @Inject constructor(
                 }.onException {  }
             }
             .catch { LogUtil.e("flow Error", "getReviewListUseCase") }
+            .launchIn(viewModelScope)
+    }
+
+    fun toggleReviewFavorite(id: Int) {
+        val requestData = ToggleReviewFavoriteRequest(
+            id = id
+        )
+        toggleReviewFavoriteUseCase(requestData)
+            .onEach { networkResult ->
+                networkResult.onSuccess { code, message, data ->
+                    data?.let {
+                        _reviewList.update { uiState ->
+                            if (uiState is UiState.Success) {
+                                val newList = uiState.data.map { item ->
+                                    if (item.id == id) item.copy(
+                                        reviewHeart = data.reviewHeart,
+                                        heartCount = if (data.reviewHeart) item.heartCount + 1 else item.heartCount - 1
+                                    )
+                                    else item
+                                }
+                                UiState.Success(newList)
+                            } else {
+                                uiState
+                            }
+                        }
+                    }
+                }.onError { code, message ->
+
+                }.onException {
+
+                }
+            }
+            .catch { LogUtil.e("flow Error", "toggleFavoriteUseCase") }
             .launchIn(viewModelScope)
     }
 }

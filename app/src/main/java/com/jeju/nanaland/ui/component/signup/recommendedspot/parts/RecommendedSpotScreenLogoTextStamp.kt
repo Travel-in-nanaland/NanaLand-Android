@@ -12,7 +12,7 @@ import com.jeju.nanaland.R
 @Composable
 fun RecommendedSpotScreenLogoTextStamp() {
     Image(
-        modifier = Modifier.width(100.dp),
+        modifier = Modifier.width(85.dp),
         painter = painterResource(R.drawable.img_logo_stamp_text),
         contentDescription = null
     )

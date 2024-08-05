@@ -60,6 +60,7 @@ fun RestaurantContentScreen(
         contentId = contentId,
         restaurantContent = restaurantContent,
         toggleFavorite = viewModel::toggleFavorite,
+        toggleReviewFavorite = viewModel::toggleReviewFavorite,
         updatePrevScreenListFavorite = updatePrevScreenListFavorite,
         reviewList = reviewList,
         moveToBackScreen = moveToBackScreen,
@@ -84,6 +85,7 @@ private fun RestaurantContentScreen(
     contentId: Int?,
     restaurantContent: UiState<RestaurantContentData>,
     toggleFavorite: (Int, (Int, Boolean) -> Unit) -> Unit,
+    toggleReviewFavorite: (Int) -> Unit,
     updatePrevScreenListFavorite: (Int, Boolean) -> Unit,
     reviewList: UiState<ReviewListData>,
     moveToBackScreen: () -> Unit,
@@ -231,7 +233,10 @@ private fun RestaurantContentScreen(
                             Spacer(Modifier.height(24.dp))
 
                             reviewList.data.data.forEach {
-                                ReviewCard(data = it)
+                                ReviewCard(
+                                    data = it,
+                                    toggleReviewFavorite = toggleReviewFavorite
+                                )
 
                                 Spacer(Modifier.height(16.dp))
                             }

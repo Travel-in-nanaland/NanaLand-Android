@@ -1,13 +1,17 @@
 package com.jeju.nanaland.ui.component.signup.recommendedspot
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -19,13 +23,17 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import com.jeju.nanaland.R
 import com.jeju.nanaland.ui.component.signup.recommendedspot.parts.RecommendedSpotScreenLogoStamp
 import com.jeju.nanaland.ui.component.signup.recommendedspot.parts.RecommendedSpotScreenLogoTextStamp
 import com.jeju.nanaland.ui.component.signup.recommendedspot.parts.RecommendedSpotScreenSpotDescription
 import com.jeju.nanaland.ui.component.signup.recommendedspot.parts.RecommendedSpotScreenSpotName
+import com.jeju.nanaland.ui.theme.caption01SemiBold
 import com.jeju.nanaland.ui.theme.getColor
 import com.jeju.nanaland.util.ui.TicketShape
 import com.skydoves.landscapist.ImageOptions
@@ -91,12 +99,30 @@ fun RecommendedSpotScreenItem(
             Spacer(Modifier.height(60.dp))
         }
 
-        Box(
+        Row(
             modifier = Modifier
-                .align(Alignment.BottomEnd)
-                .padding(end = 16.dp, bottom = 16.dp)
+                .align(Alignment.BottomCenter)
+                .padding(start = 16.dp, end = 16.dp, bottom = 16.dp),
+            verticalAlignment = Alignment.CenterVertically
         ) {
             RecommendedSpotScreenLogoTextStamp()
+
+            Spacer(Modifier.weight(1f))
+
+            Text(
+                text = "자세히 보기",
+                color = getColor().white,
+                style = caption01SemiBold
+            )
+
+            Spacer(Modifier.width(4.dp))
+
+            Image(
+                modifier = Modifier.width(24.dp),
+                painter = painterResource(R.drawable.ic_arrow_right_half),
+                contentDescription = null,
+                colorFilter = ColorFilter.tint(getColor().white)
+            )
         }
     }
 }

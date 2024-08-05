@@ -39,7 +39,8 @@ import com.jeju.nanaland.util.ui.drawColoredShadow
 
 @Composable
 fun ReviewCard(
-    data: ReviewData
+    data: ReviewData,
+    toggleReviewFavorite: (Int) -> Unit,
 ) {
     val scrollState = rememberScrollState()
     Box(
@@ -92,7 +93,8 @@ fun ReviewCard(
 
                 ReviewFavoriteButton(
                     isFavorite = data.reviewHeart,
-                    favoriteCount = data.heartCount
+                    favoriteCount = data.heartCount,
+                    toggleFavorite = { toggleReviewFavorite(data.id) }
                 )
             }
 
@@ -130,7 +132,7 @@ fun ReviewCard(
             Image(
                 modifier = Modifier
                     .size(20.dp)
-                    .clickableNoEffect {  },
+                    .clickableNoEffect { },
                 painter = painterResource(R.drawable.ic_more_dot),
                 contentDescription = null,
             )

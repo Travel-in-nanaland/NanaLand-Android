@@ -18,6 +18,7 @@ import com.jeju.nanaland.domain.request.review.GetReviewAutoCompleteKeywordReque
 import com.jeju.nanaland.domain.request.review.GetReviewListByPostRequest
 import com.jeju.nanaland.domain.request.review.GetReviewThumbnailListByUserRequest
 import com.jeju.nanaland.domain.request.review.ModifyUserReviewRequest
+import com.jeju.nanaland.domain.request.review.ToggleReviewFavoriteRequest
 import com.jeju.nanaland.globalvalue.type.ReviewCategoryType
 import com.jeju.nanaland.util.network.NetworkResult
 import com.jeju.nanaland.util.network.NetworkResultHandler
@@ -125,11 +126,11 @@ class ReviewRepositoryImpl(
 
     // 리뷰 좋아요 토글
     override suspend fun toggleReviewFavorite(
-        id: Int
+        data: ToggleReviewFavoriteRequest
     ): NetworkResult<ReviewFavorite> {
         return handleResult {
             api.toggleReviewFavorite(
-                id = id
+                id = data.id
             )
         }
     }

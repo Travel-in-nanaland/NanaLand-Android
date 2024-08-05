@@ -8,6 +8,7 @@ import androidx.paging.cachedIn
 import com.jeju.nanaland.domain.entity.member.UserProfile
 import com.jeju.nanaland.domain.entity.notice.NoticeSummery
 import com.jeju.nanaland.domain.request.review.DeleteReviewRequest
+import com.jeju.nanaland.domain.request.review.ToggleReviewFavoriteRequest
 import com.jeju.nanaland.domain.usecase.board.GetNoticeListUseCase
 import com.jeju.nanaland.domain.usecase.board.GetNoticeUseCase
 import com.jeju.nanaland.domain.usecase.member.GetUserProfileUseCase
@@ -62,7 +63,8 @@ class ProfileViewModel @Inject constructor(
     }
 
     fun setLike(id: Int){
-        toggleReviewFavoriteUseCase(id)
+        val data = ToggleReviewFavoriteRequest(id = id)
+        toggleReviewFavoriteUseCase(data)
             .onEach {
                 it.onError { code, message ->  }
             }

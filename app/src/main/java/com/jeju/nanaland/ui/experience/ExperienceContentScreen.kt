@@ -58,6 +58,7 @@ fun ExperienceContentScreen(
         contentId = contentId,
         experienceContent = experienceContent,
         toggleFavorite = viewModel::toggleFavorite,
+        toggleReviewFavorite = viewModel::toggleReviewFavorite,
         updatePrevScreenListFavorite = updatePrevScreenListFavorite,
         reviewList = reviewList,
         moveToBackScreen = moveToBackScreen,
@@ -82,6 +83,7 @@ private fun ExperienceContentScreen(
     contentId: Int?,
     experienceContent: UiState<ExperienceContent>,
     toggleFavorite: (Int, (Int, Boolean) -> Unit) -> Unit,
+    toggleReviewFavorite: (Int) -> Unit,
     updatePrevScreenListFavorite: (Int, Boolean) -> Unit,
     reviewList: UiState<ReviewListData>,
     moveToBackScreen: () -> Unit,
@@ -193,7 +195,10 @@ private fun ExperienceContentScreen(
                             Spacer(Modifier.height(24.dp))
 
                             reviewList.data.data.forEach {
-                                ReviewCard(data = it)
+                                ReviewCard(
+                                    data = it,
+                                    toggleReviewFavorite = toggleReviewFavorite
+                                )
 
                                 Spacer(Modifier.height(16.dp))
                             }
