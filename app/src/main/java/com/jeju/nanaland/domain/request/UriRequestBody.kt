@@ -5,6 +5,7 @@ import android.net.Uri
 import android.provider.MediaStore
 import okhttp3.MediaType
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import okio.BufferedSink
 import okio.source
@@ -30,9 +31,6 @@ class UriRequestBody(context: Context, private val uri: Uri): RequestBody() {
             }
         }
     }
-
-    private fun getFileName() = fileName
-
     override fun contentLength(): Long = size
 
     override fun contentType(): MediaType? =
@@ -42,5 +40,13 @@ class UriRequestBody(context: Context, private val uri: Uri): RequestBody() {
         contentResolver.openInputStream(uri)?.source()?.use { source ->
             sink.writeAll(source)
         }
+    }
+
+    fun getFileName() = fileName
+
+    fun toMultipartBody(partName: String): MultipartBody.Part {
+        return MultipartBody.Part.createFormData(
+            partName, fileName, this
+        )
     }
 }

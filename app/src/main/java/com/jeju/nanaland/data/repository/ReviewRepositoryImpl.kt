@@ -22,7 +22,6 @@ import com.jeju.nanaland.globalvalue.type.ReviewCategoryType
 import com.jeju.nanaland.util.network.NetworkResult
 import com.jeju.nanaland.util.network.NetworkResultHandler
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
-import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.toRequestBody
 
 class ReviewRepositoryImpl(
@@ -115,9 +114,7 @@ class ReviewRepositoryImpl(
                 category = category,
                 data = reqData,
                 images = images.ifEmpty { null }?.map {
-                    MultipartBody.Part.createFormData(
-                        "multipartFileList",null,it
-                    )
+                    it.toMultipartBody("multipartFileList")
                 }
             )
         }

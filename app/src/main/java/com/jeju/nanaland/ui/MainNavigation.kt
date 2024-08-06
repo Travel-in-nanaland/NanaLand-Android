@@ -35,6 +35,7 @@ import com.jeju.nanaland.ui.navigation.profileReviewScreenRoute
 import com.jeju.nanaland.ui.navigation.profileScreenRoute
 import com.jeju.nanaland.ui.navigation.profileUpdateScreen
 import com.jeju.nanaland.ui.navigation.recommendedSpotScreen
+import com.jeju.nanaland.ui.navigation.reportScreen
 import com.jeju.nanaland.ui.navigation.reviewWriteRoute
 import com.jeju.nanaland.ui.navigation.settingsScreen
 import com.jeju.nanaland.ui.navigation.signInScreen
@@ -181,5 +182,8 @@ fun MainNavigation(
 
         // 프로필 리뷰 리스트 화면
         profileReviewScreenRoute(navController)
+
+        // 신고 화면
+        reportScreen(navController)
     }
 }

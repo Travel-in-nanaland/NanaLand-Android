@@ -86,14 +86,14 @@ private fun ReviewWriteCompleteUI(
             BottomOkButton(
                 text = getString(R.string.review_write_keyword_complete_btn_again),
                 isActivated = true,
-                onClick = onAdd
+                onClick = onAgain
             )
 
             Spacer(Modifier.height(16.dp))
 
             BottomOkButtonOutlined(
                 text = getString(R.string.review_write_keyword_complete_btn_add),
-                onClick = onAgain
+                onClick = onAdd
             )
 
             Spacer(Modifier.height(20.dp))
