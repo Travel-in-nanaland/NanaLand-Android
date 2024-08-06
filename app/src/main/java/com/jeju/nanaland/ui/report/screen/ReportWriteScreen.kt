@@ -31,6 +31,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.jeju.nanaland.R
+import com.jeju.nanaland.globalvalue.constant.emailRegex
 import com.jeju.nanaland.ui.component.common.UploadImages
 import com.jeju.nanaland.ui.theme.body02
 import com.jeju.nanaland.ui.theme.bodyBold
@@ -45,10 +46,13 @@ private const val REASON_LENGTH_MAX = 500
 
 @Composable
 fun ReportWriteScreen(
-    onComplete: (String, List<Uri>) -> Unit
+    myEmail: String,
+    onComplete: (String, String, List<Uri>) -> Unit
 ) {
     var reason by remember { mutableStateOf("") }
     var reasonError by remember { mutableStateOf(false) }
+    var email by remember { mutableStateOf(myEmail) }
+    var emailError by remember { mutableStateOf(false) }
     var images by remember { mutableStateOf<List<Uri>>(emptyList()) }
 
     Box(Modifier.fillMaxSize()) {
@@ -56,35 +60,58 @@ fun ReportWriteScreen(
             modifier = Modifier
                 .verticalScroll(rememberScrollState())
         ) {
-            Row(
-                modifier = Modifier
-                    .padding(horizontal = 16.dp),
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                Text(
-                    text = getString(R.string.report_write_resone_title),
-                    style = title02Bold,
-                    color = getColor().gray01
-                )
-                Spacer(modifier = Modifier.width(12.dp))
-                Text(
-                    text = getString(R.string.common_필수_with_star),
-                    style = caption01,
-                    color = getColor().main
-                )
-            }
-
-            Spacer(modifier = Modifier.height(8.dp))
-
             Column(Modifier.padding(horizontal = 16.dp)) {
-                ReasonTextField(
+                Row(
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Text(
+                        text = getString(R.string.report_write_resone_title),
+                        style = title02Bold,
+                        color = getColor().gray01
+                    )
+                    Spacer(modifier = Modifier.width(12.dp))
+                    Text(
+                        text = getString(R.string.common_필수_with_star),
+                        style = caption01,
+                        color = getColor().main
+                    )
+                }
+                Spacer(modifier = Modifier.height(8.dp))
+                InputTextField(
                     text = reason,
-                    isError = reasonError,
+                    hint = getString(R.string.report_write_resone_hint, REASON_LENGTH_MIN),
+                    minLines = 4,
+                    error = if(reasonError) getString(R.string.report_write_resone_error, REASON_LENGTH_MIN) else null,
+                    maxLength = REASON_LENGTH_MAX,
                     onText = { reason = it }
                 )
-            }
 
-            Spacer(modifier = Modifier.height(48.dp))
+                Spacer(modifier = Modifier.height(48.dp))
+
+                Row(
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Text(
+                        text = getString(R.string.common_이메일),
+                        style = title02Bold,
+                        color = getColor().gray01
+                    )
+                    Spacer(modifier = Modifier.width(12.dp))
+                    Text(
+                        text = getString(R.string.common_필수_with_star),
+                        style = caption01,
+                        color = getColor().main
+                    )
+                }
+                Spacer(modifier = Modifier.height(8.dp))
+                InputTextField(
+                    text = email,
+                    hint = getString(R.string.info_modification_proposal_hint2, REASON_LENGTH_MIN),
+                    error = if(emailError) getString(R.string.info_modification_proposal_warning) else null,
+                    onText = { email = it }
+                )
+                Spacer(modifier = Modifier.height(48.dp))
+            }
 
             Text(
                 modifier = Modifier
@@ -112,10 +139,10 @@ fun ReportWriteScreen(
                 .padding(11.dp)
                 .align(Alignment.BottomCenter)
                 .clickableNoEffect {
-                    if(reason.length < REASON_LENGTH_MIN)
-                        reasonError = true
-                    else
-                        onComplete(reason, images)
+                    reasonError = reason.length < REASON_LENGTH_MIN
+                    emailError = !email.matches(emailRegex)
+                    if(!reasonError && !emailError)
+                        onComplete(reason, email, images)
                 },
             text = getString(R.string.info_modification_proposal_보내기),
             style = bodyBold,
@@ -127,9 +154,12 @@ fun ReportWriteScreen(
 
 
 @Composable
-private fun ReasonTextField(
+private fun InputTextField(
     text: String,
-    isError: Boolean,
+    hint: String,
+    minLines: Int = 1,
+    error: String? = null,
+    maxLength: Int? = null,
     onText: (String) -> Unit
 ) {
     val tl = text.length
@@ -139,9 +169,10 @@ private fun ReasonTextField(
             .fillMaxWidth()
             .border(
                 1.dp,
-                if (!isError) getColor().gray02 else getColor().warning,
+                if (error == null) getColor().gray02 else getColor().warning,
                 RoundedCornerShape(12.dp)
-            ),
+            )
+            .padding(horizontal = 16.dp, vertical = 8.dp),
         value = text,
         onValueChange = {
             if(it.length <= REASON_LENGTH_MAX)
@@ -150,39 +181,34 @@ private fun ReasonTextField(
         textStyle = body02.copy(
             color = getColor().black
         ),
-        minLines = 4
+        minLines = minLines
     ) {
         if(tl == 0)
             Text(
-                modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp),
-                text = getString(R.string.report_write_resone_hint, REASON_LENGTH_MIN),
+                text = hint,
                 style = body02,
                 color = getColor().gray01,
             )
 
         Column {
-            Box(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(horizontal = 8.dp, vertical = 6.dp),
-            ) {
-                it()
-            }
+            it()
 
-            Text(
-                modifier = Modifier
-                    .align(Alignment.End)
-                    .padding(end = 10.dp, bottom = 5.dp),
-                text = "($tl /$REASON_LENGTH_MAX)",
-                style = body02,
-                color = getColor().gray01,
-            )
+            maxLength?.let {
+                Text(
+                    modifier = Modifier
+                        .align(Alignment.End)
+                        .padding(end = 10.dp, bottom = 5.dp),
+                    text = "($tl /$it)",
+                    style = body02,
+                    color = getColor().gray01,
+                )
+            }
         }
     }
 
     Spacer(modifier = Modifier.height(8.dp))
 
-    if(isError)
+    error?.let {
         Row(verticalAlignment = Alignment.CenterVertically) {
             Icon(
                 modifier = Modifier.size(20.dp),
@@ -192,9 +218,10 @@ private fun ReasonTextField(
             )
             Spacer(modifier = Modifier.width(4.dp))
             Text(
-                text = getString(R.string.report_write_resone_error, REASON_LENGTH_MIN),
+                text = it,
                 style = caption01,
                 color = getColor().warning
             )
         }
+    }
 }

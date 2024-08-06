@@ -11,11 +11,12 @@ class ReportReviewUseCase @Inject constructor (
 ) {
     operator fun invoke(
         reviewId: Int,
+        email: String,
         claimType: ReportType,
         content: String,
         image: List<UriRequestBody>
     ) = flow {
-        val response = repository.reportReview(reviewId,  claimType,  content, image)
+        val response = repository.reportReview(reviewId, email, claimType,  content, image)
         emit(response)
     }
 }

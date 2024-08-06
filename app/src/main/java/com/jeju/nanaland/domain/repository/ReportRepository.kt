@@ -17,6 +17,7 @@ interface ReportRepository {
     // 리뷰 신고
     suspend fun reportReview(
         reviewId: Int,
+        email: String,
         claimType: ReportType,
         content: String,
         images: List<UriRequestBody>

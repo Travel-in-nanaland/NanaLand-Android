@@ -28,7 +28,7 @@ class ReportRepositoryImpl(
             MultipartBody.Part.createFormData("multipartFile", imageBody.toString(), imageBody)
         }
 
-        val gson = GsonBuilder().setLenient().setPrettyPrinting().create();
+        val gson = GsonBuilder().setLenient().setPrettyPrinting().create()
         val json = gson.toJson(data)
         val requestBody = json.toRequestBody("application/json".toMediaTypeOrNull())
 
@@ -37,6 +37,7 @@ class ReportRepositoryImpl(
 
     override suspend fun reportReview(
         reviewId: Int,
+        email: String,
         claimType: ReportType,
         content: String,
         images: List<UriRequestBody>
@@ -46,6 +47,7 @@ class ReportRepositoryImpl(
         }
         val reqData = Gson().toJson(mapOf(
             "reviewId" to reviewId,
+            "email" to email,
             "claimType" to claimType,
             "content" to content,
         )).toRequestBody("application/json".toMediaTypeOrNull())

@@ -414,7 +414,7 @@
     <string name="report_write_resone_title" translatable="false">신고 사유</string>
     <string name="report_write_resone_hint" translatable="false">신고 사유를 %d자 이상 작성해 주세요.</string>
     <string name="report_write_resone_error" translatable="false">신고 사유는 %d자 이상으로 작성해 주세요!</string>
-    <string name="report_write_complete_toast" translatable="false">신고한 내용은 운영정책에 따라\n최대 5일 이내 처리됩니다.</string>
+    <string name="report_write_complete_toast" translatable="false">신고한 내용은 운영정책에 따라\n최대 24시간 이내 처리됩니다.</string>
 
     <!--리뷰 키워드-->
     <!--TODO 번역-->

@@ -3,6 +3,7 @@ package com.jeju.nanaland.ui.report
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.jeju.nanaland.domain.request.UriRequestBody
+import com.jeju.nanaland.domain.usecase.member.GetUserProfileUseCase
 import com.jeju.nanaland.domain.usecase.report.ReportReviewUseCase
 import com.jeju.nanaland.globalvalue.type.ReportType
 import com.jeju.nanaland.util.network.onError
@@ -18,7 +19,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class ReportViewModel @Inject constructor(
-    private val reportReviewUseCase: ReportReviewUseCase
+    private val reportReviewUseCase: ReportReviewUseCase,
+    getUserProfileUseCase: GetUserProfileUseCase
 ) : ViewModel() {
 
     private val _page = MutableStateFlow(1)
@@ -27,8 +29,22 @@ class ReportViewModel @Inject constructor(
     private val _submitCallState = MutableStateFlow<UiState<Unit>?>(null)
     val submitCallState = _submitCallState.asStateFlow()
 
+    private val _email = MutableStateFlow("")
+    val email = _email.asStateFlow()
     var reportReason: ReportType? = null
         private set
+
+    init {
+        getUserProfileUseCase()
+            .onEach { networkResult ->
+                networkResult.onSuccess { code, message, data ->
+                    data?.let {
+                        _email.update { data.email }
+                    }
+                }
+            }
+            .launchIn(viewModelScope)
+    }
 
     fun setPage(page: Int) {
         _page.update { page }
@@ -40,12 +56,14 @@ class ReportViewModel @Inject constructor(
 
     fun submit(
         reviewId: Int,
+        email: String,
         claimType: ReportType,
         content: String,
         images: List<UriRequestBody>
     ) {
         reportReviewUseCase(
             reviewId,
+            email,
             claimType,
             content,
             images,
