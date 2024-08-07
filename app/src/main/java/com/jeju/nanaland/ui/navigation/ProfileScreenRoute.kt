@@ -15,7 +15,7 @@ import com.jeju.nanaland.globalvalue.constant.ROUTE_PROFILE
 import com.jeju.nanaland.globalvalue.constant.ROUTE_PROFILE_REVIEW
 import com.jeju.nanaland.globalvalue.constant.ROUTE_TYPE_TEST_RESULT
 import com.jeju.nanaland.ui.component.common.CustomSurface
-import com.jeju.nanaland.ui.profile.ProfileScreen
+import com.jeju.nanaland.ui.profile.screen.ProfileScreen
 import com.jeju.nanaland.ui.theme.getColor
 import com.jeju.nanaland.util.navigation.navigate
 

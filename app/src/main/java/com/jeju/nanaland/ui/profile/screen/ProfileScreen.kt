@@ -1,30 +1,42 @@
-package com.jeju.nanaland.ui.profile
+package com.jeju.nanaland.ui.profile.screen
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.paging.compose.collectAsLazyPagingItems
 import com.jeju.nanaland.R
 import com.jeju.nanaland.ui.component.common.CustomTopBarWithMenu
-import com.jeju.nanaland.ui.profile.component.ProfileScreenListSection
+import com.jeju.nanaland.ui.profile.ProfileViewModel
+import com.jeju.nanaland.ui.profile.component.ProfileScreenNoticeListSection
 import com.jeju.nanaland.ui.profile.component.ProfileScreenProfileSection
+import com.jeju.nanaland.ui.profile.component.ProfileScreenReviewListSection
+import com.jeju.nanaland.ui.profile.component.parts.ProfileScreenMoreInfoPart
+import com.jeju.nanaland.ui.profile.component.parts.ProfileScreenTabPart
 import com.jeju.nanaland.ui.profile.component.parts.ReportSheet
+import com.jeju.nanaland.ui.theme.body01
 import com.jeju.nanaland.ui.theme.getColor
 import com.jeju.nanaland.util.resource.getString
 import com.jeju.nanaland.util.ui.UiState
@@ -99,6 +111,7 @@ private fun ProfileScreen(
     else
         null
 
+    var isReviewList by remember { mutableStateOf(true) }
     var moreOptionDialog by remember { mutableStateOf(false) }
 
 
@@ -129,7 +142,11 @@ private fun ProfileScreen(
         }
         when (val up = userProfile.value) {
             is UiState.Loading -> {}
-            is UiState.Success -> {                Spacer(Modifier.height(24.dp))
+            is UiState.Success -> {
+                val reviewList = reviews.itemSnapshotList.items.take(12)
+                val noticeList = notices?.itemSnapshotList?.items?.take(12)
+
+                Spacer(Modifier.height(24.dp))
 
                 ProfileScreenProfileSection(
                     profile = up.data,
@@ -148,16 +165,55 @@ private fun ProfileScreen(
 
                 Spacer(Modifier.height(24.dp))
 
-                ProfileScreenListSection(
-                    reviews = reviews.itemSnapshotList.items.take(12),
-                    notices = notices?.itemSnapshotList?.items?.take(12),
-                    moveToReviewWriteScreen = moveToReviewWriteScreen,
-                    moveToReviewScreen = moveToProfileReviewListScreen,
-                    moveToNoticeScreen = moveToProfileNoticeListScreen
+                ProfileScreenTabPart(
+                    isReviewList = isReviewList,
+                    reviewSize = reviewList.size,
+                    moveToReviewScreen = { moveToProfileReviewListScreen(null) },
+                    toggleReviewNoticeTab = if(!isMine) null else {
+                        { isReviewList = !isReviewList }
+                    }
                 )
+                Column(Modifier.background(getColor().white)) {
 
+                    if (isMine) {
+                        if (!isReviewList || !viewModel.isGuest)
+                            ProfileScreenMoreInfoPart(
+                                isReviewList = isReviewList,
+                                listSize = if (isReviewList) reviewList.size else noticeList?.size
+                                    ?: 0,
+                                moveToListPage = {
+                                    if (isReviewList) moveToProfileReviewListScreen(null)
+                                    else moveToProfileNoticeListScreen(null)
+                                },
+                                moveToReviewWriteScreen = moveToReviewWriteScreen
+                            )
+                    } else
+                        HorizontalDivider()
+
+                    if (isReviewList) {
+                        if (!viewModel.isGuest)
+                            ProfileScreenReviewListSection(reviewList) {
+                                moveToProfileReviewListScreen(it)
+                            }
+                    } else if (noticeList != null) {
+                        ProfileScreenNoticeListSection(noticeList) {
+                            moveToProfileNoticeListScreen(it)
+                        }
+                    }
+                }
+
+                if (isMine && isReviewList){
+                    if (viewModel.isGuest) {
+                        ReviewListCenterText(getString(R.string.mypage_screen_review_guest))
+                        return@Column
+                    }
+                    else if (reviewList.isEmpty()) {
+                        ReviewListCenterText(getString(R.string.mypage_screen_review_empty))
+                        return@Column
+                    }
+                }
                 Spacer(modifier = Modifier
-                    .fillMaxSize()
+                    .fillMaxWidth()
                     .weight(1f)
                     .background(getColor().white))
 
@@ -171,4 +227,22 @@ private fun ProfileScreen(
             onDismissRequest = { moreOptionDialog = false },
             onReport = { /*TODO*/ }
         )
+}
+
+@Composable
+private fun ColumnScope.ReviewListCenterText(txt: String){
+    Box(
+        modifier = Modifier
+            .fillMaxWidth()
+            .weight(1f)
+            .background(getColor().white)
+    ) {
+        Text(
+            modifier = Modifier.align(Alignment.Center),
+            text = txt,
+            color = getColor().gray01,
+            style = body01,
+            textAlign = TextAlign.Center
+        )
+    }
 }
