@@ -12,11 +12,13 @@ import com.jeju.nanaland.ui.component.common.DialogCommon
 import com.jeju.nanaland.ui.profile.ProfileViewModel
 import com.jeju.nanaland.ui.profile.component.ProfileListFrame
 import com.jeju.nanaland.ui.profile.component.parts.ProfileListReviewRow
+import com.jeju.nanaland.ui.profile.component.parts.ReportSheet
 import com.jeju.nanaland.util.resource.getString
 
 @Composable
 fun ProfileReviewListScreen(
     moveToBackScreen: () -> Unit,
+    moveToReviewReportScreen: (Int) -> Unit,
     initialScrollToItemId: Int = -1,
     viewModel: ProfileViewModel = hiltViewModel()
 ) {
@@ -24,6 +26,7 @@ fun ProfileReviewListScreen(
     val isMine = viewModel.userId == null
 
     var removeReviewId by remember { mutableIntStateOf(-1) }
+    var reportReviewId by remember { mutableIntStateOf(-1) }
 
     ProfileListFrame(
         title = getString(
@@ -54,7 +57,7 @@ fun ProfileReviewListScreen(
                     viewModel.setLike(id)
                 },
                 onReport = { id ->
-
+                    reportReviewId = id
                 }
             )
     }
@@ -62,6 +65,12 @@ fun ProfileReviewListScreen(
         RemoveDialog(
             onDismissRequest = { removeReviewId = -1 },
             onDelete = { viewModel.setRemove(removeReviewId)}
+        )
+
+    if(reportReviewId != -1)
+        ReportSheet(
+            onDismissRequest = { reportReviewId = -1 },
+            onReport = { moveToReviewReportScreen(reportReviewId) }
         )
 }
 
