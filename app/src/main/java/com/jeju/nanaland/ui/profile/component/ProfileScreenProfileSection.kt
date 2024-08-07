@@ -140,7 +140,7 @@ fun ProfileScreenProfileSection(
     if(profile.provider != "GUEST")
         DescriptionPart(
             isMine = isMine,
-            text = profile.description ?: ""
+            text = profile.description
         )
 }
 
@@ -207,7 +207,7 @@ private fun DescriptionPart(
                 if(isMine) getString(R.string.mypage_screen_desc_hint)
                 else getString(R.string.mypage_screen_desc_default)
             },
-            color = if(text.isBlank())
+            color = if(isMine && text.isBlank())
                 getColor().gray02
             else
                 getColor().black,
