@@ -17,7 +17,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.jeju.nanaland.R
 import com.jeju.nanaland.domain.entity.member.RecommendedPostData
 import com.jeju.nanaland.ui.component.common.CustomSurface
-import com.jeju.nanaland.ui.component.common.CustomTopBar
+import com.jeju.nanaland.ui.component.common.topbar.CustomTopBar
 import com.jeju.nanaland.ui.component.signup.recommendedspot.RecommendedSpotScreenBottomButton
 import com.jeju.nanaland.ui.component.signup.recommendedspot.RecommendedSpotScreenItem
 import com.jeju.nanaland.ui.component.signup.recommendedspot.RecommendedSpotScreenText1
@@ -78,23 +78,29 @@ private fun RecommendedSpotScreen(
 
                 Spacer(Modifier.height(40.dp))
 
-                if (recommendedPostList.isNotEmpty()) {
+//                if (recommendedPostList.isNotEmpty()) {
                     Column(Modifier.padding(start = 30.dp, end = 30.dp)) {
                         RecommendedSpotScreenItem(
-                            imageUri = recommendedPostList[0].firstImage?.thumbnailUrl,
-                            title = recommendedPostList[0].title ?: "",
-                            description = recommendedPostList[0].intro ?: ""
+                            imageUri = "",
+                            title = "가나다라",
+                            description = "ㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏ"
                         )
 
-                        Spacer(Modifier.height(32.dp))
-
-                        RecommendedSpotScreenItem(
-                            imageUri = recommendedPostList[1].firstImage?.thumbnailUrl,
-                            title = recommendedPostList[1].title ?: "",
-                            description = recommendedPostList[1].intro ?: ""
-                        )
+//                        RecommendedSpotScreenItem(
+//                            imageUri = recommendedPostList[0].firstImage?.thumbnailUrl,
+//                            title = recommendedPostList[0].title ?: "",
+//                            description = recommendedPostList[0].intro ?: ""
+//                        )
+//
+//                        Spacer(Modifier.height(32.dp))
+//
+//                        RecommendedSpotScreenItem(
+//                            imageUri = recommendedPostList[1].firstImage?.thumbnailUrl,
+//                            title = recommendedPostList[1].title ?: "",
+//                            description = recommendedPostList[1].intro ?: ""
+//                        )
                     }
-                }
+//                }
 
                 Spacer(Modifier.height(80.dp))
             }

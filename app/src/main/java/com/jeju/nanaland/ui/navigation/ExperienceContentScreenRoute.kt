@@ -11,7 +11,9 @@ import com.jeju.nanaland.globalvalue.constant.ROUTE_EXPERIENCE_CONTENT
 import com.jeju.nanaland.globalvalue.constant.ROUTE_EXPERIENCE_LIST
 import com.jeju.nanaland.globalvalue.constant.ROUTE_INFORMATION_MODIFICATION_PROPOSAL_CATEGORY
 import com.jeju.nanaland.globalvalue.constant.ROUTE_MAIN
+import com.jeju.nanaland.globalvalue.constant.ROUTE_REVIEW_LIST
 import com.jeju.nanaland.globalvalue.constant.ROUTE_REVIEW_WRITE_ROUTE
+import com.jeju.nanaland.globalvalue.constant.ROUTE_SIGN_IN
 import com.jeju.nanaland.globalvalue.type.MainScreenViewType
 import com.jeju.nanaland.globalvalue.type.ReviewCategoryType
 import com.jeju.nanaland.ui.experience.ExperienceContentScreen
@@ -19,6 +21,7 @@ import com.jeju.nanaland.ui.experience.ExperienceListViewModel
 import com.jeju.nanaland.ui.main.MainViewModel
 import com.jeju.nanaland.ui.main.favorite.FavoriteViewModel
 import com.jeju.nanaland.ui.main.home.search.SearchViewModel
+import com.jeju.nanaland.util.log.LogUtil
 import com.jeju.nanaland.util.navigation.navigate
 
 fun NavGraphBuilder.experienceContentScreen(navController: NavController) = composable(route = ROUTE_EXPERIENCE_CONTENT) {
@@ -47,7 +50,7 @@ fun NavGraphBuilder.experienceContentScreen(navController: NavController) = comp
                     }
                     tmp
                 }
-                MainScreenViewType.JejuStory -> {
+                MainScreenViewType.NanaPick -> {
                     val tmp = { _: Int, _: Boolean ->
                     }
                     tmp
@@ -76,6 +79,7 @@ fun NavGraphBuilder.experienceContentScreen(navController: NavController) = comp
             navController.navigate(ROUTE_INFORMATION_MODIFICATION_PROPOSAL_CATEGORY, bundle)
         },
         moveToReviewWritingScreen = { id, image, title, address ->
+            LogUtil.e("moveToReviewWritingScreen", "moveToReviewWritingScreen")
             val bundle = bundleOf(
                 "id" to id,
                 "category" to ReviewCategoryType.EXPERIENCE.toString(),
@@ -85,6 +89,20 @@ fun NavGraphBuilder.experienceContentScreen(navController: NavController) = comp
             )
             navController.navigate(ROUTE_REVIEW_WRITE_ROUTE, bundle)
         },
-        moveToSignInScreen = {}
+        moveToSignInScreen = { navController.navigate(ROUTE_SIGN_IN) {
+            popUpTo(ROUTE_MAIN) { inclusive = true }
+            launchSingleTop = true
+        } },
+        moveToReviewListScreen = { isFavorite, image, title, address ->
+            val bundle = bundleOf(
+                "isFavorite" to isFavorite,
+                "contentId" to it.arguments?.getInt("contentId"),
+                "category" to ReviewCategoryType.EXPERIENCE.toString(),
+                "image" to image,
+                "title" to title,
+                "address" to address
+            )
+            navController.navigate(ROUTE_REVIEW_LIST, bundle)
+        }
     )
 }

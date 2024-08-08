@@ -41,6 +41,7 @@ import com.jeju.nanaland.ui.main.favorite.FavoriteViewModel
 import com.jeju.nanaland.ui.main.home.HomeScreen
 import com.jeju.nanaland.ui.main.home.HomeViewModel
 import com.jeju.nanaland.ui.main.home.search.SearchViewModel
+import com.jeju.nanaland.ui.nanapick.NanaPickListScreen
 import com.jeju.nanaland.ui.main.jejustory.JejuStoryScreen
 import com.jeju.nanaland.ui.profile.screen.ProfileScreen
 import com.jeju.nanaland.ui.theme.NanaLandTheme
@@ -57,7 +58,7 @@ fun MainScreen(
     deepLinkData: DeepLinkData,
     moveToNotificationScreen: () -> Unit,
     moveToCategoryContentScreen: (Int, String?, Boolean) -> Unit,
-    moveToNanaPickListScreen: () -> Unit,
+    moveToRestaurantListScreen: () -> Unit,
     moveToNatureListScreen: (ListFilter) -> Unit,
     moveToFestivalListScreen: (ListFilter) -> Unit,
     moveToMarketListScreen: () -> Unit,
@@ -117,7 +118,7 @@ fun MainScreen(
         },
         moveToNotificationScreen = moveToNotificationScreen,
         moveToCategoryContentScreen = moveToCategoryContentScreen,
-        moveToNanaPickListScreen = moveToNanaPickListScreen,
+        moveToRestaurantListScreen = moveToRestaurantListScreen,
         moveToNatureListScreen = moveToNatureListScreen,
         moveToFestivalListScreen = moveToFestivalListScreen,
         moveToMarketListScreen = moveToMarketListScreen,
@@ -145,7 +146,7 @@ private fun MainScreen(
     initFavoriteScreen: () -> Unit,
     moveToNotificationScreen: () -> Unit,
     moveToCategoryContentScreen: (Int, String?, Boolean) -> Unit,
-    moveToNanaPickListScreen: () -> Unit,
+    moveToRestaurantListScreen: () -> Unit,
     moveToNatureListScreen: (ListFilter) -> Unit,
     moveToFestivalListScreen: (ListFilter) -> Unit,
     moveToMarketListScreen: () -> Unit,
@@ -186,7 +187,7 @@ private fun MainScreen(
                         HomeScreen(
                             moveToNotificationScreen = moveToNotificationScreen,
                             moveToCategoryContentScreen = moveToCategoryContentScreen,
-                            moveToNanaPickListScreen = moveToNanaPickListScreen,
+                            moveToRestaurantListScreen = moveToRestaurantListScreen,
                             moveToNatureListScreen = moveToNatureListScreen,
                             moveToFestivalListScreen = moveToFestivalListScreen,
                             moveToMarketListScreen = moveToMarketListScreen,
@@ -202,8 +203,11 @@ private fun MainScreen(
                             moveToSignInScreen = moveToSignInScreen,
                         )
                     }
-                    MainScreenViewType.JejuStory -> {
-                        JejuStoryScreen()
+                    MainScreenViewType.NanaPick -> {
+                        NanaPickListScreen(
+                            moveToNanaPickContentScreen = {},
+                            moveToMainScreen = {},
+                        )
                     }
                     MainScreenViewType.MyPage -> {
                         ProfileScreen(
@@ -318,10 +322,10 @@ private fun MainScreenPreview() {
             label = getString(R.string.common_찜)
         ),
         MainViewModel.NavigationItemContent(
-            viewType = MainScreenViewType.JejuStory,
-            iconSelected = R.drawable.ic_group_filled,
-            iconUnselected = R.drawable.ic_group_outlined,
-            label = getString(R.string.common_제주_이야기)
+            viewType = MainScreenViewType.NanaPick,
+            iconSelected = R.drawable.ic_logo_gray,
+            iconUnselected = R.drawable.ic_logo_gray,
+            label = getString(R.string.common_나나s_Pick)
         ),
         MainViewModel.NavigationItemContent(
             viewType = MainScreenViewType.MyPage,

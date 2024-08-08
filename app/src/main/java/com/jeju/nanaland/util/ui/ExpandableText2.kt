@@ -23,7 +23,7 @@ import com.jeju.nanaland.ui.theme.caption01
 import com.jeju.nanaland.ui.theme.getColor
 
 @Composable
-fun ExpandableText(
+fun ExpandableText2(
     text: String,
     modifier: Modifier = Modifier,
     minimizedMaxLines: Int = 1,

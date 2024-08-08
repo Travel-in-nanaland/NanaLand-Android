@@ -12,6 +12,7 @@ import com.jeju.nanaland.data.api.MemberApi
 import com.jeju.nanaland.data.api.NanaPickApi
 import com.jeju.nanaland.data.api.NatureApi
 import com.jeju.nanaland.data.api.ReportApi
+import com.jeju.nanaland.data.api.RestaurantApi
 import com.jeju.nanaland.data.api.ReviewApi
 import com.jeju.nanaland.data.api.SearchApi
 import com.jeju.nanaland.util.network.LogInterceptor
@@ -168,5 +169,11 @@ object NetworkModule {
     @Provides
     fun provideBoardApi(@AccessTokenAutoAdded retrofit: Retrofit): BoardApi {
         return retrofit.create(BoardApi::class.java)
+    }
+
+    @Singleton
+    @Provides
+    fun provideRestaurantApi(@AccessTokenAutoAdded retrofit: Retrofit): RestaurantApi {
+        return retrofit.create(RestaurantApi::class.java)
     }
 }

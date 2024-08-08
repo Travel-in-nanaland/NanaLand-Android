@@ -17,6 +17,7 @@ import com.jeju.nanaland.domain.request.review.GetReviewByUserRequest
 import com.jeju.nanaland.domain.request.review.GetReviewListByPostRequest
 import com.jeju.nanaland.domain.request.review.GetReviewThumbnailListByUserRequest
 import com.jeju.nanaland.domain.request.review.ModifyUserReviewRequest
+import com.jeju.nanaland.domain.request.review.ToggleReviewFavoriteRequest
 import com.jeju.nanaland.globalvalue.type.ReviewCategoryType
 import com.jeju.nanaland.util.network.NetworkResult
 
@@ -62,7 +63,7 @@ interface ReviewRepository {
 
     // 리뷰 좋아요 토글
     suspend fun toggleReviewFavorite(
-        id: Int
+        data: ToggleReviewFavoriteRequest
     ): NetworkResult<ReviewFavorite>
 
     // 내가 쓴 리뷰 수정

@@ -26,7 +26,7 @@ import com.jeju.nanaland.globalvalue.constant.getLocationList
 import com.jeju.nanaland.globalvalue.type.AnchoredDraggableContentState
 import com.jeju.nanaland.globalvalue.type.FestivalCategoryType
 import com.jeju.nanaland.ui.component.common.CustomSurface
-import com.jeju.nanaland.ui.component.common.CustomTopBar
+import com.jeju.nanaland.ui.component.common.topbar.CustomTopBar
 import com.jeju.nanaland.ui.component.listscreen.category.FestivalCategoryListTab
 import com.jeju.nanaland.ui.component.listscreen.filter.DateFilterBottomDialog
 import com.jeju.nanaland.ui.component.listscreen.filter.DateLocationFilterTopBar

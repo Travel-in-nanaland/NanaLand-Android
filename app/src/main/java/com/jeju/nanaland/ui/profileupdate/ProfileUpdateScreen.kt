@@ -28,7 +28,7 @@ import com.jeju.nanaland.globalvalue.constant.INTRODUCTION_CONSTRAINT
 import com.jeju.nanaland.globalvalue.type.InputIntroductionState
 import com.jeju.nanaland.globalvalue.type.InputNicknameState
 import com.jeju.nanaland.ui.component.common.CustomSurface
-import com.jeju.nanaland.ui.component.common.CustomTopBar
+import com.jeju.nanaland.ui.component.common.topbar.CustomTopBar
 import com.jeju.nanaland.ui.component.profileupdate.ProfileUpdateScreenBottomButton
 import com.jeju.nanaland.ui.component.profileupdate.ProfileUpdateScreenIntroductionTextField
 import com.jeju.nanaland.ui.component.profileupdate.ProfileUpdateScreenNicknameText

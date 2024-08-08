@@ -18,12 +18,13 @@ import com.jeju.nanaland.util.ui.UiState
 
 @Composable
 fun KeywordLocationFilterTopBar(
+    text: String = "키워드",
     count: UiState<Int>,
     selectedKeywordList: SnapshotStateList<Boolean>,
     keywordList: List<String>,
     selectedLocationList: SnapshotStateList<Boolean>,
     locationList: List<String>,
-    openActivityFilterDialog: () -> Unit,
+    openKeywordFilterDialog: () -> Unit,
     openLocationFilterDialog: () -> Unit,
     showDimBackground: () -> Unit,
 ) {
@@ -43,9 +44,10 @@ fun KeywordLocationFilterTopBar(
         Spacer(Modifier.weight(1f))
 
         KeywordFilterBox(
+            text = text,
             showDimBackground = showDimBackground,
             keywordList = keywordList,
-            openKeywordFilterDialog = openActivityFilterDialog,
+            openKeywordFilterDialog = openKeywordFilterDialog,
             selectedKeywordList = selectedKeywordList
         )
 

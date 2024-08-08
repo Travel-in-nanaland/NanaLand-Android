@@ -14,8 +14,8 @@ fun HomeScreenCategoryButtons(
     moveToNatureListScreen: (ListFilter) -> Unit,
     moveToFestivalListScreen: (ListFilter) -> Unit,
     moveToMarketListScreen: () -> Unit,
-    moveToExperienceScreen: () -> Unit,
-    moveToNanaPickListScreen: () -> Unit,
+    moveToExperienceListScreen: () -> Unit,
+    moveToRestaurantListScreen: () -> Unit,
 ) {
     Row() {
         HomeScreenCategoryButton(
@@ -39,13 +39,13 @@ fun HomeScreenCategoryButtons(
         HomeScreenCategoryButton(
             resId = R.drawable.img_activity,
             text = getString(R.string.common_이색_체험),
-            onClick = moveToExperienceScreen
+            onClick = moveToExperienceListScreen
         )
         Spacer(Modifier.weight(1f))
         HomeScreenCategoryButton(
-            resId = R.drawable.img_nanapick,
-            text = getString(R.string.common_나나s_Pick),
-            onClick = moveToNanaPickListScreen
+            resId = R.drawable.img_restaurant,
+            text = "제주 맛집",
+            onClick = moveToRestaurantListScreen
         )
     }
 }

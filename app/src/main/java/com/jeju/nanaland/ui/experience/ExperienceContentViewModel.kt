@@ -7,9 +7,11 @@ import com.jeju.nanaland.domain.entity.review.ReviewListData
 import com.jeju.nanaland.domain.request.experience.GetExperienceContentRequest
 import com.jeju.nanaland.domain.request.favorite.ToggleFavoriteRequest
 import com.jeju.nanaland.domain.request.review.GetReviewListByPostRequest
+import com.jeju.nanaland.domain.request.review.ToggleReviewFavoriteRequest
 import com.jeju.nanaland.domain.usecase.experience.GetExperienceContentUseCase
 import com.jeju.nanaland.domain.usecase.favorite.ToggleFavoriteUseCase
 import com.jeju.nanaland.domain.usecase.review.GetReviewListByPostUseCase
+import com.jeju.nanaland.domain.usecase.review.ToggleReviewFavoriteUseCase
 import com.jeju.nanaland.globalvalue.type.ReviewCategoryType
 import com.jeju.nanaland.util.log.LogUtil
 import com.jeju.nanaland.util.network.onError
@@ -29,7 +31,8 @@ import javax.inject.Inject
 class ExperienceContentViewModel @Inject constructor(
     private val getExperienceContentUseCase: GetExperienceContentUseCase,
     private val toggleFavoriteUseCase: ToggleFavoriteUseCase,
-    private val getReviewListUseCase: GetReviewListByPostUseCase
+    private val getReviewListUseCase: GetReviewListByPostUseCase,
+    private val toggleReviewFavoriteUseCase: ToggleReviewFavoriteUseCase
 ) : ViewModel() {
 
     private val _experienceContent = MutableStateFlow<UiState<ExperienceContent>>(UiState.Loading)
@@ -112,6 +115,39 @@ class ExperienceContentViewModel @Inject constructor(
                 }.onException {  }
             }
             .catch { LogUtil.e("flow Error", "getReviewListUseCase") }
+            .launchIn(viewModelScope)
+    }
+
+    fun toggleReviewFavorite(reviewId: Int) {
+        val requestData = ToggleReviewFavoriteRequest(
+            id = reviewId
+        )
+        toggleReviewFavoriteUseCase(requestData)
+            .onEach { networkResult ->
+                networkResult.onSuccess { code, message, data ->
+                    data?.let {
+                        _reviewList.update { uiState ->
+                            if (uiState is UiState.Success) {
+                                val newList = uiState.data.data.map { item ->
+                                    if (item.id == reviewId) item.copy(
+                                        reviewHeart = data.reviewHeart,
+                                        heartCount = if (data.reviewHeart) item.heartCount + 1 else item.heartCount - 1
+                                    )
+                                    else item
+                                }
+                                UiState.Success(uiState.data.copy(data = newList))
+                            } else {
+                                uiState
+                            }
+                        }
+                    }
+                }.onError { code, message ->
+
+                }.onException {
+
+                }
+            }
+            .catch { LogUtil.e("flow Error", "toggleFavoriteUseCase") }
             .launchIn(viewModelScope)
     }
 }

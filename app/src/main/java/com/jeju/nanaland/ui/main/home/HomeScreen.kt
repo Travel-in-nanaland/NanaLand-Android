@@ -23,7 +23,7 @@ import com.jeju.nanaland.util.ui.ScreenPreview
 fun HomeScreen(
     moveToNotificationScreen: () -> Unit,
     moveToCategoryContentScreen: (Int, String?, Boolean) -> Unit,
-    moveToNanaPickListScreen: () -> Unit,
+    moveToRestaurantListScreen: () -> Unit,
     moveToNatureListScreen: (ListFilter) -> Unit,
     moveToFestivalListScreen: (ListFilter) -> Unit,
     moveToMarketListScreen: () -> Unit,
@@ -44,11 +44,11 @@ fun HomeScreen(
         updateSearchCategoryType = searchViewModel::updateSelectedCategoryType,
         moveToNotificationScreen = moveToNotificationScreen,
         moveToCategoryContentScreen = moveToCategoryContentScreen,
-        moveToNanaPickListScreen = moveToNanaPickListScreen,
+        moveToRestaurantListScreen = moveToRestaurantListScreen,
         moveToNatureListScreen = moveToNatureListScreen,
         moveToFestivalListScreen = moveToFestivalListScreen,
         moveToMarketListScreen = moveToMarketListScreen,
-        moveToExperienceScreen = moveToExperienceListScreen,
+        moveToExperienceListScreen = moveToExperienceListScreen,
         moveToSignInScreen = moveToSignInScreen,
         isContent = true
     )
@@ -65,11 +65,11 @@ private fun HomeScreen(
     updateSearchCategoryType: (SearchCategoryType) -> Unit,
     moveToNotificationScreen: () -> Unit,
     moveToCategoryContentScreen: (Int, String?, Boolean) -> Unit,
-    moveToNanaPickListScreen: () -> Unit,
+    moveToRestaurantListScreen: () -> Unit,
     moveToNatureListScreen: (ListFilter) -> Unit,
     moveToFestivalListScreen: (ListFilter) -> Unit,
     moveToMarketListScreen: () -> Unit,
-    moveToExperienceScreen: () -> Unit,
+    moveToExperienceListScreen: () -> Unit,
     moveToSignInScreen: () -> Unit,
     isContent: Boolean
 ) {
@@ -91,11 +91,11 @@ private fun HomeScreen(
             HomeScreenViewType.Home -> {
                 HomeContent(
                     moveToCategoryContentScreen = moveToCategoryContentScreen,
-                    moveToNanaPickListScreen = moveToNanaPickListScreen,
+                    moveToRestaurantListScreen = moveToRestaurantListScreen,
                     moveToNatureListScreen = moveToNatureListScreen,
                     moveToFestivalListScreen = moveToFestivalListScreen,
                     moveToMarketListScreen = moveToMarketListScreen,
-                    moveToExperienceScreen = moveToExperienceScreen,
+                    moveToExperienceListScreen = moveToExperienceListScreen,
                     moveToSignInScreen = moveToSignInScreen,
                 )
             }

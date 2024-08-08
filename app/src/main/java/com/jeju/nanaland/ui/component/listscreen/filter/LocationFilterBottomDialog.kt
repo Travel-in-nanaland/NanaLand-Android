@@ -113,7 +113,9 @@ fun LocationFilterBottomDialog(
 
         Spacer(Modifier.height(24.dp))
 
-        JejuMapImage()
+        JejuMapImage(
+            selectedLocationList = tmpSelectedLocationList
+        )
 
         JejuMapNoticeText()
 

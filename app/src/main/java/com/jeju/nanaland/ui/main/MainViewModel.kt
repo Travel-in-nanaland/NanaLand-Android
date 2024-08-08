@@ -34,10 +34,10 @@ class MainViewModel @Inject constructor() : ViewModel() {
                 label = getString(R.string.common_찜)
             ),
             NavigationItemContent(
-                viewType = MainScreenViewType.JejuStory,
-                iconSelected = R.drawable.ic_group_filled,
-                iconUnselected = R.drawable.ic_group_outlined,
-                label = getString(R.string.common_제주_이야기)
+                viewType = MainScreenViewType.NanaPick,
+                iconSelected = R.drawable.ic_logo_gray,
+                iconUnselected = R.drawable.ic_logo_gray,
+                label = getString(R.string.common_나나s_Pick)
             ),
             NavigationItemContent(
                 viewType = MainScreenViewType.MyPage,

@@ -1,15 +1,25 @@
 package com.jeju.nanaland.ui.component.review.parts
 
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import com.jeju.nanaland.R
+import com.jeju.nanaland.ui.component.common.ExpandableText
 import com.jeju.nanaland.ui.theme.body02
+import com.jeju.nanaland.ui.theme.caption01
 import com.jeju.nanaland.ui.theme.getColor
-import com.jeju.nanaland.util.ui.ExpandableText
+import com.jeju.nanaland.util.resource.getString
 
 @Composable
-fun ReviewContent(text: String) {
+fun ReviewContent(
+    text: String,
+    onExpanded: (Boolean) -> Unit,
+) {
     ExpandableText(
         text = text,
-        minimizedMaxLines = 2
+        style = body02.copy(color = getColor().black),
+        collapsedMaxLine = 2,
+        showMoreText = getString(R.string.detail_screen_common_더_보기),
+        showMoreStyle = caption01.copy(color = getColor().gray01).toSpanStyle(),
+        showLessText = getString(R.string.detail_screen_common_접기),
+        onExpanded = onExpanded
     )
 }

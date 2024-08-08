@@ -1,4 +1,4 @@
-package com.jeju.nanaland.ui.component.common
+package com.jeju.nanaland.ui.component.common.topbar
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box

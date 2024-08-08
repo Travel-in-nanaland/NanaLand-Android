@@ -47,3 +47,22 @@ fun getCultureArtKeywordList() = listOf(
 )
 
 fun getCultureArtKeywordSelectionList() = mutableStateListOf(false, false, false, false, false, false, false, false, false)
+
+fun getRestaurantKeywordList() = listOf(
+    "한식",
+    "중식",
+    "일식",
+    "양식",
+    "분식",
+    "남미 음식",
+    "동남아 음식",
+    "비건푸드",
+    "할랄푸드",
+    "육류/흑돼지",
+    "해산물",
+    "치킨/버거",
+    "카페/디저트",
+    "펍/요리주점"
+)
+
+fun getRestaurantKeywordSelectionList() = mutableStateListOf(false, false, false, false, false, false, false, false, false, false, false, false, false, false)

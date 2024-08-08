@@ -11,7 +11,7 @@ import com.jeju.nanaland.util.resource.getString
 fun LanguageInitializationScreenText2() {
     Text(
         text = getString(R.string.profile_initialization_screen_select_language),
-        color = getColor().black,
+        color = getColor().white,
         style = largeTitle01
     )
 }

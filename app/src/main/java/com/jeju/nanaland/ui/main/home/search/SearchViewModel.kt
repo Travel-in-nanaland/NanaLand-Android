@@ -21,6 +21,7 @@ import com.jeju.nanaland.domain.usecase.search.GetHotPostsUseCase
 import com.jeju.nanaland.domain.usecase.search.GetMarketSearchResultListUseCase
 import com.jeju.nanaland.domain.usecase.search.GetNatureSearchResultListUseCase
 import com.jeju.nanaland.domain.usecase.search.GetTopKeywordsUseCase
+import com.jeju.nanaland.globalvalue.constant.PAGING_SIZE
 import com.jeju.nanaland.globalvalue.type.SearchCategoryType
 import com.jeju.nanaland.util.log.LogUtil
 import com.jeju.nanaland.util.network.onError
@@ -104,7 +105,7 @@ class SearchViewModel @Inject constructor(
             else -> GetSearchResultListRequest(
                 keyword = keyword,
                 page = page,
-                size = 12
+                size = PAGING_SIZE
             )
         }
         when (_selectedCategory.value) {

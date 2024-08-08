@@ -46,7 +46,7 @@ fun NavGraphBuilder.marketContentScreen(navController: NavController) = composab
                     }
                     tmp
                 }
-                MainScreenViewType.JejuStory -> {
+                MainScreenViewType.NanaPick -> {
                     val tmp = { _: Int, _: Boolean ->
                     }
                     tmp

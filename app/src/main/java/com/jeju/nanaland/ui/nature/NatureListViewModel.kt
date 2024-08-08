@@ -7,6 +7,7 @@ import com.jeju.nanaland.domain.request.favorite.ToggleFavoriteRequest
 import com.jeju.nanaland.domain.request.nature.GetNatureListRequest
 import com.jeju.nanaland.domain.usecase.favorite.ToggleFavoriteUseCase
 import com.jeju.nanaland.domain.usecase.nature.GetNatureListUseCase
+import com.jeju.nanaland.globalvalue.constant.PAGING_SIZE
 import com.jeju.nanaland.globalvalue.constant.getLocationList
 import com.jeju.nanaland.globalvalue.constant.getLocationSelectionList
 import com.jeju.nanaland.util.log.LogUtil
@@ -48,7 +49,7 @@ class NatureListViewModel @Inject constructor(
                 if (value) locationList[idx] else null
             },
             page = page,
-            size = 12
+            size = PAGING_SIZE
         )
         getNatureListUseCase(requestData)
             .onEach { networkResult ->
