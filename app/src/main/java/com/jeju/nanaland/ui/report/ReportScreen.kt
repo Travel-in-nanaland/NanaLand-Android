@@ -23,8 +23,8 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.jeju.nanaland.R
 import com.jeju.nanaland.domain.request.UriRequestBody
 import com.jeju.nanaland.ui.component.common.CustomSurface
-import com.jeju.nanaland.ui.component.common.CustomTopBar
 import com.jeju.nanaland.ui.component.common.DialogCommon
+import com.jeju.nanaland.ui.component.common.topbar.CustomTopBar
 import com.jeju.nanaland.ui.report.screen.ReportCategoryScreen
 import com.jeju.nanaland.ui.report.screen.ReportWriteScreen
 import com.jeju.nanaland.ui.theme.getColor
