@@ -1,18 +1,21 @@
 package com.jeju.nanaland.ui.reviewwrite
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import com.airbnb.lottie.compose.LottieAnimation
+import com.airbnb.lottie.compose.LottieCompositionSpec
+import com.airbnb.lottie.compose.animateLottieCompositionAsState
+import com.airbnb.lottie.compose.rememberLottieComposition
 import com.jeju.nanaland.R
 import com.jeju.nanaland.globalvalue.type.ReviewCategoryType
 import com.jeju.nanaland.ui.component.common.BottomOkButton
@@ -50,6 +53,10 @@ private fun ReviewWriteCompleteUI(
     onAdd: () -> Unit,
 ) {
     val uiData = getUiDataByCategory(category)
+    val composition by rememberLottieComposition(
+        LottieCompositionSpec.RawRes(uiData.first)
+    )
+    val progress by animateLottieCompositionAsState(composition)
 
     CustomSurface {
         Column(
@@ -57,10 +64,11 @@ private fun ReviewWriteCompleteUI(
         ) {
             Spacer(Modifier.height(80.dp))
 
-            Image(
-                modifier = Modifier.width(250.dp),
-                painter = painterResource(uiData.first),
-                contentDescription = null,
+            LottieAnimation(
+                modifier = Modifier
+                    .fillMaxWidth(),
+                composition = composition,
+                progress = { progress },
             )
 
             Spacer(Modifier.height(40.dp))
@@ -106,12 +114,12 @@ private fun getUiDataByCategory(
 ): Triple<Int/* image id */,String/* title */,String/* sub text */> {
     return when(categoryType) { // TODO
         ReviewCategoryType.EXPERIENCE -> Triple(
-            R.drawable.img_star,
+            R.raw.review_complete_star,
             getString(R.string.review_write_keyword_complete_title1),
             getString(R.string.review_write_keyword_complete_sub1),
         )
         ReviewCategoryType.RESTAURANT ->  Triple(
-            R.drawable.img_salad,
+            R.raw.review_complete_salad,
             getString(R.string.review_write_keyword_complete_title2),
             getString(R.string.review_write_keyword_complete_sub2),
         )

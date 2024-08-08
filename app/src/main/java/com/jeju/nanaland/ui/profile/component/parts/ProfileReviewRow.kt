@@ -59,7 +59,7 @@ fun ProfileReviewRow(
                 modifier = Modifier
                     .fillMaxWidth()
                     .weight(1f)
-                    .clip(RoundedCornerShape(8.dp)),
+                    .clip(RoundedCornerShape(8.dp,8.dp,0.dp,0.dp)),
                 imageModel = { data.images.firstOrNull()?.thumbnailUrl }
             )
 

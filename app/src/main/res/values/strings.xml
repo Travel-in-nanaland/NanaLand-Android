@@ -328,6 +328,8 @@
     <string name="mypage_screen_desc_default" translatable="false">안녕하세요! 반가워요🖐️\n함께 제주 여행을 즐겨봐요 :D</string>
     <string name="mypage_screen_desc_hint" translatable="false">나를 한 줄로 표현해보세요!</string>
     <string name="mypage_screen_review_remove_dialog" translatable="false">해당 리뷰를\n삭제하시겠습니까?</string>
+    <string name="mypage_screen_review_guest" translatable="false">로그인하여 나만의 경험을 기록해보세요!</string>
+    <string name="mypage_screen_review_empty" translatable="false">후기를 남겨 나만의 경험을 기록하세요!</string>
 
 
     <!--프로필 수정 화면-->
