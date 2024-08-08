@@ -18,7 +18,7 @@ import com.jeju.nanaland.util.ui.UiState
 
 @Composable
 fun KeywordLocationFilterTopBar(
-    text: String = "키워드",
+    text: String = "종류",
     count: UiState<Int>,
     selectedKeywordList: SnapshotStateList<Boolean>,
     keywordList: List<String>,

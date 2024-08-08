@@ -127,7 +127,7 @@ private fun RestaurantContentScreen(
                 modifier = Modifier.fillMaxSize()
             ) {
                 CustomTopBarWithShareButton(
-                    title = "액티비티",
+                    title = "제주 맛집",
                     onBackButtonClicked = moveToBackScreen,
                     onShareButtonClicked = {}
                 )

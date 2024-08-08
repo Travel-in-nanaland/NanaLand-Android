@@ -46,7 +46,7 @@ import kotlinx.coroutines.launch
 @Composable
 fun ExperienceListScreen(
     moveToBackScreen: () -> Unit,
-    moveToExperienceContentScreen: (Int) -> Unit,
+    moveToExperienceContentScreen: (Int, String) -> Unit,
     moveToSignInScreen: () -> Unit,
     viewModel: ExperienceListViewModel = hiltViewModel()
 ) {
@@ -91,7 +91,7 @@ private fun ExperienceListScreen(
     clearExperienceList: () -> Unit,
     toggleFavorite: (Int) -> Unit,
     moveToBackScreen: () -> Unit,
-    moveToExperienceContentScreen: (Int) -> Unit,
+    moveToExperienceContentScreen: (Int, String) -> Unit,
     moveToSignInScreen: () -> Unit,
     isContent: Boolean
 ) {
@@ -154,6 +154,7 @@ private fun ExperienceListScreen(
                 )
 
                 ExperienceThumbnailList(
+                    experienceCategory = selectedCategoryType.toString(),
                     listState = lazyGridState,
                     thumbnailList = experienceThumbnailDataList,
                     toggleFavorite = toggleFavorite,

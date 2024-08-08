@@ -18,10 +18,11 @@ import com.jeju.nanaland.util.ui.UiState
 
 @Composable
 fun ExperienceThumbnailList(
+    experienceCategory: String,
     listState: LazyGridState,
     thumbnailList: UiState<List<ExperienceThumbnailData>>,
     toggleFavorite: (Int) -> Unit,
-    moveToExperienceContentScreen: (Int) -> Unit,
+    moveToExperienceContentScreen: (Int, String) -> Unit,
     moveToSignInScreen: () -> Unit
 ) {
     when (thumbnailList) {
@@ -46,7 +47,7 @@ fun ExperienceThumbnailList(
                             place = item.addressTag,
                             rating = item.ratingAvg.toString(),
                             onFavoriteButtonClick = { toggleFavorite(item.id) },
-                            onClick = { moveToExperienceContentScreen(item.id) },
+                            onClick = { moveToExperienceContentScreen(item.id, experienceCategory) },
                             moveToSignInScreen = moveToSignInScreen,
                         )
                     }

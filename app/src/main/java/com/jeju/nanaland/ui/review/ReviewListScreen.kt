@@ -104,7 +104,6 @@ fun ReviewListScreen(
                     contentAddress
                 )
             }
-
         },
         moveToBackScreen = moveToBackScreen,
         moveToSignInScreen = moveToSignInScreen,

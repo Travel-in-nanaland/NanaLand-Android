@@ -19,8 +19,8 @@ fun NavGraphBuilder.reviewListScreen(navController: NavController) = composable(
         contentId = it.arguments?.getInt("contentId"),
         category = it.arguments?.getString("category"),
         thumbnailUrl = it.arguments?.getString("thumbnailUrl"),
-        contentTitle = it.arguments?.getString("contentTitle"),
-        contentAddress = it.arguments?.getString("contentAddress"),
+        contentTitle = it.arguments?.getString("title"),
+        contentAddress = it.arguments?.getString("address"),
         moveToBackScreen = { navController.popBackStack() },
         moveToReviewWritingScreen = { id, image, title, address ->
             LogUtil.e("moveToReviewWritingScreen", "moveToReviewWritingScreen")
