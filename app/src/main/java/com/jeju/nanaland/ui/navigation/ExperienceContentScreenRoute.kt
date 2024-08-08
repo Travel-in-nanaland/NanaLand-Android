@@ -13,6 +13,7 @@ import com.jeju.nanaland.globalvalue.constant.ROUTE_INFORMATION_MODIFICATION_PRO
 import com.jeju.nanaland.globalvalue.constant.ROUTE_MAIN
 import com.jeju.nanaland.globalvalue.constant.ROUTE_REVIEW_LIST
 import com.jeju.nanaland.globalvalue.constant.ROUTE_REVIEW_WRITE_ROUTE
+import com.jeju.nanaland.globalvalue.constant.ROUTE_SIGN_IN
 import com.jeju.nanaland.globalvalue.type.MainScreenViewType
 import com.jeju.nanaland.globalvalue.type.ReviewCategoryType
 import com.jeju.nanaland.ui.experience.ExperienceContentScreen
@@ -88,11 +89,18 @@ fun NavGraphBuilder.experienceContentScreen(navController: NavController) = comp
             )
             navController.navigate(ROUTE_REVIEW_WRITE_ROUTE, bundle)
         },
-        moveToSignInScreen = {},
-        moveToReviewListScreen = {
+        moveToSignInScreen = { navController.navigate(ROUTE_SIGN_IN) {
+            popUpTo(ROUTE_MAIN) { inclusive = true }
+            launchSingleTop = true
+        } },
+        moveToReviewListScreen = { isFavorite, image, title, address ->
             val bundle = bundleOf(
+                "isFavorite" to isFavorite,
                 "contentId" to it.arguments?.getInt("contentId"),
-                "category" to "EXPERIENCE"
+                "category" to ReviewCategoryType.EXPERIENCE.toString(),
+                "image" to image,
+                "title" to title,
+                "address" to address
             )
             navController.navigate(ROUTE_REVIEW_LIST, bundle)
         }

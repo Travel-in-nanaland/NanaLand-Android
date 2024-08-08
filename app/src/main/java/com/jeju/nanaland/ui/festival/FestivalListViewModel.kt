@@ -12,6 +12,7 @@ import com.jeju.nanaland.domain.usecase.favorite.ToggleFavoriteUseCase
 import com.jeju.nanaland.domain.usecase.festival.GetEndedFestivalListUseCase
 import com.jeju.nanaland.domain.usecase.festival.GetMonthlyFestivalListUseCase
 import com.jeju.nanaland.domain.usecase.festival.GetSeasonalFestivalListUseCase
+import com.jeju.nanaland.globalvalue.constant.PAGING_SIZE
 import com.jeju.nanaland.globalvalue.constant.getLocationList
 import com.jeju.nanaland.globalvalue.constant.getLocationSelectionList
 import com.jeju.nanaland.globalvalue.type.FestivalCategoryType
@@ -97,7 +98,7 @@ class FestivalListViewModel @Inject constructor(
         }
         val requestData = GetMonthlyFestivalListRequest(
             page = page,
-            size = 12,
+            size = PAGING_SIZE,
             addressFilterList = selectedLocationList.mapIndexedNotNull { idx, value ->
                 if (value) locationList[idx] else null
             },
@@ -137,7 +138,7 @@ class FestivalListViewModel @Inject constructor(
         }
         val requestData = GetEndedFestivalListRequest(
             page = page,
-            size = 12,
+            size = PAGING_SIZE,
             addressFilterList = selectedLocationList.mapIndexedNotNull { idx, value ->
                 if (value) locationList[idx] else null
             }
@@ -175,7 +176,7 @@ class FestivalListViewModel @Inject constructor(
         }
         val requestData = GetSeasonalFestivalListRequest(
             page = page,
-            size = 12,
+            size = PAGING_SIZE,
             season = seasonList[selectedSeasonList.withIndex()
                 .filter { selectedSeasonList[it.index] }[0].index]
         )

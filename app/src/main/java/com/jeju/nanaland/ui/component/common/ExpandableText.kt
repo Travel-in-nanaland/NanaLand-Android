@@ -29,6 +29,7 @@ fun ExpandableText(
     showMoreStyle: SpanStyle = SpanStyle(),
     showLessText: String = "줄이기",
     showLessStyle: SpanStyle = showMoreStyle,
+    onExpanded: (Boolean) -> Unit = {}
 ) {
     var isExpanded by remember { mutableStateOf(false) }
     var clickable by remember { mutableStateOf(false) }
@@ -36,6 +37,7 @@ fun ExpandableText(
     Box(modifier = Modifier
         .clickable(clickable) {
             isExpanded = !isExpanded
+            onExpanded(isExpanded)
         }
         .then(modifier)
     ) {

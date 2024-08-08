@@ -7,6 +7,7 @@ import com.jeju.nanaland.domain.request.favorite.ToggleFavoriteRequest
 import com.jeju.nanaland.domain.request.restaurant.GetRestaurantListRequest
 import com.jeju.nanaland.domain.usecase.favorite.ToggleFavoriteUseCase
 import com.jeju.nanaland.domain.usecase.restaurant.GetRestaurantListUseCase
+import com.jeju.nanaland.globalvalue.constant.PAGING_SIZE
 import com.jeju.nanaland.globalvalue.constant.getLocationSelectionList
 import com.jeju.nanaland.globalvalue.constant.getRestaurantKeywordSelectionList
 import com.jeju.nanaland.util.log.LogUtil
@@ -58,7 +59,7 @@ class RestaurantListViewModel @Inject constructor(
                 if (value) locationList[idx] else null
             },
             page = page,
-            size = 12
+            size = PAGING_SIZE
         )
         getRestaurantListUseCase(requestData)
             .onEach { networkResult ->

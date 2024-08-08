@@ -9,6 +9,7 @@ import com.jeju.nanaland.domain.request.favorite.ToggleFavoriteRequest
 import com.jeju.nanaland.domain.usecase.experience.GetExperienceContentUseCase
 import com.jeju.nanaland.domain.usecase.experience.GetExperienceListUseCase
 import com.jeju.nanaland.domain.usecase.favorite.ToggleFavoriteUseCase
+import com.jeju.nanaland.globalvalue.constant.PAGING_SIZE
 import com.jeju.nanaland.globalvalue.constant.getActivityKeywordSelectionList
 import com.jeju.nanaland.globalvalue.constant.getCultureArtKeywordSelectionList
 import com.jeju.nanaland.globalvalue.constant.getLocationSelectionList
@@ -84,7 +85,7 @@ class ExperienceListViewModel @Inject constructor(
                 if (value) locationList[idx] else null
             },
             page = page,
-            size = 12
+            size = PAGING_SIZE
             )
         getExperienceListUseCase(requestData)
             .onEach { networkResult ->

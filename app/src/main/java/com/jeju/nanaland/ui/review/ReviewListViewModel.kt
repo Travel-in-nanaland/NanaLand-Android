@@ -3,10 +3,13 @@ package com.jeju.nanaland.ui.review
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.jeju.nanaland.domain.entity.review.ReviewData
+import com.jeju.nanaland.domain.request.favorite.ToggleFavoriteRequest
 import com.jeju.nanaland.domain.request.review.GetReviewListByPostRequest
 import com.jeju.nanaland.domain.request.review.ToggleReviewFavoriteRequest
+import com.jeju.nanaland.domain.usecase.favorite.ToggleFavoriteUseCase
 import com.jeju.nanaland.domain.usecase.review.GetReviewListByPostUseCase
 import com.jeju.nanaland.domain.usecase.review.ToggleReviewFavoriteUseCase
+import com.jeju.nanaland.globalvalue.constant.PAGING_SIZE
 import com.jeju.nanaland.globalvalue.type.ReviewCategoryType
 import com.jeju.nanaland.util.log.LogUtil
 import com.jeju.nanaland.util.network.onError
@@ -25,7 +28,8 @@ import javax.inject.Inject
 @HiltViewModel
 class ReviewListViewModel @Inject constructor(
     private val getReviewListUseCase: GetReviewListByPostUseCase,
-    private val toggleReviewFavoriteUseCase: ToggleReviewFavoriteUseCase
+    private val toggleReviewFavoriteUseCase: ToggleReviewFavoriteUseCase,
+    private val toggleFavoriteUseCase: ToggleFavoriteUseCase,
 ) : ViewModel() {
 
     private var page = 0
@@ -35,6 +39,8 @@ class ReviewListViewModel @Inject constructor(
     val reviewRating = _reviewRating.asStateFlow()
     private val _reviewList = MutableStateFlow<UiState<List<ReviewData>>>(UiState.Loading)
     val reviewList = _reviewList.asStateFlow()
+    private val _contentFavorite = MutableStateFlow(false)
+    val contentFavorite = _contentFavorite.asStateFlow()
 
     fun getReviewList(contentId: Int?, category: String?) {
         if (contentId == null || category.isNullOrEmpty()) return
@@ -55,7 +61,7 @@ class ReviewListViewModel @Inject constructor(
                 else -> ReviewCategoryType.NANA_CONTENT
             },
             page = page,
-            size = 12,
+            size = PAGING_SIZE,
         )
         getReviewListUseCase(requestData)
             .onEach { networkResult ->
@@ -104,6 +110,36 @@ class ReviewListViewModel @Inject constructor(
                             } else {
                                 uiState
                             }
+                        }
+                    }
+                }.onError { code, message ->
+
+                }.onException {
+
+                }
+            }
+            .catch { LogUtil.e("flow Error", "toggleFavoriteUseCase") }
+            .launchIn(viewModelScope)
+    }
+
+    fun initContentFavorite(isFavorite: Boolean?) {
+        if (isFavorite == null) return
+        _contentFavorite.update { isFavorite }
+    }
+
+    fun toggleContentFavorite(id: Int?, category: String?) {
+        if (id == null || category == null) return
+
+        val requestData = ToggleFavoriteRequest(
+            id = id,
+            category = category
+        )
+        toggleFavoriteUseCase(requestData)
+            .onEach { networkResult ->
+                networkResult.onSuccess { code, message, data ->
+                    data?.let {
+                        _contentFavorite.update { uiState ->
+                            data.favorite
                         }
                     }
                 }.onError { code, message ->

@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.jeju.nanaland.domain.entity.nanapick.NanaPickBannerData
 import com.jeju.nanaland.domain.request.nanapick.GetNanaPickListRequest
 import com.jeju.nanaland.domain.usecase.nanapick.GetNanaPickListUseCase
+import com.jeju.nanaland.globalvalue.constant.PAGING_SIZE
 import com.jeju.nanaland.util.log.LogUtil
 import com.jeju.nanaland.util.network.onError
 import com.jeju.nanaland.util.network.onException
@@ -31,7 +32,7 @@ class NanaPickListViewModel @Inject constructor(
         _nanaPickList.update { UiState.Loading }
         val requestData = GetNanaPickListRequest(
             page = 0,
-            size = 12
+            size = PAGING_SIZE
         )
         getNanaPickListUseCase(requestData)
             .onEach { networkResult ->

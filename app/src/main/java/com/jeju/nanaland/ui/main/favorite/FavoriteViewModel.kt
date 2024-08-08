@@ -11,6 +11,7 @@ import com.jeju.nanaland.domain.usecase.favorite.GetFavoriteFestivalListUseCase
 import com.jeju.nanaland.domain.usecase.favorite.GetFavoriteMarketListUseCase
 import com.jeju.nanaland.domain.usecase.favorite.GetFavoriteNatureListUseCase
 import com.jeju.nanaland.domain.usecase.favorite.ToggleFavoriteUseCase
+import com.jeju.nanaland.globalvalue.constant.PAGING_SIZE
 import com.jeju.nanaland.globalvalue.type.SearchCategoryType
 import com.jeju.nanaland.util.log.LogUtil
 import com.jeju.nanaland.util.network.onError
@@ -57,7 +58,7 @@ class FavoriteViewModel @Inject constructor(
         }
         val requestData = GetFavoriteListRequest(
             page = page,
-            size = 12
+            size = PAGING_SIZE
         )
         when (_selectedCategory.value) {
             SearchCategoryType.All -> getAllFavoriteListUseCase(requestData)
