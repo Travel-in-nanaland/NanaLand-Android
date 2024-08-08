@@ -67,6 +67,7 @@ fun NavGraphBuilder.experienceContentScreen(navController: NavController) = comp
     }
 
     ExperienceContentScreen(
+        experienceCategory = it.arguments?.getString("experienceCategoryType") ?: "",
         contentId = it.arguments?.getInt("contentId"),
         isSearch = isSearch,
         updatePrevScreenListFavorite = updatePrevScreenListFavorite,

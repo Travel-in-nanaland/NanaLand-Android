@@ -25,6 +25,7 @@ import com.jeju.nanaland.R
 import com.jeju.nanaland.domain.entity.experience.ExperienceContent
 import com.jeju.nanaland.domain.entity.review.ReviewListData
 import com.jeju.nanaland.globalvalue.type.AnchoredDraggableContentState
+import com.jeju.nanaland.globalvalue.type.ExperienceCategoryType
 import com.jeju.nanaland.ui.component.common.BottomOkButton
 import com.jeju.nanaland.ui.component.common.CustomSurface
 import com.jeju.nanaland.ui.component.common.ReviewBottomBar
@@ -47,6 +48,7 @@ import kotlin.math.exp
 
 @Composable
 fun ExperienceContentScreen(
+    experienceCategory: String,
     contentId: Int?,
     isSearch: Boolean,
     updatePrevScreenListFavorite: (Int, Boolean) -> Unit,
@@ -64,6 +66,7 @@ fun ExperienceContentScreen(
     val experienceContent = viewModel.experienceContent.collectAsState().value
     val reviewList = viewModel.reviewList.collectAsState().value
     ExperienceContentScreen(
+        experienceCategory = experienceCategory,
         contentId = contentId,
         experienceContent = experienceContent,
         toggleFavorite = viewModel::toggleFavorite,
@@ -99,6 +102,7 @@ fun ExperienceContentScreen(
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 private fun ExperienceContentScreen(
+    experienceCategory: String,
     contentId: Int?,
     experienceContent: UiState<ExperienceContent>,
     toggleFavorite: (Int, (Int, Boolean) -> Unit) -> Unit,
@@ -124,7 +128,7 @@ private fun ExperienceContentScreen(
                 modifier = Modifier.fillMaxSize()
             ) {
                 CustomTopBarWithShareButton(
-                    title = "액티비티",
+                    title = if (experienceCategory == ExperienceCategoryType.Activity.toString()) "액티비티" else "문화예술",
                     onBackButtonClicked = moveToBackScreen,
                     onShareButtonClicked = {}
                 )
