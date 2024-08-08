@@ -57,6 +57,8 @@ class ProfileViewModel @Inject constructor(
                 .flow
                 .cachedIn(viewModelScope)
     }
+    val isGuest: Boolean
+        get() = UserData.provider == "GUEST"
 
     init {
         getUserProfile(userId)
@@ -87,7 +89,7 @@ class ProfileViewModel @Inject constructor(
                             UiState.Success(data)
                         }
                         UserData.provider = data.provider ?: "GUEST"
-                        if (UserData.provider == "GUEST") {
+                        if (isGuest) {
                             UserData.nickname = "GUEST"
                         } else {
                             UserData.nickname = data.nickname ?: "GUEST"

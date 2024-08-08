@@ -1,19 +1,18 @@
-package com.jeju.nanaland.ui.profile
+package com.jeju.nanaland.ui.profile.screen
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
-import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -24,13 +23,19 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.paging.compose.collectAsLazyPagingItems
 import com.jeju.nanaland.R
 import com.jeju.nanaland.ui.component.common.topbar.CustomTopBarWithMenu
-import com.jeju.nanaland.ui.profile.component.ProfileScreenListSection
+import com.jeju.nanaland.ui.profile.ProfileViewModel
+import com.jeju.nanaland.ui.profile.component.ProfileScreenNoticeListSection
 import com.jeju.nanaland.ui.profile.component.ProfileScreenProfileSection
+import com.jeju.nanaland.ui.profile.component.ProfileScreenReviewListSection
+import com.jeju.nanaland.ui.profile.component.parts.ProfileScreenMoreInfoPart
+import com.jeju.nanaland.ui.profile.component.parts.ProfileScreenTabPart
+import com.jeju.nanaland.ui.profile.component.parts.ReportSheet
 import com.jeju.nanaland.ui.theme.body01
 import com.jeju.nanaland.ui.theme.getColor
 import com.jeju.nanaland.util.resource.getString
@@ -106,6 +111,7 @@ private fun ProfileScreen(
     else
         null
 
+    var isReviewList by remember { mutableStateOf(true) }
     var moreOptionDialog by remember { mutableStateOf(false) }
 
 
@@ -136,7 +142,11 @@ private fun ProfileScreen(
         }
         when (val up = userProfile.value) {
             is UiState.Loading -> {}
-            is UiState.Success -> {                Spacer(Modifier.height(24.dp))
+            is UiState.Success -> {
+                val reviewList = reviews.itemSnapshotList.items.take(12)
+                val noticeList = notices?.itemSnapshotList?.items?.take(12)
+
+                Spacer(Modifier.height(24.dp))
 
                 ProfileScreenProfileSection(
                     profile = up.data,
@@ -155,16 +165,55 @@ private fun ProfileScreen(
 
                 Spacer(Modifier.height(24.dp))
 
-                ProfileScreenListSection(
-                    reviews = reviews.itemSnapshotList.items.take(12),
-                    notices = notices?.itemSnapshotList?.items?.take(12),
-                    moveToReviewWriteScreen = moveToReviewWriteScreen,
-                    moveToReviewScreen = moveToProfileReviewListScreen,
-                    moveToNoticeScreen = moveToProfileNoticeListScreen
+                ProfileScreenTabPart(
+                    isReviewList = isReviewList,
+                    reviewSize = reviewList.size,
+                    moveToReviewScreen = { moveToProfileReviewListScreen(null) },
+                    toggleReviewNoticeTab = if(!isMine) null else {
+                        { isReviewList = !isReviewList }
+                    }
                 )
+                Column(Modifier.background(getColor().white)) {
 
+                    if (isMine) {
+                        if (!isReviewList || !viewModel.isGuest)
+                            ProfileScreenMoreInfoPart(
+                                isReviewList = isReviewList,
+                                listSize = if (isReviewList) reviewList.size else noticeList?.size
+                                    ?: 0,
+                                moveToListPage = {
+                                    if (isReviewList) moveToProfileReviewListScreen(null)
+                                    else moveToProfileNoticeListScreen(null)
+                                },
+                                moveToReviewWriteScreen = moveToReviewWriteScreen
+                            )
+                    } else
+                        HorizontalDivider()
+
+                    if (isReviewList) {
+                        if (!viewModel.isGuest)
+                            ProfileScreenReviewListSection(reviewList) {
+                                moveToProfileReviewListScreen(it)
+                            }
+                    } else if (noticeList != null) {
+                        ProfileScreenNoticeListSection(noticeList) {
+                            moveToProfileNoticeListScreen(it)
+                        }
+                    }
+                }
+
+                if (isMine && isReviewList){
+                    if (viewModel.isGuest) {
+                        ReviewListCenterText(getString(R.string.mypage_screen_review_guest))
+                        return@Column
+                    }
+                    else if (reviewList.isEmpty()) {
+                        ReviewListCenterText(getString(R.string.mypage_screen_review_empty))
+                        return@Column
+                    }
+                }
                 Spacer(modifier = Modifier
-                    .fillMaxSize()
+                    .fillMaxWidth()
                     .weight(1f)
                     .background(getColor().white))
 
@@ -180,37 +229,20 @@ private fun ProfileScreen(
         )
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-private fun ReportSheet(
-    onDismissRequest: () -> Unit,
-    onReport: () -> Unit
-) {
-    ModalBottomSheet(
-        containerColor = getColor().white,
-        shape = RoundedCornerShape(12.dp, 12.dp, 0.dp, 0.dp),
-        onDismissRequest = onDismissRequest,
-        dragHandle = null
+private fun ColumnScope.ReviewListCenterText(txt: String){
+    Box(
+        modifier = Modifier
+            .fillMaxWidth()
+            .weight(1f)
+            .background(getColor().white)
     ) {
-        Column(modifier = Modifier.fillMaxWidth()) {
-            Icon(
-                modifier = Modifier
-                    .padding(top = 16.dp, end = 16.dp)
-                    .size(28.dp)
-                    .align(Alignment.End)
-                    .clickableNoEffect { onDismissRequest() },
-                painter = painterResource(id = R.drawable.ic_close),
-                contentDescription = null
-            )
-
-            Text(
-                modifier = Modifier
-                    .clickableNoEffect { onReport() }
-                    .padding(horizontal = 16.dp, vertical = 10.dp),
-                text = getString(R.string.common_신고),
-                style = body01,
-                color = getColor().black
-            )
-        }
+        Text(
+            modifier = Modifier.align(Alignment.Center),
+            text = txt,
+            color = getColor().gray01,
+            style = body01,
+            textAlign = TextAlign.Center
+        )
     }
 }

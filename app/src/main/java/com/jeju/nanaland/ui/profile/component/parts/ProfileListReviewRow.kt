@@ -161,6 +161,7 @@ private fun ProfileListReviewRow(
                 modifier = Modifier.horizontalScroll(rememberScrollState()),
                 horizontalArrangement = Arrangement.spacedBy(8.dp)
             ) {
+                Spacer(modifier = Modifier.width((16 - 8).dp))
                 data.images.forEach { img ->
                     GlideImage(
                         modifier = Modifier
@@ -169,6 +170,7 @@ private fun ProfileListReviewRow(
                         imageModel = { img.thumbnailUrl }
                     )
                 }
+                Spacer(modifier = Modifier.width((16 - 8).dp))
             }
 
             Column(

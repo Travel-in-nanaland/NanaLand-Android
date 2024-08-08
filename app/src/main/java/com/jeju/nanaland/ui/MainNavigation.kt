@@ -38,6 +38,7 @@ import com.jeju.nanaland.ui.navigation.recommendedSpotScreen
 import com.jeju.nanaland.ui.navigation.restaurantContentScreen
 import com.jeju.nanaland.ui.navigation.restaurantListScreen
 import com.jeju.nanaland.ui.navigation.reviewListScreen
+import com.jeju.nanaland.ui.navigation.reportScreen
 import com.jeju.nanaland.ui.navigation.reviewWriteRoute
 import com.jeju.nanaland.ui.navigation.settingsScreen
 import com.jeju.nanaland.ui.navigation.signInScreen
@@ -193,5 +194,8 @@ fun MainNavigation(
 
         // 리뷰 리스트 화면
         reviewListScreen(navController)
+
+        // 신고 화면
+        reportScreen(navController)
     }
 }

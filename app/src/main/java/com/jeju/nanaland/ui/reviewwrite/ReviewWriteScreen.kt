@@ -3,9 +3,6 @@ package com.jeju.nanaland.ui.reviewwrite
 import android.net.Uri
 import android.widget.Toast
 import androidx.activity.compose.BackHandler
-import androidx.activity.compose.rememberLauncherForActivityResult
-import androidx.activity.result.PickVisualMediaRequest
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -68,6 +65,7 @@ import com.jeju.nanaland.ui.component.common.BottomOkButton
 import com.jeju.nanaland.ui.component.common.CustomSurface
 import com.jeju.nanaland.ui.component.common.topbar.CustomTopBar
 import com.jeju.nanaland.ui.component.common.DialogCommon
+import com.jeju.nanaland.ui.component.common.UploadImages
 import com.jeju.nanaland.ui.theme.body02
 import com.jeju.nanaland.ui.theme.bodyBold
 import com.jeju.nanaland.ui.theme.getColor
@@ -112,8 +110,7 @@ fun ReviewWriteScreen(
             )
         },
         onChangedRating = viewModel::updateRating,
-        onAddImage = viewModel::addImage,
-        onRemoveImage = viewModel::removeImage,
+        onChangeImages = viewModel::changeImage,
         onChangedText = {
             if(it.length > ReviewWriteViewModel.MAX_TEXT_LENGTH) {
                 Toast.makeText(context, getString(R.string.review_write_error_maximum_text, ReviewWriteViewModel.MAX_TEXT_LENGTH ), Toast.LENGTH_SHORT).show()
@@ -158,28 +155,13 @@ private fun ReviewWriteUI(
     moveToKeywordScreen: () -> Unit,
     moveToCompleteScreen: () -> Unit,
     onChangedRating: (Int) -> Unit,
-    onAddImage: (List<Uri>) -> Unit,
-    onRemoveImage: (Uri) -> Unit,
+    onChangeImages: (List<Uri>) -> Unit,
     onChangedText: (String) -> Unit,
     onRemoveKeyword: (ReviewKeyword) -> Unit,
 ) {
 
     val context = LocalContext.current
     val scrollState = rememberScrollState()
-    val takePhotoFromAlbumLauncher =
-        rememberLauncherForActivityResult(
-            if(ReviewWriteViewModel.MAX_IMAGE_CNT - uiState.reviewImage.size <= 1)
-                ActivityResultContracts.PickVisualMedia()
-            else
-                ActivityResultContracts.PickMultipleVisualMedia(ReviewWriteViewModel.MAX_IMAGE_CNT - uiState.reviewImage.size)
-        ) { uri ->
-            if(uri == null)
-                return@rememberLauncherForActivityResult
-            if(uri is Uri)
-                onAddImage(listOf(uri))
-            else if(uri is List<*>)
-                onAddImage(uri as List<Uri>)
-        }
 
     CustomSurface {
         CustomTopBar(
@@ -233,20 +215,7 @@ private fun ReviewWriteUI(
             AnnotatedStringConvertQuotes(getString(R.string.review_write_writing))
             Spacer(modifier = Modifier.height(16.dp))
 
-            ReviewImage(
-                images = uiState.reviewImage,
-                onAddImage = {
-                    if(uiState.reviewImage.size < ReviewWriteViewModel.MAX_IMAGE_CNT)
-                        takePhotoFromAlbumLauncher.launch(
-                            PickVisualMediaRequest(
-                                ActivityResultContracts.PickVisualMedia.ImageOnly,
-                            )
-                        )
-                    else
-                        Toast.makeText(context, getString(R.string.review_write_error_maximum_picture, ReviewWriteViewModel.MAX_IMAGE_CNT ), Toast.LENGTH_SHORT).show()
-                },
-                onRemoveImage = onRemoveImage
-            )
+            UploadImages(images = uiState.reviewImage, onChangeImages = onChangeImages)
 
             ReviewText(
                 text = reviewText,

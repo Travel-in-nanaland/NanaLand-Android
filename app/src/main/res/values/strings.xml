@@ -66,12 +66,15 @@
     <string name="common_네">네</string>
     <string name="common_아니오">아니오</string>
     <string name="common_필수">(필수)</string>
+    <string name="common_필수_with_star">*필수</string>
     <string name="common_선택">(선택)</string>
     <string name="common_알림">알림</string>
     <string name="common_후기" translatable="false">후기</string> <!--  TODO  -->
     <string name="common_공지사항" translatable="false">공지사항</string> <!--  TODO  -->
     <string name="common_수정" translatable="false">수정</string> <!--  TODO  -->
     <string name="common_신고" translatable="false">신고</string> <!--  TODO  -->
+    <string name="common_사진" translatable="false">사진</string> <!--  TODO  -->
+    <string name="common_동영상" translatable="false">동영상</string> <!--  TODO  -->
 
     <!--로그인 화면-->
     <string name="sign_in_screen_로그인_없이_둘러보기">로그인 없이 둘러보기</string>
@@ -325,6 +328,8 @@
     <string name="mypage_screen_desc_default" translatable="false">안녕하세요! 반가워요🖐️\n함께 제주 여행을 즐겨봐요 :D</string>
     <string name="mypage_screen_desc_hint" translatable="false">나를 한 줄로 표현해보세요!</string>
     <string name="mypage_screen_review_remove_dialog" translatable="false">해당 리뷰를\n삭제하시겠습니까?</string>
+    <string name="mypage_screen_review_guest" translatable="false">로그인하여 나만의 경험을 기록해보세요!</string>
+    <string name="mypage_screen_review_empty" translatable="false">후기를 남겨 나만의 경험을 기록하세요!</string>
 
 
     <!--프로필 수정 화면-->
@@ -404,6 +409,14 @@
     <string name="review_write_cancel_dialog_title" translatable="false">정말 나가시겠습니까?</string>
     <string name="review_write_cancel_dialog_subtitle" translatable="false">지금 나가시면,\n작성 중인 내용이 삭제됩니다.</string>
 
+    <!--신고 화면-->
+    <!--TODO 번역-->
+    <string name="report_category_title" translatable="false">신고하는 이유를 알려주세요!</string>
+    <string name="report_category_subtitle" translatable="false">타당한 근거 없이 신고된 내용은 관리자 확인 후\n반영되지 않을 수 있습니다.</string>
+    <string name="report_write_resone_title" translatable="false">신고 사유</string>
+    <string name="report_write_resone_hint" translatable="false">신고 사유를 %d자 이상 작성해 주세요.</string>
+    <string name="report_write_resone_error" translatable="false">신고 사유는 %d자 이상으로 작성해 주세요!</string>
+    <string name="report_write_complete_toast" translatable="false">신고한 내용은 운영정책에 따라\n최대 24시간 이내 처리됩니다.</string>
 
     <!--리뷰 키워드-->
     <!--TODO 번역-->
@@ -427,5 +440,19 @@
         <item>넓은 장소</item>
         <item>주차장</item>
         <item>깨끗한 화장실</item>
+    </string-array>
+
+    <!--신고 카테고리-->
+    <!--TODO 번역-->
+    <string-array name="report_reason" translatable="false">
+        <item>영리목적 / 홍보성</item>
+        <item>마음에 들지 않습니다</item>
+        <item>욕설/인신공격</item>
+        <item>개인정보 노출</item>
+        <item>음란/ 선정성</item>
+        <item>시설 폐업 및 다른 시설에 대한 리뷰</item>
+        <item>약물</item>
+        <item>학대 /  폭력</item>
+        <item>기타</item>
     </string-array>
 </resources>

@@ -17,4 +17,12 @@ interface ReportApi {
         @Part("reqDto") data: RequestBody,
         @Part image: MultipartBody.Part?
     ): Response<ResponseWrapper<String>>
+
+    // 리뷰 신고
+    @Multipart
+    @POST("report/review")
+    suspend fun reportReview(
+        @Part("reqDto") data: RequestBody,
+        @Part image: List<MultipartBody.Part>?
+    ): Response<ResponseWrapper<String>>
 }
