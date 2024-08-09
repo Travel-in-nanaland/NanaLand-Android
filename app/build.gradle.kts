@@ -144,6 +144,10 @@ dependencies {
     // paging
     implementation("androidx.paging:paging-runtime-ktx:3.3.1")
     implementation("androidx.paging:paging-compose:3.3.1")
+
+    // drawable to painter
+    implementation("com.google.accompanist:accompanist-drawablepainter:0.34.0")
+
 }
 
 kapt {
