@@ -12,17 +12,13 @@ import com.jeju.nanaland.util.resource.getString
 @Composable
 fun ProfileNoticeListScreen(
     moveToBackScreen: () -> Unit,
-    initialScrollToItemId: Int = -1,
     viewModel: ProfileViewModel = hiltViewModel()
 ) {
     val notices = viewModel.notices.collectAsLazyPagingItems()
 
     ProfileListFrame(
         title = getString(R.string.common_공지사항),
-        initialScrollToItem = run {
-            if(initialScrollToItemId == -1) -1
-            else notices.itemSnapshotList.indexOfFirst { it?.id == initialScrollToItemId }
-        },
+        initialScrollToItem = -1,
         moveToBackScreen = moveToBackScreen,
         data = notices
     ) {

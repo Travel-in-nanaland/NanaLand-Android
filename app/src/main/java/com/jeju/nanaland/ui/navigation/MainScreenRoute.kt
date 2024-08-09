@@ -12,7 +12,6 @@ import com.jeju.nanaland.globalvalue.constant.ROUTE_MAIN
 import com.jeju.nanaland.globalvalue.constant.ROUTE_MARKET_CONTENT
 import com.jeju.nanaland.globalvalue.constant.ROUTE_MARKET_LIST
 import com.jeju.nanaland.globalvalue.constant.ROUTE_NANAPICK_CONTENT
-import com.jeju.nanaland.globalvalue.constant.ROUTE_NANAPICK_LIST
 import com.jeju.nanaland.globalvalue.constant.ROUTE_NATURE_CONTENT
 import com.jeju.nanaland.globalvalue.constant.ROUTE_NATURE_LIST
 import com.jeju.nanaland.globalvalue.constant.ROUTE_NOTIFICATION
@@ -82,7 +81,8 @@ fun NavGraphBuilder.mainScreen(
         moveToTypeTestResultScreen = { navController.navigate(ROUTE_TYPE_TEST_RESULT) },
         moveToReviewWriteScreen = { /*TODO*/ },
         moveToProfileNoticeListScreen = {
-            navController.navigate(ROUTE_PROFILE_NOTICE, bundleOf("id" to (it ?: -1)))
+            if(it == null) navController.navigate(ROUTE_PROFILE_NOTICE) /*TODO*/
+            else navController.navigate(ROUTE_PROFILE_NOTICE)
         },
         moveToProfileReviewListScreen = {
             navController.navigate(ROUTE_PROFILE_REVIEW, bundleOf("id" to (it ?: -1)))
