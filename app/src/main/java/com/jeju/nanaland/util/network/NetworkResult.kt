@@ -20,7 +20,7 @@ inline fun <T> NetworkResult<T>.onSuccess(action: (code: Int, message: String?, 
     return this
 }
 
-inline fun <T> NetworkResult<T>.onError(action: (code: Int, message: String?) -> Unit): NetworkResult<T> {
+inline fun <T> NetworkResult<T>.onError(action: (code: Int, MESSAGE: String?) -> Unit): NetworkResult<T> {
     if (this is NetworkResult.Error) {
         action(this.code, this.message)
         LogUtil.e("onError", "code: ${code}\nmessage: ${message}")
