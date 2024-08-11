@@ -2,6 +2,7 @@ package com.jeju.nanaland.ui.component.common.topbar
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -44,7 +45,7 @@ fun CustomTopBarWithMenu(
     menus: @Composable RowScope.() -> Unit = { }
 ) {
 
-    Row(
+    Box(
         modifier = Modifier
             .fillMaxWidth()
             .height(TOP_BAR_HEIGHT.dp)
@@ -59,18 +60,18 @@ fun CustomTopBarWithMenu(
             .zIndex(10f)
             .drawColoredShadow(
                 color = getColor().black,
-                alpha = if(drawShadow) 0.1f else 0f,
+                alpha = if (drawShadow) 0.1f else 0f,
                 shadowRadius = 10.dp,
                 offsetX = 0.dp,
                 offsetY = 0.dp
             )
             .background(getColor().white)
-            .padding(horizontal = 16.dp),
-        verticalAlignment = Alignment.CenterVertically
+            .padding(horizontal = 16.dp)
     ) {
         if(onBackButtonClicked != null)
             Image(
                 modifier = Modifier
+                    .align(Alignment.CenterStart)
                     .clickableNoEffect { onBackButtonClicked() }
                     .size(32.dp),
                 painter = painterResource(id = R.drawable.ic_arrow_left),
@@ -79,13 +80,15 @@ fun CustomTopBarWithMenu(
             )
 
         Text(
-            modifier = Modifier.weight(1f),
+            modifier = Modifier.align(Alignment.Center),
             text = title,
             color = getColor().black,
             style = title01Bold,
             textAlign = TextAlign.Center
         )
 
-        menus()
+        Row(Modifier.align(Alignment.CenterEnd)) {
+            menus()
+        }
     }
 }

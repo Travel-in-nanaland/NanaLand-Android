@@ -12,11 +12,9 @@ import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.buildAnnotatedString
-import androidx.compose.ui.text.withStyle
 
 @Composable
 fun ExpandableText(
@@ -26,40 +24,28 @@ fun ExpandableText(
     style: TextStyle = LocalTextStyle.current,
     collapsedMaxLine: Int = 2,
     showMoreText: String = "더보기",
-    showMoreStyle: SpanStyle = SpanStyle(),
+    showMoreStyle: TextStyle = TextStyle(),
     showLessText: String = "줄이기",
-    showLessStyle: SpanStyle = showMoreStyle,
+    showLessStyle: TextStyle = showMoreStyle,
     onExpanded: (Boolean) -> Unit = {}
 ) {
     var isExpanded by remember { mutableStateOf(false) }
     var clickable by remember { mutableStateOf(false) }
     var lastCharIndex by remember { mutableIntStateOf(0) }
-    Box(modifier = Modifier
-        .clickable(clickable) {
-            isExpanded = !isExpanded
-            onExpanded(isExpanded)
-        }
-        .then(modifier)
-    ) {
+    Box(modifier) {
         Text(
             modifier = textModifier
                 .fillMaxWidth()
-                .animateContentSize(),
-            text = buildAnnotatedString {
-                if (clickable) {
-                    if (isExpanded) {
-                        append(text)
-                        withStyle(style = showLessStyle) { append(showLessText) }
-                    } else {
-                        val adjustText = text.substring(startIndex = 0, endIndex = lastCharIndex)
-                            .dropLast(showMoreText.length)
-                            .dropLastWhile { Character.isWhitespace(it) || it == '.' }
-                        append(adjustText)
-                        withStyle(style = showMoreStyle) { append(showMoreText) }
-                    }
-                } else {
-                    append(text)
+                .clickable(clickable) {
+                    isExpanded = !isExpanded
+                    onExpanded(isExpanded)
                 }
+                .animateContentSize(),
+            text = if(!clickable || isExpanded) text else {
+                text.substring(startIndex = 0, endIndex = lastCharIndex)
+                    .dropLast(showMoreText.length + 3)
+                    .dropLastWhile { Character.isWhitespace(it) || it == '.' }
+                    .plus("...")
             },
             maxLines = if (isExpanded) Int.MAX_VALUE else collapsedMaxLine,
             onTextLayout = { textLayoutResult ->
@@ -70,6 +56,13 @@ fun ExpandableText(
             },
             style = style,
         )
+
+        if(clickable)
+            Text(
+                modifier = Modifier.align(Alignment.BottomEnd),
+                text = if(isExpanded) showLessText else showMoreText,
+                style = if(isExpanded) showLessStyle else showMoreStyle
+            )
     }
 
 }
