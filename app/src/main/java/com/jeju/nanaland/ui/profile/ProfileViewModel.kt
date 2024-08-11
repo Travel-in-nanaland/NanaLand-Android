@@ -44,6 +44,9 @@ class ProfileViewModel @Inject constructor(
     val userId: Int?
         get() = savedStateHandle["userId"]
 
+    private val _isReviewList = MutableStateFlow(true)
+    val isReviewList = _isReviewList.asStateFlow()
+
     private val _userProfile = MutableStateFlow<UiState<UserProfile>>(UiState.Loading)
     val userProfile = _userProfile.asStateFlow()
 
@@ -64,6 +67,10 @@ class ProfileViewModel @Inject constructor(
         getUserProfile(userId)
     }
 
+    fun setIsReviewList(isReviewList: Boolean){
+        _isReviewList.update { isReviewList }
+    }
+
     fun setLike(id: Int){
         val data = ToggleReviewFavoriteRequest(id = id)
         toggleReviewFavoriteUseCase(data)
@@ -71,6 +78,7 @@ class ProfileViewModel @Inject constructor(
                 it.onError { code, message ->  }
             }
     }
+
     fun setRemove(id: Int){
         deleteReviewUseCase(DeleteReviewRequest(id))
             .onEach {

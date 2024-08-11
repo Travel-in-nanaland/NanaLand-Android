@@ -335,6 +335,7 @@
     <string name="mypage_screen_review_remove_dialog" translatable="false">해당 리뷰를\n삭제하시겠습니까?</string>
     <string name="mypage_screen_review_guest" translatable="false">로그인하여 나만의 경험을 기록해보세요!</string>
     <string name="mypage_screen_review_empty" translatable="false">후기를 남겨 나만의 경험을 기록하세요!</string>
+    <string name="mypage_screen_notice_empty" translatable="false">공지사항이 존재하지 않습니다</string>
 
 
     <!--프로필 수정 화면-->
