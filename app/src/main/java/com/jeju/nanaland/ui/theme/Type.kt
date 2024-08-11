@@ -6,6 +6,7 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.LineHeightStyle
 import androidx.compose.ui.unit.sp
 import com.jeju.nanaland.R
 
@@ -94,123 +95,195 @@ val largeTitle01 = TextStyle(
     fontSize = (baseFontSize + 18).sp,
     fontWeight = FontWeight.Bold,
     fontFamily = appleSdGothicNeo,
-    platformStyle = PlatformTextStyle(false)
+    platformStyle = PlatformTextStyle(false),
+    lineHeightStyle = LineHeightStyle(
+        alignment = LineHeightStyle.Alignment.Center,
+        trim = LineHeightStyle.Trim.None
+    )
 )
 val largeTitle02 = TextStyle(
     fontSize = (baseFontSize + 12).sp,
     fontWeight = FontWeight.Bold,
     fontFamily = appleSdGothicNeo,
     platformStyle = PlatformTextStyle(false),
-    lineHeight = (baseFontSize + 26).sp
+    lineHeight = (baseFontSize + 26).sp,
+    lineHeightStyle = LineHeightStyle(
+        alignment = LineHeightStyle.Alignment.Center,
+        trim = LineHeightStyle.Trim.None
+    )
 )
 val title01Bold = TextStyle(
     fontSize = (baseFontSize + 10).sp,
     fontWeight = FontWeight.Bold,
     fontFamily = appleSdGothicNeo,
-    platformStyle = PlatformTextStyle(false)
+    platformStyle = PlatformTextStyle(false),
+    lineHeightStyle = LineHeightStyle(
+        alignment = LineHeightStyle.Alignment.Center,
+        trim = LineHeightStyle.Trim.None
+    )
 )
 val title02Bold = TextStyle(
     fontSize = (baseFontSize + 8).sp,
     fontWeight = FontWeight.Bold,
     fontFamily = appleSdGothicNeo,
     platformStyle = PlatformTextStyle(false),
-    lineHeight = (baseFontSize + 20).sp
+    lineHeight = (baseFontSize + 20).sp,
+    lineHeightStyle = LineHeightStyle(
+        alignment = LineHeightStyle.Alignment.Center,
+        trim = LineHeightStyle.Trim.None
+    )
 )
 val title02 = TextStyle(
     fontSize = (baseFontSize + 8).sp,
     fontWeight = FontWeight.Medium,
     fontFamily = appleSdGothicNeo,
     platformStyle = PlatformTextStyle(false),
-    lineHeight = (baseFontSize + 20).sp
+    lineHeight = (baseFontSize + 20).sp,
+    lineHeightStyle = LineHeightStyle(
+        alignment = LineHeightStyle.Alignment.Center,
+        trim = LineHeightStyle.Trim.None
+    )
 )
 val bodyBold = TextStyle(
     fontSize = (baseFontSize + 6).sp,
     fontWeight = FontWeight.Bold,
     fontFamily = appleSdGothicNeo,
     platformStyle = PlatformTextStyle(false),
-    lineHeight = (baseFontSize + 16).sp
+    lineHeight = (baseFontSize + 16).sp,
+    lineHeightStyle = LineHeightStyle(
+        alignment = LineHeightStyle.Alignment.Center,
+        trim = LineHeightStyle.Trim.None
+    )
 )
 val bodySemiBold = TextStyle(
     fontSize = (baseFontSize + 6).sp,
     fontWeight = FontWeight.SemiBold,
     fontFamily = appleSdGothicNeo,
     platformStyle = PlatformTextStyle(false),
-    lineHeight = (baseFontSize + 16).sp
+    lineHeight = (baseFontSize + 16).sp,
+    lineHeightStyle = LineHeightStyle(
+        alignment = LineHeightStyle.Alignment.Center,
+        trim = LineHeightStyle.Trim.None
+    )
 )
 val body01 = TextStyle(
     fontSize = (baseFontSize + 6).sp,
     fontWeight = FontWeight.Medium,
     fontFamily = appleSdGothicNeo,
     platformStyle = PlatformTextStyle(false),
-    lineHeight = (baseFontSize + 16).sp
+    lineHeight = (baseFontSize + 16).sp,
+    lineHeightStyle = LineHeightStyle(
+        alignment = LineHeightStyle.Alignment.Center,
+        trim = LineHeightStyle.Trim.None
+    )
 )
 val body02Bold = TextStyle(
     fontSize = (baseFontSize + 4).sp,
     fontWeight = FontWeight.Bold,
     fontFamily = appleSdGothicNeo,
     platformStyle = PlatformTextStyle(false),
-    lineHeight = (baseFontSize + 12).sp
+    lineHeight = (baseFontSize + 12).sp,
+    lineHeightStyle = LineHeightStyle(
+        alignment = LineHeightStyle.Alignment.Center,
+        trim = LineHeightStyle.Trim.None
+    )
 )
 val body02SemiBold = TextStyle(
     fontSize = (baseFontSize + 4).sp,
     fontWeight = FontWeight.SemiBold,
     fontFamily = appleSdGothicNeo,
     platformStyle = PlatformTextStyle(false),
-    lineHeight = (baseFontSize + 12).sp
+    lineHeight = (baseFontSize + 12).sp,
+    lineHeightStyle = LineHeightStyle(
+        alignment = LineHeightStyle.Alignment.Center,
+        trim = LineHeightStyle.Trim.None
+    )
 )
 val body02 = TextStyle(
     fontSize = (baseFontSize + 4).sp,
     fontWeight = FontWeight.Medium,
     fontFamily = appleSdGothicNeo,
     platformStyle = PlatformTextStyle(false),
-    lineHeight = (baseFontSize + 12).sp
+    lineHeight = (baseFontSize + 12).sp,
+    lineHeightStyle = LineHeightStyle(
+        alignment = LineHeightStyle.Alignment.Center,
+        trim = LineHeightStyle.Trim.None
+    )
 )
 val caption01 = TextStyle(
     fontSize = (baseFontSize + 2).sp,
     fontWeight = FontWeight.Medium,
     fontFamily = appleSdGothicNeo,
     platformStyle = PlatformTextStyle(false),
-    lineHeight = (baseFontSize + 10).sp
+    lineHeight = (baseFontSize + 10).sp,
+    lineHeightStyle = LineHeightStyle(
+        alignment = LineHeightStyle.Alignment.Center,
+        trim = LineHeightStyle.Trim.None
+    )
 )
 val caption01SemiBold = TextStyle(
     fontSize = (baseFontSize + 2).sp,
     fontWeight = FontWeight.SemiBold,
     fontFamily = appleSdGothicNeo,
     platformStyle = PlatformTextStyle(false),
-    lineHeight = (baseFontSize + 10).sp
+    lineHeight = (baseFontSize + 10).sp,
+    lineHeightStyle = LineHeightStyle(
+        alignment = LineHeightStyle.Alignment.Center,
+        trim = LineHeightStyle.Trim.None
+    )
 )
 val caption02 = TextStyle(
     fontSize = (baseFontSize + 0).sp,
     fontWeight = FontWeight.Normal,
     fontFamily = appleSdGothicNeo,
     platformStyle = PlatformTextStyle(false),
-    lineHeight = (baseFontSize + 6).sp
+    lineHeight = (baseFontSize + 6).sp,
+    lineHeightStyle = LineHeightStyle(
+        alignment = LineHeightStyle.Alignment.Center,
+        trim = LineHeightStyle.Trim.None
+    )
 )
 val caption02SemiBold = TextStyle(
     fontSize = (baseFontSize + 0).sp,
     fontWeight = FontWeight.Normal,
     fontFamily = appleSdGothicNeo,
     platformStyle = PlatformTextStyle(false),
-    lineHeight = (baseFontSize + 6).sp
+    lineHeight = (baseFontSize + 6).sp,
+    lineHeightStyle = LineHeightStyle(
+        alignment = LineHeightStyle.Alignment.Center,
+        trim = LineHeightStyle.Trim.None
+    )
 )
 val largeTitle02Regular = TextStyle(
     fontSize = (baseFontSize + 12).sp,
     fontWeight = FontWeight.Normal,
     fontFamily = appleSdGothicNeo,
     platformStyle = PlatformTextStyle(false),
-    lineHeight = (baseFontSize + 26).sp
+    lineHeight = (baseFontSize + 26).sp,
+    lineHeightStyle = LineHeightStyle(
+        alignment = LineHeightStyle.Alignment.Center,
+        trim = LineHeightStyle.Trim.None
+    )
 )
 val largeTitle02Medium = TextStyle(
     fontSize = (baseFontSize + 12).sp,
     fontWeight = FontWeight.Medium,
     fontFamily = appleSdGothicNeo,
     platformStyle = PlatformTextStyle(false),
-    lineHeight = (baseFontSize + 26).sp
+    lineHeight = (baseFontSize + 26).sp,
+    lineHeightStyle = LineHeightStyle(
+        alignment = LineHeightStyle.Alignment.Center,
+        trim = LineHeightStyle.Trim.None
+    )
 )
 val searchText = TextStyle(
     fontSize = (baseFontSize + 2).sp,
     fontWeight = FontWeight.Medium,
     fontFamily = appleSdGothicNeo,
     platformStyle = PlatformTextStyle(false),
-    lineHeight = (baseFontSize + 5).sp
+    lineHeight = (baseFontSize + 5).sp,
+    lineHeightStyle = LineHeightStyle(
+        alignment = LineHeightStyle.Alignment.Center,
+        trim = LineHeightStyle.Trim.None
+    )
 )

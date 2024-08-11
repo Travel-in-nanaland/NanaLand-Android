@@ -68,7 +68,7 @@ fun ProfileScreenProfileSection(
         Column(
             modifier = Modifier.heightIn(80.dp),
             verticalArrangement = Arrangement.spacedBy(
-                space = 7.dp,
+                space = 4.dp,
                 alignment = Alignment.CenterVertically
             )
         ) {
@@ -90,7 +90,7 @@ fun ProfileScreenProfileSection(
                         RoundedCornerShape (30.dp)
                     )
                     .background(getColor().white)
-                    .padding(horizontal = 12.dp, vertical = 4.dp)
+                    .padding(horizontal = 12.dp, vertical = 2.dp)
                     .clickableNoEffect { moveToTypeTestResultScreen() },
                 text = profile.travelType ?: getString(R.string.mypage_screen_없음),
                 color = getColor().main,
