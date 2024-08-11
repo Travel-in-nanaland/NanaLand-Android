@@ -11,6 +11,7 @@ import com.jeju.nanaland.util.resource.getString
 
 @Composable
 fun ProfileNoticeListScreen(
+    moveToProfileNoticeListScreen: (Int) -> Unit,
     moveToBackScreen: () -> Unit,
     viewModel: ProfileViewModel = hiltViewModel()
 ) {
@@ -24,7 +25,7 @@ fun ProfileNoticeListScreen(
     ) {
         ProfileNoticeRow(
             data = it,
-            onClick = {}
+            onClick = moveToProfileNoticeListScreen
         )
     }
 }

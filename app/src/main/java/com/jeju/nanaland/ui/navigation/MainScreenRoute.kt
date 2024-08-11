@@ -4,6 +4,7 @@ import androidx.core.os.bundleOf
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
+import com.jeju.nanaland.globalvalue.constant.ROUTE_BOARD
 import com.jeju.nanaland.globalvalue.constant.ROUTE_EXPERIENCE_CONTENT
 import com.jeju.nanaland.globalvalue.constant.ROUTE_EXPERIENCE_LIST
 import com.jeju.nanaland.globalvalue.constant.ROUTE_FESTIVAL_CONTENT
@@ -81,8 +82,11 @@ fun NavGraphBuilder.mainScreen(
         moveToTypeTestResultScreen = { navController.navigate(ROUTE_TYPE_TEST_RESULT) },
         moveToReviewWriteScreen = { /*TODO*/ },
         moveToProfileNoticeListScreen = {
-            if(it == null) navController.navigate(ROUTE_PROFILE_NOTICE) /*TODO*/
-            else navController.navigate(ROUTE_PROFILE_NOTICE)
+            if(it == null) navController.navigate(ROUTE_PROFILE_NOTICE)
+            else navController.navigate(ROUTE_BOARD, bundleOf(
+                "type" to TEMP_BoardType.Notice.toString(),
+                "id" to it
+            ))
         },
         moveToProfileReviewListScreen = {
             navController.navigate(ROUTE_PROFILE_REVIEW, bundleOf("id" to (it ?: -1)))
