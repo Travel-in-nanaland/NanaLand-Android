@@ -23,6 +23,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import com.jeju.nanaland.R
+import com.jeju.nanaland.ui.theme.NanaLandTheme
 import com.jeju.nanaland.ui.theme.body02
 import com.jeju.nanaland.ui.theme.getColor
 import com.jeju.nanaland.ui.theme.title01Bold
@@ -45,33 +46,37 @@ fun NanaPickContentAttractivePointDialog(
     Dialog(
         onDismissRequest = onDismiss
     ) {
-        Box(
-            modifier = Modifier
-                .clip(RoundedCornerShape(10.dp))
-                .background(getColor().white)
-                .padding(16.dp)
-        ) {
-            Column {
-                Row {
-                    TitleText()
+        NanaLandTheme {
+            Box(
+                modifier = Modifier
+                    .clip(RoundedCornerShape(10.dp))
+                    .background(getColor().white)
+                    .padding(16.dp)
+            ) {
+                Column {
+                    Row {
+                        TitleText()
 
-                    Spacer(modifier = Modifier.weight(1f))
+                        Spacer(modifier = Modifier.weight(1f))
 
-                    Icon(
-                        modifier = Modifier.size(32.dp).clickable { onDismiss() },
-                        painter =  painterResource(id = R.drawable.ic_close),
-                        contentDescription =  null,
-                        tint = getColor().black,
+                        Icon(
+                            modifier = Modifier
+                                .size(32.dp)
+                                .clickable { onDismiss() },
+                            painter =  painterResource(id = R.drawable.ic_close),
+                            contentDescription =  null,
+                            tint = getColor().black,
+                        )
+                    }
+
+                    Spacer(modifier = Modifier.height(32.dp))
+
+                    Text(
+                        text = text,
+                        color = getColor().black,
+                        style = body02
                     )
                 }
-
-                Spacer(modifier = Modifier.height(32.dp))
-
-                Text(
-                    text = text,
-                    color = getColor().black,
-                    style = body02
-                )
             }
         }
     }

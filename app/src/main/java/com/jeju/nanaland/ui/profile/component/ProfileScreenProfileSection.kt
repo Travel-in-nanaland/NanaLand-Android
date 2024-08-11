@@ -32,7 +32,6 @@ import androidx.compose.ui.unit.dp
 import com.jeju.nanaland.R
 import com.jeju.nanaland.domain.entity.member.UserProfile
 import com.jeju.nanaland.ui.theme.body02
-import com.jeju.nanaland.ui.theme.body02SemiBold
 import com.jeju.nanaland.ui.theme.caption01
 import com.jeju.nanaland.ui.theme.caption01SemiBold
 import com.jeju.nanaland.ui.theme.getColor
@@ -58,15 +57,16 @@ fun ProfileScreenProfileSection(
     ) {
         GlideImage (
             modifier = Modifier
-                .size(70.dp)
+                .padding(top = 4.dp)
+                .size(80.dp)
                 .clip(CircleShape),
             imageModel = { profile.profileImage.originUrl }
         )
 
-        Spacer(modifier = Modifier.width(20.dp))
+        Spacer(modifier = Modifier.width(23.dp))
 
         Column(
-            modifier = Modifier.heightIn(70.dp),
+            modifier = Modifier.heightIn(80.dp),
             verticalArrangement = Arrangement.spacedBy(
                 space = 4.dp,
                 alignment = Alignment.CenterVertically
@@ -94,7 +94,7 @@ fun ProfileScreenProfileSection(
                     .clickableNoEffect { moveToTypeTestResultScreen() },
                 text = profile.travelType ?: getString(R.string.mypage_screen_없음),
                 color = getColor().main,
-                style = body02SemiBold,
+                style = caption01,
             )
 
             FlowRow(
@@ -129,7 +129,7 @@ fun ProfileScreenProfileSection(
                     Spacer(Modifier.width(4.dp))
 
                     Image(
-                        modifier = Modifier.size(16.dp),
+                        modifier = Modifier.size(12.dp),
                         painter = painterResource(R.drawable.ic_arrow_right),
                         contentDescription = null
                     )

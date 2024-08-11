@@ -113,6 +113,7 @@ private fun ProfileListReviewRow(
                             verticalAlignment = Alignment.CenterVertically
                         ) {
                             Text(
+                                modifier = Modifier.weight(1f, false),
                                 text = data.placeName,
                                 style = body02Bold,
                                 color = getColor().black
@@ -123,6 +124,7 @@ private fun ProfileListReviewRow(
                                 contentDescription = null,
                                 tint = getColor().black
                             )
+                            Spacer(modifier = Modifier.width(12.dp))
                         }
                         Spacer(modifier = Modifier.height(4.dp))
                         /** 별점 **/
@@ -183,7 +185,7 @@ private fun ProfileListReviewRow(
                     style = body02.copy(color = getColor().black),
                     collapsedMaxLine = 2,
                     showMoreText = getString(R.string.detail_screen_common_더_보기),
-                    showMoreStyle = caption01.copy(color = getColor().gray01).toSpanStyle(),
+                    showMoreStyle = caption01.copy(color = getColor().gray01),
                     showLessText = getString(R.string.detail_screen_common_접기),
                 )
 
@@ -205,7 +207,7 @@ private fun ProfileListReviewRow(
 
                     /** 작성일 **/
                     Text(
-                        text = data.createdAt,
+                        text = data.createdAt.replace('-','.'),
                         style = caption01,
                         color = getColor().gray01
                     )

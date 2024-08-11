@@ -78,7 +78,7 @@ fun ProfileReviewRow(
             verticalAlignment = Alignment.CenterVertically
         ) {
             Text(
-                text = data.createdAt.toString(),
+                text = data.createdAt.replace('-','.'),
                 color = getColor().black,
                 style = caption01,
             )

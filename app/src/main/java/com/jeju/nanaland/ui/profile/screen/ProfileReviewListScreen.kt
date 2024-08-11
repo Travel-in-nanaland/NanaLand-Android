@@ -29,10 +29,7 @@ fun ProfileReviewListScreen(
     var reportReviewId by remember { mutableIntStateOf(-1) }
 
     ProfileListFrame(
-        title = getString(
-            if(isMine) R.string.common_나의_나나
-            else R.string.common_후기
-        ),
+        title = getString(R.string.common_후기),
         initialScrollToItem = run {
             if(initialScrollToItemId == -1) -1
             else reviews.itemSnapshotList.indexOfFirst { it?.id == initialScrollToItemId }

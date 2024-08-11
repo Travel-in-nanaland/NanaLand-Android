@@ -18,7 +18,7 @@ fun ReviewContent(
         style = body02.copy(color = getColor().black),
         collapsedMaxLine = 2,
         showMoreText = getString(R.string.detail_screen_common_더_보기),
-        showMoreStyle = caption01.copy(color = getColor().gray01).toSpanStyle(),
+        showMoreStyle = caption01.copy(color = getColor().gray01),
         showLessText = getString(R.string.detail_screen_common_접기),
         onExpanded = onExpanded
     )

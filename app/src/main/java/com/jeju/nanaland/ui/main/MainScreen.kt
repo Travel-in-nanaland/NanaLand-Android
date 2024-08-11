@@ -42,10 +42,9 @@ import com.jeju.nanaland.ui.main.home.HomeScreen
 import com.jeju.nanaland.ui.main.home.HomeViewModel
 import com.jeju.nanaland.ui.main.home.search.SearchViewModel
 import com.jeju.nanaland.ui.nanapick.NanaPickListScreen
-import com.jeju.nanaland.ui.main.jejustory.JejuStoryScreen
 import com.jeju.nanaland.ui.profile.screen.ProfileScreen
 import com.jeju.nanaland.ui.theme.NanaLandTheme
-import com.jeju.nanaland.ui.theme.caption02
+import com.jeju.nanaland.ui.theme.caption02SemiBold
 import com.jeju.nanaland.ui.theme.getColor
 import com.jeju.nanaland.util.intent.DeepLinkData
 import com.jeju.nanaland.util.listfilter.ListFilter
@@ -281,7 +280,7 @@ fun MainNavigationBar(
                         )
                         Text(
                             text = navItem.label,
-                            style = caption02
+                            style = caption02SemiBold
                         )
                     }
                 },

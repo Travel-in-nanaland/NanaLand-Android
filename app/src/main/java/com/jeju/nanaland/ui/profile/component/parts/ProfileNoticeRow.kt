@@ -1,10 +1,12 @@
 package com.jeju.nanaland.ui.profile.component.parts
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
@@ -68,7 +70,7 @@ fun ProfileNoticeRow(
         )
         Spacer(modifier = Modifier.width(12.dp))
         Column(
-            modifier = Modifier.weight(1f)
+            modifier = Modifier.weight(1f),
         ) {
             Text(
                 text = data.noticeCategory,
@@ -80,7 +82,7 @@ fun ProfileNoticeRow(
                 color = getColor().black,
                 style = body02Bold
             )
-            Spacer(modifier = Modifier.width(4.dp))
+            Spacer(modifier = Modifier.height(4.dp))
             Text(
                 text = data.createdAt,
                 color = getColor().gray01,

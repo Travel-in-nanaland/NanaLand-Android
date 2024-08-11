@@ -63,9 +63,9 @@ import com.jeju.nanaland.globalvalue.type.ReviewCategoryType
 import com.jeju.nanaland.globalvalue.type.ReviewKeyword
 import com.jeju.nanaland.ui.component.common.BottomOkButton
 import com.jeju.nanaland.ui.component.common.CustomSurface
-import com.jeju.nanaland.ui.component.common.topbar.CustomTopBar
 import com.jeju.nanaland.ui.component.common.DialogCommon
 import com.jeju.nanaland.ui.component.common.UploadImages
+import com.jeju.nanaland.ui.component.common.topbar.CustomTopBar
 import com.jeju.nanaland.ui.theme.body02
 import com.jeju.nanaland.ui.theme.bodyBold
 import com.jeju.nanaland.ui.theme.getColor
@@ -165,7 +165,7 @@ private fun ReviewWriteUI(
 
     CustomSurface {
         CustomTopBar(
-            title = "",
+            title = getString(R.string.review_write_title),
             onBackButtonClicked = moveToBackScreen
         )
 
@@ -413,6 +413,12 @@ private fun ReviewText(
                     .padding(top = 16.dp),
             ) {
                 it()
+                if(tl == 0)
+                    Text(
+                        text = getString(R.string.review_write_writing_hint),
+                        style = body02,
+                        color = getColor().gray01
+                    )
             }
 
             Text(
@@ -434,7 +440,7 @@ private fun ReviewText(
                     append(" /$maxTextLength)")
                 },
                 color = getColor().gray01,
-                style = bodyBold
+                style = body02
             )
         }
     }
