@@ -78,7 +78,10 @@ object NetworkModule {
     @Provides
     @AccessTokenAutoAdded
     fun provideAccessTokenNeededRetrofitInstance(@AccessTokenAutoAdded okHttpClient: OkHttpClient): Retrofit {
-        val gson = GsonBuilder().setLenient().create()
+        val gson = GsonBuilder()
+            .setLenient()
+            .setDateFormat("yyyy-MM-dd'T'HH:mm:ss")
+            .create()
         return Retrofit.Builder()
             .baseUrl(BuildConfig.BASE_URL)
             .client(okHttpClient)

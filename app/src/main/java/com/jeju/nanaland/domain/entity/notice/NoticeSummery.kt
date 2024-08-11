@@ -1,6 +1,7 @@
 package com.jeju.nanaland.domain.entity.notice
 
 import com.google.gson.annotations.SerializedName
+import java.util.Date
 
 data class NoticeSummery(
     @SerializedName("id")
@@ -10,6 +11,6 @@ data class NoticeSummery(
     @SerializedName("title")
     val title: String,
     @SerializedName("createdAt")
-    val createdAt: String,
+    val createdAt: Date,
 )
 

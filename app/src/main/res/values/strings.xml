@@ -76,6 +76,11 @@
     <string name="common_사진" translatable="false">사진</string> <!--  TODO  -->
     <string name="common_동영상" translatable="false">동영상</string> <!--  TODO  -->
 
+    <!--시간 관련-->
+    <string name="common_방금전" translatable="false">방금 전</string> <!--  TODO  -->
+    <string name="common_시간전" translatable="false">%d시간 전</string> <!--  TODO  -->
+
+
     <!--로그인 화면-->
     <string name="sign_in_screen_로그인_없이_둘러보기">로그인 없이 둘러보기</string>
     <string name="sign_in_screen_google_sign_in">Google 로그인</string>
