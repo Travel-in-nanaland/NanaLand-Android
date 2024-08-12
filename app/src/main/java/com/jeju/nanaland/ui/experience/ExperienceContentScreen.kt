@@ -1,6 +1,7 @@
 package com.jeju.nanaland.ui.experience
 
 import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.background
 import androidx.compose.foundation.gestures.animateTo
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -41,6 +42,7 @@ import com.jeju.nanaland.ui.component.review.ReviewCard
 import com.jeju.nanaland.ui.component.review.TotalRatingStar
 import com.jeju.nanaland.ui.component.review.TotalReviewCountText
 import com.jeju.nanaland.ui.component.review.getReportAnchoredDraggableState
+import com.jeju.nanaland.ui.theme.getColor
 import com.jeju.nanaland.util.ui.ScreenPreview
 import com.jeju.nanaland.util.ui.UiState
 import kotlinx.coroutines.launch
@@ -149,6 +151,7 @@ private fun ExperienceContentScreen(
                                 Column(modifier = Modifier.padding(start = 16.dp, end = 16.dp)) {
                                     ExperienceDetailScreenDescription(
                                         tag = experienceContent.data.addressTag,
+                                        keywords = experienceContent.data.keywords,
                                         title = experienceContent.data.title,
                                         content = experienceContent.data.content,
                                     )
@@ -208,6 +211,12 @@ private fun ExperienceContentScreen(
                             is UiState.Failure -> {}
                         }
 
+                        Spacer(Modifier
+                            .fillMaxWidth()
+                            .height(8.dp)
+                            .background(getColor().gray03))
+
+                        Spacer(Modifier.height(32.dp))
 
                         when (reviewList) {
                             is UiState.Loading -> {}

@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
@@ -67,25 +68,25 @@ private fun SplashScreen(
     moveToSignInScreen: () -> Unit,
     isContent: Boolean
 ) {
-//    val context = LocalContext.current
+    val context = LocalContext.current
     val systemUiController = rememberSystemUiController()
-//    val fcmToken = remember { mutableStateOf("") }
+    val fcmToken = remember { mutableStateOf("") }
     LaunchedEffect(checkingState) {
-//        FirebaseMessaging.getInstance().token.addOnCompleteListener(
-//            OnCompleteListener { task ->
-//                if (!task.isSuccessful) {
-//                    Log.e("FCM-token", "Fetching FCM registration token failed", task.exception)
-//                    return@OnCompleteListener
-//                }
-//
-//                val token = task.result
-//                Log.e("FCM-token", token)
-//
-//                val msg = token.toString()
-//                fcmToken.value = msg
+        FirebaseMessaging.getInstance().token.addOnCompleteListener(
+            OnCompleteListener { task ->
+                if (!task.isSuccessful) {
+                    Log.e("FCM-token", "Fetching FCM registration token failed", task.exception)
+                    return@OnCompleteListener
+                }
+
+                val token = task.result
+                Log.e("FCM-token", token)
+                fcmToken.value = token
+
+                val msg = token.toString()
 //                Toast.makeText(context, msg, Toast.LENGTH_SHORT).show()
-//            }
-//        )
+            }
+        )
         when (checkingState) {
             SplashCheckingState.Network -> {
                 systemUiController.setStatusBarColor(
@@ -129,9 +130,10 @@ private fun SplashScreen(
             modifier = Modifier.fillMaxSize(),
             imageModel = { R.raw.splash }
         )
-//        Text(
+//        TextField(
 //            modifier = Modifier.padding(top = 40.dp),
-//            text = fcmToken.value
+//            value = fcmToken.value,
+//            onValueChange = {}
 //        )
     }
 }

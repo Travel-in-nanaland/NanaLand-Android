@@ -24,6 +24,7 @@ import androidx.compose.ui.zIndex
 import com.jeju.nanaland.R
 import com.jeju.nanaland.globalvalue.constant.TOP_BAR_HEIGHT
 import com.jeju.nanaland.ui.component.detailscreen.other.parts.description.DetailScreenFavoriteButton
+import com.jeju.nanaland.ui.component.detailscreen.other.parts.description.DetailScreenFavoriteButton2
 import com.jeju.nanaland.ui.theme.bodyBold
 import com.jeju.nanaland.ui.theme.getColor
 import com.jeju.nanaland.util.ui.clickableNoEffect
@@ -62,7 +63,7 @@ fun ReviewBottomBar(
     ) {
         Spacer(Modifier.width(16.dp))
 
-        DetailScreenFavoriteButton(
+        DetailScreenFavoriteButton2(
             isFavorite = isFavorite,
             onClick = toggleFavorite,
             moveToSignInScreen = moveToSignInScreen

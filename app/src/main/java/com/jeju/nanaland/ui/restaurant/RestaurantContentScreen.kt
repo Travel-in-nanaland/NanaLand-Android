@@ -1,6 +1,7 @@
 package com.jeju.nanaland.ui.restaurant
 
 import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.background
 import androidx.compose.foundation.gestures.animateTo
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -148,6 +149,7 @@ private fun RestaurantContentScreen(
                                 Column(modifier = Modifier.padding(start = 16.dp, end = 16.dp)) {
                                     ExperienceDetailScreenDescription(
                                         tag = restaurantContent.data.addressTag,
+                                        keywords = restaurantContent.data.keywords,
                                         title = restaurantContent.data.title,
                                         content = restaurantContent.data.content,
                                     )
@@ -159,16 +161,30 @@ private fun RestaurantContentScreen(
                                         color = getColor().black,
                                         style = title02Bold
                                     )
+                                }
 
-                                    restaurantContent.data.menus.forEach {
+                                restaurantContent.data.menus.forEachIndexed { idx, item ->
+                                    Box(
+                                        modifier = Modifier.padding(start = 16.dp, end = 16.dp)
+                                    ) {
                                         MenuItem(
-                                            menuName = it.menuName,
-                                            price = it.price,
-                                            imageUrl = it.firstImage.thumbnailUrl
+                                            menuName = item.menuName,
+                                            price = item.price,
+                                            imageUrl = item.firstImage.thumbnailUrl
                                         )
                                     }
 
-                                    Spacer(Modifier.height(32.dp))
+                                    if (idx != restaurantContent.data.menus.size - 1) {
+                                        Spacer(Modifier
+                                            .fillMaxWidth()
+                                            .height(1.dp)
+                                            .background(getColor().gray03))
+                                    }
+                                }
+
+                                Spacer(Modifier.height(32.dp))
+
+                                Column(modifier = Modifier.padding(start = 16.dp, end = 16.dp)) {
 
                                     if (!restaurantContent.data.address.isNullOrEmpty()) {
                                         DetailScreenInformation(
@@ -238,11 +254,17 @@ private fun RestaurantContentScreen(
                                 }
 
                                 Spacer(Modifier.height(40.dp))
-
                             }
                             is UiState.Failure -> {}
                         }
 
+                        Spacer(
+                            Modifier
+                                .fillMaxWidth()
+                                .height(8.dp)
+                                .background(getColor().gray03))
+
+                        Spacer(Modifier.height(32.dp))
 
                         when (reviewList) {
                             is UiState.Loading -> {}
@@ -259,6 +281,7 @@ private fun RestaurantContentScreen(
                                     }
 
                                     Spacer(Modifier.height(24.dp))
+
 
                                     reviewList.data.data.forEach {
                                         ReviewCard(

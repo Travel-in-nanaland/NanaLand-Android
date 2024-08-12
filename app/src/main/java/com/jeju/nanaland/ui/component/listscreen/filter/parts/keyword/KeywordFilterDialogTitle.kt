@@ -8,7 +8,7 @@ import com.jeju.nanaland.ui.theme.title02Bold
 @Composable
 fun KeywordFilterDialogTitle() {
     Text(
-        text = "키워드",
+        text = "종류",
         color = getColor().black,
         style = title02Bold
     )

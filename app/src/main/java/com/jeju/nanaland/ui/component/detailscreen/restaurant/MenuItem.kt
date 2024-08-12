@@ -41,7 +41,7 @@ fun MenuItem(
             Spacer(Modifier.height(4.dp))
 
             Text(
-                text = price,
+                text = "${price}원",
                 color = getColor().black,
                 style = body02
             )

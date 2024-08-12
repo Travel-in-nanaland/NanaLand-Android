@@ -156,14 +156,14 @@ private fun ReviewListScreen(
                     onBackButtonClicked = moveToBackScreen
                 )
 
-                Spacer(Modifier.height(26.dp))
-
                 LazyVerticalGrid(
                     state = lazyGridState,
                     modifier = Modifier.weight(1f),
                     columns = GridCells.Fixed(1)
                 ) {
                     item {
+                        Spacer(Modifier.height(26.dp))
+
                         when (reviewCount) {
                             is UiState.Loading -> {}
                             is UiState.Success -> {

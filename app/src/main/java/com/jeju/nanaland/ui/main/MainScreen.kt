@@ -22,6 +22,8 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -160,17 +162,20 @@ private fun MainScreen(
     moveToProfileReviewListScreen: (Int?) -> Unit,
     isContent: Boolean
 ) {
+    val homeScreenViewType = remember { mutableStateOf(HomeScreenViewType.Home) }
     CustomSurface { isImeKeyboardShowing ->
         Scaffold(
             topBar = {},
             bottomBar = {
-                MainNavigationBar(
-                    viewType,
-                    navigationItemContentList,
-                    updateMainScreenViewType = updateMainScreenViewType,
-                    initHomeScreen = initHomeScreen,
-                    initFavoriteScreen = initFavoriteScreen
-                )
+                if (homeScreenViewType.value == HomeScreenViewType.Home) {
+                    MainNavigationBar(
+                        viewType,
+                        navigationItemContentList,
+                        updateMainScreenViewType = updateMainScreenViewType,
+                        initHomeScreen = initHomeScreen,
+                        initFavoriteScreen = initFavoriteScreen
+                    )
+                }
             },
             floatingActionButton = {},
             containerColor = getColor().surface,
@@ -192,6 +197,9 @@ private fun MainScreen(
                             moveToMarketListScreen = moveToMarketListScreen,
                             moveToExperienceListScreen = moveToExperienceListScreen,
                             moveToSignInScreen = moveToSignInScreen,
+                            updateHomeScreenViewType = { viewType ->
+                                homeScreenViewType.value = viewType
+                            }
                         )
                     }
                     MainScreenViewType.Favorite -> {

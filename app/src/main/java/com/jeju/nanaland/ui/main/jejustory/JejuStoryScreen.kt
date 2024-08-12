@@ -33,7 +33,7 @@ private fun JejuStoryScreen(
     isContent: Boolean
 ) {
     Column(Modifier.fillMaxSize()) {
-        CustomTopBarNoBackButton(title = getString(R.string.common_제주_이야기))
+        CustomTopBarNoBackButton(title = getString(R.string.common_제주_맛집))
 
         Box(
             modifier = Modifier.fillMaxSize(),

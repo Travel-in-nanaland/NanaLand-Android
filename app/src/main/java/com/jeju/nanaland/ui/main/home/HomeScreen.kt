@@ -29,6 +29,7 @@ fun HomeScreen(
     moveToMarketListScreen: () -> Unit,
     moveToExperienceListScreen: () -> Unit,
     moveToSignInScreen: () -> Unit,
+    updateHomeScreenViewType: (HomeScreenViewType) -> Unit,
     homeViewModel: HomeViewModel = hiltViewModel(),
     searchViewModel: SearchViewModel = hiltViewModel()
 ) {
@@ -40,7 +41,10 @@ fun HomeScreen(
         updateInputText = homeViewModel::updateInputText,
         getSearchResult = searchViewModel::getSearchResult,
         addRecentSearch = searchViewModel::addRecentSearch,
-        updateHomeScreenViewType = homeViewModel::updateHomeScreenViewType,
+        updateHomeScreenViewType = {
+            homeViewModel.updateHomeScreenViewType(it)
+            updateHomeScreenViewType(it)
+        },
         updateSearchCategoryType = searchViewModel::updateSelectedCategoryType,
         moveToNotificationScreen = moveToNotificationScreen,
         moveToCategoryContentScreen = moveToCategoryContentScreen,

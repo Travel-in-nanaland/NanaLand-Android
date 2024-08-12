@@ -26,7 +26,7 @@ fun TagChip1(
                 color = getColor().main10,
                 shape = RoundedCornerShape(50)
             )
-            .padding(start = 10.dp, top = 2.dp, end = 10.dp, bottom = 2.dp),
+            .padding(start = 10.dp, end = 10.dp),
         contentAlignment = Alignment.Center
     ) {
         Text(
