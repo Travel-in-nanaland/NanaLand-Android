@@ -23,8 +23,6 @@ import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.jeju.nanaland.R
-import com.jeju.nanaland.globalvalue.type.InputNicknameState
-import com.jeju.nanaland.ui.component.signup.profilesetting.parts.SignUpScreenTextFieldHint
 import com.jeju.nanaland.ui.theme.body02
 import com.jeju.nanaland.ui.theme.caption01
 import com.jeju.nanaland.ui.theme.getColor

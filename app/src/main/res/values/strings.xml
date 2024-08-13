@@ -315,6 +315,7 @@
     <string name="settings_screen_버전_정보">버전 정보</string>
     <string name="settings_screen_로그아웃">로그아웃</string>
     <string name="settings_screen_회원_탈퇴">회원 탈퇴</string>
+    <string name="settings_screen_회원_가입" translatable="false">회원가입</string>
 
     <!--로그아웃 다이얼로그-->
     <string name="sign_out_dialog_text">정말 로그아웃을\n하시겠습니까?</string>

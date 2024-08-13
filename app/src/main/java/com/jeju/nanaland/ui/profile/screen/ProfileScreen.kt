@@ -15,6 +15,7 @@ import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -50,7 +51,7 @@ fun ProfileScreen(
     moveToProfileModificationScreen: (String?, String?, String?) -> Unit,
     moveToSignInScreen: () -> Unit,
     moveToTypeTestScreen: () -> Unit,
-    moveToTypeTestResultScreen: () -> Unit,
+    moveToTypeTestResultScreen: (String) -> Unit,
     moveToReviewWriteScreen: () -> Unit,
     moveToProfileReviewListScreen: (Int?) -> Unit,
     moveToProfileNoticeListScreen: (Int?) -> Unit,
@@ -73,7 +74,7 @@ fun ProfileScreen(
 @Composable
 fun ProfileScreen(
     onBackButtonClicked: () -> Unit,
-    moveToTypeTestResultScreen: () -> Unit,
+    moveToTypeTestResultScreen: (String) -> Unit,
     moveToProfileReviewListScreen: (Int?) -> Unit,
 ) {
     ProfileScreen(
@@ -99,12 +100,15 @@ private fun ProfileScreen(
     moveToProfileModificationScreen: (String?, String?, String?) -> Unit,
     moveToSignInScreen: () -> Unit,
     moveToTypeTestScreen: () -> Unit,
-    moveToTypeTestResultScreen: () -> Unit,
+    moveToTypeTestResultScreen: (String) -> Unit,
     moveToReviewWriteScreen: () -> Unit,
     moveToProfileReviewListScreen: (Int?) -> Unit,
     moveToProfileNoticeListScreen: (Int?) -> Unit,
     viewModel: ProfileViewModel = hiltViewModel()
 ) {
+    LaunchedEffect(Unit) {
+        viewModel.getUserProfile()
+    }
     val userProfile = viewModel.userProfile.collectAsState()
     val reviews = viewModel.reviews.collectAsLazyPagingItems()
     val notices = if(isMine)
@@ -161,7 +165,7 @@ private fun ProfileScreen(
                         )
                     },
                     moveToTypeTestScreen = moveToTypeTestScreen,
-                    moveToTypeTestResultScreen = moveToTypeTestResultScreen
+                    moveToTypeTestResultScreen = { up.data.travelType?.let(moveToTypeTestResultScreen) }
                 )
 
                 Spacer(Modifier.height(24.dp))

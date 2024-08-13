@@ -21,7 +21,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.jeju.nanaland.globalvalue.type.InputNicknameState
 import com.jeju.nanaland.ui.component.common.CustomSurface
 import com.jeju.nanaland.ui.component.signup.profilesetting.SignUpScreenBottomButton
 import com.jeju.nanaland.ui.component.signup.profilesetting.SignUpScreenCharacterCount
@@ -43,11 +42,11 @@ fun SignUpScreen(
 ) {
     val inputNickname = viewModel.inputNickname.collectAsState().value
     val profileImageUri = viewModel.profileImageUri.collectAsState().value
-    val inputNicknameState = viewModel.inputNicknameState.collectAsState().value
+    val inputNicknameState = viewModel.errorNickname.collectAsState().value
     SignUpScreen(
         inputNickname = inputNickname,
         updateInputNickname = viewModel::updateInputNickname,
-        inputNicknameState = inputNicknameState,
+        inputNicknameError = inputNicknameState,
         profileImageUri = profileImageUri,
         updateProfileImageUri = viewModel::updateProfileImageUri,
         signUp = {
@@ -69,7 +68,7 @@ fun SignUpScreen(
 private fun SignUpScreen(
     inputNickname: String,
     updateInputNickname: (String) -> Unit,
-    inputNicknameState: InputNicknameState,
+    inputNicknameError: Int?,
     profileImageUri: String?,
     updateProfileImageUri: (Uri) -> Unit,
     signUp: () -> Unit,
@@ -118,7 +117,10 @@ private fun SignUpScreen(
                         modifier = Modifier.fillMaxWidth(),
                         contentAlignment = Alignment.CenterEnd
                     ) {
-                        SignUpScreenCharacterCount(count = inputNickname.length)
+                        SignUpScreenCharacterCount(
+                            count = inputNickname.length,
+                            isError = inputNicknameError != null
+                        )
                     }
 
                     Spacer(Modifier.height(8.dp))
@@ -126,7 +128,7 @@ private fun SignUpScreen(
                     SignUpScreenTextField(
                         inputText = inputNickname,
                         onValueChange = updateInputNickname,
-                        inputState = inputNicknameState
+                        error = inputNicknameError
                     )
 
                     Spacer(Modifier.height(40.dp))
@@ -135,7 +137,7 @@ private fun SignUpScreen(
 
             item {
                 SignUpScreenBottomButton(
-                    isActivated = inputNickname.isNotEmpty() && inputNicknameState == InputNicknameState.Idle,
+                    isActivated = inputNickname.isNotEmpty() && inputNicknameError == null,
                     onClick = signUp
                 )
 

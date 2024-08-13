@@ -5,6 +5,7 @@ import com.jeju.nanaland.data.api.MemberApi
 import com.jeju.nanaland.domain.entity.member.RecommendedPostData
 import com.jeju.nanaland.domain.entity.member.UserProfile
 import com.jeju.nanaland.domain.repository.MemberRepository
+import com.jeju.nanaland.domain.request.UriRequestBody
 import com.jeju.nanaland.domain.request.member.UpdateLanguageRequest
 import com.jeju.nanaland.domain.request.member.UpdatePolicyAgreementRequest
 import com.jeju.nanaland.domain.request.member.UpdateUserProfileRequest
@@ -48,18 +49,18 @@ class MemberRepositoryImpl(
 
     override suspend fun updateUserProfile(
         data: UpdateUserProfileRequest,
-        image: File?
+        image: UriRequestBody?
     ): NetworkResult<String?> {
-        val multipartImage: MultipartBody.Part? = image?.let {
-            val imageBody = image.asRequestBody("image/png".toMediaTypeOrNull())
-            MultipartBody.Part.createFormData("multipartFile", imageBody.toString(), imageBody)
-        }
-
         val gson = GsonBuilder().setLenient().setPrettyPrinting().create();
         val json = gson.toJson(data)
         val requestBody = json.toRequestBody("application/json".toMediaTypeOrNull())
+        return handleResult { memberApi.updateUserProfile(requestBody, image?.toMultipartBody("multipartFile")) }
+    }
 
-        return handleResult { memberApi.updateUserProfile(requestBody, multipartImage) }
+    override suspend fun duplicateNickname(
+        data: String,
+    ): NetworkResult<Unit> {
+        return handleResult { memberApi.duplicateNickname(data) }
     }
 
     override suspend fun withdraw(

@@ -63,10 +63,6 @@ class ProfileViewModel @Inject constructor(
     val isGuest: Boolean
         get() = UserData.provider == "GUEST"
 
-    init {
-        getUserProfile(userId)
-    }
-
     fun setIsReviewList(isReviewList: Boolean){
         _isReviewList.update { isReviewList }
     }
@@ -88,14 +84,21 @@ class ProfileViewModel @Inject constructor(
             }
     }
 
-    private fun getUserProfile(userId: Int?) {
+    fun getUserProfile() {
         getUserProfileUseCase(userId)
             .onEach { networkResult ->
                 networkResult.onSuccess { _, _, data ->
                     data?.let {
+                        if(data == (_userProfile.value as? UiState.Success)?.data)
+                            return@onSuccess
+
                         _userProfile.update {
                             UiState.Success(data)
                         }
+
+                        if(userId != null)
+                            return@onSuccess
+
                         UserData.provider = data.provider ?: "GUEST"
                         if (isGuest) {
                             UserData.nickname = "GUEST"

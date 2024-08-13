@@ -7,25 +7,30 @@ import android.provider.MediaStore
 import androidx.core.net.toUri
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
+import com.jeju.nanaland.R
 import com.jeju.nanaland.domain.entity.member.ConsentItem
 import com.jeju.nanaland.domain.request.auth.SignUpRequest
 import com.jeju.nanaland.domain.usecase.auth.SignUpUseCase
 import com.jeju.nanaland.domain.usecase.authdatastore.SaveAccessTokenUseCase
 import com.jeju.nanaland.domain.usecase.authdatastore.SaveRefreshTokenUseCase
+import com.jeju.nanaland.domain.usecase.member.DuplicateNicknameUseCase
 import com.jeju.nanaland.domain.usecase.settingsdatastore.GetValueUseCase
 import com.jeju.nanaland.globalvalue.constant.KEY_LANGUAGE
 import com.jeju.nanaland.globalvalue.constant.NICKNAME_CONSTRAINT
 import com.jeju.nanaland.globalvalue.constant.nicknameRegex
-import com.jeju.nanaland.globalvalue.type.InputNicknameState
 import com.jeju.nanaland.globalvalue.userdata.UserData
 import com.jeju.nanaland.util.log.LogUtil
+import com.jeju.nanaland.util.network.NetworkResult
 import com.jeju.nanaland.util.network.onError
 import com.jeju.nanaland.util.network.onException
 import com.jeju.nanaland.util.network.onSuccess
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.debounce
+import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.update
@@ -38,25 +43,31 @@ class SignUpViewModel @Inject constructor(
     private val getValueUseCase: GetValueUseCase,
     private val saveAccessTokenUseCase: SaveAccessTokenUseCase,
     private val saveRefreshTokenUseCase: SaveRefreshTokenUseCase,
+    private val duplicateNicknameUseCase: DuplicateNicknameUseCase,
     private val application: Application
 ) : AndroidViewModel(application) {
 
     private val _inputNickname = MutableStateFlow("")
     val inputNickname = _inputNickname.asStateFlow()
-    private val _inputNicknameState = MutableStateFlow(InputNicknameState.Idle)
-    val inputNicknameState = _inputNicknameState.asStateFlow()
     private val _profileImageUri = MutableStateFlow<String?>(null)
     val profileImageUri = _profileImageUri.asStateFlow()
 
+    private val _errorNickname = MutableStateFlow<Int?>(null)
+    val errorNickname: StateFlow<Int?> = _errorNickname
+
+    init {
+        @Suppress("OPT_IN_USAGE")
+        inputNickname
+            .debounce(600)
+            .distinctUntilChanged()
+            .onEach {
+                if(!nicknameIsError())
+                    nicknameIsErrorByApi()
+            }
+            .launchIn(viewModelScope)
+    }
     fun updateInputNickname(nickname: String) {
         _inputNickname.update { nickname }
-        if (_inputNickname.value.length > NICKNAME_CONSTRAINT) {
-            _inputNicknameState.update { InputNicknameState.TooInt }
-        } else if (!_inputNickname.value.matches(nicknameRegex)) {
-            _inputNicknameState.update { InputNicknameState.Invalid }
-        } else {
-            _inputNicknameState.update { InputNicknameState.Idle }
-        }
     }
 
     fun updateProfileImageUri(uri: Uri) {
@@ -123,7 +134,7 @@ class SignUpViewModel @Inject constructor(
                 }.onError { code, message ->
                     when (code) {
                         409 -> {
-                            _inputNicknameState.update { InputNicknameState.Duplicated }
+                            _errorNickname.update { R.string.sign_up_profile_setting_warning2 }
                         }
                     }
                 }.onException {
@@ -132,5 +143,26 @@ class SignUpViewModel @Inject constructor(
             }
             .catch { LogUtil.e("flow Error", "signUpUseCase") }
             .launchIn(viewModelScope)
+    }
+    private fun nicknameIsError(): Boolean {
+        return if (_inputNickname.value.length > NICKNAME_CONSTRAINT) {
+            _errorNickname.update { R.string.sign_up_profile_setting_warning1 }
+            true
+        } else if (!_inputNickname.value.matches(nicknameRegex)) {
+            _errorNickname.update { R.string.sign_up_profile_setting_warning3 }
+            true
+        } else {
+            false
+        }
+    }
+
+    private suspend fun nicknameIsErrorByApi(): Boolean {
+        return if(duplicateNicknameUseCase(_inputNickname.value) is NetworkResult.Success) {
+            _errorNickname.update { null }
+            false
+        } else {
+            _errorNickname.update { R.string.sign_up_profile_setting_warning2 }
+            true
+        }
     }
 }
