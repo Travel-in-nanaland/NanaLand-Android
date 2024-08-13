@@ -4,7 +4,6 @@ import androidx.core.os.bundleOf
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
-import com.jeju.nanaland.globalvalue.constant.ROUTE_TYPE_TEST_COMPLETION
 import com.jeju.nanaland.globalvalue.constant.ROUTE_TYPE_TEST_LOADING
 import com.jeju.nanaland.globalvalue.constant.ROUTE_TYPE_TEST_RESULT
 import com.jeju.nanaland.ui.typetest.TypeTestLoadingScreen
@@ -14,6 +13,7 @@ fun NavGraphBuilder.typeTestLoadingScreen(navController: NavController) = compos
     TypeTestLoadingScreen(
         moveToTypeTestResultScreen = {
             val bundle = bundleOf(
+                "isFirst" to (it.arguments?.getBoolean("isFirst") == true),
                 "travelType" to (it.arguments?.getString("travelType") ?: "")
             )
             navController.popBackStack(ROUTE_TYPE_TEST_LOADING, true)

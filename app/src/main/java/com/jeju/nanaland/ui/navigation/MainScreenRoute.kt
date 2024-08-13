@@ -79,7 +79,7 @@ fun NavGraphBuilder.mainScreen(
             launchSingleTop = true
         } },
         moveToTypeTestScreen = { navController.navigate(ROUTE_TYPE_TESTING) },
-        moveToTypeTestResultScreen = { navController.navigate(ROUTE_TYPE_TEST_RESULT) },
+        moveToTypeTestResultScreen = { navController.navigate(ROUTE_TYPE_TEST_RESULT,  bundleOf("travelType" to it)) },
         moveToReviewWriteScreen = { /*TODO*/ },
         moveToProfileNoticeListScreen = {
             if(it == null) navController.navigate(ROUTE_PROFILE_NOTICE)
