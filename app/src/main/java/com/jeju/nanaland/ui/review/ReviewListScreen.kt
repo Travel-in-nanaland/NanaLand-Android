@@ -162,14 +162,13 @@ private fun ReviewListScreen(
                     columns = GridCells.Fixed(1)
                 ) {
                     item {
-                        Spacer(Modifier.height(26.dp))
-
                         when (reviewCount) {
                             is UiState.Loading -> {}
                             is UiState.Success -> {
                                 Row(
-                                    modifier = Modifier.padding(start = 16.dp, end = 16.dp)
+                                    modifier = Modifier.padding(start = 16.dp, top = 26.dp, end = 16.dp)
                                 ) {
+
                                     Text(
                                         text = "후기",
                                         color = getColor().black,

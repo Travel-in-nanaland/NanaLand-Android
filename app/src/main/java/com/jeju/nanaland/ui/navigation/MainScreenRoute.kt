@@ -18,6 +18,7 @@ import com.jeju.nanaland.globalvalue.constant.ROUTE_NOTIFICATION
 import com.jeju.nanaland.globalvalue.constant.ROUTE_PROFILE_NOTICE
 import com.jeju.nanaland.globalvalue.constant.ROUTE_PROFILE_REVIEW
 import com.jeju.nanaland.globalvalue.constant.ROUTE_PROFILE_UPDATE
+import com.jeju.nanaland.globalvalue.constant.ROUTE_RESTAURANT_CONTENT
 import com.jeju.nanaland.globalvalue.constant.ROUTE_RESTAURANT_LIST
 import com.jeju.nanaland.globalvalue.constant.ROUTE_SETTINGS
 import com.jeju.nanaland.globalvalue.constant.ROUTE_SIGN_IN
@@ -47,6 +48,7 @@ fun NavGraphBuilder.mainScreen(
                 CategoryType.Market -> { navController.navigate(ROUTE_MARKET_CONTENT, bundle) }
                 CategoryType.Experience -> { navController.navigate(ROUTE_EXPERIENCE_CONTENT, bundle) }
                 CategoryType.Nana -> { navController.navigate(ROUTE_NANAPICK_CONTENT, bundle) }
+                CategoryType.Restaurant -> { navController.navigate(ROUTE_RESTAURANT_CONTENT, bundle) }
             }
         },
         moveToRestaurantListScreen = { navController.navigate(ROUTE_RESTAURANT_LIST) { launchSingleTop = true } },

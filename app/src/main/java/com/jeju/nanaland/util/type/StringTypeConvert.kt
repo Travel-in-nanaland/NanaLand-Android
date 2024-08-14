@@ -8,6 +8,7 @@ fun getCategoryType(type: String?): CategoryType {
         "FESTIVAL" -> CategoryType.Festival
         "MARKET" -> CategoryType.Market
         "EXPERIENCE" -> CategoryType.Experience
+        "RESTAURANT" -> CategoryType.Restaurant
         else  -> CategoryType.Nana
     }
 }

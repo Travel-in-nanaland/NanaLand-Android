@@ -34,6 +34,7 @@ import com.jeju.nanaland.ui.component.common.topbar.CustomTopBarWithShareButton
 import com.jeju.nanaland.ui.component.detailscreen.other.ExperienceDetailScreenDescription
 import com.jeju.nanaland.ui.component.detailscreen.other.DetailScreenInformation
 import com.jeju.nanaland.ui.component.detailscreen.other.DetailScreenInformationModificationProposalButton
+import com.jeju.nanaland.ui.component.detailscreen.other.DetailScreenNotice
 import com.jeju.nanaland.ui.component.detailscreen.other.DetailScreenTopBannerImage
 import com.jeju.nanaland.ui.component.detailscreen.other.MoveToTopButton
 import com.jeju.nanaland.ui.component.review.ReportBottomDialog
@@ -156,6 +157,13 @@ private fun ExperienceContentScreen(
                                         content = experienceContent.data.content,
                                     )
 
+                                    Spacer(Modifier.height(24.dp))
+
+                                    DetailScreenNotice(
+                                        title = "간단 설명",
+                                        content = experienceContent.data.intro
+                                    )
+
                                     Spacer(Modifier.height(32.dp))
 
                                     if (experienceContent.data.address.isNotEmpty()) {
@@ -211,10 +219,11 @@ private fun ExperienceContentScreen(
                             is UiState.Failure -> {}
                         }
 
-                        Spacer(Modifier
-                            .fillMaxWidth()
-                            .height(8.dp)
-                            .background(getColor().gray03))
+                        Spacer(
+                            Modifier
+                                .fillMaxWidth()
+                                .height(8.dp)
+                                .background(getColor().gray03))
 
                         Spacer(Modifier.height(32.dp))
 

@@ -14,6 +14,7 @@ import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -38,6 +39,7 @@ fun ExperienceDetailScreenDescription(
     content: String?,
 ) {
     val isMoreOpen = remember { mutableStateOf(false) }
+    val isOverflow = remember { mutableStateOf(false) }
     Box(
         modifier = Modifier
 //            .padding(16.dp)
@@ -55,7 +57,9 @@ fun ExperienceDetailScreenDescription(
             .animateContentSize()
     ) {
         Column(
-            modifier = Modifier.padding(start = 16.dp, top = 16.dp, end = 16.dp, bottom = 16.dp)
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(start = 16.dp, top = 16.dp, end = 16.dp, bottom = 16.dp)
         ) {
             LazyRow(
                 modifier = Modifier.height(20.dp)
@@ -84,8 +88,9 @@ fun ExperienceDetailScreenDescription(
             Spacer(Modifier.height(8.dp))
 
             DetailScreenDescriptionContent(
-                isMoreOpen = isMoreOpen.value,
-                text = content
+                isMoreOpen = isMoreOpen,
+                isOverflow = isOverflow,
+                text = content,
             )
 
             Spacer(Modifier.height(16.dp))
@@ -93,10 +98,14 @@ fun ExperienceDetailScreenDescription(
             Box(
                 modifier = Modifier.align(Alignment.End)
             ) {
-                DetailScreenMoreButton(
-                    isMoreOpen = isMoreOpen.value,
-                    onClick = { isMoreOpen.value = !isMoreOpen.value }
-                )
+                if (isOverflow.value) {
+                    DetailScreenMoreButton(
+                        isMoreOpen = isMoreOpen.value,
+                        onClick = {
+                            isMoreOpen.value = !isMoreOpen.value
+                        }
+                    )
+                }
             }
         }
     }

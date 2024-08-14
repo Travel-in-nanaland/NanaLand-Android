@@ -11,7 +11,7 @@ interface ReportRepository {
     // 정보 수정 제안
     suspend fun informationModificationProposal(
         data: InformationModificationProposalRequest,
-        image: File?
+        images: List<UriRequestBody>
     ): NetworkResult<String?>
 
     // 리뷰 신고

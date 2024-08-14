@@ -83,7 +83,7 @@ fun ReviewBottomBar(
             contentAlignment = Alignment.Center
         ) {
             Text(
-                text = "리뷰 작성하기",
+                text = "후기 작성하기",
                 color = getColor().white,
                 style = bodyBold
             )

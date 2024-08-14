@@ -15,7 +15,7 @@ interface ReportApi {
     @POST("report/info-fix")
     suspend fun informationModificationProposal(
         @Part("reqDto") data: RequestBody,
-        @Part image: MultipartBody.Part?
+        @Part images: List<MultipartBody.Part>?
     ): Response<ResponseWrapper<String>>
 
     // 리뷰 신고
