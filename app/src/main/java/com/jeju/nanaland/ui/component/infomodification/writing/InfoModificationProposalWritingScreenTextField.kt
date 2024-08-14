@@ -37,6 +37,7 @@ fun InfoModificationProposalWritingScreenTextField(
     inputText: String,
     onValueChange: (String) -> Unit,
     isValid: Boolean = true,
+    contentAlignment: Alignment = Alignment.TopStart
 ) {
     BasicTextField(
         value = inputText,
@@ -58,8 +59,8 @@ fun InfoModificationProposalWritingScreenTextField(
                         ),
                         shape = RoundedCornerShape(12.dp)
                     )
-                    .padding(16.dp),
-                contentAlignment = Alignment.TopStart
+                    .padding(start = 16.dp, top = if (contentAlignment == Alignment.TopStart) 16.dp else 0.dp),
+                contentAlignment = contentAlignment
             ) {
                 it()
                 if (inputText == "") {

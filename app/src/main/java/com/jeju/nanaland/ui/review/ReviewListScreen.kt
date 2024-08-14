@@ -156,8 +156,6 @@ private fun ReviewListScreen(
                     onBackButtonClicked = moveToBackScreen
                 )
 
-                Spacer(Modifier.height(26.dp))
-
                 LazyVerticalGrid(
                     state = lazyGridState,
                     modifier = Modifier.weight(1f),
@@ -168,8 +166,9 @@ private fun ReviewListScreen(
                             is UiState.Loading -> {}
                             is UiState.Success -> {
                                 Row(
-                                    modifier = Modifier.padding(start = 16.dp, end = 16.dp)
+                                    modifier = Modifier.padding(start = 16.dp, top = 26.dp, end = 16.dp)
                                 ) {
+
                                     Text(
                                         text = "후기",
                                         color = getColor().black,

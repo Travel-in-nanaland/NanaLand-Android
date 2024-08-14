@@ -21,18 +21,18 @@ class ReportRepositoryImpl(
 
     override suspend fun informationModificationProposal(
         data: InformationModificationProposalRequest,
-        image: File?
+        images: List<UriRequestBody>
     ): NetworkResult<String?> {
-        val multipartImage: MultipartBody.Part? = image?.let {
-            val imageBody = image.asRequestBody("image/png".toMediaTypeOrNull())
-            MultipartBody.Part.createFormData("multipartFile", imageBody.toString(), imageBody)
-        }
+//        val multipartImage: MultipartBody.Part? = images?.let {
+//            val imageBody = images.asRequestBody("image/png".toMediaTypeOrNull())
+//            MultipartBody.Part.createFormData("multipartFile", imageBody.toString(), imageBody)
+//        }
 
         val gson = GsonBuilder().setLenient().setPrettyPrinting().create()
         val json = gson.toJson(data)
         val requestBody = json.toRequestBody("application/json".toMediaTypeOrNull())
 
-        return handleResult { reportApi.informationModificationProposal(requestBody, multipartImage) }
+        return handleResult { reportApi.informationModificationProposal(requestBody, images.ifEmpty { null }?.map { it.toMultipartBody("multipartFileList") }) }
     }
 
     override suspend fun reportReview(

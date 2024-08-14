@@ -42,7 +42,7 @@
     <string name="common_나나s_Pick">나나\'s Pick</string>
     <string name="common_홈">홈</string>
     <string name="common_찜">찜</string>
-    <string name="common_제주_이야기">제주 이야기</string>
+    <string name="common_제주_맛집">제주 맛집</string>
     <string name="common_나의_나나">나의 나나</string>
     <string name="common_전체">전체</string>
     <string name="common_건">건</string>
@@ -287,7 +287,7 @@
     <string name="type_test_screen_text5">" 님의 여행 유형은"</string>
     <string name="type_test_screen_text6">nanaland in Jeju 가 당신을 위해\n맞춤 여행 주스를 만들었어요!</string>
     <string name="type_test_screen_button1">여행지</string>
-    <string name="type_test_screen_button2">메인 화면 바로가기</string>
+    <string name="type_test_screen_button2">홈화면 바로가기</string>
     <string name="type_test_screen_lets_go">Let\'s Go!</string>
 
     <!--여행지 유형 테스트 추천 여행지 화면-->

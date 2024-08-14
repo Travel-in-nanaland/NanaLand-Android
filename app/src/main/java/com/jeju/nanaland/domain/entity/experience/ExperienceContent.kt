@@ -8,6 +8,8 @@ data class ExperienceContent(
     val id: Int,
     @SerializedName("title")
     val title: String,
+    @SerializedName("intro")
+    val intro: String,
     @SerializedName("content")
     val content: String,
     @SerializedName("address")

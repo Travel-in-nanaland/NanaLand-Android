@@ -157,7 +157,7 @@ private fun NatureContentScreen(
 
                                 if (!natureContent.data.details.isNullOrEmpty()) {
                                     DetailScreenInformation(
-                                        drawableId = R.drawable.ic_clip_outlined,
+                                        drawableId = R.drawable.ic_note_outlined,
                                         title = getString(R.string.detail_screen_common_상세_정보),
                                         content = natureContent.data.details
                                     )

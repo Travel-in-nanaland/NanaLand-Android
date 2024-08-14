@@ -3,13 +3,16 @@ package com.jeju.nanaland.ui.infomodification
 import android.annotation.SuppressLint
 import android.app.Application
 import android.net.Uri
+import androidx.compose.runtime.mutableStateListOf
 import androidx.core.net.toUri
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
+import com.jeju.nanaland.domain.request.UriRequestBody
 import com.jeju.nanaland.domain.request.report.InformationModificationProposalRequest
 import com.jeju.nanaland.domain.usecase.report.InformationModificationProposalUseCase
 import com.jeju.nanaland.globalvalue.constant.emailRegex
 import com.jeju.nanaland.globalvalue.type.InputEmailState
+import com.jeju.nanaland.ui.reviewwrite.ReviewWriteViewModel.Companion.MAX_IMAGE_CNT
 import com.jeju.nanaland.util.file.copy
 import com.jeju.nanaland.util.file.getFileExtension
 import com.jeju.nanaland.util.log.LogUtil
@@ -41,6 +44,7 @@ class InfoModificationProposalViewModel @Inject constructor(
     val inputEmail = _inputEmail.asStateFlow()
     private val _inputEmailState = MutableStateFlow(InputEmailState.Idle)
     val inputEmailState = _inputEmailState.asStateFlow()
+    val selectedImageList = mutableStateListOf<Uri>()
 
     fun updateImageUri(uri: Uri) {
         _imageUri.update { uri.toString() }
@@ -59,6 +63,11 @@ class InfoModificationProposalViewModel @Inject constructor(
         }
     }
 
+    fun changeImage(arg: List<Uri>) {
+        selectedImageList.clear()
+        selectedImageList.addAll(arg)
+    }
+
     @SuppressLint("Range", "Recycle")
     fun sendReport(postId: Int, fixType: String, category: String, moveToCompleteScreen: () -> Unit) {
         val requestData = InformationModificationProposalRequest(
@@ -69,24 +78,24 @@ class InfoModificationProposalViewModel @Inject constructor(
             email = _inputEmail.value
         )
 
-        val fileExtension = getFileExtension(application, _imageUri.value!!.toUri())
-        val fileName = "temporary_file" + if (fileExtension != null) ".$fileExtension" else ""
-
-        val imageFile = File(application.cacheDir, fileName)
-        imageFile.createNewFile()
-
-        try {
-            val oStream = FileOutputStream(imageFile)
-            val inputStream = application.contentResolver.openInputStream(_imageUri.value!!.toUri())
-
-            inputStream?.let {
-                copy(inputStream, oStream)
-            }
-
-            oStream.flush()
-        } catch (e: Exception) {
-            e.printStackTrace()
-        }
+//        val fileExtension = getFileExtension(application, _imageUri.value!!.toUri())
+//        val fileName = "temporary_file" + if (fileExtension != null) ".$fileExtension" else ""
+//
+//        val imageFile = File(application.cacheDir, fileName)
+//        imageFile.createNewFile()
+//
+//        try {
+//            val oStream = FileOutputStream(imageFile)
+//            val inputStream = application.contentResolver.openInputStream(_imageUri.value!!.toUri())
+//
+//            inputStream?.let {
+//                copy(inputStream, oStream)
+//            }
+//
+//            oStream.flush()
+//        } catch (e: Exception) {
+//            e.printStackTrace()
+//        }
 
 //        var imageFile: File? = null
 //        if (_imageUri.value?.contains("content") == true) {
@@ -96,7 +105,7 @@ class InfoModificationProposalViewModel @Inject constructor(
 //            imageFile = path?.let { File(it) }
 //        }
 
-        infoModificationUseCase(requestData, imageFile)
+        infoModificationUseCase(requestData, selectedImageList.map { UriRequestBody(application, it) })
             .onEach { networkResult ->
                 networkResult.onSuccess { code, message, data ->
                     moveToCompleteScreen()

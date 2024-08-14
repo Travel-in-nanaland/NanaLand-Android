@@ -50,7 +50,7 @@ fun DateLocationFilterTopBar(
             endCalendar = endCalendar
         )
 
-        Spacer(Modifier.width(16.dp))
+        Spacer(Modifier.width(8.dp))
 
         LocationFilterBox(
             showDimBackground = showDimBackground,

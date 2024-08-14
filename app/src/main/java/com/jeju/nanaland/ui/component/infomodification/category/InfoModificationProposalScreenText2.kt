@@ -11,7 +11,7 @@ import com.jeju.nanaland.util.resource.getString
 fun InfoModificationProposalScreenText2() {
     Text(
         text = getString(R.string.info_modification_proposal_text1),
-        color = getColor().black,
+        color = getColor().gray01,
         style = body02
     )
 }

@@ -74,7 +74,7 @@ class CustomDateView @JvmOverloads constructor(
     override var stripColor: Int = defCalendarStyleAttr.rangeStripColor
 
     private val mViewClickListener = OnClickListener {
-        val key = it.tag as Int
+        val key = it.tag as Long
         if (onDateClickListener != null) {
             val selectedCal = Calendar.getInstance()
             var date = Date()

@@ -3,6 +3,7 @@ import com.android.build.gradle.internal.cxx.configure.gradleLocalProperties
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
+    id("com.google.gms.google-services")
     id("com.google.dagger.hilt.android")
     id("kotlin-parcelize")
     id("kotlin-kapt")
@@ -148,6 +149,12 @@ dependencies {
     // drawable to painter
     implementation("com.google.accompanist:accompanist-drawablepainter:0.34.0")
 
+    // Firebase Bom
+    implementation(platform("com.google.firebase:firebase-bom:32.3.1"))
+    implementation("com.google.firebase:firebase-analytics-ktx")
+
+    implementation("com.google.firebase:firebase-messaging")
+    implementation("com.google.firebase:firebase-analytics")
 }
 
 kapt {

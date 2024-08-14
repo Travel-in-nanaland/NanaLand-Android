@@ -5,10 +5,12 @@ import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.provider.Settings
+import android.util.Log
 import android.view.WindowManager
 import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.OnBackPressedCallback
+import com.google.android.gms.tasks.OnCompleteListener
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.fillMaxSize
@@ -18,6 +20,7 @@ import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.IntSize
 import androidx.lifecycle.ViewModelProvider
+import com.google.firebase.messaging.FirebaseMessaging
 import com.jeju.nanaland.globalvalue.constant.BOTTOM_NAVIGATION_BAR_HEIGHT
 import com.jeju.nanaland.globalvalue.constant.SCREEN_HEIGHT_WITHOUT_SYSTEM_BAR
 import com.jeju.nanaland.globalvalue.constant.SCREEN_WIDTH
@@ -84,7 +87,6 @@ class MainActivity : ComponentActivity() {
 //        viewModel.saveRefreshToken("eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxMiIsImF1dGgiOiJST0xFX01FTUJFUiIsImV4cCI6MTcxNTg2NzA4OH0.W2BAeUJqN3mUtFxqqUOTTmbbLoYIxroMWnY9lk9n0cVx21KerUG0zfvSQaDWdG8rGRlWTdGG8XxmcjNHxMkC9Q")
         // 공유용 토큰
 //        viewModel.saveRefreshToken("eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI2IiwiYXV0aCI6IlJPTEVfTUVNQkVSIiwiZXhwIjoxNzE1MzU1MDQ3fQ.0qaNAfkEohRBwOAUjiv-3Ob2-tfOUL_XhaVKeFcpp3qQxyVPlbTRz8Q0hzruHNRO5b-p3RymfQxc3CRw24Hvaw")
-
 
         setContent {
             NanaLandTheme {

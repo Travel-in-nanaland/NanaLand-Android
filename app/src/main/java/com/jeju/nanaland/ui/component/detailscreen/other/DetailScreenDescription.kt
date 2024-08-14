@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -41,6 +42,7 @@ fun DetailScreenDescription(
     moveToSignInScreen: () -> Unit,
 ) {
     val isMoreOpen = remember { mutableStateOf(false) }
+    val isOverflow = remember { mutableStateOf(false) }
     Box(
         modifier = Modifier
 //            .padding(16.dp)
@@ -69,7 +71,8 @@ fun DetailScreenDescription(
             Spacer(Modifier.height(8.dp))
 
             DetailScreenDescriptionContent(
-                isMoreOpen = isMoreOpen.value,
+                isMoreOpen = isMoreOpen,
+                isOverflow = isOverflow,
                 text = content
             )
 
@@ -78,10 +81,14 @@ fun DetailScreenDescription(
             Box(
                 modifier = Modifier.align(Alignment.End)
             ) {
-                DetailScreenMoreButton(
-                    isMoreOpen = isMoreOpen.value,
-                    onClick = { isMoreOpen.value = !isMoreOpen.value }
-                )
+                if (isOverflow.value) {
+                    DetailScreenMoreButton(
+                        isMoreOpen = isMoreOpen.value,
+                        onClick = {
+                            isMoreOpen.value = !isMoreOpen.value
+                        }
+                    )
+                }
             }
         }
         Row(
