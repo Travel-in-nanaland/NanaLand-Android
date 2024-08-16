@@ -17,7 +17,6 @@ import com.jeju.nanaland.domain.request.review.GetMyReviewListRequest
 import com.jeju.nanaland.domain.request.review.GetReviewAutoCompleteKeywordRequest
 import com.jeju.nanaland.domain.request.review.GetReviewListByPostRequest
 import com.jeju.nanaland.domain.request.review.GetReviewThumbnailListByUserRequest
-import com.jeju.nanaland.domain.request.review.ModifyUserReviewRequest
 import com.jeju.nanaland.domain.request.review.ToggleReviewFavoriteRequest
 import com.jeju.nanaland.globalvalue.type.ReviewCategoryType
 import com.jeju.nanaland.util.network.NetworkResult
@@ -54,7 +53,7 @@ class ReviewRepositoryImpl(
     // 리뷰 위한 게시글 검색 자동완성
     override suspend fun getReviewAutoCompleteKeyword(
         data: GetReviewAutoCompleteKeywordRequest
-    ): NetworkResult<ReviewKeywordResult> {
+    ): NetworkResult<List<ReviewKeywordResult>> {
         return handleResult {
             api.getReviewAutoCompleteKeyword(
                 keyword = data.keyword
@@ -134,11 +133,23 @@ class ReviewRepositoryImpl(
 
     // 내가 쓴 리뷰 수정
     override suspend fun modifyUserReview(
-        data: ModifyUserReviewRequest
+        id: Int,
+        newImages: List<UriRequestBody>?,
+        data: CreateReviewRequest
     ): NetworkResult<String> {
         return handleResult {
+            val reqData = Gson().toJson(
+                data.copy(
+                    editImages = data.editImages ?: emptyList()
+                )
+            ).toRequestBody("application/json".toMediaTypeOrNull())
+
             api.modifyUserReview(
-                id = data.id
+                id = id,
+                data = reqData,
+                newImages = newImages?.map {
+                    it.toMultipartBody("imageList")
+                }
             )
         }
     }

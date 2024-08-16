@@ -80,6 +80,9 @@
     <string name="common_방금전" translatable="false">방금 전</string> <!--  TODO  -->
     <string name="common_시간전" translatable="false">%d시간 전</string> <!--  TODO  -->
 
+    <!--에러 관련-->
+    <string name="common_인터넷_문제" translatable="false">인터넷 연결에 문제가 생긴 것 같아요!\n확인 후 다시 들어와줄 수 있을까요?</string> <!--  TODO  -->
+
 
     <!--로그인 화면-->
     <string name="sign_in_screen_로그인_없이_둘러보기">로그인 없이 둘러보기</string>
@@ -399,6 +402,7 @@
     <!--후기 작성 화면-->
     <!--TODO 번역-->
     <string name="review_write_title" translatable="false">후기 작성</string>
+    <string name="review_write_search_hint" translatable="false">장소를 검색하세요</string>
     <string name="review_write_select_rating" translatable="false">\"별점\"을 \"선택\"해주세요!</string>
     <string name="review_write_writing" translatable="false">\"방문 후기\"를 \"작성\"해주세요!</string>
     <string name="review_write_writing_hint" translatable="false">내용을 작성해 주세요</string>

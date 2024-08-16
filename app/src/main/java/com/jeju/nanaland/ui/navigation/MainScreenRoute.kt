@@ -20,6 +20,7 @@ import com.jeju.nanaland.globalvalue.constant.ROUTE_PROFILE_NOTICE
 import com.jeju.nanaland.globalvalue.constant.ROUTE_PROFILE_REVIEW
 import com.jeju.nanaland.globalvalue.constant.ROUTE_PROFILE_UPDATE
 import com.jeju.nanaland.globalvalue.constant.ROUTE_RESTAURANT_LIST
+import com.jeju.nanaland.globalvalue.constant.ROUTE_REVIEW_WRITE_ROUTE
 import com.jeju.nanaland.globalvalue.constant.ROUTE_SETTINGS
 import com.jeju.nanaland.globalvalue.constant.ROUTE_SIGN_IN
 import com.jeju.nanaland.globalvalue.constant.ROUTE_TYPE_TESTING
@@ -80,7 +81,7 @@ fun NavGraphBuilder.mainScreen(
         } },
         moveToTypeTestScreen = { navController.navigate(ROUTE_TYPE_TESTING) },
         moveToTypeTestResultScreen = { navController.navigate(ROUTE_TYPE_TEST_RESULT,  bundleOf("travelType" to it)) },
-        moveToReviewWriteScreen = { /*TODO*/ },
+        moveToReviewWriteScreen = { navController.navigate(ROUTE_REVIEW_WRITE_ROUTE) },
         moveToProfileNoticeListScreen = {
             if(it == null) navController.navigate(ROUTE_PROFILE_NOTICE)
             else navController.navigate(ROUTE_BOARD, bundleOf(

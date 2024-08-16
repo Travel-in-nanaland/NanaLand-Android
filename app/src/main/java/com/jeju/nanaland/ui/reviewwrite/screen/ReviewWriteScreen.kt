@@ -1,4 +1,4 @@
-package com.jeju.nanaland.ui.reviewwrite
+package com.jeju.nanaland.ui.reviewwrite.screen
 
 import android.net.Uri
 import android.widget.Toast
@@ -6,7 +6,6 @@ import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -22,19 +21,16 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Clear
-import androidx.compose.material.icons.filled.Close
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -56,6 +52,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
 import androidx.navigation.navOptions
 import com.jeju.nanaland.R
+import com.jeju.nanaland.domain.request.UriRequestBody
 import com.jeju.nanaland.globalvalue.constant.ROUTE_REVIEW_WRITE
 import com.jeju.nanaland.globalvalue.constant.ROUTE_REVIEW_WRITE_COMPLETE
 import com.jeju.nanaland.globalvalue.constant.ROUTE_REVIEW_WRITE_KEYWORD
@@ -66,6 +63,8 @@ import com.jeju.nanaland.ui.component.common.CustomSurface
 import com.jeju.nanaland.ui.component.common.DialogCommon
 import com.jeju.nanaland.ui.component.common.UploadImages
 import com.jeju.nanaland.ui.component.common.topbar.CustomTopBar
+import com.jeju.nanaland.ui.reviewwrite.ReviewWriteUiState
+import com.jeju.nanaland.ui.reviewwrite.ReviewWriteViewModel
 import com.jeju.nanaland.ui.theme.body02
 import com.jeju.nanaland.ui.theme.bodyBold
 import com.jeju.nanaland.ui.theme.getColor
@@ -80,14 +79,8 @@ fun ReviewWriteScreen(
     navController: NavController,
     id: Int,
     category: ReviewCategoryType,
-    image: String,
-    title: String,
-    address: String,
     viewModel: ReviewWriteViewModel = hiltViewModel()
 ) {
-    LaunchedEffect(image, title, address) {
-        viewModel.setUI(image, title, address)
-    }
     val context = LocalContext.current
     val uiState = viewModel.uiState.collectAsStateWithLifecycle()
     val callState = viewModel.callState.collectAsStateWithLifecycle()
@@ -95,7 +88,6 @@ fun ReviewWriteScreen(
     BackHandler {
         cancelDialogVisible = true
     }
-
     ReviewWriteUI(
         uiState = uiState.value,
         reviewText = viewModel.reviewText,
@@ -103,10 +95,15 @@ fun ReviewWriteScreen(
         moveToKeywordScreen = { navController.navigate(ROUTE_REVIEW_WRITE_KEYWORD) },
         moveToCompleteScreen = {
             viewModel.submit(
-                id,
-                category,
-                uiState.value,
-                viewModel.reviewText
+                id = id,
+                category = category,
+                snapshotData = uiState.value,
+                snapshotContent = viewModel.reviewText,
+                newImages = uiState.value.reviewImage.filter{
+                    it.first == -1
+                }.map {
+                    UriRequestBody(context, Uri.parse(it.second))
+                }
             )
         },
         onChangedRating = viewModel::updateRating,
@@ -155,7 +152,7 @@ private fun ReviewWriteUI(
     moveToKeywordScreen: () -> Unit,
     moveToCompleteScreen: () -> Unit,
     onChangedRating: (Int) -> Unit,
-    onChangeImages: (List<Uri>) -> Unit,
+    onChangeImages: (List<Pair<Int,String>>) -> Unit,
     onChangedText: (String) -> Unit,
     onRemoveKeyword: (ReviewKeyword) -> Unit,
 ) {
@@ -215,7 +212,18 @@ private fun ReviewWriteUI(
             AnnotatedStringConvertQuotes(getString(R.string.review_write_writing))
             Spacer(modifier = Modifier.height(16.dp))
 
-            UploadImages(images = uiState.reviewImage, onChangeImages = onChangeImages)
+            UploadImages(
+                modifier = Modifier.padding(horizontal = 16.dp),
+                images = uiState.reviewImage.map { it.second },
+                onChangeImages = { images ->
+                    onChangeImages( images.map { image ->
+                        Pair(
+                            uiState.reviewImage.firstOrNull{ it.second == image}?.first ?: -1,
+                            image
+                        )
+                    })
+                }
+            )
 
             ReviewText(
                 text = reviewText,
@@ -297,90 +305,6 @@ private fun StarRating(
     }
 }
 
-@Composable
-private fun ReviewImage(
-    images: List<Uri>,
-    maxImageCnt: Int = 5,
-    onAddImage: () ->Unit,
-    onRemoveImage: (Uri) ->Unit,
-) {
-    val scrollState = rememberScrollState()
-
-    Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .horizontalScroll(scrollState),
-        horizontalArrangement = Arrangement.spacedBy(8.dp)
-
-    ) {
-        Spacer(modifier = Modifier.width(16.dp))
-
-        Column (
-            modifier = Modifier
-                .clickable {
-                    onAddImage()
-                }
-                .size(80.dp)
-                .clip(RoundedCornerShape(8.dp))
-                .background(getColor().gray02),
-            verticalArrangement = Arrangement.Center,
-            horizontalAlignment = Alignment.CenterHorizontally,
-        ) {
-            Icon(
-                modifier = Modifier.size(38.dp),
-                painter = painterResource(id = R.drawable.ic_camera_outlined),
-                contentDescription = null,
-                tint = getColor().white
-            )
-            Text(
-                text = "${images.size} / $maxImageCnt",
-                color = getColor().white,
-                style = body02
-            )
-        }
-
-        images.forEach { image ->
-            Box(
-                Modifier
-                    .size(80.dp)
-                    .clip(RoundedCornerShape(8.dp))
-            ) {
-                GlideImage(
-                    modifier = Modifier.fillMaxSize(),
-                    imageModel = { image },
-                    imageOptions = ImageOptions(
-                        contentScale = ContentScale.Crop,
-                        alignment = Alignment.Center
-                    ),
-                    previewPlaceholder = R.drawable.img_ad_1
-                )
-                Box(
-                    Modifier
-                        .padding(2.dp)
-                        .size(22.dp)
-                        .align(Alignment.TopEnd)
-                        .clickable {
-                            onRemoveImage(image)
-                        }
-                ) {
-                    Icon(
-                        modifier = Modifier
-                            .fillMaxSize()
-                            .padding(3.dp)
-                            .clip(CircleShape)
-                            .background(getColor().black)
-                            .padding(2.dp),
-                        imageVector = Icons.Default.Close,
-                        contentDescription = null,
-                        tint = getColor().white
-                    )
-                }
-            }
-        }
-
-        Spacer(modifier = Modifier.width(16.dp))
-    }
-}
 @Composable
 private fun ReviewText(
     text: String,

@@ -106,9 +106,6 @@ private fun ProfileScreen(
     moveToProfileNoticeListScreen: (Int?) -> Unit,
     viewModel: ProfileViewModel = hiltViewModel()
 ) {
-    LaunchedEffect(Unit) {
-        viewModel.getUserProfile()
-    }
     val userProfile = viewModel.userProfile.collectAsState()
     val reviews = viewModel.reviews.collectAsLazyPagingItems()
     val notices = if(isMine)
@@ -116,7 +113,11 @@ private fun ProfileScreen(
     else
         null
 
-    var isReviewList = viewModel.isReviewList.collectAsStateWithLifecycle()
+    LaunchedEffect(Unit) {
+        viewModel.init()
+    }
+
+    val isReviewList = viewModel.isReviewList.collectAsStateWithLifecycle()
     var moreOptionDialog by remember { mutableStateOf(false) }
 
 

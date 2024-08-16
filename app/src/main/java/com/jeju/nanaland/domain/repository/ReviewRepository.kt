@@ -3,7 +3,6 @@ package com.jeju.nanaland.domain.repository
 import androidx.paging.PagingSource
 import com.jeju.nanaland.domain.entity.review.MemberReviewDetail
 import com.jeju.nanaland.domain.entity.review.MyReviewData
-import com.jeju.nanaland.domain.entity.review.ReviewDataByUser
 import com.jeju.nanaland.domain.entity.review.ReviewFavorite
 import com.jeju.nanaland.domain.entity.review.ReviewKeywordResult
 import com.jeju.nanaland.domain.entity.review.ReviewListData
@@ -13,10 +12,8 @@ import com.jeju.nanaland.domain.request.review.CreateReviewRequest
 import com.jeju.nanaland.domain.request.review.DeleteReviewRequest
 import com.jeju.nanaland.domain.request.review.GetMyReviewListRequest
 import com.jeju.nanaland.domain.request.review.GetReviewAutoCompleteKeywordRequest
-import com.jeju.nanaland.domain.request.review.GetReviewByUserRequest
 import com.jeju.nanaland.domain.request.review.GetReviewListByPostRequest
 import com.jeju.nanaland.domain.request.review.GetReviewThumbnailListByUserRequest
-import com.jeju.nanaland.domain.request.review.ModifyUserReviewRequest
 import com.jeju.nanaland.domain.request.review.ToggleReviewFavoriteRequest
 import com.jeju.nanaland.globalvalue.type.ReviewCategoryType
 import com.jeju.nanaland.util.network.NetworkResult
@@ -36,7 +33,7 @@ interface ReviewRepository {
     // 리뷰 위한 게시글 검색 자동완성
     suspend fun getReviewAutoCompleteKeyword(
         data: GetReviewAutoCompleteKeywordRequest
-    ): NetworkResult<ReviewKeywordResult>
+    ): NetworkResult<List<ReviewKeywordResult>>
 
     // 회원 별 리뷰 썸네일 리스트 조회(6~12개)
     suspend fun getReviewThumbnailListByUser(
@@ -68,6 +65,8 @@ interface ReviewRepository {
 
     // 내가 쓴 리뷰 수정
     suspend fun modifyUserReview(
-        data: ModifyUserReviewRequest
-    ): NetworkResult<String>
+        id: Int,
+        newImages: List<UriRequestBody>?,
+        data: CreateReviewRequest
+    ): NetworkResult<String?>
 }

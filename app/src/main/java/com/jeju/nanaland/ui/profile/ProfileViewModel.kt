@@ -50,19 +50,33 @@ class ProfileViewModel @Inject constructor(
     private val _userProfile = MutableStateFlow<UiState<UserProfile>>(UiState.Loading)
     val userProfile = _userProfile.asStateFlow()
 
-    val reviews = getReviewListByUserUseCase(userId)
+    var reviews = getReviewListByUserUseCase(userId)
         .flow
         .cachedIn(viewModelScope)
+        private set
 
-    val notices = run {
+    var notices = run {
         if(userId != null) flow { PagingData.empty<NoticeSummery>() }
         else getNoticeListUseCase()
                 .flow
                 .cachedIn(viewModelScope)
     }
+        private set
     val isGuest: Boolean
         get() = UserData.provider == "GUEST"
 
+    fun init() {
+        getUserProfile()
+        reviews = getReviewListByUserUseCase(userId)
+            .flow
+            .cachedIn(viewModelScope)
+        notices = run {
+            if(userId != null) flow { PagingData.empty<NoticeSummery>() }
+            else getNoticeListUseCase()
+                .flow
+                .cachedIn(viewModelScope)
+        }
+    }
     fun setIsReviewList(isReviewList: Boolean){
         _isReviewList.update { isReviewList }
     }
@@ -84,7 +98,7 @@ class ProfileViewModel @Inject constructor(
             }
     }
 
-    fun getUserProfile() {
+    private fun getUserProfile() {
         getUserProfileUseCase(userId)
             .onEach { networkResult ->
                 networkResult.onSuccess { _, _, data ->

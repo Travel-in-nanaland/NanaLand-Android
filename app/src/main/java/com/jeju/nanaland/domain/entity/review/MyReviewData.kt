@@ -18,7 +18,7 @@ data class MyReviewData(
     @SerializedName("content")
     val content: String,
     @SerializedName("images")
-    val images: ImageUrlWithId,
+    val images: List<ImageUrlWithId>,
     @SerializedName("reviewKeywords")
     val reviewKeywords: List<String>
 )

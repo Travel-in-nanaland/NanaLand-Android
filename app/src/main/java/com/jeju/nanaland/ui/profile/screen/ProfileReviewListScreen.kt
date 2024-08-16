@@ -8,6 +8,7 @@ import androidx.compose.runtime.setValue
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.paging.compose.collectAsLazyPagingItems
 import com.jeju.nanaland.R
+import com.jeju.nanaland.globalvalue.type.ReviewCategoryType
 import com.jeju.nanaland.ui.component.common.DialogCommon
 import com.jeju.nanaland.ui.profile.ProfileViewModel
 import com.jeju.nanaland.ui.profile.component.ProfileListFrame
@@ -19,6 +20,7 @@ import com.jeju.nanaland.util.resource.getString
 fun ProfileReviewListScreen(
     moveToBackScreen: () -> Unit,
     moveToReviewReportScreen: (Int) -> Unit,
+    moveToReviewEditScreen: (Int, ReviewCategoryType) -> Unit,
     initialScrollToItemId: Int = -1,
     viewModel: ProfileViewModel = hiltViewModel()
 ) {
@@ -40,9 +42,7 @@ fun ProfileReviewListScreen(
         if(isMine)
             ProfileListReviewRow(
                 data = it,
-                onEdit = { data ->
-
-                },
+                onEdit = { moveToReviewEditScreen(it.id, it.category) },
                 onRemove = { data ->
                     removeReviewId = data.id
                 }

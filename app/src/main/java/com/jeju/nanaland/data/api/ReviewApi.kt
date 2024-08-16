@@ -39,7 +39,7 @@ interface ReviewApi {
     @GET("review/search/auto-complete")
     suspend fun getReviewAutoCompleteKeyword(
         @Query("keyword") keyword: String,
-    ): Response<ResponseWrapper<ReviewKeywordResult>>
+    ): Response<ResponseWrapper<List<ReviewKeywordResult>>>
 
     // 회원별 리뷰 썸네일 리스트 조회(6~12개)
     @GET("review/preview")
@@ -81,8 +81,11 @@ interface ReviewApi {
     ): Response<ResponseWrapper<ReviewFavorite>>
 
     // 내가 쓴 리뷰 수정
+    @Multipart
     @PUT("review/my/{id}")
     suspend fun modifyUserReview(
         @Path("id") id: Int,
+        @Part("editReviewDto") data: RequestBody,
+        @Part newImages: List<MultipartBody.Part>?
     ): Response<ResponseWrapper<String>>
 }

@@ -8,6 +8,7 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import com.jeju.nanaland.globalvalue.constant.ROUTE_PROFILE_REVIEW
 import com.jeju.nanaland.globalvalue.constant.ROUTE_REPORT
+import com.jeju.nanaland.globalvalue.constant.ROUTE_REVIEW_WRITE_ROUTE
 import com.jeju.nanaland.ui.profile.screen.ProfileReviewListScreen
 import com.jeju.nanaland.util.navigation.navigate
 
@@ -20,6 +21,11 @@ fun NavGraphBuilder.profileReviewScreenRoute(
     ProfileReviewListScreen(
         moveToBackScreen = { navController.popBackStack() },
         moveToReviewReportScreen = { navController.navigate(ROUTE_REPORT, bundleOf("reviewId" to it)) },
+        moveToReviewEditScreen = { id, category ->
+            navController.navigate(ROUTE_REVIEW_WRITE_ROUTE, bundleOf(
+                "id" to id, "category" to category.toString(), "isEdit" to true
+            ))
+        },
         initialScrollToItemId = id,
         viewModel = hiltViewModel(parentEntry)
     )
