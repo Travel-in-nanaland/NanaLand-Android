@@ -83,10 +83,7 @@ fun NavGraphBuilder.experienceContentScreen(navController: NavController) = comp
             LogUtil.e("moveToReviewWritingScreen", "moveToReviewWritingScreen")
             val bundle = bundleOf(
                 "id" to id,
-                "category" to ReviewCategoryType.EXPERIENCE.toString(),
-                "image" to image,
-                "title" to title,
-                "address" to address,
+                "category" to ReviewCategoryType.EXPERIENCE.toString()
             )
             navController.navigate(ROUTE_REVIEW_WRITE_ROUTE, bundle)
         },

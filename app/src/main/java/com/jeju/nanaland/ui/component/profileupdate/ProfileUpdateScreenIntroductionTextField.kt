@@ -23,9 +23,6 @@ import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.jeju.nanaland.R
-import com.jeju.nanaland.globalvalue.type.InputIntroductionState
-import com.jeju.nanaland.globalvalue.type.InputNicknameState
-import com.jeju.nanaland.ui.component.signup.profilesetting.parts.SignUpScreenTextFieldHint
 import com.jeju.nanaland.ui.theme.body02
 import com.jeju.nanaland.ui.theme.caption01
 import com.jeju.nanaland.ui.theme.getColor
@@ -35,7 +32,7 @@ import com.jeju.nanaland.util.resource.getString
 fun ProfileUpdateScreenIntroductionTextField(
     inputText: String,
     onValueChange: (String) -> Unit,
-    inputState: InputIntroductionState
+    error: Int?
 ) {
     BasicTextField(
         value = inputText,
@@ -52,7 +49,7 @@ fun ProfileUpdateScreenIntroductionTextField(
                     .border(
                         border = BorderStroke(
                             width = 1.dp,
-                            color = if (inputState == InputIntroductionState.Idle) getColor().gray02 else getColor().warning
+                            color = if (error == null) getColor().gray02 else getColor().warning
                         ),
                         shape = RoundedCornerShape(12.dp)
                     )
@@ -62,7 +59,7 @@ fun ProfileUpdateScreenIntroductionTextField(
                 it()
             }
 
-            if (inputState != InputIntroductionState.Idle) {
+            if (error != null) {
                 Spacer(Modifier.height(8.dp))
 
                 Row(verticalAlignment = Alignment.CenterVertically) {
@@ -76,8 +73,7 @@ fun ProfileUpdateScreenIntroductionTextField(
                     Spacer(Modifier.width(4.dp))
 
                     Text(
-                        text = if (inputState == InputIntroductionState.Invalid) getString(R.string.profile_update_screen_warning)
-                        else "",
+                        text = getString(error),
                         color = getColor().warning,
                         style = caption01
                     )

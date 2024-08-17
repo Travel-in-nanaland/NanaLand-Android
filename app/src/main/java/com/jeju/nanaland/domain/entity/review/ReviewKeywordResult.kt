@@ -1,14 +1,14 @@
 package com.jeju.nanaland.domain.entity.review
 
-import androidx.annotation.StyleRes
 import com.google.gson.annotations.SerializedName
 import com.jeju.nanaland.domain.entity.common.ImageUrl
+import com.jeju.nanaland.globalvalue.type.ReviewCategoryType
 
 data class ReviewKeywordResult(
     @SerializedName("id")
     val id: Int,
     @SerializedName("category")
-    val category: String,
+    val category: ReviewCategoryType,
     @SerializedName("categoryValue")
     val categoryValue: String,
     @SerializedName("title")

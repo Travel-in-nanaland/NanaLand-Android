@@ -14,7 +14,6 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
@@ -44,12 +43,12 @@ import com.skydoves.landscapist.glide.GlideImage
 
 @Composable
 fun UploadImages(
-    images: List<Uri>,
+    images: List<String>,
+    modifier: Modifier = Modifier,
     maxImageCnt: Int = 5,
     layoutSize: Dp = 80.dp,
-    horizontalPadding: Dp = 16.dp,
     clickImage: @Composable (Int,Int) -> Unit = { c, m -> ClickImage(c, m) },
-    onChangeImages: (List<Uri>) ->Unit,
+    onChangeImages: (List<String>) ->Unit,
 ) {
     val context = LocalContext.current
 
@@ -63,20 +62,12 @@ fun UploadImages(
             if(uri == null)
                 return@rememberLauncherForActivityResult
             if(uri is Uri)
-                onChangeImages(images.plus(uri))
+                onChangeImages(images.plus(uri.toString()))
             else if(uri is List<*>)
-                onChangeImages(images.plus(uri as List<Uri>))
+                onChangeImages(images.plus((uri as List<Uri>).map { it.toString() }))
         }
 
-    Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .horizontalScroll(rememberScrollState()),
-        horizontalArrangement = Arrangement.spacedBy(8.dp)
-
-    ) {
-        Spacer(modifier = Modifier.width(horizontalPadding))
-
+    Row(modifier) {
         Box(
             modifier = Modifier
                 .size(layoutSize)
@@ -88,57 +79,66 @@ fun UploadImages(
                             )
                         )
                     else
-                        Toast.makeText(
-                            context, getString(
-                                R.string.review_write_error_maximum_picture,
-                                maxImageCnt
-                            ),
-                            Toast.LENGTH_SHORT
-                        ).show()
+                        Toast
+                            .makeText(
+                                context, getString(
+                                    R.string.review_write_error_maximum_picture,
+                                    maxImageCnt
+                                ),
+                                Toast.LENGTH_SHORT
+                            )
+                            .show()
                 }
         ) {
             clickImage(images.size, maxImageCnt)
         }
 
-        images.forEach { image ->
-            Box(
-                Modifier
-                    .size(layoutSize)
-                    .clip(RoundedCornerShape(8.dp))
-            ) {
-                GlideImage(
-                    modifier = Modifier.fillMaxSize(),
-                    imageModel = { image },
-                    imageOptions = ImageOptions(
-                        contentScale = ContentScale.Crop,
-                        alignment = Alignment.Center
-                    )
-                )
+        Spacer(modifier = Modifier.width(8.dp))
+
+        Row(
+            modifier = Modifier
+                .weight(1f)
+                .horizontalScroll(rememberScrollState()),
+            horizontalArrangement = Arrangement.spacedBy(8.dp)
+        ) {
+            images.forEach { image ->
                 Box(
                     Modifier
-                        .padding(2.dp)
-                        .size(22.dp)
-                        .align(Alignment.TopEnd)
-                        .clickableNoEffect {
-                            onChangeImages(images.minus(image))
-                        }
+                        .size(layoutSize)
+                        .clip(RoundedCornerShape(8.dp))
                 ) {
-                    Icon(
-                        modifier = Modifier
-                            .fillMaxSize()
-                            .padding(3.dp)
-                            .clip(CircleShape)
-                            .background(getColor().black)
-                            .padding(2.dp),
-                        imageVector = Icons.Default.Close,
-                        contentDescription = null,
-                        tint = getColor().white
+                    GlideImage(
+                        modifier = Modifier.fillMaxSize(),
+                        imageModel = { image },
+                        imageOptions = ImageOptions(
+                            contentScale = ContentScale.Crop,
+                            alignment = Alignment.Center
+                        )
                     )
+                    Box(
+                        Modifier
+                            .padding(2.dp)
+                            .size(22.dp)
+                            .align(Alignment.TopEnd)
+                            .clickableNoEffect {
+                                onChangeImages(images.minus(image))
+                            }
+                    ) {
+                        Icon(
+                            modifier = Modifier
+                                .fillMaxSize()
+                                .padding(3.dp)
+                                .clip(CircleShape)
+                                .background(getColor().black)
+                                .padding(2.dp),
+                            imageVector = Icons.Default.Close,
+                            contentDescription = null,
+                            tint = getColor().white
+                        )
+                    }
                 }
             }
         }
-
-        Spacer(modifier = Modifier.width(horizontalPadding))
     }
 }
 

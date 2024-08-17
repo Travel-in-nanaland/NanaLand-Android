@@ -17,36 +17,27 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
+import com.jeju.nanaland.R
+import com.jeju.nanaland.globalvalue.constant.TravelType
+import com.jeju.nanaland.globalvalue.constant.toViewString
+import com.jeju.nanaland.ui.component.common.BottomOkButton
+import com.jeju.nanaland.ui.component.common.BottomOkButtonOutlined
 import com.jeju.nanaland.ui.component.common.CustomSurface
-import com.jeju.nanaland.ui.component.signup.typetestresult.TypeTestResultScreenBottomButton1
-import com.jeju.nanaland.ui.component.signup.typetestresult.TypeTestResultScreenBottomButton2
 import com.jeju.nanaland.ui.component.signup.typetestresult.TypeTestResultScreenImage
 import com.jeju.nanaland.ui.component.signup.typetestresult.TypeTestResultScreenText1
 import com.jeju.nanaland.ui.component.signup.typetestresult.TypeTestResultScreenText2
 import com.jeju.nanaland.ui.component.signup.typetestresult.TypeTestResultScreenText3
 import com.jeju.nanaland.ui.theme.getColor
+import com.jeju.nanaland.util.resource.getString
 import com.jeju.nanaland.util.ui.scrollableVerticalArrangement
+
 
 @Composable
 fun TypeTestResultScreen(
-    travelType: String,
+    travelType: TravelType,
+    filledButtonString: String,
     moveToRecommendedSpotScreen: () -> Unit,
-    moveToMainScreen: () -> Unit,
-) {
-    TypeTestResultScreen(
-        travelType = travelType,
-        moveToRecommendedSpotScreen = moveToRecommendedSpotScreen,
-        moveToMainScreen = moveToMainScreen,
-        isContent = true
-    )
-}
-
-@Composable
-private fun TypeTestResultScreen(
-    travelType: String,
-    moveToRecommendedSpotScreen: () -> Unit,
-    moveToMainScreen: () -> Unit,
-    isContent: Boolean
+    onFilledButtonClick: () -> Unit,
 ) {
     CustomSurface {
         LazyColumn(
@@ -92,11 +83,18 @@ private fun TypeTestResultScreen(
 
             item {
 
-                TypeTestResultScreenBottomButton1(travelType = travelType) { moveToRecommendedSpotScreen() }
+                BottomOkButtonOutlined(
+                    text = travelType.toViewString() + getString(R.string.type_test_screen_button1),
+                    onClick = moveToRecommendedSpotScreen
+                )
 
                 Spacer(Modifier.height(16.dp))
 
-                TypeTestResultScreenBottomButton2 { moveToMainScreen() }
+                BottomOkButton(
+                    text = filledButtonString,
+                    isActivated = true,
+                    onClick = onFilledButtonClick
+                )
 
                 Spacer(Modifier.height(20.dp))
             }

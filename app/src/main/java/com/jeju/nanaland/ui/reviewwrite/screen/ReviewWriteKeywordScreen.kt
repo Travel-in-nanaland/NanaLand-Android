@@ -1,4 +1,4 @@
-package com.jeju.nanaland.ui.reviewwrite
+package com.jeju.nanaland.ui.reviewwrite.screen
 
 import android.widget.Toast
 import androidx.compose.foundation.background
@@ -35,6 +35,7 @@ import com.jeju.nanaland.globalvalue.type.ReviewKeyword
 import com.jeju.nanaland.ui.component.common.BottomOkButton
 import com.jeju.nanaland.ui.component.common.CustomSurface
 import com.jeju.nanaland.ui.component.common.topbar.CustomTopBar
+import com.jeju.nanaland.ui.reviewwrite.ReviewWriteViewModel
 import com.jeju.nanaland.ui.theme.body02
 import com.jeju.nanaland.ui.theme.bodyBold
 import com.jeju.nanaland.ui.theme.caption01
@@ -109,7 +110,10 @@ private fun ReviewWriteKeywordUI(
         ) {
             Text(
                 modifier = Modifier.padding(vertical = 24.dp),
-                text = stringResource(R.string.review_write_keyword_guide, ReviewWriteViewModel.MIN_KEYWORD_CNT, ReviewWriteViewModel.MAX_KEYWORD_CNT),
+                text = stringResource(R.string.review_write_keyword_guide,
+                    ReviewWriteViewModel.MIN_KEYWORD_CNT,
+                    ReviewWriteViewModel.MAX_KEYWORD_CNT
+                ),
                 color = getColor().main,
                 style = caption01
             )
@@ -154,7 +158,7 @@ private fun ReviewWriteKeywordUI(
 
             BottomOkButton(
                 getString(R.string.filter_dialog_common_적용하기),
-                selectKeyword.size in (ReviewWriteViewModel.MIN_KEYWORD_CNT .. ReviewWriteViewModel.MAX_KEYWORD_CNT)
+                selectKeyword.size in (ReviewWriteViewModel.MIN_KEYWORD_CNT..ReviewWriteViewModel.MAX_KEYWORD_CNT)
             ) {
                 onComplete()
             }

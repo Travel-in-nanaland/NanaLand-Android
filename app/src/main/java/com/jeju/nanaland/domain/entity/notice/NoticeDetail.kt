@@ -5,7 +5,7 @@ import com.jeju.nanaland.domain.entity.common.ImageUrl
 
 data class NoticeDetail(
     @SerializedName("title")
-    val title: Int,
+    val title: String,
     @SerializedName("createdAt")
     val createdAt: String,
     @SerializedName("noticeContents")
@@ -13,7 +13,7 @@ data class NoticeDetail(
 )
 
 data class NoticeContent (
-    @SerializedName("createdAt")
+    @SerializedName("image")
     val image: ImageUrl?,
     @SerializedName("content")
     val content: String?,

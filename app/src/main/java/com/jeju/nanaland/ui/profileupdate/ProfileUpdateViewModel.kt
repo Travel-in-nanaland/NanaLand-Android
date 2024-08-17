@@ -1,71 +1,80 @@
 package com.jeju.nanaland.ui.profileupdate
 
 import android.annotation.SuppressLint
-import android.app.Application
 import android.net.Uri
-import androidx.core.net.toUri
-import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.SavedStateHandle
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.jeju.nanaland.R
+import com.jeju.nanaland.domain.request.UriRequestBody
 import com.jeju.nanaland.domain.request.member.UpdateUserProfileRequest
+import com.jeju.nanaland.domain.usecase.member.DuplicateNicknameUseCase
 import com.jeju.nanaland.domain.usecase.member.UpdateUserProfileUseCase
 import com.jeju.nanaland.globalvalue.constant.INTRODUCTION_CONSTRAINT
 import com.jeju.nanaland.globalvalue.constant.NICKNAME_CONSTRAINT
-import com.jeju.nanaland.globalvalue.type.InputIntroductionState
-import com.jeju.nanaland.globalvalue.type.InputNicknameState
-import com.jeju.nanaland.util.log.LogUtil
+import com.jeju.nanaland.globalvalue.constant.nicknameRegex
+import com.jeju.nanaland.util.network.NetworkResult
 import com.jeju.nanaland.util.network.onError
 import com.jeju.nanaland.util.network.onException
 import com.jeju.nanaland.util.network.onSuccess
-import com.jeju.nanaland.globalvalue.constant.nicknameRegex
-import com.jeju.nanaland.util.file.copy
-import com.jeju.nanaland.util.file.getFileExtension
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.debounce
+import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.update
-import java.io.File
-import java.io.FileOutputStream
 import javax.inject.Inject
 
 @HiltViewModel
 class ProfileUpdateViewModel @Inject constructor(
     private val updateProfileUseCase: UpdateUserProfileUseCase,
-    private val application: Application
-) : AndroidViewModel(application) {
+    private val duplicateNicknameUseCase: DuplicateNicknameUseCase,
+    savedStateHandle: SavedStateHandle
+) : ViewModel() {
 
     private val _inputNickname = MutableStateFlow("")
     val inputNickname = _inputNickname.asStateFlow()
-    private val _inputNicknameState = MutableStateFlow(InputNicknameState.Idle)
-    val inputNicknameState = _inputNicknameState.asStateFlow()
     private val _inputIntroduction = MutableStateFlow("")
     val inputIntroduction = _inputIntroduction.asStateFlow()
-    private val _inputIntroductionState = MutableStateFlow(InputIntroductionState.Idle)
-    val inputIntroductionState = _inputIntroductionState.asStateFlow()
     private val _imageUri = MutableStateFlow<String?>(null)
     val imageUri: StateFlow<String?> = _imageUri
 
+    private val _errorNickname = MutableStateFlow<Int?>(null)
+    val errorNickname: StateFlow<Int?> = _errorNickname
+    private val _errorIntro = MutableStateFlow<Int?>(null)
+    val errorIntro: StateFlow<Int?> = _errorIntro
+
+    init {
+        updateProfileImageUri(Uri.parse(savedStateHandle["profileImageUri"]!!))
+        updateInputNickname(savedStateHandle["nickname"]!!)
+        updateInputIntroduction(savedStateHandle["introduction"]!!)
+
+        @Suppress("OPT_IN_USAGE")
+        inputNickname
+            .debounce(600)
+            .distinctUntilChanged()
+            .onEach {
+                if(!nicknameIsError())
+                    nicknameIsErrorByApi()
+            }
+            .launchIn(viewModelScope)
+
+        inputIntroduction
+            .onEach {
+                introIsError()
+            }
+            .launchIn(viewModelScope)
+    }
+
     fun updateInputNickname(nickname: String) {
         _inputNickname.update { nickname }
-        if (_inputNickname.value.length > NICKNAME_CONSTRAINT) {
-            _inputNicknameState.update { InputNicknameState.TooInt }
-        } else if (!_inputNickname.value.matches(nicknameRegex)) {
-            _inputNicknameState.update { InputNicknameState.Invalid }
-        } else {
-            _inputNicknameState.update { InputNicknameState.Idle }
-        }
     }
 
     fun updateInputIntroduction(introduction: String) {
         _inputIntroduction.update { introduction }
-        if (_inputIntroduction.value.length > INTRODUCTION_CONSTRAINT) {
-            _inputIntroductionState.update { InputIntroductionState.Invalid }
-        } else {
-            _inputIntroductionState.update { InputIntroductionState.Idle }
-        }
     }
 
     fun updateProfileImageUri(uri: Uri) {
@@ -73,49 +82,58 @@ class ProfileUpdateViewModel @Inject constructor(
     }
 
     @SuppressLint("Recycle", "Range")
-    fun updateProfile(moveToBackScreen: () -> Unit) {
+    fun updateProfile(image: UriRequestBody?, moveToBackScreen: () -> Unit) {
         val requestData = UpdateUserProfileRequest(
             nickname = _inputNickname.value,
             description = _inputIntroduction.value
         )
 
-        val fileExtension = getFileExtension(application, _imageUri.value!!.toUri())
-        val fileName = "temporary_file" + if (fileExtension != null) ".$fileExtension" else ""
-
-        val imageFile = File(application.cacheDir, fileName)
-        imageFile.createNewFile()
-
-        try {
-            val oStream = FileOutputStream(imageFile)
-            val inputStream = application.contentResolver.openInputStream(_imageUri.value!!.toUri())
-
-            inputStream?.let {
-                copy(inputStream, oStream)
-            }
-
-            oStream.flush()
-        } catch (e: Exception) {
-            e.printStackTrace()
-        }
-
-        updateProfileUseCase(requestData, imageFile)
+        updateProfileUseCase(requestData, image)
             .onEach { networkResult ->
                 networkResult.onSuccess { code, message, data ->
-                    data?.let {
-
-                    }
                     moveToBackScreen()
                 }.onError { code, message ->
                     when (code) {
                         409 -> {
-                            _inputNicknameState.update { InputNicknameState.Duplicated }
+                            _errorNickname.update { R.string.sign_up_profile_setting_warning2 }
                         }
                     }
                 }.onException {
 
                 }
             }
-            .catch { LogUtil.e("flow Error", "updateProfileUseCase") }
             .launchIn(viewModelScope)
+    }
+
+    private fun nicknameIsError(): Boolean {
+        return if (_inputNickname.value.length > NICKNAME_CONSTRAINT) {
+            _errorNickname.update { R.string.sign_up_profile_setting_warning1 }
+            true
+        } else if (!_inputNickname.value.matches(nicknameRegex)) {
+            _errorNickname.update { R.string.sign_up_profile_setting_warning3 }
+            true
+        } else {
+            false
+        }
+    }
+
+    private suspend fun nicknameIsErrorByApi(): Boolean {
+        return if(duplicateNicknameUseCase(_inputNickname.value) is NetworkResult.Success) {
+            _errorNickname.update { null }
+            false
+        } else {
+            _errorNickname.update { R.string.sign_up_profile_setting_warning2 }
+            true
+        }
+    }
+
+    private fun introIsError(): Boolean {
+        return if (_inputIntroduction.value.length > INTRODUCTION_CONSTRAINT) {
+            _errorIntro.update { R.string.profile_update_screen_warning }
+            true
+        } else {
+            _errorIntro.update { null }
+            false
+        }
     }
 }

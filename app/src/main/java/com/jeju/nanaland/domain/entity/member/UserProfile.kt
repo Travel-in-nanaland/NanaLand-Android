@@ -19,7 +19,7 @@ data class UserProfile(
     @SerializedName("level")
     val level: Int,
     @SerializedName("travelType")
-    val travelType: String,
+    val travelType: String?,
     @SerializedName("hashtags")
     val hashTags: List<String>
 )

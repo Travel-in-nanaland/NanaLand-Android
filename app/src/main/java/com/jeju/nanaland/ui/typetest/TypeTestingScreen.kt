@@ -13,6 +13,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.jeju.nanaland.globalvalue.constant.TravelType
 import com.jeju.nanaland.ui.component.common.CustomSurface
 import com.jeju.nanaland.ui.component.signup.typetest.TypeTestingScreenBackButton
 import com.jeju.nanaland.ui.component.signup.typetest.TypeTestingScreenBottomButton
@@ -24,7 +25,7 @@ import com.jeju.nanaland.ui.component.signup.typetest.TypeTestingScreenSkipTestT
 
 @Composable
 fun TypeTestingScreen(
-    moveToTypeTestCompletionScreen: (String) -> Unit,
+    moveToTypeTestCompletionScreen: (TravelType) -> Unit,
     moveToBackScreen: () -> Unit,
     viewModel: TypeTestingViewModel = hiltViewModel()
 ) {
@@ -46,8 +47,8 @@ private fun TypeTestingScreen(
     level: Int,
     updateLevel: (Int) -> Unit,
     selectionList: SnapshotStateList<Int>,
-    updateUserType: ((String) -> Unit) -> Unit,
-    moveToTypeTestCompletionScreen: (String) -> Unit,
+    updateUserType: ((TravelType) -> Unit) -> Unit,
+    moveToTypeTestCompletionScreen: (TravelType) -> Unit,
     moveToBackScreen: () -> Unit,
     isContent: Boolean
 ) {

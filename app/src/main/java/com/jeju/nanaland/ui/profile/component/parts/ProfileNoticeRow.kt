@@ -1,7 +1,6 @@
 package com.jeju.nanaland.ui.profile.component.parts
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -27,6 +26,7 @@ import com.jeju.nanaland.ui.theme.body02Bold
 import com.jeju.nanaland.ui.theme.caption01SemiBold
 import com.jeju.nanaland.ui.theme.caption02
 import com.jeju.nanaland.ui.theme.getColor
+import com.jeju.nanaland.util.string.toFormatString
 import com.jeju.nanaland.util.ui.clickableNoEffect
 import com.jeju.nanaland.util.ui.drawColoredShadow
 
@@ -84,7 +84,7 @@ fun ProfileNoticeRow(
             )
             Spacer(modifier = Modifier.height(4.dp))
             Text(
-                text = data.createdAt,
+                text = data.createdAt.toFormatString(),
                 color = getColor().gray01,
                 style = caption02
             )

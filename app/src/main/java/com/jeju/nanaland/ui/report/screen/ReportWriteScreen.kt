@@ -59,63 +59,59 @@ fun ReportWriteScreen(
         Column(
             modifier = Modifier
                 .verticalScroll(rememberScrollState())
+                .padding(horizontal = 16.dp)
         ) {
-            Column(Modifier.padding(horizontal = 16.dp)) {
-                Row(
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    Text(
-                        text = getString(R.string.report_write_resone_title),
-                        style = title02Bold,
-                        color = getColor().gray01
-                    )
-                    Spacer(modifier = Modifier.width(12.dp))
-                    Text(
-                        text = getString(R.string.common_필수_with_star),
-                        style = caption01,
-                        color = getColor().main
-                    )
-                }
-                Spacer(modifier = Modifier.height(8.dp))
-                InputTextField(
-                    text = reason,
-                    hint = getString(R.string.report_write_resone_hint, REASON_LENGTH_MIN),
-                    minLines = 4,
-                    error = if(reasonError) getString(R.string.report_write_resone_error, REASON_LENGTH_MIN) else null,
-                    maxLength = REASON_LENGTH_MAX,
-                    onText = { reason = it }
+            Row(
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Text(
+                    text = getString(R.string.report_write_resone_title),
+                    style = title02Bold,
+                    color = getColor().gray01
                 )
-
-                Spacer(modifier = Modifier.height(48.dp))
-
-                Row(
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    Text(
-                        text = getString(R.string.common_이메일),
-                        style = title02Bold,
-                        color = getColor().gray01
-                    )
-                    Spacer(modifier = Modifier.width(12.dp))
-                    Text(
-                        text = getString(R.string.common_필수_with_star),
-                        style = caption01,
-                        color = getColor().main
-                    )
-                }
-                Spacer(modifier = Modifier.height(8.dp))
-                InputTextField(
-                    text = email,
-                    hint = getString(R.string.info_modification_proposal_hint2, REASON_LENGTH_MIN),
-                    error = if(emailError) getString(R.string.info_modification_proposal_warning) else null,
-                    onText = { email = it }
+                Spacer(modifier = Modifier.width(12.dp))
+                Text(
+                    text = getString(R.string.common_필수_with_star),
+                    style = caption01,
+                    color = getColor().main
                 )
-                Spacer(modifier = Modifier.height(48.dp))
             }
+            Spacer(modifier = Modifier.height(8.dp))
+            InputTextField(
+                text = reason,
+                hint = getString(R.string.report_write_resone_hint, REASON_LENGTH_MIN),
+                minLines = 4,
+                error = if(reasonError) getString(R.string.report_write_resone_error, REASON_LENGTH_MIN) else null,
+                maxLength = REASON_LENGTH_MAX,
+                onText = { reason = it }
+            )
 
+            Spacer(modifier = Modifier.height(48.dp))
+
+            Row(
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Text(
+                    text = getString(R.string.common_이메일),
+                    style = title02Bold,
+                    color = getColor().gray01
+                )
+                Spacer(modifier = Modifier.width(12.dp))
+                Text(
+                    text = getString(R.string.common_필수_with_star),
+                    style = caption01,
+                    color = getColor().main
+                )
+            }
+            Spacer(modifier = Modifier.height(8.dp))
+            InputTextField(
+                text = email,
+                hint = getString(R.string.info_modification_proposal_hint2, REASON_LENGTH_MIN),
+                error = if(emailError) getString(R.string.info_modification_proposal_warning) else null,
+                onText = { email = it }
+            )
+            Spacer(modifier = Modifier.height(48.dp))
             Text(
-                modifier = Modifier
-                    .padding(horizontal = 16.dp),
                 text = getString(R.string.common_사진) +
                         " / " +
                         getString(R.string.common_동영상),
@@ -123,8 +119,8 @@ fun ReportWriteScreen(
                 color = getColor().gray01
             )
             Spacer(modifier = Modifier.height(8.dp))
-            UploadImages(images) {
-                images = it
+            UploadImages(images.map { it.toString() }) {
+                images = it.map { Uri.parse(it) }
             }
             Spacer(modifier = Modifier.height(100.dp))
         }

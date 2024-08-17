@@ -25,7 +25,6 @@ import com.jeju.nanaland.ui.component.settings.SettingsScreenHorizontalDivider
 import com.jeju.nanaland.ui.component.settings.SettingsScreenTopBar
 import com.jeju.nanaland.ui.component.settings.SettingsScreenVersionText
 import com.jeju.nanaland.ui.component.signout.SignOutConfirmDialog
-import com.jeju.nanaland.util.log.LogUtil
 import com.jeju.nanaland.util.resource.getString
 
 @Composable
@@ -126,22 +125,23 @@ private fun SettingsScreen(
         SettingsScreenHorizontalDivider()
 
         Spacer(Modifier.height(4.dp))
-
         SettingsScreenCategoryItem(
-            text = getString(R.string.settings_screen_로그아웃),
+            text = if (UserData.provider == "GUEST") getString(R.string.settings_screen_회원_가입)
+                else getString(R.string.settings_screen_로그아웃),
             onClick = {
                 if (UserData.provider == "GUEST") {
-                    isNonMemberGuideDialogShowing.value = true
+                    moveToSignInScreen()
                 } else {
                     isSignOutDialogShowing.value = true
                 }
             }
         )
 
-        SettingsScreenCategoryItem(
-            text = getString(R.string.settings_screen_회원_탈퇴),
-            onClick = { moveToWithdrawalScreen() }
-        )
+        if(UserData.provider != "GUEST")
+            SettingsScreenCategoryItem(
+                text = getString(R.string.settings_screen_회원_탈퇴),
+                onClick = { moveToWithdrawalScreen() }
+            )
     }
 
     if (isNonMemberGuideDialogShowing.value) {

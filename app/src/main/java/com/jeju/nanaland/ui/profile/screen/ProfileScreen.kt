@@ -15,6 +15,7 @@ import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -26,6 +27,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.paging.compose.collectAsLazyPagingItems
 import com.jeju.nanaland.R
 import com.jeju.nanaland.ui.component.common.topbar.CustomTopBarWithMenu
@@ -49,7 +51,7 @@ fun ProfileScreen(
     moveToProfileModificationScreen: (String?, String?, String?) -> Unit,
     moveToSignInScreen: () -> Unit,
     moveToTypeTestScreen: () -> Unit,
-    moveToTypeTestResultScreen: () -> Unit,
+    moveToTypeTestResultScreen: (String) -> Unit,
     moveToReviewWriteScreen: () -> Unit,
     moveToProfileReviewListScreen: (Int?) -> Unit,
     moveToProfileNoticeListScreen: (Int?) -> Unit,
@@ -72,7 +74,7 @@ fun ProfileScreen(
 @Composable
 fun ProfileScreen(
     onBackButtonClicked: () -> Unit,
-    moveToTypeTestResultScreen: () -> Unit,
+    moveToTypeTestResultScreen: (String) -> Unit,
     moveToProfileReviewListScreen: (Int?) -> Unit,
 ) {
     ProfileScreen(
@@ -98,7 +100,7 @@ private fun ProfileScreen(
     moveToProfileModificationScreen: (String?, String?, String?) -> Unit,
     moveToSignInScreen: () -> Unit,
     moveToTypeTestScreen: () -> Unit,
-    moveToTypeTestResultScreen: () -> Unit,
+    moveToTypeTestResultScreen: (String) -> Unit,
     moveToReviewWriteScreen: () -> Unit,
     moveToProfileReviewListScreen: (Int?) -> Unit,
     moveToProfileNoticeListScreen: (Int?) -> Unit,
@@ -111,7 +113,11 @@ private fun ProfileScreen(
     else
         null
 
-    var isReviewList by remember { mutableStateOf(true) }
+    LaunchedEffect(Unit) {
+        viewModel.init()
+    }
+
+    val isReviewList = viewModel.isReviewList.collectAsStateWithLifecycle()
     var moreOptionDialog by remember { mutableStateOf(false) }
 
 
@@ -144,7 +150,7 @@ private fun ProfileScreen(
             is UiState.Loading -> {}
             is UiState.Success -> {
                 val reviewList = reviews.itemSnapshotList.items.take(12)
-                val noticeList = notices?.itemSnapshotList?.items?.take(12)
+                val noticeList = notices?.itemSnapshotList?.items
 
                 Spacer(Modifier.height(24.dp))
 
@@ -160,29 +166,29 @@ private fun ProfileScreen(
                         )
                     },
                     moveToTypeTestScreen = moveToTypeTestScreen,
-                    moveToTypeTestResultScreen = moveToTypeTestResultScreen
+                    moveToTypeTestResultScreen = { up.data.travelType?.let(moveToTypeTestResultScreen) }
                 )
 
                 Spacer(Modifier.height(24.dp))
 
                 ProfileScreenTabPart(
-                    isReviewList = isReviewList,
+                    isReviewList = isReviewList.value,
                     reviewSize = reviewList.size,
                     moveToReviewScreen = { moveToProfileReviewListScreen(null) },
                     toggleReviewNoticeTab = if(!isMine) null else {
-                        { isReviewList = !isReviewList }
+                        { viewModel.setIsReviewList(!isReviewList.value) }
                     }
                 )
                 Column(Modifier.background(getColor().white)) {
 
                     if (isMine) {
-                        if (!isReviewList || !viewModel.isGuest)
+                        if (!isReviewList.value || !viewModel.isGuest)
                             ProfileScreenMoreInfoPart(
-                                isReviewList = isReviewList,
-                                listSize = if (isReviewList) reviewList.size else noticeList?.size
+                                isReviewList = isReviewList.value,
+                                listSize = if (isReviewList.value) reviewList.size else noticeList?.size
                                     ?: 0,
                                 moveToListPage = {
-                                    if (isReviewList) moveToProfileReviewListScreen(null)
+                                    if (isReviewList.value) moveToProfileReviewListScreen(null)
                                     else moveToProfileNoticeListScreen(null)
                                 },
                                 moveToReviewWriteScreen = moveToReviewWriteScreen
@@ -190,25 +196,31 @@ private fun ProfileScreen(
                     } else
                         HorizontalDivider()
 
-                    if (isReviewList) {
+                    if (isReviewList.value) {
                         if (!viewModel.isGuest)
                             ProfileScreenReviewListSection(reviewList) {
                                 moveToProfileReviewListScreen(it)
                             }
-                    } else if (noticeList != null) {
+                    } else if (!noticeList.isNullOrEmpty()) {
                         ProfileScreenNoticeListSection(noticeList) {
                             moveToProfileNoticeListScreen(it)
                         }
                     }
                 }
 
-                if (isMine && isReviewList){
-                    if (viewModel.isGuest) {
-                        ReviewListCenterText(getString(R.string.mypage_screen_review_guest))
-                        return@Column
+                if (isMine){
+                    if(isReviewList.value) {
+                        if (viewModel.isGuest) {
+                            ListCenterText(getString(R.string.mypage_screen_review_guest))
+                            return@Column
+                        }
+                        else if (reviewList.isEmpty()) {
+                            ListCenterText(getString(R.string.mypage_screen_review_empty))
+                            return@Column
+                        }
                     }
-                    else if (reviewList.isEmpty()) {
-                        ReviewListCenterText(getString(R.string.mypage_screen_review_empty))
+                    else if(noticeList.isNullOrEmpty()){
+                        ListCenterText(getString(R.string.mypage_screen_notice_empty))
                         return@Column
                     }
                 }
@@ -230,7 +242,7 @@ private fun ProfileScreen(
 }
 
 @Composable
-private fun ColumnScope.ReviewListCenterText(txt: String){
+private fun ColumnScope.ListCenterText(txt: String){
     Box(
         modifier = Modifier
             .fillMaxWidth()

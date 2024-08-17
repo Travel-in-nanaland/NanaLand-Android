@@ -76,6 +76,14 @@
     <string name="common_사진" translatable="false">사진</string> <!--  TODO  -->
     <string name="common_동영상" translatable="false">동영상</string> <!--  TODO  -->
 
+    <!--시간 관련-->
+    <string name="common_방금전" translatable="false">방금 전</string> <!--  TODO  -->
+    <string name="common_시간전" translatable="false">%d시간 전</string> <!--  TODO  -->
+
+    <!--에러 관련-->
+    <string name="common_인터넷_문제" translatable="false">인터넷 연결에 문제가 생긴 것 같아요!\n확인 후 다시 들어와줄 수 있을까요?</string> <!--  TODO  -->
+
+
     <!--로그인 화면-->
     <string name="sign_in_screen_로그인_없이_둘러보기">로그인 없이 둘러보기</string>
     <string name="sign_in_screen_google_sign_in">Google 로그인</string>
@@ -310,6 +318,7 @@
     <string name="settings_screen_버전_정보">버전 정보</string>
     <string name="settings_screen_로그아웃">로그아웃</string>
     <string name="settings_screen_회원_탈퇴">회원 탈퇴</string>
+    <string name="settings_screen_회원_가입" translatable="false">회원가입</string>
 
     <!--로그아웃 다이얼로그-->
     <string name="sign_out_dialog_text">정말 로그아웃을\n하시겠습니까?</string>
@@ -330,6 +339,7 @@
     <string name="mypage_screen_review_remove_dialog" translatable="false">해당 리뷰를\n삭제하시겠습니까?</string>
     <string name="mypage_screen_review_guest" translatable="false">로그인하여 나만의 경험을 기록해보세요!</string>
     <string name="mypage_screen_review_empty" translatable="false">후기를 남겨 나만의 경험을 기록하세요!</string>
+    <string name="mypage_screen_notice_empty" translatable="false">공지사항이 존재하지 않습니다</string>
 
 
     <!--프로필 수정 화면-->
@@ -392,6 +402,7 @@
     <!--후기 작성 화면-->
     <!--TODO 번역-->
     <string name="review_write_title" translatable="false">후기 작성</string>
+    <string name="review_write_search_hint" translatable="false">장소를 검색하세요</string>
     <string name="review_write_select_rating" translatable="false">\"별점\"을 \"선택\"해주세요!</string>
     <string name="review_write_writing" translatable="false">\"방문 후기\"를 \"작성\"해주세요!</string>
     <string name="review_write_writing_hint" translatable="false">내용을 작성해 주세요</string>

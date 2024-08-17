@@ -44,24 +44,41 @@ class ProfileViewModel @Inject constructor(
     val userId: Int?
         get() = savedStateHandle["userId"]
 
+    private val _isReviewList = MutableStateFlow(true)
+    val isReviewList = _isReviewList.asStateFlow()
+
     private val _userProfile = MutableStateFlow<UiState<UserProfile>>(UiState.Loading)
     val userProfile = _userProfile.asStateFlow()
 
-    val reviews = getReviewListByUserUseCase(userId)
+    var reviews = getReviewListByUserUseCase(userId)
         .flow
         .cachedIn(viewModelScope)
+        private set
 
-    val notices = run {
+    var notices = run {
         if(userId != null) flow { PagingData.empty<NoticeSummery>() }
         else getNoticeListUseCase()
                 .flow
                 .cachedIn(viewModelScope)
     }
+        private set
     val isGuest: Boolean
         get() = UserData.provider == "GUEST"
 
-    init {
-        getUserProfile(userId)
+    fun init() {
+        getUserProfile()
+        reviews = getReviewListByUserUseCase(userId)
+            .flow
+            .cachedIn(viewModelScope)
+        notices = run {
+            if(userId != null) flow { PagingData.empty<NoticeSummery>() }
+            else getNoticeListUseCase()
+                .flow
+                .cachedIn(viewModelScope)
+        }
+    }
+    fun setIsReviewList(isReviewList: Boolean){
+        _isReviewList.update { isReviewList }
     }
 
     fun setLike(id: Int){
@@ -71,6 +88,7 @@ class ProfileViewModel @Inject constructor(
                 it.onError { code, message ->  }
             }
     }
+
     fun setRemove(id: Int){
         deleteReviewUseCase(DeleteReviewRequest(id))
             .onEach {
@@ -80,14 +98,21 @@ class ProfileViewModel @Inject constructor(
             }
     }
 
-    private fun getUserProfile(userId: Int?) {
+    private fun getUserProfile() {
         getUserProfileUseCase(userId)
             .onEach { networkResult ->
                 networkResult.onSuccess { _, _, data ->
                     data?.let {
+                        if(data == (_userProfile.value as? UiState.Success)?.data)
+                            return@onSuccess
+
                         _userProfile.update {
                             UiState.Success(data)
                         }
+
+                        if(userId != null)
+                            return@onSuccess
+
                         UserData.provider = data.provider ?: "GUEST"
                         if (isGuest) {
                             UserData.nickname = "GUEST"

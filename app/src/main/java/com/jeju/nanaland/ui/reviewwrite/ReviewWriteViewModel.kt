@@ -1,29 +1,45 @@
 package com.jeju.nanaland.ui.reviewwrite
 
-import android.content.Context
-import android.net.Uri
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.jeju.nanaland.domain.entity.review.ReviewKeywordResult
 import com.jeju.nanaland.domain.request.UriRequestBody
+import com.jeju.nanaland.domain.request.experience.GetExperienceContentRequest
+import com.jeju.nanaland.domain.request.restaurant.GetRestaurantContentRequest
 import com.jeju.nanaland.domain.request.review.CreateReviewRequest
+import com.jeju.nanaland.domain.request.review.EditImage
+import com.jeju.nanaland.domain.usecase.experience.GetExperienceContentUseCase
+import com.jeju.nanaland.domain.usecase.restaurant.GetRestaurantContentUseCase
 import com.jeju.nanaland.domain.usecase.review.CreateReviewUseCase
+import com.jeju.nanaland.domain.usecase.review.GetMyReviewDetailUseCase
+import com.jeju.nanaland.domain.usecase.review.GetReviewListByKeywordUseCase
+import com.jeju.nanaland.domain.usecase.review.ModifyUserReviewUseCase
 import com.jeju.nanaland.globalvalue.type.ReviewCategoryType
 import com.jeju.nanaland.globalvalue.type.ReviewKeyword
+import com.jeju.nanaland.util.network.NetworkResult
 import com.jeju.nanaland.util.network.onError
 import com.jeju.nanaland.util.network.onException
 import com.jeju.nanaland.util.network.onSuccess
 import com.jeju.nanaland.util.ui.UiState
 import dagger.hilt.android.lifecycle.HiltViewModel
-import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.debounce
+import kotlinx.coroutines.flow.distinctUntilChanged
+import kotlinx.coroutines.flow.filter
+import kotlinx.coroutines.flow.flatMapLatest
+import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withTimeoutOrNull
+import java.io.IOException
 import javax.inject.Inject
 
 
@@ -33,7 +49,7 @@ data class ReviewWriteUiState(
     val subTitleTxt: String = "",
 
     val reviewRating: Int = 0,
-    val reviewImage: List<Uri> = emptyList(),
+    val reviewImage: List<Pair<Int,String>> = emptyList(),
     val reviewKeyword: List<ReviewKeyword> = emptyList(),
 
     val canSubmit: Boolean = false
@@ -42,7 +58,11 @@ data class ReviewWriteUiState(
 @HiltViewModel
 class ReviewWriteViewModel @Inject constructor(
     private val createReviewUseCase: CreateReviewUseCase,
-    @ApplicationContext private val context: Context
+    private val modifyUserReviewUseCase: ModifyUserReviewUseCase,
+    private val getExperienceListUseCase: GetExperienceContentUseCase,
+    private val getRestaurantContentUseCase: GetRestaurantContentUseCase,
+    private val getMyReviewDetailUseCase: GetMyReviewDetailUseCase,
+    private val getReviewListByKeywordUseCase: GetReviewListByKeywordUseCase,
 ) : ViewModel() {
     companion object{
         const val MAX_IMAGE_CNT = 5
@@ -50,6 +70,8 @@ class ReviewWriteViewModel @Inject constructor(
         const val MIN_KEYWORD_CNT = 3
         const val MAX_KEYWORD_CNT = 6
     }
+    var isEdit = false
+        private set
 
     private val viewModelState = MutableStateFlow(
         ReviewWriteUiState()
@@ -61,44 +83,152 @@ class ReviewWriteViewModel @Inject constructor(
             viewModelState.value
         )
 
+    val keywordText = MutableStateFlow("")
     var reviewText by mutableStateOf("")
         private set
+
+    private val _reviewsByKeyword: MutableStateFlow<UiState<List<ReviewKeywordResult>>> =
+        MutableStateFlow(UiState.Success(emptyList()))
+    val reviewsByKeyword = _reviewsByKeyword.asStateFlow()
+
+    init {
+        @Suppress("OPT_IN_USAGE")
+        keywordText.filter { it.isNotBlank() }
+            .onEach {
+                if(_reviewsByKeyword.value != UiState.Loading)
+                    _reviewsByKeyword.update { UiState.Loading }
+            }
+            .debounce(600)
+            .apply {
+                if(_reviewsByKeyword.value != UiState.Loading)
+                    distinctUntilChanged()
+            }
+            .flatMapLatest {
+                flow<Unit> {
+                    val response = withTimeoutOrNull(2000) {
+                        getReviewListByKeywordUseCase(it)
+                    } ?: NetworkResult.Exception(IOException("network timeout 2000ms"))
+
+                    response.onSuccess { code, message, data ->
+                        data?.let {
+                            _reviewsByKeyword.update { UiState.Success(data) }
+                        }
+                    }.onError { code, message ->
+                        _reviewsByKeyword.update { UiState.Failure("") }
+                    }.onException { e ->
+                        _reviewsByKeyword.update { UiState.Failure("", e) }
+                    }
+                }
+            }.launchIn(viewModelScope)
+    }
 
     private val _callState = MutableStateFlow<UiState<Unit>?>(null)
     val callState = _callState.asStateFlow()
 
 
-    fun setUI(image: String, title: String, address: String) {
-        viewModelState.update {
-            it.copy(
-               titleImg = image,
-               titleTxt = title,
-                subTitleTxt = address,
-            )
+    fun init(id: Int?, category: ReviewCategoryType?, isEdit: Boolean = false){
+        if(id == null) return
+
+        this.isEdit = isEdit
+        if(isEdit) { // edit my review
+            getMyReviewDetailUseCase(id).onEach { networkResult ->
+                networkResult.onSuccess { code, message, data ->
+                    data?.let {
+                        viewModelState.update {
+                            ReviewWriteUiState(
+                                titleImg = data.firstImage.originUrl,
+                                titleTxt = data.title,
+                                subTitleTxt = data.address,
+                                reviewRating = data.rating.toInt(),
+                                reviewImage = data.images.map { Pair(it.id, it.thumbnailUrl) },
+                                reviewKeyword = data.reviewKeywords.map { keyword ->
+                                    ReviewKeyword.Mood.entries.firstOrNull {
+                                        it.name == keyword
+                                    } ?: ReviewKeyword.With.entries.firstOrNull {
+                                        it.name == keyword
+                                    } ?: ReviewKeyword.Infra.valueOf(keyword)
+                                },
+                                canSubmit = true
+                            )
+                        }
+                        reviewText = data.content
+                    }
+                }
+            }.launchIn(viewModelScope)
+        } else { // create new review
+            when(category){
+                ReviewCategoryType.EXPERIENCE -> getExperienceListUseCase(
+                    GetExperienceContentRequest(id, false)
+                ).onEach { networkResult ->
+                    networkResult.onSuccess { code, message, data ->
+                        data?.let {
+                            viewModelState.update {
+                                ReviewWriteUiState(
+                                    titleImg = data.images.firstOrNull()?.originUrl ?: "",
+                                    titleTxt = data.title,
+                                    subTitleTxt = data.address
+                                )
+                            }
+                        }
+                    }
+                }.launchIn(viewModelScope)
+
+                ReviewCategoryType.RESTAURANT -> getRestaurantContentUseCase(
+                    GetRestaurantContentRequest(id,false)
+                ).onEach { networkResult ->
+                    networkResult.onSuccess { code, message, data ->
+                        data?.let {
+                            viewModelState.update {
+                                it.copy(
+                                    titleImg = data.images.firstOrNull()?.originUrl ?: "",
+                                    titleTxt = data.title,
+                                    subTitleTxt = data.address
+                                )
+                            }
+                        }
+                    }
+                }.launchIn(viewModelScope)
+
+                else -> return
+            }
         }
     }
-
 
     fun submit(
         id: Int,
         category: ReviewCategoryType,
         snapshotData: ReviewWriteUiState,
-        snapshotContent: String
+        snapshotContent: String,
+        newImages: List<UriRequestBody>
     ) {
         viewModelScope.launch {
             _callState.update { UiState.Loading }
-            createReviewUseCase(
-                id = id,
-                category = category,
-                images = snapshotData.reviewImage.map {
-                    UriRequestBody(context, it)
-                },
-                data = CreateReviewRequest(
-                    rating = snapshotData.reviewRating,
-                    content = snapshotContent,
-                    keywords = snapshotData.reviewKeyword,
-                ),
-            ).onSuccess { _, _, _ ->
+            run {
+                if(!isEdit)
+                    createReviewUseCase(
+                        id = id,
+                        category = category,
+                        images = newImages,
+                        data = CreateReviewRequest(
+                            rating = snapshotData.reviewRating,
+                            content = snapshotContent,
+                            keywords = snapshotData.reviewKeyword,
+                        )
+                    )
+                else
+                    modifyUserReviewUseCase(
+                        id = id,
+                        newImages = newImages,
+                        data = CreateReviewRequest(
+                            rating = snapshotData.reviewRating,
+                            content = snapshotContent,
+                            keywords = snapshotData.reviewKeyword,
+                            editImages = snapshotData.reviewImage.map {
+                                EditImage(it.first, it.first == -1)
+                            }
+                        )
+                    )
+            }.onSuccess { _, _, _ ->
                 _callState.update { UiState.Success(Unit) }
             }.onError { _, _ ->
                 _callState.update { null }
@@ -116,7 +246,7 @@ class ReviewWriteViewModel @Inject constructor(
         }
     }
 
-    fun changeImage(arg: List<Uri>) {
+    fun changeImage(arg: List<Pair<Int,String>>) {
         viewModelState.update {
             it.copy(
                 reviewImage = arg.take(MAX_IMAGE_CNT)

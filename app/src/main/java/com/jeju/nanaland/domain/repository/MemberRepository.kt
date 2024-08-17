@@ -2,13 +2,13 @@ package com.jeju.nanaland.domain.repository
 
 import com.jeju.nanaland.domain.entity.member.RecommendedPostData
 import com.jeju.nanaland.domain.entity.member.UserProfile
+import com.jeju.nanaland.domain.request.UriRequestBody
 import com.jeju.nanaland.domain.request.member.UpdateLanguageRequest
 import com.jeju.nanaland.domain.request.member.UpdatePolicyAgreementRequest
 import com.jeju.nanaland.domain.request.member.UpdateUserProfileRequest
 import com.jeju.nanaland.domain.request.member.UpdateUserTypeRequest
 import com.jeju.nanaland.domain.request.member.WithdrawalRequest
 import com.jeju.nanaland.util.network.NetworkResult
-import java.io.File
 
 interface MemberRepository {
 
@@ -29,8 +29,13 @@ interface MemberRepository {
     // 유저 프로필 수정
     suspend fun updateUserProfile(
         data: UpdateUserProfileRequest,
-        image: File?
+        image: UriRequestBody?
     ): NetworkResult<String?>
+
+    // 닉네임 중복 확인
+    suspend fun duplicateNickname(
+        data: String,
+    ): NetworkResult<Unit>
 
     // 회원 탈퇴
     suspend fun withdraw(

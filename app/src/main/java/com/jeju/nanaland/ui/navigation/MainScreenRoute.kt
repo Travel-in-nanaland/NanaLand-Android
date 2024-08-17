@@ -4,6 +4,7 @@ import androidx.core.os.bundleOf
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
+import com.jeju.nanaland.globalvalue.constant.ROUTE_BOARD
 import com.jeju.nanaland.globalvalue.constant.ROUTE_EXPERIENCE_CONTENT
 import com.jeju.nanaland.globalvalue.constant.ROUTE_EXPERIENCE_LIST
 import com.jeju.nanaland.globalvalue.constant.ROUTE_FESTIVAL_CONTENT
@@ -20,6 +21,7 @@ import com.jeju.nanaland.globalvalue.constant.ROUTE_PROFILE_REVIEW
 import com.jeju.nanaland.globalvalue.constant.ROUTE_PROFILE_UPDATE
 import com.jeju.nanaland.globalvalue.constant.ROUTE_RESTAURANT_CONTENT
 import com.jeju.nanaland.globalvalue.constant.ROUTE_RESTAURANT_LIST
+import com.jeju.nanaland.globalvalue.constant.ROUTE_REVIEW_WRITE_ROUTE
 import com.jeju.nanaland.globalvalue.constant.ROUTE_SETTINGS
 import com.jeju.nanaland.globalvalue.constant.ROUTE_SIGN_IN
 import com.jeju.nanaland.globalvalue.constant.ROUTE_TYPE_TESTING
@@ -80,11 +82,14 @@ fun NavGraphBuilder.mainScreen(
             launchSingleTop = true
         } },
         moveToTypeTestScreen = { navController.navigate(ROUTE_TYPE_TESTING) },
-        moveToTypeTestResultScreen = { navController.navigate(ROUTE_TYPE_TEST_RESULT) },
-        moveToReviewWriteScreen = { /*TODO*/ },
+        moveToTypeTestResultScreen = { navController.navigate(ROUTE_TYPE_TEST_RESULT,  bundleOf("travelType" to it)) },
+        moveToReviewWriteScreen = { navController.navigate(ROUTE_REVIEW_WRITE_ROUTE) },
         moveToProfileNoticeListScreen = {
-            if(it == null) navController.navigate(ROUTE_PROFILE_NOTICE) /*TODO*/
-            else navController.navigate(ROUTE_PROFILE_NOTICE)
+            if(it == null) navController.navigate(ROUTE_PROFILE_NOTICE)
+            else navController.navigate(ROUTE_BOARD, bundleOf(
+                "type" to TEMP_BoardType.Notice.toString(),
+                "id" to it
+            ))
         },
         moveToProfileReviewListScreen = {
             navController.navigate(ROUTE_PROFILE_REVIEW, bundleOf("id" to (it ?: -1)))

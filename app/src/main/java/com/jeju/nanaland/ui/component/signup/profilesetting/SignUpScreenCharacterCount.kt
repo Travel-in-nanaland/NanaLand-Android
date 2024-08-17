@@ -11,11 +11,12 @@ import com.jeju.nanaland.util.resource.getString
 @Composable
 fun SignUpScreenCharacterCount(
     count: Int,
+    isError: Boolean,
     maxCount: Int = NICKNAME_CONSTRAINT,
 ) {
     Text(
         text = "$count / $maxCount " + getString(R.string.common_자),
-        color = if (count > maxCount) getColor().warning else getColor().gray01,
+        color = if (isError) getColor().warning else getColor().gray01,
         style = caption01
     )
 }

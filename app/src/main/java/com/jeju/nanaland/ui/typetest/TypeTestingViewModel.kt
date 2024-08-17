@@ -5,22 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.jeju.nanaland.domain.request.member.UpdateUserTypeRequest
 import com.jeju.nanaland.domain.usecase.member.UpdateUserTypeUseCase
-import com.jeju.nanaland.globalvalue.constant.TYPE_GAMGYUL
-import com.jeju.nanaland.globalvalue.constant.TYPE_GAMGYUL_ADE
-import com.jeju.nanaland.globalvalue.constant.TYPE_GAMGYUL_AFFOKATO
-import com.jeju.nanaland.globalvalue.constant.TYPE_GAMGYUL_BUBBLE_TEA
-import com.jeju.nanaland.globalvalue.constant.TYPE_GAMGYUL_CHOCOLATE
-import com.jeju.nanaland.globalvalue.constant.TYPE_GAMGYUL_CIDER
-import com.jeju.nanaland.globalvalue.constant.TYPE_GAMGYUL_COCKTAIL
-import com.jeju.nanaland.globalvalue.constant.TYPE_GAMGYUL_FLATCCINO
-import com.jeju.nanaland.globalvalue.constant.TYPE_GAMGYUL_HANGWA
-import com.jeju.nanaland.globalvalue.constant.TYPE_GAMGYUL_ICECREAM
-import com.jeju.nanaland.globalvalue.constant.TYPE_GAMGYUL_JUICE
-import com.jeju.nanaland.globalvalue.constant.TYPE_GAMGYUL_LATTE
-import com.jeju.nanaland.globalvalue.constant.TYPE_GAMGYUL_RICECAKE
-import com.jeju.nanaland.globalvalue.constant.TYPE_GAMGYUL_SIKHYE
-import com.jeju.nanaland.globalvalue.constant.TYPE_GAMGYUL_YOGURT
-import com.jeju.nanaland.globalvalue.constant.TYPE_TANGERINE_PEEL_TEA
+import com.jeju.nanaland.globalvalue.constant.TravelType
 import com.jeju.nanaland.util.log.LogUtil
 import com.jeju.nanaland.util.network.onError
 import com.jeju.nanaland.util.network.onException
@@ -47,24 +32,24 @@ class TypeTestingViewModel @Inject constructor(
         _level.update { level }
     }
 
-    fun updateUserType(moveToTypeTestCompletionScreen: (String) -> Unit) {
+    fun updateUserType(moveToTypeTestCompletionScreen: (TravelType) -> Unit) {
         val type = when ("${selectionList[0]}${selectionList[2]}${selectionList[4]}") {
-            "111" -> TYPE_GAMGYUL_ICECREAM
-            "112" -> TYPE_GAMGYUL_RICECAKE
-            "113" -> TYPE_GAMGYUL
-            "114" -> TYPE_GAMGYUL_CIDER
-            "121" -> TYPE_GAMGYUL_AFFOKATO
-            "122" -> TYPE_GAMGYUL_HANGWA
-            "123" -> TYPE_GAMGYUL_JUICE
-            "124" -> TYPE_GAMGYUL_CHOCOLATE
-            "221" -> TYPE_GAMGYUL_COCKTAIL
-            "222" -> TYPE_TANGERINE_PEEL_TEA
-            "223" -> TYPE_GAMGYUL_YOGURT
-            "224" -> TYPE_GAMGYUL_FLATCCINO
-            "211" -> TYPE_GAMGYUL_LATTE
-            "212" -> TYPE_GAMGYUL_SIKHYE
-            "213" -> TYPE_GAMGYUL_ADE
-            else -> TYPE_GAMGYUL_BUBBLE_TEA
+            "111" -> TravelType.GAMGYUL_ICECREAM
+            "112" -> TravelType.GAMGYUL_RICECAKE
+            "113" -> TravelType.GAMGYUL
+            "114" -> TravelType.GAMGYUL_CIDER
+            "121" -> TravelType.GAMGYUL_AFFOKATO
+            "122" -> TravelType.GAMGYUL_HANGWA
+            "123" -> TravelType.GAMGYUL_JUICE
+            "124" -> TravelType.GAMGYUL_CHOCOLATE
+            "221" -> TravelType.GAMGYUL_COCKTAIL
+            "222" -> TravelType.TANGERINE_PEEL_TEA
+            "223" -> TravelType.GAMGYUL_YOGURT
+            "224" -> TravelType.GAMGYUL_FLATCCINO
+            "211" -> TravelType.GAMGYUL_LATTE
+            "212" -> TravelType.GAMGYUL_SIKHYE
+            "213" -> TravelType.GAMGYUL_ADE
+            else -> TravelType.GAMGYUL_BUBBLE_TEA
         }
         
         val requestData = UpdateUserTypeRequest(type = type)

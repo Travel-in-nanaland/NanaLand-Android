@@ -16,24 +16,23 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.jeju.nanaland.R
+import com.jeju.nanaland.domain.request.UriRequestBody
 import com.jeju.nanaland.globalvalue.constant.INTRODUCTION_CONSTRAINT
-import com.jeju.nanaland.globalvalue.type.InputIntroductionState
-import com.jeju.nanaland.globalvalue.type.InputNicknameState
 import com.jeju.nanaland.ui.component.common.CustomSurface
+import com.jeju.nanaland.ui.component.common.DialogCommon
 import com.jeju.nanaland.ui.component.common.topbar.CustomTopBar
 import com.jeju.nanaland.ui.component.profileupdate.ProfileUpdateScreenBottomButton
 import com.jeju.nanaland.ui.component.profileupdate.ProfileUpdateScreenIntroductionTextField
 import com.jeju.nanaland.ui.component.profileupdate.ProfileUpdateScreenNicknameText
 import com.jeju.nanaland.ui.component.profileupdate.ProfileUpdateScreenProfileContent
-import com.jeju.nanaland.ui.component.profileupdate.ProfileUpdateScreenWaringDialog
 import com.jeju.nanaland.ui.component.signup.profilesetting.SignUpScreenCharacterCount
 import com.jeju.nanaland.ui.component.signup.profilesetting.SignUpScreenTextField
 import com.jeju.nanaland.ui.theme.bodyBold
@@ -50,28 +49,29 @@ fun ProfileUpdateScreen(
     moveToBackScreen: () -> Unit,
     viewModel: ProfileUpdateViewModel = hiltViewModel()
 ) {
-    LaunchedEffect(Unit) {
-        viewModel.updateProfileImageUri(Uri.parse(profileImageUri))
-        viewModel.updateInputNickname(nickname)
-        viewModel.updateInputIntroduction(introduction)
-    }
+    val context = LocalContext.current
     val inputNickname = viewModel.inputNickname.collectAsState().value
-    val inputNicknameState = viewModel.inputNicknameState.collectAsState().value
+    val inputNicknameState = viewModel.errorNickname.collectAsState().value
     val inputIntroduction = viewModel.inputIntroduction.collectAsState().value
-    val inputIntroductionState = viewModel.inputIntroductionState.collectAsState().value
-    val profileImageUri = viewModel.imageUri.collectAsState().value
+    val inputIntroductionState = viewModel.errorIntro.collectAsState().value
+    val inputProfileImageUri = viewModel.imageUri.collectAsState().value
     ProfileUpdateScreen(
         prevNickname = nickname,
         prevIntroduction = introduction,
+        prevProfileImageUri = inputProfileImageUri,
         inputNickname = inputNickname,
         updateInputNickname = viewModel::updateInputNickname,
-        inputNicknameState = inputNicknameState,
+        inputNicknameError = inputNicknameState,
         inputIntroduction = inputIntroduction,
-        inputIntroductionState = inputIntroductionState,
+        inputIntroductionError = inputIntroductionState,
         updateInputIntroduction = viewModel::updateInputIntroduction,
-        profileImageUri = profileImageUri,
+        inputProfileImageUri = inputProfileImageUri,
         updateProfileImageUri = viewModel::updateProfileImageUri,
-        updateProfile = viewModel::updateProfile,
+        updateProfile = {
+            val image = if(profileImageUri == inputProfileImageUri) null
+                else UriRequestBody(context, Uri.parse(inputProfileImageUri))
+            viewModel.updateProfile(image = image, moveToBackScreen = moveToBackScreen)
+        },
         moveToBackScreen = moveToBackScreen,
         isContent = true
     )
@@ -81,21 +81,22 @@ fun ProfileUpdateScreen(
 private fun ProfileUpdateScreen(
     prevNickname: String,
     prevIntroduction: String,
+    prevProfileImageUri: String?,
     inputNickname: String,
     updateInputNickname: (String) -> Unit,
-    inputNicknameState: InputNicknameState,
+    inputNicknameError: Int?,
     inputIntroduction: String,
-    inputIntroductionState: InputIntroductionState,
+    inputIntroductionError: Int?,
     updateInputIntroduction: (String) -> Unit,
-    profileImageUri: String?,
+    inputProfileImageUri: String?,
     updateProfileImageUri: (Uri) -> Unit,
-    updateProfile: (() -> Unit) -> Unit,
+    updateProfile: () -> Unit,
     moveToBackScreen: () -> Unit,
     isContent: Boolean
 ) {
     val isWarningDialogShowing = remember { mutableStateOf(false) }
     BackHandler {
-        if (prevNickname != inputNickname || prevIntroduction != inputIntroduction) {
+        if (prevProfileImageUri != inputProfileImageUri || prevNickname != inputNickname || prevIntroduction != inputIntroduction) {
             isWarningDialogShowing.value = true
         } else {
             moveToBackScreen()
@@ -135,7 +136,7 @@ private fun ProfileUpdateScreen(
                     modifier = Modifier.padding(start = 16.dp, end = 16.dp)
                 ) {
                     ProfileUpdateScreenProfileContent(
-                        imageUri = profileImageUri,
+                        imageUri = inputProfileImageUri,
                         onClick = {
                             takePhotoFromAlbumLauncher.launch(
                                 PickVisualMediaRequest(
@@ -152,7 +153,10 @@ private fun ProfileUpdateScreen(
 
                         Spacer(Modifier.weight(1f))
 
-                        SignUpScreenCharacterCount(count = inputNickname.length)
+                        SignUpScreenCharacterCount(
+                            count = inputNickname.length,
+                            isError = inputNicknameError != null
+                        )
                     }
 
                     Spacer(Modifier.height(8.dp))
@@ -160,7 +164,7 @@ private fun ProfileUpdateScreen(
                     SignUpScreenTextField(
                         inputText = inputNickname,
                         onValueChange = updateInputNickname,
-                        inputState = inputNicknameState
+                        error = inputNicknameError
                     )
 
                     Spacer(Modifier.height(80.dp))
@@ -176,7 +180,8 @@ private fun ProfileUpdateScreen(
 
                         SignUpScreenCharacterCount(
                             count = inputIntroduction.length,
-                            maxCount = INTRODUCTION_CONSTRAINT
+                            maxCount = INTRODUCTION_CONSTRAINT,
+                            isError = inputIntroductionError != null
                         )
                     }
 
@@ -185,7 +190,7 @@ private fun ProfileUpdateScreen(
                     ProfileUpdateScreenIntroductionTextField(
                         inputText = inputIntroduction,
                         onValueChange = updateInputIntroduction,
-                        inputState = inputIntroductionState
+                        error = inputIntroductionError
                     )
 
                     Spacer(Modifier.height(40.dp))
@@ -193,10 +198,8 @@ private fun ProfileUpdateScreen(
             }
             item {
                 ProfileUpdateScreenBottomButton(
-                    isActivated = inputNickname.isNotEmpty() && inputNicknameState == InputNicknameState.Idle && inputIntroductionState == InputIntroductionState.Idle,
-                    onClick = {
-                        updateProfile(moveToBackScreen)
-                    }
+                    isActivated = inputNickname.isNotEmpty() && inputNicknameError == null && inputIntroductionError == null,
+                    onClick = updateProfile
                 )
 
                 Spacer(Modifier.height(20.dp))
@@ -205,9 +208,12 @@ private fun ProfileUpdateScreen(
     }
 
     if (isWarningDialogShowing.value) {
-        ProfileUpdateScreenWaringDialog(
-            onConfirm = moveToBackScreen,
-            onCancel = { isWarningDialogShowing.value = false }
+        DialogCommon(
+            title = getString(R.string.review_write_cancel_dialog_title),
+            subTitle = getString(R.string.review_write_cancel_dialog_subtitle),
+            onDismissRequest = { isWarningDialogShowing.value = false },
+            onPositive = moveToBackScreen,
+            onNegative = { isWarningDialogShowing.value = false }
         )
     }
 }

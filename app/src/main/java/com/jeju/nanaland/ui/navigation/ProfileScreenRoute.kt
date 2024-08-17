@@ -36,7 +36,7 @@ fun NavGraphBuilder.profileScreenRoute(navController: NavController) = composabl
                 ProfileScreen(
                     onBackButtonClicked = { navController.popBackStack() },
                     moveToTypeTestResultScreen = {
-                        navController.navigate(ROUTE_TYPE_TEST_RESULT)
+                        navController.navigate(ROUTE_TYPE_TEST_RESULT,  bundleOf("travelType" to it))
                     },
                     moveToProfileReviewListScreen = {
                         navController.navigate(ROUTE_PROFILE_REVIEW, bundleOf("id" to it))
