@@ -22,7 +22,7 @@ data class MemberReviewDetail (
     @SerializedName("heartCount")
     val heartCount: Int,
     @SerializedName("images")
-    val images: List<ImageUrl>?,
+    val images: List<ImageUrl>,//TODO
     @SerializedName("imageFileDto") //TODO
     val thumbnail: ImageUrl?,
     @SerializedName("reviewTypeKeywords")
