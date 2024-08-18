@@ -1,6 +1,5 @@
 package com.jeju.nanaland.util.network
 
-import android.util.Log
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.jeju.nanaland.domain.response.ResponsePagingWrapper
@@ -42,12 +41,12 @@ interface NetworkResultHandler {
                 return state.anchorPosition?.let { anchorPosition ->
                     val anchorPage = state.closestPageToPosition(anchorPosition)
                     anchorPage?.prevKey?.plus(1) ?: anchorPage?.nextKey?.minus(1)
-                }
+                }?.takeIf { it > 0 } ?: 0
             }
 
             override suspend fun load(params: LoadParams<Int>): LoadResult<Int, T> {
                 return try {
-                    val currentKey = params.key ?: 0
+                    val currentKey = params.key?.takeIf { it > 0 } ?: 0
                     val call = handleResult {
                         responseFunction(currentKey, params.loadSize)
                     }.onError { code, _ ->
@@ -56,7 +55,7 @@ interface NetworkResultHandler {
                         throw it
                     }
                     val data = (call as NetworkResult.Success).data!!.data
-                    val prevKey = if(currentKey == 0) null else currentKey - params.loadSize
+                    val prevKey = if(currentKey <= 0) null else currentKey - params.loadSize
                     val nextKey = if(data.isEmpty()) null else currentKey + params.loadSize
 
                     LoadResult.Page(
