@@ -17,6 +17,7 @@ import com.jeju.nanaland.domain.usecase.review.GetReviewListByUserUseCase
 import com.jeju.nanaland.domain.usecase.review.ToggleReviewFavoriteUseCase
 import com.jeju.nanaland.globalvalue.userdata.UserData
 import com.jeju.nanaland.util.log.LogUtil
+import com.jeju.nanaland.util.network.NetworkResult
 import com.jeju.nanaland.util.network.onError
 import com.jeju.nanaland.util.network.onException
 import com.jeju.nanaland.util.network.onSuccess
@@ -67,7 +68,7 @@ class ProfileViewModel @Inject constructor(
 
     fun init() {
         getUserProfile()
-        reviews = getReviewListByUserUseCase(userId)
+        reviews = getReviewListByUserUseCase(userId) //TODO
             .flow
             .cachedIn(viewModelScope)
         notices = run {
@@ -89,13 +90,8 @@ class ProfileViewModel @Inject constructor(
             }
     }
 
-    fun setRemove(id: Int){
-        deleteReviewUseCase(DeleteReviewRequest(id))
-            .onEach {
-                it
-                    .onSuccess { code, message, data ->  }
-                    .onError { code, message ->  }
-            }
+    suspend fun setRemove(id: Int): NetworkResult<String>{
+        return deleteReviewUseCase(DeleteReviewRequest(id))
     }
 
     private fun getUserProfile() {
