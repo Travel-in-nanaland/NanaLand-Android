@@ -4,6 +4,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.paging.compose.collectAsLazyPagingItems
@@ -14,7 +15,9 @@ import com.jeju.nanaland.ui.profile.ProfileViewModel
 import com.jeju.nanaland.ui.profile.component.ProfileListFrame
 import com.jeju.nanaland.ui.profile.component.parts.ProfileListReviewRow
 import com.jeju.nanaland.ui.profile.component.parts.ReportSheet
+import com.jeju.nanaland.util.network.NetworkResult
 import com.jeju.nanaland.util.resource.getString
+import kotlinx.coroutines.launch
 
 @Composable
 fun ProfileReviewListScreen(
@@ -24,6 +27,7 @@ fun ProfileReviewListScreen(
     initialScrollToItemId: Int = -1,
     viewModel: ProfileViewModel = hiltViewModel()
 ) {
+    val scope = rememberCoroutineScope()
     val reviews = viewModel.reviews.collectAsLazyPagingItems()
     val isMine = viewModel.userId == null
 
@@ -61,7 +65,12 @@ fun ProfileReviewListScreen(
     if(removeReviewId != -1)
         RemoveDialog(
             onDismissRequest = { removeReviewId = -1 },
-            onDelete = { viewModel.setRemove(removeReviewId)}
+            onDelete = { scope.launch {
+                if(viewModel.setRemove(removeReviewId) is NetworkResult.Success) {
+                    removeReviewId = -1
+                    reviews.refresh()
+                }
+            } }
         )
 
     if(reportReviewId != -1)
@@ -81,7 +90,7 @@ private fun RemoveDialog(
         title = getString(R.string.mypage_screen_review_remove_dialog),
 //        modifier = {},
 //        subTitle = {},
-        onPositive = { onDelete() },
-        onNegative = { onDismissRequest() },
+        onPositive = onDelete,
+        onNegative = onDismissRequest,
     )
 }

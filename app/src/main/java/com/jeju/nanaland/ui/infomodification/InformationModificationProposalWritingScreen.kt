@@ -170,9 +170,9 @@ private fun InformationModificationProposalWritingScreen(
                 }
 
                 UploadImages(
-                    images = selectedImageList,
-                    onChangeImages = onChangeImages,
-                    horizontalPadding = 10.dp
+                    modifier = Modifier.padding(horizontal = 10.dp),
+                    images = selectedImageList.map { it.toString() },
+                    onChangeImages = { onChangeImages(it.map { Uri.parse(it) }) },
                 )
 
                 Spacer(Modifier.height(40.dp))
