@@ -44,7 +44,7 @@ class InfoModificationProposalViewModel @Inject constructor(
     val inputEmail = _inputEmail.asStateFlow()
     private val _inputEmailState = MutableStateFlow(InputEmailState.Idle)
     val inputEmailState = _inputEmailState.asStateFlow()
-    val selectedImageList = mutableStateListOf<Uri>()
+    val selectedImageList = mutableStateListOf<String>()
 
     fun updateImageUri(uri: Uri) {
         _imageUri.update { uri.toString() }
@@ -63,7 +63,7 @@ class InfoModificationProposalViewModel @Inject constructor(
         }
     }
 
-    fun changeImage(arg: List<Uri>) {
+    fun changeImage(arg: List<String>) {
         selectedImageList.clear()
         selectedImageList.addAll(arg)
     }
@@ -105,7 +105,7 @@ class InfoModificationProposalViewModel @Inject constructor(
 //            imageFile = path?.let { File(it) }
 //        }
 
-        infoModificationUseCase(requestData, selectedImageList.map { UriRequestBody(application, it) })
+        infoModificationUseCase(requestData, selectedImageList.map { UriRequestBody(application, it.toUri()) })
             .onEach { networkResult ->
                 networkResult.onSuccess { code, message, data ->
                     moveToCompleteScreen()
