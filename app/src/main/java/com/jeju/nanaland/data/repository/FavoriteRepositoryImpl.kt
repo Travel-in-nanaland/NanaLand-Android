@@ -13,12 +13,35 @@ class FavoriteRepositoryImpl(
     private val favoriteApi: FavoriteApi
 ) : FavoriteRepository, NetworkResultHandler {
 
+    // 제주맛집 찜리스트 조회
+    override suspend fun getFavoriteRestaurantList(
+        data: GetFavoriteListRequest
+    ): NetworkResult<FavoriteListData> {
+        return handleResult {
+            favoriteApi.getFavoriteRestaurantList(
+                page = data.page,
+                size = data.size
+            )
+        }
+    }
+
     // 7대자연 찜리스토 조회
     override suspend fun getFavoriteNatureList(
         data: GetFavoriteListRequest
     ): NetworkResult<FavoriteListData> {
         return handleResult {
             favoriteApi.getFavoriteNatureList(
+                page = data.page,
+                size = data.size
+            )
+        }
+    }
+
+    override suspend fun getFavoriteNanaPickList(
+        data: GetFavoriteListRequest
+    ): NetworkResult<FavoriteListData> {
+        return handleResult {
+            favoriteApi.getFavoriteNanaPickList(
                 page = data.page,
                 size = data.size
             )
