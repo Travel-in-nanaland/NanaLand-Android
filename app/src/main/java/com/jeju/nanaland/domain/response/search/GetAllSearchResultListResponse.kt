@@ -21,4 +21,8 @@ data class AllSearchResultListData(
     val experience: SearchResultData,
     @SerializedName("market")
     val market: SearchResultData,
+    @SerializedName("restaurant")
+    val restaurant: SearchResultData,
+    @SerializedName("nana")
+    val nana: SearchResultData
 )

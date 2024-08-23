@@ -10,13 +10,13 @@ import com.jeju.nanaland.ui.nanapick.NanaPickListScreen
 import com.jeju.nanaland.util.navigation.navigate
 
 fun NavGraphBuilder.nanaPickListScreen(navController: NavController) = composable(route = ROUTE_NANAPICK_LIST) {
-    NanaPickListScreen(
-        moveToNanaPickContentScreen = { contentId ->
-            val bundle = bundleOf(
-                "contentId" to contentId
-            )
-            navController.navigate(ROUTE_NANAPICK_CONTENT, bundle)
-        },
-        moveToMainScreen = { navController.popBackStack() }
-    )
+//    NanaPickListScreen(
+//        moveToNanaPickContentScreen = { contentId ->
+//            val bundle = bundleOf(
+//                "contentId" to contentId
+//            )
+//            navController.navigate(ROUTE_NANAPICK_CONTENT, bundle)
+//        },
+//        moveToMainScreen = { navController.popBackStack() }
+//    )
 }

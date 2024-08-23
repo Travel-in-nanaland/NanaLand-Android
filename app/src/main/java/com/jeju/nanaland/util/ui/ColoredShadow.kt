@@ -14,7 +14,7 @@ import kotlin.math.absoluteValue
 
 @RequiresApi(Build.VERSION_CODES.O)
 fun Modifier.drawColoredShadow(
-    color: Color,
+    color: Color = Color.Black,
     alpha: Float = 0.2f,
     borderRadius: Dp = 0.dp,
     shadowRadius: Dp = 20.dp,

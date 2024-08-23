@@ -5,7 +5,9 @@ import com.jeju.nanaland.domain.usecase.favorite.GetAllFavoriteListUseCase
 import com.jeju.nanaland.domain.usecase.favorite.GetFavoriteExperienceListUseCase
 import com.jeju.nanaland.domain.usecase.favorite.GetFavoriteFestivalListUseCase
 import com.jeju.nanaland.domain.usecase.favorite.GetFavoriteMarketListUseCase
+import com.jeju.nanaland.domain.usecase.favorite.GetFavoriteNanaPickListUseCase
 import com.jeju.nanaland.domain.usecase.favorite.GetFavoriteNatureListUseCase
+import com.jeju.nanaland.domain.usecase.favorite.GetFavoriteRestaurantListUseCase
 import com.jeju.nanaland.domain.usecase.favorite.ToggleFavoriteUseCase
 import dagger.Module
 import dagger.Provides
@@ -17,6 +19,15 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object FavoriteUseCaseModule {
 
+    // 제주맛집 찜리스트 조회
+    @Singleton
+    @Provides
+    fun provideGetFavoriteRestaurantListUseCase(
+        repository: FavoriteRepository
+    ): GetFavoriteRestaurantListUseCase {
+        return GetFavoriteRestaurantListUseCase(repository)
+    }
+
     // 7대자연 찜리스토 조회
     @Singleton
     @Provides
@@ -24,6 +35,15 @@ object FavoriteUseCaseModule {
         repository: FavoriteRepository
     ): GetFavoriteNatureListUseCase {
         return GetFavoriteNatureListUseCase(repository)
+    }
+
+    // 나나스픽 찜리스트 조회
+    @Singleton
+    @Provides
+    fun provideFavoriteNanaPickListUseCase(
+        repository: FavoriteRepository
+    ): GetFavoriteNanaPickListUseCase {
+        return GetFavoriteNanaPickListUseCase(repository)
     }
 
     // 전통시장 찜리스트 조회

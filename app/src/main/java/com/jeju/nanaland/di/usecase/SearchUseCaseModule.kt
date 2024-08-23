@@ -8,6 +8,7 @@ import com.jeju.nanaland.domain.usecase.search.GetHotPostsUseCase
 import com.jeju.nanaland.domain.usecase.search.GetMarketSearchResultListUseCase
 import com.jeju.nanaland.domain.usecase.search.GetNanaPickSearchResultListUseCase
 import com.jeju.nanaland.domain.usecase.search.GetNatureSearchResultListUseCase
+import com.jeju.nanaland.domain.usecase.search.GetRestaurantSearchResultListUseCase
 import com.jeju.nanaland.domain.usecase.search.GetTopKeywordsUseCase
 import dagger.Module
 import dagger.Provides
@@ -36,6 +37,15 @@ object SearchUseCaseModule {
         repository: SearchRepository
     ): GetTopKeywordsUseCase {
         return GetTopKeywordsUseCase(repository)
+    }
+
+    // 제주맛집 검색 결과
+    @Singleton
+    @Provides
+    fun provideGetRestaurantSearchResultListUseCase(
+        repository: SearchRepository
+    ): GetRestaurantSearchResultListUseCase {
+        return GetRestaurantSearchResultListUseCase(repository)
     }
 
     // 자연 검색 결과

@@ -41,4 +41,11 @@ class NanaPickRepositoryImpl(
             )
         }
     }
+
+    // 금주 추천 나나's pick
+    override suspend fun getRecommendedNanaPickList(): NetworkResult<List<NanaPickBannerData>> {
+        return handleResult {
+            nanaPickApi.getRecommendedNanaPickList()
+        }
+    }
 }

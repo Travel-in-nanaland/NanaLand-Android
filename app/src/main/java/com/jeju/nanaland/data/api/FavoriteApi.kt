@@ -12,9 +12,23 @@ import retrofit2.http.Query
 
 interface FavoriteApi {
 
+    // 제주맛집 찜리스트 조회
+    @GET("favorite/restaurant/list")
+    suspend fun getFavoriteRestaurantList(
+        @Query("page") page: Int,
+        @Query("size") size: Int
+    ): Response<ResponseWrapper<FavoriteListData>>
+
     // 7대자연 찜리스트 조회
     @GET("favorite/nature/list")
     suspend fun getFavoriteNatureList(
+        @Query("page") page: Int,
+        @Query("size") size: Int
+    ): Response<ResponseWrapper<FavoriteListData>>
+
+    // 나나스픽 찜리스트 조회
+    @GET("favorite/nana/list")
+    suspend fun getFavoriteNanaPickList(
         @Query("page") page: Int,
         @Query("size") size: Int
     ): Response<ResponseWrapper<FavoriteListData>>
@@ -31,7 +45,6 @@ interface FavoriteApi {
     suspend fun getFavoriteFestivalList(
         @Query("page") page: Int,
         @Query("size") size: Int
-
     ): Response<ResponseWrapper<FavoriteListData>>
 
     // 이색체험 찜리스트 조회
@@ -47,7 +60,6 @@ interface FavoriteApi {
     suspend fun getAllFavoriteList(
         @Query("page") page: Int,
         @Query("size") size: Int
-
     ): Response<ResponseWrapper<FavoriteListData>>
 
     // 좋아요 토글

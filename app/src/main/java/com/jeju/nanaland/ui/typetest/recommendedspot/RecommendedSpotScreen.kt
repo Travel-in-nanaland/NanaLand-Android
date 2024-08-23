@@ -80,25 +80,20 @@ private fun RecommendedSpotScreen(
 
 //                if (recommendedPostList.isNotEmpty()) {
                     Column(Modifier.padding(start = 30.dp, end = 30.dp)) {
-                        RecommendedSpotScreenItem(
-                            imageUri = "",
-                            title = "가나다라",
-                            description = "ㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏ"
-                        )
+//                        RecommendedSpotScreenItem(
+//                            imageUri = "",
+//                            title = "가나다라",
+//                            description = "ㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏ"
+//                        )
+                        recommendedPostList.forEach { item ->
+                            RecommendedSpotScreenItem(
+                                imageUri = item.firstImage.thumbnailUrl,
+                                title = item.title ?: "",
+                                description = item.intro ?: ""
+                            )
 
-//                        RecommendedSpotScreenItem(
-//                            imageUri = recommendedPostList[0].firstImage?.thumbnailUrl,
-//                            title = recommendedPostList[0].title ?: "",
-//                            description = recommendedPostList[0].intro ?: ""
-//                        )
-//
-//                        Spacer(Modifier.height(32.dp))
-//
-//                        RecommendedSpotScreenItem(
-//                            imageUri = recommendedPostList[1].firstImage?.thumbnailUrl,
-//                            title = recommendedPostList[1].title ?: "",
-//                            description = recommendedPostList[1].intro ?: ""
-//                        )
+                            Spacer(Modifier.height(32.dp))
+                        }
                     }
 //                }
 
