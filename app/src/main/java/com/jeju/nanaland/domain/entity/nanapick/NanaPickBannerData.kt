@@ -14,4 +14,6 @@ data class NanaPickBannerData(
     val subHeading: String,
     @SerializedName("heading")
     val heading: String,
+    @SerializedName("newest")
+    val newest: Boolean?
 )

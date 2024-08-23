@@ -12,6 +12,7 @@ import com.jeju.nanaland.globalvalue.constant.ROUTE_FESTIVAL_LIST
 import com.jeju.nanaland.globalvalue.constant.ROUTE_MAIN
 import com.jeju.nanaland.globalvalue.constant.ROUTE_MARKET_CONTENT
 import com.jeju.nanaland.globalvalue.constant.ROUTE_MARKET_LIST
+import com.jeju.nanaland.globalvalue.constant.ROUTE_NANAPICK_ALL_LIST
 import com.jeju.nanaland.globalvalue.constant.ROUTE_NANAPICK_CONTENT
 import com.jeju.nanaland.globalvalue.constant.ROUTE_NATURE_CONTENT
 import com.jeju.nanaland.globalvalue.constant.ROUTE_NATURE_LIST
@@ -93,6 +94,9 @@ fun NavGraphBuilder.mainScreen(
         },
         moveToProfileReviewListScreen = {
             navController.navigate(ROUTE_PROFILE_REVIEW, bundleOf("id" to (it ?: -1)))
+        },
+        moveToNanaPickAllListScreen = {
+            navController.navigate(ROUTE_NANAPICK_ALL_LIST) { launchSingleTop = true }
         }
     )
 }

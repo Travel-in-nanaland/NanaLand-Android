@@ -24,6 +24,7 @@ import com.jeju.nanaland.ui.navigation.marketListScreen
 import com.jeju.nanaland.ui.navigation.marketingPolicyDetailsScreen
 import com.jeju.nanaland.ui.navigation.nanaPickContentScreen
 import com.jeju.nanaland.ui.navigation.nanaPickListScreen
+import com.jeju.nanaland.ui.navigation.nanapickAllListScreen
 import com.jeju.nanaland.ui.navigation.natureContentScreen
 import com.jeju.nanaland.ui.navigation.natureListScreen
 import com.jeju.nanaland.ui.navigation.notificationScreen
@@ -201,5 +202,8 @@ fun MainNavigation(
 
         // 게시판 디테일(공지, ... 등)
         boardScreen(navController)
+
+        // 나나픽 전체 리스트 화면
+        nanapickAllListScreen(navController)
     }
 }

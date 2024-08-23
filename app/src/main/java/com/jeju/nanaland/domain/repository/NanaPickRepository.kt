@@ -21,4 +21,9 @@ interface NanaPickRepository {
     suspend fun getNanaPickContent(
         data: GetNanaPickContentRequest
     ): NetworkResult<NanaPickContentData>
+
+    // 금주 추천 나나's pick
+    suspend fun getRecommendedNanaPickList(
+
+    ): NetworkResult<List<NanaPickBannerData>>
 }

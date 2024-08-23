@@ -4,6 +4,7 @@ import com.jeju.nanaland.domain.repository.NanaPickRepository
 import com.jeju.nanaland.domain.usecase.nanapick.GetHomePreviewBannerUseCase
 import com.jeju.nanaland.domain.usecase.nanapick.GetNanaPickContentUseCase
 import com.jeju.nanaland.domain.usecase.nanapick.GetNanaPickListUseCase
+import com.jeju.nanaland.domain.usecase.nanapick.GetRecommendedNanaPickListUseCase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -39,5 +40,14 @@ object NanaPickUseCaseModule {
         repository: NanaPickRepository
     ): GetNanaPickContentUseCase {
         return GetNanaPickContentUseCase(repository)
+    }
+
+    // 금주 추천 나나's pick
+    @Singleton
+    @Provides
+    fun provideGetRecommendedNanaPickListUseCase(
+        repository: NanaPickRepository
+    ): GetRecommendedNanaPickListUseCase {
+        return GetRecommendedNanaPickListUseCase(repository)
     }
 }
