@@ -8,6 +8,7 @@ import com.jeju.nanaland.domain.entity.search.SearchResultThumbnailData
 import com.jeju.nanaland.domain.request.favorite.ToggleFavoriteRequest
 import com.jeju.nanaland.domain.request.search.GetAllSearchResultListRequest
 import com.jeju.nanaland.domain.request.search.GetSearchResultListRequest
+import com.jeju.nanaland.domain.response.search.AllSearchResultListData
 import com.jeju.nanaland.domain.response.search.GetAllSearchResultListResponse
 import com.jeju.nanaland.domain.response.search.GetSearchResultListResponse
 import com.jeju.nanaland.domain.usecase.favorite.ToggleFavoriteUseCase
@@ -121,24 +122,24 @@ class SearchViewModel @Inject constructor(
                 data?.let {
                     when (_selectedCategory.value) {
                         SearchCategoryType.All -> {
-                            data as GetAllSearchResultListResponse
+                            data as AllSearchResultListData
                             val map = mapOf(
-                                SearchCategoryType.Nature.name to data.data.nature,
-                                SearchCategoryType.Festival.name to data.data.festival,
-                                SearchCategoryType.Market.name to data.data.market,
-                                SearchCategoryType.Experience.name to data.data.experience,
+                                SearchCategoryType.Nature.name to data.nature,
+                                SearchCategoryType.Festival.name to data.festival,
+                                SearchCategoryType.Market.name to data.market,
+                                SearchCategoryType.Experience.name to data.experience,
                             )
                             _allSearchResultList.update {
                                 UiState.Success(map)
                             }
                         }
                         else -> {
-                            data as GetSearchResultListResponse
+                            data as SearchResultData
                             _categorizedSearchResultList.update {
                                 if (prevList.isNullOrEmpty()) {
-                                    UiState.Success(data.data)
+                                    UiState.Success(data)
                                 } else {
-                                    UiState.Success(data.data.copy(data = prevList + data.data.data))
+                                    UiState.Success(data.copy(data = prevList + data.data))
                                 }
                             }
                         }
@@ -150,7 +151,7 @@ class SearchViewModel @Inject constructor(
 
             }
         }
-        .catch { LogUtil.e("flow Error", "getSearchResult") }
+        .catch { LogUtil.e("flow Error", "getSearchResult\n" + it.message) }
         .launchIn(viewModelScope)
     }
 
