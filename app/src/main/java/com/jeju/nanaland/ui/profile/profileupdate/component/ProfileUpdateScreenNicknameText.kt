@@ -1,4 +1,4 @@
-package com.jeju.nanaland.ui.component.profileupdate
+package com.jeju.nanaland.ui.profile.profileupdate.component
 
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable

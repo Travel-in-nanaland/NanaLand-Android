@@ -1,4 +1,4 @@
-package com.jeju.nanaland.ui.profile.screen
+package com.jeju.nanaland.ui.profile.profileReviewList
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -11,9 +11,9 @@ import androidx.paging.compose.collectAsLazyPagingItems
 import com.jeju.nanaland.R
 import com.jeju.nanaland.globalvalue.type.ReviewCategoryType
 import com.jeju.nanaland.ui.component.common.DialogCommon
-import com.jeju.nanaland.ui.profile.ProfileViewModel
 import com.jeju.nanaland.ui.profile.component.ProfileListFrame
-import com.jeju.nanaland.ui.profile.component.parts.ProfileListReviewRow
+import com.jeju.nanaland.ui.profile.profileReviewList.component.ProfileListReviewRow
+import com.jeju.nanaland.ui.profile.root.ProfileViewModel
 import com.jeju.nanaland.ui.profile.component.parts.ReportSheet
 import com.jeju.nanaland.util.network.NetworkResult
 import com.jeju.nanaland.util.resource.getString

@@ -1,4 +1,4 @@
-package com.jeju.nanaland.ui.profile.component
+package com.jeju.nanaland.ui.profile.root.component
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background

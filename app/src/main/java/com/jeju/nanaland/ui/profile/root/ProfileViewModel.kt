@@ -1,4 +1,4 @@
-package com.jeju.nanaland.ui.profile
+package com.jeju.nanaland.ui.profile.root
 
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel

@@ -1,4 +1,4 @@
-package com.jeju.nanaland.ui.profileupdate
+package com.jeju.nanaland.ui.profile.profileupdate
 
 import android.net.Uri
 import android.util.Log
@@ -29,10 +29,10 @@ import com.jeju.nanaland.globalvalue.constant.INTRODUCTION_CONSTRAINT
 import com.jeju.nanaland.ui.component.common.CustomSurface
 import com.jeju.nanaland.ui.component.common.DialogCommon
 import com.jeju.nanaland.ui.component.common.topbar.CustomTopBar
-import com.jeju.nanaland.ui.component.profileupdate.ProfileUpdateScreenBottomButton
-import com.jeju.nanaland.ui.component.profileupdate.ProfileUpdateScreenIntroductionTextField
-import com.jeju.nanaland.ui.component.profileupdate.ProfileUpdateScreenNicknameText
-import com.jeju.nanaland.ui.component.profileupdate.ProfileUpdateScreenProfileContent
+import com.jeju.nanaland.ui.profile.profileupdate.component.ProfileUpdateScreenBottomButton
+import com.jeju.nanaland.ui.profile.profileupdate.component.ProfileUpdateScreenIntroductionTextField
+import com.jeju.nanaland.ui.profile.profileupdate.component.ProfileUpdateScreenNicknameText
+import com.jeju.nanaland.ui.profile.profileupdate.component.ProfileUpdateScreenProfileContent
 import com.jeju.nanaland.ui.component.signup.profilesetting.SignUpScreenCharacterCount
 import com.jeju.nanaland.ui.component.signup.profilesetting.SignUpScreenTextField
 import com.jeju.nanaland.ui.theme.bodyBold

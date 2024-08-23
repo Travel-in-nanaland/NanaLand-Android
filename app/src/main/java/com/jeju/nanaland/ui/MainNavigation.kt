@@ -31,10 +31,9 @@ import com.jeju.nanaland.ui.navigation.permissionCheckingRoute
 import com.jeju.nanaland.ui.navigation.policyAgreeScreen
 import com.jeju.nanaland.ui.navigation.policySettingScreen
 import com.jeju.nanaland.ui.navigation.privacyPolicyDetailsScreen
-import com.jeju.nanaland.ui.navigation.profileNoticeScreenRoute
-import com.jeju.nanaland.ui.navigation.profileReviewScreenRoute
-import com.jeju.nanaland.ui.navigation.profileScreenRoute
-import com.jeju.nanaland.ui.navigation.profileUpdateScreen
+import com.jeju.nanaland.ui.profile.profileNoticeScreenRoute
+import com.jeju.nanaland.ui.profile.profileReviewScreenRoute
+import com.jeju.nanaland.ui.profile.profileUpdateScreen
 import com.jeju.nanaland.ui.navigation.recommendedSpotScreen
 import com.jeju.nanaland.ui.navigation.reportScreen
 import com.jeju.nanaland.ui.navigation.restaurantContentScreen
@@ -50,6 +49,7 @@ import com.jeju.nanaland.ui.navigation.typeTestLoadingScreen
 import com.jeju.nanaland.ui.navigation.typeTestResultScreen
 import com.jeju.nanaland.ui.navigation.typeTestingScreen
 import com.jeju.nanaland.ui.navigation.withdrawalScreen
+import com.jeju.nanaland.ui.profile.profileScreenRoute
 import com.jeju.nanaland.util.intent.DeepLinkData
 
 @Composable

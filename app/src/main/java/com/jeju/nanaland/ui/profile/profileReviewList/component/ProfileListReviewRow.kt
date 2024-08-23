@@ -1,4 +1,4 @@
-package com.jeju.nanaland.ui.profile.component.parts
+package com.jeju.nanaland.ui.profile.profileReviewList.component
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border

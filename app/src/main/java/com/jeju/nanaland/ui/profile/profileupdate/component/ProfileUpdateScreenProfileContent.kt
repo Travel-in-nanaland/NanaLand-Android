@@ -1,4 +1,4 @@
-package com.jeju.nanaland.ui.component.profileupdate
+package com.jeju.nanaland.ui.profile.profileupdate.component
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
@@ -10,7 +10,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.jeju.nanaland.R
-import com.jeju.nanaland.ui.component.profileupdate.parts.ProfileUpdateScreenProfileImage
+import com.jeju.nanaland.ui.profile.profileupdate.component.parts.ProfileUpdateScreenProfileImage
 import com.jeju.nanaland.util.ui.clickableNoEffect
 
 @Composable

@@ -1,4 +1,4 @@
-package com.jeju.nanaland.ui.component.profileupdate.parts
+package com.jeju.nanaland.ui.profile.profileupdate.component.parts
 
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape

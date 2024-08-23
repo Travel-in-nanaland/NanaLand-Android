@@ -1,11 +1,11 @@
-package com.jeju.nanaland.ui.profile.screen
+package com.jeju.nanaland.ui.profile.profileNoticeList
 
 import androidx.compose.runtime.Composable
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.paging.compose.collectAsLazyPagingItems
 import com.jeju.nanaland.R
-import com.jeju.nanaland.ui.profile.ProfileViewModel
 import com.jeju.nanaland.ui.profile.component.ProfileListFrame
+import com.jeju.nanaland.ui.profile.root.ProfileViewModel
 import com.jeju.nanaland.ui.profile.component.parts.ProfileNoticeRow
 import com.jeju.nanaland.util.resource.getString
 

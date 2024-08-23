@@ -1,4 +1,4 @@
-package com.jeju.nanaland.ui.navigation
+package com.jeju.nanaland.ui.profile
 
 import androidx.compose.runtime.remember
 import androidx.core.os.bundleOf
@@ -9,7 +9,7 @@ import androidx.navigation.compose.composable
 import com.jeju.nanaland.globalvalue.constant.ROUTE_PROFILE_REVIEW
 import com.jeju.nanaland.globalvalue.constant.ROUTE_REPORT
 import com.jeju.nanaland.globalvalue.constant.ROUTE_REVIEW_WRITE_ROUTE
-import com.jeju.nanaland.ui.profile.screen.ProfileReviewListScreen
+import com.jeju.nanaland.ui.profile.profileReviewList.ProfileReviewListScreen
 import com.jeju.nanaland.util.navigation.navigate
 
 fun NavGraphBuilder.profileReviewScreenRoute(

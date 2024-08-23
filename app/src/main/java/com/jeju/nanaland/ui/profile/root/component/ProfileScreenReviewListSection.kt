@@ -1,4 +1,4 @@
-package com.jeju.nanaland.ui.profile.component
+package com.jeju.nanaland.ui.profile.root.component
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Spacer
@@ -11,7 +11,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.jeju.nanaland.domain.entity.review.MemberReviewDetail
-import com.jeju.nanaland.ui.profile.component.parts.ProfileReviewRow
+import com.jeju.nanaland.ui.profile.root.component.parts.ProfileReviewRow
 
 @Composable
 fun ProfileScreenReviewListSection(

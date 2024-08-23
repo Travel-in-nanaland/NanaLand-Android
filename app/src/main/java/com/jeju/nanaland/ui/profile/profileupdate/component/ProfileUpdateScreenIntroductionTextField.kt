@@ -1,4 +1,4 @@
-package com.jeju.nanaland.ui.component.profileupdate
+package com.jeju.nanaland.ui.profile.profileupdate.component
 
 import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.BorderStroke

@@ -1,4 +1,4 @@
-package com.jeju.nanaland.ui.profileupdate
+package com.jeju.nanaland.ui.profile.profileupdate
 
 import android.annotation.SuppressLint
 import android.net.Uri

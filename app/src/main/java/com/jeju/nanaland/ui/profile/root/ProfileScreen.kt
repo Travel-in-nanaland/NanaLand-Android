@@ -1,4 +1,4 @@
-package com.jeju.nanaland.ui.profile.screen
+package com.jeju.nanaland.ui.profile.root
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -31,13 +31,12 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.paging.compose.collectAsLazyPagingItems
 import com.jeju.nanaland.R
 import com.jeju.nanaland.ui.component.common.topbar.CustomTopBarWithMenu
-import com.jeju.nanaland.ui.profile.ProfileViewModel
-import com.jeju.nanaland.ui.profile.component.ProfileScreenNoticeListSection
-import com.jeju.nanaland.ui.profile.component.ProfileScreenProfileSection
-import com.jeju.nanaland.ui.profile.component.ProfileScreenReviewListSection
-import com.jeju.nanaland.ui.profile.component.parts.ProfileScreenMoreInfoPart
-import com.jeju.nanaland.ui.profile.component.parts.ProfileScreenTabPart
 import com.jeju.nanaland.ui.profile.component.parts.ReportSheet
+import com.jeju.nanaland.ui.profile.root.component.ProfileScreenNoticeListSection
+import com.jeju.nanaland.ui.profile.root.component.ProfileScreenProfileSection
+import com.jeju.nanaland.ui.profile.root.component.ProfileScreenReviewListSection
+import com.jeju.nanaland.ui.profile.root.component.parts.ProfileScreenMoreInfoPart
+import com.jeju.nanaland.ui.profile.root.component.parts.ProfileScreenTabPart
 import com.jeju.nanaland.ui.theme.body01
 import com.jeju.nanaland.ui.theme.getColor
 import com.jeju.nanaland.util.resource.getString

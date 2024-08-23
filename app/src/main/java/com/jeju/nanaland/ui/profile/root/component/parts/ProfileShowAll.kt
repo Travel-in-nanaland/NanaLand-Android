@@ -1,4 +1,4 @@
-package com.jeju.nanaland.ui.profile.component.parts
+package com.jeju.nanaland.ui.profile.root.component.parts
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row

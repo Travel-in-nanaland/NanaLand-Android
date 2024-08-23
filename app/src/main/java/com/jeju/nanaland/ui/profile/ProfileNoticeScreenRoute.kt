@@ -1,4 +1,4 @@
-package com.jeju.nanaland.ui.navigation
+package com.jeju.nanaland.ui.profile
 
 import androidx.compose.runtime.remember
 import androidx.core.os.bundleOf
@@ -8,7 +8,8 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import com.jeju.nanaland.globalvalue.constant.ROUTE_BOARD
 import com.jeju.nanaland.globalvalue.constant.ROUTE_PROFILE_NOTICE
-import com.jeju.nanaland.ui.profile.screen.ProfileNoticeListScreen
+import com.jeju.nanaland.ui.navigation.TEMP_BoardType
+import com.jeju.nanaland.ui.profile.profileNoticeList.ProfileNoticeListScreen
 import com.jeju.nanaland.util.navigation.navigate
 
 fun NavGraphBuilder.profileNoticeScreenRoute(
