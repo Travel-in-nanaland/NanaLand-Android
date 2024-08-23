@@ -1,5 +1,6 @@
 package com.jeju.nanaland.ui.component.listscreen.filter
 
+import androidx.compose.animation.core.exponentialDecay
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
@@ -189,7 +190,8 @@ fun getCultureKeywordArtAnchoredDraggableState() = AnchoredDraggableState(
     initialValue = AnchoredDraggableContentState.Closed,
     positionalThreshold = { it: Float -> it * 0.5f },
     velocityThreshold = { 100f },
-    animationSpec = tween(400)
+    snapAnimationSpec = tween(400),
+    decayAnimationSpec = exponentialDecay(400f),
 ).apply {
     updateAnchors(
         DraggableAnchors {
