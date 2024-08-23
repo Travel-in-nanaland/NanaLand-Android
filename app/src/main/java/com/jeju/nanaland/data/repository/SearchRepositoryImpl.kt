@@ -24,6 +24,16 @@ class SearchRepositoryImpl(
         return handleResult { searchApi.getTopKeywords() }
     }
 
+    override suspend fun getRestaurantSearchResultList(data: GetSearchResultListRequest): NetworkResult<SearchResultData> {
+        return handleResult {
+            searchApi.getRestaurantSearchResultList(
+                keyword = data.keyword,
+                page = data.page,
+                size = data.size
+            )
+        }
+    }
+
     // 자연 검색 결과
     override suspend fun getNatureSearchResultList(
         data: GetSearchResultListRequest

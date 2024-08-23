@@ -64,18 +64,18 @@ fun SearchResultScreenPreviewByCategory(
 
     Spacer(Modifier.height(16.dp))
 
-    if (category == SearchCategoryType.NanaPick || category == SearchCategoryType.JejuStory || category == SearchCategoryType.Experience) {
-        Box(
-            Modifier.fillMaxWidth(),
-            contentAlignment = Alignment.Center
-        ) {
-            Spacer(Modifier.height(32.dp))
-
-            SearchResultScreenPreparingServiceContent(isImageSmall = true)
-
-            Spacer(Modifier.height(32.dp))
-        }
-    } else {
+//    if (category == SearchCategoryType.NanaPick || category == SearchCategoryType.Restaurant || category == SearchCategoryType.Experience) {
+//        Box(
+//            Modifier.fillMaxWidth(),
+//            contentAlignment = Alignment.Center
+//        ) {
+//            Spacer(Modifier.height(32.dp))
+//
+//            SearchResultScreenPreparingServiceContent(isImageSmall = true)
+//
+//            Spacer(Modifier.height(32.dp))
+//        }
+//    } else {
         if ((allSearchResultList[category.name]?.data?.size ?: 0) == 0) {
             Spacer(Modifier.height(32.dp))
 
@@ -96,6 +96,8 @@ fun SearchResultScreenPreviewByCategory(
                                     SearchCategoryType.Festival -> "FESTIVAL"
                                     SearchCategoryType.Market -> "MARKET"
                                     SearchCategoryType.Experience -> "EXPERIENCE"
+                                    SearchCategoryType.Restaurant -> "RESTAURANT"
+                                    SearchCategoryType.NanaPick -> "NANAPICK"
                                     else -> ""
                                 })
                             },
@@ -105,6 +107,8 @@ fun SearchResultScreenPreviewByCategory(
                                     SearchCategoryType.Festival -> "FESTIVAL"
                                     SearchCategoryType.Market -> "MARKET"
                                     SearchCategoryType.Experience -> "EXPERIENCE"
+                                    SearchCategoryType.Restaurant -> "RESTAURANT"
+                                    SearchCategoryType.NanaPick -> "NANAPICK"
                                     else -> ""
                                 }, true)
                             },
@@ -118,7 +122,7 @@ fun SearchResultScreenPreviewByCategory(
                 }
             }
         }
-    }
+//    }
 }
 
 @ComponentPreview

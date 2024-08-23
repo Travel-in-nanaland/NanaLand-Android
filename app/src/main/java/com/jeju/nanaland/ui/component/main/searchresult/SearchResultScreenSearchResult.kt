@@ -62,14 +62,14 @@ fun SearchResultScreenSearchResult(
             is UiState.Failure -> {}
         }
     } else {
-        if (selectedCategory == SearchCategoryType.NanaPick || selectedCategory == SearchCategoryType.JejuStory || selectedCategory == SearchCategoryType.Experience) {
-            Box(
-                Modifier.fillMaxSize(),
-                contentAlignment = Alignment.Center
-            ) {
-                SearchResultScreenPreparingServiceContent()
-            }
-        } else {
+//        if (selectedCategory == SearchCategoryType.NanaPick || selectedCategory == SearchCategoryType.Restaurant || selectedCategory == SearchCategoryType.Experience) {
+//            Box(
+//                Modifier.fillMaxSize(),
+//                contentAlignment = Alignment.Center
+//            ) {
+//                SearchResultScreenPreparingServiceContent()
+//            }
+//        } else {
             when (categorizedSearchResultList) {
                 is UiState.Loading -> {}
                 is UiState.Success -> {
@@ -101,5 +101,5 @@ fun SearchResultScreenSearchResult(
                 is UiState.Failure -> {}
             }
         }
-    }
+//    }
 }

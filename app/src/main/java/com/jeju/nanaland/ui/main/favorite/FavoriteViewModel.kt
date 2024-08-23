@@ -67,7 +67,7 @@ class FavoriteViewModel @Inject constructor(
             SearchCategoryType.Market -> getFavoriteMarketListUseCase(requestData)
             SearchCategoryType.Experience -> { return }
             SearchCategoryType.NanaPick -> { return }
-            SearchCategoryType.JejuStory -> { return }
+            SearchCategoryType.Restaurant -> { return }
         }.onEach {  networkResult ->
             networkResult.onSuccess { code, message, data ->
                 data?.let {
