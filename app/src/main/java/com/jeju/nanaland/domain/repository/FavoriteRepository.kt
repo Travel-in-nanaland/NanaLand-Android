@@ -8,8 +8,18 @@ import com.jeju.nanaland.util.network.NetworkResult
 
 interface FavoriteRepository {
 
+    // 제주맛집 찜리스트 조회
+    suspend fun getFavoriteRestaurantList(
+        data: GetFavoriteListRequest
+    ): NetworkResult<FavoriteListData>
+
     // 7대자연 찜리스트 조회
     suspend fun getFavoriteNatureList(
+        data: GetFavoriteListRequest
+    ): NetworkResult<FavoriteListData>
+
+    // 나나스픽 찜리스트 조회
+    suspend fun getFavoriteNanaPickList(
         data: GetFavoriteListRequest
     ): NetworkResult<FavoriteListData>
 

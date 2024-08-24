@@ -8,6 +8,7 @@ import com.jeju.nanaland.domain.entity.search.SearchResultThumbnailData
 import com.jeju.nanaland.domain.request.favorite.ToggleFavoriteRequest
 import com.jeju.nanaland.domain.request.search.GetAllSearchResultListRequest
 import com.jeju.nanaland.domain.request.search.GetSearchResultListRequest
+import com.jeju.nanaland.domain.response.search.AllSearchResultListData
 import com.jeju.nanaland.domain.response.search.GetAllSearchResultListResponse
 import com.jeju.nanaland.domain.response.search.GetSearchResultListResponse
 import com.jeju.nanaland.domain.usecase.favorite.ToggleFavoriteUseCase
@@ -19,7 +20,9 @@ import com.jeju.nanaland.domain.usecase.search.GetExperienceSearchResultListUseC
 import com.jeju.nanaland.domain.usecase.search.GetFestivalSearchResultListUseCase
 import com.jeju.nanaland.domain.usecase.search.GetHotPostsUseCase
 import com.jeju.nanaland.domain.usecase.search.GetMarketSearchResultListUseCase
+import com.jeju.nanaland.domain.usecase.search.GetNanaPickSearchResultListUseCase
 import com.jeju.nanaland.domain.usecase.search.GetNatureSearchResultListUseCase
+import com.jeju.nanaland.domain.usecase.search.GetRestaurantSearchResultListUseCase
 import com.jeju.nanaland.domain.usecase.search.GetTopKeywordsUseCase
 import com.jeju.nanaland.globalvalue.constant.PAGING_SIZE
 import com.jeju.nanaland.globalvalue.type.SearchCategoryType
@@ -47,6 +50,8 @@ class SearchViewModel @Inject constructor(
     private val getMarketSearchResultListUseCase: GetMarketSearchResultListUseCase,
     private val getFestivalSearchResultListUseCase: GetFestivalSearchResultListUseCase,
     private val getExperienceSearchResultListUseCase: GetExperienceSearchResultListUseCase,
+    private val getNanaPickSearchResultListUseCase: GetNanaPickSearchResultListUseCase,
+    private val getRestaurantSearchResultListUseCase: GetRestaurantSearchResultListUseCase,
     private val getAllSearchResultListUseCase: GetAllSearchResultListUseCase,
     private val getAllRecentSearchUseCase: GetAllRecentSearchUseCase,
     private val addRecentSearchUseCase: AddRecentSearchUseCase,
@@ -114,31 +119,33 @@ class SearchViewModel @Inject constructor(
             SearchCategoryType.Festival -> getFestivalSearchResultListUseCase(requestData as GetSearchResultListRequest)
             SearchCategoryType.Nature -> getNatureSearchResultListUseCase(requestData as GetSearchResultListRequest)
             SearchCategoryType.Market -> getMarketSearchResultListUseCase(requestData as GetSearchResultListRequest)
-            SearchCategoryType.NanaPick -> { return }
-            SearchCategoryType.JejuStory -> { return }
+            SearchCategoryType.NanaPick -> getNanaPickSearchResultListUseCase(requestData as GetSearchResultListRequest)
+            SearchCategoryType.Restaurant -> getRestaurantSearchResultListUseCase(requestData as GetSearchResultListRequest)
         }.onEach { networkResult ->
             networkResult.onSuccess { code, message, data ->
                 data?.let {
                     when (_selectedCategory.value) {
                         SearchCategoryType.All -> {
-                            data as GetAllSearchResultListResponse
+                            data as AllSearchResultListData
                             val map = mapOf(
-                                SearchCategoryType.Nature.name to data.data.nature,
-                                SearchCategoryType.Festival.name to data.data.festival,
-                                SearchCategoryType.Market.name to data.data.market,
-                                SearchCategoryType.Experience.name to data.data.experience,
+                                SearchCategoryType.Nature.name to data.nature,
+                                SearchCategoryType.Festival.name to data.festival,
+                                SearchCategoryType.Market.name to data.market,
+                                SearchCategoryType.Experience.name to data.experience,
+                                SearchCategoryType.Restaurant.name to data.restaurant,
+                                SearchCategoryType.NanaPick.name to data.nana
                             )
                             _allSearchResultList.update {
                                 UiState.Success(map)
                             }
                         }
                         else -> {
-                            data as GetSearchResultListResponse
+                            data as SearchResultData
                             _categorizedSearchResultList.update {
                                 if (prevList.isNullOrEmpty()) {
-                                    UiState.Success(data.data)
+                                    UiState.Success(data)
                                 } else {
-                                    UiState.Success(data.data.copy(data = prevList + data.data.data))
+                                    UiState.Success(data.copy(data = prevList + data.data))
                                 }
                             }
                         }
@@ -150,7 +157,7 @@ class SearchViewModel @Inject constructor(
 
             }
         }
-        .catch { LogUtil.e("flow Error", "getSearchResult") }
+        .catch { LogUtil.e("flow Error", "getSearchResult\n" + it.message) }
         .launchIn(viewModelScope)
     }
 
@@ -305,6 +312,8 @@ class SearchViewModel @Inject constructor(
                                     "FESTIVAL" -> "Festival"
                                     "MARKET" -> "Market"
                                     "EXPERIENCE" -> "Experience"
+                                    "RESTAURANT" -> "Restaurant"
+                                    "NANAPICK" -> "NanaPick"
                                     else -> ""
                                 }
                                 if (newMap.containsKey(categoryString)) {

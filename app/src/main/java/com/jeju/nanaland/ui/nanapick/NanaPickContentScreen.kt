@@ -17,6 +17,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -29,6 +30,7 @@ import com.jeju.nanaland.ui.component.detailscreen.nanapick.NanaPickContentSubCo
 import com.jeju.nanaland.ui.component.detailscreen.nanapick.NanaPickContentTopBanner
 import com.jeju.nanaland.ui.component.detailscreen.other.DetailScreenNotice
 import com.jeju.nanaland.ui.component.detailscreen.other.MoveToTopButton
+import com.jeju.nanaland.util.log.LogUtil
 import com.jeju.nanaland.util.resource.getString
 import com.jeju.nanaland.util.ui.UiState
 import kotlinx.coroutines.launch
@@ -63,7 +65,9 @@ private fun NanaPickContentScreen(
     moveToSignInScreen: () -> Unit,
     isContent: Boolean
 ) {
+    val density = LocalDensity.current.density
     val scrollState = rememberScrollState()
+    LogUtil.e("", "${density} ${scrollState.value} ${scrollState.value / 2.0}, ${400 - (scrollState.value / 2.0)}")
     val coroutineScope = rememberCoroutineScope()
     var attractiveDialogText by remember { mutableStateOf("") }
 
@@ -82,13 +86,10 @@ private fun NanaPickContentScreen(
             is UiState.Loading -> {}
             is UiState.Success -> {
                 Box(modifier = Modifier.fillMaxSize()) {
-                    Column(modifier = Modifier.verticalScroll(scrollState)) {
-                        NanaPickContentTopBanner(
-                            contentId = contentId,
-                            nanaPickContent = nanaPickContent,
-                            toggleFavorite = toggleFavorite,
-                            moveToSignInScreen = moveToSignInScreen,
-                        )
+                    Column(modifier = Modifier
+                        .verticalScroll(scrollState)
+                        .padding(top = 400.dp)
+                    ) {
 
                         Spacer(Modifier.height(16.dp))
 
@@ -109,6 +110,14 @@ private fun NanaPickContentScreen(
 
                         Spacer(Modifier.height(80.dp))
                     }
+
+                    NanaPickContentTopBanner(
+                        height = if (400 - (scrollState.value / density) > 185) 400 - (scrollState.value / density).toInt() else 185,
+                        contentId = contentId,
+                        nanaPickContent = nanaPickContent,
+                        toggleFavorite = toggleFavorite,
+                        moveToSignInScreen = moveToSignInScreen,
+                    )
 
                     MoveToTopButton {
                         coroutineScope.launch { scrollState.animateScrollTo(0) }

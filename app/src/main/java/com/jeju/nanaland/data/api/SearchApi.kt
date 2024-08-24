@@ -20,6 +20,14 @@ interface SearchApi {
     suspend fun getTopKeywords(
     ): Response<ResponseWrapper<List<String>>>
 
+    // 제주맛집 검색 결과
+    @GET("search/restaurant")
+    suspend fun getRestaurantSearchResultList(
+        @Query("keyword") keyword: String,
+        @Query("page") page: Int,
+        @Query("size") size: Int
+    ): Response<ResponseWrapper<SearchResultData>>
+
     // 자연 검색 결과
     @GET("search/nature")
     suspend fun getNatureSearchResultList(

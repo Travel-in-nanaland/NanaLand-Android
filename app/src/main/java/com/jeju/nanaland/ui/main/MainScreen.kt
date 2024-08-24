@@ -72,6 +72,7 @@ fun MainScreen(
     moveToReviewWriteScreen: () -> Unit,
     moveToProfileNoticeListScreen: (Int?) -> Unit,
     moveToProfileReviewListScreen: (Int?) -> Unit,
+    moveToNanaPickAllListScreen: () -> Unit,
     viewModel: MainViewModel = hiltViewModel(),
     homeViewModel: HomeViewModel = hiltViewModel(),
     searchViewModel: SearchViewModel = hiltViewModel(),
@@ -132,6 +133,7 @@ fun MainScreen(
         moveToReviewWriteScreen = moveToReviewWriteScreen,
         moveToProfileNoticeListScreen = moveToProfileNoticeListScreen,
         moveToProfileReviewListScreen = moveToProfileReviewListScreen,
+        moveToNanaPickAllListScreen = moveToNanaPickAllListScreen,
         isContent = true
     )
 }
@@ -160,6 +162,7 @@ private fun MainScreen(
     moveToReviewWriteScreen: () -> Unit,
     moveToProfileNoticeListScreen: (Int?) -> Unit,
     moveToProfileReviewListScreen: (Int?) -> Unit,
+    moveToNanaPickAllListScreen: () -> Unit,
     isContent: Boolean
 ) {
     val homeScreenViewType = remember { mutableStateOf(HomeScreenViewType.Home) }
@@ -212,8 +215,10 @@ private fun MainScreen(
                     }
                     MainScreenViewType.NanaPick -> {
                         NanaPickListScreen(
-                            moveToNanaPickContentScreen = {},
+                            moveToNanaPickContentScreen = { contentId ->
+                                moveToCategoryContentScreen(contentId, "NANA", false) },
                             moveToMainScreen = {},
+                            moveToNanaPickAllListScreen = moveToNanaPickAllListScreen
                         )
                     }
                     MainScreenViewType.MyPage -> {

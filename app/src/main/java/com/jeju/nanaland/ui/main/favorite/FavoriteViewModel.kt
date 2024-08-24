@@ -9,7 +9,9 @@ import com.jeju.nanaland.domain.usecase.favorite.GetAllFavoriteListUseCase
 import com.jeju.nanaland.domain.usecase.favorite.GetFavoriteExperienceListUseCase
 import com.jeju.nanaland.domain.usecase.favorite.GetFavoriteFestivalListUseCase
 import com.jeju.nanaland.domain.usecase.favorite.GetFavoriteMarketListUseCase
+import com.jeju.nanaland.domain.usecase.favorite.GetFavoriteNanaPickListUseCase
 import com.jeju.nanaland.domain.usecase.favorite.GetFavoriteNatureListUseCase
+import com.jeju.nanaland.domain.usecase.favorite.GetFavoriteRestaurantListUseCase
 import com.jeju.nanaland.domain.usecase.favorite.ToggleFavoriteUseCase
 import com.jeju.nanaland.globalvalue.constant.PAGING_SIZE
 import com.jeju.nanaland.globalvalue.type.SearchCategoryType
@@ -34,6 +36,8 @@ class FavoriteViewModel @Inject constructor(
     private val getFavoriteFestivalListUseCase: GetFavoriteFestivalListUseCase,
     private val getFavoriteMarketListUseCase: GetFavoriteMarketListUseCase,
     private val getFavoriteExperienceListUseCase: GetFavoriteExperienceListUseCase,
+    private val getFavoriteNanaPickListUseCase: GetFavoriteNanaPickListUseCase,
+    private val getFavoriteRestaurantListUseCase: GetFavoriteRestaurantListUseCase,
     private val toggleFavoriteUseCase: ToggleFavoriteUseCase
 ) : ViewModel() {
 
@@ -65,9 +69,9 @@ class FavoriteViewModel @Inject constructor(
             SearchCategoryType.Nature -> getFavoriteNatureListUseCase(requestData)
             SearchCategoryType.Festival -> getFavoriteFestivalListUseCase(requestData)
             SearchCategoryType.Market -> getFavoriteMarketListUseCase(requestData)
-            SearchCategoryType.Experience -> { return }
-            SearchCategoryType.NanaPick -> { return }
-            SearchCategoryType.JejuStory -> { return }
+            SearchCategoryType.Experience -> getFavoriteExperienceListUseCase(requestData)
+            SearchCategoryType.NanaPick -> getFavoriteNanaPickListUseCase(requestData)
+            SearchCategoryType.Restaurant -> getFavoriteRestaurantListUseCase(requestData)
         }.onEach {  networkResult ->
             networkResult.onSuccess { code, message, data ->
                 data?.let {

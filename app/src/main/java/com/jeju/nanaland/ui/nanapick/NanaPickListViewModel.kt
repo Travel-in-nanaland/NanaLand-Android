@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.jeju.nanaland.domain.entity.nanapick.NanaPickBannerData
 import com.jeju.nanaland.domain.request.nanapick.GetNanaPickListRequest
 import com.jeju.nanaland.domain.usecase.nanapick.GetNanaPickListUseCase
+import com.jeju.nanaland.domain.usecase.nanapick.GetRecommendedNanaPickListUseCase
 import com.jeju.nanaland.globalvalue.constant.PAGING_SIZE
 import com.jeju.nanaland.util.log.LogUtil
 import com.jeju.nanaland.util.network.onError
@@ -22,11 +23,14 @@ import javax.inject.Inject
 
 @HiltViewModel
 class NanaPickListViewModel @Inject constructor(
-    private val getNanaPickListUseCase: GetNanaPickListUseCase
+    private val getNanaPickListUseCase: GetNanaPickListUseCase,
+    private val getRecommendedNanaPickListUseCase: GetRecommendedNanaPickListUseCase
 ) : ViewModel() {
 
     private val _nanaPickList = MutableStateFlow<UiState<List<NanaPickBannerData>>>(UiState.Loading)
     val nanaPickList = _nanaPickList.asStateFlow()
+    private val _recommendedNanaPickList = MutableStateFlow<UiState<List<NanaPickBannerData>>>(UiState.Loading)
+    val recommendedNanaPickList = _recommendedNanaPickList.asStateFlow()
     
     fun getNanaPickList() {
         _nanaPickList.update { UiState.Loading }
@@ -48,7 +52,26 @@ class NanaPickListViewModel @Inject constructor(
 
                 }
             }
-            .catch { LogUtil.e("flow Error", "flow Error") }
+            .catch { LogUtil.e("flow Error", "getNanaPickListUseCase") }
+            .launchIn(viewModelScope)
+    }
+
+    fun getRecommendedNanaPickList() {
+        getRecommendedNanaPickListUseCase()
+            .onEach { networkResult ->
+                networkResult.onSuccess { code, message, data ->
+                    data?.let {
+                        _recommendedNanaPickList.update {
+                            UiState.Success(data)
+                        }
+                    }
+                }.onError { code, message ->
+
+                }.onException {
+
+                }
+            }
+            .catch { LogUtil.e("flow Error", "getRecommendedNanaPickListUseCase") }
             .launchIn(viewModelScope)
     }
 }

@@ -24,8 +24,14 @@ interface NanaPickApi {
     ): Response<ResponseWrapper<NanaPickListData>>
 
     // 나나 Pick 콘텐츠
-    @GET("nana/{contentId}")
+    @GET("nana/{id}")
     suspend fun getNanaPickContent(
-        @Path("contentId") id: Int
+        @Path("id") id: Int
     ): Response<ResponseWrapper<NanaPickContentData>>
+
+    // 금주 추천 나나's pick
+    @GET("nana/recommend")
+    suspend fun getRecommendedNanaPickList(
+
+    ): Response<ResponseWrapper<List<NanaPickBannerData>>>
 }

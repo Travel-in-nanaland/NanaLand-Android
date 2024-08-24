@@ -62,6 +62,7 @@ fun SearchResultScreenSearchResultList(
                             SearchCategoryType.Festival -> "FESTIVAL"
                             SearchCategoryType.Market -> "MARKET"
                             SearchCategoryType.Experience -> "EXPERIENCE"
+                            SearchCategoryType.Restaurant -> "RESTAURANT"
                             else -> ""
                         })
                     },
@@ -71,6 +72,7 @@ fun SearchResultScreenSearchResultList(
                             SearchCategoryType.Festival -> "FESTIVAL"
                             SearchCategoryType.Market -> "MARKET"
                             SearchCategoryType.Experience -> "EXPERIENCE"
+                            SearchCategoryType.Restaurant -> "RESTAURANT"
                             else -> ""
                         }, true)
                     },

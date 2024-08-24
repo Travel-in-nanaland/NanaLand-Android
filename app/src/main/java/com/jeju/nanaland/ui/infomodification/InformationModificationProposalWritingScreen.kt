@@ -87,8 +87,8 @@ private fun InformationModificationProposalWritingScreen(
     sendReport: (() -> Unit) -> Unit,
     moveToBackScreen: () -> Unit,
     moveToCompleteScreen: () -> Unit,
-    selectedImageList: SnapshotStateList<Uri>,
-    onChangeImages: (List<Uri>) -> Unit,
+    selectedImageList: SnapshotStateList<String>,
+    onChangeImages: (List<String>) -> Unit,
     isContent: Boolean
 ) {
     val focusManager = LocalFocusManager.current
@@ -170,9 +170,9 @@ private fun InformationModificationProposalWritingScreen(
                 }
 
                 UploadImages(
-                    modifier = Modifier.padding(horizontal = 10.dp),
-                    images = selectedImageList.map { it.toString() },
-                    onChangeImages = { onChangeImages(it.map { Uri.parse(it) }) },
+                    images = selectedImageList.toList(),
+                    onChangeImages = onChangeImages,
+                    modifier = Modifier.padding(horizontal = 16.dp)
                 )
 
                 Spacer(Modifier.height(40.dp))

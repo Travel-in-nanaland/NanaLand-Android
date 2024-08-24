@@ -33,7 +33,7 @@ fun HomeScreenNanaPickBanner(
             .height(height.dp)
             .clickableNoEffect { onClick(item.id) }
     ) {
-        HomeScreenNanaPickBannerImage(imageUri = item.firstImage?.thumbnailUrl)
+        HomeScreenNanaPickBannerImage(imageUri = item.firstImage.thumbnailUrl)
 
         Box(
             modifier = Modifier

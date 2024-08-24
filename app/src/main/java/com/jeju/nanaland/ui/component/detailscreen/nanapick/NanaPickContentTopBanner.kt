@@ -18,6 +18,7 @@ import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.jeju.nanaland.domain.entity.nanapick.NanaPickContentData
 import com.jeju.nanaland.ui.component.detailscreen.nanapick.parts.topbanner.NanaPickContentTopBannerSubTitle
@@ -33,6 +34,7 @@ import com.skydoves.landscapist.glide.GlideImage
 
 @Composable
 fun NanaPickContentTopBanner(
+    height: Int,
     contentId: Int?,
     nanaPickContent: UiState.Success<NanaPickContentData>,
     toggleFavorite: () -> Unit,
@@ -43,18 +45,18 @@ fun NanaPickContentTopBanner(
     Box(
         modifier = Modifier
             .fillMaxWidth()
-            .height(240.dp)
+            .height(height.dp)
             .background(getColor().skeleton)
     ) {
         GlideImage(
             modifier = Modifier.fillMaxSize(),
-            imageModel = { nanaPickContent.data.firstImage }
+            imageModel = { nanaPickContent.data.firstImage.originUrl }
         )
 
         Box(
             modifier = Modifier
                 .fillMaxWidth()
-                .height(240.dp)
+                .height(height.dp)
                 .drawBehind {
                     drawRect(
                         brush = brush,
