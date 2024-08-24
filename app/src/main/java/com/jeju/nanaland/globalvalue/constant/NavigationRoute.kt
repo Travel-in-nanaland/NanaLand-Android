@@ -48,12 +48,15 @@ const val ROUTE_REVIEW_WRITE_COMPLETE = "ROUTE_REVIEW_WRITE_COMPLETE"
 //const val ROUTE_PROFILE_REVIEW = "ROUTE_PROFILE_REVIEW"
 const val ROUTE_REVIEW_LIST = "ROUTE_REVIEW_LIST"
 const val ROUTE_REPORT = "ROUTE_REPORT"
-const val ROUTE_BOARD = "ROUTE_BOARD"
+//const val ROUTE_BOARD = "ROUTE_BOARD"
 const val ROUTE_NANAPICK_ALL_LIST = "ROUTE_NANAPICK_ALL_LIST"
 
 
 
 sealed class ROUTE {
+    @Serializable
+    data class NoticeDetail(val noticeId: Int)
+
     @Serializable
     data object Profile {
         @Serializable

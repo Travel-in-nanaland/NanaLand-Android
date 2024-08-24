@@ -1,11 +1,10 @@
-package com.jeju.nanaland.ui.board
+package com.jeju.nanaland.ui.noticeDetail
 
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.jeju.nanaland.domain.entity.notice.NoticeDetail
 import com.jeju.nanaland.domain.usecase.board.GetNoticeUseCase
-import com.jeju.nanaland.ui.navigation.TEMP_BoardType
 import com.jeju.nanaland.util.log.LogUtil
 import com.jeju.nanaland.util.network.onError
 import com.jeju.nanaland.util.network.onException
@@ -25,10 +24,10 @@ class BoardViewModel @Inject constructor(
     private val getNoticeUseCase: GetNoticeUseCase,
     private val savedStateHandle: SavedStateHandle
 ): ViewModel() {
-    val type: TEMP_BoardType
-        get() = TEMP_BoardType.valueOf(savedStateHandle["type"]!!)
     val id: Int
         get() = savedStateHandle["id"]!!
+    val type: TEMP_BoardType
+        get() = TEMP_BoardType.valueOf(savedStateHandle["type"]!!)
 
     private val _noticeData = MutableStateFlow<UiState<NoticeDetail>>(UiState.Loading)
     val noticeData = _noticeData.asStateFlow()

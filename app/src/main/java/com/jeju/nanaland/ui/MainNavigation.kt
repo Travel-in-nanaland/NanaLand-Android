@@ -7,7 +7,6 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
 import com.jeju.nanaland.globalvalue.constant.ROUTE_SPLASH
-import com.jeju.nanaland.ui.navigation.boardScreen
 import com.jeju.nanaland.ui.navigation.experienceContentScreen
 import com.jeju.nanaland.ui.navigation.experienceListScreen
 import com.jeju.nanaland.ui.navigation.festivalContentScreen
@@ -47,6 +46,7 @@ import com.jeju.nanaland.ui.navigation.typeTestLoadingScreen
 import com.jeju.nanaland.ui.navigation.typeTestResultScreen
 import com.jeju.nanaland.ui.navigation.typeTestingScreen
 import com.jeju.nanaland.ui.navigation.withdrawalScreen
+import com.jeju.nanaland.ui.noticeDetail.noticeDetailScreen
 import com.jeju.nanaland.ui.profile.profileScreenRoute
 import com.jeju.nanaland.util.intent.DeepLinkData
 
@@ -197,8 +197,8 @@ fun MainNavigation(
         // 신고 화면
         reportScreen(navController)
 
-        // 게시판 디테일(공지, ... 등)
-        boardScreen(navController)
+        // 공지 디테일
+        noticeDetailScreen(navController)
 
         // 나나픽 전체 리스트 화면
         nanapickAllListScreen(navController)
