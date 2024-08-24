@@ -38,7 +38,7 @@ const val ROUTE_PERMISSION_CHECKING = "ROUTE_PERMISSION_CHECKING"
 const val ROUTE_WITHDRAW = "ROUTE_WITHDRAW"
 const val ROUTE_LANGUAGE_CHANGE = "ROUTE_LANGUAGE_CHANGE"
 const val ROUTE_RECOMMENDED_SPOT = "ROUTE_RECOMMENDED_SPOT"
-const val ROUTE_NOTIFICATION = "ROUTE_NOTIFICATION"
+//const val ROUTE_NOTIFICATION = "ROUTE_NOTIFICATION"
 const val ROUTE_REVIEW_WRITE_ROUTE = "ROUTE_REVIEW_WRITE_ROUTE"
 const val ROUTE_REVIEW_WRITE_SEARCH = "ROUTE_REVIEW_WRITE_SEARCH"
 const val ROUTE_REVIEW_WRITE = "ROUTE_REVIEW_WRITE"
@@ -56,6 +56,15 @@ const val ROUTE_NANAPICK_ALL_LIST = "ROUTE_NANAPICK_ALL_LIST"
 sealed class ROUTE {
     @Serializable
     data class NoticeDetail(val noticeId: Int)
+
+    @Serializable
+    data object Home {
+        @Serializable
+        data object StartDest
+
+        @Serializable
+        data object Notification
+    }
 
     @Serializable
     data object Profile {

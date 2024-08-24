@@ -16,7 +16,6 @@ import com.jeju.nanaland.globalvalue.constant.ROUTE_NANAPICK_ALL_LIST
 import com.jeju.nanaland.globalvalue.constant.ROUTE_NANAPICK_CONTENT
 import com.jeju.nanaland.globalvalue.constant.ROUTE_NATURE_CONTENT
 import com.jeju.nanaland.globalvalue.constant.ROUTE_NATURE_LIST
-import com.jeju.nanaland.globalvalue.constant.ROUTE_NOTIFICATION
 import com.jeju.nanaland.globalvalue.constant.ROUTE_RESTAURANT_CONTENT
 import com.jeju.nanaland.globalvalue.constant.ROUTE_RESTAURANT_LIST
 import com.jeju.nanaland.globalvalue.constant.ROUTE_REVIEW_WRITE_ROUTE
@@ -36,7 +35,7 @@ fun NavGraphBuilder.mainScreen(
 ) = composable(route = ROUTE_MAIN) {
     MainScreen(
         deepLinkData = deepLinkData,
-        moveToNotificationScreen = { navController.navigate(ROUTE_NOTIFICATION) { launchSingleTop = true } },
+        moveToNotificationScreen = { navController.navigate(ROUTE.Home.Notification) { launchSingleTop = true } },
         moveToCategoryContentScreen = { contentId, category, isSearch ->
             val bundle = bundleOf(
                 "contentId" to contentId,

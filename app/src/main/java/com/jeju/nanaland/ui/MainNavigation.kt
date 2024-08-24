@@ -26,7 +26,7 @@ import com.jeju.nanaland.ui.navigation.nanaPickListScreen
 import com.jeju.nanaland.ui.navigation.nanapickAllListScreen
 import com.jeju.nanaland.ui.navigation.natureContentScreen
 import com.jeju.nanaland.ui.navigation.natureListScreen
-import com.jeju.nanaland.ui.navigation.notificationScreen
+import com.jeju.nanaland.ui.notification.notificationScreen
 import com.jeju.nanaland.ui.navigation.permissionCheckingRoute
 import com.jeju.nanaland.ui.navigation.policyAgreeScreen
 import com.jeju.nanaland.ui.navigation.policySettingScreen
