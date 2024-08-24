@@ -31,9 +31,6 @@ import com.jeju.nanaland.ui.navigation.permissionCheckingRoute
 import com.jeju.nanaland.ui.navigation.policyAgreeScreen
 import com.jeju.nanaland.ui.navigation.policySettingScreen
 import com.jeju.nanaland.ui.navigation.privacyPolicyDetailsScreen
-import com.jeju.nanaland.ui.profile.profileNoticeScreenRoute
-import com.jeju.nanaland.ui.profile.profileReviewScreenRoute
-import com.jeju.nanaland.ui.profile.profileUpdateScreen
 import com.jeju.nanaland.ui.navigation.recommendedSpotScreen
 import com.jeju.nanaland.ui.navigation.reportScreen
 import com.jeju.nanaland.ui.navigation.restaurantContentScreen
@@ -163,8 +160,8 @@ fun MainNavigation(
         // 정보 수정 제안 완료 화면
         informationModificationProposalCompleteScreen(navController)
 
-        // 프로필 수정 화면
-        profileUpdateScreen(navController)
+//        // 프로필 수정 화면
+//        profileUpdateScreen(navController)
 
         // 설정 화면
         settingsScreen(navController)
@@ -187,11 +184,11 @@ fun MainNavigation(
         // 타인 프로필 화면
         profileScreenRoute(navController)
 
-        // 프로필 공지사항 리스트 화면
-        profileNoticeScreenRoute(navController)
-
-        // 프로필 리뷰 리스트 화면
-        profileReviewScreenRoute(navController)
+//        // 프로필 공지사항 리스트 화면
+//        profileNoticeScreenRoute(navController)
+//
+//        // 프로필 리뷰 리스트 화면
+//        profileReviewScreenRoute(navController)
 
         // 리뷰 리스트 화면
         reviewListScreen(navController)

@@ -54,21 +54,21 @@ const val ROUTE_BOARD = "ROUTE_BOARD"
 
 sealed class ROUTE {
     @Serializable
-    data class Profile(val userId: Int?): ROUTE() {
+    data object Profile {
         @Serializable
+        data class StartDest(val userId: Int? = null)
+
+        @Serializable /** 프로필 수정 화면 **/
         data class Update(
             val profileImageUri: String,
             val nickname: String,
             val introduction: String
-        ): ROUTE()
+        )
 
-        @Serializable
-        data object NoticeList: ROUTE()
+        @Serializable /** 프로필 공지사항 리스트 화면 **/
+        data object NoticeList
 
-        @Serializable
-        data class NoticeDetail(val noticeId: Int? = null): ROUTE()
-
-        @Serializable
-        data class ReviewList(val initialScrollToItemId: Int? = null): ROUTE()
+        @Serializable /** 프로필 리뷰 리스트 화면 **/
+        data class ReviewList(val initialScrollToItemId: Int?)
     }
 }
