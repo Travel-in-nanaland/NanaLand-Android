@@ -3,6 +3,7 @@ package com.jeju.nanaland.ui.profile.root
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.navigation.toRoute
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.jeju.nanaland.domain.entity.member.UserProfile
@@ -15,6 +16,7 @@ import com.jeju.nanaland.domain.usecase.member.GetUserProfileUseCase
 import com.jeju.nanaland.domain.usecase.review.DeleteReviewUseCase
 import com.jeju.nanaland.domain.usecase.review.GetReviewListByUserUseCase
 import com.jeju.nanaland.domain.usecase.review.ToggleReviewFavoriteUseCase
+import com.jeju.nanaland.globalvalue.constant.ROUTE
 import com.jeju.nanaland.globalvalue.userdata.UserData
 import com.jeju.nanaland.util.log.LogUtil
 import com.jeju.nanaland.util.network.NetworkResult
@@ -40,10 +42,12 @@ class ProfileViewModel @Inject constructor(
     private val getNoticeListUseCase: GetNoticeListUseCase,
     private val toggleReviewFavoriteUseCase: ToggleReviewFavoriteUseCase,
     private val deleteReviewUseCase: DeleteReviewUseCase,
-    private val savedStateHandle: SavedStateHandle
+    savedStateHandle: SavedStateHandle
 ) : ViewModel() {
+    val stateHandle: ROUTE.Profile.StartDest = savedStateHandle.toRoute()
+
     val userId: Int?
-        get() = savedStateHandle["userId"]
+        get() = stateHandle.userId
 
     private val _isReviewList = MutableStateFlow(true)
     val isReviewList = _isReviewList.asStateFlow()

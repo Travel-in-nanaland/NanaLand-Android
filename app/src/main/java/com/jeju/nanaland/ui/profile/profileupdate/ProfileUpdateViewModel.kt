@@ -5,6 +5,7 @@ import android.net.Uri
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.navigation.toRoute
 import com.jeju.nanaland.R
 import com.jeju.nanaland.domain.request.UriRequestBody
 import com.jeju.nanaland.domain.request.member.UpdateUserProfileRequest
@@ -12,6 +13,7 @@ import com.jeju.nanaland.domain.usecase.member.DuplicateNicknameUseCase
 import com.jeju.nanaland.domain.usecase.member.UpdateUserProfileUseCase
 import com.jeju.nanaland.globalvalue.constant.INTRODUCTION_CONSTRAINT
 import com.jeju.nanaland.globalvalue.constant.NICKNAME_CONSTRAINT
+import com.jeju.nanaland.globalvalue.constant.ROUTE
 import com.jeju.nanaland.globalvalue.constant.nicknameRegex
 import com.jeju.nanaland.util.network.NetworkResult
 import com.jeju.nanaland.util.network.onError
@@ -34,6 +36,7 @@ class ProfileUpdateViewModel @Inject constructor(
     private val duplicateNicknameUseCase: DuplicateNicknameUseCase,
     savedStateHandle: SavedStateHandle
 ) : ViewModel() {
+    val stateHandle: ROUTE.Profile.Update = savedStateHandle.toRoute()
 
     private val _inputNickname = MutableStateFlow("")
     val inputNickname = _inputNickname.asStateFlow()
@@ -48,9 +51,9 @@ class ProfileUpdateViewModel @Inject constructor(
     val errorIntro: StateFlow<Int?> = _errorIntro
 
     init {
-        updateProfileImageUri(Uri.parse(savedStateHandle["profileImageUri"]!!))
-        updateInputNickname(savedStateHandle["nickname"]!!)
-        updateInputIntroduction(savedStateHandle["introduction"]!!)
+        updateProfileImageUri(Uri.parse(stateHandle.profileImageUri))
+        updateInputNickname(stateHandle.nickname)
+        updateInputIntroduction(stateHandle.introduction)
 
         @Suppress("OPT_IN_USAGE")
         inputNickname

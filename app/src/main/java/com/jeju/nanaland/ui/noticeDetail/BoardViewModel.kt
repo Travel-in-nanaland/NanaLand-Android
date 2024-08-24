@@ -3,8 +3,10 @@ package com.jeju.nanaland.ui.noticeDetail
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.navigation.toRoute
 import com.jeju.nanaland.domain.entity.notice.NoticeDetail
 import com.jeju.nanaland.domain.usecase.board.GetNoticeUseCase
+import com.jeju.nanaland.globalvalue.constant.ROUTE
 import com.jeju.nanaland.util.log.LogUtil
 import com.jeju.nanaland.util.network.onError
 import com.jeju.nanaland.util.network.onException
@@ -22,25 +24,15 @@ import javax.inject.Inject
 @HiltViewModel
 class BoardViewModel @Inject constructor(
     private val getNoticeUseCase: GetNoticeUseCase,
-    private val savedStateHandle: SavedStateHandle
+    savedStateHandle: SavedStateHandle
 ): ViewModel() {
-    val id: Int
-        get() = savedStateHandle["id"]!!
-    val type: TEMP_BoardType
-        get() = TEMP_BoardType.valueOf(savedStateHandle["type"]!!)
+    val stateHandle: ROUTE.NoticeDetail = savedStateHandle.toRoute()
 
     private val _noticeData = MutableStateFlow<UiState<NoticeDetail>>(UiState.Loading)
     val noticeData = _noticeData.asStateFlow()
 
     init {
-        when(type) {
-            TEMP_BoardType.Notice -> getNotice(id)
-            else -> {/*TODO*/}
-        }
-    }
-
-    private fun getNotice(id: Int){
-        getNoticeUseCase(id)
+        getNoticeUseCase(stateHandle.noticeId)
             .onEach { networkResult ->
                 networkResult.onSuccess { _, _, data ->
                     data?.let {
