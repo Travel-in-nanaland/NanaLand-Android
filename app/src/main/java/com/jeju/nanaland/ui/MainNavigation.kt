@@ -7,7 +7,6 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
 import com.jeju.nanaland.globalvalue.constant.ROUTE_SPLASH
-import com.jeju.nanaland.ui.navigation.boardScreen
 import com.jeju.nanaland.ui.navigation.experienceContentScreen
 import com.jeju.nanaland.ui.navigation.experienceListScreen
 import com.jeju.nanaland.ui.navigation.festivalContentScreen
@@ -27,15 +26,11 @@ import com.jeju.nanaland.ui.navigation.nanaPickListScreen
 import com.jeju.nanaland.ui.navigation.nanapickAllListScreen
 import com.jeju.nanaland.ui.navigation.natureContentScreen
 import com.jeju.nanaland.ui.navigation.natureListScreen
-import com.jeju.nanaland.ui.navigation.notificationScreen
+import com.jeju.nanaland.ui.notification.notificationScreen
 import com.jeju.nanaland.ui.navigation.permissionCheckingRoute
 import com.jeju.nanaland.ui.navigation.policyAgreeScreen
 import com.jeju.nanaland.ui.navigation.policySettingScreen
 import com.jeju.nanaland.ui.navigation.privacyPolicyDetailsScreen
-import com.jeju.nanaland.ui.navigation.profileNoticeScreenRoute
-import com.jeju.nanaland.ui.navigation.profileReviewScreenRoute
-import com.jeju.nanaland.ui.navigation.profileScreenRoute
-import com.jeju.nanaland.ui.navigation.profileUpdateScreen
 import com.jeju.nanaland.ui.navigation.recommendedSpotScreen
 import com.jeju.nanaland.ui.navigation.reportScreen
 import com.jeju.nanaland.ui.navigation.restaurantContentScreen
@@ -51,6 +46,8 @@ import com.jeju.nanaland.ui.navigation.typeTestLoadingScreen
 import com.jeju.nanaland.ui.navigation.typeTestResultScreen
 import com.jeju.nanaland.ui.navigation.typeTestingScreen
 import com.jeju.nanaland.ui.navigation.withdrawalScreen
+import com.jeju.nanaland.ui.noticeDetail.noticeDetailScreen
+import com.jeju.nanaland.ui.profile.profileScreenRoute
 import com.jeju.nanaland.util.intent.DeepLinkData
 
 @Composable
@@ -164,8 +161,8 @@ fun MainNavigation(
         // 정보 수정 제안 완료 화면
         informationModificationProposalCompleteScreen(navController)
 
-        // 프로필 수정 화면
-        profileUpdateScreen(navController)
+//        // 프로필 수정 화면
+//        profileUpdateScreen(navController)
 
         // 설정 화면
         settingsScreen(navController)
@@ -188,11 +185,11 @@ fun MainNavigation(
         // 타인 프로필 화면
         profileScreenRoute(navController)
 
-        // 프로필 공지사항 리스트 화면
-        profileNoticeScreenRoute(navController)
-
-        // 프로필 리뷰 리스트 화면
-        profileReviewScreenRoute(navController)
+//        // 프로필 공지사항 리스트 화면
+//        profileNoticeScreenRoute(navController)
+//
+//        // 프로필 리뷰 리스트 화면
+//        profileReviewScreenRoute(navController)
 
         // 리뷰 리스트 화면
         reviewListScreen(navController)
@@ -200,8 +197,8 @@ fun MainNavigation(
         // 신고 화면
         reportScreen(navController)
 
-        // 게시판 디테일(공지, ... 등)
-        boardScreen(navController)
+        // 공지 디테일
+        noticeDetailScreen(navController)
 
         // 나나픽 전체 리스트 화면
         nanapickAllListScreen(navController)

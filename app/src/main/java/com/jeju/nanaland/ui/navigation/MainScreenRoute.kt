@@ -4,7 +4,7 @@ import androidx.core.os.bundleOf
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
-import com.jeju.nanaland.globalvalue.constant.ROUTE_BOARD
+import com.jeju.nanaland.globalvalue.constant.ROUTE
 import com.jeju.nanaland.globalvalue.constant.ROUTE_EXPERIENCE_CONTENT
 import com.jeju.nanaland.globalvalue.constant.ROUTE_EXPERIENCE_LIST
 import com.jeju.nanaland.globalvalue.constant.ROUTE_FESTIVAL_CONTENT
@@ -16,10 +16,6 @@ import com.jeju.nanaland.globalvalue.constant.ROUTE_NANAPICK_ALL_LIST
 import com.jeju.nanaland.globalvalue.constant.ROUTE_NANAPICK_CONTENT
 import com.jeju.nanaland.globalvalue.constant.ROUTE_NATURE_CONTENT
 import com.jeju.nanaland.globalvalue.constant.ROUTE_NATURE_LIST
-import com.jeju.nanaland.globalvalue.constant.ROUTE_NOTIFICATION
-import com.jeju.nanaland.globalvalue.constant.ROUTE_PROFILE_NOTICE
-import com.jeju.nanaland.globalvalue.constant.ROUTE_PROFILE_REVIEW
-import com.jeju.nanaland.globalvalue.constant.ROUTE_PROFILE_UPDATE
 import com.jeju.nanaland.globalvalue.constant.ROUTE_RESTAURANT_CONTENT
 import com.jeju.nanaland.globalvalue.constant.ROUTE_RESTAURANT_LIST
 import com.jeju.nanaland.globalvalue.constant.ROUTE_REVIEW_WRITE_ROUTE
@@ -39,7 +35,7 @@ fun NavGraphBuilder.mainScreen(
 ) = composable(route = ROUTE_MAIN) {
     MainScreen(
         deepLinkData = deepLinkData,
-        moveToNotificationScreen = { navController.navigate(ROUTE_NOTIFICATION) { launchSingleTop = true } },
+        moveToNotificationScreen = { navController.navigate(ROUTE.Home.Notification) { launchSingleTop = true } },
         moveToCategoryContentScreen = { contentId, category, isSearch ->
             val bundle = bundleOf(
                 "contentId" to contentId,
@@ -71,12 +67,13 @@ fun NavGraphBuilder.mainScreen(
         moveToExperienceListScreen = { navController.navigate(ROUTE_EXPERIENCE_LIST) { launchSingleTop = true } },
         moveToSettingsScreen = { navController.navigate(ROUTE_SETTINGS) { launchSingleTop = true } },
         moveToProfileModificationScreen = { profileImageUri, nickname, introduction ->
-            val bundle = bundleOf(
-                "profileImageUri" to profileImageUri,
-                "nickname" to nickname,
-                "introduction" to introduction
+            navController.navigate(
+                ROUTE.Profile.Update(
+                    profileImageUri = profileImageUri ?: "",
+                    nickname = nickname ?: "",
+                    introduction = introduction ?: ""
+                )
             )
-            navController.navigate(ROUTE_PROFILE_UPDATE, bundle)
         },
         moveToSignInScreen = { navController.navigate(ROUTE_SIGN_IN) {
             popUpTo(ROUTE_MAIN) { inclusive = true }
@@ -86,14 +83,11 @@ fun NavGraphBuilder.mainScreen(
         moveToTypeTestResultScreen = { navController.navigate(ROUTE_TYPE_TEST_RESULT,  bundleOf("travelType" to it)) },
         moveToReviewWriteScreen = { navController.navigate(ROUTE_REVIEW_WRITE_ROUTE) },
         moveToProfileNoticeListScreen = {
-            if(it == null) navController.navigate(ROUTE_PROFILE_NOTICE)
-            else navController.navigate(ROUTE_BOARD, bundleOf(
-                "type" to TEMP_BoardType.Notice.toString(),
-                "id" to it
-            ))
+            if(it == null) navController.navigate(ROUTE.Profile.NoticeList)
+            else navController.navigate(ROUTE.NoticeDetail(it))
         },
         moveToProfileReviewListScreen = {
-            navController.navigate(ROUTE_PROFILE_REVIEW, bundleOf("id" to (it ?: -1)))
+            navController.navigate(ROUTE.Profile.ReviewList(it))
         },
         moveToNanaPickAllListScreen = {
             navController.navigate(ROUTE_NANAPICK_ALL_LIST) { launchSingleTop = true }

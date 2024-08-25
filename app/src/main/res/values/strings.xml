@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">nanaland in Jeju</string>
-
+    <string name="default_notification_channel_id" translatable="false">1</string>
     <!--언어 초기화 화면-->
     <string name="select_language_please">언어를 선택해주세요</string>
 
