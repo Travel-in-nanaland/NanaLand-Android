@@ -11,7 +11,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
@@ -21,7 +20,10 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.paging.compose.collectAsLazyPagingItems
 import com.jeju.nanaland.R
+import com.jeju.nanaland.domain.entity.notification.NotificationLinkType
+import com.jeju.nanaland.domain.entity.notification.NotificationType
 import com.jeju.nanaland.ui.component.common.CustomSurface
 import com.jeju.nanaland.ui.component.common.topbar.CustomTopBar
 import com.jeju.nanaland.ui.theme.body02Bold
@@ -35,11 +37,12 @@ import com.jeju.nanaland.util.ui.clickableNoEffect
 @Composable
 fun NotificationScreen(
     moveToBackScreen: () -> Unit,
-    moveToNanaPickScreen: (Int) -> Unit,
+    moveToContentScreen: (Int, NotificationType) -> Unit,
     moveToNoticeScreen: (Int) -> Unit,
-    moveToFavoriteScreen: (Int) -> Unit,
     viewModel: NotificationViewModel = hiltViewModel()
 ) {
+    val data = viewModel.data.collectAsLazyPagingItems()
+
     CustomSurface {
         Column(Modifier.fillMaxSize()) {
             CustomTopBar(
@@ -53,15 +56,19 @@ fun NotificationScreen(
                     Spacer(modifier = Modifier.height((24 - 8).dp))
                 }
 
-                items(viewModel.data) {
+                items(data.itemCount) {
                     Row(
                         modifier = Modifier
                             .padding(horizontal = 16.dp, vertical = 4.dp)
                             .clickableNoEffect {
-                                when(it.type) {
-                                    TEMP_NotificationType.ISSUE -> moveToNoticeScreen(1/*TODO*/)
-                                    TEMP_NotificationType.NANA_PICK -> moveToNanaPickScreen(1249 /*TODO*/)
-                                    TEMP_NotificationType.LIKE -> moveToFavoriteScreen(it.id)
+                                when(data[it]?.clickEvent) {
+                                    NotificationLinkType.NOTICE -> {
+                                        moveToNoticeScreen(data[it]!!.contentId)
+                                    }
+                                    NotificationLinkType.POST -> {
+                                        moveToContentScreen(data[it]!!.contentId, data[it]!!.category)
+                                    }
+                                    else -> {}
                                 }
                             }
                     ) {
@@ -78,18 +85,18 @@ fun NotificationScreen(
                         Spacer(modifier = Modifier.width(12.dp))
                         Column {
                             Text(
-                                text = it.title,
+                                text = data[it]!!.title,
                                 color = getColor().main,
                                 style = body02Bold
                             )
                             Spacer(modifier = Modifier.height(6.dp))
                             Text(
-                                text = it.subTitle,
+                                text = data[it]!!.content,
                                 color = getColor().black,
                                 style = caption01
                             )
                             Text(
-                                text = it.date.toFormatString(),
+                                text = data[it]!!.createdAt.toFormatString(),
                                 color = getColor().gray01,
                                 style = caption02
                             )

@@ -4,6 +4,7 @@ import androidx.paging.PagingSource
 import com.jeju.nanaland.data.api.BoardApi
 import com.jeju.nanaland.domain.entity.notice.NoticeDetail
 import com.jeju.nanaland.domain.entity.notice.NoticeSummery
+import com.jeju.nanaland.domain.entity.notification.Notification
 import com.jeju.nanaland.domain.repository.BoardRepository
 import com.jeju.nanaland.util.network.NetworkResult
 import com.jeju.nanaland.util.network.NetworkResultHandler
@@ -21,6 +22,15 @@ class BoardRepositoryImpl(
     override fun getNoticeList(): PagingSource<Int, NoticeSummery> {
         return handleResultPaging { page, size ->
             api.getNoticeList(
+                page = page,
+                size = size,
+            )
+        }
+    }
+
+    override fun getNotificationList(): PagingSource<Int, Notification> {
+        return handleResultPaging { page, size ->
+            api.getNotificationList(
                 page = page,
                 size = size,
             )
