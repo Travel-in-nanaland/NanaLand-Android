@@ -1,5 +1,6 @@
 package com.jeju.nanaland.ui.restaurant
 
+import android.content.Intent
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.gestures.animateTo
@@ -17,10 +18,12 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.jeju.nanaland.R
@@ -45,6 +48,7 @@ import com.jeju.nanaland.ui.component.review.TotalReviewCountText
 import com.jeju.nanaland.ui.component.review.getReportAnchoredDraggableState
 import com.jeju.nanaland.ui.theme.getColor
 import com.jeju.nanaland.ui.theme.title02Bold
+import com.jeju.nanaland.util.language.getLanguage
 import com.jeju.nanaland.util.ui.UiState
 import kotlinx.coroutines.launch
 
@@ -58,6 +62,7 @@ fun RestaurantContentScreen(
     moveToSignInScreen: () -> Unit,
     moveToReviewListScreen: (Boolean, String, String, String) -> Unit,
     moveToReviewWritingScreen: (Int, String, String, String) -> Unit,
+    moveToReportScreen: (Int) -> Unit,
     viewModel: RestaurantContentViewModel = hiltViewModel()
 ) {
     LaunchedEffect(Unit) {
@@ -96,6 +101,7 @@ fun RestaurantContentScreen(
                 )
             }
         },
+        moveToReportScreen = moveToReportScreen,
         isContent = true
     )
 }
@@ -114,12 +120,15 @@ private fun RestaurantContentScreen(
     moveToReviewWritingScreen: () -> Unit,
     moveToInfoModificationProposalScreen: () -> Unit,
     moveToSignInScreen: () -> Unit,
+    moveToReportScreen: (Int) -> Unit,
     isContent: Boolean
 ) {
+    val context = LocalContext.current
     val scrollState = rememberScrollState()
     val coroutineScope = rememberCoroutineScope()
     val reportDialogAnchoredDraggableState = remember { getReportAnchoredDraggableState() }
     val isDimBackgroundShowing = remember { mutableStateOf(false) }
+    val selectedReviewId = remember { mutableIntStateOf(0) }
     CustomSurface {
         Box(
             modifier = Modifier.fillMaxSize()
@@ -130,7 +139,15 @@ private fun RestaurantContentScreen(
                 CustomTopBarWithShareButton(
                     title = "제주 맛집",
                     onBackButtonClicked = moveToBackScreen,
-                    onShareButtonClicked = {}
+                    onShareButtonClicked = {
+                        val sendIntent: Intent = Intent().apply {
+                            action = Intent.ACTION_SEND
+                            putExtra(Intent.EXTRA_TEXT, "http://13.125.110.80:8080/share/${getLanguage()}?category=restaurant&id=${contentId}")
+                            type = "text/plain"
+                        }
+                        val shareIntent = Intent.createChooser(sendIntent, null)
+                        context.startActivity(shareIntent)
+                    }
                 )
 
                 Box(
@@ -289,8 +306,8 @@ private fun RestaurantContentScreen(
                                             toggleReviewFavorite = toggleReviewFavorite,
                                             onMenuButtonClick = {
                                                 isDimBackgroundShowing.value = true
-                                                coroutineScope.launch { reportDialogAnchoredDraggableState.animateTo(
-                                                    AnchoredDraggableContentState.Open) }
+                                                coroutineScope.launch { reportDialogAnchoredDraggableState.animateTo(AnchoredDraggableContentState.Open) }
+                                                selectedReviewId.intValue = it.id
                                             }
                                         )
 
@@ -347,7 +364,7 @@ private fun RestaurantContentScreen(
             }
 
             ReportBottomDialog(
-                onClick = {  },
+                onClick = { moveToReportScreen(selectedReviewId.intValue) },
                 hideDimBackground = { isDimBackgroundShowing.value = false },
                 anchoredDraggableState = reportDialogAnchoredDraggableState
             )

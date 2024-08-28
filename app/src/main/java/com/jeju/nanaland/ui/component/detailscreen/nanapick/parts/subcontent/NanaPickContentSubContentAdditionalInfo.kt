@@ -46,6 +46,7 @@ fun NanaPickContentSubContentAdditionalInfo(
                 "FEE" -> R.drawable.ic_fee
                 "DATE" -> R.drawable.ic_calendar_filled
                 "DESCRIPTION" -> R.drawable.ic_speech_bubble
+                "ETC" -> R.drawable.ic_smile
                 else -> R.drawable.ic_phone_outlined
             }),
             contentDescription = null,

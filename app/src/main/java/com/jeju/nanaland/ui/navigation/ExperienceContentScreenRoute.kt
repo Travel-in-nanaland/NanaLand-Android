@@ -11,6 +11,7 @@ import com.jeju.nanaland.globalvalue.constant.ROUTE_EXPERIENCE_CONTENT
 import com.jeju.nanaland.globalvalue.constant.ROUTE_EXPERIENCE_LIST
 import com.jeju.nanaland.globalvalue.constant.ROUTE_INFORMATION_MODIFICATION_PROPOSAL_CATEGORY
 import com.jeju.nanaland.globalvalue.constant.ROUTE_MAIN
+import com.jeju.nanaland.globalvalue.constant.ROUTE_REPORT
 import com.jeju.nanaland.globalvalue.constant.ROUTE_REVIEW_LIST
 import com.jeju.nanaland.globalvalue.constant.ROUTE_REVIEW_WRITE_ROUTE
 import com.jeju.nanaland.globalvalue.constant.ROUTE_SIGN_IN
@@ -101,6 +102,12 @@ fun NavGraphBuilder.experienceContentScreen(navController: NavController) = comp
                 "address" to address
             )
             navController.navigate(ROUTE_REVIEW_LIST, bundle)
+        },
+        moveToReportScreen = { reviewId ->
+            val bundle = bundleOf(
+                "reviewId" to reviewId
+            )
+            navController.navigate(ROUTE_REPORT, bundle)
         }
     )
 }

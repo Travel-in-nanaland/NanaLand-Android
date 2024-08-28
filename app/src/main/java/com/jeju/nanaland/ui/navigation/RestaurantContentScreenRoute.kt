@@ -9,6 +9,7 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import com.jeju.nanaland.globalvalue.constant.ROUTE_INFORMATION_MODIFICATION_PROPOSAL_CATEGORY
 import com.jeju.nanaland.globalvalue.constant.ROUTE_MAIN
+import com.jeju.nanaland.globalvalue.constant.ROUTE_REPORT
 import com.jeju.nanaland.globalvalue.constant.ROUTE_RESTAURANT_CONTENT
 import com.jeju.nanaland.globalvalue.constant.ROUTE_RESTAURANT_LIST
 import com.jeju.nanaland.globalvalue.constant.ROUTE_REVIEW_LIST
@@ -100,6 +101,12 @@ fun NavGraphBuilder.restaurantContentScreen(navController: NavController) = comp
                 "address" to address
             )
             navController.navigate(ROUTE_REVIEW_LIST, bundle)
+        },
+        moveToReportScreen = { reviewId ->
+            val bundle = bundleOf(
+                "reviewId" to reviewId
+            )
+            navController.navigate(ROUTE_REPORT, bundle)
         }
     )
 }

@@ -2,6 +2,7 @@ package com.jeju.nanaland.ui.splash
 
 import android.app.Application
 import android.content.res.Configuration
+import android.widget.Toast
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -56,6 +57,8 @@ class SplashViewModel @Inject constructor(
         _isNetworkConnected.update { networkManager.isNetworkConnected }
         if (networkManager.isNetworkConnected) {
             _checkingState.update { SplashCheckingState.Language }
+        } else {
+            Toast.makeText(application, "인터넷 연결에 문제가 생겼으니,\n연결 상태를 확인 후 다시 시도하세요", Toast.LENGTH_SHORT).show()
         }
     }
 
