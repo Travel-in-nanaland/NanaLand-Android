@@ -69,12 +69,17 @@
     <string name="common_필수_with_star">*필수</string>
     <string name="common_선택">(선택)</string>
     <string name="common_알림">알림</string>
+    <string name="common_종류">종류</string>
+    <string name="common_리뷰">리뷰</string>
+    <string name="common_액티비티">액티비티</string>
+    <string name="common_문화예술">문화예술</string>
     <string name="common_후기" translatable="false">후기</string> <!--  TODO  -->
     <string name="common_공지사항" translatable="false">공지사항</string> <!--  TODO  -->
     <string name="common_수정" translatable="false">수정</string> <!--  TODO  -->
     <string name="common_신고" translatable="false">신고</string> <!--  TODO  -->
     <string name="common_사진" translatable="false">사진</string> <!--  TODO  -->
     <string name="common_동영상" translatable="false">동영상</string> <!--  TODO  -->
+    <string name="common_원" translatable="false">원</string> <!--  TODO  -->
 
     <!--시간 관련-->
     <string name="common_방금전" translatable="false">방금 전</string> <!--  TODO  -->
@@ -172,11 +177,12 @@
     <string name="festival_list_screen_image_caption">*참고용 사진입니다.</string>
 
     <!--상세 화면 공통-->
-    <string name="detail_screen_common_더_보기">더 보기</string>
+    <string name="detail_screen_common_더보기">더보기</string>
     <string name="detail_screen_common_접기">접기</string>
     <string name="detail_screen_common_주소">주소</string>
     <string name="detail_screen_common_연락처">연락처</string>
     <string name="detail_screen_common_이용_시간">이용 시간</string>
+    <string name="detail_screen_common_영업_시간">영업 시간</string>
     <string name="detail_screen_common_편의시설">편의시설</string>
     <string name="detail_screen_common_홈페이지">홈페이지</string>
     <string name="detail_screen_common_입장료">입장료</string>
@@ -185,6 +191,16 @@
     <string name="detail_screen_common_소개합니다">소개합니다!</string>
     <string name="detail_screen_common_알아두면_좋아요">알아두면 좋아요!</string>
     <string name="detail_screen_common_이_장소만의_매력_포인트">이 장소만의 매력 포인트✨</string>
+    <string name="detail_screen_common_후기_작성하기">후기 작성하기</string>
+    <string name="detail_screen_common_후기_더보기">후기 더보기</string>
+    <string name="detail_screen_common_대표_메뉴">대표 메뉴</string>
+    <string name="detail_screen_common_후기_더보기">후기 더보기</string>
+    <string name="detail_screen_common_줄이기">줄이기</string>
+    <string name="detail_screen_common_간단_설명">간단 설명</string>
+    <string name="detail_screen_common_제공_서비스">제공 서비스</string>
+    <string name="detail_screen_common_인스타그램">인스타그램</string>
+
+
 
     <!--정보 수정 제안-->
     <string name="info_modification_proposal_정보_수정_제안">정보 수정 제안</string>
@@ -210,6 +226,7 @@
     <string name="info_modification_proposal_button1">콘텐츠 다시 보러 가기</string>
     <string name="info_modification_proposal_button2">다른 항목 추가하기</string>
     <string name="info_modification_proposal_warning">이메일 형식이 잘못 되었습니다. 다시 입력해 주세요!</string>
+    <string name="info_modification_proposal_necessary">필수</string>
 
     <!--약관 동의 화면-->
     <string name="policy_agree_screen_heading">nanaland in Jeju에\n오신 것을 환영합니다.</string>
@@ -302,6 +319,7 @@
     <string name="type_test_recommended_spot_text1">""</string>
     <string name="type_test_recommended_spot_text2"> 님을 위한</string>
     <string name="type_test_recommended_spot_추천_여행지">추천 여행지</string>
+    <string name="type_test_recommended_spot_자세히_보기">자세히 보기</string>
 
     <!--언어 설정 화면-->
     <string name="language_change_screen_guide">맨 위에 있는 언어로\n기본 설정 되어 있습니다.</string>
@@ -468,4 +486,9 @@
         <item>학대 /  폭력</item>
         <item>기타</item>
     </string-array>
+
+    <!--나나스픽 리스트-->
+    <string name="nanapick_list_screen_recommended_post" translatable="false">금주 추천 나나\'s Pick</string>
+    <string name="nanapick_list_screen_see_all" translatable="false">모두보기</string>
+    <string name="nanapick_list_screen_new" translatable="false">NEW</string>
 </resources>

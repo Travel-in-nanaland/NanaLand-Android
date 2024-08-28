@@ -11,14 +11,16 @@ import androidx.compose.runtime.snapshots.SnapshotStateList
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.jeju.nanaland.R
 import com.jeju.nanaland.ui.component.listscreen.filter.parts.FilteredItemCount
 import com.jeju.nanaland.ui.component.listscreen.filter.parts.keyword.KeywordFilterBox
 import com.jeju.nanaland.ui.component.listscreen.filter.parts.location.LocationFilterBox
+import com.jeju.nanaland.util.resource.getString
 import com.jeju.nanaland.util.ui.UiState
 
 @Composable
 fun KeywordLocationFilterTopBar(
-    text: String = "종류",
+    text: String = getString(R.string.common_종류),
     count: UiState<Int>,
     selectedKeywordList: SnapshotStateList<Boolean>,
     keywordList: List<String>,

@@ -49,6 +49,7 @@ import com.jeju.nanaland.ui.component.review.getReportAnchoredDraggableState
 import com.jeju.nanaland.ui.theme.getColor
 import com.jeju.nanaland.ui.theme.title02Bold
 import com.jeju.nanaland.util.language.getLanguage
+import com.jeju.nanaland.util.resource.getString
 import com.jeju.nanaland.util.ui.UiState
 import kotlinx.coroutines.launch
 
@@ -174,7 +175,7 @@ private fun RestaurantContentScreen(
                                     Spacer(Modifier.height(32.dp))
 
                                     Text(
-                                        text = "대표 메뉴",
+                                        text = getString(R.string.detail_screen_common_대표_메뉴),
                                         color = getColor().black,
                                         style = title02Bold
                                     )
@@ -206,7 +207,7 @@ private fun RestaurantContentScreen(
                                     if (!restaurantContent.data.address.isNullOrEmpty()) {
                                         DetailScreenInformation(
                                             drawableId = R.drawable.ic_location_outlined,
-                                            title = "주소",
+                                            title = getString(R.string.detail_screen_common_주소),
                                             content = restaurantContent.data.address
                                         )
 
@@ -216,7 +217,7 @@ private fun RestaurantContentScreen(
                                     if (!restaurantContent.data.time.isNullOrEmpty()) {
                                         DetailScreenInformation(
                                             drawableId = R.drawable.ic_clock_outlined,
-                                            title = "영업 시간",
+                                            title = getString(R.string.detail_screen_common_영업_시간),
                                             content = restaurantContent.data.time
                                         )
 
@@ -226,7 +227,7 @@ private fun RestaurantContentScreen(
                                     if (!restaurantContent.data.contact.isNullOrEmpty()) {
                                         DetailScreenInformation(
                                             drawableId = R.drawable.ic_phone_outlined,
-                                            title = "연락처",
+                                            title = getString(R.string.detail_screen_common_연락처),
                                             content = restaurantContent.data.contact
                                         )
 
@@ -236,7 +237,7 @@ private fun RestaurantContentScreen(
                                     if (!restaurantContent.data.service.isNullOrEmpty()) {
                                         DetailScreenInformation(
                                             drawableId = R.drawable.ic_headset_outlined,
-                                            title = "제공 서비스",
+                                            title = getString(R.string.detail_screen_common_제공_서비스),
                                             content = restaurantContent.data.service
                                         )
 
@@ -246,7 +247,7 @@ private fun RestaurantContentScreen(
                                     if (!restaurantContent.data.homepage.isNullOrEmpty()) {
                                         DetailScreenInformation(
                                             drawableId = R.drawable.ic_clip_outlined,
-                                            title = "홈페이지",
+                                            title = getString(R.string.detail_screen_common_홈페이지),
                                             content = restaurantContent.data.homepage
                                         )
 
@@ -256,7 +257,7 @@ private fun RestaurantContentScreen(
                                     if (!restaurantContent.data.instagram.isNullOrEmpty()) {
                                         DetailScreenInformation(
                                             drawableId = R.drawable.ic_instagram_outlined,
-                                            title = "인스타그램",
+                                            title = getString(R.string.detail_screen_common_인스타그램),
                                             content = restaurantContent.data.instagram
                                         )
 
@@ -319,7 +320,7 @@ private fun RestaurantContentScreen(
 
                                 if (reviewList.data.totalElements > 3) {
                                     BottomOkButton(
-                                        text = "후기 더보기",
+                                        text = getString(R.string.detail_screen_common_후기_더보기),
                                         isActivated = true,
                                         onClick = moveToReviewListScreen
                                     )

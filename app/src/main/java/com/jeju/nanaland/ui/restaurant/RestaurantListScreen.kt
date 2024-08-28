@@ -19,6 +19,7 @@ import androidx.compose.runtime.snapshots.SnapshotStateList
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.jeju.nanaland.R
 import com.jeju.nanaland.domain.entity.restaurant.RestaurantThumbnailData
 import com.jeju.nanaland.globalvalue.constant.PAGING_THRESHOLD
 import com.jeju.nanaland.globalvalue.constant.getLocationList
@@ -36,6 +37,7 @@ import com.jeju.nanaland.ui.component.listscreen.filter.RestaurantKeywordFilterD
 import com.jeju.nanaland.ui.component.listscreen.filter.getLocationAnchoredDraggableState
 import com.jeju.nanaland.ui.component.listscreen.filter.getRestaurantKeywordAnchoredDraggableState
 import com.jeju.nanaland.ui.component.listscreen.list.RestaurantThumbnailList
+import com.jeju.nanaland.util.resource.getString
 import com.jeju.nanaland.util.ui.UiState
 import kotlinx.coroutines.launch
 
@@ -118,7 +120,7 @@ private fun RestaurantListScreen(
                 Spacer(Modifier.height(16.dp))
 
                 KeywordLocationFilterTopBar(
-                    text = "종류",
+                    text = getString(R.string.common_종류),
                     count = restaurantThumbnailCount,
                     selectedKeywordList = selectedRestaurantKeywordList,
                     keywordList = getRestaurantKeywordList(),

@@ -157,7 +157,7 @@
     <string name="festival_list_screen_image_caption">*Gambar untuk rujukan.</string>
 
     <!--상세 화면 공통-->
-    <string name="detail_screen_common_더_보기">Lihat Lagi</string>
+    <string name="detail_screen_common_더보기">Lihat Lagi</string>
     <string name="detail_screen_common_접기">Sembunyi</string>
     <string name="detail_screen_common_주소">Alamat</string>
     <string name="detail_screen_common_연락처">Hubungi</string>

@@ -44,7 +44,7 @@ fun HomeScreenCategoryButtons(
         Spacer(Modifier.weight(1f))
         HomeScreenCategoryButton(
             resId = R.drawable.img_restaurant,
-            text = "제주 맛집",
+            text = getString(R.string.common_제주_맛집),
             onClick = moveToRestaurantListScreen
         )
     }

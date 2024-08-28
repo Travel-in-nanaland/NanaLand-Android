@@ -94,7 +94,7 @@ private fun NanaPickListScreen(
             Spacer(Modifier.height(24.dp))
 
             Text(
-                text = "금주 추천 나나's Pick",
+                text = getString(R.string.nanapick_list_screen_recommended_post),
                 color = getColor().black,
                 style = title02Bold
             )
@@ -190,7 +190,7 @@ private fun NanaPickListScreen(
                 verticalAlignment = Alignment.Bottom
             ) {
                 Text(
-                    text = "나나's Pick",
+                    text = getString(R.string.common_나나s_Pick),
                     color = getColor().black,
                     style = title02Bold
                 )
@@ -200,7 +200,7 @@ private fun NanaPickListScreen(
                 Text(
                     modifier = Modifier
                         .clickableNoEffect { moveToNanaPickAllListScreen() },
-                    text = "모두보기",
+                    text = getString(R.string.nanapick_list_screen_see_all),
                     color = getColor().gray01,
                     style = caption01
                 )

@@ -157,7 +157,7 @@
     <string name="festival_list_screen_image_caption">*参考照片。</string>
 
     <!--상세 화면 공통-->
-    <string name="detail_screen_common_더_보기">更多</string>
+    <string name="detail_screen_common_더보기">更多</string>
     <string name="detail_screen_common_접기">折叠</string>
     <string name="detail_screen_common_주소">地址</string>
     <string name="detail_screen_common_연락처">电话</string>
