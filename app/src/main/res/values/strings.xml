@@ -403,8 +403,8 @@
     <!--TODO 번역-->
     <string name="review_write_title" translatable="false">후기 작성</string>
     <string name="review_write_search_hint" translatable="false">장소를 검색하세요</string>
-    <string name="review_write_select_rating" translatable="false">\"별점\"을 \"선택\"해주세요!</string>
-    <string name="review_write_writing" translatable="false">\"방문 후기\"를 \"작성\"해주세요!</string>
+    <string name="review_write_select_rating" translatable="false">{별점}을 {선택}해주세요!</string>
+    <string name="review_write_writing" translatable="false">{방문 후기}를 {작성}해주세요!</string>
     <string name="review_write_writing_hint" translatable="false">내용을 작성해 주세요</string>
     <string name="review_write_add_keyword" translatable="false">키워드 추가</string>
     <string name="review_write_complete" translatable="false">올리기</string>

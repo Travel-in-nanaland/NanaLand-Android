@@ -62,6 +62,7 @@ import com.jeju.nanaland.ui.component.common.BottomOkButton
 import com.jeju.nanaland.ui.component.common.CustomSurface
 import com.jeju.nanaland.ui.component.common.DialogCommon
 import com.jeju.nanaland.ui.component.common.UploadImages
+import com.jeju.nanaland.ui.component.common.text.TextWithPointColor
 import com.jeju.nanaland.ui.component.common.topbar.CustomTopBar
 import com.jeju.nanaland.ui.reviewwrite.ReviewWriteUiState
 import com.jeju.nanaland.ui.reviewwrite.ReviewWriteViewModel
@@ -157,7 +158,6 @@ private fun ReviewWriteUI(
     onRemoveKeyword: (ReviewKeyword) -> Unit,
 ) {
 
-    val context = LocalContext.current
     val scrollState = rememberScrollState()
 
     CustomSurface {
@@ -202,14 +202,20 @@ private fun ReviewWriteUI(
             )
 
             MyDivider()
-            AnnotatedStringConvertQuotes(getString(R.string.review_write_select_rating))
+            TextWithPointColor(
+                text = getString(R.string.review_write_select_rating),
+                style = bodyBold
+            )
             Spacer(modifier = Modifier.height(16.dp))
             StarRating(rating = uiState.reviewRating) {
                 onChangedRating(it)
             }
 
             MyDivider()
-            AnnotatedStringConvertQuotes(getString(R.string.review_write_writing))
+            TextWithPointColor(
+                text = getString(R.string.review_write_writing),
+                style = bodyBold
+            )
             Spacer(modifier = Modifier.height(16.dp))
 
             UploadImages(
@@ -253,29 +259,6 @@ private fun MyDivider() {
             .padding(vertical = 24.dp),
         thickness = 1.dp,
         color = getColor().gray02
-    )
-}
-
-@Composable
-private fun AnnotatedStringConvertQuotes(text: String) {
-    val conv = text.split('"')
-    Text(
-        text = buildAnnotatedString {
-            conv.forEachIndexed { index, s ->
-                if(index % 2 == 1)
-                    withStyle(
-                        style = SpanStyle(
-                            color = getColor().main
-                        )
-                    ) {
-                        append(s)
-                    }
-                else
-                    append(s)
-            }
-        },
-        color = getColor().black,
-        style = bodyBold
     )
 }
 
