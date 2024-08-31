@@ -109,9 +109,7 @@ private fun ProfileListReviewRow(
                 Row {
                     Column(Modifier.weight(1f)) {
                         /** 가게명 **/
-                        Row(
-                            verticalAlignment = Alignment.CenterVertically
-                        ) {
+                        Row {
                             Text(
                                 modifier = Modifier.weight(1f, false),
                                 text = data.placeName,
@@ -119,7 +117,9 @@ private fun ProfileListReviewRow(
                                 color = getColor().black
                             )
                             Icon(
-                                modifier = Modifier.size(16.dp),
+                                modifier = Modifier
+                                    .padding(horizontal = 4.dp, vertical = 3.dp)
+                                    .size(16.dp),
                                 painter = painterResource(R.drawable.ic_arrow_right),
                                 contentDescription = null,
                                 tint = getColor().black
