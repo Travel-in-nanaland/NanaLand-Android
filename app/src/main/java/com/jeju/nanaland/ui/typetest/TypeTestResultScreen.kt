@@ -45,18 +45,6 @@ fun TypeTestResultScreen(
 ) {
     CustomSurface {
         Box {
-            moveToBackScreen?.let {
-                Icon(
-                    modifier = Modifier
-                        .padding(16.dp)
-                        .size(32.dp)
-                        .clickableNoEffect { it() },
-                    painter = painterResource(R.drawable.ic_arrow_left),
-                    contentDescription = null,
-                    tint = getColor().black
-                )
-            }
-
             LazyColumn(
                 modifier = Modifier
                     .fillMaxSize()
@@ -116,6 +104,18 @@ fun TypeTestResultScreen(
                     Spacer(Modifier.height(20.dp))
                 }
             }
+            moveToBackScreen?.let {
+                Icon(
+                    modifier = Modifier
+                        .padding(16.dp)
+                        .size(32.dp)
+                        .clickableNoEffect { it() },
+                    painter = painterResource(R.drawable.ic_arrow_left),
+                    contentDescription = null,
+                    tint = getColor().black
+                )
+            }
         }
+
     }
 }
