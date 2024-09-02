@@ -188,6 +188,7 @@ private fun ResultDataRowView(
     } else {
         LazyColumn(
             modifier = Modifier
+                .fillMaxSize()
                 .conditional(isBlur) { blur(1.dp) },
             verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
