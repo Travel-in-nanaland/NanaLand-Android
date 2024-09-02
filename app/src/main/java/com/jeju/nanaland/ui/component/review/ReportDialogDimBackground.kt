@@ -5,7 +5,6 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.gestures.AnchoredDraggableState
 import androidx.compose.foundation.gestures.animateTo
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
@@ -28,7 +27,7 @@ import kotlin.math.roundToInt
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun ReportDialogDimBackground(
-    isDimBackgroundShowing: MutableState<Boolean>,
+    isDimBackgroundShowing: MutableState<Int>,
     reportAnchoredDraggableState: AnchoredDraggableState<AnchoredDraggableContentState>? = null
 ) {
     val density = LocalDensity.current.density
@@ -50,7 +49,7 @@ fun ReportDialogDimBackground(
                     if (reportAnchoredDraggableState?.targetValue == AnchoredDraggableContentState.Open) {
                         reportAnchoredDraggableState.animateTo(AnchoredDraggableContentState.Closed)
                     }
-                    isDimBackgroundShowing.value = false
+                    isDimBackgroundShowing.value = -1
                 }
             }
     )

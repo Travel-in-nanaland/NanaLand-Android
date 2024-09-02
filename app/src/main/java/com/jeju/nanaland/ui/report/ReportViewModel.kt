@@ -1,11 +1,16 @@
 package com.jeju.nanaland.ui.report
 
+import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.navigation.toRoute
+import com.jeju.nanaland.domain.entity.report.ClaimType
+import com.jeju.nanaland.domain.entity.report.ReportDetail
+import com.jeju.nanaland.domain.entity.report.ReportType
 import com.jeju.nanaland.domain.request.UriRequestBody
 import com.jeju.nanaland.domain.usecase.member.GetUserProfileUseCase
 import com.jeju.nanaland.domain.usecase.report.ReportReviewUseCase
-import com.jeju.nanaland.globalvalue.type.ReportType
+import com.jeju.nanaland.globalvalue.constant.ROUTE
 import com.jeju.nanaland.util.network.onError
 import com.jeju.nanaland.util.network.onSuccess
 import com.jeju.nanaland.util.ui.UiState
@@ -20,8 +25,10 @@ import javax.inject.Inject
 @HiltViewModel
 class ReportViewModel @Inject constructor(
     private val reportReviewUseCase: ReportReviewUseCase,
-    getUserProfileUseCase: GetUserProfileUseCase
+    getUserProfileUseCase: GetUserProfileUseCase,
+    savedStateHandle: SavedStateHandle
 ) : ViewModel() {
+    val stateHandle: ROUTE.Report = savedStateHandle.toRoute()
 
     private val _page = MutableStateFlow(1)
     val page = _page.asStateFlow()
@@ -31,7 +38,7 @@ class ReportViewModel @Inject constructor(
 
     private val _email = MutableStateFlow("")
     val email = _email.asStateFlow()
-    var reportReason: ReportType? = null
+    var reportReason: ClaimType? = null
         private set
 
     init {
@@ -50,23 +57,25 @@ class ReportViewModel @Inject constructor(
         _page.update { page }
     }
 
-    fun setReason(reason: ReportType){
+    fun setReason(reason: ClaimType){
         reportReason = reason
     }
 
     fun submit(
-        reviewId: Int,
         email: String,
-        claimType: ReportType,
+        claimType: ClaimType,
         content: String,
         images: List<UriRequestBody>
     ) {
         reportReviewUseCase(
-            reviewId,
-            email,
-            claimType,
-            content,
-            images,
+            ReportDetail(
+                id = stateHandle.reportId,
+                reportType = if(stateHandle.isReview) ReportType.REVIEW else ReportType.MEMBER,
+                email = email,
+                claimType = claimType,
+                content = content,
+            ),
+            images
         ).onEach {
             _submitCallState.update { UiState.Loading }
             it.onSuccess { code, message, data ->

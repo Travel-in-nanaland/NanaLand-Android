@@ -1,10 +1,9 @@
 package com.jeju.nanaland.domain.repository
 
+import com.jeju.nanaland.domain.entity.report.ReportDetail
 import com.jeju.nanaland.domain.request.UriRequestBody
 import com.jeju.nanaland.domain.request.report.InformationModificationProposalRequest
-import com.jeju.nanaland.globalvalue.type.ReportType
 import com.jeju.nanaland.util.network.NetworkResult
-import java.io.File
 
 interface ReportRepository {
 
@@ -16,10 +15,7 @@ interface ReportRepository {
 
     // 리뷰 신고
     suspend fun reportReview(
-        reviewId: Int,
-        email: String,
-        claimType: ReportType,
-        content: String,
+        data: ReportDetail,
         images: List<UriRequestBody>
     ): NetworkResult<String?>
 }

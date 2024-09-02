@@ -6,13 +6,12 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -23,7 +22,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringArrayResource
 import androidx.compose.ui.unit.dp
 import com.jeju.nanaland.R
-import com.jeju.nanaland.globalvalue.type.ReportType
+import com.jeju.nanaland.domain.entity.report.ClaimType
 import com.jeju.nanaland.ui.theme.body02
 import com.jeju.nanaland.ui.theme.getColor
 import com.jeju.nanaland.ui.theme.title01Bold
@@ -31,13 +30,13 @@ import com.jeju.nanaland.util.resource.getString
 
 @Composable
 fun ReportCategoryScreen(
-    onClick: (ReportType) -> Unit
+    onClick: (ClaimType) -> Unit
 ) {
     Column(
         modifier = Modifier
+            .fillMaxSize()
             .padding(horizontal = 16.dp)
             .padding(bottom = 16.dp)
-            .verticalScroll(rememberScrollState())
     ) {
         Text(
             text = getString(R.string.report_category_title),
@@ -54,7 +53,7 @@ fun ReportCategoryScreen(
         Column(
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
-            ReportType.entries.forEach {
+            ClaimType.entries.forEach {
                 Row(
                     modifier = Modifier
                         .border(

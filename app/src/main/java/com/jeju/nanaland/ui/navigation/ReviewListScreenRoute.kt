@@ -4,6 +4,7 @@ import androidx.core.os.bundleOf
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
+import com.jeju.nanaland.globalvalue.constant.ROUTE
 import com.jeju.nanaland.globalvalue.constant.ROUTE_MAIN
 import com.jeju.nanaland.globalvalue.constant.ROUTE_REVIEW_LIST
 import com.jeju.nanaland.globalvalue.constant.ROUTE_REVIEW_WRITE_ROUTE
@@ -33,6 +34,7 @@ fun NavGraphBuilder.reviewListScreen(navController: NavController) = composable(
         moveToSignInScreen = { navController.navigate(ROUTE_SIGN_IN) {
             popUpTo(ROUTE_MAIN) { inclusive = true }
             launchSingleTop = true
-        } }
+        } },
+        moveToReportScreen = { navController.navigate(ROUTE.Report(it, true)) }
     )
 }

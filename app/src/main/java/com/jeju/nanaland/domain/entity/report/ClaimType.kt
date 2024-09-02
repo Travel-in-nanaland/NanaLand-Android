@@ -1,8 +1,8 @@
-package com.jeju.nanaland.globalvalue.type
+package com.jeju.nanaland.domain.entity.report
 
 import com.google.gson.annotations.SerializedName
 
-enum class ReportType(val stringIndex: Int) {
+enum class ClaimType(val stringIndex: Int) {
     @SerializedName("COMMERCIAL_PURPOSE")
     COMMERCIAL_PURPOSE(0),
     @SerializedName("DISLIKE")
