@@ -3,9 +3,9 @@ package com.jeju.nanaland.ui.infomodification
 import android.net.Uri
 import android.util.Log
 import androidx.activity.compose.rememberLauncherForActivityResult
-import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
@@ -17,7 +17,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.snapshots.SnapshotStateList
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.unit.dp
@@ -27,11 +26,10 @@ import com.jeju.nanaland.globalvalue.type.InputEmailState
 import com.jeju.nanaland.ui.component.common.CustomSurface
 import com.jeju.nanaland.ui.component.common.UploadImages
 import com.jeju.nanaland.ui.component.common.topbar.CustomTopBar
+import com.jeju.nanaland.ui.component.infomodification.writing.InfoModificationProposalWritingScreenBottomButton
 import com.jeju.nanaland.ui.component.infomodification.writing.InfoModificationProposalWritingScreenDescription
 import com.jeju.nanaland.ui.component.infomodification.writing.InfoModificationProposalWritingScreenHeading
-import com.jeju.nanaland.ui.component.infomodification.writing.InfoModificationProposalWritingScreenImagePreview
 import com.jeju.nanaland.ui.component.infomodification.writing.InfoModificationProposalWritingScreenTextField
-import com.jeju.nanaland.ui.component.infomodification.writing.InfoModificationProposalWritingScreenBottomButton
 import com.jeju.nanaland.ui.theme.getColor
 import com.jeju.nanaland.ui.theme.title02Bold
 import com.jeju.nanaland.util.resource.getString
@@ -132,7 +130,8 @@ private fun InformationModificationProposalWritingScreen(
                         Spacer(Modifier.height(8.dp))
 
                         InfoModificationProposalWritingScreenTextField(
-                            height = 120,
+                            line = 4,
+                            innerPadding = PaddingValues(16.dp),
                             hint = getString(R.string.info_modification_proposal_hint1),
                             inputText = inputDescription,
                             onValueChange = updateInputDescription
@@ -149,12 +148,12 @@ private fun InformationModificationProposalWritingScreen(
                         Spacer(Modifier.height(8.dp))
 
                         InfoModificationProposalWritingScreenTextField(
-                            height = 48,
+                            line = 1,
+                            innerPadding = PaddingValues(horizontal = 16.dp, vertical = 13.dp),
                             hint = getString(R.string.info_modification_proposal_hint2),
                             inputText = inputEmail,
                             onValueChange = updateInputEmail,
                             isValid = inputEmailState == InputEmailState.Idle,
-                            contentAlignment = Alignment.CenterStart
                         )
 
                         Spacer(Modifier.height(48.dp))

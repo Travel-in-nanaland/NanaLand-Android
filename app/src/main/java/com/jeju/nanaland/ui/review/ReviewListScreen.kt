@@ -3,13 +3,11 @@ package com.jeju.nanaland.ui.review
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.gestures.animateTo
-import androidx.compose.foundation.gestures.scrollable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -18,14 +16,12 @@ import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.itemsIndexed
 import androidx.compose.foundation.lazy.grid.rememberLazyGridState
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.derivedStateOf
-import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
@@ -65,6 +61,7 @@ fun ReviewListScreen(
     moveToBackScreen: () -> Unit,
     moveToReviewWritingScreen: (Int, String, String, String) -> Unit,
     moveToSignInScreen: () -> Unit,
+    moveToReportScreen:(Int) -> Unit,
     viewModel: ReviewListViewModel = hiltViewModel()
 ) {
     LaunchedEffect(Unit) {
@@ -108,6 +105,7 @@ fun ReviewListScreen(
         },
         moveToBackScreen = moveToBackScreen,
         moveToSignInScreen = moveToSignInScreen,
+        moveToReportScreen = moveToReportScreen,
         isContent = true
     )
 }
@@ -125,12 +123,13 @@ private fun ReviewListScreen(
     moveToReviewWritingScreen: () -> Unit,
     moveToBackScreen: () -> Unit,
     moveToSignInScreen: () -> Unit,
+    moveToReportScreen: (Int) -> Unit,
     isContent: Boolean
 ) {
     val lazyGridState = rememberLazyGridState()
     val coroutineScope = rememberCoroutineScope()
     val reportDialogAnchoredDraggableState = remember { getReportAnchoredDraggableState() }
-    val isDimBackgroundShowing = remember { mutableStateOf(false) }
+    val isDimBackgroundShowing = remember { mutableIntStateOf(-1) }
     val loadMore = remember {
         derivedStateOf {
             val layoutInfo = lazyGridState.layoutInfo
@@ -237,7 +236,7 @@ private fun ReviewListScreen(
                                         data = item,
                                         toggleReviewFavorite = toggleReviewFavorite,
                                         onMenuButtonClick = {
-                                            isDimBackgroundShowing.value = true
+                                            isDimBackgroundShowing.intValue = item.id
                                             coroutineScope.launch { reportDialogAnchoredDraggableState.animateTo(
                                                 AnchoredDraggableContentState.Open) }
                                         }
@@ -267,7 +266,7 @@ private fun ReviewListScreen(
                 }
             }
 
-            if (isDimBackgroundShowing.value) {
+            if (isDimBackgroundShowing.intValue > 0) {
                 ReportDialogDimBackground(
                     isDimBackgroundShowing = isDimBackgroundShowing,
                     reportAnchoredDraggableState = reportDialogAnchoredDraggableState
@@ -275,8 +274,8 @@ private fun ReviewListScreen(
             }
 
             ReportBottomDialog(
-                onClick = {  },
-                hideDimBackground = { isDimBackgroundShowing.value = false },
+                onClick = { moveToReportScreen(isDimBackgroundShowing.intValue) },
+                hideDimBackground = { isDimBackgroundShowing.intValue = -1 },
                 anchoredDraggableState = reportDialogAnchoredDraggableState
             )
         }

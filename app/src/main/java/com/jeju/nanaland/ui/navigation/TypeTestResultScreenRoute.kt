@@ -36,5 +36,8 @@ fun NavGraphBuilder.typeTestResultScreen(navController: NavController) = composa
                 launchSingleTop = true
             } }
         },
+        moveToBackScreen = if(isFirst) null else {
+            { navController.popBackStack() }
+        }
     )
 }

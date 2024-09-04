@@ -21,13 +21,19 @@ import com.jeju.nanaland.util.network.onException
 import com.jeju.nanaland.util.network.onSuccess
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharedFlow
+import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.flow.shareIn
 import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
@@ -38,38 +44,38 @@ class ProfileUpdateViewModel @Inject constructor(
 ) : ViewModel() {
     val stateHandle: ROUTE.Profile.Update = savedStateHandle.toRoute()
 
-    private val _inputNickname = MutableStateFlow("")
+    private val _inputNickname = MutableStateFlow(stateHandle.nickname)
     val inputNickname = _inputNickname.asStateFlow()
-    private val _inputIntroduction = MutableStateFlow("")
+    private val _inputIntroduction = MutableStateFlow(stateHandle.introduction)
     val inputIntroduction = _inputIntroduction.asStateFlow()
-    private val _imageUri = MutableStateFlow<String?>(null)
+    private val _imageUri = MutableStateFlow<String?>(Uri.parse(stateHandle.profileImageUri).toString())
     val imageUri: StateFlow<String?> = _imageUri
 
     private val _errorNickname = MutableStateFlow<Int?>(null)
     val errorNickname: StateFlow<Int?> = _errorNickname
-    private val _errorIntro = MutableStateFlow<Int?>(null)
-    val errorIntro: StateFlow<Int?> = _errorIntro
+
+    val errorIntro: SharedFlow<Int?> = inputIntroduction
+        .map {
+            if (_inputIntroduction.value.length > INTRODUCTION_CONSTRAINT) {
+                R.string.profile_update_screen_warning
+            } else {
+                null
+            }
+        }.shareIn(viewModelScope, SharingStarted.Eagerly)
 
     init {
-        updateProfileImageUri(Uri.parse(stateHandle.profileImageUri))
-        updateInputNickname(stateHandle.nickname)
-        updateInputIntroduction(stateHandle.introduction)
-
-        @Suppress("OPT_IN_USAGE")
-        inputNickname
-            .debounce(600)
-            .distinctUntilChanged()
-            .onEach {
-                if(!nicknameIsError())
-                    nicknameIsErrorByApi()
-            }
-            .launchIn(viewModelScope)
-
-        inputIntroduction
-            .onEach {
-                introIsError()
-            }
-            .launchIn(viewModelScope)
+        viewModelScope.launch {
+            @Suppress("OPT_IN_USAGE")
+            inputNickname
+                .debounce(600)
+                .distinctUntilChanged()
+                .collectLatest {
+                    if(it == stateHandle.nickname)
+                        _errorNickname.update { null }
+                    else
+                        _errorNickname.update { _ -> checkNickname(it) }
+                }
+        }
     }
 
     fun updateInputNickname(nickname: String) {
@@ -108,35 +114,14 @@ class ProfileUpdateViewModel @Inject constructor(
             .launchIn(viewModelScope)
     }
 
-    private fun nicknameIsError(): Boolean {
-        return if (_inputNickname.value.length > NICKNAME_CONSTRAINT) {
-            _errorNickname.update { R.string.sign_up_profile_setting_warning1 }
-            true
-        } else if (!_inputNickname.value.matches(nicknameRegex)) {
-            _errorNickname.update { R.string.sign_up_profile_setting_warning3 }
-            true
-        } else {
-            false
-        }
-    }
-
-    private suspend fun nicknameIsErrorByApi(): Boolean {
-        return if(duplicateNicknameUseCase(_inputNickname.value) is NetworkResult.Success) {
-            _errorNickname.update { null }
-            false
-        } else {
-            _errorNickname.update { R.string.sign_up_profile_setting_warning2 }
-            true
-        }
-    }
-
-    private fun introIsError(): Boolean {
-        return if (_inputIntroduction.value.length > INTRODUCTION_CONSTRAINT) {
-            _errorIntro.update { R.string.profile_update_screen_warning }
-            true
-        } else {
-            _errorIntro.update { null }
-            false
-        }
+    private suspend fun checkNickname(nickname: String): Int? {
+        return if (nickname.length > NICKNAME_CONSTRAINT)
+            R.string.sign_up_profile_setting_warning1
+        else if (!nickname.matches(nicknameRegex))
+            R.string.sign_up_profile_setting_warning3
+        else  if(duplicateNicknameUseCase(nickname) !is NetworkResult.Success)
+            R.string.sign_up_profile_setting_warning2
+        else
+            null
     }
 }

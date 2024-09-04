@@ -16,7 +16,6 @@ import androidx.navigation.compose.composable
 import androidx.navigation.navigation
 import androidx.navigation.toRoute
 import com.jeju.nanaland.globalvalue.constant.ROUTE
-import com.jeju.nanaland.globalvalue.constant.ROUTE_REPORT
 import com.jeju.nanaland.globalvalue.constant.ROUTE_REVIEW_WRITE_ROUTE
 import com.jeju.nanaland.globalvalue.constant.ROUTE_TYPE_TEST_RESULT
 import com.jeju.nanaland.ui.component.common.CustomSurface
@@ -86,8 +85,7 @@ fun NavGraphBuilder.profileScreenRoute(navController: NavController) = navigatio
             moveToBackScreen = { navController.popBackStack() },
             moveToReviewReportScreen = {
                 navController.navigate(
-                    ROUTE_REPORT,
-                    bundleOf("reviewId" to it)
+                    ROUTE.Report(it, false)
                 )
             },
             moveToReviewEditScreen = { id, category ->

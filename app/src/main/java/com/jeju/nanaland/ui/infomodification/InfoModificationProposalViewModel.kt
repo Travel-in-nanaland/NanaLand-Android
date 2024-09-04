@@ -9,12 +9,10 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import com.jeju.nanaland.domain.request.UriRequestBody
 import com.jeju.nanaland.domain.request.report.InformationModificationProposalRequest
+import com.jeju.nanaland.domain.usecase.member.GetUserProfileUseCase
 import com.jeju.nanaland.domain.usecase.report.InformationModificationProposalUseCase
 import com.jeju.nanaland.globalvalue.constant.emailRegex
 import com.jeju.nanaland.globalvalue.type.InputEmailState
-import com.jeju.nanaland.ui.reviewwrite.ReviewWriteViewModel.Companion.MAX_IMAGE_CNT
-import com.jeju.nanaland.util.file.copy
-import com.jeju.nanaland.util.file.getFileExtension
 import com.jeju.nanaland.util.log.LogUtil
 import com.jeju.nanaland.util.network.onError
 import com.jeju.nanaland.util.network.onException
@@ -26,13 +24,12 @@ import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.update
-import java.io.File
-import java.io.FileOutputStream
 import javax.inject.Inject
 
 @HiltViewModel
 class InfoModificationProposalViewModel @Inject constructor(
     private val infoModificationUseCase: InformationModificationProposalUseCase,
+    getUserProfileUseCase: GetUserProfileUseCase,
     private val application: Application
 ) : AndroidViewModel(application) {
 
@@ -45,6 +42,18 @@ class InfoModificationProposalViewModel @Inject constructor(
     private val _inputEmailState = MutableStateFlow(InputEmailState.Idle)
     val inputEmailState = _inputEmailState.asStateFlow()
     val selectedImageList = mutableStateListOf<String>()
+
+    init {
+        getUserProfileUseCase()
+            .onEach { networkResult ->
+                networkResult.onSuccess { code, message, data ->
+                    data?.let {
+                        _inputEmail.update { data.email }
+                    }
+                }
+            }
+            .launchIn(viewModelScope)
+    }
 
     fun updateImageUri(uri: Uri) {
         _imageUri.update { uri.toString() }

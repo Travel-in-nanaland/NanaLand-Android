@@ -7,6 +7,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
+import com.jeju.nanaland.globalvalue.constant.ROUTE
 import com.jeju.nanaland.globalvalue.constant.ROUTE_INFORMATION_MODIFICATION_PROPOSAL_CATEGORY
 import com.jeju.nanaland.globalvalue.constant.ROUTE_MAIN
 import com.jeju.nanaland.globalvalue.constant.ROUTE_REPORT
@@ -102,11 +103,6 @@ fun NavGraphBuilder.restaurantContentScreen(navController: NavController) = comp
             )
             navController.navigate(ROUTE_REVIEW_LIST, bundle)
         },
-        moveToReportScreen = { reviewId ->
-            val bundle = bundleOf(
-                "reviewId" to reviewId
-            )
-            navController.navigate(ROUTE_REPORT, bundle)
-        }
+        moveToReportScreen = { navController.navigate(ROUTE.Report(it, true)) }
     )
 }

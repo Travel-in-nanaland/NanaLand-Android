@@ -128,8 +128,8 @@ private fun RestaurantContentScreen(
     val scrollState = rememberScrollState()
     val coroutineScope = rememberCoroutineScope()
     val reportDialogAnchoredDraggableState = remember { getReportAnchoredDraggableState() }
-    val isDimBackgroundShowing = remember { mutableStateOf(false) }
     val selectedReviewId = remember { mutableIntStateOf(0) }
+    val isDimBackgroundShowing = remember { mutableIntStateOf(-1) }
     CustomSurface {
         Box(
             modifier = Modifier.fillMaxSize()
@@ -306,9 +306,9 @@ private fun RestaurantContentScreen(
                                             data = it,
                                             toggleReviewFavorite = toggleReviewFavorite,
                                             onMenuButtonClick = {
-                                                isDimBackgroundShowing.value = true
-                                                coroutineScope.launch { reportDialogAnchoredDraggableState.animateTo(AnchoredDraggableContentState.Open) }
-                                                selectedReviewId.intValue = it.id
+                                                isDimBackgroundShowing.intValue = it.id
+                                                coroutineScope.launch { reportDialogAnchoredDraggableState.animateTo(
+                                                    AnchoredDraggableContentState.Open) }
                                             }
                                         )
 
@@ -357,7 +357,7 @@ private fun RestaurantContentScreen(
                 }
             }
 
-            if (isDimBackgroundShowing.value) {
+            if (isDimBackgroundShowing.intValue > 0) {
                 ReportDialogDimBackground(
                     isDimBackgroundShowing = isDimBackgroundShowing,
                     reportAnchoredDraggableState = reportDialogAnchoredDraggableState
@@ -365,8 +365,8 @@ private fun RestaurantContentScreen(
             }
 
             ReportBottomDialog(
-                onClick = { moveToReportScreen(selectedReviewId.intValue) },
-                hideDimBackground = { isDimBackgroundShowing.value = false },
+                onClick = { moveToReportScreen(isDimBackgroundShowing.intValue) },
+                hideDimBackground = { isDimBackgroundShowing.intValue = -1 },
                 anchoredDraggableState = reportDialogAnchoredDraggableState
             )
         }

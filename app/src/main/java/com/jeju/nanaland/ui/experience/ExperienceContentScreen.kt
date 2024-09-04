@@ -34,11 +34,11 @@ import com.jeju.nanaland.ui.component.common.BottomOkButton
 import com.jeju.nanaland.ui.component.common.CustomSurface
 import com.jeju.nanaland.ui.component.common.ReviewBottomBar
 import com.jeju.nanaland.ui.component.common.topbar.CustomTopBarWithShareButton
-import com.jeju.nanaland.ui.component.detailscreen.other.ExperienceDetailScreenDescription
 import com.jeju.nanaland.ui.component.detailscreen.other.DetailScreenInformation
 import com.jeju.nanaland.ui.component.detailscreen.other.DetailScreenInformationModificationProposalButton
 import com.jeju.nanaland.ui.component.detailscreen.other.DetailScreenNotice
 import com.jeju.nanaland.ui.component.detailscreen.other.DetailScreenTopBannerImage
+import com.jeju.nanaland.ui.component.detailscreen.other.ExperienceDetailScreenDescription
 import com.jeju.nanaland.ui.component.detailscreen.other.MoveToTopButton
 import com.jeju.nanaland.ui.component.review.ReportBottomDialog
 import com.jeju.nanaland.ui.component.review.ReportDialogDimBackground
@@ -52,7 +52,6 @@ import com.jeju.nanaland.util.resource.getString
 import com.jeju.nanaland.util.ui.ScreenPreview
 import com.jeju.nanaland.util.ui.UiState
 import kotlinx.coroutines.launch
-import kotlin.math.exp
 
 @Composable
 fun ExperienceContentScreen(
@@ -131,8 +130,8 @@ private fun ExperienceContentScreen(
     val scrollState = rememberScrollState()
     val coroutineScope = rememberCoroutineScope()
     val reportDialogAnchoredDraggableState = remember { getReportAnchoredDraggableState() }
-    val isDimBackgroundShowing = remember { mutableStateOf(false) }
     val selectedReviewId = remember { mutableIntStateOf(0) }
+    val isDimBackgroundShowing = remember { mutableIntStateOf(-1) }
     CustomSurface {
         Box(
             modifier = Modifier.fillMaxSize()
@@ -266,7 +265,7 @@ private fun ExperienceContentScreen(
                                             data = it,
                                             toggleReviewFavorite = toggleReviewFavorite,
                                             onMenuButtonClick = {
-                                                isDimBackgroundShowing.value = true
+                                                isDimBackgroundShowing.intValue = it.id
                                                 coroutineScope.launch { reportDialogAnchoredDraggableState.animateTo(AnchoredDraggableContentState.Open) }
                                                 selectedReviewId.intValue = it.id
                                             }
@@ -318,7 +317,7 @@ private fun ExperienceContentScreen(
                 }
             }
 
-            if (isDimBackgroundShowing.value) {
+            if (isDimBackgroundShowing.intValue > 0) {
                 ReportDialogDimBackground(
                     isDimBackgroundShowing = isDimBackgroundShowing,
                     reportAnchoredDraggableState = reportDialogAnchoredDraggableState
@@ -327,7 +326,7 @@ private fun ExperienceContentScreen(
 
             ReportBottomDialog(
                 onClick = { moveToReportScreen(selectedReviewId.intValue) },
-                hideDimBackground = { isDimBackgroundShowing.value = false },
+                hideDimBackground = { isDimBackgroundShowing.intValue = -1 },
                 anchoredDraggableState = reportDialogAnchoredDraggableState
             )
         }

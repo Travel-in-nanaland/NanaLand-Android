@@ -33,7 +33,6 @@ import com.jeju.nanaland.util.ui.UiState
 
 @Composable
 fun ReportScreen(
-    reviewId: Int,
     moveToBackScreen: () -> Unit,
     viewModel: ReportViewModel = hiltViewModel()
 ) {
@@ -96,7 +95,6 @@ fun ReportScreen(
                     ReportWriteScreen(email.value) { reason, email, images ->
                         if(submitState.value !is UiState.Loading)
                             viewModel.submit(
-                                reviewId = reviewId,
                                 email = email,
                                 claimType = viewModel.reportReason!!,
                                 content = reason,
