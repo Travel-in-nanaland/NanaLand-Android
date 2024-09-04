@@ -16,7 +16,7 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
@@ -31,11 +31,11 @@ import com.jeju.nanaland.ui.component.common.BottomOkButton
 import com.jeju.nanaland.ui.component.common.CustomSurface
 import com.jeju.nanaland.ui.component.common.ReviewBottomBar
 import com.jeju.nanaland.ui.component.common.topbar.CustomTopBarWithShareButton
-import com.jeju.nanaland.ui.component.detailscreen.other.ExperienceDetailScreenDescription
 import com.jeju.nanaland.ui.component.detailscreen.other.DetailScreenInformation
 import com.jeju.nanaland.ui.component.detailscreen.other.DetailScreenInformationModificationProposalButton
 import com.jeju.nanaland.ui.component.detailscreen.other.DetailScreenNotice
 import com.jeju.nanaland.ui.component.detailscreen.other.DetailScreenTopBannerImage
+import com.jeju.nanaland.ui.component.detailscreen.other.ExperienceDetailScreenDescription
 import com.jeju.nanaland.ui.component.detailscreen.other.MoveToTopButton
 import com.jeju.nanaland.ui.component.review.ReportBottomDialog
 import com.jeju.nanaland.ui.component.review.ReportDialogDimBackground
@@ -47,7 +47,6 @@ import com.jeju.nanaland.ui.theme.getColor
 import com.jeju.nanaland.util.ui.ScreenPreview
 import com.jeju.nanaland.util.ui.UiState
 import kotlinx.coroutines.launch
-import kotlin.math.exp
 
 @Composable
 fun ExperienceContentScreen(
@@ -60,6 +59,7 @@ fun ExperienceContentScreen(
     moveToSignInScreen: () -> Unit,
     moveToReviewListScreen: (Boolean, String, String, String) -> Unit,
     moveToReviewWritingScreen: (Int, String, String, String) -> Unit,
+    moveToReportScreen:(Int) -> Unit,
     viewModel: ExperienceContentViewModel = hiltViewModel()
 ) {
     LaunchedEffect(Unit) {
@@ -98,6 +98,7 @@ fun ExperienceContentScreen(
                     experienceContent.data.address,
                 )
         },
+        moveToReportScreen = moveToReportScreen,
         isContent = true
     )
 }
@@ -117,12 +118,13 @@ private fun ExperienceContentScreen(
     moveToReviewWritingScreen: () -> Unit,
     moveToInfoModificationProposalScreen: () -> Unit,
     moveToSignInScreen: () -> Unit,
+    moveToReportScreen: (Int) -> Unit,
     isContent: Boolean
 ) {
     val scrollState = rememberScrollState()
     val coroutineScope = rememberCoroutineScope()
     val reportDialogAnchoredDraggableState = remember { getReportAnchoredDraggableState() }
-    val isDimBackgroundShowing = remember { mutableStateOf(false) }
+    val isDimBackgroundShowing = remember { mutableIntStateOf(-1) }
     CustomSurface {
         Box(
             modifier = Modifier.fillMaxSize()
@@ -248,7 +250,7 @@ private fun ExperienceContentScreen(
                                             data = it,
                                             toggleReviewFavorite = toggleReviewFavorite,
                                             onMenuButtonClick = {
-                                                isDimBackgroundShowing.value = true
+                                                isDimBackgroundShowing.intValue = it.id
                                                 coroutineScope.launch { reportDialogAnchoredDraggableState.animateTo(AnchoredDraggableContentState.Open) }
                                             }
                                         )
@@ -299,7 +301,7 @@ private fun ExperienceContentScreen(
                 }
             }
 
-            if (isDimBackgroundShowing.value) {
+            if (isDimBackgroundShowing.intValue > 0) {
                 ReportDialogDimBackground(
                     isDimBackgroundShowing = isDimBackgroundShowing,
                     reportAnchoredDraggableState = reportDialogAnchoredDraggableState
@@ -307,8 +309,8 @@ private fun ExperienceContentScreen(
             }
 
             ReportBottomDialog(
-                onClick = {  },
-                hideDimBackground = { isDimBackgroundShowing.value = false },
+                onClick = { moveToReportScreen(isDimBackgroundShowing.intValue) },
+                hideDimBackground = { isDimBackgroundShowing.intValue = -1 },
                 anchoredDraggableState = reportDialogAnchoredDraggableState
             )
         }

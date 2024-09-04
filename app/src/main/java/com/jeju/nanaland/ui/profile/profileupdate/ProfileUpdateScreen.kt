@@ -29,12 +29,12 @@ import com.jeju.nanaland.globalvalue.constant.INTRODUCTION_CONSTRAINT
 import com.jeju.nanaland.ui.component.common.CustomSurface
 import com.jeju.nanaland.ui.component.common.DialogCommon
 import com.jeju.nanaland.ui.component.common.topbar.CustomTopBar
+import com.jeju.nanaland.ui.component.signup.profilesetting.SignUpScreenCharacterCount
+import com.jeju.nanaland.ui.component.signup.profilesetting.SignUpScreenTextField
 import com.jeju.nanaland.ui.profile.profileupdate.component.ProfileUpdateScreenBottomButton
 import com.jeju.nanaland.ui.profile.profileupdate.component.ProfileUpdateScreenIntroductionTextField
 import com.jeju.nanaland.ui.profile.profileupdate.component.ProfileUpdateScreenNicknameText
 import com.jeju.nanaland.ui.profile.profileupdate.component.ProfileUpdateScreenProfileContent
-import com.jeju.nanaland.ui.component.signup.profilesetting.SignUpScreenCharacterCount
-import com.jeju.nanaland.ui.component.signup.profilesetting.SignUpScreenTextField
 import com.jeju.nanaland.ui.theme.bodyBold
 import com.jeju.nanaland.ui.theme.getColor
 import com.jeju.nanaland.util.log.LogUtil
@@ -50,26 +50,26 @@ fun ProfileUpdateScreen(
     viewModel: ProfileUpdateViewModel = hiltViewModel()
 ) {
     val context = LocalContext.current
-    val inputNickname = viewModel.inputNickname.collectAsState().value
-    val inputNicknameState = viewModel.errorNickname.collectAsState().value
-    val inputIntroduction = viewModel.inputIntroduction.collectAsState().value
-    val inputIntroductionState = viewModel.errorIntro.collectAsState().value
-    val inputProfileImageUri = viewModel.imageUri.collectAsState().value
+    val inputNickname = viewModel.inputNickname.collectAsState()
+    val inputNicknameState = viewModel.errorNickname.collectAsState()
+    val inputIntroduction = viewModel.inputIntroduction.collectAsState()
+    val inputIntroductionState = viewModel.errorIntro.collectAsState(null)
+    val inputProfileImageUri = viewModel.imageUri.collectAsState()
     ProfileUpdateScreen(
         prevNickname = nickname,
         prevIntroduction = introduction,
-        prevProfileImageUri = inputProfileImageUri,
-        inputNickname = inputNickname,
+        prevProfileImageUri = inputProfileImageUri.value,
+        inputNickname = inputNickname.value,
         updateInputNickname = viewModel::updateInputNickname,
-        inputNicknameError = inputNicknameState,
-        inputIntroduction = inputIntroduction,
-        inputIntroductionError = inputIntroductionState,
+        inputNicknameError = inputNicknameState.value,
+        inputIntroduction = inputIntroduction.value,
+        inputIntroductionError = inputIntroductionState.value,
         updateInputIntroduction = viewModel::updateInputIntroduction,
-        inputProfileImageUri = inputProfileImageUri,
+        inputProfileImageUri = inputProfileImageUri.value,
         updateProfileImageUri = viewModel::updateProfileImageUri,
         updateProfile = {
-            val image = if(profileImageUri == inputProfileImageUri) null
-                else UriRequestBody(context, Uri.parse(inputProfileImageUri))
+            val image = if(profileImageUri == inputProfileImageUri.value) null
+                else UriRequestBody(context, Uri.parse(inputProfileImageUri.value))
             viewModel.updateProfile(image = image, moveToBackScreen = moveToBackScreen)
         },
         moveToBackScreen = moveToBackScreen,

@@ -20,7 +20,7 @@ interface ReportApi {
 
     // 리뷰 신고
     @Multipart
-    @POST("report/review")
+    @POST("report/claim")
     suspend fun reportReview(
         @Part("reqDto") data: RequestBody,
         @Part image: List<MultipartBody.Part>?

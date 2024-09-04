@@ -21,6 +21,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
+import com.jeju.nanaland.R
 import com.jeju.nanaland.globalvalue.constant.SYSTEM_NAVIGATION_BAR_HEIGHT
 import com.jeju.nanaland.globalvalue.constant.SYSTEM_STATUS_BAR_HEIGHT
 import com.jeju.nanaland.globalvalue.constant.TOTAL_SCREEN_HEIGHT
@@ -28,6 +29,7 @@ import com.jeju.nanaland.globalvalue.type.AnchoredDraggableContentState
 import com.jeju.nanaland.ui.component.listscreen.filter.parts.FilterDialogCloseButton
 import com.jeju.nanaland.ui.theme.body01
 import com.jeju.nanaland.ui.theme.getColor
+import com.jeju.nanaland.util.resource.getString
 import com.jeju.nanaland.util.ui.clickableNoEffect
 import kotlinx.coroutines.launch
 import kotlin.math.roundToInt
@@ -75,8 +77,9 @@ fun ReportBottomDialog(
         Text(
             modifier = Modifier
                 .fillMaxWidth()
+                .clickableNoEffect { onClick() }
                 .padding(start = 16.dp),
-            text = "신고",
+            text = getString(R.string.common_신고),
             color = getColor().black,
             style = body01
         )

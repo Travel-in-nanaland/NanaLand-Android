@@ -6,6 +6,7 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -30,18 +31,19 @@ import com.jeju.nanaland.util.resource.getString
 
 @Composable
 fun InfoModificationProposalWritingScreenTextField(
-    height: Int,
+    line: Int,
+    innerPadding: PaddingValues,
     hint: String,
     inputText: String,
     onValueChange: (String) -> Unit,
     isValid: Boolean = true,
-    contentAlignment: Alignment = Alignment.TopStart
 ) {
     BasicTextField(
         value = inputText,
         onValueChange = onValueChange,
         textStyle = body02,
-        singleLine = true
+        singleLine = line == 1,
+        minLines = line
     ) {
         Column(
             modifier = Modifier.animateContentSize()
@@ -49,7 +51,6 @@ fun InfoModificationProposalWritingScreenTextField(
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(height.dp)
                     .border(
                         border = BorderStroke(
                             width = 1.dp,
@@ -57,8 +58,7 @@ fun InfoModificationProposalWritingScreenTextField(
                         ),
                         shape = RoundedCornerShape(12.dp)
                     )
-                    .padding(start = 16.dp, top = if (contentAlignment == Alignment.TopStart) 16.dp else 0.dp),
-                contentAlignment = contentAlignment
+                    .padding(innerPadding),
             ) {
                 it()
                 if (inputText == "") {

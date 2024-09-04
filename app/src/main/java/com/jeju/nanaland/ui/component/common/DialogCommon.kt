@@ -1,13 +1,16 @@
 package com.jeju.nanaland.ui.component.common
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Text
@@ -44,28 +47,31 @@ fun DialogCommon(
         NanaLandTheme {
             Box(
                 modifier = modifier
+                    .size(300.dp, 200.dp)
                     .clip(RoundedCornerShape(10.dp))
                     .background(getColor().white)
             ) {
-                Column(
-                    horizontalAlignment = Alignment.CenterHorizontally
-                ) {
-                    Spacer(modifier = Modifier.height(25.dp))
-                    Text(
-                        text = title,
-                        style = title01Bold,
-                        color = getColor().black,
-                        textAlign = TextAlign.Center
-                    )
-                    Spacer(modifier = Modifier.height(15.dp))
-                    subTitle?.let {
+                Column {
+                    Column(
+                        modifier = Modifier.weight(1f).fillMaxWidth(),
+                        horizontalAlignment = Alignment.CenterHorizontally,
+                        verticalArrangement = Arrangement.Center
+                    ) {
                         Text(
-                            text = it,
-                            style = body01,
-                            color = getColor().gray01,
+                            text = title,
+                            style = title01Bold,
+                            color = getColor().black,
                             textAlign = TextAlign.Center
                         )
-                        Spacer(modifier = Modifier.height(20.dp))
+                        subTitle?.let {
+                            Spacer(modifier = Modifier.height(15.dp))
+                            Text(
+                                text = it,
+                                style = body01,
+                                color = getColor().gray01,
+                                textAlign = TextAlign.Center
+                            )
+                        }
                     }
 
                     HorizontalDivider(color = getColor().gray02)

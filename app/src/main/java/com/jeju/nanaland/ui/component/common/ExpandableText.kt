@@ -14,7 +14,10 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.buildAnnotatedString
+import androidx.compose.ui.text.withStyle
 
 @Composable
 fun ExpandableText(
@@ -41,11 +44,23 @@ fun ExpandableText(
                     onExpanded(isExpanded)
                 }
                 .animateContentSize(),
-            text = if(!clickable || isExpanded) text else {
-                text.substring(startIndex = 0, endIndex = lastCharIndex)
-                    .dropLast(showMoreText.length + 3)
-                    .dropLastWhile { Character.isWhitespace(it) || it == '.' }
-                    .plus("...")
+            text = if(!clickable || isExpanded) {
+                buildAnnotatedString {
+                    append(text)
+                    withStyle(showLessStyle.copy(Color.Transparent).toSpanStyle()){
+                        append(showLessText)
+                    }
+                }
+            }
+            else {
+                buildAnnotatedString {
+                    append(
+                        text.substring(startIndex = 0, endIndex = lastCharIndex)
+                            .dropLast(showMoreText.length + 3)
+                            .dropLastWhile { Character.isWhitespace(it) || it == '.' }
+                            .plus("...")
+                    )
+                }
             },
             maxLines = if (isExpanded) Int.MAX_VALUE else collapsedMaxLine,
             onTextLayout = { textLayoutResult ->
