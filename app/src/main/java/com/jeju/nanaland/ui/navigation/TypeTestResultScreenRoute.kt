@@ -14,6 +14,7 @@ import com.jeju.nanaland.util.resource.getString
 
 fun NavGraphBuilder.typeTestResultScreen(navController: NavController) = composable(route = ROUTE_TYPE_TEST_RESULT) {
     val isFirst = it.arguments?.getBoolean("isFirst") == true
+    val isMine = it.arguments?.getBoolean("isMine") == true
     val filledButtonString = if(isFirst)
             getString(R.string.type_test_screen_button2)
         else
@@ -26,15 +27,19 @@ fun NavGraphBuilder.typeTestResultScreen(navController: NavController) = composa
             popUpTo(ROUTE_TYPE_TEST_RESULT) { inclusive = false }
             launchSingleTop = true
         } },
-        onFilledButtonClick = {
-            if(isFirst) { navController.navigate(ROUTE_MAIN) {
-                popUpTo(ROUTE_TYPE_TEST_RESULT) { inclusive = true }
-                launchSingleTop = true
-            } }
-            else { navController.navigate(ROUTE_TYPE_TESTING) {
-                popUpTo(ROUTE_TYPE_TEST_RESULT) { inclusive = true }
-                launchSingleTop = true
-            } }
+        onFilledButtonClick = if(isMine) {
+            {
+                if(isFirst) { navController.navigate(ROUTE_MAIN) {
+                    popUpTo(ROUTE_TYPE_TEST_RESULT) { inclusive = true }
+                    launchSingleTop = true
+                } }
+                else { navController.navigate(ROUTE_TYPE_TESTING) {
+                    popUpTo(ROUTE_TYPE_TEST_RESULT) { inclusive = true }
+                    launchSingleTop = true
+                } }
+            }
+        } else {
+            null
         },
         moveToBackScreen = if(isFirst) null else {
             { navController.popBackStack() }

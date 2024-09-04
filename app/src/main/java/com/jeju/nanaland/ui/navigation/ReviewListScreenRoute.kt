@@ -35,6 +35,7 @@ fun NavGraphBuilder.reviewListScreen(navController: NavController) = composable(
             popUpTo(ROUTE_MAIN) { inclusive = true }
             launchSingleTop = true
         } },
-        moveToReportScreen = { navController.navigate(ROUTE.Report(it, true)) }
+        moveToReportScreen = { navController.navigate(ROUTE.Report(it, true)) },
+        moveToProfileScreen = { navController.navigate(ROUTE.Profile.StartDest(it)) }
     )
 }

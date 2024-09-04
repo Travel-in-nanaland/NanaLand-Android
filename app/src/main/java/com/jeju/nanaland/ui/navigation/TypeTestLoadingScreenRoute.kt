@@ -14,6 +14,7 @@ fun NavGraphBuilder.typeTestLoadingScreen(navController: NavController) = compos
         moveToTypeTestResultScreen = {
             val bundle = bundleOf(
                 "isFirst" to (it.arguments?.getBoolean("isFirst") == true),
+                "isMine" to true,
                 "travelType" to (it.arguments?.getString("travelType") ?: "")
             )
             navController.popBackStack(ROUTE_TYPE_TEST_LOADING, true)

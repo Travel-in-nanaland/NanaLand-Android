@@ -59,6 +59,7 @@ fun RestaurantContentScreen(
     moveToReviewListScreen: (Boolean, String, String, String) -> Unit,
     moveToReviewWritingScreen: (Int, String, String, String) -> Unit,
     moveToReportScreen:(Int) -> Unit,
+    moveToProfileScreen:(Int) -> Unit,
     viewModel: RestaurantContentViewModel = hiltViewModel()
 ) {
     LaunchedEffect(Unit) {
@@ -98,6 +99,7 @@ fun RestaurantContentScreen(
             }
         },
         moveToReportScreen = moveToReportScreen,
+        moveToProfileScreen = moveToProfileScreen,
         isContent = true
     )
 }
@@ -117,6 +119,7 @@ private fun RestaurantContentScreen(
     moveToInfoModificationProposalScreen: () -> Unit,
     moveToSignInScreen: () -> Unit,
     moveToReportScreen: (Int) -> Unit,
+    moveToProfileScreen: (Int) -> Unit,
     isContent: Boolean
 ) {
     val scrollState = rememberScrollState()
@@ -290,6 +293,7 @@ private fun RestaurantContentScreen(
                                         ReviewCard(
                                             data = it,
                                             toggleReviewFavorite = toggleReviewFavorite,
+                                            onProfileClick = moveToProfileScreen,
                                             onMenuButtonClick = {
                                                 isDimBackgroundShowing.intValue = it.id
                                                 coroutineScope.launch { reportDialogAnchoredDraggableState.animateTo(
