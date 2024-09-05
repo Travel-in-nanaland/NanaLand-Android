@@ -231,11 +231,14 @@ class ReviewWriteViewModel @Inject constructor(
             }.onSuccess { _, _, _ ->
                 _callState.update { UiState.Success(Unit) }
             }.onError { _, _ ->
-                _callState.update { null }
+                _callState.update { UiState.Failure("") }
             }.onException {
-                _callState.update { null }
+                _callState.update { UiState.Failure("") }
             }
         }
+    }
+    fun setCallStateNull(){
+        _callState.update { null }
     }
 
 

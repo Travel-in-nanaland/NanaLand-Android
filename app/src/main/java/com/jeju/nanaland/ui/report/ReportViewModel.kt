@@ -85,4 +85,7 @@ class ReportViewModel @Inject constructor(
             }
         }.launchIn(viewModelScope)
     }
+    fun setSubmitCallStateNull(){
+        _submitCallState.update { null }
+    }
 }
