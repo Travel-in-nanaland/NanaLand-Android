@@ -26,7 +26,7 @@ fun RowScope.SettingsScreenDialogConfirmButton(
     ) {
         Text(
             text = text,
-            color = getColor().main,
+            color = getColor().black,
             style = title02Bold
         )
     }

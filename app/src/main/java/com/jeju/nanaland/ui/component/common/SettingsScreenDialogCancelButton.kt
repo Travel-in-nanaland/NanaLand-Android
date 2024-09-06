@@ -26,7 +26,7 @@ fun RowScope.SettingsScreenDialogCancelButton(
     ) {
         Text(
             text = text,
-            color = getColor().black,
+            color = getColor().main,
             style = title02Bold
         )
     }
