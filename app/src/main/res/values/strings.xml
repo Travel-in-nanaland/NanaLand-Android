@@ -186,6 +186,11 @@
     <string name="detail_screen_common_알아두면_좋아요">알아두면 좋아요!</string>
     <string name="detail_screen_common_이_장소만의_매력_포인트">이 장소만의 매력 포인트✨</string>
 
+    <!--상세 화면 - 식당 관련-->
+    <!--TODO 번역 추가본(09.07 작성)-->
+    <string name="restaurant_main_menu" translatable="false">대표 메뉴</string>
+    <string name="restaurant_price_unit" translatable="false">%s원</string>
+
     <!--정보 수정 제안-->
     <string name="info_modification_proposal_정보_수정_제안">정보 수정 제안</string>
     <string name="info_modification_proposal_정보_수정_제안2">정보 수정 제안</string>
@@ -438,7 +443,6 @@
     <string name="loading_wait_text_desc2" translatable="false">여러분의 경험이\nnanaland로 전달 중입니다💜</string>
     <string name="loading_wait_text_desc3" translatable="false">여러분의 생각이 잘 전달되도록\n신중히 처리 중입니다💌</string>
     <string name="loading_wait_text_desc4" translatable="false">잠시만 기다려 주세요!\n여러분의 피드백은 저희에게 큰 힘이 됩니다🍀</string>
-
 
     <!--리뷰 키워드-->
     <!--TODO 번역-->

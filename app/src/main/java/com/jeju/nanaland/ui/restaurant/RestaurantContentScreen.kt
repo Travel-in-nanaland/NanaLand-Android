@@ -45,6 +45,7 @@ import com.jeju.nanaland.ui.component.review.TotalReviewCountText
 import com.jeju.nanaland.ui.component.review.getReportAnchoredDraggableState
 import com.jeju.nanaland.ui.theme.getColor
 import com.jeju.nanaland.ui.theme.title02Bold
+import com.jeju.nanaland.util.resource.getString
 import com.jeju.nanaland.util.ui.UiState
 import kotlinx.coroutines.launch
 
@@ -163,7 +164,7 @@ private fun RestaurantContentScreen(
                                     Spacer(Modifier.height(32.dp))
 
                                     Text(
-                                        text = "대표 메뉴",
+                                        text = getString(R.string.restaurant_main_menu),
                                         color = getColor().black,
                                         style = title02Bold
                                     )
