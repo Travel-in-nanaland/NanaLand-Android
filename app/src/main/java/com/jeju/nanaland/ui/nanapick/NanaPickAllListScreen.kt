@@ -1,12 +1,12 @@
 package com.jeju.nanaland.ui.nanapick
 
-import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
-import androidx.compose.foundation.lazy.grid.itemsIndexed
+import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.lazy.grid.rememberLazyGridState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -68,31 +68,26 @@ private fun NanaPickAllListScreen(
             onBackButtonClicked = moveToBackScreen
         )
 
-        Spacer(Modifier.height(16.dp))
-
         when (nanaPickList) {
             is UiState.Loading -> {}
             is UiState.Success -> {
                 LazyVerticalGrid(
-                    modifier = Modifier.padding(start = 36.dp, end = 36.dp),
+                    modifier = Modifier.padding(horizontal = 36.dp),
                     state = lazyGridState,
-                    columns = GridCells.Fixed(2)
+                    columns = GridCells.Fixed(2),
+                    verticalArrangement = Arrangement.spacedBy(24.dp),
+                    horizontalArrangement = Arrangement.spacedBy(48.dp)
                 ) {
-                    itemsIndexed(nanaPickList.data) { idx, item ->
-                        Row() {
-                            if (idx % 2 == 1) {
-                                Spacer(Modifier.weight(1f))
-                            }
+                    item {
+                        Spacer(Modifier.height((40 - 24).dp))
+                    }
+                    item { }
 
-                            NanaPickThumbnailBanner2(
-                                item = item,
-                                onClick = moveToNanaPickContentScreen
-                            )
-
-                            if (idx % 2 == 0) {
-                                Spacer(Modifier.weight(1f))
-                            }
-                        }
+                    items(nanaPickList.data) { item ->
+                        NanaPickThumbnailBanner2(
+                            item = item,
+                            onClick = moveToNanaPickContentScreen
+                        )
                     }
                 }
             }
