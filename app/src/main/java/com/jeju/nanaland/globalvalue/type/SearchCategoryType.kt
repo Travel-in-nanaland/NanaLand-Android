@@ -9,6 +9,6 @@ enum class SearchCategoryType(val titleResId: Int) {
     Festival(R.string.common_축제),
     Market(R.string.common_전통시장),
     Experience(R.string.common_이색_체험),
-    NanaPick(R.string.common_나나s_Pick),
-    Restaurant(R.string.common_제주_맛집)
+    Restaurant(R.string.common_제주_맛집),
+    NanaPick(R.string.common_나나s_Pick)
 }
