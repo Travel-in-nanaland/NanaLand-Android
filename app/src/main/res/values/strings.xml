@@ -192,6 +192,10 @@
     <string name="restaurant_main_menu" translatable="false">대표 메뉴</string>
     <string name="restaurant_price_unit" translatable="false">%s원</string>
 
+    <!--상세 화면 - 후기 관련-->
+    <!--TODO 번역 추가본(09.07 작성)-->
+    <string name="detail_screen_more_review" translatable="false">후기 더보기</string>
+
     <!--정보 수정 제안-->
     <string name="info_modification_proposal_정보_수정_제안">정보 수정 제안</string>
     <string name="info_modification_proposal_정보_수정_제안2">정보 수정 제안</string>
