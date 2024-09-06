@@ -13,6 +13,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.jeju.nanaland.R
 import com.jeju.nanaland.domain.entity.member.RecommendedPostData
 import com.jeju.nanaland.domain.entity.nanapick.NanaPickBannerData
 import com.jeju.nanaland.globalvalue.userdata.UserData
@@ -22,6 +23,7 @@ import com.jeju.nanaland.ui.component.main.home.HomeScreenRecommendText
 import com.jeju.nanaland.ui.component.main.home.HomeScreenRecommendedPosts
 import com.jeju.nanaland.ui.component.main.home.HomeScreenTopBanner
 import com.jeju.nanaland.util.listfilter.ListFilter
+import com.jeju.nanaland.util.resource.getString
 import com.jeju.nanaland.util.ui.ScreenPreview
 import com.jeju.nanaland.util.ui.UiState
 
@@ -108,7 +110,9 @@ private fun HomeContent(
         Column(
             modifier = Modifier.padding(start = 16.dp, end = 16.dp, bottom = 20.dp)
         ) {
-            HomeScreenRecommendText(text = UserData.nickname)
+            HomeScreenRecommendText(text = UserData.nickname.takeIf {
+                it != "GUEST"
+            } ?: getString(R.string.common_guest_name))
 
             Spacer(Modifier.height(10.dp))
 

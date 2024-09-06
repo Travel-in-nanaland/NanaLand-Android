@@ -75,6 +75,7 @@
     <string name="common_신고" translatable="false">신고</string> <!--  TODO  -->
     <string name="common_사진" translatable="false">사진</string> <!--  TODO  -->
     <string name="common_동영상" translatable="false">동영상</string> <!--  TODO  -->
+    <string name="common_guest_name">우리 나나</string><!--TODO 번역 추가본(09.07 작성)-->
 
     <!--시간 관련-->
     <string name="common_방금전" translatable="false">방금 전</string> <!--  TODO  -->
