@@ -8,5 +8,7 @@ data class SignInRequest(
     @SerializedName("provider")
     val provider: String,
     @SerializedName("providerId")
-    val providerId: String
+    val providerId: String,
+    @SerializedName("fcmToken")
+    val fcmToken: String?
 )

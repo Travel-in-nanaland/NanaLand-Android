@@ -23,4 +23,8 @@ interface AuthRepository {
         data: SignUpRequest,
         image: File?
     ): NetworkResult<AuthTokenData>
+
+    // FCM 토큰 발행
+    suspend fun getFCMToken(
+    ): String?
 }
