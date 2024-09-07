@@ -108,7 +108,9 @@ private fun NanaPickListScreen(
                         state = pagerState,
                         pageSize = PageSize.Fixed(226.dp)
                     ) { page ->
-                        Column {
+                        Column(
+                            modifier = Modifier.clickableNoEffect { moveToNanaPickContentScreen(recommendedNanaPickList.data[page % recommendedNanaPickList.data.size].id) }
+                        ) {
                             Box(
                                 modifier = Modifier
                                     .padding(end = 16.dp)

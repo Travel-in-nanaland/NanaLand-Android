@@ -67,11 +67,12 @@
     <string name="common_네">Ya</string>
     <string name="common_아니오">Tidak</string>
     <string name="common_필수">(Wajib)</string>
+    <string name="common_필수_with_star">*Diperlukan</string>
     <string name="common_선택">(Opsional)</string>
 
     <!--로그인 화면-->
-    <string name="sign_in_screen_로그인_없이_둘러보기">Guna Tanpa Log Masuk</string>
-    <string name="sign_in_screen_google_sign_in">Sign in with Google</string>
+    <string name="sign_in_screen_로그인_없이_둘러보기">Layari tanpa log masuk</string>
+    <string name="sign_in_screen_google_sign_in">Log Masuk Google</string>
 
     <!--홈 화면-->
     <string name="home_screen_ad1_title">Nak lihat laut yang cantik di Pulau Jeju?</string>
@@ -83,7 +84,7 @@
     <string name="home_screen_ad4_title">Festival khas di Jeju pada bulan Julai🎈</string>
     <string name="home_screen_ad4_content">Mari saksikan festival yang penuh dengan harta karun dunia, rasa Pulau Jeju!</string>
     <string name="home_screen_recommend1">"Cadangan untuk "</string>
-    <string name="home_screen_recommend2">" kami 🍊"</string>
+    <string name="home_screen_recommend2">Cadangan daripada penduduk untuk Nana kami</string>
 
     <string-array name="home_screen_hint">
         <item>Festival Bunga Canola di Jeju sedang berlangsung! 🏵️</item>
@@ -172,6 +173,12 @@
     <string name="detail_screen_common_이_장소만의_매력_포인트">Daya tarikan tempat ini✨</string>
 
     <!--정보 수정 제안-->
+    <string name="detail_screen_common_후기_작성하기">Tulis ulasan</string>
+    <string name="detail_screen_common_후기_더보기">Lihat lebih banyak ulasan</string>
+    <string name="detail_screen_common_대표_메뉴">Menu Utama</string>
+    <string name="detail_screen_common_간단_설명">Penjelasan ringkas</string>
+    <string name="detail_screen_common_제공_서비스">Perkhidmatan yang disediakan</string>
+    <string name="detail_screen_common_인스타그램">Instagram</string>
     <string name="info_modification_proposal_정보_수정_제안">Cadangan Pembetulan</string>
     <string name="info_modification_proposal_정보_수정_제안2">Cadangan Pembetulan</string>
     <string name="info_modification_proposal_heading1">Sila berikan cadangan maklumat yang perlu dibetulkan.</string>
@@ -197,6 +204,7 @@
     <string name="info_modification_proposal_warning">Format e-mel tidak betul. Sila masukkan semula!</string>
 
     <!--약관 동의 화면-->
+    <string name="info_modification_proposal_necessary">Diperlukan</string>
     <string name="policy_agree_screen_heading">Selamat datang ke\n\nnanaland in Jeju</string>
     <string name="policy_agree_screen_전체_동의">Setuju Semua</string>
     <string name="policy_agree_screen_privacy_policy">Terma Penggunaan &amp; Dasar Privasi</string>
@@ -317,13 +325,21 @@
     <string name="mypage_screen_level">Lv.</string>
 
     <!--프로필 수정 화면-->
+    <string name="mypage_screen_모두보기">Lihat semua</string>
+    <string name="mypage_screen_리뷰작성하기">Tulis ulasan</string>
+    <string name="mypage_screen_desc_default">Hello! Gembira bertemu dengan anda🖐️</string>
+    <string name="mypage_screen_desc_hint">Luahkan diri anda dalam satu baris!</string>
+    <string name="mypage_screen_review_remove_dialog">Adakah anda mahu/n memadam ulasan ini?</string>
+    <string name="mypage_screen_review_guest">Log masuk untuk merekod pengalaman anda sendiri!</string>
+    <string name="mypage_screen_review_empty">Tinggalkan ulasan dan rekod pengalaman anda!</string>
+    <string name="mypage_screen_notice_empty">Tiada Pengumuman</string>
     <string name="profile_update_screen_프로필_수정">Ubah Profil</string>
     <string name="profile_update_screen_수정_완료">Pembetulan selesai</string>
     <string name="profile_update_screen_warning">소개글은 70자 이내로 작성 가능합니다.</string>
 
     <!--프로필 수정 화면 다이얼로그-->
-    <string name="profile_update_dialog_text1">Adakah anda ingin\nmemadam perubahan?</string>
-    <string name="profile_update_dialog_text2">Kembali sekarang akan memadamkan\nperubahan.</string>
+    <string name="profile_update_dialog_text1">Adakah anda pasti mahu keluar?</string>
+    <string name="profile_update_dialog_text2">Jika anda keluar sekarang,/nApa yang anda tulis akan dipadam.</string>
 
     <!--언어 초기화 화면-->
     <string name="profile_initialization_screen_hello">안녕하세요!</string>
@@ -372,4 +388,50 @@
     <string name="permission_checking_screen_카메라_description">Diperlukan untuk mendaftar gambar ulasan dan maklumat restoran.</string>
     <string name="permission_checking_screen_알림_description">Diperlukan untuk menerima pemberitahuan acara dan maklumat tawaran.</string>
     <string name="permission_checking_screen_오디오_및_음악_description">Diperlukan untuk mendaftar kandungan video.</string>
+    <string name="common_알림">Amaran</string>
+    <string name="common_종류">Jenis</string>
+    <string name="common_리뷰">Ulasan</string>
+    <string name="common_액티비티">Aktiviti</string>
+    <string name="common_문화예술">Budaya dan Seni</string>
+    <string name="common_후기">Ulasan</string>
+    <string name="common_공지사항">Pengumuman</string>
+    <string name="common_수정">Pembetulan</string>
+    <string name="common_신고">Laporan</string>
+    <string name="common_사진">Gambar</string>
+    <string name="common_동영상">Video</string>
+    <string name="common_원">won</string>
+    <string name="common_시간전">%d jam yang lalu</string>
+    <string name="common_인터넷_문제">Saya rasa ada masalah dengan sambungan internet saya!/nBoleh anda kembali selepas menyemak?</string>
+    <string name="detail_screen_common_영업_시간">Waktu Operasi</string>
+    <string name="review_write_title">Tulis ulasan</string>
+    <string name="review_write_search_hint">Cari Lokasi</string>
+    <string name="review_write_select_rating">Sila {pilih} penilaian {bintang}!</string>
+    <string name="review_write_writing">Sila {tulis} ulasan {kunjungan}!</string>
+    <string name="review_write_writing_hint">Sila isikan butiran</string>
+    <string name="review_write_add_keyword">Tambah kata kunci</string>
+    <string name="review_write_complete">Naikkan</string>
+    <string name="review_write_error_maximum_picture">Anda boleh memilih sehingga %d gambar</string>
+    <string name="review_write_error_maximum_text">Kandungan boleh ditulis dalam %d aksara.</string>
+    <string name="review_write_keyword_title">Kata kunci</string>
+    <string name="review_write_keyword_guide">*Anda mesti memilih sekurang-kurangnya %d item, dan boleh memilih sehingga %d item.</string>
+    <string name="review_write_keyword_error_over">Anda boleh memilih sehingga %d</string>
+    <string name="review_write_keyword_complete_title1">Terima kasih atas penulisan anda yang menarik 👻</string>
+    <string name="review_write_keyword_complete_sub1">Seperti daya tarikan anda/n{Daya tarikan destinasi pelancongan juga meningkat!}</string>
+    <string name="review_write_keyword_complete_title2">Anda suka sangat?</string>
+    <string name="review_write_keyword_complete_sub2">Penulisan anda yang teliti/nPilihan perjalanan seseorang/nIa memperkayakan saya!</string>
+    <string name="review_write_keyword_complete_btn_again">Lihat kandungan semula</string>
+    <string name="review_write_keyword_complete_btn_add">Tambah ulasan lain</string>
+    <string name="review_write_cancel_dialog_title">Adakah anda pasti mahu keluar?</string>
+    <string name="review_write_cancel_dialog_subtitle">Jika anda keluar sekarang,/nApa yang anda tulis akan dipadam.</string>
+    <string name="report_category_title">Sila beritahu kami mengapa anda melaporkannya!</string>
+    <string name="report_category_subtitle">Maklumat yang dilaporkan tanpa alasan yang sah mesti disahkan oleh pentadbir./nIa mungkin tidak akan diterima.</string>
+    <string name="report_write_resone_title">Sebab untuk laporan</string>
+    <string name="report_write_resone_hint">Sila tulis sekurang-kurangnya %d aksara mengenai sebab untuk laporan ini.</string>
+    <string name="report_write_resone_error">Sila tulis sekurang-kurangnya %d aksara mengenai sebab untuk laporan ini.</string>
+    <string name="report_write_complete_toast">Kandungan yang dilaporkan akan diproses dalam /ntempoh maksimum 24 jam mengikut dasar operasi.</string>
+    <string name="review_keyword_mood">Suasana</string>
+    <string name="review_keyword_with">Teman</string>
+    <string name="review_keyword_infra">Kemudahan</string>
+    <string name="nanapick_list_screen_recommended_post">Cadangan minggu ini, Pilihan Nana</string>
+    <string name="nanapick_list_screen_see_all">Lihat semua</string>
 </resources>

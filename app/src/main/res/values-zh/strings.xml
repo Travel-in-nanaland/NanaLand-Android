@@ -52,14 +52,15 @@
     <string name="common_네">是</string>
     <string name="common_아니오">否</string>
     <string name="common_필수">(必填)</string>
+    <string name="common_필수_with_star">*必填</string>
     <string name="common_선택">(选填)</string>
 
     <!--로그인 화면-->
-    <string name="sign_in_screen_로그인_없이_둘러보기">无需登录浏览 </string>
-    <string name="sign_in_screen_google_sign_in">Sign in with Google</string>
+    <string name="sign_in_screen_로그인_없이_둘러보기">不登录直接浏览</string>
+    <string name="sign_in_screen_google_sign_in">使用 Google 登录</string>
 
     <!--홈 화면-->
-    <string name="home_screen_ad1_title">想在济州岛看美丽的大海吗？</string>
+    <string name="home_screen_ad1_title">想看济州岛美丽的大海吗？</string>
     <string name="home_screen_ad1_content">那就来西归浦市城山体验大自然吧！</string>
     <string name="home_screen_ad2_title">想去看稀有的星星吗？💫</string>
     <string name="home_screen_ad2_content">来确认一下充满感性的涯月的山丘吧😯</string>
@@ -68,7 +69,7 @@
     <string name="home_screen_ad4_title">济州岛七月举办的独特节日🎈</string>
     <string name="home_screen_ad4_content">来看看充满济州岛风情的世界宝藏节日吧！</string>
     <string name="home_screen_recommend1">为</string>
-    <string name="home_screen_recommend2">的当地人推荐🍊</string>
+    <string name="home_screen_recommend2">为您准备的Nana推荐</string>
 
     <string-array name="home_screen_hint">
         <item>济州岛的油菜花节正进行中！🏵️</item>
@@ -172,6 +173,12 @@
     <string name="detail_screen_common_이_장소만의_매력_포인트">这个地方的魅力✨</string>
 
     <!--정보 수정 제안-->
+    <string name="detail_screen_common_후기_작성하기">写评价</string>
+    <string name="detail_screen_common_후기_더보기">查看更多评论</string>
+    <string name="detail_screen_common_대표_메뉴">代表菜单</string>
+    <string name="detail_screen_common_간단_설명">简要说明</string>
+    <string name="detail_screen_common_제공_서비스">提供的服务</string>
+    <string name="detail_screen_common_인스타그램">Instagram</string>
     <string name="info_modification_proposal_정보_수정_제안">建议修改信息</string>
     <string name="info_modification_proposal_정보_수정_제안2">建议修改信息</string>
     <string name="info_modification_proposal_heading1">请提出需要修改的信息 !</string>
@@ -197,6 +204,7 @@
     <string name="info_modification_proposal_warning">电子邮件格式不正确。请重新输入！</string>
 
     <!--약관 동의 화면-->
+    <string name="info_modification_proposal_necessary">必填</string>
     <string name="policy_agree_screen_heading">欢迎来到济州的\nnanaland</string>
     <string name="policy_agree_screen_전체_동의">全部同意</string>
     <string name="policy_agree_screen_privacy_policy">同意使用条款及隐私政策</string>
@@ -316,13 +324,21 @@
     <string name="mypage_screen_level">Lv.</string>
 
     <!--프로필 수정 화면-->
+    <string name="mypage_screen_모두보기">查看全部</string>
+    <string name="mypage_screen_리뷰작성하기">写评价</string>
+    <string name="mypage_screen_desc_default">你好！很高兴见到你🖐️</string>
+    <string name="mypage_screen_desc_hint">用一句话变现自己！</string>
+    <string name="mypage_screen_review_remove_dialog">确定删除/n这条评论吗？</string>
+    <string name="mypage_screen_review_guest">登录以记录您自己的经验！</string>
+    <string name="mypage_screen_review_empty">留下评价并记录您的体验！</string>
+    <string name="mypage_screen_notice_empty">没有公告</string>
     <string name="profile_update_screen_프로필_수정">编辑个人资料</string>
     <string name="profile_update_screen_수정_완료">修改完成</string>
     <string name="profile_update_screen_warning">소개글은 70자 이내로 작성 가능합니다.</string>
 
     <!--프로필 수정 화면 다이얼로그-->
-    <string name="profile_update_dialog_text1">要删除更改内容吗？</string>
-    <string name="profile_update_dialog_text2">现在返回的话更改内容将被删除</string>
+    <string name="profile_update_dialog_text1">您确定要离开吗？</string>
+    <string name="profile_update_dialog_text2">如果您现在离开，/n您正在写的内容将被删除。</string>
 
     <!--언어 초기화 화면-->
     <string name="profile_initialization_screen_hello">안녕하세요!</string>
@@ -371,4 +387,50 @@
     <string name="permission_checking_screen_카메라_description">为注册评论照片和美食信息所需。</string>
     <string name="permission_checking_screen_알림_description">为接收活动及优惠信息通知所需。</string>
     <string name="permission_checking_screen_오디오_및_음악_description">注册视频内容所需。</string>
+    <string name="common_알림">告示</string>
+    <string name="common_종류">类型</string>
+    <string name="common_리뷰">评价</string>
+    <string name="common_액티비티">活动</string>
+    <string name="common_문화예술">文化艺术</string>
+    <string name="common_후기">评价</string>
+    <string name="common_공지사항">公告</string>
+    <string name="common_수정">修改</string>
+    <string name="common_신고">举报</string>
+    <string name="common_사진">图片</string>
+    <string name="common_동영상">视频</string>
+    <string name="common_원">韩元</string>
+    <string name="common_시간전">%d小时前</string>
+    <string name="common_인터넷_문제">网络不太顺畅！/n能检查后回来吗？</string>
+    <string name="detail_screen_common_영업_시간">营业时间</string>
+    <string name="review_write_title">写评价</string>
+    <string name="review_write_search_hint">搜索地点</string>
+    <string name="review_write_select_rating">请{选择}一个{星级评分}！</string>
+    <string name="review_write_writing">请{写下}一个{访问评价}！</string>
+    <string name="review_write_writing_hint">请填写详细信息</string>
+    <string name="review_write_add_keyword">添加关键词</string>
+    <string name="review_write_complete">上传</string>
+    <string name="review_write_error_maximum_picture">您最多可以选择%d张照片</string>
+    <string name="review_write_error_maximum_text">内容可在%d个字符内书写。</string>
+    <string name="review_write_keyword_title">关键词</string>
+    <string name="review_write_keyword_guide">*您必须选择至少%d个项目，最多可以选择%d个项目。</string>
+    <string name="review_write_keyword_error_over">最多可以选择%d个</string>
+    <string name="review_write_keyword_complete_title1">感谢您精彩的写作👻</string>
+    <string name="review_write_keyword_complete_sub1">就像你的魅力一样/n{旅游目的地的吸引力也增加了！}</string>
+    <string name="review_write_keyword_complete_title2">非常喜欢！</string>
+    <string name="review_write_keyword_complete_sub2">你细致入微的写作/让n某人的旅行选择/n更加丰富！</string>
+    <string name="review_write_keyword_complete_btn_again">再去看看内容</string>
+    <string name="review_write_keyword_complete_btn_add">添加另一条评价</string>
+    <string name="review_write_cancel_dialog_title">您确定要离开吗？</string>
+    <string name="review_write_cancel_dialog_subtitle">如果您现在离开，/n您正在写的内容将被删除。</string>
+    <string name="report_category_title">请告诉我们举报原因！</string>
+    <string name="report_category_subtitle">无有效理由的举报信息必须由管理员确认。/n可能不会反映。</string>
+    <string name="report_write_resone_title">举报原因</string>
+    <string name="report_write_resone_hint">请写下至少%d个字的举报理由。</string>
+    <string name="report_write_resone_error">请写下至少%d个字的举报理由。</string>
+    <string name="report_write_complete_toast">举报内容符合运营政策。/n将在最多24小时内处理。</string>
+    <string name="review_keyword_mood">氛围</string>
+    <string name="review_keyword_with">同伴</string>
+    <string name="review_keyword_infra">便利设施</string>
+    <string name="nanapick_list_screen_recommended_post">本周推荐，Nana精选</string>
+    <string name="nanapick_list_screen_see_all">查看全部</string>
 </resources>

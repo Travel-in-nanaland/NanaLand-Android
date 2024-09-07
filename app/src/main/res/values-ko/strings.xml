@@ -67,11 +67,12 @@
     <string name="common_네">네</string>
     <string name="common_아니오">아니오</string>
     <string name="common_필수">(필수)</string>
+    <string name="common_필수_with_star">*필수</string>
     <string name="common_선택">(선택)</string>
 
     <!--로그인 화면-->
-    <string name="sign_in_screen_로그인_없이_둘러보기">로그인 없이 둘러보기</string>
-    <string name="sign_in_screen_google_sign_in">Google 로그인</string>
+    <string name="sign_in_screen_로그인_없이_둘러보기">로그인없이 둘러보기</string>
+    <string name="sign_in_screen_google_sign_in">구글 로그인</string>
 
     <!--홈 화면-->
     <string name="home_screen_ad1_title">제주도에서 예쁜 바다 보고 싶다고?</string>
@@ -83,7 +84,7 @@
     <string name="home_screen_ad4_title">제주도에서만 여는 7월 축제🎈</string>
     <string name="home_screen_ad4_content">세계의 보물, 제주도가 가득 느껴지는 축제 보러가자</string>
     <string name="home_screen_recommend1">""</string>
-    <string name="home_screen_recommend2">" 님을 위한 도민 추천 🍊"</string>
+    <string name="home_screen_recommend2">우리 나나님을 위한 도민 추천</string>
 
     <string-array name="home_screen_hint">
         <item>제주도는 지금 유채꽃 축제🏵️</item>
@@ -172,6 +173,12 @@
     <string name="detail_screen_common_이_장소만의_매력_포인트">이 장소만의 매력 포인트✨</string>
 
     <!--정보 수정 제안-->
+    <string name="detail_screen_common_후기_작성하기">후기 작성하기</string>
+    <string name="detail_screen_common_후기_더보기">후기 더 보기</string>
+    <string name="detail_screen_common_대표_메뉴">대표 메뉴</string>
+    <string name="detail_screen_common_간단_설명">간단 설명</string>
+    <string name="detail_screen_common_제공_서비스">제공 서비스</string>
+    <string name="detail_screen_common_인스타그램">Instagram</string>
     <string name="info_modification_proposal_정보_수정_제안">정보 수정 제안</string>
     <string name="info_modification_proposal_정보_수정_제안2">정보 수정 제안</string>
     <string name="info_modification_proposal_heading1">수정해야 할 정보를 제안해 주세요!</string>
@@ -197,6 +204,7 @@
     <string name="info_modification_proposal_warning">이메일 형식이 잘못 되었습니다. 다시 입력해 주세요!</string>
 
     <!--약관 동의 화면-->
+    <string name="info_modification_proposal_necessary">필수</string>
     <string name="policy_agree_screen_heading">nanaland in Jeju에\n오신 것을 환영합니다.</string>
     <string name="policy_agree_screen_전체_동의">전체 동의</string>
     <string name="policy_agree_screen_privacy_policy">이용약관 동의 및 개인정보 처리방침</string>
@@ -317,13 +325,21 @@
     <string name="mypage_screen_level">Lv.</string>
 
     <!--프로필 수정 화면-->
+    <string name="mypage_screen_모두보기">모두보기</string>
+    <string name="mypage_screen_리뷰작성하기">후기 작성하기</string>
+    <string name="mypage_screen_desc_default">안녕하세요! 반가워요🖐️</string>
+    <string name="mypage_screen_desc_hint">나를 한 줄로 표현해보세요!</string>
+    <string name="mypage_screen_review_remove_dialog">해당 후기를/n삭제하시겠습니까?</string>
+    <string name="mypage_screen_review_guest">로그인하여 나만의 경험을 기록해보세요!</string>
+    <string name="mypage_screen_review_empty">후기를 남겨 나만의 경험을 기록하세요!</string>
+    <string name="mypage_screen_notice_empty">공지사항이 존재하지 않습니다</string>
     <string name="profile_update_screen_프로필_수정">프로필 수정</string>
     <string name="profile_update_screen_수정_완료">수정 완료</string>
     <string name="profile_update_screen_warning">소개글은 70자 이내로 작성 가능합니다.</string>
 
     <!--프로필 수정 화면 다이얼로그-->
-    <string name="profile_update_dialog_text1">변경 내용을\n삭제하시겠습니까?</string>
-    <string name="profile_update_dialog_text2">지금 돌아가면 변경 내용이 삭제됩니다.</string>
+    <string name="profile_update_dialog_text1">정말 나가시겠습니까?</string>
+    <string name="profile_update_dialog_text2">지금 나가시면,/n작성 중인 내용이 삭제됩니다.</string>
 
     <!--언어 초기화 화면-->
     <string name="profile_initialization_screen_hello">안녕하세요!</string>
@@ -372,4 +388,50 @@
     <string name="permission_checking_screen_카메라_description">리뷰  사진 등록 및 맛집정보 등록을 위해 필요합니다.</string>
     <string name="permission_checking_screen_알림_description">이벤트 및 혜택정보 알림 수신을 위해 필요합니다.</string>
     <string name="permission_checking_screen_오디오_및_음악_description">영상 콘텐츠 등록을 위해 필요합니다.</string>
+    <string name="common_알림">알림</string>
+    <string name="common_종류">종류</string>
+    <string name="common_리뷰">리뷰</string>
+    <string name="common_액티비티">액티비티</string>
+    <string name="common_문화예술">문화예술</string>
+    <string name="common_후기">후기</string>
+    <string name="common_공지사항">공지사항</string>
+    <string name="common_수정">수정</string>
+    <string name="common_신고">신고</string>
+    <string name="common_사진">사진</string>
+    <string name="common_동영상">동영상</string>
+    <string name="common_원">원</string>
+    <string name="common_시간전">%d시간 전</string>
+    <string name="common_인터넷_문제">인터넷 연결에 문제가 생긴 것 같아요!/n확인 후 다시 들어와줄 수 있을까요?</string>
+    <string name="detail_screen_common_영업_시간">영업 시간</string>
+    <string name="review_write_title">후기 작성</string>
+    <string name="review_write_search_hint">장소를 검색하세요</string>
+    <string name="review_write_select_rating">{별점}을 {선택}해주세요!</string>
+    <string name="review_write_writing">{방문 후기}를 {작성}해주세요!</string>
+    <string name="review_write_writing_hint">내용을 작성해 주세요</string>
+    <string name="review_write_add_keyword">키워드 추가</string>
+    <string name="review_write_complete">올리기</string>
+    <string name="review_write_error_maximum_picture">사진은 %d개까지 선택 가능합니다</string>
+    <string name="review_write_error_maximum_text">내용은 %d자 이내로 작성 가능합니다</string>
+    <string name="review_write_keyword_title">키워드</string>
+    <string name="review_write_keyword_guide">*최소 %d개 이상 선택해야하며, 최대 %d개까지 선택 가능합니다.</string>
+    <string name="review_write_keyword_error_over">최대 %d개까지 선택 가능합니다</string>
+    <string name="review_write_keyword_complete_title1">당신의 매력적인 글 고마워요 👻</string>
+    <string name="review_write_keyword_complete_sub1">당신의 매력만큼이나/n{여행지의 매력도 함께 올라갔어요!}</string>
+    <string name="review_write_keyword_complete_title2">너무 마음에 드는걸요 ?</string>
+    <string name="review_write_keyword_complete_sub2">당신의 세심한 글이/n누군가의 여행 선택지를/n풍요롭게 해줬어요 !</string>
+    <string name="review_write_keyword_complete_btn_again">콘텐츠 다시 보러 가기</string>
+    <string name="review_write_keyword_complete_btn_add">다른 리뷰 추가하기</string>
+    <string name="review_write_cancel_dialog_title">정말 나가시겠습니까?</string>
+    <string name="review_write_cancel_dialog_subtitle">지금 나가시면,/n작성 중인 내용이 삭제됩니다.</string>
+    <string name="report_category_title">신고하는 이유를 알려주세요!</string>
+    <string name="report_category_subtitle">타당한 근거 없이 신고된 내용은 관리자 확인 후/n반영되지 않을 수 있습니다.</string>
+    <string name="report_write_resone_title">신고 사유</string>
+    <string name="report_write_resone_hint">신고 사유를 %d자 이상 작성해 주세요.</string>
+    <string name="report_write_resone_error">신고 사유를 %d자 이상 작성해 주세요.</string>
+    <string name="report_write_complete_toast">신고한 내용은 운영정책에 따라/n최대 24시간 이내 처리됩니다.</string>
+    <string name="review_keyword_mood">분위기</string>
+    <string name="review_keyword_with">동반자</string>
+    <string name="review_keyword_infra">편의 시설</string>
+    <string name="nanapick_list_screen_recommended_post">금주 (추천)나나’s Pick</string>
+    <string name="nanapick_list_screen_see_all">모두보기</string>
 </resources>
