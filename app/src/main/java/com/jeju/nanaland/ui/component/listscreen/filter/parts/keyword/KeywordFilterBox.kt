@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -18,6 +19,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.jeju.nanaland.R
 import com.jeju.nanaland.ui.theme.caption01
@@ -35,6 +37,7 @@ fun KeywordFilterBox(
     Row(
         modifier = Modifier
             .height(32.dp)
+            .widthIn(max = 159.dp)
             .border(
                 border = BorderStroke(
                     width = 1.dp,
@@ -52,17 +55,17 @@ fun KeywordFilterBox(
         Spacer(Modifier.width(12.dp))
 
         Text(
+            modifier = Modifier.weight(1f, false),
             text = when (selectedKeywordList.count { it }) {
                 0 -> text
-                1, 2 -> selectedKeywordList.withIndex()
-                    .filter { selectedKeywordList[it.index] }.take(2)
-                    .joinToString(separator = ", ") { keywordList[it.index] }
                 else -> selectedKeywordList.withIndex()
-                    .filter { selectedKeywordList[it.index] }.take(2)
-                    .joinToString(separator = ", ") { keywordList[it.index] } + ", ..."
+                    .filter { selectedKeywordList[it.index] }
+                    .joinToString(separator = ", ") { keywordList[it.index] }
             },
             color = getColor().gray01,
-            style = caption01
+            style = caption01,
+            maxLines = 1,
+            overflow = TextOverflow.Ellipsis
         )
 
         Spacer(Modifier.width(4.dp))
