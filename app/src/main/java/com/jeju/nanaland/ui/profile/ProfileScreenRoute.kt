@@ -92,7 +92,7 @@ fun NavGraphBuilder.profileScreenRoute(navController: NavController) = navigatio
             moveToBackScreen = { navController.popBackStack() },
             moveToReviewReportScreen = {
                 navController.navigate(
-                    ROUTE.Report(it, false)
+                    ROUTE.Report(it, true)
                 )
             },
             moveToReviewEditScreen = { id, category ->
