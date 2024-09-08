@@ -398,7 +398,7 @@
     <string name="common_신고">Declaration</string>
     <string name="common_사진">Picture</string>
     <string name="common_동영상">Videos</string>
-    <string name="common_원">won</string>
+    <string name="common_원">%swon</string>
     <string name="common_시간전">%d  hour ago</string>
     <string name="common_인터넷_문제">I think there\'s a problem with my internet connection!/nCan you come back after checking?</string>
     <string name="detail_screen_common_영업_시간">Opening Hours</string>

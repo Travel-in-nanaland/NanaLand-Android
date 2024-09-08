@@ -399,7 +399,7 @@
     <string name="common_신고">Laporan</string>
     <string name="common_사진">Gambar</string>
     <string name="common_동영상">Video</string>
-    <string name="common_원">won</string>
+    <string name="common_원">%swon</string>
     <string name="common_시간전">%d jam yang lalu</string>
     <string name="common_인터넷_문제">Saya rasa ada masalah dengan sambungan internet saya!/nBoleh anda kembali selepas menyemak?</string>
     <string name="detail_screen_common_영업_시간">Waktu Operasi</string>

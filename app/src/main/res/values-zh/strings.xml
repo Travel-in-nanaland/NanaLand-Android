@@ -398,7 +398,7 @@
     <string name="common_신고">举报</string>
     <string name="common_사진">图片</string>
     <string name="common_동영상">视频</string>
-    <string name="common_원">韩元</string>
+    <string name="common_원">%s韩元</string>
     <string name="common_시간전">%d小时前</string>
     <string name="common_인터넷_문제">网络不太顺畅！/n能检查后回来吗？</string>
     <string name="detail_screen_common_영업_시간">营业时间</string>
