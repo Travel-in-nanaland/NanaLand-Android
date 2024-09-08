@@ -433,4 +433,7 @@
     <string name="review_keyword_infra">Amenities</string>
     <string name="nanapick_list_screen_recommended_post">This week’s recommendation, Nana’s Pick</string>
     <string name="nanapick_list_screen_see_all">See all</string>
+    <string name="common_나가기">Exit</string>
+    <string name="common_재시작">Retry</string>
+    <string name="splash_screen_text">Please check your internet connection</string>
 </resources>

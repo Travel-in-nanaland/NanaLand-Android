@@ -1,5 +1,6 @@
 package com.jeju.nanaland.ui.splash
 
+import android.app.Activity
 import android.util.Log
 import android.widget.Toast
 import androidx.compose.foundation.layout.Box
@@ -29,6 +30,7 @@ import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.messaging.FirebaseMessaging
 import com.jeju.nanaland.R
 import com.jeju.nanaland.globalvalue.type.SplashCheckingState
+import com.jeju.nanaland.ui.splash.component.NetworkConnectionDialog
 import com.jeju.nanaland.util.intent.DeepLinkData
 import com.skydoves.landscapist.glide.GlideImage
 import kotlinx.coroutines.delay
@@ -43,9 +45,11 @@ fun SplashScreen(
 ) {
     val checkingState = viewModel.checkingState.collectAsState().value
     val isNetworkConnected = viewModel.isNetworkConnected.collectAsState().value
+    val isNetworkConnectionDialogShowing = viewModel.isNetworkConnectionDialogShowing.collectAsState().value
     SplashScreen(
         checkingState = checkingState,
         isNetworkConnected = isNetworkConnected,
+        isNetworkConnectionDialogShowing = isNetworkConnectionDialogShowing,
         checkNetworkState = viewModel::checkNetworkState,
         checkLanguageState = {
             viewModel.checkLanguageState(
@@ -65,6 +69,7 @@ fun SplashScreen(
 private fun SplashScreen(
     checkingState: SplashCheckingState,
     isNetworkConnected: Boolean,
+    isNetworkConnectionDialogShowing: Boolean,
     checkNetworkState: () -> Unit,
     checkLanguageState: (() -> Unit) -> Unit,
     checkSignInState: (() -> Unit, () -> Unit) -> Unit,
@@ -146,6 +151,14 @@ private fun SplashScreen(
 //            value = fcmToken.value,
 //            onValueChange = {}
 //        )
+    }
+    if (isNetworkConnectionDialogShowing) {
+        NetworkConnectionDialog(
+            exit = { (context as Activity).finish() },
+            retry = {
+                checkNetworkState()
+            }
+        )
     }
 }
 

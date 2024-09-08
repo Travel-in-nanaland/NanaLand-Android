@@ -24,6 +24,7 @@ import com.jeju.nanaland.util.network.onError
 import com.jeju.nanaland.util.network.onException
 import com.jeju.nanaland.util.network.onSuccess
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.catch
@@ -52,13 +53,19 @@ class SplashViewModel @Inject constructor(
     val checkingState = _checkingState.asStateFlow()
     private val _isNetworkConnected = MutableStateFlow(false)
     val isNetworkConnected = _isNetworkConnected.asStateFlow()
+    private val _isNetworkConnectionDialogShowing = MutableStateFlow(false)
+    val isNetworkConnectionDialogShowing = _isNetworkConnectionDialogShowing.asStateFlow()
 
     fun checkNetworkState() {
-        _isNetworkConnected.update { networkManager.isNetworkConnected }
-        if (networkManager.isNetworkConnected) {
-            _checkingState.update { SplashCheckingState.Language }
-        } else {
-            Toast.makeText(application, "인터넷 연결에 문제가 생겼으니,\n연결 상태를 확인 후 다시 시도하세요", Toast.LENGTH_SHORT).show()
+        viewModelScope.launch {
+            _isNetworkConnectionDialogShowing.value = false
+            delay(1000)
+            _isNetworkConnected.update { networkManager.isNetworkConnected }
+            if (networkManager.isNetworkConnected) {
+                _checkingState.update { SplashCheckingState.Language }
+            } else {
+                _isNetworkConnectionDialogShowing.value = true
+            }
         }
     }
 

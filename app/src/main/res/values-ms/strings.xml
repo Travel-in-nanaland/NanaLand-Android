@@ -434,4 +434,7 @@
     <string name="review_keyword_infra">Kemudahan</string>
     <string name="nanapick_list_screen_recommended_post">Cadangan minggu ini, Pilihan Nana</string>
     <string name="nanapick_list_screen_see_all">Lihat semua</string>
+    <string name="common_나가기">Keluar</string>
+    <string name="common_재시작">Cuba Lagi</string>
+    <string name="splash_screen_text">Sila periksa sambungan internet anda</string>
 </resources>

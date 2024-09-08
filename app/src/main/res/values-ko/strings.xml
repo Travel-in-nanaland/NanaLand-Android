@@ -434,4 +434,7 @@
     <string name="review_keyword_infra">편의 시설</string>
     <string name="nanapick_list_screen_recommended_post">금주 (추천)나나’s Pick</string>
     <string name="nanapick_list_screen_see_all">모두보기</string>
+    <string name="common_나가기">나가기</string>
+    <string name="common_재시작">재시도</string>
+    <string name="splash_screen_text">인터넷 연결을 확인해주세요</string>
 </resources>
