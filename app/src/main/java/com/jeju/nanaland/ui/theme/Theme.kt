@@ -65,7 +65,6 @@ fun NanaLandTheme(
     }
 
     val view = LocalView.current
-    val density = LocalDensity.current.density
     val customDensity = LocalContext.current.resources.displayMetrics.widthPixels.toFloat() / 360f
 //    LogUtil.e("customDensity", "${customDensity}")
     if (!view.isInEditMode) {

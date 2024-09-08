@@ -159,7 +159,7 @@ private fun InformationModificationProposalWritingScreen(
                         Spacer(Modifier.height(48.dp))
 
                         Text(
-                            text = "사진",
+                            text = getString(R.string.common_사진),
                             color = getColor().black,
                             style = title02Bold
                         )

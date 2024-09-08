@@ -96,6 +96,12 @@ fun MainScreen(
                 "market" -> {
                     moveToCategoryContentScreen(contentId ?: 0, "MARKET", false)
                 }
+                "experience" -> {
+                    moveToCategoryContentScreen(contentId ?: 0, "EXPERIENCE", false)
+                }
+                "restaurant" -> {
+                    moveToCategoryContentScreen(contentId ?: 0, "RESTAURANT", false)
+                }
                 else -> {
                     moveToCategoryContentScreen(contentId ?: 0, "NANAPICK", false)
                 }

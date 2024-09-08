@@ -77,8 +77,8 @@ fun ReportBottomDialog(
         Text(
             modifier = Modifier
                 .fillMaxWidth()
-                .clickableNoEffect { onClick() }
-                .padding(start = 16.dp),
+                .padding(start = 16.dp)
+                .clickableNoEffect { onClick() },
             text = getString(R.string.common_신고),
             color = getColor().black,
             style = body01

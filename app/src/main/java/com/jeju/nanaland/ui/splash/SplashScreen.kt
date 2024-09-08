@@ -1,5 +1,6 @@
 package com.jeju.nanaland.ui.splash
 
+import android.app.Activity
 import android.util.Log
 import android.widget.Toast
 import androidx.compose.foundation.layout.Box
@@ -10,6 +11,7 @@ import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -19,11 +21,16 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.airbnb.lottie.compose.LottieAnimation
+import com.airbnb.lottie.compose.LottieCompositionSpec
+import com.airbnb.lottie.compose.animateLottieCompositionAsState
+import com.airbnb.lottie.compose.rememberLottieComposition
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.messaging.FirebaseMessaging
 import com.jeju.nanaland.R
 import com.jeju.nanaland.globalvalue.type.SplashCheckingState
+import com.jeju.nanaland.ui.splash.component.NetworkConnectionDialog
 import com.jeju.nanaland.util.intent.DeepLinkData
 import com.skydoves.landscapist.glide.GlideImage
 import kotlinx.coroutines.delay
@@ -38,9 +45,11 @@ fun SplashScreen(
 ) {
     val checkingState = viewModel.checkingState.collectAsState().value
     val isNetworkConnected = viewModel.isNetworkConnected.collectAsState().value
+    val isNetworkConnectionDialogShowing = viewModel.isNetworkConnectionDialogShowing.collectAsState().value
     SplashScreen(
         checkingState = checkingState,
         isNetworkConnected = isNetworkConnected,
+        isNetworkConnectionDialogShowing = isNetworkConnectionDialogShowing,
         checkNetworkState = viewModel::checkNetworkState,
         checkLanguageState = {
             viewModel.checkLanguageState(
@@ -60,6 +69,7 @@ fun SplashScreen(
 private fun SplashScreen(
     checkingState: SplashCheckingState,
     isNetworkConnected: Boolean,
+    isNetworkConnectionDialogShowing: Boolean,
     checkNetworkState: () -> Unit,
     checkLanguageState: (() -> Unit) -> Unit,
     checkSignInState: (() -> Unit, () -> Unit) -> Unit,
@@ -98,7 +108,7 @@ private fun SplashScreen(
                     darkIcons = false
                 )
 
-                delay(3500)
+                delay(1500)
 
                 systemUiController.setStatusBarColor(
                     color = Color(0x00000000),
@@ -124,17 +134,31 @@ private fun SplashScreen(
             .fillMaxSize(),
         contentAlignment = Alignment.Center
     ) {
+
+        val composition by rememberLottieComposition(
+            LottieCompositionSpec.RawRes(R.raw.splash)
+        )
+        val progress by animateLottieCompositionAsState(composition)
 //        val composition by rememberLottieComposition(LottieCompositionSpec.RawRes(R.raw.splash1))
 //        LottieAnimation(composition)
-        GlideImage(
+        LottieAnimation(
             modifier = Modifier.fillMaxSize(),
-            imageModel = { R.raw.splash }
+            composition = composition,
+            progress = { progress }
         )
 //        TextField(
 //            modifier = Modifier.padding(top = 40.dp),
 //            value = fcmToken.value,
 //            onValueChange = {}
 //        )
+    }
+    if (isNetworkConnectionDialogShowing) {
+        NetworkConnectionDialog(
+            exit = { (context as Activity).finish() },
+            retry = {
+                checkNetworkState()
+            }
+        )
     }
 }
 

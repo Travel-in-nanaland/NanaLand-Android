@@ -46,6 +46,7 @@ import com.jeju.nanaland.ui.theme.body02Bold
 import com.jeju.nanaland.ui.theme.getColor
 import com.jeju.nanaland.ui.theme.title01Bold
 import com.jeju.nanaland.ui.theme.title02
+import com.jeju.nanaland.util.resource.getString
 import com.jeju.nanaland.util.ui.UiState
 import kotlinx.coroutines.launch
 
@@ -169,7 +170,7 @@ private fun ReviewListScreen(
                                 ) {
 
                                     Text(
-                                        text = "후기",
+                                        text = getString(R.string.common_후기),
                                         color = getColor().black,
                                         style = title01Bold
                                     )

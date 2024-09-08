@@ -35,6 +35,7 @@ import com.jeju.nanaland.ui.component.signup.recommendedspot.parts.RecommendedSp
 import com.jeju.nanaland.ui.component.signup.recommendedspot.parts.RecommendedSpotScreenSpotName
 import com.jeju.nanaland.ui.theme.caption01SemiBold
 import com.jeju.nanaland.ui.theme.getColor
+import com.jeju.nanaland.util.resource.getString
 import com.jeju.nanaland.util.ui.TicketShape
 import com.skydoves.landscapist.ImageOptions
 import com.skydoves.landscapist.glide.GlideImage
@@ -110,7 +111,7 @@ fun RecommendedSpotScreenItem(
             Spacer(Modifier.weight(1f))
 
             Text(
-                text = "자세히 보기",
+                text = getString(R.string.type_test_recommended_spot_자세히_보기),
                 color = getColor().white,
                 style = caption01SemiBold
             )

@@ -1,5 +1,6 @@
 package com.jeju.nanaland.ui.experience
 
+import android.content.Intent
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.gestures.animateTo
@@ -17,9 +18,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.jeju.nanaland.R
@@ -44,6 +47,8 @@ import com.jeju.nanaland.ui.component.review.TotalRatingStar
 import com.jeju.nanaland.ui.component.review.TotalReviewCountText
 import com.jeju.nanaland.ui.component.review.getReportAnchoredDraggableState
 import com.jeju.nanaland.ui.theme.getColor
+import com.jeju.nanaland.util.language.getLanguage
+import com.jeju.nanaland.util.resource.getString
 import com.jeju.nanaland.util.ui.ScreenPreview
 import com.jeju.nanaland.util.ui.UiState
 import kotlinx.coroutines.launch
@@ -59,7 +64,7 @@ fun ExperienceContentScreen(
     moveToSignInScreen: () -> Unit,
     moveToReviewListScreen: (Boolean, String, String, String) -> Unit,
     moveToReviewWritingScreen: (Int, String, String, String) -> Unit,
-    moveToReportScreen:(Int) -> Unit,
+    moveToReportScreen: (Int) -> Unit,
     viewModel: ExperienceContentViewModel = hiltViewModel()
 ) {
     LaunchedEffect(Unit) {
@@ -121,9 +126,11 @@ private fun ExperienceContentScreen(
     moveToReportScreen: (Int) -> Unit,
     isContent: Boolean
 ) {
+    val context = LocalContext.current
     val scrollState = rememberScrollState()
     val coroutineScope = rememberCoroutineScope()
     val reportDialogAnchoredDraggableState = remember { getReportAnchoredDraggableState() }
+    val selectedReviewId = remember { mutableIntStateOf(0) }
     val isDimBackgroundShowing = remember { mutableIntStateOf(-1) }
     CustomSurface {
         Box(
@@ -133,9 +140,17 @@ private fun ExperienceContentScreen(
                 modifier = Modifier.fillMaxSize()
             ) {
                 CustomTopBarWithShareButton(
-                    title = if (experienceCategory == ExperienceCategoryType.Activity.toString()) "액티비티" else "문화예술",
+                    title = if (experienceCategory == ExperienceCategoryType.Activity.toString()) getString(R.string.common_액티비티) else getString(R.string.common_문화예술),
                     onBackButtonClicked = moveToBackScreen,
-                    onShareButtonClicked = {}
+                    onShareButtonClicked = {
+                        val sendIntent: Intent = Intent().apply {
+                            action = Intent.ACTION_SEND
+                            putExtra(Intent.EXTRA_TEXT, "http://13.125.110.80:8080/share/${getLanguage()}?category=experience&id=${contentId}")
+                            type = "text/plain"
+                        }
+                        val shareIntent = Intent.createChooser(sendIntent, null)
+                        context.startActivity(shareIntent)
+                    }
                 )
 
                 Box(
@@ -162,7 +177,7 @@ private fun ExperienceContentScreen(
                                     Spacer(Modifier.height(24.dp))
 
                                     DetailScreenNotice(
-                                        title = "간단 설명",
+                                        title = getString(R.string.detail_screen_common_간단_설명),
                                         content = experienceContent.data.intro
                                     )
 
@@ -171,7 +186,7 @@ private fun ExperienceContentScreen(
                                     if (experienceContent.data.address.isNotEmpty()) {
                                         DetailScreenInformation(
                                             drawableId = R.drawable.ic_location_outlined,
-                                            title = "주소",
+                                            title = getString(R.string.detail_screen_common_주소),
                                             content = experienceContent.data.address
                                         )
 
@@ -181,7 +196,7 @@ private fun ExperienceContentScreen(
                                     if (experienceContent.data.contact.isNotEmpty()) {
                                         DetailScreenInformation(
                                             drawableId = R.drawable.ic_phone_outlined,
-                                            title = "연락처",
+                                            title = getString(R.string.detail_screen_common_연락처),
                                             content = experienceContent.data.contact
                                         )
 
@@ -191,7 +206,7 @@ private fun ExperienceContentScreen(
                                     if (experienceContent.data.time.isNotEmpty()) {
                                         DetailScreenInformation(
                                             drawableId = R.drawable.ic_clock_outlined,
-                                            title = "이용 시간",
+                                            title = getString(R.string.detail_screen_common_이용_시간),
                                             content = experienceContent.data.time
                                         )
 
@@ -201,7 +216,7 @@ private fun ExperienceContentScreen(
                                     if (experienceContent.data.amenity.isNotEmpty()) {
                                         DetailScreenInformation(
                                             drawableId = R.drawable.ic_ticket_outlined,
-                                            title = "입장료",
+                                            title = getString(R.string.detail_screen_common_입장료),
                                             content = experienceContent.data.amenity
                                         )
 
@@ -252,6 +267,7 @@ private fun ExperienceContentScreen(
                                             onMenuButtonClick = {
                                                 isDimBackgroundShowing.intValue = it.id
                                                 coroutineScope.launch { reportDialogAnchoredDraggableState.animateTo(AnchoredDraggableContentState.Open) }
+                                                selectedReviewId.intValue = it.id
                                             }
                                         )
 
@@ -263,7 +279,7 @@ private fun ExperienceContentScreen(
 
                                 if (reviewList.data.totalElements > 3) {
                                     BottomOkButton(
-                                        text = "후기 더보기",
+                                        text = getString(R.string.detail_screen_common_후기_더보기),
                                         isActivated = true,
                                         onClick = moveToReviewListScreen
                                     )
@@ -309,7 +325,7 @@ private fun ExperienceContentScreen(
             }
 
             ReportBottomDialog(
-                onClick = { moveToReportScreen(isDimBackgroundShowing.intValue) },
+                onClick = { moveToReportScreen(selectedReviewId.intValue) },
                 hideDimBackground = { isDimBackgroundShowing.intValue = -1 },
                 anchoredDraggableState = reportDialogAnchoredDraggableState
             )

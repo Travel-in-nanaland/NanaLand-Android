@@ -1,5 +1,6 @@
 package com.jeju.nanaland.ui.restaurant
 
+import android.content.Intent
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.gestures.animateTo
@@ -18,9 +19,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.jeju.nanaland.R
@@ -45,6 +48,8 @@ import com.jeju.nanaland.ui.component.review.TotalReviewCountText
 import com.jeju.nanaland.ui.component.review.getReportAnchoredDraggableState
 import com.jeju.nanaland.ui.theme.getColor
 import com.jeju.nanaland.ui.theme.title02Bold
+import com.jeju.nanaland.util.language.getLanguage
+import com.jeju.nanaland.util.resource.getString
 import com.jeju.nanaland.util.ui.UiState
 import kotlinx.coroutines.launch
 
@@ -58,7 +63,7 @@ fun RestaurantContentScreen(
     moveToSignInScreen: () -> Unit,
     moveToReviewListScreen: (Boolean, String, String, String) -> Unit,
     moveToReviewWritingScreen: (Int, String, String, String) -> Unit,
-    moveToReportScreen:(Int) -> Unit,
+    moveToReportScreen: (Int) -> Unit,
     viewModel: RestaurantContentViewModel = hiltViewModel()
 ) {
     LaunchedEffect(Unit) {
@@ -119,9 +124,11 @@ private fun RestaurantContentScreen(
     moveToReportScreen: (Int) -> Unit,
     isContent: Boolean
 ) {
+    val context = LocalContext.current
     val scrollState = rememberScrollState()
     val coroutineScope = rememberCoroutineScope()
     val reportDialogAnchoredDraggableState = remember { getReportAnchoredDraggableState() }
+    val selectedReviewId = remember { mutableIntStateOf(0) }
     val isDimBackgroundShowing = remember { mutableIntStateOf(-1) }
     CustomSurface {
         Box(
@@ -133,7 +140,15 @@ private fun RestaurantContentScreen(
                 CustomTopBarWithShareButton(
                     title = "제주 맛집",
                     onBackButtonClicked = moveToBackScreen,
-                    onShareButtonClicked = {}
+                    onShareButtonClicked = {
+                        val sendIntent: Intent = Intent().apply {
+                            action = Intent.ACTION_SEND
+                            putExtra(Intent.EXTRA_TEXT, "http://13.125.110.80:8080/share/${getLanguage()}?category=restaurant&id=${contentId}")
+                            type = "text/plain"
+                        }
+                        val shareIntent = Intent.createChooser(sendIntent, null)
+                        context.startActivity(shareIntent)
+                    }
                 )
 
                 Box(
@@ -160,7 +175,7 @@ private fun RestaurantContentScreen(
                                     Spacer(Modifier.height(32.dp))
 
                                     Text(
-                                        text = "대표 메뉴",
+                                        text = getString(R.string.detail_screen_common_대표_메뉴),
                                         color = getColor().black,
                                         style = title02Bold
                                     )
@@ -192,7 +207,7 @@ private fun RestaurantContentScreen(
                                     if (!restaurantContent.data.address.isNullOrEmpty()) {
                                         DetailScreenInformation(
                                             drawableId = R.drawable.ic_location_outlined,
-                                            title = "주소",
+                                            title = getString(R.string.detail_screen_common_주소),
                                             content = restaurantContent.data.address
                                         )
 
@@ -202,7 +217,7 @@ private fun RestaurantContentScreen(
                                     if (!restaurantContent.data.time.isNullOrEmpty()) {
                                         DetailScreenInformation(
                                             drawableId = R.drawable.ic_clock_outlined,
-                                            title = "영업 시간",
+                                            title = getString(R.string.detail_screen_common_영업_시간),
                                             content = restaurantContent.data.time
                                         )
 
@@ -212,7 +227,7 @@ private fun RestaurantContentScreen(
                                     if (!restaurantContent.data.contact.isNullOrEmpty()) {
                                         DetailScreenInformation(
                                             drawableId = R.drawable.ic_phone_outlined,
-                                            title = "연락처",
+                                            title = getString(R.string.detail_screen_common_연락처),
                                             content = restaurantContent.data.contact
                                         )
 
@@ -222,7 +237,7 @@ private fun RestaurantContentScreen(
                                     if (!restaurantContent.data.service.isNullOrEmpty()) {
                                         DetailScreenInformation(
                                             drawableId = R.drawable.ic_headset_outlined,
-                                            title = "제공 서비스",
+                                            title = getString(R.string.detail_screen_common_제공_서비스),
                                             content = restaurantContent.data.service
                                         )
 
@@ -232,7 +247,7 @@ private fun RestaurantContentScreen(
                                     if (!restaurantContent.data.homepage.isNullOrEmpty()) {
                                         DetailScreenInformation(
                                             drawableId = R.drawable.ic_clip_outlined,
-                                            title = "홈페이지",
+                                            title = getString(R.string.detail_screen_common_홈페이지),
                                             content = restaurantContent.data.homepage
                                         )
 
@@ -242,7 +257,7 @@ private fun RestaurantContentScreen(
                                     if (!restaurantContent.data.instagram.isNullOrEmpty()) {
                                         DetailScreenInformation(
                                             drawableId = R.drawable.ic_instagram_outlined,
-                                            title = "인스타그램",
+                                            title = getString(R.string.detail_screen_common_인스타그램),
                                             content = restaurantContent.data.instagram
                                         )
 
@@ -305,7 +320,7 @@ private fun RestaurantContentScreen(
 
                                 if (reviewList.data.totalElements > 3) {
                                     BottomOkButton(
-                                        text = "후기 더보기",
+                                        text = getString(R.string.detail_screen_common_후기_더보기),
                                         isActivated = true,
                                         onClick = moveToReviewListScreen
                                     )
