@@ -312,6 +312,7 @@
     <string name="type_test_recommended_spot_text1">""</string>
     <string name="type_test_recommended_spot_text2"> 님을 위한</string>
     <string name="type_test_recommended_spot_추천_여행지">추천 여행지</string>
+    <string name="type_test_recommended_spot_go_detail" translatable="false">자세히 보기</string><!--TODO 번역 추가본(09.07 작성)-->
 
     <!--언어 설정 화면-->
     <string name="language_change_screen_guide">맨 위에 있는 언어로\n기본 설정 되어 있습니다.</string>

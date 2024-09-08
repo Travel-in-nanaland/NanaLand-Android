@@ -72,21 +72,21 @@ private fun SplashScreen(
     val systemUiController = rememberSystemUiController()
     val fcmToken = remember { mutableStateOf("") }
     LaunchedEffect(checkingState) {
-        FirebaseMessaging.getInstance().token.addOnCompleteListener(
-            OnCompleteListener { task ->
-                if (!task.isSuccessful) {
-                    Log.e("FCM-token", "Fetching FCM registration token failed", task.exception)
-                    return@OnCompleteListener
-                }
-
-                val token = task.result
-                Log.e("FCM-token", token)
-                fcmToken.value = token
-
-                val msg = token.toString()
-//                Toast.makeText(context, msg, Toast.LENGTH_SHORT).show()
-            }
-        )
+//        FirebaseMessaging.getInstance().token.addOnCompleteListener(
+//            OnCompleteListener { task ->
+//                if (!task.isSuccessful) {
+//                    Log.e("FCM-token", "Fetching FCM registration token failed", task.exception)
+//                    return@OnCompleteListener
+//                }
+//
+//                val token = task.result
+//                Log.e("FCM-token", token)
+//                fcmToken.value = token
+//
+//                val msg = token.toString()
+////                Toast.makeText(context, msg, Toast.LENGTH_SHORT).show()
+//            }
+//        )
         when (checkingState) {
             SplashCheckingState.Network -> {
                 systemUiController.setStatusBarColor(

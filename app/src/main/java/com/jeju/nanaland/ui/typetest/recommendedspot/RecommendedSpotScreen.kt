@@ -29,6 +29,7 @@ import com.jeju.nanaland.util.resource.getString
 fun RecommendedSpotScreen(
     moveToMainScreen: () -> Unit,
     moveToBackScreen: () -> Unit,
+    moveToDetailScreen:(Int, String) -> Unit,
     viewModel: RecommendedSpotViewModel = hiltViewModel()
 ) {
     val recommendedPostList = viewModel.recommendedPostList.collectAsState().value
@@ -36,6 +37,7 @@ fun RecommendedSpotScreen(
         recommendedPostList = recommendedPostList,
         moveToMainScreen = moveToMainScreen,
         moveToBackScreen = moveToBackScreen,
+        moveToDetailScreen = moveToDetailScreen,
         isContent = true
     )
 }
@@ -45,6 +47,7 @@ private fun RecommendedSpotScreen(
     recommendedPostList: List<RecommendedPostData>,
     moveToMainScreen: () -> Unit,
     moveToBackScreen: () -> Unit,
+    moveToDetailScreen:(Int, String) -> Unit,
     isContent: Boolean
 ) {
     CustomSurface {
@@ -89,7 +92,8 @@ private fun RecommendedSpotScreen(
                             RecommendedSpotScreenItem(
                                 imageUri = item.firstImage.thumbnailUrl,
                                 title = item.title ?: "",
-                                description = item.intro ?: ""
+                                description = item.intro ?: "",
+                                onDetailClick = { moveToDetailScreen(item.id, item.category) }
                             )
 
                             Spacer(Modifier.height(32.dp))
