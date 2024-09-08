@@ -153,14 +153,15 @@ fun ReviewCard(
                 style = caption01
             )
 
-            Image(
-                modifier = Modifier
-                    .size(20.dp)
-                    .clickableNoEffect { onMenuButtonClick() },
-                painter = painterResource(R.drawable.ic_more_dot),
-                contentDescription = null,
-                colorFilter = ColorFilter.tint(getColor().gray01)
-            )
+            if(!data.myReview)
+                Image(
+                    modifier = Modifier
+                        .size(20.dp)
+                        .clickableNoEffect { onMenuButtonClick() },
+                    painter = painterResource(R.drawable.ic_more_dot),
+                    contentDescription = null,
+                    colorFilter = ColorFilter.tint(getColor().gray01)
+                )
         }
     }
 }
