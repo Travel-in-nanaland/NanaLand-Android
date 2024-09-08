@@ -51,7 +51,7 @@
     <string name="common_동영상">Video</string>
     <string name="common_원">%swon</string>
     <string name="common_시간전">%d giờ trước</string>
-    <string name="common_인터넷_문제">Tôi nghĩ có vấn đề với kết nối internet của tôi!/nBạn có thể quay lại sau khi kiểm tra không?</string>
+    <string name="common_인터넷_문제">Tôi nghĩ có vấn đề với kết nối internet của tôi!\nBạn có thể quay lại sau khi kiểm tra không?</string>
     <string name="sign_in_screen_로그인_없이_둘러보기">Duyệt mà không cần đăng nhập</string>
     <string name="sign_in_screen_google_sign_in">Đăng nhập bằng Google</string>
     <string name="home_screen_ad1_title">Muốn thấy biển đẹp ở Đảo Jeju?</string>
@@ -119,7 +119,7 @@
     <string name="info_modification_proposal_정보_수정_제안">Đề xuất sửa đổi thông tin</string>
     <string name="info_modification_proposal_정보_수정_제안2">Đề xuất sửa đổi thông tin</string>
     <string name="info_modification_proposal_heading1">Vui lòng đề xuất thông tin cần được sửa đổi!</string>
-    <string name="info_modification_proposal_text1">Ảnh đính kèm khi đề xuất vị trí sẽ được sử dụng để xác nhận thông tin vị trí./nNếu bạn giúp đỡ, bạn có thể nhận được lợi ích.</string>
+    <string name="info_modification_proposal_text1">Ảnh đính kèm khi đề xuất vị trí sẽ được sử dụng để xác nhận thông tin vị trí.\nNếu bạn giúp đỡ, bạn có thể nhận được lợi ích.</string>
     <string name="info_modification_proposal_전화번호_및_홈페이지">Số điện thoại và trang web</string>
     <string name="info_modification_proposal_운영_시간">Giờ hoạt động</string>
     <string name="info_modification_proposal_장소명_및_위치">Tên địa điểm và vị trí</string>
@@ -133,16 +133,16 @@
     <string name="info_modification_proposal_hint2">example@gmail.com</string>
     <string name="info_modification_proposal_보내기">Gửi</string>
     <string name="info_modification_proposal_heading4">Cảm ơn bạn đã đề xuất sửa đổi thông tin.</string>
-    <string name="info_modification_proposal_text4">Bằng cách đề xuất sửa đổi thông tin/nSức hấp dẫn của điểm đến du lịch cũng đã tăng lên!</string>
+    <string name="info_modification_proposal_text4">Bằng cách đề xuất sửa đổi thông tin\nSức hấp dẫn của điểm đến du lịch cũng đã tăng lên!</string>
     <string name="info_modification_proposal_button1">Xem lại nội dung</string>
     <string name="info_modification_proposal_button2">Thêm mục khác</string>
     <string name="info_modification_proposal_warning">Định dạng email không đúng. Vui lòng nhập lại!</string>
     <string name="info_modification_proposal_necessary">Bắt buộc</string>
-    <string name="policy_agree_screen_heading">Nanaland tại Jeju/nChào mừng.</string>
+    <string name="policy_agree_screen_heading">Nanaland tại Jeju\nChào mừng.</string>
     <string name="policy_agree_screen_privacy_policy">Đồng ý với Điều khoản Sử dụng và Chính sách Bảo mật (bắt buộc)</string>
     <string name="policy_agree_screen_marketing_policy">Đồng ý sử dụng cho mục đích tiếp thị (tùy chọn)</string>
     <string name="policy_agree_screen_location_policy">Đồng ý với các điều khoản dịch vụ dựa trên vị trí (tùy chọn)</string>
-    <string name="sign_up_profile_setting_guide">Viết tên bạn muốn sử dụng và chọn/nhồ sơ.</string>
+    <string name="sign_up_profile_setting_guide">Viết tên bạn muốn sử dụng và chọn\nhồ sơ.</string>
     <string name="sign_up_profile_setting_hint">Vui lòng nhập tên của bạn</string>
     <string name="sign_up_profile_setting_warning1">Biệt danh đó không thể sử dụng.</string>
     <string name="sign_up_profile_setting_warning2">Biệt danh đó đã được sử dụng bởi người dùng khác.</string>
@@ -171,7 +171,7 @@
     <string name="settings_screen_버전_정보">Thông tin phiên bản</string>
     <string name="settings_screen_로그아웃">Đăng xuất</string>
     <string name="settings_screen_회원_탈퇴">Rút khỏi thành viên</string>
-    <string name="sign_out_dialog_text">Bạn có chắc chắn muốn đăng xuất/n không?</string>
+    <string name="sign_out_dialog_text">Bạn có chắc chắn muốn đăng xuất\n không?</string>
     <string name="mypage_screen_프로필_수정">Chỉnh sửa hồ sơ</string>
     <string name="mypage_screen_테스트_다시하기">Kiểm tra lại</string>
     <string name="mypage_screen_테스트_하기">Kiểm tra</string>
@@ -182,7 +182,7 @@
     <string name="mypage_screen_리뷰작성하기">Viết đánh giá</string>
     <string name="mypage_screen_desc_default">Xin chào! Rất vui được gặp bạn🖐️</string>
     <string name="mypage_screen_desc_hint">Thể hiện bản thân bạn trong một dòng!</string>
-    <string name="mypage_screen_review_remove_dialog">Bạn có muốn/n xóa đánh giá này không?</string>
+    <string name="mypage_screen_review_remove_dialog">Bạn có muốn\n xóa đánh giá này không?</string>
     <string name="mypage_screen_review_guest">Đăng nhập để ghi lại trải nghiệm của riêng bạn!</string>
     <string name="mypage_screen_review_empty">Để lại đánh giá và ghi lại trải nghiệm của bạn!</string>
     <string name="mypage_screen_notice_empty">Không Có Thông Báo</string>
@@ -190,7 +190,7 @@
     <string name="profile_update_screen_수정_완료">Chỉnh sửa hoàn tất</string>
     <string name="profile_update_screen_warning">Giới thiệu có thể được viết trong 70 ký tự hoặc ít hơn.</string>
     <string name="profile_update_dialog_text1">Bạn có chắc chắn muốn rời đi không?</string>
-    <string name="profile_update_dialog_text2">Nếu bạn rời đi bây giờ,/nNhững gì bạn đang viết sẽ bị xóa.</string>
+    <string name="profile_update_dialog_text2">Nếu bạn rời đi bây giờ,\nNhững gì bạn đang viết sẽ bị xóa.</string>
     <string name="profile_initialization_screen_hello">Xin chào</string>
     <string name="profile_initialization_screen_select_language">Vui lòng chọn ngôn ngữ</string>
     <string name="policy_setting_screen_warning">Xin lưu ý rằng nếu bạn không đồng ý, bạn có thể không nhận được các dịch vụ hoặc lợi ích.</string>
@@ -222,7 +222,7 @@
     <string name="permission_checking_screen_카메라">Camera</string>
     <string name="permission_checking_screen_알림">Thông báo</string>
     <string name="permission_checking_screen_오디오_및_음악">Âm thanh và nhạc</string>
-    <string name="permission_checking_screen_전화_기기_정보_description">Yêu cầu quyền truy cập để xác minh trạng thái điện thoại di động và ID./nYêu cầu khi cung cấp giải pháp phát hiện giả mạo thiết bị.</string>
+    <string name="permission_checking_screen_전화_기기_정보_description">Yêu cầu quyền truy cập để xác minh trạng thái điện thoại di động và ID.\nYêu cầu khi cung cấp giải pháp phát hiện giả mạo thiết bị.</string>
     <string name="permission_checking_screen_저장공간_description">Cần thiết để cung cấp chức năng lưu trữ ảnh.</string>
     <string name="permission_checking_screen_위치정보_description">Cần thiết để cung cấp thông tin như nhà hàng và điểm tham quan gần đó dựa trên vị trí hiện tại của bạn.</string>
     <string name="permission_checking_screen_카메라_description">Cần thiết để đăng ký ảnh đánh giá và thông tin nhà hàng.</string>
@@ -241,19 +241,19 @@
     <string name="review_write_keyword_guide">*Bạn phải chọn ít nhất %d mục và có thể chọn tối đa %d mục.</string>
     <string name="review_write_keyword_error_over">Bạn có thể chọn tối đa %d</string>
     <string name="review_write_keyword_complete_title1">Cảm ơn bạn vì bài viết hấp dẫn của bạn 👻</string>
-    <string name="review_write_keyword_complete_sub1">Cũng giống như sự quyến rũ của bạn/n{Sức hấp dẫn của điểm đến du lịch cũng tăng lên!}</string>
+    <string name="review_write_keyword_complete_sub1">Cũng giống như sự quyến rũ của bạn\n{Sức hấp dẫn của điểm đến du lịch cũng tăng lên!}</string>
     <string name="review_write_keyword_complete_title2">Bạn thích nó nhiều như vậy sao?</string>
-    <string name="review_write_keyword_complete_sub2">Bài viết tỉ mỉ của bạn/nLựa chọn du lịch của ai đó/nNó đã làm phong phú tôi!</string>
+    <string name="review_write_keyword_complete_sub2">Bài viết tỉ mỉ của bạn\nLựa chọn du lịch của ai đó\nNó đã làm phong phú tôi!</string>
     <string name="review_write_keyword_complete_btn_again">Xem lại nội dung</string>
     <string name="review_write_keyword_complete_btn_add">Thêm một đánh giá khác</string>
     <string name="review_write_cancel_dialog_title">Bạn có chắc chắn muốn rời đi không?</string>
-    <string name="review_write_cancel_dialog_subtitle">Nếu bạn rời đi bây giờ,/nNhững gì bạn đang viết sẽ bị xóa.</string>
+    <string name="review_write_cancel_dialog_subtitle">Nếu bạn rời đi bây giờ,\nNhững gì bạn đang viết sẽ bị xóa.</string>
     <string name="report_category_title">Hãy cho chúng tôi biết lý do bạn báo cáo!</string>
-    <string name="report_category_subtitle">Thông tin báo cáo không có căn cứ hợp lệ phải được xác nhận bởi quản trị viên./nCó thể sẽ không được phản ánh.</string>
+    <string name="report_category_subtitle">Thông tin báo cáo không có căn cứ hợp lệ phải được xác nhận bởi quản trị viên.\nCó thể sẽ không được phản ánh.</string>
     <string name="report_write_resone_title">Lý do báo cáo</string>
     <string name="report_write_resone_hint">Vui lòng viết ít nhất %d ký tự về lý do báo cáo.</string>
     <string name="report_write_resone_error">Vui lòng viết ít nhất %d ký tự về lý do báo cáo.</string>
-    <string name="report_write_complete_toast">Nội dung báo cáo phù hợp với chính sách hoạt động./nSẽ được xử lý trong vòng tối đa 24 giờ.</string>
+    <string name="report_write_complete_toast">Nội dung báo cáo phù hợp với chính sách hoạt động.\nSẽ được xử lý trong vòng tối đa 24 giờ.</string>
     <string name="review_keyword_mood">Bầu không khí</string>
     <string name="review_keyword_with">Bạn đồng hành</string>
     <string name="review_keyword_infra">Tiện nghi</string>

@@ -328,7 +328,7 @@
     <string name="mypage_screen_리뷰작성하기">写评价</string>
     <string name="mypage_screen_desc_default">你好！很高兴见到你🖐️</string>
     <string name="mypage_screen_desc_hint">用一句话变现自己！</string>
-    <string name="mypage_screen_review_remove_dialog">确定删除/n这条评论吗？</string>
+    <string name="mypage_screen_review_remove_dialog">确定删除\n这条评论吗？</string>
     <string name="mypage_screen_review_guest">登录以记录您自己的经验！</string>
     <string name="mypage_screen_review_empty">留下评价并记录您的体验！</string>
     <string name="mypage_screen_notice_empty">没有公告</string>
@@ -338,7 +338,7 @@
 
     <!--프로필 수정 화면 다이얼로그-->
     <string name="profile_update_dialog_text1">您确定要离开吗？</string>
-    <string name="profile_update_dialog_text2">如果您现在离开，/n您正在写的内容将被删除。</string>
+    <string name="profile_update_dialog_text2">如果您现在离开，\n您正在写的内容将被删除。</string>
 
     <!--언어 초기화 화면-->
     <string name="profile_initialization_screen_hello">안녕하세요!</string>
@@ -400,7 +400,7 @@
     <string name="common_동영상">视频</string>
     <string name="common_원">%s韩元</string>
     <string name="common_시간전">%d小时前</string>
-    <string name="common_인터넷_문제">网络不太顺畅！/n能检查后回来吗？</string>
+    <string name="common_인터넷_문제">网络不太顺畅！\n能检查后回来吗？</string>
     <string name="detail_screen_common_영업_시간">营业时间</string>
     <string name="review_write_title">写评价</string>
     <string name="review_write_search_hint">搜索地点</string>
@@ -415,19 +415,19 @@
     <string name="review_write_keyword_guide">*您必须选择至少%d个项目，最多可以选择%d个项目。</string>
     <string name="review_write_keyword_error_over">最多可以选择%d个</string>
     <string name="review_write_keyword_complete_title1">感谢您精彩的写作👻</string>
-    <string name="review_write_keyword_complete_sub1">就像你的魅力一样/n{旅游目的地的吸引力也增加了！}</string>
+    <string name="review_write_keyword_complete_sub1">就像你的魅力一样\n{旅游目的地的吸引力也增加了！}</string>
     <string name="review_write_keyword_complete_title2">非常喜欢！</string>
-    <string name="review_write_keyword_complete_sub2">你细致入微的写作/让n某人的旅行选择/n更加丰富！</string>
+    <string name="review_write_keyword_complete_sub2">你细致入微的写作/让n某人的旅行选择\n更加丰富！</string>
     <string name="review_write_keyword_complete_btn_again">再去看看内容</string>
     <string name="review_write_keyword_complete_btn_add">添加另一条评价</string>
     <string name="review_write_cancel_dialog_title">您确定要离开吗？</string>
-    <string name="review_write_cancel_dialog_subtitle">如果您现在离开，/n您正在写的内容将被删除。</string>
+    <string name="review_write_cancel_dialog_subtitle">如果您现在离开，\n您正在写的内容将被删除。</string>
     <string name="report_category_title">请告诉我们举报原因！</string>
-    <string name="report_category_subtitle">无有效理由的举报信息必须由管理员确认。/n可能不会反映。</string>
+    <string name="report_category_subtitle">无有效理由的举报信息必须由管理员确认。\n可能不会反映。</string>
     <string name="report_write_resone_title">举报原因</string>
     <string name="report_write_resone_hint">请写下至少%d个字的举报理由。</string>
     <string name="report_write_resone_error">请写下至少%d个字的举报理由。</string>
-    <string name="report_write_complete_toast">举报内容符合运营政策。/n将在最多24小时内处理。</string>
+    <string name="report_write_complete_toast">举报内容符合运营政策。\n将在最多24小时内处理。</string>
     <string name="review_keyword_mood">氛围</string>
     <string name="review_keyword_with">同伴</string>
     <string name="review_keyword_infra">便利设施</string>
