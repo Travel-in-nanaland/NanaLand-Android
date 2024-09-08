@@ -29,8 +29,8 @@ fun ExperienceCategoryListTab(
         repeat(2) {
             CategoryBox(
                 text = when (it) {
-                    0 -> "액티비티"
-                    else -> "문화예술"
+                    0 -> getString(R.string.common_액티비티)
+                    else -> getString(R.string.common_문화예술)
                 },
                 isSelected = titleList[it] == selectedCategoryType,
                 updateSelectedCategoryType = {

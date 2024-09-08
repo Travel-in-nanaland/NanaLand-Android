@@ -44,7 +44,7 @@ fun MenuItem(
 
             Text(
                 text = getString(
-                    R.string.restaurant_price_unit,
+                    R.string.common_원,
                     price
                         .toDoubleOrNull()
                         ?.toWithComma(customContext.resources.configuration.locales[0])

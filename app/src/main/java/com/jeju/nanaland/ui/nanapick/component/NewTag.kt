@@ -12,8 +12,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
+import com.jeju.nanaland.R
 import com.jeju.nanaland.ui.theme.caption02SemiBold
 import com.jeju.nanaland.ui.theme.getColor
+import com.jeju.nanaland.util.resource.getString
 
 @Composable
 fun NewTag(
@@ -29,7 +31,7 @@ fun NewTag(
         contentAlignment = Alignment.Center
     ) {
         Text(
-            text = "NEW",
+            text = getString(R.string.nanapick_list_screen_new),
             color = getColor().white,
             style = caption02SemiBold
         )

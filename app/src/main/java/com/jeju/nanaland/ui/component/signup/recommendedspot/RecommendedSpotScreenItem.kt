@@ -110,7 +110,7 @@ fun RecommendedSpotScreenItem(
             Spacer(Modifier.weight(1f))
 
             Text(
-                text = getString(R.string.type_test_recommended_spot_go_detail),
+                text = getString(R.string.type_test_recommended_spot_자세히_보기),
                 color = getColor().white,
                 style = caption01SemiBold
             )

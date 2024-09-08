@@ -87,7 +87,7 @@ private fun LanguageInitializationScreen(
             item {
                 LanguageInitializationScreenLanguageBox(
                     text1 = "Hello!\nNice to meet you \uD83D\uDC4B",
-                    text2 = getString(R.string.common_영어),
+                    text2 = "English",
                     onClick = {
                         selectLanguage("en")
                         moveToSignInScreen()
@@ -98,7 +98,7 @@ private fun LanguageInitializationScreen(
             item {
                 LanguageInitializationScreenLanguageBox(
                     text1 = "你好!\n很高兴见到你 \uD83D\uDC4B",
-                    text2 = getString(R.string.common_중국어),
+                    text2 = "汉语",
                     onClick = {
                         selectLanguage("zh")
                         moveToSignInScreen()
@@ -109,7 +109,7 @@ private fun LanguageInitializationScreen(
             item {
                 LanguageInitializationScreenLanguageBox(
                     text1 = "Hai!\nGembira jumpa \uD83D\uDC4B",
-                    text2 = getString(R.string.common_말레이시아어),
+                    text2 = "Bahasa Malaysia",
                     onClick = {
                         selectLanguage("ms")
                         moveToSignInScreen()
@@ -119,8 +119,19 @@ private fun LanguageInitializationScreen(
 
             item {
                 LanguageInitializationScreenLanguageBox(
+                    text1 = "Chào!\nVui gặp bạn \uD83D\uDC4B",
+                    text2 = "Tiếng Việt",
+                    onClick = {
+                        selectLanguage("vi")
+                        moveToSignInScreen()
+                    }
+                )
+            }
+
+            item {
+                LanguageInitializationScreenLanguageBox(
                     text1 = "안녕하세요!\n반갑습니다 \uD83D\uDC4B",
-                    text2 = getString(R.string.common_한국어),
+                    text2 = "한국어",
                     onClick = {
                         selectLanguage("ko")
                         moveToSignInScreen()

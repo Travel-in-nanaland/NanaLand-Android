@@ -52,11 +52,12 @@
     <string name="common_네">Yes</string>
     <string name="common_아니오">No</string>
     <string name="common_필수">(Required)</string>
+    <string name="common_필수_with_star">*Essential</string>
     <string name="common_선택">(Optional)</string>
 
     <!--로그인 화면-->
-    <string name="sign_in_screen_로그인_없이_둘러보기">Browse Without Logging In</string>
-    <string name="sign_in_screen_google_sign_in">Sign in with Google</string>
+    <string name="sign_in_screen_로그인_없이_둘러보기">Browse without logging in</string>
+    <string name="sign_in_screen_google_sign_in">Google Login</string>
 
     <!--홈 화면-->
     <string name="home_screen_ad1_title">Want to see the beautiful sea in Jeju Island?</string>
@@ -68,7 +69,7 @@
     <string name="home_screen_ad4_title">Jeju\'s unique festival in July🎈</string>
     <string name="home_screen_ad4_content">Let\'s go see the festival full of the treasures of the world, feeling Jeju Island!</string>
     <string name="home_screen_recommend1">"Local Recommendations for Our "</string>
-    <string name="home_screen_recommend2">" 🍊"</string>
+    <string name="home_screen_recommend2">Recommendation from residents for our Nana</string>
 
     <string-array name="home_screen_hint">
         <item>Jeju\'s Canola Festival is on now! 🏵️</item>
@@ -156,7 +157,7 @@
     <string name="festival_list_screen_image_caption">*Reference photos.</string>
 
     <!--상세 화면 공통-->
-    <string name="detail_screen_common_더_보기">more</string>
+    <string name="detail_screen_common_더보기">more</string>
     <string name="detail_screen_common_접기">close</string>
     <string name="detail_screen_common_주소">Address</string>
     <string name="detail_screen_common_연락처">Contact</string>
@@ -171,6 +172,12 @@
     <string name="detail_screen_common_이_장소만의_매력_포인트">The charm of this place✨</string>
 
     <!--정보 수정 제안-->
+    <string name="detail_screen_common_후기_작성하기">Write a review</string>
+    <string name="detail_screen_common_후기_더보기">See more reviews</string>
+    <string name="detail_screen_common_대표_메뉴">Main Menu</string>
+    <string name="detail_screen_common_간단_설명">Brief explanation</string>
+    <string name="detail_screen_common_제공_서비스">Services provided</string>
+    <string name="detail_screen_common_인스타그램">Instagram</string>
     <string name="info_modification_proposal_정보_수정_제안">Information Update Suggestions</string>
     <string name="info_modification_proposal_정보_수정_제안2">Information Update\nSuggestions</string>
     <string name="info_modification_proposal_heading1">Suggest an Information Update!</string>
@@ -196,6 +203,7 @@
     <string name="info_modification_proposal_warning">The email format is incorrect. Please re-enter!</string>
 
     <!--약관 동의 화면-->
+    <string name="info_modification_proposal_necessary">Essential</string>
     <string name="policy_agree_screen_heading">Welcome to\nnanaland in Jeju</string>
     <string name="policy_agree_screen_전체_동의">Agree to All</string>
     <string name="policy_agree_screen_privacy_policy">Agree to Terms of Use and\nPrivacy Policy</string>
@@ -316,13 +324,21 @@
     <string name="mypage_screen_level">Lv.</string>
 
     <!--프로필 수정 화면-->
+    <string name="mypage_screen_모두보기">See all</string>
+    <string name="mypage_screen_리뷰작성하기">Write a review</string>
+    <string name="mypage_screen_desc_default">Hello! Nice to meet you🖐️</string>
+    <string name="mypage_screen_desc_hint">Express yourself in one line!</string>
+    <string name="mypage_screen_review_remove_dialog">Do you want to/n delete this review?</string>
+    <string name="mypage_screen_review_guest">Log in to record your own experience!</string>
+    <string name="mypage_screen_review_empty">Leave a review and record your experience!</string>
+    <string name="mypage_screen_notice_empty">No Announcements Available</string>
     <string name="profile_update_screen_프로필_수정">Edit Profile</string>
     <string name="profile_update_screen_수정_완료">Update</string>
     <string name="profile_update_screen_warning">소개글은 70자 이내로 작성 가능합니다.</string>
 
     <!--프로필 수정 화면 다이얼로그-->
-    <string name="profile_update_dialog_text1">Discard Changes?</string>
-    <string name="profile_update_dialog_text2">If you go back now, your changes will be discarded.</string>
+    <string name="profile_update_dialog_text1">Are you sure you want to leave?</string>
+    <string name="profile_update_dialog_text2">If you leave now,/nWhat you are writing will be deleted.</string>
 
     <!--언어 초기화 화면-->
     <string name="profile_initialization_screen_hello">안녕하세요!</string>
@@ -371,4 +387,53 @@
     <string name="permission_checking_screen_카메라_description">Needed to upload review photos and restaurant information.</string>
     <string name="permission_checking_screen_알림_description">Needed to receive notifications about events and benefits.</string>
     <string name="permission_checking_screen_오디오_및_음악_description">Needed to upload video content.</string>
+    <string name="common_알림">Alarm</string>
+    <string name="common_종류">Type</string>
+    <string name="common_리뷰">Review</string>
+    <string name="common_액티비티">Activity</string>
+    <string name="common_문화예술">Culture and Arts</string>
+    <string name="common_후기">Reviews</string>
+    <string name="common_공지사항">Announcement</string>
+    <string name="common_수정">Correction</string>
+    <string name="common_신고">Declaration</string>
+    <string name="common_사진">Picture</string>
+    <string name="common_동영상">Videos</string>
+    <string name="common_원">won</string>
+    <string name="common_시간전">%d  hour ago</string>
+    <string name="common_인터넷_문제">I think there\'s a problem with my internet connection!/nCan you come back after checking?</string>
+    <string name="detail_screen_common_영업_시간">Opening Hours</string>
+    <string name="review_write_title">Write a review</string>
+    <string name="review_write_search_hint">Search Location</string>
+    <string name="review_write_select_rating">Please {select} a {star rating}!</string>
+    <string name="review_write_writing">Please {write} a {visit review}!</string>
+    <string name="review_write_writing_hint">Please fill in the details</string>
+    <string name="review_write_add_keyword">Add keyword</string>
+    <string name="review_write_complete">Raise</string>
+    <string name="review_write_error_maximum_picture">You can select up to %d photos</string>
+    <string name="review_write_error_maximum_text">Content can be written within %d characters.</string>
+    <string name="review_write_keyword_title">Keyword</string>
+    <string name="review_write_keyword_guide">*You must select at least %d items, and you can select up to %d items.</string>
+    <string name="review_write_keyword_error_over">You can select up to %d</string>
+    <string name="review_write_keyword_complete_title1">Thank you for your fascinating writing 👻</string>
+    <string name="review_write_keyword_complete_sub1">As much as your charm/n{The attractiveness of the travel destination also increased!}</string>
+    <string name="review_write_keyword_complete_title2">You like it so much?</string>
+    <string name="review_write_keyword_complete_sub2">Your meticulous writing/nSomeone\'s travel choices/nIt enriched me!</string>
+    <string name="review_write_keyword_complete_btn_again">Go see content again</string>
+    <string name="review_write_keyword_complete_btn_add">Add another review</string>
+    <string name="review_write_cancel_dialog_title">Are you sure you want to leave?</string>
+    <string name="review_write_cancel_dialog_subtitle">If you leave now,/nWhat you are writing will be deleted.</string>
+    <string name="report_category_title">Please tell us why you are reporting it!</string>
+    <string name="report_category_subtitle">Information reported without valid grounds must be confirmed by the administrator./nIt may not be reflected.</string>
+    <string name="report_write_resone_title">Reason for reporting</string>
+    <string name="report_write_resone_hint">Please write at least %d characters about the reason for the report.</string>
+    <string name="report_write_resone_error">Please write at least %d characters about the reason for the report.</string>
+    <string name="report_write_complete_toast">The reported contents are in accordance with the operating policy./nIt will be processed within a maximum of 24 hours.</string>
+    <string name="review_keyword_mood">Atmosphere</string>
+    <string name="review_keyword_with">Companion</string>
+    <string name="review_keyword_infra">Amenities</string>
+    <string name="nanapick_list_screen_recommended_post">This week’s recommendation, Nana’s Pick</string>
+    <string name="nanapick_list_screen_see_all">See all</string>
+    <string name="common_나가기">Exit</string>
+    <string name="common_재시작">Retry</string>
+    <string name="splash_screen_text">Please check your internet connection</string>
 </resources>

@@ -18,7 +18,7 @@ fun DetailScreenMoreButton(
 ) {
     Text(
         modifier = Modifier.clickableNoEffect { onClick() },
-        text = if (isMoreOpen) getString(R.string.detail_screen_common_접기) else getString(R.string.detail_screen_common_더_보기),
+        text = if (isMoreOpen) getString(R.string.detail_screen_common_접기) else getString(R.string.detail_screen_common_더보기),
         color = getColor().gray01,
         style = caption01
     )

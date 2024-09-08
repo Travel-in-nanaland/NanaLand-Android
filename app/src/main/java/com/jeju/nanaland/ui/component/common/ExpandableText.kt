@@ -16,6 +16,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
+import com.jeju.nanaland.R
+import com.jeju.nanaland.util.resource.getString
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.withStyle
 
@@ -26,9 +28,9 @@ fun ExpandableText(
     textModifier: Modifier = Modifier,
     style: TextStyle = LocalTextStyle.current,
     collapsedMaxLine: Int = 2,
-    showMoreText: String = "더보기",
+    showMoreText: String = getString(R.string.detail_screen_common_더보기),
     showMoreStyle: TextStyle = TextStyle(),
-    showLessText: String = "줄이기",
+    showLessText: String = getString(R.string.detail_screen_common_줄이기),
     showLessStyle: TextStyle = showMoreStyle,
     onExpanded: (Boolean) -> Unit = {}
 ) {

@@ -18,9 +18,11 @@ import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.text.TextLayoutResult
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.IntSize
+import com.jeju.nanaland.R
 import com.jeju.nanaland.ui.theme.body02
 import com.jeju.nanaland.ui.theme.caption01
 import com.jeju.nanaland.ui.theme.getColor
+import com.jeju.nanaland.util.resource.getString
 
 @Composable
 fun ExpandableText2(
@@ -70,7 +72,7 @@ fun ExpandableText2(
         if (!expanded) {
             val density = LocalDensity.current
             Text(
-                text = "더보기",
+                text = getString(R.string.detail_screen_common_더보기),
                 color = getColor().gray01,
                 style = caption01,
                 onTextLayout = { seeMoreSizeState.value = it.size },

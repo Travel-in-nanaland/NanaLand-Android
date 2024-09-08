@@ -61,7 +61,7 @@ private fun WithdrawalScreen(
 
     CustomSurface {
         CustomTopBar(
-            title = "회원탈퇴",
+            title = getString(R.string.withdrawal_screen_회원탈퇴),
             onBackButtonClicked = { moveToBackScreen() }
         )
 

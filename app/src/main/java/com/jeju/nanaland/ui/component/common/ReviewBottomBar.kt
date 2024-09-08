@@ -27,6 +27,7 @@ import com.jeju.nanaland.ui.component.detailscreen.other.parts.description.Detai
 import com.jeju.nanaland.ui.component.detailscreen.other.parts.description.DetailScreenFavoriteButton2
 import com.jeju.nanaland.ui.theme.bodyBold
 import com.jeju.nanaland.ui.theme.getColor
+import com.jeju.nanaland.util.resource.getString
 import com.jeju.nanaland.util.ui.clickableNoEffect
 import com.jeju.nanaland.util.ui.drawColoredShadow
 
@@ -83,7 +84,7 @@ fun ReviewBottomBar(
             contentAlignment = Alignment.Center
         ) {
             Text(
-                text = "후기 작성하기",
+                text = getString(R.string.detail_screen_common_후기_작성하기),
                 color = getColor().white,
                 style = bodyBold
             )
