@@ -329,7 +329,7 @@
     <string name="mypage_screen_리뷰작성하기">후기 작성하기</string>
     <string name="mypage_screen_desc_default">안녕하세요! 반가워요🖐️</string>
     <string name="mypage_screen_desc_hint">나를 한 줄로 표현해보세요!</string>
-    <string name="mypage_screen_review_remove_dialog">해당 후기를/n삭제하시겠습니까?</string>
+    <string name="mypage_screen_review_remove_dialog">해당 후기를\n삭제하시겠습니까?</string>
     <string name="mypage_screen_review_guest">로그인하여 나만의 경험을 기록해보세요!</string>
     <string name="mypage_screen_review_empty">후기를 남겨 나만의 경험을 기록하세요!</string>
     <string name="mypage_screen_notice_empty">공지사항이 존재하지 않습니다</string>
@@ -339,7 +339,7 @@
 
     <!--프로필 수정 화면 다이얼로그-->
     <string name="profile_update_dialog_text1">정말 나가시겠습니까?</string>
-    <string name="profile_update_dialog_text2">지금 나가시면,/n작성 중인 내용이 삭제됩니다.</string>
+    <string name="profile_update_dialog_text2">지금 나가시면,\n작성 중인 내용이 삭제됩니다.</string>
 
     <!--언어 초기화 화면-->
     <string name="profile_initialization_screen_hello">안녕하세요!</string>
@@ -399,9 +399,9 @@
     <string name="common_신고">신고</string>
     <string name="common_사진">사진</string>
     <string name="common_동영상">동영상</string>
-    <string name="common_원">원</string>
+    <string name="common_원">%s원</string>
     <string name="common_시간전">%d시간 전</string>
-    <string name="common_인터넷_문제">인터넷 연결에 문제가 생긴 것 같아요!/n확인 후 다시 들어와줄 수 있을까요?</string>
+    <string name="common_인터넷_문제">인터넷 연결에 문제가 생긴 것 같아요!\n확인 후 다시 들어와줄 수 있을까요?</string>
     <string name="detail_screen_common_영업_시간">영업 시간</string>
     <string name="review_write_title">후기 작성</string>
     <string name="review_write_search_hint">장소를 검색하세요</string>
@@ -416,19 +416,19 @@
     <string name="review_write_keyword_guide">*최소 %d개 이상 선택해야하며, 최대 %d개까지 선택 가능합니다.</string>
     <string name="review_write_keyword_error_over">최대 %d개까지 선택 가능합니다</string>
     <string name="review_write_keyword_complete_title1">당신의 매력적인 글 고마워요 👻</string>
-    <string name="review_write_keyword_complete_sub1">당신의 매력만큼이나/n{여행지의 매력도 함께 올라갔어요!}</string>
+    <string name="review_write_keyword_complete_sub1">당신의 매력만큼이나\n{여행지의 매력도 함께 올라갔어요!}</string>
     <string name="review_write_keyword_complete_title2">너무 마음에 드는걸요 ?</string>
-    <string name="review_write_keyword_complete_sub2">당신의 세심한 글이/n누군가의 여행 선택지를/n풍요롭게 해줬어요 !</string>
+    <string name="review_write_keyword_complete_sub2">당신의 세심한 글이\n누군가의 여행 선택지를\n풍요롭게 해줬어요 !</string>
     <string name="review_write_keyword_complete_btn_again">콘텐츠 다시 보러 가기</string>
     <string name="review_write_keyword_complete_btn_add">다른 리뷰 추가하기</string>
     <string name="review_write_cancel_dialog_title">정말 나가시겠습니까?</string>
-    <string name="review_write_cancel_dialog_subtitle">지금 나가시면,/n작성 중인 내용이 삭제됩니다.</string>
+    <string name="review_write_cancel_dialog_subtitle">지금 나가시면,\n작성 중인 내용이 삭제됩니다.</string>
     <string name="report_category_title">신고하는 이유를 알려주세요!</string>
-    <string name="report_category_subtitle">타당한 근거 없이 신고된 내용은 관리자 확인 후/n반영되지 않을 수 있습니다.</string>
+    <string name="report_category_subtitle">타당한 근거 없이 신고된 내용은 관리자 확인 후\n반영되지 않을 수 있습니다.</string>
     <string name="report_write_resone_title">신고 사유</string>
     <string name="report_write_resone_hint">신고 사유를 %d자 이상 작성해 주세요.</string>
     <string name="report_write_resone_error">신고 사유를 %d자 이상 작성해 주세요.</string>
-    <string name="report_write_complete_toast">신고한 내용은 운영정책에 따라/n최대 24시간 이내 처리됩니다.</string>
+    <string name="report_write_complete_toast">신고한 내용은 운영정책에 따라\n최대 24시간 이내 처리됩니다.</string>
     <string name="review_keyword_mood">분위기</string>
     <string name="review_keyword_with">동반자</string>
     <string name="review_keyword_infra">편의 시설</string>

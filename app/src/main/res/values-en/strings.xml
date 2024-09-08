@@ -328,7 +328,7 @@
     <string name="mypage_screen_리뷰작성하기">Write a review</string>
     <string name="mypage_screen_desc_default">Hello! Nice to meet you🖐️</string>
     <string name="mypage_screen_desc_hint">Express yourself in one line!</string>
-    <string name="mypage_screen_review_remove_dialog">Do you want to/n delete this review?</string>
+    <string name="mypage_screen_review_remove_dialog">Do you want to\n delete this review?</string>
     <string name="mypage_screen_review_guest">Log in to record your own experience!</string>
     <string name="mypage_screen_review_empty">Leave a review and record your experience!</string>
     <string name="mypage_screen_notice_empty">No Announcements Available</string>
@@ -338,7 +338,7 @@
 
     <!--프로필 수정 화면 다이얼로그-->
     <string name="profile_update_dialog_text1">Are you sure you want to leave?</string>
-    <string name="profile_update_dialog_text2">If you leave now,/nWhat you are writing will be deleted.</string>
+    <string name="profile_update_dialog_text2">If you leave now,\nWhat you are writing will be deleted.</string>
 
     <!--언어 초기화 화면-->
     <string name="profile_initialization_screen_hello">안녕하세요!</string>
@@ -398,9 +398,9 @@
     <string name="common_신고">Declaration</string>
     <string name="common_사진">Picture</string>
     <string name="common_동영상">Videos</string>
-    <string name="common_원">won</string>
+    <string name="common_원">%swon</string>
     <string name="common_시간전">%d  hour ago</string>
-    <string name="common_인터넷_문제">I think there\'s a problem with my internet connection!/nCan you come back after checking?</string>
+    <string name="common_인터넷_문제">I think there\'s a problem with my internet connection!\nCan you come back after checking?</string>
     <string name="detail_screen_common_영업_시간">Opening Hours</string>
     <string name="review_write_title">Write a review</string>
     <string name="review_write_search_hint">Search Location</string>
@@ -415,19 +415,19 @@
     <string name="review_write_keyword_guide">*You must select at least %d items, and you can select up to %d items.</string>
     <string name="review_write_keyword_error_over">You can select up to %d</string>
     <string name="review_write_keyword_complete_title1">Thank you for your fascinating writing 👻</string>
-    <string name="review_write_keyword_complete_sub1">As much as your charm/n{The attractiveness of the travel destination also increased!}</string>
+    <string name="review_write_keyword_complete_sub1">As much as your charm\n{The attractiveness of the travel destination also increased!}</string>
     <string name="review_write_keyword_complete_title2">You like it so much?</string>
-    <string name="review_write_keyword_complete_sub2">Your meticulous writing/nSomeone\'s travel choices/nIt enriched me!</string>
+    <string name="review_write_keyword_complete_sub2">Your meticulous writing\nSomeone\'s travel choices\nIt enriched me!</string>
     <string name="review_write_keyword_complete_btn_again">Go see content again</string>
     <string name="review_write_keyword_complete_btn_add">Add another review</string>
     <string name="review_write_cancel_dialog_title">Are you sure you want to leave?</string>
-    <string name="review_write_cancel_dialog_subtitle">If you leave now,/nWhat you are writing will be deleted.</string>
+    <string name="review_write_cancel_dialog_subtitle">If you leave now,\nWhat you are writing will be deleted.</string>
     <string name="report_category_title">Please tell us why you are reporting it!</string>
-    <string name="report_category_subtitle">Information reported without valid grounds must be confirmed by the administrator./nIt may not be reflected.</string>
+    <string name="report_category_subtitle">Information reported without valid grounds must be confirmed by the administrator.\nIt may not be reflected.</string>
     <string name="report_write_resone_title">Reason for reporting</string>
     <string name="report_write_resone_hint">Please write at least %d characters about the reason for the report.</string>
     <string name="report_write_resone_error">Please write at least %d characters about the reason for the report.</string>
-    <string name="report_write_complete_toast">The reported contents are in accordance with the operating policy./nIt will be processed within a maximum of 24 hours.</string>
+    <string name="report_write_complete_toast">The reported contents are in accordance with the operating policy.\nIt will be processed within a maximum of 24 hours.</string>
     <string name="review_keyword_mood">Atmosphere</string>
     <string name="review_keyword_with">Companion</string>
     <string name="review_keyword_infra">Amenities</string>

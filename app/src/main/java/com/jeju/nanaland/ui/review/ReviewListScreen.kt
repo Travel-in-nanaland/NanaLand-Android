@@ -62,6 +62,7 @@ fun ReviewListScreen(
     moveToReviewWritingScreen: (Int, String, String, String) -> Unit,
     moveToSignInScreen: () -> Unit,
     moveToReportScreen:(Int) -> Unit,
+    moveToProfileScreen:(Int) -> Unit,
     viewModel: ReviewListViewModel = hiltViewModel()
 ) {
     LaunchedEffect(Unit) {
@@ -106,6 +107,7 @@ fun ReviewListScreen(
         moveToBackScreen = moveToBackScreen,
         moveToSignInScreen = moveToSignInScreen,
         moveToReportScreen = moveToReportScreen,
+        moveToProfileScreen = moveToProfileScreen,
         isContent = true
     )
 }
@@ -124,6 +126,7 @@ private fun ReviewListScreen(
     moveToBackScreen: () -> Unit,
     moveToSignInScreen: () -> Unit,
     moveToReportScreen: (Int) -> Unit,
+    moveToProfileScreen: (Int) -> Unit,
     isContent: Boolean
 ) {
     val lazyGridState = rememberLazyGridState()
@@ -235,6 +238,7 @@ private fun ReviewListScreen(
                                     ReviewCard(
                                         data = item,
                                         toggleReviewFavorite = toggleReviewFavorite,
+                                        onProfileClick = moveToProfileScreen,
                                         onMenuButtonClick = {
                                             isDimBackgroundShowing.intValue = item.id
                                             coroutineScope.launch { reportDialogAnchoredDraggableState.animateTo(

@@ -1,8 +1,10 @@
 package com.jeju.nanaland.ui.experience
 
 import android.content.Intent
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.gestures.animateTo
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -13,7 +15,9 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
@@ -23,6 +27,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.jeju.nanaland.R
@@ -30,7 +35,6 @@ import com.jeju.nanaland.domain.entity.experience.ExperienceContent
 import com.jeju.nanaland.domain.entity.review.ReviewListData
 import com.jeju.nanaland.globalvalue.type.AnchoredDraggableContentState
 import com.jeju.nanaland.globalvalue.type.ExperienceCategoryType
-import com.jeju.nanaland.ui.component.common.BottomOkButton
 import com.jeju.nanaland.ui.component.common.CustomSurface
 import com.jeju.nanaland.ui.component.common.ReviewBottomBar
 import com.jeju.nanaland.ui.component.common.topbar.CustomTopBarWithShareButton
@@ -46,11 +50,14 @@ import com.jeju.nanaland.ui.component.review.ReviewCard
 import com.jeju.nanaland.ui.component.review.TotalRatingStar
 import com.jeju.nanaland.ui.component.review.TotalReviewCountText
 import com.jeju.nanaland.ui.component.review.getReportAnchoredDraggableState
+import com.jeju.nanaland.ui.theme.bodyBold
 import com.jeju.nanaland.ui.theme.getColor
 import com.jeju.nanaland.util.language.getLanguage
 import com.jeju.nanaland.util.resource.getString
+import com.jeju.nanaland.util.resource.getString
 import com.jeju.nanaland.util.ui.ScreenPreview
 import com.jeju.nanaland.util.ui.UiState
+import com.jeju.nanaland.util.ui.clickableNoEffect
 import kotlinx.coroutines.launch
 
 @Composable
@@ -65,6 +72,7 @@ fun ExperienceContentScreen(
     moveToReviewListScreen: (Boolean, String, String, String) -> Unit,
     moveToReviewWritingScreen: (Int, String, String, String) -> Unit,
     moveToReportScreen: (Int) -> Unit,
+    moveToProfileScreen: (Int) -> Unit,
     viewModel: ExperienceContentViewModel = hiltViewModel()
 ) {
     LaunchedEffect(Unit) {
@@ -104,6 +112,7 @@ fun ExperienceContentScreen(
                 )
         },
         moveToReportScreen = moveToReportScreen,
+        moveToProfileScreen = moveToProfileScreen,
         isContent = true
     )
 }
@@ -124,6 +133,7 @@ private fun ExperienceContentScreen(
     moveToInfoModificationProposalScreen: () -> Unit,
     moveToSignInScreen: () -> Unit,
     moveToReportScreen: (Int) -> Unit,
+    moveToProfileScreen: (Int) -> Unit,
     isContent: Boolean
 ) {
     val context = LocalContext.current
@@ -264,6 +274,7 @@ private fun ExperienceContentScreen(
                                         ReviewCard(
                                             data = it,
                                             toggleReviewFavorite = toggleReviewFavorite,
+                                            onProfileClick = moveToProfileScreen,
                                             onMenuButtonClick = {
                                                 isDimBackgroundShowing.intValue = it.id
                                                 coroutineScope.launch { reportDialogAnchoredDraggableState.animateTo(AnchoredDraggableContentState.Open) }
@@ -278,10 +289,29 @@ private fun ExperienceContentScreen(
                                 }
 
                                 if (reviewList.data.totalElements > 3) {
-                                    BottomOkButton(
+                                    Text(
+                                        modifier = Modifier
+                                            .padding(horizontal = 16.dp)
+                                            .fillMaxWidth()
+                                            .background(
+                                                color = getColor().white,
+                                                shape = RoundedCornerShape(50)
+                                            )
+                                            .border(
+                                                border = BorderStroke(
+                                                    width = 1.dp,
+                                                    color = getColor().gray02,
+                                                ),
+                                                shape = RoundedCornerShape(50)
+                                            )
+                                            .clickableNoEffect {
+                                                moveToReviewListScreen()
+                                            }
+                                            .padding(vertical = 11.dp),
                                         text = getString(R.string.detail_screen_common_후기_더보기),
-                                        isActivated = true,
-                                        onClick = moveToReviewListScreen
+                                        color = getColor().gray01,
+                                        style = bodyBold,
+                                        textAlign = TextAlign.Center
                                     )
                                 }
 

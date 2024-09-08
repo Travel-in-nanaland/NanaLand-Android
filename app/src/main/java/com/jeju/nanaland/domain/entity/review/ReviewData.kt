@@ -27,5 +27,7 @@ data class ReviewData(
     @SerializedName("reviewTypeKeywords")
     val reviewTypeKeywords: List<String>,
     @SerializedName("reviewHeart")
-    val reviewHeart: Boolean
+    val reviewHeart: Boolean,
+    @SerializedName("myReview")
+    val myReview: Boolean
 )

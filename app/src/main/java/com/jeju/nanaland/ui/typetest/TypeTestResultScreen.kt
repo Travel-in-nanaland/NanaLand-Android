@@ -40,7 +40,7 @@ fun TypeTestResultScreen(
     travelType: TravelType,
     filledButtonString: String,
     moveToRecommendedSpotScreen: () -> Unit,
-    onFilledButtonClick: () -> Unit,
+    onFilledButtonClick: (() -> Unit)?,
     moveToBackScreen: (() -> Unit)?,
 ) {
     CustomSurface {
@@ -95,11 +95,13 @@ fun TypeTestResultScreen(
 
                     Spacer(Modifier.height(16.dp))
 
-                    BottomOkButton(
-                        text = filledButtonString,
-                        isActivated = true,
-                        onClick = onFilledButtonClick
-                    )
+                    onFilledButtonClick?.let {
+                        BottomOkButton(
+                            text = filledButtonString,
+                            isActivated = true,
+                            onClick = onFilledButtonClick
+                        )
+                    }
 
                     Spacer(Modifier.height(20.dp))
                 }

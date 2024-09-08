@@ -66,6 +66,7 @@ fun ProfileScreen(
         moveToProfileReviewListScreen = moveToProfileReviewListScreen,
         moveToProfileNoticeListScreen = moveToProfileNoticeListScreen,
 
+        moveToReportScreen = {},
         onBackButtonClicked ={},
     )
 }
@@ -75,12 +76,14 @@ fun ProfileScreen(
     onBackButtonClicked: () -> Unit,
     moveToTypeTestResultScreen: (String) -> Unit,
     moveToProfileReviewListScreen: (Int?) -> Unit,
+    moveToReportScreen: (Int) -> Unit,
 ) {
     ProfileScreen(
         isMine = false,
         onBackButtonClicked = onBackButtonClicked,
         moveToTypeTestResultScreen = moveToTypeTestResultScreen,
         moveToProfileReviewListScreen = moveToProfileReviewListScreen,
+        moveToReportScreen = moveToReportScreen,
 
         moveToSettingsScreen = {},
         moveToReviewWriteScreen = {},
@@ -103,6 +106,7 @@ private fun ProfileScreen(
     moveToReviewWriteScreen: () -> Unit,
     moveToProfileReviewListScreen: (Int?) -> Unit,
     moveToProfileNoticeListScreen: (Int?) -> Unit,
+    moveToReportScreen: (Int) -> Unit,
     viewModel: ProfileViewModel = hiltViewModel()
 ) {
     val userProfile = viewModel.userProfile.collectAsState()
@@ -236,7 +240,7 @@ private fun ProfileScreen(
     if(moreOptionDialog)
         ReportSheet(
             onDismissRequest = { moreOptionDialog = false },
-            onReport = { /*TODO*/ }
+            onReport = { viewModel.userId?.let { moveToReportScreen(it) } }
         )
 }
 

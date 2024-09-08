@@ -2,6 +2,7 @@ package com.jeju.nanaland.util.string
 
 import com.jeju.nanaland.R
 import com.jeju.nanaland.util.resource.getString
+import java.text.NumberFormat
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Date
@@ -43,3 +44,9 @@ fun Date.toFormatString(): String {
         else -> toDotYearMonthDate()
     }
 }
+
+// 가격 등에 컴마 넣는거
+private val numberFormat = mutableMapOf<Locale, NumberFormat>()
+fun Number.toWithComma(locale: Locale): String = numberFormat.getOrPut(locale) {
+    NumberFormat.getNumberInstance(locale)
+}.format(this)

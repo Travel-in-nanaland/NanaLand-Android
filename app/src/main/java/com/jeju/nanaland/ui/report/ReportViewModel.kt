@@ -67,6 +67,8 @@ class ReportViewModel @Inject constructor(
         content: String,
         images: List<UriRequestBody>
     ) {
+        _submitCallState.update { UiState.Loading }
+
         reportReviewUseCase(
             ReportDetail(
                 id = stateHandle.reportId,
@@ -77,12 +79,14 @@ class ReportViewModel @Inject constructor(
             ),
             images
         ).onEach {
-            _submitCallState.update { UiState.Loading }
             it.onSuccess { code, message, data ->
                 _submitCallState.update { UiState.Success(Unit) }
             }.onError { code, message ->
                 _submitCallState.update { UiState.Failure("") }
             }
         }.launchIn(viewModelScope)
+    }
+    fun setSubmitCallStateNull(){
+        _submitCallState.update { null }
     }
 }

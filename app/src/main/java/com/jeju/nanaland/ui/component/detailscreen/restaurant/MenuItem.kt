@@ -1,6 +1,5 @@
 package com.jeju.nanaland.ui.component.detailscreen.restaurant
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -16,10 +15,11 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
 import com.jeju.nanaland.R
 import com.jeju.nanaland.ui.theme.body02
-import com.jeju.nanaland.ui.theme.body02Bold
 import com.jeju.nanaland.ui.theme.bodyBold
 import com.jeju.nanaland.ui.theme.getColor
+import com.jeju.nanaland.util.language.customContext
 import com.jeju.nanaland.util.resource.getString
+import com.jeju.nanaland.util.string.toWithComma
 import com.skydoves.landscapist.glide.GlideImage
 
 @Composable
@@ -43,7 +43,13 @@ fun MenuItem(
             Spacer(Modifier.height(4.dp))
 
             Text(
-                text = "${price}" + getString(R.string.common_원),
+                text = getString(
+                    R.string.common_원,
+                    price
+                        .toDoubleOrNull()
+                        ?.toWithComma(customContext.resources.configuration.locales[0])
+                        ?: price
+                ),
                 color = getColor().black,
                 style = body02
             )

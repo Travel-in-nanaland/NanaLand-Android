@@ -29,6 +29,7 @@ import com.jeju.nanaland.util.navigation.navigate
 fun NavGraphBuilder.profileScreenRoute(navController: NavController) = navigation<ROUTE.Profile>(
     ROUTE.Profile.StartDest(null)
 ) {
+    // TODO 현재는 타인 프로필만 이용 -> 병합 후 "isMine" key 상수 value 수정
     composable<ROUTE.Profile.StartDest> {
         CustomSurface { isImeKeyboardShowing ->
             Scaffold(
@@ -43,11 +44,17 @@ fun NavGraphBuilder.profileScreenRoute(navController: NavController) = navigatio
                     ProfileScreen(
                         onBackButtonClicked = { navController.popBackStack() },
                         moveToTypeTestResultScreen = {
-                            navController.navigate(ROUTE_TYPE_TEST_RESULT,  bundleOf("travelType" to it))
+                            navController.navigate(ROUTE_TYPE_TEST_RESULT,  bundleOf(
+                                "travelType" to it,
+                                "isMine" to false,
+                            ))
                         },
                         moveToProfileReviewListScreen = {
                             navController.navigate(ROUTE.Profile.ReviewList(it))
                         },
+                        moveToReportScreen = {
+                            navController.navigate(ROUTE.Report(it, false))
+                        }
                     )
                 }
             }

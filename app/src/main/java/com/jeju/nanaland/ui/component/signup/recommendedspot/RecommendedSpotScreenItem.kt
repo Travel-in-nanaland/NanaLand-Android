@@ -1,7 +1,6 @@
 package com.jeju.nanaland.ui.component.signup.recommendedspot
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -17,8 +16,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawBehind
-import androidx.compose.ui.draw.drawWithCache
-import androidx.compose.ui.draw.drawWithContent
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Brush
@@ -29,7 +26,6 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.jeju.nanaland.R
-import com.jeju.nanaland.ui.component.signup.recommendedspot.parts.RecommendedSpotScreenLogoStamp
 import com.jeju.nanaland.ui.component.signup.recommendedspot.parts.RecommendedSpotScreenLogoTextStamp
 import com.jeju.nanaland.ui.component.signup.recommendedspot.parts.RecommendedSpotScreenSpotDescription
 import com.jeju.nanaland.ui.component.signup.recommendedspot.parts.RecommendedSpotScreenSpotName
@@ -37,6 +33,7 @@ import com.jeju.nanaland.ui.theme.caption01SemiBold
 import com.jeju.nanaland.ui.theme.getColor
 import com.jeju.nanaland.util.resource.getString
 import com.jeju.nanaland.util.ui.TicketShape
+import com.jeju.nanaland.util.ui.clickableNoEffect
 import com.skydoves.landscapist.ImageOptions
 import com.skydoves.landscapist.glide.GlideImage
 
@@ -44,7 +41,8 @@ import com.skydoves.landscapist.glide.GlideImage
 fun RecommendedSpotScreenItem(
     imageUri: String?,
     title: String,
-    description: String
+    description: String,
+    onDetailClick: ()->Unit
 ) {
     val brush = remember { Brush.verticalGradient(listOf(Color.Transparent, Color(0xB3262627), Color(0xB3262627))) }
     Box(
@@ -59,6 +57,7 @@ fun RecommendedSpotScreenItem(
                 )
                 clip = true
             }
+            .clickableNoEffect { onDetailClick() }
     ) {
         GlideImage(
             modifier = Modifier.fillMaxSize(),

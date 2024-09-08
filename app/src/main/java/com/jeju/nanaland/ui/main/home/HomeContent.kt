@@ -108,7 +108,9 @@ private fun HomeContent(
         Column(
             modifier = Modifier.padding(start = 16.dp, end = 16.dp, bottom = 20.dp)
         ) {
-            HomeScreenRecommendText(text = UserData.nickname)
+            HomeScreenRecommendText(text = UserData.nickname.takeIf {
+                it != "GUEST"
+            } ?: "")
 
             Spacer(Modifier.height(10.dp))
 

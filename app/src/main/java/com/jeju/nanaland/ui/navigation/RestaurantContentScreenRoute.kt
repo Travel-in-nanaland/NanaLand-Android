@@ -102,6 +102,7 @@ fun NavGraphBuilder.restaurantContentScreen(navController: NavController) = comp
             )
             navController.navigate(ROUTE_REVIEW_LIST, bundle)
         },
-        moveToReportScreen = { navController.navigate(ROUTE.Report(it, true)) }
+        moveToReportScreen = { navController.navigate(ROUTE.Report(it, true)) },
+        moveToProfileScreen = { navController.navigate(ROUTE.Profile.StartDest(it)) }
     )
 }

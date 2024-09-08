@@ -62,6 +62,7 @@ import com.jeju.nanaland.ui.component.common.BottomOkButton
 import com.jeju.nanaland.ui.component.common.CustomSurface
 import com.jeju.nanaland.ui.component.common.DialogCommon
 import com.jeju.nanaland.ui.component.common.UploadImages
+import com.jeju.nanaland.ui.component.common.dialog.SubmitLoadingDialog
 import com.jeju.nanaland.ui.component.common.text.TextWithPointColor
 import com.jeju.nanaland.ui.component.common.topbar.CustomTopBar
 import com.jeju.nanaland.ui.reviewwrite.ReviewWriteUiState
@@ -121,7 +122,12 @@ fun ReviewWriteScreen(
     )
     callState.value?.let {
         when (it) {
-            is UiState.Loading -> {}
+            is UiState.Loading -> {
+                SubmitLoadingDialog(
+                    getString(R.string.loading_wait_text_desc1),
+                    getString(R.string.loading_wait_text_desc2),
+                )
+            }
             is UiState.Success -> {
                 val bundle = bundleOf(
                     "category" to category.toString()
@@ -130,7 +136,10 @@ fun ReviewWriteScreen(
                     popUpTo(ROUTE_REVIEW_WRITE) { inclusive = true}
                 })
             }
-            is UiState.Failure -> {}
+            is UiState.Failure -> {
+                viewModel.setCallStateNull()
+                Toast.makeText(context, getString(R.string.common_인터넷_문제), Toast.LENGTH_LONG).show()
+            }
         }
     }
     if(cancelDialogVisible) {

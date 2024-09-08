@@ -1,12 +1,15 @@
 package com.jeju.nanaland.ui.nanapick
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -24,15 +27,17 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.jeju.nanaland.R
 import com.jeju.nanaland.domain.entity.nanapick.NanaPickContentData
 import com.jeju.nanaland.ui.component.common.CustomSurface
-import com.jeju.nanaland.ui.component.common.topbar.CustomTopBar
 import com.jeju.nanaland.ui.component.detailscreen.nanapick.NanaPickContentAttractivePointDialog
 import com.jeju.nanaland.ui.component.detailscreen.nanapick.NanaPickContentSubContents
 import com.jeju.nanaland.ui.component.detailscreen.nanapick.NanaPickContentTopBanner
-import com.jeju.nanaland.ui.component.detailscreen.other.DetailScreenNotice
 import com.jeju.nanaland.ui.component.detailscreen.other.MoveToTopButton
+import com.jeju.nanaland.ui.component.detailscreen.other.parts.notice.DetailScreenNoticeContent
+import com.jeju.nanaland.ui.component.detailscreen.other.parts.notice.DetailScreenNoticeTitle
+import com.jeju.nanaland.ui.theme.getColor
 import com.jeju.nanaland.util.log.LogUtil
 import com.jeju.nanaland.util.resource.getString
 import com.jeju.nanaland.util.ui.UiState
+import com.jeju.nanaland.util.ui.drawColoredShadow
 import kotlinx.coroutines.launch
 
 @Composable
@@ -77,10 +82,6 @@ private fun NanaPickContentScreen(
         }
 
     CustomSurface {
-        CustomTopBar(
-            title = getString(R.string.common_나나s_Pick),
-            onBackButtonClicked = moveToBackScreen
-        )
 
         when (nanaPickContent) {
             is UiState.Loading -> {}
@@ -95,10 +96,30 @@ private fun NanaPickContentScreen(
 
                         Column(modifier = Modifier.padding(start = 16.dp, end = 16.dp)) {
                             if (!nanaPickContent.data.notice.isNullOrEmpty()) {
-                                DetailScreenNotice(
-                                    title = getString(R.string.detail_screen_common_알아두면_좋아요),
-                                    content = nanaPickContent.data.notice
-                                )
+                                Column(
+                                    modifier = Modifier
+                                        .fillMaxWidth()
+                                        .drawColoredShadow(
+                                            color = getColor().black,
+                                            alpha = 0.1f,
+                                            shadowRadius = 12.dp,
+                                            offsetX = 0.dp,
+                                            offsetY = 0.dp
+                                        )
+                                        .background(
+                                            color = getColor().white,
+                                            shape = RoundedCornerShape(12.dp)
+                                        )
+                                        .padding(16.dp)
+                                ) {
+                                    DetailScreenNoticeTitle(
+                                        getString(R.string.detail_screen_common_알아두면_좋아요)
+                                    )
+
+                                    Spacer(Modifier.height(4.dp))
+
+                                    DetailScreenNoticeContent(nanaPickContent.data.notice)
+                                }
                             }
 
                             Spacer(Modifier.height(48.dp))
@@ -115,6 +136,7 @@ private fun NanaPickContentScreen(
                         height = if (400 - (scrollState.value / density) > 185) 400 - (scrollState.value / density).toInt() else 185,
                         contentId = contentId,
                         nanaPickContent = nanaPickContent,
+                        onBackButtonClicked = moveToBackScreen,
                         toggleFavorite = toggleFavorite,
                         moveToSignInScreen = moveToSignInScreen,
                     )

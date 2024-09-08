@@ -10,7 +10,6 @@ import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -24,6 +23,7 @@ import com.jeju.nanaland.R
 import com.jeju.nanaland.domain.request.UriRequestBody
 import com.jeju.nanaland.ui.component.common.CustomSurface
 import com.jeju.nanaland.ui.component.common.DialogCommon
+import com.jeju.nanaland.ui.component.common.dialog.SubmitLoadingDialog
 import com.jeju.nanaland.ui.component.common.topbar.CustomTopBar
 import com.jeju.nanaland.ui.report.screen.ReportCategoryScreen
 import com.jeju.nanaland.ui.report.screen.ReportWriteScreen
@@ -42,12 +42,22 @@ fun ReportScreen(
     val email = viewModel.email.collectAsStateWithLifecycle()
     var cancelDialog by remember { mutableStateOf(false) }
 
-    LaunchedEffect(submitState.value) {
-        if(submitState.value is UiState.Success){
-            Toast.makeText(context, getString(R.string.report_write_complete_toast), Toast.LENGTH_LONG).show()
-            moveToBackScreen()
+    submitState.value?.let {
+        when (it) {
+            is UiState.Success -> {
+                Toast.makeText(context, getString(R.string.report_write_complete_toast), Toast.LENGTH_LONG).show()
+                moveToBackScreen()
+            }
+            is UiState.Loading -> {
+                SubmitLoadingDialog(getString(R.string.loading_wait_text_desc3))
+            }
+            is UiState.Failure -> {
+                viewModel.setSubmitCallStateNull()
+                Toast.makeText(context, getString(R.string.common_인터넷_문제), Toast.LENGTH_LONG).show()
+            }
         }
     }
+
     BackHandler {
         if(page.value <= 1)
             moveToBackScreen()

@@ -1,26 +1,19 @@
 package com.jeju.nanaland.ui.nanapick.component
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.jeju.nanaland.domain.entity.nanapick.NanaPickBannerData
 import com.jeju.nanaland.ui.theme.body02Bold
 import com.jeju.nanaland.ui.theme.caption02
-import com.jeju.nanaland.ui.theme.caption02SemiBold
 import com.jeju.nanaland.ui.theme.getColor
 import com.jeju.nanaland.util.ui.clickableNoEffect
 import com.skydoves.landscapist.ImageOptions
@@ -32,17 +25,11 @@ fun NanaPickThumbnailBanner2(
     onClick: (Int) -> Unit
 ) {
     Column(
-        modifier = Modifier.width(120.dp)
+        modifier = Modifier.clickableNoEffect { onClick(item.id) }
     ) {
-        Box(
-            modifier = Modifier
-                .padding(top = 24.dp)
-                .fillMaxWidth()
-                .height(160.dp)
-                .clickableNoEffect { onClick(item.id) }
-        ) {
+        Box {
             GlideImage(
-                modifier = Modifier.fillMaxSize(),
+                modifier = Modifier.aspectRatio(3/4f),
                 imageModel = { item.firstImage.thumbnailUrl },
                 imageOptions = ImageOptions(contentScale = ContentScale.Crop)
             )
@@ -59,7 +46,9 @@ fun NanaPickThumbnailBanner2(
         Text(
             text = item.heading,
             color = getColor().black,
-            style = body02Bold
+            style = body02Bold,
+            maxLines = 1,
+            overflow = TextOverflow.Ellipsis
         )
 
         Text(

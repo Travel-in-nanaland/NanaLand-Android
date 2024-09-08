@@ -82,7 +82,7 @@ fun ProfileNoticeRow(
                 color = getColor().black,
                 style = body02Bold
             )
-            Spacer(modifier = Modifier.height(4.dp))
+            Spacer(modifier = Modifier.height(6.dp))
             Text(
                 text = data.createdAt.toFormatString(),
                 color = getColor().gray01,

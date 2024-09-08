@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.jeju.nanaland.domain.entity.common.ImageUrl
 import com.jeju.nanaland.domain.entity.nanapick.NanaPickSubContentAdditionalInfoData
 import com.jeju.nanaland.ui.component.detailscreen.nanapick.NanaPickContentAttractivePoint
 import com.jeju.nanaland.ui.component.detailscreen.nanapick.parts.subcontent.NanaPickContentSubContentAdditionalInfo
@@ -23,7 +24,7 @@ fun NanaPickContentSubContent(
     index: Int,
     subTitle: String?,
     title: String?,
-    imageUri: String?,
+    imageUri: List<ImageUrl>,
     content: String?,
     additionalInfoList: List<NanaPickSubContentAdditionalInfoData>,
     tagList: List<String?>,

@@ -140,13 +140,17 @@ private fun NanaPickListScreen(
                                     Text(
                                         text = recommendedNanaPickList.data[page % recommendedNanaPickList.data.size].subHeading,
                                         color = getColor().white,
-                                        style = body02SemiBold
+                                        style = body02SemiBold,
+                                        maxLines = 1,
+                                        overflow = TextOverflow.Ellipsis
                                     )
 
                                     Text(
                                         text = recommendedNanaPickList.data[page % recommendedNanaPickList.data.size].heading,
                                         color = getColor().white,
-                                        style = title01Bold
+                                        style = title01Bold,
+                                        maxLines = 2,
+                                        overflow = TextOverflow.Ellipsis
                                     )
                                 }
                             }

@@ -58,20 +58,21 @@ fun WithdrawalScreenConfirmDialog(
                     SettingsScreenHorizontalDivider()
 
                     Row(Modifier.height(IntrinsicSize.Min)) {
-                        SettingsScreenDialogCancelButton(
-                            text = getString(R.string.common_취소),
-                            onClick = onCancel
-                        )
-
-                        WithdrawalScreenDialogVerticalDivider()
-
                         SettingsScreenDialogConfirmButton(
-                            text = getString(R.string.common_삭제),
+                            text = getString(R.string.common_네),
                             onClick = {
                                 onCancel()
                                 onConfirm()
                             }
                         )
+
+                        WithdrawalScreenDialogVerticalDivider()
+
+                        SettingsScreenDialogCancelButton(
+                            text = getString(R.string.common_취소),
+                            onClick = onCancel
+                        )
+
                     }
                 }
             }

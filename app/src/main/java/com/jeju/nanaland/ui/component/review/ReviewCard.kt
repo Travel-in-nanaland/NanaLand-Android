@@ -13,8 +13,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.layout.wrapContentHeight
-import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
@@ -48,6 +46,7 @@ import com.jeju.nanaland.util.ui.drawColoredShadow
 fun ReviewCard(
     data: ReviewData,
     toggleReviewFavorite: (Int) -> Unit,
+    onProfileClick: (Int) -> Unit,
     onMenuButtonClick: () -> Unit,
 ) {
     val scrollState = rememberScrollState()
@@ -79,29 +78,31 @@ fun ReviewCard(
             Row(
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                ReviewProfileImage(imageUrl = data.profileImage.thumbnailUrl)
+                Row(Modifier.clickableNoEffect { onProfileClick(data.memberId) }) {
+                    ReviewProfileImage(imageUrl = data.profileImage.thumbnailUrl)
 
-                Spacer(Modifier.width(8.dp))
+                    Spacer(Modifier.width(8.dp))
 
-                Column {
-                    ReviewProfileName(name = data.nickname)
+                    Column {
+                        ReviewProfileName(name = data.nickname)
 
-                    Row(
-                        verticalAlignment = Alignment.CenterVertically
-                    ) {
-                        ReviewCountText(count = data.memberReviewCount)
+                        Row(
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            ReviewCountText(count = data.memberReviewCount)
 
-                        Spacer(Modifier.width(4.dp))
+                            Spacer(Modifier.width(4.dp))
 
-                        Box(
-                            Modifier
-                                .width(1.dp)
-                                .height(12.dp)
-                                .background(getColor().black))
+                            Box(
+                                Modifier
+                                    .width(1.dp)
+                                    .height(12.dp)
+                                    .background(getColor().black))
 
-                        Spacer(Modifier.width(4.dp))
+                            Spacer(Modifier.width(4.dp))
 
-                        ReviewRatingText(rating = data.rating)
+                            ReviewRatingText(rating = data.rating)
+                        }
                     }
                 }
 
@@ -152,14 +153,15 @@ fun ReviewCard(
                 style = caption01
             )
 
-            Image(
-                modifier = Modifier
-                    .size(20.dp)
-                    .clickableNoEffect { onMenuButtonClick() },
-                painter = painterResource(R.drawable.ic_more_dot),
-                contentDescription = null,
-                colorFilter = ColorFilter.tint(getColor().gray01)
-            )
+            if(!data.myReview)
+                Image(
+                    modifier = Modifier
+                        .size(20.dp)
+                        .clickableNoEffect { onMenuButtonClick() },
+                    painter = painterResource(R.drawable.ic_more_dot),
+                    contentDescription = null,
+                    colorFilter = ColorFilter.tint(getColor().gray01)
+                )
         }
     }
 }

@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -19,6 +20,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.jeju.nanaland.R
 import com.jeju.nanaland.ui.theme.NanaLandTheme
@@ -39,6 +41,7 @@ fun LocationFilterBox(
     Row(
         modifier = Modifier
             .height(32.dp)
+            .widthIn(max = 159.dp)
             .border(
                 border = BorderStroke(
                     width = 1.dp,
@@ -56,17 +59,17 @@ fun LocationFilterBox(
         Spacer(Modifier.width(12.dp))
 
         Text(
+            modifier = Modifier.weight(1f, false),
             text = when (selectedLocationList.count { it }) {
                 0 -> getString(R.string.list_screen_common_전_지역)
-                1, 2 -> selectedLocationList.withIndex()
-                    .filter { selectedLocationList[it.index] }.take(2)
-                    .joinToString(separator = ", ") { locationList[it.index] }
                 else -> selectedLocationList.withIndex()
-                    .filter { selectedLocationList[it.index] }.take(2)
-                    .joinToString(separator = ", ") { locationList[it.index] } + ", ..."
+                    .filter { selectedLocationList[it.index] }
+                    .joinToString(separator = ", ") { locationList[it.index] }
             },
             color = getColor().gray01,
-            style = caption01
+            style = caption01,
+            maxLines = 1,
+            overflow = TextOverflow.Ellipsis
         )
 
         Spacer(Modifier.width(4.dp))

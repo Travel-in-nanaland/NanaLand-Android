@@ -2,8 +2,10 @@ package com.jeju.nanaland.ui.signin
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.google.firebase.messaging.FirebaseMessaging
 import com.jeju.nanaland.domain.request.auth.SignInRequest
 import com.jeju.nanaland.domain.request.auth.SignUpRequest
+import com.jeju.nanaland.domain.usecase.auth.GetFCMTokenUseCase
 import com.jeju.nanaland.domain.usecase.auth.SignInUseCase
 import com.jeju.nanaland.domain.usecase.auth.SignUpUseCase
 import com.jeju.nanaland.domain.usecase.authdatastore.SaveAccessTokenUseCase
@@ -20,7 +22,10 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.launch
 import javax.inject.Inject
+import kotlin.coroutines.resume
+import kotlin.coroutines.suspendCoroutine
 
 @HiltViewModel
 class SignInViewModel @Inject constructor(
@@ -30,6 +35,7 @@ class SignInViewModel @Inject constructor(
     private val saveAccessTokenUseCase: SaveAccessTokenUseCase,
     private val saveRefreshTokenUseCase: SaveRefreshTokenUseCase,
     private val signUpUseCase: SignUpUseCase,
+    private val getFCMTokenUseCase: GetFCMTokenUseCase,
 ) : ViewModel() {
 
     fun signIn(
@@ -37,7 +43,7 @@ class SignInViewModel @Inject constructor(
         id: String,
         moveToMainScreen: () -> Unit,
         moveToSignUpScreen: () -> Unit,
-    ) {
+    ) = viewModelScope.launch {
         var locale = "ENGLISH"
         getValueUseCase(key = KEY_LANGUAGE)
             .onEach {
@@ -54,7 +60,8 @@ class SignInViewModel @Inject constructor(
         val requestData = SignInRequest(
             locale = locale,
             provider = provider,
-            providerId = id
+            providerId = id,
+            fcmToken = getFCMTokenUseCase()
         )
         signInUseCase(requestData)
             .onEach { networkResult ->
@@ -150,7 +157,7 @@ class SignInViewModel @Inject constructor(
             .launchIn(viewModelScope)
     }
 
-    private fun nonMemberSignIn(
+    private suspend fun nonMemberSignIn(
         locale: String,
         androidId: String,
         moveToMainScreen: () -> Unit,
@@ -158,7 +165,8 @@ class SignInViewModel @Inject constructor(
         val signInData = SignInRequest(
             locale = locale,
             provider = "GUEST",
-            providerId = androidId
+            providerId = androidId,
+            fcmToken = getFCMTokenUseCase()
         )
         signInUseCase(signInData)
             .onEach { networkResult ->

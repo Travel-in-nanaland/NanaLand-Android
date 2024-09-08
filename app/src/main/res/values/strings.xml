@@ -79,7 +79,7 @@
     <string name="common_신고">신고</string> <!--  TODO  -->
     <string name="common_사진">사진</string> <!--  TODO  -->
     <string name="common_동영상">동영상</string> <!--  TODO  -->
-    <string name="common_원">원</string> <!--  TODO  -->
+    <string name="common_원">%s원</string> <!--  TODO  -->
 
     <!--시간 관련-->
     <string name="common_방금전" translatable="false">방금 전</string> <!--  TODO  -->
@@ -103,7 +103,7 @@
     <string name="home_screen_ad4_title">제주도에서만 여는 7월 축제🎈</string>
     <string name="home_screen_ad4_content">세계의 보물, 제주도가 가득 느껴지는 축제 보러가자</string>
     <string name="home_screen_recommend1">""</string>
-    <string name="home_screen_recommend2">우리 나나님을 위한 도민 추천</string>
+    <string name="home_screen_recommend2">"우리 나나님을 위한 도민 추천 🍊"</string>
 
     <string-array name="home_screen_hint">
         <item>제주도는 지금 유채꽃 축제🏵️</item>
@@ -447,6 +447,14 @@
     <string name="report_write_resone_hint">신고 사유를 %d자 이상 작성해 주세요.</string>
     <string name="report_write_resone_error">신고 사유는 %d자 이상으로 작성해 주세요!</string>
     <string name="report_write_complete_toast">신고한 내용은 운영정책에 따라\n최대 24시간 이내 처리됩니다.</string>
+
+    <!--로딩 관련-->
+    <!--TODO 번역 추가본(09.05 작성)-->
+    <string name="loading_wait_text" translatable="false">잠시만 기다려 주세요!</string>
+    <string name="loading_wait_text_desc1" translatable="false">소중한 의견을 안전하게 전송 중입니다🍊</string>
+    <string name="loading_wait_text_desc2" translatable="false">여러분의 경험이\nnanaland로 전달 중입니다💜</string>
+    <string name="loading_wait_text_desc3" translatable="false">여러분의 생각이 잘 전달되도록\n신중히 처리 중입니다💌</string>
+    <string name="loading_wait_text_desc4" translatable="false">잠시만 기다려 주세요!\n여러분의 피드백은 저희에게 큰 힘이 됩니다🍀</string>
 
     <!--리뷰 키워드-->
     <!--TODO 번역-->

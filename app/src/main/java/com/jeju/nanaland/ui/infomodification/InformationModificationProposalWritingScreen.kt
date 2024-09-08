@@ -15,7 +15,10 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.runtime.snapshots.SnapshotStateList
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalFocusManager
@@ -25,6 +28,7 @@ import com.jeju.nanaland.R
 import com.jeju.nanaland.globalvalue.type.InputEmailState
 import com.jeju.nanaland.ui.component.common.CustomSurface
 import com.jeju.nanaland.ui.component.common.UploadImages
+import com.jeju.nanaland.ui.component.common.dialog.SubmitLoadingDialog
 import com.jeju.nanaland.ui.component.common.topbar.CustomTopBar
 import com.jeju.nanaland.ui.component.infomodification.writing.InfoModificationProposalWritingScreenBottomButton
 import com.jeju.nanaland.ui.component.infomodification.writing.InfoModificationProposalWritingScreenDescription
@@ -49,6 +53,14 @@ fun InformationModificationProposalWritingScreen(
     val inputEmail = viewModel.inputEmail.collectAsState().value
     val inputEmailState = viewModel.inputEmailState.collectAsState().value
     val selectedImageList = viewModel.selectedImageList
+    var isSubmitLoading by remember {
+        mutableStateOf(false)
+    }
+    SubmitLoadingDialog(
+        getString(R.string.loading_wait_text_desc4),
+        isVisible = isSubmitLoading
+    )
+
     InformationModificationProposalWritingScreen(
         imageUri = imageUri,
         inputDescription = inputDescription,
@@ -58,7 +70,8 @@ fun InformationModificationProposalWritingScreen(
         updateInputDescription = viewModel::updateInputDescription,
         updateInputEmail = viewModel::updateInputEmail,
         sendReport = {
-            viewModel.sendReport(
+            isSubmitLoading = true
+            viewModel.sendReport( // TODO: 에러 처리(현재 에러시 무한 로딩 예상)
                 postId = postId,
                 fixType = fixType,
                 category = category,
