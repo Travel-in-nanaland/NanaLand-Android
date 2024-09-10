@@ -431,7 +431,7 @@
     <string name="review_keyword_mood">氛围</string>
     <string name="review_keyword_with">同伴</string>
     <string name="review_keyword_infra">便利设施</string>
-    <string name="nanapick_list_screen_recommended_post">本周推荐，Nana精选</string>
+    <string name="nanapick_list_screen_recommended_post">本周{推荐}，Nana精选</string>
     <string name="nanapick_list_screen_see_all">查看全部</string>
     <string name="common_나가기">退出</string>
     <string name="common_재시작">重试</string>

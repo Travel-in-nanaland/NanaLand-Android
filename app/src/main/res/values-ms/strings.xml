@@ -432,7 +432,7 @@
     <string name="review_keyword_mood">Suasana</string>
     <string name="review_keyword_with">Teman</string>
     <string name="review_keyword_infra">Kemudahan</string>
-    <string name="nanapick_list_screen_recommended_post">Cadangan minggu ini, Pilihan Nana</string>
+    <string name="nanapick_list_screen_recommended_post">{Cadangan} minggu ini, Pilihan Nana</string>
     <string name="nanapick_list_screen_see_all">Lihat semua</string>
     <string name="common_나가기">Keluar</string>
     <string name="common_재시작">Cuba Lagi</string>

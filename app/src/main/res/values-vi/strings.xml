@@ -257,7 +257,7 @@
     <string name="review_keyword_mood">Bầu không khí</string>
     <string name="review_keyword_with">Bạn đồng hành</string>
     <string name="review_keyword_infra">Tiện nghi</string>
-    <string name="nanapick_list_screen_recommended_post">Gợi ý tuần này, Lựa chọn của Nana</string>
+    <string name="nanapick_list_screen_recommended_post">Gợi ý tuần này, {Lựa chọn} của Nana</string>
     <string name="nanapick_list_screen_see_all">Xem tất cả</string>
     <string name="common_나가기">Thoát</string>
     <string name="common_재시작">Thử Lại</string>
