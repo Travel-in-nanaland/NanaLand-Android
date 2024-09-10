@@ -22,7 +22,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.mutableIntStateOf
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
@@ -208,7 +207,12 @@ private fun RestaurantContentScreen(
                                     }
                                 }
 
-                                Spacer(Modifier.height(32.dp))
+                                Spacer(Modifier.height(8.dp))
+                                Spacer(Modifier
+                                    .fillMaxWidth()
+                                    .height(8.dp)
+                                    .background(getColor().gray03))
+                                Spacer(Modifier.height(16.dp))
 
                                 Column(modifier = Modifier.padding(start = 16.dp, end = 16.dp)) {
 
