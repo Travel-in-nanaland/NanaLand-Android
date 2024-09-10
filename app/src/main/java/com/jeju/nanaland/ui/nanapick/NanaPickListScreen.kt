@@ -136,7 +136,7 @@ private fun NanaPickListScreen(
                                 Column(
                                     modifier = Modifier
                                         .align(Alignment.BottomStart)
-                                        .padding(start = 16.dp, bottom = 16.dp)
+                                        .padding(16.dp)
                                 ) {
                                     Text(
                                         text = recommendedNanaPickList.data[page % recommendedNanaPickList.data.size].subHeading,
