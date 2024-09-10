@@ -28,6 +28,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.jeju.nanaland.R
 import com.jeju.nanaland.domain.entity.nanapick.NanaPickBannerData
+import com.jeju.nanaland.ui.component.common.text.TextWithPointColor
 import com.jeju.nanaland.ui.component.common.topbar.CustomTopBarNoBackButton
 import com.jeju.nanaland.ui.component.main.home.HomeScreenAdPageIndicator
 import com.jeju.nanaland.ui.nanapick.component.NanaPickThumbnailBanner1
@@ -93,7 +94,7 @@ private fun NanaPickListScreen(
         ) {
             Spacer(Modifier.height(24.dp))
 
-            Text(
+            TextWithPointColor(
                 text = getString(R.string.nanapick_list_screen_recommended_post),
                 color = getColor().black,
                 style = title02Bold
