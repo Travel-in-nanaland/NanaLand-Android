@@ -126,7 +126,7 @@ private fun NanaPickListScreen(
                                 Text(
                                     modifier = Modifier
                                         .align(Alignment.TopEnd)
-                                        .padding(top = 8.dp, end = 8.dp),
+                                        .padding(top = 8.dp, end = 16.dp),
                                     text = recommendedNanaPickList.data[page % recommendedNanaPickList.data.size].version,
                                     color = getColor().white,
                                     style = caption01SemiBold
@@ -141,7 +141,7 @@ private fun NanaPickListScreen(
                                         text = recommendedNanaPickList.data[page % recommendedNanaPickList.data.size].subHeading,
                                         color = getColor().white,
                                         style = body02SemiBold,
-                                        maxLines = 1,
+                                        maxLines = 2,
                                         overflow = TextOverflow.Ellipsis
                                     )
 
