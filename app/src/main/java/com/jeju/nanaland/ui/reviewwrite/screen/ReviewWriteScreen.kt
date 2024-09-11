@@ -135,6 +135,8 @@ fun ReviewWriteScreen(
                 navController.navigate(ROUTE_REVIEW_WRITE_COMPLETE, bundle, navOptions = navOptions{
                     popUpTo(ROUTE_REVIEW_WRITE) { inclusive = true}
                 })
+                viewModel.setCallStateNull()
+                viewModel.updateReviewText("")
             }
             is UiState.Failure -> {
                 viewModel.setCallStateNull()
