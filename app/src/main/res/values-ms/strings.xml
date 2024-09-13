@@ -437,4 +437,7 @@
     <string name="common_나가기">Keluar</string>
     <string name="common_재시작">Cuba Lagi</string>
     <string name="splash_screen_text">Sila periksa sambungan internet anda</string>
+    <string name="loading_wait_text_desc2">Sila tunggu sebentar!\nPengalaman anda sedang dihantar\nke nanaland. 💜</string>
+    <string name="loading_wait_text_desc3">Sila tunggu sebentar!\nKami sedang memproses pemikiran anda dengan teliti untuk\nmemastikan ia disampaikan dengan baik. 💌</string>
+    <string name="loading_wait_text_desc4">Sila tunggu sebentar!\nMaklum balas anda adalah sokongan\nbesar kepada kami. 🍀</string>
 </resources>

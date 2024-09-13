@@ -449,12 +449,9 @@
     <string name="report_write_complete_toast">신고한 내용은 운영정책에 따라\n최대 24시간 이내 처리됩니다.</string>
 
     <!--로딩 관련-->
-    <!--TODO 번역 추가본(09.05 작성)-->
-    <string name="loading_wait_text" translatable="false">잠시만 기다려 주세요!</string>
-    <string name="loading_wait_text_desc1" translatable="false">소중한 의견을 안전하게 전송 중입니다🍊</string>
-    <string name="loading_wait_text_desc2" translatable="false">여러분의 경험이\nnanaland로 전달 중입니다💜</string>
-    <string name="loading_wait_text_desc3" translatable="false">여러분의 생각이 잘 전달되도록\n신중히 처리 중입니다💌</string>
-    <string name="loading_wait_text_desc4" translatable="false">여러분의 피드백은 저희에게 큰 힘이 됩니다🍀</string>
+    <string name="loading_wait_text_desc2">잠시만 기다려 주세요!\n여러분의 경험이\n nanaland로 전달 중입니다💜</string>
+    <string name="loading_wait_text_desc3">잠시만 기다려 주세요!\n여러분의 생각이 잘 전달되도록\n신중히 처리 중입니다💌</string>
+    <string name="loading_wait_text_desc4">잠시만 기다려 주세요!\n여러분의 피드백은 저희에게 큰 힘이 됩니다🍀</string>
 
     <!--리뷰 키워드-->
     <!--TODO 번역-->

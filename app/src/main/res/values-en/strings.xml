@@ -436,4 +436,7 @@
     <string name="common_나가기">Exit</string>
     <string name="common_재시작">Retry</string>
     <string name="splash_screen_text">Please check your internet connection</string>
+    <string name="loading_wait_text_desc2">Please wait a moment!\nYour experience is being delivered\n to nanaland. 💜</string>
+    <string name="loading_wait_text_desc3">Please wait a moment!\nWe are carefully processing your thoughts to ensure they are well communicated. 💌</string>
+    <string name="loading_wait_text_desc4">Please wait a moment! \nYour feedback is a great support\n to us. 🍀</string>
 </resources>

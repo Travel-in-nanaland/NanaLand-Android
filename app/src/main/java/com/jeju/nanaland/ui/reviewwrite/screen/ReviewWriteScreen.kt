@@ -124,7 +124,6 @@ fun ReviewWriteScreen(
         when (it) {
             is UiState.Loading -> {
                 SubmitLoadingDialog(
-                    getString(R.string.loading_wait_text_desc1),
                     getString(R.string.loading_wait_text_desc2),
                 )
             }
