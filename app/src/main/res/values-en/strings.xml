@@ -5,15 +5,13 @@
     <!--언어 초기화 화면-->
     <string name="select_language_please">언어를 선택해주세요</string>
 
-    <string-array name="week_sun_sat">
-        <item>MON</item>
-        <item>TUE</item>
-        <item>WEN</item>
-        <item>TUR</item>
-        <item>FRI</item>
-        <item>SAT</item>
-        <item>SUN</item>
-    </string-array>
+    <string name="week_sun_sat_1">MON</string>
+    <string name="week_sun_sat_2">TUE</string>
+    <string name="week_sun_sat_3">WEN</string>
+    <string name="week_sun_sat_4">TUR</string>
+    <string name="week_sun_sat_5">FRI</string>
+    <string name="week_sun_sat_6">SAT</string>
+    <string name="week_sun_sat_7">SUN</string>
 
     <string name="cancel">Cancel</string>
     <string name="done">Done</string>
@@ -71,33 +69,29 @@
     <string name="home_screen_recommend1">"Local Recommendations for Our "</string>
     <string name="home_screen_recommend2">Recommendation from residents for our Nana</string>
 
-    <string-array name="home_screen_hint">
-        <item>Jeju\'s Canola Festival is on now! 🏵️</item>
-        <item>Let\'s visit Jeju\'s green tea fields! 😎</item>
-        <item>When is the Jeju 5-day market? ❓</item>
-        <item>What to do in Udo today? 🏝️</item>
-        <item>Exploring the trendy Gujwa! 👒</item>
-        <item>Conquer the Hallasan trails! 🏔️</item>
-        <item>Nothing beats a night drive in Jeju! 🌉</item>
-        <item>Last stop, fun near Jeju Airport! 🛫</item>
-        <item>Summer in Jeju means Hydrangea Day! 😀</item>
-        <item>Stay in a charming hanok in Jeju! 🏠</item>
-    </string-array>
+    <string name="home_screen_hint_1">Jeju\'s Canola Festival is on now! 🏵️</string>
+    <string name="home_screen_hint_2">Let\'s visit Jeju\'s green tea fields! 😎</string>
+    <string name="home_screen_hint_3">When is the Jeju 5-day market? ❓</string>
+    <string name="home_screen_hint_4">What to do in Udo today? 🏝️</string>
+    <string name="home_screen_hint_5">Exploring the trendy Gujwa! 👒</string>
+    <string name="home_screen_hint_6">Conquer the Hallasan trails! 🏔️</string>
+    <string name="home_screen_hint_7">Nothing beats a night drive in Jeju! 🌉</string>
+    <string name="home_screen_hint_8">Last stop, fun near Jeju Airport! 🛫</string>
+    <string name="home_screen_hint_9">Summer in Jeju means Hydrangea Day! 😀</string>
+    <string name="home_screen_hint_10">Stay in a charming hanok in Jeju! 🏠</string>
 
-    <string-array name="month_name">
-        <item>January</item>
-        <item>February</item>
-        <item>March</item>
-        <item>April</item>
-        <item>May</item>
-        <item>June</item>
-        <item>July</item>
-        <item>August</item>
-        <item>September</item>
-        <item>October</item>
-        <item>November</item>
-        <item>December</item>
-    </string-array>
+    <string name="month_name_1">January</string>
+    <string name="month_name_2">February</string>
+    <string name="month_name_3">March</string>
+    <string name="month_name_4">April</string>
+    <string name="month_name_5">May</string>
+    <string name="month_name_6">June</string>
+    <string name="month_name_7">July</string>
+    <string name="month_name_8">August</string>
+    <string name="month_name_9">September</string>
+    <string name="month_name_10">October</string>
+    <string name="month_name_11">November</string>
+    <string name="month_name_12">December</string>
 
     <!--검색 화면-->
     <string name="searching_screen_textfiled_hint">Please enter a search</string>
@@ -436,7 +430,32 @@
     <string name="common_나가기">Exit</string>
     <string name="common_재시작">Retry</string>
     <string name="splash_screen_text">Please check your internet connection</string>
+    <string name="review_keyword_1">Good for anniversaries</string>
+    <string name="review_keyword_2">It\'s cute</string>
+    <string name="review_keyword_3">It\'s luxurious</string>
+    <string name="review_keyword_4">The scenery is pretty</string>
+    <string name="review_keyword_5">You are kind.</string>
+    <string name="review_keyword_6">Children</string>
+    <string name="review_keyword_7">Friend</string>
+    <string name="review_keyword_8">Parents</string>
+    <string name="review_keyword_9">Alone</string>
+    <string name="review_keyword_10">Lover/Spouse</string>
+    <string name="review_keyword_11">Relative/Sibling</string>
+    <string name="review_keyword_12">Pet</string>
+    <string name="review_keyword_13">Outlet available</string>
+    <string name="review_keyword_14">Wide</string>
+    <string name="review_keyword_15">Parking lot</string>
+    <string name="review_keyword_16">Clean toilet</string>
+    <string name="report_reason_1">For profit / promotional purpose</string>
+    <string name="report_reason_2">I don\'t like it</string>
+    <string name="report_reason_3">Profanity/personal attacks</string>
+    <string name="report_reason_4">Personal information exposure</string>
+    <string name="report_reason_5">Obscenity/sensuality</string>
+    <string name="report_reason_6">Facility closures and reviews of other facilities</string>
+    <string name="report_reason_7">Medication</string>
+    <string name="report_reason_8">Abuse/Violence</string>
+    <string name="report_reason_9">Etc</string>
     <string name="loading_wait_text_desc2">Please wait a moment!\nYour experience is being delivered\n to nanaland. 💜</string>
     <string name="loading_wait_text_desc3">Please wait a moment!\nWe are carefully processing your thoughts to ensure they are well communicated. 💌</string>
-    <string name="loading_wait_text_desc4">Please wait a moment! \nYour feedback is a great support\n to us. 🍀</string>
+    <string name="loading_wait_text_desc4">Please wait a moment!\nYour feedback is a great support\n to us. 🍀</string>
 </resources>

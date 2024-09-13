@@ -5,15 +5,13 @@
     <!--언어 초기화 화면-->
     <string name="select_language_please">언어를 선택해주세요</string>
 
-    <string-array name="week_sun_sat">
-        <item>日</item>
-        <item>一</item>
-        <item>二</item>
-        <item>三</item>
-        <item>四</item>
-        <item>五</item>
-        <item>六</item>
-    </string-array>
+    <string name="week_sun_sat_1">日</string>
+    <string name="week_sun_sat_2">一</string>
+    <string name="week_sun_sat_3">二</string>
+    <string name="week_sun_sat_4">三</string>
+    <string name="week_sun_sat_5">四</string>
+    <string name="week_sun_sat_6">五</string>
+    <string name="week_sun_sat_7">六</string>
 
     <string name="cancel">Cancel</string>
     <string name="done">Done</string>
@@ -71,33 +69,29 @@
     <string name="home_screen_recommend1">为</string>
     <string name="home_screen_recommend2">为您准备的Nana推荐</string>
 
-    <string-array name="home_screen_hint">
-        <item>济州岛的油菜花节正进行中！🏵️</item>
-        <item>一起去济州的绿茶田吧！😎</item>
-        <item>济州五日集什么时候开？❓</item>
-        <item>今天在牛岛做什么？🏝️</item>
-        <item>探访热门的翰林邑！👒</item>
-        <item>征服汉拿山小径！🏔️</item>
-        <item>济州的夜间兜风最浪漫！🌉</item>
-        <item>最后一站，在济州机场附近玩！🛫</item>
-        <item>济州的夏天是绣球花之日！😀</item>
-        <item>住在济州充满情调的韩屋！🏠</item>
-    </string-array>
+    <string name="home_screen_hint_1">济州岛的油菜花节正进行中！🏵️</string>
+    <string name="home_screen_hint_2">一起去济州的绿茶田吧！😎</string>
+    <string name="home_screen_hint_3">济州五日集什么时候开？❓</string>
+    <string name="home_screen_hint_4">今天在牛岛做什么？🏝️</string>
+    <string name="home_screen_hint_5">探访热门的翰林邑！👒</string>
+    <string name="home_screen_hint_6">征服汉拿山小径！🏔️</string>
+    <string name="home_screen_hint_7">济州的夜间兜风最浪漫！🌉</string>
+    <string name="home_screen_hint_8">最后一站，在济州机场附近玩！🛫</string>
+    <string name="home_screen_hint_9">济州的夏天是绣球花之日！😀</string>
+    <string name="home_screen_hint_10">住在济州充满情调的韩屋！🏠</string>
 
-    <string-array name="month_name">
-        <item>1月</item>
-        <item>2月</item>
-        <item>3月</item>
-        <item>4月</item>
-        <item>5月</item>
-        <item>6月</item>
-        <item>7月</item>
-        <item>8月</item>
-        <item>9月</item>
-        <item>10月</item>
-        <item>11月</item>
-        <item>12月</item>
-    </string-array>
+    <string name="month_name_1">1月</string>
+    <string name="month_name_2">2月</string>
+    <string name="month_name_3">3月</string>
+    <string name="month_name_4">4月</string>
+    <string name="month_name_5">5月</string>
+    <string name="month_name_6">6月</string>
+    <string name="month_name_7">7月</string>
+    <string name="month_name_8">8月</string>
+    <string name="month_name_9">9月</string>
+    <string name="month_name_10">10月</string>
+    <string name="month_name_11">11月</string>
+    <string name="month_name_12">12月</string>
 
     <!--검색 화면-->
     <string name="searching_screen_textfiled_hint">请输入搜索词。</string>
@@ -436,6 +430,31 @@
     <string name="common_나가기">退出</string>
     <string name="common_재시작">重试</string>
     <string name="splash_screen_text">请检查您的网络连接</string>
+    <string name="review_keyword_1">适合于纪念日</string>
+    <string name="review_keyword_2">小巧可爱</string>
+    <string name="review_keyword_3">很高档</string>
+    <string name="review_keyword_4">风景很美</string>
+    <string name="review_keyword_5">好亲切</string>
+    <string name="review_keyword_6">子女</string>
+    <string name="review_keyword_7">朋友</string>
+    <string name="review_keyword_8">父母</string>
+    <string name="review_keyword_9">单独</string>
+    <string name="review_keyword_10">爱人/配偶</string>
+    <string name="review_keyword_11">亲戚/兄弟姐妹</string>
+    <string name="review_keyword_12">宠物</string>
+    <string name="review_keyword_13">提供电源插座</string>
+    <string name="review_keyword_14">宽敞</string>
+    <string name="review_keyword_15">停车场</string>
+    <string name="review_keyword_16">洁净的卫生间</string>
+    <string name="report_reason_1">用于营利/推广目的</string>
+    <string name="report_reason_2">我不喜欢</string>
+    <string name="report_reason_3">侮辱性/人身攻击</string>
+    <string name="report_reason_4">曝光个人信息</string>
+    <string name="report_reason_5">淫秽/性感内容</string>
+    <string name="report_reason_6">设施停业及其他设施的评论</string>
+    <string name="report_reason_7">药物</string>
+    <string name="report_reason_8">虐待/暴力</string>
+    <string name="report_reason_9">其他</string>
     <string name="loading_wait_text_desc2">请稍等！\n您的体验正在传送\n到nanaland💜</string>
     <string name="loading_wait_text_desc3">请稍等！\n我们正在仔细处理您的想法，确保\n它们能够顺利传达💌</string>
     <string name="loading_wait_text_desc4">请稍等！\n您的反馈对我们来说是莫大的\n支持🍀</string>
