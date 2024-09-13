@@ -41,7 +41,6 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.res.stringArrayResource
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.withStyle
@@ -72,6 +71,7 @@ import com.jeju.nanaland.ui.theme.bodyBold
 import com.jeju.nanaland.ui.theme.getColor
 import com.jeju.nanaland.util.navigation.navigate
 import com.jeju.nanaland.util.resource.getString
+import com.jeju.nanaland.util.resource.getStringArray
 import com.jeju.nanaland.util.ui.UiState
 import com.skydoves.landscapist.ImageOptions
 import com.skydoves.landscapist.glide.GlideImage
@@ -412,7 +412,7 @@ private fun ReviewKeywordChip(
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Text(
-                    text = stringArrayResource(R.array.review_keyword)[it.stringIndex],
+                    text = getStringArray(R.array.review_keyword)[it.stringIndex],
                     color = getColor().main,
                     style = body02
                 )

@@ -19,7 +19,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.res.stringArrayResource
 import androidx.compose.ui.unit.dp
 import com.jeju.nanaland.R
 import com.jeju.nanaland.domain.entity.report.ClaimType
@@ -27,6 +26,7 @@ import com.jeju.nanaland.ui.theme.body02
 import com.jeju.nanaland.ui.theme.getColor
 import com.jeju.nanaland.ui.theme.title01Bold
 import com.jeju.nanaland.util.resource.getString
+import com.jeju.nanaland.util.resource.getStringArray
 
 @Composable
 fun ReportCategoryScreen(
@@ -67,7 +67,7 @@ fun ReportCategoryScreen(
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     Text(
-                        text = stringArrayResource(R.array.report_reason)[it.stringIndex],
+                        text = getStringArray(R.array.report_reason)[it.stringIndex],
                         style = body02,
                         color = getColor().black
                     )
