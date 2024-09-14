@@ -436,4 +436,5 @@
     <string name="common_나가기">退出</string>
     <string name="common_재시작">重试</string>
     <string name="splash_screen_text">请检查您的网络连接</string>
+    <string name="settings_screen_회원_가입">注册</string>
 </resources>

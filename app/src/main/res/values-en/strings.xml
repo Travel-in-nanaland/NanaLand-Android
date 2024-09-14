@@ -436,4 +436,5 @@
     <string name="common_나가기">Exit</string>
     <string name="common_재시작">Retry</string>
     <string name="splash_screen_text">Please check your internet connection</string>
+    <string name="settings_screen_회원_가입">Sign Up</string>
 </resources>

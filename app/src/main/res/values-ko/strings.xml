@@ -437,4 +437,5 @@
     <string name="common_나가기">나가기</string>
     <string name="common_재시작">재시도</string>
     <string name="splash_screen_text">인터넷 연결을 확인해주세요</string>
+    <string name="settings_screen_회원_가입">회원가입</string>
 </resources>

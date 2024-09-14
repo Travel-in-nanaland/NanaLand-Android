@@ -437,4 +437,5 @@
     <string name="common_나가기">Keluar</string>
     <string name="common_재시작">Cuba Lagi</string>
     <string name="splash_screen_text">Sila periksa sambungan internet anda</string>
+    <string name="settings_screen_회원_가입">Daftar</string>
 </resources>
