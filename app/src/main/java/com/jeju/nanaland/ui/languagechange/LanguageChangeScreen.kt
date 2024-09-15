@@ -41,7 +41,7 @@ private fun LanguageChangeScreen(
     moveToBackScreen: () -> Unit,
     isContent: Boolean
 ) {
-    val languageList = remember { mutableStateListOf("ko", "en", "zh", "ms") }.apply {
+    val languageList = remember { mutableStateListOf("ko", "en", "zh", "ms", "vi") }.apply {
         sortBy { it != currLanguage }
     }
     val selectedLanguage = remember { mutableStateOf(currLanguage) }
@@ -66,7 +66,8 @@ private fun LanguageChangeScreen(
                     "ko" -> getString(R.string.common_한국어)
                     "en" -> getString(R.string.common_영어)
                     "zh" -> getString(R.string.common_중국어)
-                    else -> getString(R.string.common_말레이시아어)
+                    "ms" -> getString(R.string.common_말레이시아어)
+                    else -> getString(R.string.common_베트남어)
                 },
                 isSelected = currLanguage == it,
                 onClick = {

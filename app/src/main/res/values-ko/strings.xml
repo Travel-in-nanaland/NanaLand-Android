@@ -463,4 +463,5 @@
     <string name="loading_wait_text_desc2">잠시만 기다려 주세요!\n여러분의 경험이\n nanaland로 전달 중입니다💜</string>
     <string name="loading_wait_text_desc3">잠시만 기다려 주세요!\n여러분의 생각이 잘 전달되도록\n신중히 처리 중입니다💌</string>
     <string name="loading_wait_text_desc4">잠시만 기다려 주세요!\n여러분의 피드백은 저희에게 큰 힘이 됩니다🍀</string>
+    <string name="settings_screen_회원_가입">회원가입</string>
 </resources>

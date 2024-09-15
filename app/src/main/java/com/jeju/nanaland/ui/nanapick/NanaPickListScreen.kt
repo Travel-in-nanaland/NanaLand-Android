@@ -28,6 +28,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.jeju.nanaland.R
 import com.jeju.nanaland.domain.entity.nanapick.NanaPickBannerData
+import com.jeju.nanaland.ui.component.common.text.TextWithPointColor
 import com.jeju.nanaland.ui.component.common.topbar.CustomTopBarNoBackButton
 import com.jeju.nanaland.ui.component.main.home.HomeScreenAdPageIndicator
 import com.jeju.nanaland.ui.nanapick.component.NanaPickThumbnailBanner1
@@ -93,7 +94,7 @@ private fun NanaPickListScreen(
         ) {
             Spacer(Modifier.height(24.dp))
 
-            Text(
+            TextWithPointColor(
                 text = getString(R.string.nanapick_list_screen_recommended_post),
                 color = getColor().black,
                 style = title02Bold
@@ -126,7 +127,7 @@ private fun NanaPickListScreen(
                                 Text(
                                     modifier = Modifier
                                         .align(Alignment.TopEnd)
-                                        .padding(top = 8.dp, end = 8.dp),
+                                        .padding(top = 8.dp, end = 16.dp),
                                     text = recommendedNanaPickList.data[page % recommendedNanaPickList.data.size].version,
                                     color = getColor().white,
                                     style = caption01SemiBold
@@ -135,13 +136,13 @@ private fun NanaPickListScreen(
                                 Column(
                                     modifier = Modifier
                                         .align(Alignment.BottomStart)
-                                        .padding(start = 16.dp, bottom = 16.dp)
+                                        .padding(16.dp)
                                 ) {
                                     Text(
                                         text = recommendedNanaPickList.data[page % recommendedNanaPickList.data.size].subHeading,
                                         color = getColor().white,
                                         style = body02SemiBold,
-                                        maxLines = 1,
+                                        maxLines = 2,
                                         overflow = TextOverflow.Ellipsis
                                     )
 

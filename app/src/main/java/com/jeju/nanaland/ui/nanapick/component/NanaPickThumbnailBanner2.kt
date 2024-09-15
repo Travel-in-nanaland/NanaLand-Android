@@ -47,7 +47,7 @@ fun NanaPickThumbnailBanner2(
             text = item.heading,
             color = getColor().black,
             style = body02Bold,
-            maxLines = 1,
+            maxLines = 2,
             overflow = TextOverflow.Ellipsis
         )
 
