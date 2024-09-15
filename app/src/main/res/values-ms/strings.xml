@@ -84,7 +84,7 @@
     <string name="home_screen_ad4_title">Festival khas di Jeju pada bulan Julai🎈</string>
     <string name="home_screen_ad4_content">Mari saksikan festival yang penuh dengan harta karun dunia, rasa Pulau Jeju!</string>
     <string name="home_screen_recommend1">"Cadangan untuk "</string>
-    <string name="home_screen_recommend2">Cadangan daripada penduduk untuk Nana kami</string>
+    <string name="home_screen_recommend2">Cadangan daripada penduduk untuk %s kami</string>
 
     <string-array name="home_screen_hint">
         <item>Festival Bunga Canola di Jeju sedang berlangsung! 🏵️</item>

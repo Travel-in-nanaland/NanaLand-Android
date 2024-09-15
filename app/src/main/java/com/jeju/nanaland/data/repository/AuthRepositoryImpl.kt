@@ -67,4 +67,10 @@ class AuthRepositoryImpl(
             }
         }
     }
+
+    override suspend fun duplicateNickname(
+        data: String,
+    ): NetworkResult<Unit> {
+        return handleResult { authApi.duplicateNickname(data) }
+    }
 }

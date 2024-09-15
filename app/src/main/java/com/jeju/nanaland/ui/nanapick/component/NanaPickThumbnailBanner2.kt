@@ -30,7 +30,7 @@ fun NanaPickThumbnailBanner2(
         Box {
             GlideImage(
                 modifier = Modifier.aspectRatio(3/4f),
-                imageModel = { item.firstImage.thumbnailUrl },
+                imageModel = { item.firstImage.originUrl },
                 imageOptions = ImageOptions(contentScale = ContentScale.Crop)
             )
 

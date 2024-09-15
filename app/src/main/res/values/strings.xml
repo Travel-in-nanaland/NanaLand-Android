@@ -103,7 +103,7 @@
     <string name="home_screen_ad4_title">제주도에서만 여는 7월 축제🎈</string>
     <string name="home_screen_ad4_content">세계의 보물, 제주도가 가득 느껴지는 축제 보러가자</string>
     <string name="home_screen_recommend1">""</string>
-    <string name="home_screen_recommend2">"우리 나나님을 위한 도민 추천 🍊"</string>
+    <string name="home_screen_recommend2">"우리 %s님을 위한 도민 추천 🍊"</string>
 
     <string-array name="home_screen_hint">
         <item>제주도는 지금 유채꽃 축제🏵️</item>
@@ -392,7 +392,7 @@
     <string name="withdrawal_screen_warning">안내사항을 확인하였으며 동의합니다.</string>
 
     <!--회원 탈퇴 다이얼로그-->
-    <string name="withdrawal_dialog_text1">정말 제주도 여행 정보와 헤택을\n받지 않으시겠습니까? 😢</string>
+    <string name="withdrawal_dialog_text1">정말 제주도 여행 정보와 혜택을\n받지 않으시겠습니까? 😢</string>
     <string name="withdrawal_dialog_text2">*90일 이내에 재가입 시,\n기존 계정으로 로그인이 됩니다.</string>
 
     <!--접근 권한 안내 화면-->

@@ -57,12 +57,6 @@ class MemberRepositoryImpl(
         return handleResult { memberApi.updateUserProfile(requestBody, image?.toMultipartBody("multipartFile")) }
     }
 
-    override suspend fun duplicateNickname(
-        data: String,
-    ): NetworkResult<Unit> {
-        return handleResult { memberApi.duplicateNickname(data) }
-    }
-
     override suspend fun withdraw(
         data: WithdrawalRequest
     ): NetworkResult<Any?> {

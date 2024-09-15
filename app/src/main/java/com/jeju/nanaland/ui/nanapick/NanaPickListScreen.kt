@@ -119,7 +119,7 @@ private fun NanaPickListScreen(
                             ) {
                                 GlideImage(
                                     modifier = Modifier.fillMaxWidth(),
-                                    imageModel = { recommendedNanaPickList.data[page % recommendedNanaPickList.data.size].firstImage.thumbnailUrl },
+                                    imageModel = { recommendedNanaPickList.data[page % recommendedNanaPickList.data.size].firstImage.originUrl },
                                     imageOptions = ImageOptions(contentScale = ContentScale.FillHeight)
                                 )
 

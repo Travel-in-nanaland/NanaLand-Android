@@ -47,6 +47,7 @@ class SignInViewModel @Inject constructor(
         var locale = "ENGLISH"
         getValueUseCase(key = KEY_LANGUAGE)
             .onEach {
+                LogUtil.e("", "${it}")
                 locale = when (it) {
                     "en" -> "ENGLISH"
                     "zh" -> "CHINESE"
@@ -54,35 +55,35 @@ class SignInViewModel @Inject constructor(
                     "ko" -> "KOREAN"
                     else -> "ENGLISH"
                 }
-            }
-            .catch { LogUtil.e("flow error", "getValueUseCase") }
-            .launchIn(viewModelScope)
-        val requestData = SignInRequest(
-            locale = locale,
-            provider = provider,
-            providerId = id,
-            fcmToken = getFCMTokenUseCase()
-        )
-        signInUseCase(requestData)
-            .onEach { networkResult ->
-                networkResult.onSuccess { code, message, data ->
-                    data?.let {
-                        saveAccessTokenUseCase(data.accessToken ?: "")
-                        saveRefreshTokenUseCase(data.refreshToken ?: "")
-                        getUserData()
-                        moveToMainScreen()
-                    }
-                }.onError { code, message ->
-                    when (code) {
-                        404 -> {
-                            moveToSignUpScreen()
+                val requestData = SignInRequest(
+                    locale = locale,
+                    provider = provider,
+                    providerId = id,
+                    fcmToken = getFCMTokenUseCase()
+                )
+                signInUseCase(requestData)
+                    .onEach { networkResult ->
+                        networkResult.onSuccess { code, message, data ->
+                            data?.let {
+                                saveAccessTokenUseCase(data.accessToken ?: "")
+                                saveRefreshTokenUseCase(data.refreshToken ?: "")
+                                getUserData()
+                                moveToMainScreen()
+                            }
+                        }.onError { code, message ->
+                            when (code) {
+                                404 -> {
+                                    moveToSignUpScreen()
+                                }
+                            }
+                        }.onException {
+
                         }
                     }
-                }.onException {
-
-                }
+                    .catch { LogUtil.e("flow error", "signInUseCase") }
+                    .launchIn(viewModelScope)
             }
-            .catch { LogUtil.e("flow error", "signInUseCase") }
+            .catch { LogUtil.e("flow error", "getValueUseCase") }
             .launchIn(viewModelScope)
     }
 

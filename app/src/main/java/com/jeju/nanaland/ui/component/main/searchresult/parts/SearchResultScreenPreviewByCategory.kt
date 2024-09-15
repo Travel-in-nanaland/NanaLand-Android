@@ -87,7 +87,7 @@ fun SearchResultScreenPreviewByCategory(
                 allSearchResultList[category.name]?.data?.let { searchResult ->
                     searchResult.forEachIndexed { idx, item ->
                         SearchThumbnail(
-                            imageUri = item.firstImage?.thumbnailUrl,
+                            imageUri = item.firstImage?.originUrl,
                             isFavorite = item.favorite,
                             title = item.title,
                             onFavoriteButtonClick = {

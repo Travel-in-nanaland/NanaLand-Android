@@ -62,7 +62,7 @@
     <string name="home_screen_ad3_content">Những chợ truyền thống nào vẫn còn tồn tại?</string>
     <string name="home_screen_ad4_title">Lễ hội tháng 7 chỉ tổ chức tại Đảo Jeju🎈</string>
     <string name="home_screen_ad4_content">Hãy đi xem lễ hội nơi bạn có thể cảm nhận được kho báu của thế giới, Đảo Jeju.</string>
-    <string name="home_screen_recommend2">Gợi ý từ người dân cho Nana của chúng tôi</string>
+    <string name="home_screen_recommend2">Gợi ý từ người dân cho %s của chúng tôi</string>
     <string name="searching_screen_textfiled_hint">Vui lòng nhập từ khóa tìm kiếm của bạn</string>
     <string name="searching_screen_최근_검색어">Tìm kiếm gần đây</string>
     <string name="searching_screen_모두_지우기">Xóa tất cả</string>

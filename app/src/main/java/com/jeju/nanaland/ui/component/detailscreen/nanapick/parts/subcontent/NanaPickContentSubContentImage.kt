@@ -36,7 +36,7 @@ fun NanaPickContentSubContentImage(imageUri: List<ImageUrl>) {
     ) {
         HorizontalPager(state = pagerState) { page ->
             GlideImage(
-                imageModel = { imageUri[page].thumbnailUrl },
+                imageModel = { imageUri[page].originUrl },
                 imageOptions = ImageOptions(contentScale = ContentScale.FillWidth)
             )
         }

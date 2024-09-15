@@ -56,7 +56,7 @@ fun NanaPickThumbnailBanner1(
             ) {
                 GlideImage(
                     modifier = Modifier.fillMaxSize(),
-                    imageModel = { item.firstImage.thumbnailUrl },
+                    imageModel = { item.firstImage.originUrl },
                     imageOptions = ImageOptions(contentScale = ContentScale.Crop)
                 )
 

@@ -69,7 +69,7 @@
     <string name="home_screen_ad4_title">Jeju\'s unique festival in July🎈</string>
     <string name="home_screen_ad4_content">Let\'s go see the festival full of the treasures of the world, feeling Jeju Island!</string>
     <string name="home_screen_recommend1">"Local Recommendations for Our "</string>
-    <string name="home_screen_recommend2">Recommendation from residents for our Nana</string>
+    <string name="home_screen_recommend2">Recommendation from residents for our %s</string>
 
     <string-array name="home_screen_hint">
         <item>Jeju\'s Canola Festival is on now! 🏵️</item>

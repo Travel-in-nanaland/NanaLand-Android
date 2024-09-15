@@ -28,6 +28,8 @@ class SettingsViewModel @Inject constructor(
     private val clearAuthDataStoreUseCase: ClearAuthDataStoreUseCase,
     private val clearUserSettingsDataStoreUseCase: ClearUserSettingsDataStoreUseCase,
     private val clearRecentSearchDataStoreUseCase: ClearRecentSearchDataStoreUseCase,
+    private val getValueUseCase: GetValueUseCase,
+    private val saveValueUseCase: SaveValueUseCase
 ) : ViewModel() {
 
     fun signOut(
@@ -36,9 +38,20 @@ class SettingsViewModel @Inject constructor(
         signOutUseCase()
             .onEach { networkResult ->
                 networkResult.onSuccess { code, message, data ->
+                    var locale = "en"
+                    getValueUseCase(key = KEY_LANGUAGE)
+                        .onEach {
+                            locale = it ?: "en"
+                        }
+                        .catch { LogUtil.e("flow Error", "getValueUseCase") }
+                        .launchIn(viewModelScope)
                     clearAuthDataStoreUseCase()
                     clearUserSettingsDataStoreUseCase()
                     clearRecentSearchDataStoreUseCase()
+                    viewModelScope.launch { saveValueUseCase(
+                        key = KEY_LANGUAGE,
+                        value = locale
+                    ) }
                     moveToSignInScreen()
                 }.onError { code, message ->
 

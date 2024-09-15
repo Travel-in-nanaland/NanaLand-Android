@@ -3,6 +3,7 @@ package com.jeju.nanaland.ui.report.screen
 import android.net.Uri
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -67,7 +68,7 @@ fun ReportWriteScreen(
                 Text(
                     text = getString(R.string.report_write_resone_title),
                     style = title02Bold,
-                    color = getColor().gray01
+                    color = getColor().black
                 )
                 Spacer(modifier = Modifier.width(12.dp))
                 Text(
@@ -83,7 +84,10 @@ fun ReportWriteScreen(
                 minLines = 4,
                 error = if(reasonError) getString(R.string.report_write_resone_error, REASON_LENGTH_MIN) else null,
                 maxLength = REASON_LENGTH_MAX,
-                onText = { reason = it }
+                onText = {
+                    reason = it
+                    reasonError = reason.length < 20
+                }
             )
 
             Spacer(modifier = Modifier.height(48.dp))
@@ -94,7 +98,7 @@ fun ReportWriteScreen(
                 Text(
                     text = getString(R.string.common_이메일),
                     style = title02Bold,
-                    color = getColor().gray01
+                    color = getColor().black
                 )
                 Spacer(modifier = Modifier.width(12.dp))
                 Text(
@@ -108,6 +112,7 @@ fun ReportWriteScreen(
                 text = email,
                 hint = getString(R.string.info_modification_proposal_hint2, REASON_LENGTH_MIN),
                 error = if(emailError) getString(R.string.info_modification_proposal_warning) else null,
+                height = 48,
                 onText = { email = it }
             )
             Spacer(modifier = Modifier.height(48.dp))
@@ -116,7 +121,7 @@ fun ReportWriteScreen(
                         " / " +
                         getString(R.string.common_동영상),
                 style = title02Bold,
-                color = getColor().gray01
+                color = getColor().black
             )
             Spacer(modifier = Modifier.height(8.dp))
             UploadImages(images.map { it.toString() }) {
@@ -156,6 +161,7 @@ private fun InputTextField(
     minLines: Int = 1,
     error: String? = null,
     maxLength: Int? = null,
+    height: Int? = null,
     onText: (String) -> Unit
 ) {
     val tl = text.length
@@ -163,6 +169,9 @@ private fun InputTextField(
     BasicTextField(
         modifier = Modifier
             .fillMaxWidth()
+            .then(
+                if (height != null) Modifier.height(height.dp) else Modifier
+            )
             .border(
                 1.dp,
                 if (error == null) getColor().gray02 else getColor().warning,
@@ -186,9 +195,10 @@ private fun InputTextField(
                 color = getColor().gray01,
             )
 
-        Column {
+        Column(
+            verticalArrangement = if (height == null) Arrangement.Top else Arrangement.Center
+        ) {
             it()
-
             maxLength?.let {
                 Text(
                     modifier = Modifier

@@ -24,7 +24,7 @@ fun HomeScreenRecommendedPosts(
                 repeat(recommendedPosts.data.size) { idx ->
                     val item = recommendedPosts.data[idx]
                     MainHomeThumbnail(
-                        imageUri = item.firstImage?.thumbnailUrl,
+                        imageUri = item.firstImage?.originUrl,
                         isFavorite = item.favorite,
                         title = item.title,
                         onFavoriteButtonClick = { onFavoriteButtonClick(item.id, item.category) },

@@ -83,7 +83,7 @@ private fun NatureContentScreen(
             is UiState.Success -> {
                 Box(modifier = Modifier.fillMaxSize()) {
                         Column(modifier = Modifier.verticalScroll(scrollState)) {
-                            DetailScreenTopBannerImage(imageUri = natureContent.data.images[0]?.thumbnailUrl)
+                            DetailScreenTopBannerImage(imageUri = natureContent.data.images[0]?.originUrl)
 
                             Spacer(Modifier.height(24.dp))
 
