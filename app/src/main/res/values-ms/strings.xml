@@ -5,30 +5,26 @@
     <!--언어 초기화 화면-->
     <string name="select_language_please">언어를 선택해주세요</string>
 
-    <string-array name="week_sun_sat">
-        <item>월</item>
-        <item>화</item>
-        <item>수</item>
-        <item>목</item>
-        <item>금</item>
-        <item>토</item>
-        <item>일</item>
-    </string-array>
+    <string name="week_sun_sat_1">월</string>
+    <string name="week_sun_sat_2">화</string>
+    <string name="week_sun_sat_3">수</string>
+    <string name="week_sun_sat_4">목</string>
+    <string name="week_sun_sat_5">금</string>
+    <string name="week_sun_sat_6">토</string>
+    <string name="week_sun_sat_7">일</string>
 
-    <string-array name="month_name">
-        <item>January</item>
-        <item>February</item>
-        <item>March</item>
-        <item>April</item>
-        <item>May</item>
-        <item>June</item>
-        <item>July</item>
-        <item>August</item>
-        <item>September</item>
-        <item>October</item>
-        <item>November</item>
-        <item>December</item>
-    </string-array>
+    <string name="month_name_1">January</string>
+    <string name="month_name_2">February</string>
+    <string name="month_name_3">March</string>
+    <string name="month_name_4">April</string>
+    <string name="month_name_5">May</string>
+    <string name="month_name_6">June</string>
+    <string name="month_name_7">July</string>
+    <string name="month_name_8">August</string>
+    <string name="month_name_9">September</string>
+    <string name="month_name_10">October</string>
+    <string name="month_name_11">November</string>
+    <string name="month_name_12">December</string>
 
     <string name="cancel">Cancel</string>
     <string name="done">Done</string>
@@ -86,18 +82,16 @@
     <string name="home_screen_recommend1">"Cadangan untuk "</string>
     <string name="home_screen_recommend2">Cadangan daripada penduduk untuk %s kami</string>
 
-    <string-array name="home_screen_hint">
-        <item>Festival Bunga Canola di Jeju sedang berlangsung! 🏵️</item>
-        <item>Jom lawati ladang teh hijau Jeju! 😎</item>
-        <item>Bila pasar 5 hari Jeju buka? ❓</item>
-        <item>Apa nak buat di Udo hari ini? 🏝️</item>
-        <item>Meneroka Gujwa-eup yang trendy! 👒</item>
-        <item>Takluki laluan Hallasan! 🏔️</item>
-        <item>Tiada yang lebih romantis dari pemanduan malam di Jeju! 🌉</item>
-        <item>Hentian terakhir, seronok di sekitar Lapangan Terbang Jeju! 🛫</item>
-        <item>Musim panas di Jeju bermaksud Hari Hydrangea! 😀</item>
-        <item>Menginap di hanok yang menawan di Jeju! 🏠</item>
-    </string-array>
+    <string name="home_screen_hint_1">Festival Bunga Canola di Jeju sedang berlangsung! 🏵️</string>
+    <string name="home_screen_hint_2">Jom lawati ladang teh hijau Jeju! 😎</string>
+    <string name="home_screen_hint_3">Bila pasar 5 hari Jeju buka? ❓</string>
+    <string name="home_screen_hint_4">Apa nak buat di Udo hari ini? 🏝️</string>
+    <string name="home_screen_hint_5">Meneroka Gujwa-eup yang trendy! 👒</string>
+    <string name="home_screen_hint_6">Takluki laluan Hallasan! 🏔️</string>
+    <string name="home_screen_hint_7">Tiada yang lebih romantis dari pemanduan malam di Jeju! 🌉</string>
+    <string name="home_screen_hint_8">Hentian terakhir, seronok di sekitar Lapangan Terbang Jeju! 🛫</string>
+    <string name="home_screen_hint_9">Musim panas di Jeju bermaksud Hari Hydrangea! 😀</string>
+    <string name="home_screen_hint_10">Menginap di hanok yang menawan di Jeju! 🏠</string>
 
     <!--검색 화면-->
     <string name="searching_screen_textfiled_hint">Sila masukkan kata carian.</string>
@@ -432,9 +426,37 @@
     <string name="review_keyword_mood">Suasana</string>
     <string name="review_keyword_with">Teman</string>
     <string name="review_keyword_infra">Kemudahan</string>
-    <string name="nanapick_list_screen_recommended_post">Cadangan minggu ini, Pilihan Nana</string>
+    <string name="nanapick_list_screen_recommended_post">{Cadangan} minggu ini, Pilihan Nana</string>
     <string name="nanapick_list_screen_see_all">Lihat semua</string>
     <string name="common_나가기">Keluar</string>
     <string name="common_재시작">Cuba Lagi</string>
     <string name="splash_screen_text">Sila periksa sambungan internet anda</string>
+    <string name="review_keyword_1">Sesuai untuk ulang tahun</string>
+    <string name="review_keyword_2">Ia comel</string>
+    <string name="review_keyword_3">Ia mewah</string>
+    <string name="review_keyword_4">Pemandangannya cantik</string>
+    <string name="review_keyword_5">Anda baik hati.</string>
+    <string name="review_keyword_6">Kanak-kanak</string>
+    <string name="review_keyword_7">Kawan</string>
+    <string name="review_keyword_8">Ibu bapa</string>
+    <string name="review_keyword_9">Bersendirian</string>
+    <string name="review_keyword_10">Kekasih/Pasangan</string>
+    <string name="review_keyword_11">Saudara-mara/Adik-beradik</string>
+    <string name="review_keyword_12">Haiwan peliharaan</string>
+    <string name="review_keyword_13">Soket tersedia</string>
+    <string name="review_keyword_14">Luas</string>
+    <string name="review_keyword_15">Tempat letak kereta</string>
+    <string name="review_keyword_16">Tandas bersih</string>
+    <string name="report_reason_1">Untuk tujuan keuntungan / promosi</string>
+    <string name="report_reason_2">Saya tidak suka</string>
+    <string name="report_reason_3">000 results</string>
+    <string name="report_reason_4">Pendedahan maklumat peribadi</string>
+    <string name="report_reason_5">Lucah / Sensualiti</string>
+    <string name="report_reason_6">Penutupan kemudahan dan ulasan kemudahan lain</string>
+    <string name="report_reason_7">Ubat</string>
+    <string name="report_reason_8">Penyalahgunaan / Keganasan</string>
+    <string name="report_reason_9">Lain-lain</string>
+    <string name="loading_wait_text_desc2">Sila tunggu sebentar!\nPengalaman anda sedang dihantar\nke nanaland. 💜</string>
+    <string name="loading_wait_text_desc3">Sila tunggu sebentar!\nKami sedang memproses pemikiran anda dengan teliti untuk\nmemastikan ia disampaikan dengan baik. 💌</string>
+    <string name="loading_wait_text_desc4">Sila tunggu sebentar!\nMaklum balas anda adalah sokongan\nbesar kepada kami. 🍀</string>
 </resources>

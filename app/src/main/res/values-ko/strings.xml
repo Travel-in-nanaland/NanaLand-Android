@@ -5,30 +5,26 @@
     <!--언어 초기화 화면-->
     <string name="select_language_please">언어를 선택해주세요</string>
 
-    <string-array name="week_sun_sat">
-        <item>월</item>
-        <item>화</item>
-        <item>수</item>
-        <item>목</item>
-        <item>금</item>
-        <item>토</item>
-        <item>일</item>
-    </string-array>
+    <string name="week_sun_sat_1">월</string>
+    <string name="week_sun_sat_2">화</string>
+    <string name="week_sun_sat_3">수</string>
+    <string name="week_sun_sat_4">목</string>
+    <string name="week_sun_sat_5">금</string>
+    <string name="week_sun_sat_6">토</string>
+    <string name="week_sun_sat_7">일</string>
 
-    <string-array name="month_name">
-        <item>1월</item>
-        <item>2월</item>
-        <item>3월</item>
-        <item>4월</item>
-        <item>5월</item>
-        <item>6월</item>
-        <item>7월</item>
-        <item>8월</item>
-        <item>9월</item>
-        <item>10월</item>
-        <item>11월</item>
-        <item>12월</item>
-    </string-array>
+    <string name="month_name_1">1월</string>
+    <string name="month_name_2">2월</string>
+    <string name="month_name_3">3월</string>
+    <string name="month_name_4">4월</string>
+    <string name="month_name_5">5월</string>
+    <string name="month_name_6">6월</string>
+    <string name="month_name_7">7월</string>
+    <string name="month_name_8">8월</string>
+    <string name="month_name_9">9월</string>
+    <string name="month_name_10">10월</string>
+    <string name="month_name_11">11월</string>
+    <string name="month_name_12">12월</string>
 
     <string name="cancel">Cancel</string>
     <string name="done">Done</string>
@@ -86,18 +82,16 @@
     <string name="home_screen_recommend1">""</string>
     <string name="home_screen_recommend2">우리 %s님을 위한 도민 추천</string>
 
-    <string-array name="home_screen_hint">
-        <item>제주도는 지금 유채꽃 축제🏵️</item>
-        <item>제주도 녹차밭 가보자고😎</item>
-        <item>제주 5일장 언제 열지❓</item>
-        <item>우도에서 오늘 뭐하지🏝️</item>
-        <item>요즘 HOT한 구좌 탐방하러👒</item>
-        <item>한라산 오름길 도장 깨기🏔️</item>
-        <item>제주도 야간 드라이브만한 낭만 또 없지🌉</item>
-        <item>마지막까지, 제주 공항 근처에서 놀자🛫</item>
-        <item>제주의 여름은 수국 DAY😀</item>
-        <item>제주도에 감성 낭낭한 한옥 숙소🏠</item>
-    </string-array>
+    <string name="home_screen_hint_1">제주도는 지금 유채꽃 축제🏵️</string>
+    <string name="home_screen_hint_2">제주도 녹차밭 가보자고😎</string>
+    <string name="home_screen_hint_3">제주 5일장 언제 열지❓</string>
+    <string name="home_screen_hint_4">우도에서 오늘 뭐하지🏝️</string>
+    <string name="home_screen_hint_5">요즘 HOT한 구좌 탐방하러👒</string>
+    <string name="home_screen_hint_6">한라산 오름길 도장 깨기🏔️</string>
+    <string name="home_screen_hint_7">제주도 야간 드라이브만한 낭만 또 없지🌉</string>
+    <string name="home_screen_hint_8">마지막까지, 제주 공항 근처에서 놀자🛫</string>
+    <string name="home_screen_hint_9">제주의 여름은 수국 DAY😀</string>
+    <string name="home_screen_hint_10">제주도에 감성 낭낭한 한옥 숙소🏠</string>
 
     <!--검색 화면-->
     <string name="searching_screen_textfiled_hint">검색어를 입력해 주세요</string>
@@ -432,9 +426,41 @@
     <string name="review_keyword_mood">분위기</string>
     <string name="review_keyword_with">동반자</string>
     <string name="review_keyword_infra">편의 시설</string>
-    <string name="nanapick_list_screen_recommended_post">금주 (추천)나나’s Pick</string>
+    <string name="nanapick_list_screen_recommended_post">금주 {추천}나나’s Pick</string>
     <string name="nanapick_list_screen_see_all">모두보기</string>
     <string name="common_나가기">나가기</string>
     <string name="common_재시작">재시도</string>
     <string name="splash_screen_text">인터넷 연결을 확인해주세요</string>
+
+    <!--리뷰 키워드-->
+    <string name="review_keyword_1">기념일에 가면 좋아요</string>
+    <string name="review_keyword_2">아기자기해요</string>
+    <string name="review_keyword_3">고급스러워요</string>
+    <string name="review_keyword_4">풍경이 예뻐요</string>
+    <string name="review_keyword_5">친절해요</string>
+    <string name="review_keyword_6">자녀</string>
+    <string name="review_keyword_7">친구</string>
+    <string name="review_keyword_8">부모님</string>
+    <string name="review_keyword_9">혼자</string>
+    <string name="review_keyword_10">연인, 배우자</string>
+    <string name="review_keyword_11">친척/형제</string>
+    <string name="review_keyword_12">반려동물</string>
+    <string name="review_keyword_13">콘센트 사용 가능</string>
+    <string name="review_keyword_14">넓은 장소</string>
+    <string name="review_keyword_15">주차장</string>
+    <string name="review_keyword_16">깨끗한 화장실</string>
+
+    <!--신고 카테고리-->
+    <string name="report_reason_1">영리목적 / 홍보성</string>
+    <string name="report_reason_2">마음에 들지 않습니다</string>
+    <string name="report_reason_3">욕설/인신공격</string>
+    <string name="report_reason_4">개인정보 노출</string>
+    <string name="report_reason_5">음란/ 선정성</string>
+    <string name="report_reason_6">시설 폐업 및 다른 시설에 대한 리뷰</string>
+    <string name="report_reason_7">약물</string>
+    <string name="report_reason_8">학대 /  폭력</string>
+    <string name="report_reason_9">기타</string>
+    <string name="loading_wait_text_desc2">잠시만 기다려 주세요!\n여러분의 경험이\n nanaland로 전달 중입니다💜</string>
+    <string name="loading_wait_text_desc3">잠시만 기다려 주세요!\n여러분의 생각이 잘 전달되도록\n신중히 처리 중입니다💌</string>
+    <string name="loading_wait_text_desc4">잠시만 기다려 주세요!\n여러분의 피드백은 저희에게 큰 힘이 됩니다🍀</string>
 </resources>
