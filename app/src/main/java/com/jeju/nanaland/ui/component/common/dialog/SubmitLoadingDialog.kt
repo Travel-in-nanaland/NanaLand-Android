@@ -26,7 +26,6 @@ import com.jeju.nanaland.R
 import com.jeju.nanaland.ui.theme.NanaLandTheme
 import com.jeju.nanaland.ui.theme.body01
 import com.jeju.nanaland.ui.theme.getColor
-import com.jeju.nanaland.util.resource.getString
 
 /**
  * 로딩 다이얼로그
@@ -39,7 +38,6 @@ import com.jeju.nanaland.util.resource.getString
  * back key 사용 시 호출
  * @param loadingGIF 상단의 애니메이션 파일 리소스
  * @param loadingGifSize 상단의 애니메이션 사이즈
- * @param waitText 첫 줄에 들어갈 공통 글
  * @param textStyle 설명란의 텍스트 스타일
  * @param textColor 설명란의 텍스트 컬러
  */
@@ -50,7 +48,6 @@ fun SubmitLoadingDialog(
     onCancelByBackPress: (() -> Unit)? = null,
     @RawRes loadingGIF: Int = R.raw.loading_for_submit,
     loadingGifSize: DpSize = DpSize(168.dp, 140.dp),
-    waitText: String = getString(R.string.loading_wait_text),
     textStyle: TextStyle = body01,
     textColor: Color = getColor().white,
 ) {
@@ -76,12 +73,6 @@ fun SubmitLoadingDialog(
                     modifier = Modifier.size(loadingGifSize),
                     composition = gif,
                     iterations = LottieConstants.IterateForever
-                )
-                Text(
-                    text =  waitText,
-                    style = textStyle,
-                    color = textColor,
-                    textAlign = TextAlign.Center
                 )
                 Text(
                     text =  descRandomText,
