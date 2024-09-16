@@ -25,7 +25,6 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.stringArrayResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -41,6 +40,7 @@ import com.jeju.nanaland.ui.theme.bodyBold
 import com.jeju.nanaland.ui.theme.caption01
 import com.jeju.nanaland.ui.theme.getColor
 import com.jeju.nanaland.util.resource.getString
+import com.jeju.nanaland.util.resource.getStringArray
 import com.jeju.nanaland.util.ui.ScreenPreview
 
 @ScreenPreview
@@ -147,7 +147,7 @@ private fun ReviewWriteKeywordUI(
                                 )
                                 .clickable { onKeyword(keyword) }
                                 .padding(horizontal = 16.dp, vertical = 8.dp),
-                            text = stringArrayResource(R.array.review_keyword)[keyword.stringIndex],
+                            text = getStringArray(R.array.review_keyword)[keyword.stringIndex],
                             color = if(isSelect) getColor().main else getColor().gray02,
                             style = body02
                         )

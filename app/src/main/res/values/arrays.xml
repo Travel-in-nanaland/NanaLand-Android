@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="week_sun_sat" translatable="false">
+        <item>@string/week_sun_sat_1</item>
+        <item>@string/week_sun_sat_2</item>
+        <item>@string/week_sun_sat_3</item>
+        <item>@string/week_sun_sat_4</item>
+        <item>@string/week_sun_sat_5</item>
+        <item>@string/week_sun_sat_6</item>
+        <item>@string/week_sun_sat_7</item>
+    </string-array>
+
+    <string-array name="month_name" translatable="false">
+        <item>@string/month_name_1</item>
+        <item>@string/month_name_2</item>
+        <item>@string/month_name_3</item>
+        <item>@string/month_name_4</item>
+        <item>@string/month_name_5</item>
+        <item>@string/month_name_6</item>
+        <item>@string/month_name_7</item>
+        <item>@string/month_name_8</item>
+        <item>@string/month_name_9</item>
+        <item>@string/month_name_10</item>
+        <item>@string/month_name_11</item>
+        <item>@string/month_name_12</item>
+    </string-array>
+
+    <!--홈 화면-->
+    <string-array name="home_screen_hint" translatable="false">
+        <item>@string/home_screen_hint_1</item>
+        <item>@string/home_screen_hint_2</item>
+        <item>@string/home_screen_hint_3</item>
+        <item>@string/home_screen_hint_4</item>
+        <item>@string/home_screen_hint_5</item>
+        <item>@string/home_screen_hint_6</item>
+        <item>@string/home_screen_hint_7</item>
+        <item>@string/home_screen_hint_8</item>
+        <item>@string/home_screen_hint_9</item>
+        <item>@string/home_screen_hint_10</item>
+    </string-array>
+
+    <!--리뷰 키워드-->
+    <string-array name="review_keyword" translatable="false">
+        <item>@string/review_keyword_1</item>
+        <item>@string/review_keyword_2</item>
+        <item>@string/review_keyword_3</item>
+        <item>@string/review_keyword_4</item>
+        <item>@string/review_keyword_5</item>
+        <item>@string/review_keyword_6</item>
+        <item>@string/review_keyword_7</item>
+        <item>@string/review_keyword_8</item>
+        <item>@string/review_keyword_9</item>
+        <item>@string/review_keyword_10</item>
+        <item>@string/review_keyword_11</item>
+        <item>@string/review_keyword_12</item>
+        <item>@string/review_keyword_13</item>
+        <item>@string/review_keyword_14</item>
+        <item>@string/review_keyword_15</item>
+        <item>@string/review_keyword_16</item>
+    </string-array>
+
+    <!--신고 카테고리-->
+    <string-array name="report_reason" translatable="false">
+        <item>@string/report_reason_1</item>
+        <item>@string/report_reason_2</item>
+        <item>@string/report_reason_3</item>
+        <item>@string/report_reason_4</item>
+        <item>@string/report_reason_5</item>
+        <item>@string/report_reason_6</item>
+        <item>@string/report_reason_7</item>
+        <item>@string/report_reason_8</item>
+        <item>@string/report_reason_9</item>
+    </string-array>
+</resources>
