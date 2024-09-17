@@ -43,6 +43,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.core.os.bundleOf
@@ -134,6 +135,8 @@ fun ReviewWriteScreen(
                 navController.navigate(ROUTE_REVIEW_WRITE_COMPLETE, bundle, navOptions = navOptions{
                     popUpTo(ROUTE_REVIEW_WRITE) { inclusive = true}
                 })
+                viewModel.setCallStateNull()
+                viewModel.updateReviewText("")
             }
             is UiState.Failure -> {
                 viewModel.setCallStateNull()
@@ -180,77 +183,82 @@ private fun ReviewWriteUI(
             modifier = Modifier
                 .fillMaxSize()
                 .imePadding()
-                .verticalScroll(scrollState),
-            horizontalAlignment = Alignment.CenterHorizontally,
+                .verticalScroll(scrollState)
         ) {
-            GlideImage(
-                modifier = Modifier
-                    .size(80.dp)
-                    .clip(RoundedCornerShape(8.dp)),
-                imageModel = { uiState.titleImg },
-                imageOptions = ImageOptions(
-                    contentScale = ContentScale.Crop,
-                    alignment = Alignment.Center
-                ),
-                previewPlaceholder = R.drawable.img_ad_1
-            )
-
-            Spacer(modifier = Modifier.height(8.dp))
-
-            Text(
-                text = uiState.titleTxt,
-                color = getColor().black,
-                style = bodyBold
-            )
-            Spacer(modifier = Modifier.height(4.dp))
-            Text(
-                text = uiState.subTitleTxt,
-                color = getColor().black,
-                style = body02
-            )
-
-            MyDivider()
-            TextWithPointColor(
-                text = getString(R.string.review_write_select_rating),
-                style = bodyBold
-            )
-            Spacer(modifier = Modifier.height(16.dp))
-            StarRating(rating = uiState.reviewRating) {
-                onChangedRating(it)
-            }
-
-            MyDivider()
-            TextWithPointColor(
-                text = getString(R.string.review_write_writing),
-                style = bodyBold
-            )
-            Spacer(modifier = Modifier.height(16.dp))
-
-            UploadImages(
+            Column(
                 modifier = Modifier.padding(horizontal = 16.dp),
-                images = uiState.reviewImage.map { it.second },
-                onChangeImages = { images ->
-                    onChangeImages( images.map { image ->
-                        Pair(
-                            uiState.reviewImage.firstOrNull{ it.second == image}?.first ?: -1,
-                            image
-                        )
-                    })
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                GlideImage(
+                    modifier = Modifier
+                        .size(80.dp)
+                        .clip(RoundedCornerShape(8.dp)),
+                    imageModel = { uiState.titleImg },
+                    imageOptions = ImageOptions(
+                        contentScale = ContentScale.Crop,
+                        alignment = Alignment.Center
+                    ),
+                    previewPlaceholder = R.drawable.img_ad_1
+                )
+
+                Spacer(modifier = Modifier.height(8.dp))
+
+                Text(
+                    text = uiState.titleTxt,
+                    color = getColor().black,
+                    style = bodyBold,
+                    textAlign = TextAlign.Center
+                )
+                Spacer(modifier = Modifier.height(4.dp))
+                Text(
+                    text = uiState.subTitleTxt,
+                    color = getColor().black,
+                    style = body02,
+                    textAlign = TextAlign.Center
+                )
+
+                MyDivider()
+                TextWithPointColor(
+                    text = getString(R.string.review_write_select_rating),
+                    style = bodyBold
+                )
+                Spacer(modifier = Modifier.height(16.dp))
+                StarRating(rating = uiState.reviewRating) {
+                    onChangedRating(it)
                 }
-            )
 
-            ReviewText(
-                text = reviewText,
-                maxTextLength = ReviewWriteViewModel.MAX_TEXT_LENGTH,
-                onText = onChangedText
-            )
+                MyDivider()
+                TextWithPointColor(
+                    text = getString(R.string.review_write_writing),
+                    style = bodyBold
+                )
+                Spacer(modifier = Modifier.height(16.dp))
 
-            ReviewKeywordChip(
-                keywords = uiState.reviewKeyword,
-                onRemoveKeyword = onRemoveKeyword,
-                moveToKeywordScreen = moveToKeywordScreen
-            )
-            Spacer(modifier = Modifier.height(32.dp))
+                UploadImages(
+                    images = uiState.reviewImage.map { it.second },
+                    onChangeImages = { images ->
+                        onChangeImages(images.map { image ->
+                            Pair(
+                                uiState.reviewImage.firstOrNull { it.second == image }?.first ?: -1,
+                                image
+                            )
+                        })
+                    }
+                )
+
+                ReviewText(
+                    text = reviewText,
+                    maxTextLength = ReviewWriteViewModel.MAX_TEXT_LENGTH,
+                    onText = onChangedText
+                )
+
+                ReviewKeywordChip(
+                    keywords = uiState.reviewKeyword,
+                    onRemoveKeyword = onRemoveKeyword,
+                    moveToKeywordScreen = moveToKeywordScreen
+                )
+                Spacer(modifier = Modifier.height(32.dp))
+            }
             BottomOkButton(getString(R.string.review_write_complete),uiState.canSubmit){
                 moveToCompleteScreen()
             }
@@ -307,7 +315,7 @@ private fun ReviewText(
     BasicTextField(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(16.dp)
+            .padding(vertical = 16.dp)
             .border(
                 1.dp,
                 getColor().gray02,
@@ -370,8 +378,7 @@ private fun ReviewKeywordChip(
 ) {
     FlowRow(
         modifier = Modifier
-            .fillMaxWidth()
-            .padding(horizontal = 16.dp),
+            .fillMaxWidth(),
         horizontalArrangement = Arrangement.spacedBy(8.dp),
         verticalArrangement = Arrangement.spacedBy(12.dp)
     ) {

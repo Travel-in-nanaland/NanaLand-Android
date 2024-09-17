@@ -67,7 +67,7 @@
     <string name="home_screen_ad4_title">Jeju\'s unique festival in July🎈</string>
     <string name="home_screen_ad4_content">Let\'s go see the festival full of the treasures of the world, feeling Jeju Island!</string>
     <string name="home_screen_recommend1">"Local Recommendations for Our "</string>
-    <string name="home_screen_recommend2">Recommendation from residents for our Nana</string>
+    <string name="home_screen_recommend2">Recommendation from residents for our %s</string>
 
     <string name="home_screen_hint_1">Jeju\'s Canola Festival is on now! 🏵️</string>
     <string name="home_screen_hint_2">Let\'s visit Jeju\'s green tea fields! 😎</string>
@@ -458,4 +458,5 @@
     <string name="loading_wait_text_desc2">Please wait a moment!\nYour experience is being delivered\n to nanaland. 💜</string>
     <string name="loading_wait_text_desc3">Please wait a moment!\nWe are carefully processing your thoughts to ensure they are well communicated. 💌</string>
     <string name="loading_wait_text_desc4">Please wait a moment!\nYour feedback is a great support\n to us. 🍀</string>
+    <string name="settings_screen_회원_가입">Sign Up</string>
 </resources>

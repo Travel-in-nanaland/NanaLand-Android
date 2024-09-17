@@ -16,8 +16,16 @@ import androidx.navigation.compose.composable
 import androidx.navigation.navigation
 import androidx.navigation.toRoute
 import com.jeju.nanaland.globalvalue.constant.ROUTE
+import com.jeju.nanaland.globalvalue.constant.ROUTE_EXPERIENCE_CONTENT
+import com.jeju.nanaland.globalvalue.constant.ROUTE_FESTIVAL_CONTENT
+import com.jeju.nanaland.globalvalue.constant.ROUTE_MARKET_CONTENT
+import com.jeju.nanaland.globalvalue.constant.ROUTE_NANAPICK_CONTENT
+import com.jeju.nanaland.globalvalue.constant.ROUTE_NATURE_CONTENT
+import com.jeju.nanaland.globalvalue.constant.ROUTE_RESTAURANT_CONTENT
 import com.jeju.nanaland.globalvalue.constant.ROUTE_REVIEW_WRITE_ROUTE
 import com.jeju.nanaland.globalvalue.constant.ROUTE_TYPE_TEST_RESULT
+import com.jeju.nanaland.globalvalue.type.CategoryType
+import com.jeju.nanaland.globalvalue.type.ReviewCategoryType
 import com.jeju.nanaland.ui.component.common.CustomSurface
 import com.jeju.nanaland.ui.profile.profileNoticeList.ProfileNoticeListScreen
 import com.jeju.nanaland.ui.profile.profileReviewList.ProfileReviewListScreen
@@ -25,6 +33,7 @@ import com.jeju.nanaland.ui.profile.profileupdate.ProfileUpdateScreen
 import com.jeju.nanaland.ui.profile.root.ProfileScreen
 import com.jeju.nanaland.ui.theme.getColor
 import com.jeju.nanaland.util.navigation.navigate
+import com.jeju.nanaland.util.type.getCategoryType
 
 fun NavGraphBuilder.profileScreenRoute(navController: NavController) = navigation<ROUTE.Profile>(
     ROUTE.Profile.StartDest(null)
@@ -103,7 +112,21 @@ fun NavGraphBuilder.profileScreenRoute(navController: NavController) = navigatio
                 )
             },
             initialScrollToItemId = data.initialScrollToItemId ?: -1,
-            viewModel = hiltViewModel(parentEntry)
+            viewModel = hiltViewModel(parentEntry),
+            moveToContentScreen = { reviewCategoryType, id ->
+                val bundle = bundleOf(
+                    "contentId" to id,
+                    "isSearch" to false
+                )
+                when (reviewCategoryType) {
+                    ReviewCategoryType.NATURE -> { navController.navigate(ROUTE_NATURE_CONTENT, bundle) }
+                    ReviewCategoryType.FESTIVAL -> { navController.navigate(ROUTE_FESTIVAL_CONTENT, bundle) }
+                    ReviewCategoryType.MARKET -> { navController.navigate(ROUTE_MARKET_CONTENT, bundle) }
+                    ReviewCategoryType.EXPERIENCE -> { navController.navigate(ROUTE_EXPERIENCE_CONTENT, bundle) }
+                    ReviewCategoryType.NANA, ReviewCategoryType.NANA_CONTENT -> { navController.navigate(ROUTE_NANAPICK_CONTENT, bundle) }
+                    ReviewCategoryType.RESTAURANT -> { navController.navigate(ROUTE_RESTAURANT_CONTENT, bundle) }
+                }
+            }
         )
     }
 }

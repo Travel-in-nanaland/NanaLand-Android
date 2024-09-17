@@ -67,7 +67,7 @@
     <string name="home_screen_ad4_title">济州岛七月举办的独特节日🎈</string>
     <string name="home_screen_ad4_content">来看看充满济州岛风情的世界宝藏节日吧！</string>
     <string name="home_screen_recommend1">为</string>
-    <string name="home_screen_recommend2">为您准备的Nana推荐</string>
+    <string name="home_screen_recommend2">为您准备的%s推荐</string>
 
     <string name="home_screen_hint_1">济州岛的油菜花节正进行中！🏵️</string>
     <string name="home_screen_hint_2">一起去济州的绿茶田吧！😎</string>
@@ -458,4 +458,5 @@
     <string name="loading_wait_text_desc2">请稍等！\n您的体验正在传送\n到nanaland💜</string>
     <string name="loading_wait_text_desc3">请稍等！\n我们正在仔细处理您的想法，确保\n它们能够顺利传达💌</string>
     <string name="loading_wait_text_desc4">请稍等！\n您的反馈对我们来说是莫大的\n支持🍀</string>
+    <string name="settings_screen_회원_가입">注册</string>
 </resources>

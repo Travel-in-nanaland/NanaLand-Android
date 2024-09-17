@@ -96,7 +96,7 @@ fun ExperienceContentScreen(
             if(experienceContent is UiState.Success) {
                 moveToReviewListScreen(
                     experienceContent.data.favorite,
-                    experienceContent.data.images.firstOrNull()?.thumbnailUrl ?: "",
+                    experienceContent.data.images.firstOrNull()?.originUrl ?: "",
                     experienceContent.data.title,
                     experienceContent.data.address,
                 )
@@ -106,7 +106,7 @@ fun ExperienceContentScreen(
             if(experienceContent is UiState.Success)
                 moveToReviewWritingScreen(
                     experienceContent.data.id,
-                    experienceContent.data.images.firstOrNull()?.thumbnailUrl ?: "",
+                    experienceContent.data.images.firstOrNull()?.originUrl ?: "",
                     experienceContent.data.title,
                     experienceContent.data.address,
                 )
@@ -172,7 +172,7 @@ private fun ExperienceContentScreen(
                         when (experienceContent) {
                             is UiState.Loading -> {}
                             is UiState.Success -> {
-                                DetailScreenTopBannerImage(imageUri = experienceContent.data.images[0].thumbnailUrl)
+                                DetailScreenTopBannerImage(imageUri = experienceContent.data.images[0].originUrl)
 
                                 Spacer(Modifier.height(24.dp))
 

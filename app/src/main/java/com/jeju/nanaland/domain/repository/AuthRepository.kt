@@ -27,4 +27,9 @@ interface AuthRepository {
     // FCM 토큰 발행
     suspend fun getFCMToken(
     ): String?
+
+    // 닉네임 중복 확인
+    suspend fun duplicateNickname(
+        data: String,
+    ): NetworkResult<Unit>
 }

@@ -62,7 +62,7 @@
     <string name="home_screen_ad3_content">Những chợ truyền thống nào vẫn còn tồn tại?</string>
     <string name="home_screen_ad4_title">Lễ hội tháng 7 chỉ tổ chức tại Đảo Jeju🎈</string>
     <string name="home_screen_ad4_content">Hãy đi xem lễ hội nơi bạn có thể cảm nhận được kho báu của thế giới, Đảo Jeju.</string>
-    <string name="home_screen_recommend2">Gợi ý từ người dân cho Nana của chúng tôi</string>
+    <string name="home_screen_recommend2">Gợi ý từ người dân cho %s của chúng tôi</string>
     <string name="searching_screen_textfiled_hint">Vui lòng nhập từ khóa tìm kiếm của bạn</string>
     <string name="searching_screen_최근_검색어">Tìm kiếm gần đây</string>
     <string name="searching_screen_모두_지우기">Xóa tất cả</string>
@@ -309,4 +309,5 @@
     <string name="loading_wait_text_desc2">Vui lòng chờ một chút!\nTrải nghiệm của bạn đang được gửi\nđến nanaland. 💜</string>
     <string name="loading_wait_text_desc3">Vui lòng chờ một chút!\nChúng tôi đang xử lý cẩn thận để đảm bảo\ný kiến của bạn được truyền đạt chính xác. 💌</string>
     <string name="loading_wait_text_desc4">Vui lòng chờ một chút!\nPhản hồi của bạn là nguồn động lực lớn\ncho chúng tôi. 🍀</string>
+    <string name="settings_screen_회원_가입">Đăng ký</string>
 </resources>

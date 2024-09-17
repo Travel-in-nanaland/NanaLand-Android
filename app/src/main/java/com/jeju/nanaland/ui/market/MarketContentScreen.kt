@@ -82,7 +82,7 @@ private fun MarketContentScreen(
             is UiState.Success -> {
                 Box(Modifier.fillMaxSize()) {
                     Column(Modifier.verticalScroll(scrollState)) {
-                        DetailScreenTopBannerImage(imageUri = marketContent.data.images[0]?.thumbnailUrl)
+                        DetailScreenTopBannerImage(imageUri = marketContent.data.images[0]?.originUrl)
 
                         Spacer(Modifier.height(24.dp))
 

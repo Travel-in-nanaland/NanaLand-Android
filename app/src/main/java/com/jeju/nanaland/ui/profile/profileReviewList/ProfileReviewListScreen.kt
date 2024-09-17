@@ -25,6 +25,7 @@ fun ProfileReviewListScreen(
     moveToReviewReportScreen: (Int) -> Unit,
     moveToReviewEditScreen: (Int, ReviewCategoryType) -> Unit,
     initialScrollToItemId: Int = -1,
+    moveToContentScreen: (ReviewCategoryType, Int) -> Unit,
     viewModel: ProfileViewModel = hiltViewModel()
 ) {
     val scope = rememberCoroutineScope()
@@ -49,7 +50,8 @@ fun ProfileReviewListScreen(
                 onEdit = { moveToReviewEditScreen(it.id, it.category) },
                 onRemove = { data ->
                     removeReviewId = data.id
-                }
+                },
+                moveToContentScreen = moveToContentScreen
             )
         else
             ProfileListReviewRow(
@@ -59,7 +61,8 @@ fun ProfileReviewListScreen(
                 },
                 onReport = { id ->
                     reportReviewId = id
-                }
+                },
+                moveToContentScreen = moveToContentScreen
             )
     }
     if(removeReviewId != -1)

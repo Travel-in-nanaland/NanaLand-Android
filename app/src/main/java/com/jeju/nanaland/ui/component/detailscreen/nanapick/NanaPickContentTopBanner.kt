@@ -91,6 +91,12 @@ fun NanaPickContentTopBanner(
 
                 Spacer(modifier = Modifier.weight(1f))
 
+                NanaPickContentTopBannerFavoriteButton(
+                    isFavorite = nanaPickContent.data.favorite,
+                    onClick = { toggleFavorite() },
+                    moveToSignInScreen = moveToSignInScreen,
+                )
+
                 NanaPickContentTopBannerShareButton(
                     onClick = {
                         val sendIntent: Intent = Intent().apply {
@@ -101,12 +107,6 @@ fun NanaPickContentTopBanner(
                         val shareIntent = Intent.createChooser(sendIntent, null)
                         context.startActivity(shareIntent)
                     }
-                )
-
-                NanaPickContentTopBannerFavoriteButton(
-                    isFavorite = nanaPickContent.data.favorite,
-                    onClick = { toggleFavorite() },
-                    moveToSignInScreen = moveToSignInScreen,
                 )
             }
 

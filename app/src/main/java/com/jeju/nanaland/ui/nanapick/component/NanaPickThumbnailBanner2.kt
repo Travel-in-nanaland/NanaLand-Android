@@ -30,7 +30,7 @@ fun NanaPickThumbnailBanner2(
         Box {
             GlideImage(
                 modifier = Modifier.aspectRatio(3/4f),
-                imageModel = { item.firstImage.thumbnailUrl },
+                imageModel = { item.firstImage.originUrl },
                 imageOptions = ImageOptions(contentScale = ContentScale.Crop)
             )
 
@@ -47,7 +47,7 @@ fun NanaPickThumbnailBanner2(
             text = item.heading,
             color = getColor().black,
             style = body02Bold,
-            maxLines = 1,
+            maxLines = 2,
             overflow = TextOverflow.Ellipsis
         )
 
