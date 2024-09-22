@@ -26,6 +26,20 @@
         <item>@string/month_name_12</item>
     </string-array>
 
+    <string-array name="season" translatable="false">
+        <item>@string/common_봄</item>
+        <item>@string/common_여름</item>
+        <item>@string/common_가을</item>
+        <item>@string/common_겨울</item>
+    </string-array>
+
+    <string-array name="season_desc" translatable="false">
+        <item>@string/common_봄_desc</item>
+        <item>@string/common_여름_desc</item>
+        <item>@string/common_가을_desc</item>
+        <item>@string/common_겨울_desc</item>
+    </string-array>
+
     <!--홈 화면-->
     <string-array name="home_screen_hint" translatable="false">
         <item>@string/home_screen_hint_1</item>

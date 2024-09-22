@@ -18,7 +18,6 @@ import com.jeju.nanaland.util.ui.UiState
 fun SeasonFilterTopBar(
     count: UiState<Int>,
     selectedSeasonList: SnapshotStateList<Boolean>,
-    seasonList: List<String>,
     openSeasonFilterDialog: () -> Unit,
     showDimBackground: () -> Unit,
 ) {
@@ -39,7 +38,6 @@ fun SeasonFilterTopBar(
 
         SeasonFilterBox(
             showDimBackground = showDimBackground,
-            seasonList = seasonList,
             openSeasonFilterDialog = openSeasonFilterDialog,
             selectedSeasonList = selectedSeasonList
         )

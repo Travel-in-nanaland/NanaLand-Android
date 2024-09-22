@@ -17,9 +17,12 @@
     <string name="common_나의_나나">Nana của tôi</string>
     <string name="common_전체">Toàn bộ</string>
     <string name="common_건">trường hợp</string>
-    <string name="common_월">tháng</string>
+    <string name="common_봄_desc">Tháng Ba, Tháng Tư</string>
+    <string name="common_가을_desc">Tháng Chín, Tháng Mười</string>
+    <string name="common_겨울_desc">Tháng Mười Một, Tháng Mười Hai, Tháng Một, Tháng Hai</string>
     <string name="common_봄">mùa xuân</string>
     <string name="common_여름">mùa hè</string>
+    <string name="common_여름_desc">Tháng Năm, Tháng Sáu, Tháng Bảy, Tháng Tám</string>
     <string name="common_가을">mùa thu</string>
     <string name="common_겨울">mùa đông</string>
     <string name="common_이메일">Email</string>

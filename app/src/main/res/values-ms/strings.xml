@@ -44,9 +44,12 @@
     <string name="common_전체">Seluruh</string>
     <string name="common_건">perkara</string>
     <string name="common_년">년</string>
-    <string name="common_월">""</string>
+    <string name="common_봄_desc">March, April</string>
+    <string name="common_가을_desc">September, October</string>
+    <string name="common_겨울_desc">November, December, January, February</string>
     <string name="common_봄">Musim bunga</string>
     <string name="common_여름">Musim panas</string>
+    <string name="common_여름_desc">May, June, July, August</string>
     <string name="common_가을">Musim luruh</string>
     <string name="common_겨울">Musim sejuk</string>
     <string name="common_이메일">E-mel</string>
