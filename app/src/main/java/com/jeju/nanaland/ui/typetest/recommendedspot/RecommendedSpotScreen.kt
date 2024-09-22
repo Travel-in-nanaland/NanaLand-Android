@@ -22,7 +22,6 @@ import com.jeju.nanaland.ui.component.signup.recommendedspot.RecommendedSpotScre
 import com.jeju.nanaland.ui.component.signup.recommendedspot.RecommendedSpotScreenItem
 import com.jeju.nanaland.ui.component.signup.recommendedspot.RecommendedSpotScreenText1
 import com.jeju.nanaland.ui.component.signup.recommendedspot.RecommendedSpotScreenText2
-import com.jeju.nanaland.util.language.getLanguage
 import com.jeju.nanaland.util.resource.getString
 
 @Composable
@@ -65,18 +64,8 @@ private fun RecommendedSpotScreen(
                 Spacer(Modifier.height(32.dp))
 
                 Column(Modifier.padding(start = 16.dp, end = 16.dp)) {
-                    when (getLanguage()) {
-                        "ms" -> {
-                            RecommendedSpotScreenText2()
-
-                            RecommendedSpotScreenText1()
-                        }
-                        else -> {
-                            RecommendedSpotScreenText1()
-
-                            RecommendedSpotScreenText2()
-                        }
-                    }
+                    RecommendedSpotScreenText1()
+                    RecommendedSpotScreenText2()
                 }
 
                 Spacer(Modifier.height(40.dp))

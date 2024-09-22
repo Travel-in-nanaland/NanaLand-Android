@@ -16,12 +16,7 @@ import com.jeju.nanaland.util.resource.getString
 fun RecommendedSpotScreenText2() {
     Text(
         modifier = Modifier.fillMaxWidth(),
-        text = when (customContext.resources.configuration.locales[0].language) {
-            "ko" -> getString(R.string.type_test_recommended_spot_추천_여행지)
-            "ms" -> getString(R.string.type_test_recommended_spot_text2)
-            "zh" -> getString(R.string.type_test_recommended_spot_추천_여행지)
-            else -> "Destinations for ${UserData.nickname}"
-        },
+        text = getString(R.string.type_test_recommended_spot_추천_여행지),
         color = getColor().main,
         style = largeTitle01,
         textAlign = TextAlign.Center

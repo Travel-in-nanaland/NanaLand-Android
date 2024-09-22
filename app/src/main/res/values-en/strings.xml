@@ -285,9 +285,8 @@
     <string name="type_test_screen_lets_go">Let\'s Go!</string>
 
     <!--여행지 유형 테스트 추천 여행지 화면-->
-    <string name="type_test_recommended_spot_text1">""</string>
-    <string name="type_test_recommended_spot_text2">Recommended Travel</string>
-    <string name="type_test_recommended_spot_추천_여행지">Recommended\nTravel Destinations</string>
+    <string name="type_test_recommended_spot_text">For %s</string>
+    <string name="type_test_recommended_spot_추천_여행지">Recommended Travel Destinations</string>
 
     <!--언어 설정 화면-->
     <string name="language_change_screen_guide">The language at the top is set as default.</string>

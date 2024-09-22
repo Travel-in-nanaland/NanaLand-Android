@@ -286,9 +286,8 @@
     <string name="type_test_screen_lets_go">Let\'s Go!</string>
 
     <!--여행지 유형 테스트 추천 여행지 화면-->
-    <string name="type_test_recommended_spot_text1">"Disyorkan untuk "</string>
-    <string name="type_test_recommended_spot_text2">Destinasi Pelancongan</string>
-    <string name="type_test_recommended_spot_추천_여행지">Destinasi\nPelancongan Disyorkan</string>
+    <string name="type_test_recommended_spot_text">Untuk %s</string>
+    <string name="type_test_recommended_spot_추천_여행지">Destinasi Pelancongan Disyorkan</string>
 
     <!--언어 설정 화면-->
     <string name="language_change_screen_guide">Bahasa di atas telah\nditetapkan sebagai lalai.</string>
