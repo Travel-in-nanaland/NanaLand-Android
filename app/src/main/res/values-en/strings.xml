@@ -31,9 +31,12 @@
     <string name="common_전체">ALL</string>
     <string name="common_건">Results</string>
     <string name="common_년">년</string>
-    <string name="common_월">""</string>
+    <string name="common_봄_desc">March, April</string>
+    <string name="common_가을_desc">September, October</string>
+    <string name="common_겨울_desc">November, December, January, February</string>
     <string name="common_봄">Spring</string>
     <string name="common_여름">Summer</string>
+    <string name="common_여름_desc">May, June, July, August</string>
     <string name="common_가을">Autumn</string>
     <string name="common_겨울">Winter</string>
     <string name="common_이메일">Email</string>

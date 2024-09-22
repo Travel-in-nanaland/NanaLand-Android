@@ -44,11 +44,14 @@
     <string name="common_전체">전체</string>
     <string name="common_건">건</string>
     <string name="common_년">년</string>
-    <string name="common_월">월</string>
     <string name="common_봄">봄</string>
+    <string name="common_봄_desc">3, 4월</string>
     <string name="common_여름">여름</string>
+    <string name="common_여름_desc">5, 6, 7, 8월</string>
     <string name="common_가을">가을</string>
+    <string name="common_가을_desc">9, 10월</string>
     <string name="common_겨울">겨울</string>
+    <string name="common_겨울_desc">11, 12, 1, 2월</string>
     <string name="common_이메일">이메일</string>
     <string name="common_확인">확인</string>
     <string name="common_자">자</string>

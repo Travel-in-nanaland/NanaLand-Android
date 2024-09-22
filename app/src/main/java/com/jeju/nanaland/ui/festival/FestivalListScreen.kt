@@ -133,12 +133,6 @@ private fun FestivalListScreen(
     val locationFilterDialogAnchoredDraggableState = remember { getLocationAnchoredDraggableState() }
     val seasonFilterDialogAnchoredDraggableState = remember { getSeasonAnchoredDraggableState() }
     val locationList = remember { getLocationList() }
-    val seasonList = remember { listOf(
-        getString(R.string.common_봄),
-        getString(R.string.common_여름),
-        getString(R.string.common_가을),
-        getString(R.string.common_겨울)
-    ) }
     val isDimBackgroundShowing = remember { mutableStateOf(false) }
     val lazyGridState = rememberLazyGridState()
     val loadMore = remember {
@@ -203,7 +197,6 @@ private fun FestivalListScreen(
                         SeasonFilterTopBar(
                             count = festivalThumbnailCount,
                             selectedSeasonList = selectedSeasonList,
-                            seasonList = seasonList,
                             openSeasonFilterDialog = { coroutineScope.launch { seasonFilterDialogAnchoredDraggableState.animateTo(AnchoredDraggableContentState.Open) } },
                             showDimBackground = { isDimBackgroundShowing.value = true }
                         )
@@ -262,7 +255,6 @@ private fun FestivalListScreen(
             )
 
             SeasonFilterBottomDialog(
-                seasonList = seasonList,
                 hideDimBackground = { isDimBackgroundShowing.value = false },
                 anchoredDraggableState = seasonFilterDialogAnchoredDraggableState,
                 selectedSeasonList = selectedSeasonList,

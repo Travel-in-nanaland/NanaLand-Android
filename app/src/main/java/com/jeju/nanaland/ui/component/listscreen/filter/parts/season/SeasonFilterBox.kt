@@ -21,12 +21,12 @@ import androidx.compose.ui.unit.dp
 import com.jeju.nanaland.R
 import com.jeju.nanaland.ui.theme.caption01
 import com.jeju.nanaland.ui.theme.getColor
+import com.jeju.nanaland.util.resource.getStringArray
 import com.jeju.nanaland.util.ui.clickableNoEffect
 
 @Composable
 fun SeasonFilterBox(
     showDimBackground: () -> Unit,
-    seasonList: List<String>,
     openSeasonFilterDialog: () -> Unit,
     selectedSeasonList: SnapshotStateList<Boolean>
 ) {
@@ -51,8 +51,7 @@ fun SeasonFilterBox(
         Spacer(Modifier.width(12.dp))
 
         Text(
-            text = seasonList[selectedSeasonList.withIndex()
-                .filter { selectedSeasonList[it.index] }[0].index],
+            text = getStringArray(R.array.season)[selectedSeasonList.indexOfFirst { it }],
             color = getColor().gray01,
             style = caption01
         )

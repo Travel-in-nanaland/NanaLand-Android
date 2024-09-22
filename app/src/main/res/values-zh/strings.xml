@@ -31,9 +31,12 @@
     <string name="common_전체">全部</string>
     <string name="common_건">件</string>
     <string name="common_년">년</string>
-    <string name="common_월">月</string>
+    <string name="common_봄_desc">3, 4月</string>
+    <string name="common_가을_desc">9, 10月</string>
+    <string name="common_겨울_desc">11, 12, 1, 2月</string>
     <string name="common_봄">春天</string>
     <string name="common_여름">夏天</string>
+    <string name="common_여름_desc">5, 6, 7, 8月</string>
     <string name="common_가을">秋天</string>
     <string name="common_겨울">冬天</string>
     <string name="common_이메일">电子邮件</string>

@@ -32,8 +32,7 @@ import com.jeju.nanaland.ui.component.listscreen.filter.parts.FilterDialogCloseB
 import com.jeju.nanaland.ui.component.listscreen.filter.parts.season.SeasonFilterDialogTitle
 import com.jeju.nanaland.ui.component.listscreen.filter.parts.season.SeasonSelectableBox
 import com.jeju.nanaland.ui.theme.getColor
-import com.jeju.nanaland.util.language.getLanguage
-import com.jeju.nanaland.util.resource.getString
+import com.jeju.nanaland.util.resource.getStringArray
 import com.jeju.nanaland.util.ui.clickableNoEffect
 import kotlinx.coroutines.launch
 import kotlin.math.roundToInt
@@ -41,7 +40,6 @@ import kotlin.math.roundToInt
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun SeasonFilterBottomDialog(
-    seasonList: List<String>,
     hideDimBackground: () -> Unit,
     anchoredDraggableState: AnchoredDraggableState<AnchoredDraggableContentState>,
     selectedSeasonList: SnapshotStateList<Boolean>,
@@ -88,25 +86,8 @@ fun SeasonFilterBottomDialog(
 
         repeat(4) { seasonIdx ->
             SeasonSelectableBox(
-                seasonText = seasonList[seasonIdx],
-                monthText = when (seasonIdx) {
-                    0 -> when (getLanguage()) {
-                        "ko", "zh" -> "3, 4"
-                        else -> "March, April"
-                    }
-                    1 -> when (getLanguage()) {
-                        "ko", "zh" -> "5, 6, 7, 8"
-                        else -> "May, June, July, August"
-                    }
-                    2 -> when (getLanguage()) {
-                        "ko", "zh" -> "9, 10"
-                        else -> "September, October"
-                    }
-                    else -> when (getLanguage()) {
-                        "ko", "zh" -> "11, 12, 1, 2"
-                        else -> "November, December, January, February"
-                    }
-                } + getString(R.string.common_월),
+                seasonText = getStringArray(R.array.season)[seasonIdx],
+                monthText = getStringArray(R.array.season_desc)[seasonIdx],
                 onClick = {
                     // 이미 같은 계절이 선택되어 있으면 새로고침 안한다.
                     if (!selectedSeasonList[seasonIdx]) {
