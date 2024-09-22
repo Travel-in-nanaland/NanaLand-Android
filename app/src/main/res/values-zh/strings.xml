@@ -284,9 +284,8 @@
     <string name="type_test_screen_button2">前往主屏幕</string>
     <string name="type_test_screen_lets_go">Let\'s Go!</string>
 
-    <!--여행지 유형 테스트 추천 여행지 화면-->
-    <string name="type_test_recommended_spot_text1">为</string>
-    <string name="type_test_recommended_spot_text2">推荐</string>
+    <!--여행지 유형 테스트 추천 여행지 화면-->为了oooo/n{推荐的旅行目的地}
+    <string name="type_test_recommended_spot_text">为了 %s</string>
     <string name="type_test_recommended_spot_추천_여행지">的旅游地</string>
 
     <!--언어 설정 화면-->

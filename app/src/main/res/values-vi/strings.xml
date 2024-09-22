@@ -310,4 +310,6 @@
     <string name="loading_wait_text_desc2">Vui lòng chờ một chút!\nTrải nghiệm của bạn đang được gửi\nđến nanaland. 💜</string>
     <string name="loading_wait_text_desc3">Vui lòng chờ một chút!\nChúng tôi đang xử lý cẩn thận để đảm bảo\ný kiến của bạn được truyền đạt chính xác. 💌</string>
     <string name="loading_wait_text_desc4">Vui lòng chờ một chút!\nPhản hồi của bạn là nguồn động lực lớn\ncho chúng tôi. 🍀</string>
+    <string name="type_test_recommended_spot_text">Dành cho %s</string>
+    <string name="type_test_recommended_spot_추천_여행지">Điểm đến du lịch được đề xuất</string>
 </resources>

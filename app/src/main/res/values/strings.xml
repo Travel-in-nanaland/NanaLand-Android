@@ -311,8 +311,7 @@
     <string name="type_test_screen_lets_go">Let\'s Go!</string>
 
     <!--여행지 유형 테스트 추천 여행지 화면-->
-    <string name="type_test_recommended_spot_text1">""</string>
-    <string name="type_test_recommended_spot_text2"> 님을 위한</string>
+    <string name="type_test_recommended_spot_text">%s 님을 위한</string>
     <string name="type_test_recommended_spot_추천_여행지">추천 여행지</string>
     <string name="type_test_recommended_spot_자세히_보기">자세히 보기</string>
 
