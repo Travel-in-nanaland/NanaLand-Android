@@ -150,22 +150,41 @@
     <string name="sign_up_profile_setting_warning1">Biệt danh đó không thể sử dụng.</string>
     <string name="sign_up_profile_setting_warning2">Biệt danh đó đã được sử dụng bởi người dùng khác.</string>
     <string name="sign_up_profile_setting_warning3">Biệt danh chỉ có thể chứa chữ cái, dấu cách, và số.</string>
+    <string name="type_test_screen_테스트_건너뛰기">Bỏ qua bài kiểm tra</string>
+    <string name="type_test_screen_다음">Tiếp theo</string>
+
+    <string name="type_test_screen_question1">{Khi chọn điểm đến du lịch thì \n%s thế nào?}</string>
+    <string name="type_test_screen_question2">{Khi lập kế hoạch du lịch thì \n%s thế nào?}</string>
+    <string name="type_test_screen_question3">{Khi xác định chi phí du lịch thì \n%s thế nào?}</string>
+    <string name="type_test_screen_question4">{%s làm gì\nkhi đi du lịch?}</string>
+    <string name="type_test_screen_question5">{Bạn muốn làm gì nhất\nkhi đi du lịch?}</string>
+
+    <string name="type_test_screen_item1">Địa điểm du lịch sôi động</string>
+    <string name="type_test_screen_item2">Nơi yên tĩnh tại địa phương</string>
+    <string name="type_test_screen_item3">Linh hoạt</string>
+    <string name="type_test_screen_item4">Hoàn toàn được lên kế hoạch</string>
+    <string name="type_test_screen_item5">Du lịch tiết kiệm</string>
+    <string name="type_test_screen_item6">Du lịch sang trọng</string>
     <string name="type_test_screen_item7">Chỉ còn lại những bức ảnh!</string>
     <string name="type_test_screen_item8">Khi tôi đi du lịch, tôi ghi lại phong cảnh bằng mắt mình!</string>
     <string name="type_test_screen_item9">Nôi đẹp</string>
     <string name="type_test_screen_item10">Văn hóa truyền thống</string>
     <string name="type_test_screen_item11">Phong cảnh thiên nhiên</string>
     <string name="type_test_screen_item12">Công viên giải trí</string>
-    <string name="type_test_screen_테스트_건너뛰기">Bỏ qua bài kiểm tra</string>
-    <string name="type_test_screen_다음">Tiếp theo</string>
-    <string name="type_test_screen_text2">Bạn muốn du lịch theo phong cách nào?</string>
-    <string name="type_test_screen_text3">Quýt đang được ép...</string>
-    <string name="type_test_screen_text4">Nước ép du lịch ngon lành sắp ra mắt!</string>
-    <string name="type_test_screen_text5">Loại hình du lịch của 0000 là</string>
-    <string name="type_test_screen_text6">nanaland in Jeju đã tạo ra một loại nước ép du lịch riêng cho bạn!</string>
-    <string name="type_test_screen_button1">Điểm đến 0000</string>
-    <string name="type_test_screen_button2">Về màn hình chính</string>
+
+
+    <string name="type_test_screen_text_page1_text1">Sở thích</string>
+    <string name="type_test_screen_text_page1_text2">của {%s} là gì?</string>
+    <string name="type_test_screen_text_page1_text3">Bạn muốn du lịch theo phong cách nào?</string>
     <string name="type_test_screen_lets_go">Let\'s Go!</string>
+
+    <string name="type_test_screen_text_page2_text1">Quýt đang được ép...</string>
+    <string name="type_test_screen_text_page2_text2">Nước ép du lịch ngon lành sắp ra mắt!</string>
+
+    <string name="type_test_screen_text_result_header">Loại hình du lịch của %s là</string>
+    <string name="type_test_screen_text_result_body">nanaland in Jeju đã tạo ra một loại nước ép du lịch riêng cho bạn!</string>
+    <string name="type_test_screen_button1">Điểm đến %s</string>
+    <string name="type_test_screen_button2">Về màn hình chính</string>
     <string name="settings_screen_설정">Cài đặt</string>
     <string name="settings_screen_사용_설정">Đã bật</string>
     <string name="settings_screen_약관_및_정책">Điều khoản và Chính sách</string>

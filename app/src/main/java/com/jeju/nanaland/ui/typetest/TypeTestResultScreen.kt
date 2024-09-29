@@ -89,7 +89,7 @@ fun TypeTestResultScreen(
                 item {
 
                     BottomOkButtonOutlined(
-                        text = travelType.toViewString() + getString(R.string.type_test_screen_button1),
+                        text = getString(R.string.type_test_screen_button1, travelType.toViewString()),
                         onClick = moveToRecommendedSpotScreen
                     )
 

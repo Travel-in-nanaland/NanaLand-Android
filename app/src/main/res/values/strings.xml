@@ -277,40 +277,43 @@
     <string name="type_감귤_버블티_description">호기심 가득한 당신!\n먹을수록 반전인 감귤 버블티 유형!</string>
 
     <!--여행지 유형 테스트 화면-->
-    <string name="type_test_screen_question1">"여행 장소를\n고를 때 "</string>
-    <string name="type_test_screen_question2">"여행 계획을\n세울 때 "</string>
-    <string name="type_test_screen_question3">"여행 경비를\n정할 때 "</string>
-    <string name="type_test_screen_question4">여행을 다닐 때\n</string>
-    <string name="type_test_screen_question5">여행에서 가장\n하고 싶은 것은?</string>
-    <string name="type_test_screen_question6">""</string>
-    <string name="type_test_screen_question_님은1">" 님은?"</string>
-    <string name="type_test_screen_question_님은2">" 님은?"</string>
-    <string name="type_test_screen_question_님은3">" 님은?"</string>
-    <string name="type_test_screen_question_님은4">" 님은?"</string>
+    <string name="type_test_screen_테스트_건너뛰기">테스트 건너뛰기</string>
+    <string name="type_test_screen_다음">다음</string>
+
+    <string name="type_test_screen_question1">{여행 장소를}\n고를 때 %s 님은?</string>
     <string name="type_test_screen_item1">활발한 관광 장소</string>
     <string name="type_test_screen_item2">한적한 로컬 장소</string>
+
+    <string name="type_test_screen_question2">{여행 계획을}\n세울 때 %s 님은?</string>
     <string name="type_test_screen_item3">유동적</string>
     <string name="type_test_screen_item4">완전 계획적</string>
+
+    <string name="type_test_screen_question3">{여행 경비를}\n정할 때 %s 님은?</string>
     <string name="type_test_screen_item5">가성비 여행</string>
     <string name="type_test_screen_item6">럭셔리 여행</string>
+
+    <string name="type_test_screen_question4">{여행 다닐 때}\n%s 님은?</string>
     <string name="type_test_screen_item7">남는건 사진뿐!</string>
     <string name="type_test_screen_item8">눈으로 담아야지</string>
+
+    <string name="type_test_screen_question5">{여행에서 가장}\n하고 싶은 것은?</string>
     <string name="type_test_screen_item9">감성 장소</string>
     <string name="type_test_screen_item10">전통 문화</string>
     <string name="type_test_screen_item11">자연 경관</string>
     <string name="type_test_screen_item12">테마파크</string>
-    <string name="type_test_screen_테스트_건너뛰기">테스트 건너뛰기</string>
-    <string name="type_test_screen_다음">다음</string>
-    <string name="type_test_screen_님의">" 님의"</string>
-    <string name="type_test_screen_text1">취향은?</string>
-    <string name="type_test_screen_text2">하고 싶은 여행 스타일은?</string>
-    <string name="type_test_screen_text3">감귤이 착즙 되는 중...</string>
-    <string name="type_test_screen_text4">맛있는 여행 주스가 곧 나옵니다 !</string>
-    <string name="type_test_screen_text5">" 님의 여행 유형은"</string>
-    <string name="type_test_screen_text6">nanaland in Jeju 가 당신을 위해\n맞춤 여행 주스를 만들었어요!</string>
-    <string name="type_test_screen_button1">여행지</string>
-    <string name="type_test_screen_button2">홈화면 바로가기</string>
+
+    <string name="type_test_screen_text_page1_text1">{%s} 님의</string>
+    <string name="type_test_screen_text_page1_text2">취향은?</string>
+    <string name="type_test_screen_text_page1_text3">하고 싶은 여행 스타일은?</string>
     <string name="type_test_screen_lets_go">Let\'s Go!</string>
+
+    <string name="type_test_screen_text_page2_text1">감귤이 착즙 되는 중...</string>
+    <string name="type_test_screen_text_page2_text2">맛있는 여행 주스가 곧 나옵니다 !</string>
+
+    <string name="type_test_screen_text_result_header">%s 님의 여행 유형은</string>
+    <string name="type_test_screen_text_result_body">nanaland in Jeju 가 당신을 위해\n맞춤 여행 주스를 만들었어요!</string>
+    <string name="type_test_screen_button1">%s 여행지</string>
+    <string name="type_test_screen_button2">홈화면 바로가기</string>
 
     <!--여행지 유형 테스트 추천 여행지 화면-->
     <string name="type_test_recommended_spot_text">%s 님을 위한</string>

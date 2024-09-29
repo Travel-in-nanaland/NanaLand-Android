@@ -252,16 +252,15 @@
     <string name="type_감귤_버블티_description">A type full of curiosity,\nsurprising with each bite.</string>
 
     <!--여행지 유형 테스트 화면-->
-    <string name="type_test_screen_question1">""</string>
-    <string name="type_test_screen_question2">""</string>
-    <string name="type_test_screen_question3">""</string>
-    <string name="type_test_screen_question4">""</string>
-    <string name="type_test_screen_question5">""</string>
-    <string name="type_test_screen_question6">, What do you most\nwant to do on a trip?</string>
-    <string name="type_test_screen_question_님은1">\nyour travel style?</string>
-    <string name="type_test_screen_question_님은2">\nhow do you plan your trips?</string>
-    <string name="type_test_screen_question_님은3">" how do you set\nyour travel budget?"</string>
-    <string name="type_test_screen_question_님은4">\nwhat\'s your travel style?</string>
+    <string name="type_test_screen_테스트_건너뛰기">Skip the test</string>
+    <string name="type_test_screen_다음">next</string>
+
+    <string name="type_test_screen_question1">{%s}\nyour travel style?</string>
+    <string name="type_test_screen_question2">{%s}\nhow do you plan your trips?</string>
+    <string name="type_test_screen_question3">{%s how do you set}\nyour {travel budget?}</string>
+    <string name="type_test_screen_question4">{%s}\nwhat\'s your travel style?</string>
+    <string name="type_test_screen_question5">{%s,What do you most}\nwant to do on a trip?</string>
+
     <string name="type_test_screen_item1">Busy tourist spot</string>
     <string name="type_test_screen_item2">Quiet local spot</string>
     <string name="type_test_screen_item3">Flexible</string>
@@ -274,18 +273,19 @@
     <string name="type_test_screen_item10">Traditional culture</string>
     <string name="type_test_screen_item11">Natural scenery</string>
     <string name="type_test_screen_item12">Theme park</string>
-    <string name="type_test_screen_테스트_건너뛰기">Skip Test</string>
-    <string name="type_test_screen_다음">next</string>
-    <string name="type_test_screen_님의">""</string>
-    <string name="type_test_screen_text1">what travel style</string>
-    <string name="type_test_screen_text2">do you prefer?</string>
-    <string name="type_test_screen_text3">Squeezing the citrus...</string>
-    <string name="type_test_screen_text4">Delicious travel juice coming up soon!</string>
-    <string name="type_test_screen_text5">\'s travel type is</string>
-    <string name="type_test_screen_text6">nanaland in Jeju has created a custom travel juice for you!</string>
-    <string name="type_test_screen_button1">" Destination"</string>
-    <string name="type_test_screen_button2">Go to the main screen</string>
+
+    <string name="type_test_screen_text_page1_text1">%s</string>
+    <string name="type_test_screen_text_page1_text2">what travel style</string>
+    <string name="type_test_screen_text_page1_text3">do you prefer?</string>
     <string name="type_test_screen_lets_go">Let\'s Go!</string>
+
+    <string name="type_test_screen_text_page2_text1">Squeezing the citrus...</string>
+    <string name="type_test_screen_text_page2_text2">Delicious travel juice coming up soon!</string>
+
+    <string name="type_test_screen_text_result_header">%s\'s travel type is</string>
+    <string name="type_test_screen_text_result_body">nanaland in Jeju has created a custom travel juice for you!</string>
+    <string name="type_test_screen_button1">%s Destination</string>
+    <string name="type_test_screen_button2">Go to the main screen</string>
 
     <!--여행지 유형 테스트 추천 여행지 화면-->
     <string name="type_test_recommended_spot_text">For %s</string>

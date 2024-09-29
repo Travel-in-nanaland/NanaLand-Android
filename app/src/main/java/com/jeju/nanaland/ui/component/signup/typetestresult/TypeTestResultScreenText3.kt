@@ -49,7 +49,7 @@ fun TypeTestResultScreenText3(travelType: TravelType) {
                     color = getColor().black
                 )
             ) {
-                append("\n\n" + getString(R.string.type_test_screen_text6))
+                append("\n\n" + getString(R.string.type_test_screen_text_result_body))
             }
         },
         textAlign = TextAlign.Center

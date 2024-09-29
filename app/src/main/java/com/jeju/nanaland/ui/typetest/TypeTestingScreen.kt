@@ -11,17 +11,24 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.snapshots.SnapshotStateList
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.jeju.nanaland.R
 import com.jeju.nanaland.globalvalue.constant.TravelType
+import com.jeju.nanaland.globalvalue.userdata.UserData
 import com.jeju.nanaland.ui.component.common.CustomSurface
+import com.jeju.nanaland.ui.component.common.text.TextWithPointColor
 import com.jeju.nanaland.ui.component.signup.typetest.TypeTestingScreenBackButton
 import com.jeju.nanaland.ui.component.signup.typetest.TypeTestingScreenBottomButton
 import com.jeju.nanaland.ui.component.signup.typetest.TypeTestingScreenLevelText
 import com.jeju.nanaland.ui.component.signup.typetest.TypeTestingScreenProgressBar
-import com.jeju.nanaland.ui.component.signup.typetest.TypeTestingScreenQuestionText
 import com.jeju.nanaland.ui.component.signup.typetest.TypeTestingScreenSelectableItem
 import com.jeju.nanaland.ui.component.signup.typetest.TypeTestingScreenSkipTestText
+import com.jeju.nanaland.ui.theme.getColor
+import com.jeju.nanaland.ui.theme.largeTitle02
+import com.jeju.nanaland.ui.theme.largeTitle02Medium
+import com.jeju.nanaland.util.resource.getStringArray
 
 @Composable
 fun TypeTestingScreen(
@@ -67,7 +74,12 @@ private fun TypeTestingScreen(
 
             Spacer(Modifier.height(80.dp))
 
-            TypeTestingScreenQuestionText(level = level)
+            TextWithPointColor(
+                text = getStringArray(R.array.type_test_screen_questions, level-1, UserData.nickname),
+                color = getColor().main,
+                style = largeTitle02Medium.copy(textAlign = TextAlign.Center),
+                pointStyle = largeTitle02.copy(textAlign = TextAlign.Center)
+            )
 
             when (level) {
                 5 -> {
