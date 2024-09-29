@@ -13,5 +13,9 @@ import com.jeju.nanaland.util.language.customContext
 
 fun getString(@StringRes id: Int, vararg formatArgs: Any) = customContext.getString(id, *formatArgs)
 fun getStringArray(@ArrayRes id: Int) = customContext.resources.getStringArray(id)
+fun getStringArray(@ArrayRes id: Int, index: Int, vararg formatArgs: Any) = String.format(
+    customContext.resources.getStringArray(id)[index],
+    *formatArgs
+)
 
 fun getDrawable(@DrawableRes id: Int) = ContextCompat.getDrawable(customContext, id)

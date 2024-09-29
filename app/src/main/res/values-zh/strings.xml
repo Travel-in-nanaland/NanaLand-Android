@@ -252,16 +252,15 @@
     <string name="type_감귤_버블티_description">充满好奇心的你！\n越吃越反转的柑橘珍珠奶茶类型！</string>
 
     <!--여행지 유형 테스트 화면-->
-    <string name="type_test_screen_question1">选拔景点时\n</string>
-    <string name="type_test_screen_question2">制定旅行计划时\n</string>
-    <string name="type_test_screen_question3">定旅行经费时\n</string>
-    <string name="type_test_screen_question4">在旅游时\n</string>
-    <string name="type_test_screen_question5">在旅游中\n</string>
-    <string name="type_test_screen_question6">最想做什么?</string>
-    <string name="type_test_screen_question_님은1">更注重什么？</string>
-    <string name="type_test_screen_question_님은2">更注重什么？</string>
-    <string name="type_test_screen_question_님은3">更注重什么？</string>
-    <string name="type_test_screen_question_님은4">更注重什么？</string>
+    <string name="type_test_screen_테스트_건너뛰기">跳过测试</string>
+    <string name="type_test_screen_다음">下一步</string>
+
+    <string name="type_test_screen_question1">选{拔景点}时\n%s更注重什么？</string>
+    <string name="type_test_screen_question2">{制定旅行}计划时\n%s更注重什么？</string>
+    <string name="type_test_screen_question3">{定旅行}经费时\n%s更注重什么？</string>
+    <string name="type_test_screen_question4">{在旅游}时\n%s更注重什么？</string>
+    <string name="type_test_screen_question5">{在旅游中}\n%s最想做什么?</string>
+
     <string name="type_test_screen_item1">热闹的观赏景点</string>
     <string name="type_test_screen_item2">悠闲自在的景点</string>
     <string name="type_test_screen_item3">自由自在</string>
@@ -274,20 +273,22 @@
     <string name="type_test_screen_item10">传统文化</string>
     <string name="type_test_screen_item11">自然景观</string>
     <string name="type_test_screen_item12">主题公园</string>
-    <string name="type_test_screen_테스트_건너뛰기">跳过测试</string>
-    <string name="type_test_screen_다음">下一步</string>
-    <string name="type_test_screen_님의">""</string>
-    <string name="type_test_screen_text1">爱好是..</string>
-    <string name="type_test_screen_text2">想要的旅游风格是..</string>
-    <string name="type_test_screen_text3">柑橘正在被榨汁……</string>
-    <string name="type_test_screen_text4">美味的旅游果汁马上出来！ </string>
-    <string name="type_test_screen_text5">的旅行类型是</string>
-    <string name="type_test_screen_text6">nanaland in Jeju 为您定制了旅行果汁！</string>
-    <string name="type_test_screen_button1">旅游地</string>
-    <string name="type_test_screen_button2">前往主屏幕</string>
+
+    <string name="type_test_screen_text_page1_text1">{%s}</string>
+    <string name="type_test_screen_text_page1_text2">爱好是..</string>
+    <string name="type_test_screen_text_page1_text3">想要的旅游风格是..</string>
     <string name="type_test_screen_lets_go">Let\'s Go!</string>
 
-    <!--여행지 유형 테스트 추천 여행지 화면-->为了oooo/n{推荐的旅行目的地}
+    <string name="type_test_screen_text_page2_text1">柑橘正在被榨汁……</string>
+    <string name="type_test_screen_text_page2_text2">美味的旅游果汁马上出来！</string>
+
+    <string name="type_test_screen_text_result_header">%s 的旅行类型是</string>
+    <string name="type_test_screen_text_result_body">nanaland in Jeju 为您定制了旅行果汁！</string>
+    <string name="type_test_screen_button1">%s 旅游地</string>
+    <string name="type_test_screen_button2">前往主屏幕</string>
+
+
+    <!--여행지 유형 테스트 추천 여행지 화면-->
     <string name="type_test_recommended_spot_text">为了 %s</string>
     <string name="type_test_recommended_spot_추천_여행지">的旅游地</string>
 

@@ -86,4 +86,29 @@
         <item>@string/report_reason_8</item>
         <item>@string/report_reason_9</item>
     </string-array>
+
+    <!--타입 테스트 질문지-->
+    <string-array name="type_test_screen_questions" translatable="false">
+        <item>@string/type_test_screen_question1</item>
+        <item>@string/type_test_screen_question2</item>
+        <item>@string/type_test_screen_question3</item>
+        <item>@string/type_test_screen_question4</item>
+        <item>@string/type_test_screen_question5</item>
+    </string-array>
+    <!--타입 테스트 선택지-->
+    <string-array name="type_test_screen_items" translatable="false">
+        <item>@string/type_test_screen_item1</item>
+        <item>@string/type_test_screen_item2</item>
+        <item>@string/type_test_screen_item3</item>
+        <item>@string/type_test_screen_item4</item>
+        <item>@string/type_test_screen_item5</item>
+        <item>@string/type_test_screen_item6</item>
+        <item>@string/type_test_screen_item7</item>
+        <item>@string/type_test_screen_item8</item>
+        <item>@string/type_test_screen_item9</item>
+        <item>@string/type_test_screen_item10</item>
+        <item>@string/type_test_screen_item11</item>
+        <item>@string/type_test_screen_item12</item>
+    </string-array>
+
 </resources>

@@ -11,7 +11,7 @@ import com.jeju.nanaland.util.resource.getString
 @Composable
 fun TypeTestResultScreenText1() {
     Text(
-        text = UserData.nickname + getString(R.string.type_test_screen_text5),
+        text = getString(R.string.type_test_screen_text_result_header, UserData.nickname),
         color = getColor().black,
         style = body01
     )

@@ -253,16 +253,15 @@
     <string name="type_감귤_버블티_description">Sejenis Bubble Tea\nMandaring yang penuh dengan kejutan semakin anda minum!</string>
 
     <!--여행지 유형 테스트 화면-->
-    <string name="type_test_screen_question1">"Apakah pilihan "</string>
-    <string name="type_test_screen_question2">"Apakah pilihan "</string>
-    <string name="type_test_screen_question3">"Apakah pilihan "</string>
-    <string name="type_test_screen_question4">"Apakah pilihan "</string>
-    <string name="type_test_screen_question5">Apa yang paling ingin\ndilakukan dalam perjalanan?</string>
-    <string name="type_test_screen_question6">""</string>
-    <string name="type_test_screen_question_님은1">" ketika\nmemilih destinasi perjalanan?"</string>
-    <string name="type_test_screen_question_님은2">" ketika\nmerancang perjalanan?"</string>
-    <string name="type_test_screen_question_님은3">" ketika\nmenetapkan bajet\nperjalanan?"</string>
-    <string name="type_test_screen_question_님은4">" ketika\nberjalan?"</string>
+    <string name="type_test_screen_테스트_건너뛰기">Langkau ujian</string>
+    <string name="type_test_screen_다음">Seterusnya</string>
+
+    <string name="type_test_screen_question1">{Apakah pilihan %s ketika\nmemilih destinasi perjalanan?}</string>
+    <string name="type_test_screen_question2">{Apakah pilihan %s ketika merancang perjalanan?}</string>
+    <string name="type_test_screen_question3">{Apakah pilihan %s ketika menetapkan bajet perjalanan?}</string>
+    <string name="type_test_screen_question4">{Apakah pilihan %s ketika berjalan?}</string>
+    <string name="type_test_screen_question5">{Apa yang paling ingin dilakukan dalam perjalanan?}</string>
+
     <string name="type_test_screen_item1">Tempat Pelancongan Yang Sibuk</string>
     <string name="type_test_screen_item2">Tempat Tempatan Yang Sunyi</string>
     <string name="type_test_screen_item3">Fleksibel</string>
@@ -275,18 +274,19 @@
     <string name="type_test_screen_item10">Budaya Tradisional</string>
     <string name="type_test_screen_item11">Pemandangan Semula Jadi</string>
     <string name="type_test_screen_item12">Taman Tema</string>
-    <string name="type_test_screen_테스트_건너뛰기">Langkau ujian</string>
-    <string name="type_test_screen_다음">Seterusnya</string>
-    <string name="type_test_screen_님의">Apakah pilihan</string>
-    <string name="type_test_screen_text1">""</string>
-    <string name="type_test_screen_text2">Apakah gaya perjalanan yang\ningin dilakukan?</string>
-    <string name="type_test_screen_text3">Jus Tangerin Sedang Diperah...</string>
-    <string name="type_test_screen_text4">Jus Perjalanan yang Sedap Akan\nSegera Tersedia!</string>
-    <string name="type_test_screen_text5">" adalah"</string>
-    <string name="type_test_screen_text6">nanaland in Jeju telah membuat jus perjalanan\nkhas untuk anda!</string>
-    <string name="type_test_screen_button1">\nDestinasi Perjalanan</string>
-    <string name="type_test_screen_button2">Terus ke Laman Utama</string>
+
+    <string name="type_test_screen_text_page1_text1">Apakah pilihan</string>
+    <string name="type_test_screen_text_page1_text2">{%s?}</string>
+    <string name="type_test_screen_text_page1_text3">Apakah gaya perjalanan yang ingin dilakukan?</string>
     <string name="type_test_screen_lets_go">Let\'s Go!</string>
+
+    <string name="type_test_screen_text_page2_text1">Jus Tangerin Sedang Diperah...</string>
+    <string name="type_test_screen_text_page2_text2">Jus Perjalanan yang Sedap Akan Segera Tersedia!</string>
+
+    <string name="type_test_screen_text_result_header">Jenis Perjalanan %s adalah</string>
+    <string name="type_test_screen_text_result_body">nanaland in Jeju telah membuat jus perjalanan khas untuk anda!</string>
+    <string name="type_test_screen_button1">%s\nDestinasi Perjalanan</string>
+    <string name="type_test_screen_button2">Terus ke Laman Utama</string>
 
     <!--여행지 유형 테스트 추천 여행지 화면-->
     <string name="type_test_recommended_spot_text">Untuk %s</string>
