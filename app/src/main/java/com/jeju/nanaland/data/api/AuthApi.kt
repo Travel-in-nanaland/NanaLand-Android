@@ -36,4 +36,10 @@ interface AuthApi {
         @Part("reqDto") data: RequestBody,
         @Part image: MultipartBody.Part?
     ): Response<ResponseWrapper<AuthTokenData>>
+
+    // 닉네임 중복 확인
+    @GET("member/validateNickname")
+    suspend fun duplicateNickname(
+        @Query("nickname") data: String,
+    ): Response<ResponseWrapper<Unit>>
 }

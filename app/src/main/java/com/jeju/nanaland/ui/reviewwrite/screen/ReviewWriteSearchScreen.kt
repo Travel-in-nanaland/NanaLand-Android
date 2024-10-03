@@ -207,7 +207,7 @@ private fun ResultDataRowView(
                         modifier = Modifier
                             .size(56.dp)
                             .clip(RoundedCornerShape(6.dp)),
-                        imageModel = { it.firstImage.thumbnailUrl },
+                        imageModel = { it.firstImage.originUrl },
                     )
                     Spacer(modifier = Modifier.width(16.dp))
                     Column {

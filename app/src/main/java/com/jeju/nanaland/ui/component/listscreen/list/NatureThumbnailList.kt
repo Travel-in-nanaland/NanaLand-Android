@@ -40,7 +40,7 @@ fun NatureThumbnailList(
                         contentAlignment = if (idx % 2 == 0) Alignment.CenterStart else Alignment.CenterEnd
                     ) {
                         NatureThumbnail(
-                            imageUri = item.firstImage?.thumbnailUrl,
+                            imageUri = item.firstImage?.originUrl,
                             isFavorite = item.favorite,
                             title = item.title,
                             tag = item.addressTag,

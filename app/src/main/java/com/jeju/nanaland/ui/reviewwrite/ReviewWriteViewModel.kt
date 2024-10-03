@@ -140,7 +140,7 @@ class ReviewWriteViewModel @Inject constructor(
                                 titleTxt = data.title,
                                 subTitleTxt = data.address,
                                 reviewRating = data.rating.toInt(),
-                                reviewImage = data.images.map { Pair(it.id, it.thumbnailUrl) },
+                                reviewImage = data.images.map { Pair(it.id, it.originUrl) },
                                 reviewKeyword = data.reviewKeywords.map { keyword ->
                                     ReviewKeyword.Mood.entries.firstOrNull {
                                         it.name == keyword

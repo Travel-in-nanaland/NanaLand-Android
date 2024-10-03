@@ -10,7 +10,7 @@ import com.jeju.nanaland.util.resource.getString
 @Composable
 fun HomeScreenRecommendText(text: String) {
     Text(
-        text = getString(R.string.home_screen_recommend1) + text + getString(R.string.home_screen_recommend2),
+        text = getString(R.string.home_screen_recommend2, text),
         color = Color(0xFF1A1A1A),
         style = title02Bold
     )

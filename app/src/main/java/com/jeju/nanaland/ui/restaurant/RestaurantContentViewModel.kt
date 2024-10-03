@@ -1,5 +1,8 @@
 package com.jeju.nanaland.ui.restaurant
 
+import android.app.Application
+import android.widget.Toast
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.jeju.nanaland.domain.entity.restaurant.RestaurantContentData
@@ -29,11 +32,12 @@ import javax.inject.Inject
 
 @HiltViewModel
 class RestaurantContentViewModel @Inject constructor(
+    private val application: Application,
     private val getRestaurantContentUseCase: GetRestaurantContentUseCase,
     private val toggleFavoriteUseCase: ToggleFavoriteUseCase,
     private val getReviewListUseCase: GetReviewListByPostUseCase,
-    private val toggleReviewFavoriteUseCase: ToggleReviewFavoriteUseCase
-) : ViewModel() {
+    private val toggleReviewFavoriteUseCase: ToggleReviewFavoriteUseCase,
+) : AndroidViewModel(application) {
 
     private val _restaurantContent = MutableStateFlow<UiState<RestaurantContentData>>(UiState.Loading)
     val restaurantContent = _restaurantContent.asStateFlow()
@@ -142,7 +146,9 @@ class RestaurantContentViewModel @Inject constructor(
                         }
                     }
                 }.onError { code, message ->
-
+                    when (code) {
+                        400 -> Toast.makeText(application, "", Toast.LENGTH_SHORT).show()
+                    }
                 }.onException {
 
                 }

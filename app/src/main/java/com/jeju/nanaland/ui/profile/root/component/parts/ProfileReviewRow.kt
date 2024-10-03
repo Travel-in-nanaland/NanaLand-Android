@@ -60,7 +60,7 @@ fun ProfileReviewRow(
                     .fillMaxWidth()
                     .weight(1f)
                     .clip(RoundedCornerShape(8.dp,8.dp,0.dp,0.dp)),
-                imageModel = { data.images.firstOrNull()?.thumbnailUrl }
+                imageModel = { data.images.firstOrNull()?.originUrl }
             )
 
         Text(

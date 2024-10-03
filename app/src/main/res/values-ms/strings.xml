@@ -83,7 +83,7 @@
     <string name="home_screen_ad4_title">Festival khas di Jeju pada bulan Julai🎈</string>
     <string name="home_screen_ad4_content">Mari saksikan festival yang penuh dengan harta karun dunia, rasa Pulau Jeju!</string>
     <string name="home_screen_recommend1">"Cadangan untuk "</string>
-    <string name="home_screen_recommend2">Cadangan daripada penduduk untuk Nana kami</string>
+    <string name="home_screen_recommend2">Cadangan daripada penduduk untuk %s kami</string>
 
     <string name="home_screen_hint_1">Festival Bunga Canola di Jeju sedang berlangsung! 🏵️</string>
     <string name="home_screen_hint_2">Jom lawati ladang teh hijau Jeju! 😎</string>
@@ -461,4 +461,5 @@
     <string name="loading_wait_text_desc2">Sila tunggu sebentar!\nPengalaman anda sedang dihantar\nke nanaland. 💜</string>
     <string name="loading_wait_text_desc3">Sila tunggu sebentar!\nKami sedang memproses pemikiran anda dengan teliti untuk\nmemastikan ia disampaikan dengan baik. 💌</string>
     <string name="loading_wait_text_desc4">Sila tunggu sebentar!\nMaklum balas anda adalah sokongan\nbesar kepada kami. 🍀</string>
+    <string name="settings_screen_회원_가입">Daftar</string>
 </resources>

@@ -40,7 +40,7 @@ fun MarketThumbnailList(
                         contentAlignment = if (idx % 2 == 0) Alignment.CenterStart else Alignment.CenterEnd
                     ) {
                         MarketThumbnail(
-                            imageUri = item.firstImage?.thumbnailUrl,
+                            imageUri = item.firstImage?.originUrl,
                             isFavorite = item.favorite,
                             title = item.title,
                             tag = item.addressTag,

@@ -53,7 +53,7 @@ fun SearchResultScreenSearchResultList(
                 modifier = Modifier.padding(start = 4.dp, end = 4.dp, bottom = 16.dp)
             ) {
                 SearchThumbnail(
-                    imageUri = item.firstImage?.thumbnailUrl,
+                    imageUri = item.firstImage?.originUrl,
                     isFavorite = item.favorite,
                     title = item.title,
                     onFavoriteButtonClick = {
