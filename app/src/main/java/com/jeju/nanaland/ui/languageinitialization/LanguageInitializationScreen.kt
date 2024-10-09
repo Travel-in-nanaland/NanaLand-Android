@@ -3,18 +3,15 @@ package com.jeju.nanaland.ui.languageinitialization
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -25,11 +22,11 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.jeju.nanaland.R
 import com.jeju.nanaland.globalvalue.constant.BOTTOM_NAVIGATION_BAR_HEIGHT
+import com.jeju.nanaland.globalvalue.type.LanguageType
 import com.jeju.nanaland.ui.component.languageinitialization.LanguageInitializationScreenLanguageBox
 import com.jeju.nanaland.ui.component.languageinitialization.LanguageInitializationScreenText1
 import com.jeju.nanaland.ui.component.languageinitialization.LanguageInitializationScreenText2
 import com.jeju.nanaland.ui.theme.getColor
-import com.jeju.nanaland.util.resource.getString
 import com.jeju.nanaland.util.ui.ScreenPreview
 
 @Composable
@@ -46,7 +43,7 @@ fun LanguageInitializationScreen(
 
 @Composable
 private fun LanguageInitializationScreen(
-    selectLanguage: (String) -> Unit,
+    selectLanguage: (LanguageType) -> Unit,
     moveToSignInScreen: () -> Unit,
     isContent: Boolean
 ) {
@@ -89,7 +86,7 @@ private fun LanguageInitializationScreen(
                     text1 = "Hello!\nNice to meet you \uD83D\uDC4B",
                     text2 = "English",
                     onClick = {
-                        selectLanguage("en")
+                        selectLanguage(LanguageType.English)
                         moveToSignInScreen()
                     }
                 )
@@ -100,7 +97,7 @@ private fun LanguageInitializationScreen(
                     text1 = "你好!\n很高兴见到你 \uD83D\uDC4B",
                     text2 = "汉语",
                     onClick = {
-                        selectLanguage("zh")
+                        selectLanguage(LanguageType.Chinese)
                         moveToSignInScreen()
                     }
                 )
@@ -111,7 +108,7 @@ private fun LanguageInitializationScreen(
                     text1 = "Hai!\nGembira jumpa \uD83D\uDC4B",
                     text2 = "Bahasa Malaysia",
                     onClick = {
-                        selectLanguage("ms")
+                        selectLanguage(LanguageType.Malaysia)
                         moveToSignInScreen()
                     }
                 )
@@ -122,7 +119,7 @@ private fun LanguageInitializationScreen(
                     text1 = "Chào!\nVui gặp bạn \uD83D\uDC4B",
                     text2 = "Tiếng Việt",
                     onClick = {
-                        selectLanguage("vi")
+                        selectLanguage(LanguageType.Vietnam)
                         moveToSignInScreen()
                     }
                 )
@@ -133,7 +130,7 @@ private fun LanguageInitializationScreen(
                     text1 = "안녕하세요!\n반갑습니다 \uD83D\uDC4B",
                     text2 = "한국어",
                     onClick = {
-                        selectLanguage("ko")
+                        selectLanguage(LanguageType.Korean)
                         moveToSignInScreen()
                     }
                 )

@@ -14,10 +14,10 @@ import com.jeju.nanaland.domain.usecase.auth.SignUpUseCase
 import com.jeju.nanaland.domain.usecase.authdatastore.SaveAccessTokenUseCase
 import com.jeju.nanaland.domain.usecase.authdatastore.SaveRefreshTokenUseCase
 import com.jeju.nanaland.domain.usecase.member.DuplicateNicknameUseCase
-import com.jeju.nanaland.domain.usecase.settingsdatastore.GetValueUseCase
-import com.jeju.nanaland.globalvalue.constant.KEY_LANGUAGE
+import com.jeju.nanaland.domain.usecase.settingsdatastore.GetLanguageUseCase
 import com.jeju.nanaland.globalvalue.constant.NICKNAME_CONSTRAINT
 import com.jeju.nanaland.globalvalue.constant.nicknameRegex
+import com.jeju.nanaland.globalvalue.type.LanguageType
 import com.jeju.nanaland.globalvalue.userdata.UserData
 import com.jeju.nanaland.util.log.LogUtil
 import com.jeju.nanaland.util.network.NetworkResult
@@ -31,16 +31,18 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.flow.distinctUntilChanged
+import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.runBlocking
 import java.io.File
 import javax.inject.Inject
 
 @HiltViewModel
 class SignUpViewModel @Inject constructor(
     private val signUpUseCase: SignUpUseCase,
-    private val getValueUseCase: GetValueUseCase,
+    private val getLanguageUseCase: GetLanguageUseCase,
     private val saveAccessTokenUseCase: SaveAccessTokenUseCase,
     private val saveRefreshTokenUseCase: SaveRefreshTokenUseCase,
     private val duplicateNicknameUseCase: DuplicateNicknameUseCase,
@@ -86,19 +88,10 @@ class SignUpViewModel @Inject constructor(
     ) {
         if (_inputNickname.value.length > 8 || _inputNickname.value.isEmpty()) return
 
-        var locale = "ENGLISH"
-        getValueUseCase(key = KEY_LANGUAGE)
-            .onEach {
-                locale = when (it) {
-                    "en" -> "ENGLISH"
-                    "zh" -> "CHINESE"
-                    "ms" -> "MALAYSIA"
-                    "ko" -> "KOREAN"
-                    else -> "ENGLISH"
-                }
-            }
-            .catch { LogUtil.e("flow Error", "getValueUseCase") }
-            .launchIn(viewModelScope)
+        var locale: LanguageType
+        runBlocking {
+            locale = getLanguageUseCase().firstOrNull() ?: LanguageType.English
+        }
 
         var imageFile: File? = null
         if (_profileImageUri.value?.contains("content") == true) {

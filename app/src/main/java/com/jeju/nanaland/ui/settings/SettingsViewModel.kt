@@ -8,8 +8,6 @@ import com.jeju.nanaland.domain.usecase.authdatastore.SaveRefreshTokenUseCase
 import com.jeju.nanaland.domain.usecase.member.SignOutUseCase
 import com.jeju.nanaland.domain.usecase.recentsearchdatastore.ClearRecentSearchDataStoreUseCase
 import com.jeju.nanaland.domain.usecase.settingsdatastore.ClearUserSettingsDataStoreUseCase
-import com.jeju.nanaland.domain.usecase.settingsdatastore.GetValueUseCase
-import com.jeju.nanaland.domain.usecase.settingsdatastore.SaveValueUseCase
 import com.jeju.nanaland.globalvalue.constant.KEY_LANGUAGE
 import com.jeju.nanaland.util.log.LogUtil
 import com.jeju.nanaland.util.network.onError

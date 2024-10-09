@@ -23,11 +23,12 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import com.jeju.nanaland.R
+import com.jeju.nanaland.globalvalue.type.LanguageType
 import com.jeju.nanaland.ui.theme.NanaLandTheme
 import com.jeju.nanaland.ui.theme.body02
 import com.jeju.nanaland.ui.theme.getColor
 import com.jeju.nanaland.ui.theme.title01Bold
-import com.jeju.nanaland.util.language.customContext
+import com.jeju.nanaland.util.language.getLanguage
 import com.jeju.nanaland.util.resource.getString
 import com.jeju.nanaland.util.ui.ComponentPreview
 
@@ -92,20 +93,22 @@ private fun TitleText() {
             .drawBehind {
                 val rectTopOffset = size.height / 2
                 val rectStartOffset =
-                    size.width * when (customContext.resources.configuration.locales[0].language) {
-                        "ko" -> 0.438f
-                        "ms" -> 0f
-                        "zh" -> 0.6f
-                        else -> 0f
+                    size.width * when (getLanguage()) {
+                        LanguageType.Korean -> 0.438f
+                        LanguageType.Malaysia -> 0f
+                        LanguageType.Chinese -> 0.6f
+                        LanguageType.English -> 0f
+                        LanguageType.Vietnam -> 0f
                     }
 
                 val rectHeightPx = size.height * 2 / 3
                 val rectWidthPx =
-                    size.width * when (customContext.resources.configuration.locales[0].language) {
-                        "ko" -> 0.4666f
-                        "ms" -> 0.4978f
-                        "zh" -> 0.2437f
-                        else -> 0.4238f
+                    size.width * when (getLanguage()) {
+                        LanguageType.Korean -> 0.4666f
+                        LanguageType.Malaysia -> 0.4978f
+                        LanguageType.Chinese -> 0.2437f
+                        LanguageType.English -> 0.4238f
+                        LanguageType.Vietnam -> 0.4238f
                     }
 
                 drawRect(
