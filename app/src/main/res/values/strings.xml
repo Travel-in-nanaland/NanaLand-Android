@@ -490,7 +490,7 @@
     <string name="report_reason_9">기타</string>
 
     <!--나나스픽 리스트-->
-    <string name="nanapick_list_screen_recommended_post">금주 추천 나나\'s Pick</string>
+    <string name="nanapick_list_screen_recommended_post">금주 {추천} 나나’s Pick</string>
     <string name="nanapick_list_screen_see_all">모두보기</string>
     <string name="nanapick_list_screen_new" translatable="false">NEW</string>
     <string name="common_나가기">나가기</string>
