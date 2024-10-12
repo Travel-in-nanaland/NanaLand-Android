@@ -40,7 +40,6 @@ import com.jeju.nanaland.util.ui.clickableNoEffect
 import com.jeju.nanaland.util.ui.conditional
 import com.jeju.nanaland.util.ui.drawColoredShadow
 import com.skydoves.landscapist.glide.GlideImage
-import kotlin.random.Random
 
 /** 마이페이지 **/
 @JvmName("rowIsMyPage")
@@ -88,7 +87,7 @@ private fun ProfileListReviewRow(
     onReport: ((Int) -> Unit)? = null,
 ) {
     var likeCnt by remember { mutableIntStateOf(data.heartCount) }
-    var isLike by remember { mutableStateOf(/*TODO*/ Random.nextBoolean()) }
+    var isLike by remember { mutableStateOf(data.isWish) }
 
     Box(
         modifier = Modifier

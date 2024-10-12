@@ -91,7 +91,7 @@ class ProfileViewModel @Inject constructor(
         toggleReviewFavoriteUseCase(data)
             .onEach {
                 it.onError { code, message ->  }
-            }
+            }.launchIn(viewModelScope)
     }
 
     suspend fun setRemove(id: Int): NetworkResult<String>{
