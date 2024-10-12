@@ -205,10 +205,9 @@ private fun ProfileScreen(
                         HorizontalDivider()
 
                     if (isReviewList.value) {
-                        if (!viewModel.isGuest)
-                            ProfileScreenReviewListSection(reviewList) {
-                                moveToProfileReviewListScreen(it)
-                            }
+                        ProfileScreenReviewListSection(reviewList) {
+                            moveToProfileReviewListScreen(it)
+                        }
                     } else if (!noticeList.isNullOrEmpty()) {
                         ProfileScreenNoticeListSection(noticeList) {
                             moveToProfileNoticeListScreen(it)
