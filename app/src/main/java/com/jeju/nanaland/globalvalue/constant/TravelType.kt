@@ -90,5 +90,5 @@ fun String.toTravelType(): TravelType = when (this) {
     getString(R.string.type_감귤_식혜) -> TravelType.GAMGYUL_SIKHYE
     getString(R.string.type_감귤_에이드) -> TravelType.GAMGYUL_ADE
     getString(R.string.type_감귤_버블티) -> TravelType.GAMGYUL_BUBBLE_TEA
-    else -> throw Exception("String.toTravelType Exception")
+    else -> throw Exception("String.toTravelType Exception ($this)")
 }

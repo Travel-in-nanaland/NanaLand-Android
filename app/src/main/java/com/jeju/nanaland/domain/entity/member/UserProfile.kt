@@ -2,6 +2,7 @@ package com.jeju.nanaland.domain.entity.member
 
 import com.google.gson.annotations.SerializedName
 import com.jeju.nanaland.domain.entity.common.ImageUrl
+import com.jeju.nanaland.globalvalue.constant.TravelType
 
 data class UserProfile(
     @SerializedName("consentItems")
@@ -18,8 +19,8 @@ data class UserProfile(
     val description: String,
     @SerializedName("level")
     val level: Int,
-    @SerializedName("travelType")
-    val travelType: String?,
+    @SerializedName("travelTypeKey")
+    val travelType: TravelType?,
     @SerializedName("hashtags")
     val hashTags: List<String>
 )

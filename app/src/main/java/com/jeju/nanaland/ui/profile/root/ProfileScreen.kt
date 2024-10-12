@@ -30,6 +30,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.paging.compose.collectAsLazyPagingItems
 import com.jeju.nanaland.R
+import com.jeju.nanaland.globalvalue.constant.TravelType
 import com.jeju.nanaland.ui.component.common.topbar.CustomTopBarWithMenu
 import com.jeju.nanaland.ui.profile.component.parts.ReportSheet
 import com.jeju.nanaland.ui.profile.root.component.ProfileScreenNoticeListSection
@@ -50,7 +51,7 @@ fun ProfileScreen(
     moveToProfileModificationScreen: (String?, String?, String?) -> Unit,
     moveToSignInScreen: () -> Unit,
     moveToTypeTestScreen: () -> Unit,
-    moveToTypeTestResultScreen: (String) -> Unit,
+    moveToTypeTestResultScreen: (TravelType) -> Unit,
     moveToReviewWriteScreen: () -> Unit,
     moveToProfileReviewListScreen: (Int?) -> Unit,
     moveToProfileNoticeListScreen: (Int?) -> Unit,
@@ -61,7 +62,7 @@ fun ProfileScreen(
         moveToProfileModificationScreen = moveToProfileModificationScreen,
         moveToSignInScreen = moveToSignInScreen,
         moveToTypeTestScreen = moveToTypeTestScreen,
-        moveToTypeTestResultScreen = moveToTypeTestResultScreen,
+        moveToTypeTestResultScreen = { _, it -> moveToTypeTestResultScreen(it) },
         moveToReviewWriteScreen = moveToReviewWriteScreen,
         moveToProfileReviewListScreen = moveToProfileReviewListScreen,
         moveToProfileNoticeListScreen = moveToProfileNoticeListScreen,
@@ -74,7 +75,7 @@ fun ProfileScreen(
 @Composable
 fun ProfileScreen(
     onBackButtonClicked: () -> Unit,
-    moveToTypeTestResultScreen: (String) -> Unit,
+    moveToTypeTestResultScreen: (String, TravelType) -> Unit,
     moveToProfileReviewListScreen: (Int?) -> Unit,
     moveToReportScreen: (Int) -> Unit,
 ) {
@@ -102,7 +103,7 @@ private fun ProfileScreen(
     moveToProfileModificationScreen: (String?, String?, String?) -> Unit,
     moveToSignInScreen: () -> Unit,
     moveToTypeTestScreen: () -> Unit,
-    moveToTypeTestResultScreen: (String) -> Unit,
+    moveToTypeTestResultScreen: (String, TravelType) -> Unit,
     moveToReviewWriteScreen: () -> Unit,
     moveToProfileReviewListScreen: (Int?) -> Unit,
     moveToProfileNoticeListScreen: (Int?) -> Unit,
@@ -169,7 +170,11 @@ private fun ProfileScreen(
                         )
                     },
                     moveToTypeTestScreen = moveToTypeTestScreen,
-                    moveToTypeTestResultScreen = { up.data.travelType?.let(moveToTypeTestResultScreen) }
+                    moveToTypeTestResultScreen = {
+                        up.data.travelType?.let {
+                            moveToTypeTestResultScreen(up.data.nickname, it)
+                        }
+                    }
                 )
 
                 Spacer(Modifier.height(24.dp))

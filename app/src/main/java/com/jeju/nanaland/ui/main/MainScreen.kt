@@ -34,6 +34,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.jeju.nanaland.R
 import com.jeju.nanaland.globalvalue.constant.TOP_BAR_HEIGHT
+import com.jeju.nanaland.globalvalue.constant.TravelType
 import com.jeju.nanaland.globalvalue.type.HomeScreenViewType
 import com.jeju.nanaland.globalvalue.type.MainScreenViewType
 import com.jeju.nanaland.globalvalue.type.SearchCategoryType
@@ -68,7 +69,7 @@ fun MainScreen(
     moveToProfileModificationScreen: (String?, String?, String?) -> Unit,
     moveToSignInScreen: () -> Unit,
     moveToTypeTestScreen: () -> Unit,
-    moveToTypeTestResultScreen: (String) -> Unit,
+    moveToTypeTestResultScreen: (TravelType) -> Unit,
     moveToReviewWriteScreen: () -> Unit,
     moveToProfileNoticeListScreen: (Int?) -> Unit,
     moveToProfileReviewListScreen: (Int?) -> Unit,
@@ -164,7 +165,7 @@ private fun MainScreen(
     moveToProfileModificationScreen: (String?, String?, String?) -> Unit,
     moveToSignInScreen: () -> Unit,
     moveToTypeTestScreen: () -> Unit,
-    moveToTypeTestResultScreen: (String) -> Unit,
+    moveToTypeTestResultScreen: (TravelType) -> Unit,
     moveToReviewWriteScreen: () -> Unit,
     moveToProfileNoticeListScreen: (Int?) -> Unit,
     moveToProfileReviewListScreen: (Int?) -> Unit,

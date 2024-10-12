@@ -17,7 +17,6 @@ import androidx.navigation.navigation
 import androidx.navigation.toRoute
 import com.jeju.nanaland.globalvalue.constant.ROUTE
 import com.jeju.nanaland.globalvalue.constant.ROUTE_REVIEW_WRITE_ROUTE
-import com.jeju.nanaland.globalvalue.constant.ROUTE_TYPE_TEST_RESULT
 import com.jeju.nanaland.ui.component.common.CustomSurface
 import com.jeju.nanaland.ui.profile.profileNoticeList.ProfileNoticeListScreen
 import com.jeju.nanaland.ui.profile.profileReviewList.ProfileReviewListScreen
@@ -43,10 +42,12 @@ fun NavGraphBuilder.profileScreenRoute(navController: NavController) = navigatio
                 ) {
                     ProfileScreen(
                         onBackButtonClicked = { navController.popBackStack() },
-                        moveToTypeTestResultScreen = {
-                            navController.navigate(ROUTE_TYPE_TEST_RESULT,  bundleOf(
-                                "travelType" to it,
-                                "isMine" to false,
+                        moveToTypeTestResultScreen = { name, type ->
+                            navController.navigate( ROUTE.TypeTest.Result(
+                                name = name,
+                                travelType = type,
+                                isMine = false,
+                                isFirst = false
                             ))
                         },
                         moveToProfileReviewListScreen = {
