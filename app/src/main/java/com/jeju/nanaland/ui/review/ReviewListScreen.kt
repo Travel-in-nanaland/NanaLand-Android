@@ -62,7 +62,7 @@ fun ReviewListScreen(
     moveToReviewWritingScreen: (Int, String, String, String) -> Unit,
     moveToSignInScreen: () -> Unit,
     moveToReportScreen:(Int) -> Unit,
-    moveToProfileScreen:(Int) -> Unit,
+    moveToProfileScreen: (Int?) -> Unit,
     viewModel: ReviewListViewModel = hiltViewModel()
 ) {
     LaunchedEffect(Unit) {
@@ -126,7 +126,7 @@ private fun ReviewListScreen(
     moveToBackScreen: () -> Unit,
     moveToSignInScreen: () -> Unit,
     moveToReportScreen: (Int) -> Unit,
-    moveToProfileScreen: (Int) -> Unit,
+    moveToProfileScreen: (Int?) -> Unit,
     isContent: Boolean
 ) {
     val lazyGridState = rememberLazyGridState()

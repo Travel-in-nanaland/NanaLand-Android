@@ -230,6 +230,7 @@ private fun MainScreen(
                     }
                     MainScreenViewType.MyPage -> {
                         ProfileScreen(
+                            onBackButtonClicked = null,
                             moveToSettingsScreen = moveToSettingsScreen,
                             moveToProfileModificationScreen = moveToProfileModificationScreen,
                             moveToSignInScreen = moveToSignInScreen,

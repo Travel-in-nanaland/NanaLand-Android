@@ -47,6 +47,7 @@ import com.jeju.nanaland.util.ui.clickableNoEffect
 /** 마이 페이지 **/
 @Composable
 fun ProfileScreen(
+    onBackButtonClicked: (() -> Unit)?,
     moveToSettingsScreen: () -> Unit,
     moveToProfileModificationScreen: (String?, String?, String?) -> Unit,
     moveToSignInScreen: () -> Unit,
@@ -58,6 +59,7 @@ fun ProfileScreen(
 ) {
     ProfileScreen(
         isMine = true,
+        onBackButtonClicked = onBackButtonClicked,
         moveToSettingsScreen = moveToSettingsScreen,
         moveToProfileModificationScreen = moveToProfileModificationScreen,
         moveToSignInScreen = moveToSignInScreen,
@@ -68,7 +70,6 @@ fun ProfileScreen(
         moveToProfileNoticeListScreen = moveToProfileNoticeListScreen,
 
         moveToReportScreen = {},
-        onBackButtonClicked ={},
     )
 }
 /** 타인 프로필 **/
@@ -98,7 +99,7 @@ fun ProfileScreen(
 @Composable
 private fun ProfileScreen(
     isMine: Boolean,
-    onBackButtonClicked: () -> Unit,
+    onBackButtonClicked: (() -> Unit)?,
     moveToSettingsScreen: () -> Unit,
     moveToProfileModificationScreen: (String?, String?, String?) -> Unit,
     moveToSignInScreen: () -> Unit,
@@ -134,7 +135,7 @@ private fun ProfileScreen(
         CustomTopBarWithMenu(
             title = if(isMine) getString(R.string.common_나의_나나) else "",
             drawShadow = false,
-            onBackButtonClicked = if(isMine) null else onBackButtonClicked,
+            onBackButtonClicked = onBackButtonClicked,
         ) {
             Icon(
                 modifier = Modifier
