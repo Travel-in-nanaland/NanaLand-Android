@@ -43,7 +43,6 @@
     <string name="common_나의_나나">nana saya</string>
     <string name="common_전체">Seluruh</string>
     <string name="common_건">perkara</string>
-    <string name="common_년">년</string>
     <string name="common_봄_desc">March, April</string>
     <string name="common_가을_desc">September, October</string>
     <string name="common_겨울_desc">November, December, January, February</string>
@@ -82,8 +81,8 @@
     <string name="home_screen_ad3_content">Pasar tradisional apa yang masih ada?</string>
     <string name="home_screen_ad4_title">Festival khas di Jeju pada bulan Julai🎈</string>
     <string name="home_screen_ad4_content">Mari saksikan festival yang penuh dengan harta karun dunia, rasa Pulau Jeju!</string>
-    <string name="home_screen_recommend1">"Cadangan untuk "</string>
-    <string name="home_screen_recommend2">Cadangan daripada penduduk untuk Nana kami</string>
+    <string name="home_screen_recommend">Cadangan daripada penduduk untuk %s kami</string>
+    <string name="home_screen_recommend_default_name">Nana</string>
 
     <string name="home_screen_hint_1">Festival Bunga Canola di Jeju sedang berlangsung! 🏵️</string>
     <string name="home_screen_hint_2">Jom lawati ladang teh hijau Jeju! 😎</string>
@@ -101,13 +100,11 @@
     <string name="searching_screen_최근_검색어">Carian terkini</string>
     <string name="searching_screen_모두_지우기">Kosongkan semua</string>
     <string name="searching_screen_최근_검색어가_없습니다">Tiada carian terkini.</string>
-    <string name="searching_screen_가장_많이">""</string>
-    <string name="searching_screen_검색하고_있어요">Paling Banyak Dicari!</string>
+    <string name="searching_screen_most_search">Paling banyak dicari!</string>
     <string name="searching_screen_hot_keywords">eningkatan Pencarian! Tempat Jeju 🍊</string>
 
     <!--검색 결과 화면-->
     <string name="search_result_screen_no_result">Carian anda tidak\nmengembalikan sebarang hasil.</string>
-    <string name="search_result_screen_preparing_service">Perkhidmatan ini sedang disediakan.\nJumpa lagi!</string>
 
     <!--비회원 회원가입 유도 다이얼로그-->
     <string name="non_member_dialog_guide">Anda perlu menjadi ahli untuk menggunakan semua perkhidmatan✨</string>
@@ -187,8 +184,7 @@
     <string name="info_modification_proposal_장소_삭제">Padam Lokasi</string>
     <string name="info_modification_proposal_heading2">Sila kongsi maklumat tambahan!</string>
     <string name="info_modification_proposal_제공_서비스">Perkhidmatan yang Disediakan</string>
-    <string name="info_modification_proposal_사진_추가하기">Tambah Gambar</string>
-    <string name="info_modification_proposal_text2">Jika anda melampirkan maklumat yang disahkan\nbersama foto, maklumat yang lebih tepat akan\ndilengkapkan.</string>
+    <string name="detail_screen_common_줄이기">tutup</string>
     <string name="info_modification_proposal_heading3">Cadangan Pembetulan Maklumat</string>
     <string name="info_modification_proposal_hint1">Sila lampirkan gambar bersama dengan maklumat yang telah disahkan untuk melengkapkan maklumat yang lebih tepat</string>
     <string name="info_modification_proposal_text3">Sila tinggalkan komen jika ada butiran mengenai item yang anda minta untuk diubah atau apa-apa isu lain</string>
@@ -313,7 +309,6 @@
 
     <!--마이페이지 화면-->
     <string name="mypage_screen_프로필_수정">Ubah Profil</string>
-    <string name="mypage_screen_여행_유형">Jenis Perjalanan</string>
     <string name="mypage_screen_테스트_다시하기">Uji semula</string>
     <string name="mypage_screen_테스트_하기">Ujian</string>
     <string name="mypage_screen_없음">Tiada</string>
@@ -366,9 +361,7 @@
 
     <!--접근 권한 안내 화면-->
     <string name="permission_checking_screen_접근_권한_안내">Panduan Keizinan Akses</string>
-    <string name="permission_checking_screen_guide1">Untuk menggunakan aplikasi nanaland in Jeju, Keizinan Akses berikut diperlukan.</string>
-    <string name="permission_checking_screen_guide2">""</string>
-    <string name="permission_checking_screen_guide3">""</string>
+    <string name="permission_checking_screen_guide">Untuk menggunakan aplikasi nanaland in Jeju, Keizinan Akses berikut diperlukan.</string>
     <string name="permission_checking_screen_text1">Keizinan akses yang wajib diperlukan untuk menggunakan perkhidmatan nanaland in Jeju, dan jika ditolak, penggunaan perkhidmatan akan terhad.</string>
     <string name="permission_checking_screen_text2">Jika anda tidak bersetuju dengan keizinan akses pilihan, beberapa fungsi dalam perkhidmatan nanaland in Jeju mungkin terhad.</string>
     <string name="permission_checking_screen_알려드립니다">Makluman</string>
@@ -461,4 +454,5 @@
     <string name="loading_wait_text_desc2">Sila tunggu sebentar!\nPengalaman anda sedang dihantar\nke nanaland. 💜</string>
     <string name="loading_wait_text_desc3">Sila tunggu sebentar!\nKami sedang memproses pemikiran anda dengan teliti untuk\nmemastikan ia disampaikan dengan baik. 💌</string>
     <string name="loading_wait_text_desc4">Sila tunggu sebentar!\nMaklum balas anda adalah sokongan\nbesar kepada kami. 🍀</string>
+    <string name="type_test_recommended_spot_자세히_보기">Ketahui lebih lanjut</string>
 </resources>

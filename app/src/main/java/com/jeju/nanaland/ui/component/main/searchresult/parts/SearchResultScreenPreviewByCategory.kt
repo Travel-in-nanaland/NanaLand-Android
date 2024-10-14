@@ -1,12 +1,10 @@
 package com.jeju.nanaland.ui.component.main.searchresult.parts
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
@@ -18,7 +16,6 @@ import androidx.compose.ui.unit.dp
 import com.jeju.nanaland.R
 import com.jeju.nanaland.domain.entity.search.SearchResultData
 import com.jeju.nanaland.globalvalue.type.SearchCategoryType
-import com.jeju.nanaland.ui.component.main.searchresult.SearchResultScreenPreparingServiceContent
 import com.jeju.nanaland.ui.component.thumbnail.SearchThumbnail
 import com.jeju.nanaland.util.resource.getString
 import com.jeju.nanaland.util.ui.ComponentPreview
