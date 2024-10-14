@@ -1,13 +1,8 @@
 package com.jeju.nanaland.ui.splash
 
 import android.app.Activity
-import android.util.Log
-import android.widget.Toast
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Text
-import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
@@ -17,22 +12,19 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.airbnb.lottie.compose.LottieAnimation
 import com.airbnb.lottie.compose.LottieCompositionSpec
 import com.airbnb.lottie.compose.animateLottieCompositionAsState
 import com.airbnb.lottie.compose.rememberLottieComposition
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
-import com.google.android.gms.tasks.OnCompleteListener
-import com.google.firebase.messaging.FirebaseMessaging
 import com.jeju.nanaland.R
 import com.jeju.nanaland.globalvalue.type.SplashCheckingState
 import com.jeju.nanaland.ui.splash.component.NetworkConnectionDialog
 import com.jeju.nanaland.util.intent.DeepLinkData
-import com.skydoves.landscapist.glide.GlideImage
 import kotlinx.coroutines.delay
 
 @Composable
@@ -144,7 +136,8 @@ private fun SplashScreen(
         LottieAnimation(
             modifier = Modifier.fillMaxSize(),
             composition = composition,
-            progress = { progress }
+            progress = { progress },
+            contentScale = ContentScale.Crop
         )
 //        TextField(
 //            modifier = Modifier.padding(top = 40.dp),

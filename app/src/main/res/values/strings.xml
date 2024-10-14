@@ -58,6 +58,7 @@
     <string name="common_중국어">中国话</string>
     <string name="common_영어">English</string>
     <string name="common_말레이시아어">Melayu</string>
+    <string name="common_베트남어" translatable="false">Tiếng Việt</string>
     <string name="common_소개">소개</string>
     <string name="common_닉네임">닉네임</string>
     <string name="common_취소">취소</string>
@@ -330,7 +331,7 @@
     <string name="settings_screen_버전_정보">버전 정보</string>
     <string name="settings_screen_로그아웃">로그아웃</string>
     <string name="settings_screen_회원_탈퇴">회원 탈퇴</string>
-    <string name="settings_screen_회원_가입" translatable="false">회원가입</string>
+    <string name="settings_screen_회원_가입">회원가입</string>
 
     <!--로그아웃 다이얼로그-->
     <string name="sign_out_dialog_text">정말 로그아웃을\n하시겠습니까?</string>
@@ -386,7 +387,7 @@
     <string name="withdrawal_screen_warning">안내사항을 확인하였으며 동의합니다.</string>
 
     <!--회원 탈퇴 다이얼로그-->
-    <string name="withdrawal_dialog_text1">정말 제주도 여행 정보와 헤택을\n받지 않으시겠습니까? 😢</string>
+    <string name="withdrawal_dialog_text1">정말 제주도 여행 정보와 혜택을\n받지 않으시겠습니까? 😢</string>
     <string name="withdrawal_dialog_text2">*90일 이내에 재가입 시,\n기존 계정으로 로그인이 됩니다.</string>
 
     <!--접근 권한 안내 화면-->

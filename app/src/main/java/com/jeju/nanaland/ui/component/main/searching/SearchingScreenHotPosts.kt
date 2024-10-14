@@ -29,7 +29,7 @@ fun SearchingScreenHotPosts(
                     val item = hotPosts.data[idx]
                     Column {
                         SearchThumbnail(
-                            imageUri = item.firstImage?.thumbnailUrl,
+                            imageUri = item.firstImage?.originUrl,
                             isFavorite = item.favorite,
                             title = item.title,
                             onFavoriteButtonClick = { onFavoriteButtonClick(item.id, item.category) },

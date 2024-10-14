@@ -359,7 +359,7 @@
     <string name="withdrawal_screen_warning">안내사항을 확인하였으며 동의합니다.</string>
 
     <!--회원 탈퇴 다이얼로그-->
-    <string name="withdrawal_dialog_text1">정말 제주도 여행 정보와 헤택을\n받지 않으시겠습니까? 😢</string>
+    <string name="withdrawal_dialog_text1">정말 제주도 여행 정보와 혜택을\n받지 않으시겠습니까? 😢</string>
     <string name="withdrawal_dialog_text2">*90일 이내에 재가입 시,\n기존 계정으로 로그인이 됩니다.</string>
 
     <!--접근 권한 안내 화면-->
@@ -461,5 +461,6 @@
     <string name="loading_wait_text_desc2">잠시만 기다려 주세요!\n여러분의 경험이\n nanaland로 전달 중입니다💜</string>
     <string name="loading_wait_text_desc3">잠시만 기다려 주세요!\n여러분의 생각이 잘 전달되도록\n신중히 처리 중입니다💌</string>
     <string name="loading_wait_text_desc4">잠시만 기다려 주세요!\n여러분의 피드백은 저희에게 큰 힘이 됩니다🍀</string>
+    <string name="settings_screen_회원_가입">회원가입</string>
     <string name="type_test_recommended_spot_자세히_보기">자세히 보기</string>
 </resources>

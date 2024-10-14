@@ -100,7 +100,7 @@
     <string name="searching_screen_최근_검색어">Carian terkini</string>
     <string name="searching_screen_모두_지우기">Kosongkan semua</string>
     <string name="searching_screen_최근_검색어가_없습니다">Tiada carian terkini.</string>
-    <string name="searching_screen_most_search">Paling banyak dicari!</string>
+    <string name="searching_screen_most_search">Paling Banyak dicari!</string>
     <string name="searching_screen_hot_keywords">eningkatan Pencarian! Tempat Jeju 🍊</string>
 
     <!--검색 결과 화면-->
@@ -454,5 +454,6 @@
     <string name="loading_wait_text_desc2">Sila tunggu sebentar!\nPengalaman anda sedang dihantar\nke nanaland. 💜</string>
     <string name="loading_wait_text_desc3">Sila tunggu sebentar!\nKami sedang memproses pemikiran anda dengan teliti untuk\nmemastikan ia disampaikan dengan baik. 💌</string>
     <string name="loading_wait_text_desc4">Sila tunggu sebentar!\nMaklum balas anda adalah sokongan\nbesar kepada kami. 🍀</string>
+    <string name="settings_screen_회원_가입">Daftar</string>
     <string name="type_test_recommended_spot_자세히_보기">Ketahui lebih lanjut</string>
 </resources>

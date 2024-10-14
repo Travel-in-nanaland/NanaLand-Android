@@ -79,7 +79,7 @@ private fun RecommendedSpotScreen(
 //                        )
                         recommendedPostList.forEach { item ->
                             RecommendedSpotScreenItem(
-                                imageUri = item.firstImage.thumbnailUrl,
+                                imageUri = item.firstImage.originUrl,
                                 title = item.title ?: "",
                                 description = item.intro ?: "",
                                 onDetailClick = { moveToDetailScreen(item.id, item.category) }

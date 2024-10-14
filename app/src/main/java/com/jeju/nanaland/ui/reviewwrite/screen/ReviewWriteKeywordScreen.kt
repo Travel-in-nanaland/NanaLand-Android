@@ -25,7 +25,6 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
@@ -110,7 +109,7 @@ private fun ReviewWriteKeywordUI(
         ) {
             Text(
                 modifier = Modifier.padding(vertical = 24.dp),
-                text = stringResource(R.string.review_write_keyword_guide,
+                text = getString(R.string.review_write_keyword_guide,
                     ReviewWriteViewModel.MIN_KEYWORD_CNT,
                     ReviewWriteViewModel.MAX_KEYWORD_CNT
                 ),

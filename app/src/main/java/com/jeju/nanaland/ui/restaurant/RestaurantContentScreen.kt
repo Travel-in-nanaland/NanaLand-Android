@@ -22,7 +22,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.mutableIntStateOf
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
@@ -92,7 +91,7 @@ fun RestaurantContentScreen(
             if(restaurantContent is UiState.Success) {
                 moveToReviewListScreen(
                     restaurantContent.data.favorite,
-                    restaurantContent.data.images.firstOrNull()?.thumbnailUrl ?: "",
+                    restaurantContent.data.images.firstOrNull()?.originUrl ?: "",
                     restaurantContent.data.title,
                     restaurantContent.data.address,
                 )
@@ -102,7 +101,7 @@ fun RestaurantContentScreen(
             if(restaurantContent is UiState.Success) {
                 moveToReviewWritingScreen(
                     restaurantContent.data.id,
-                    restaurantContent.data.images.firstOrNull()?.thumbnailUrl ?: "",
+                    restaurantContent.data.images.firstOrNull()?.originUrl ?: "",
                     restaurantContent.data.title,
                     restaurantContent.data.address,
                 )
@@ -168,7 +167,7 @@ private fun RestaurantContentScreen(
                         when (restaurantContent) {
                             is UiState.Loading -> {}
                             is UiState.Success -> {
-                                DetailScreenTopBannerImage(imageUri = restaurantContent.data.images[0].thumbnailUrl)
+                                DetailScreenTopBannerImage(imageUri = restaurantContent.data.images[0].originUrl)
 
                                 Spacer(Modifier.height(24.dp))
 
@@ -196,7 +195,7 @@ private fun RestaurantContentScreen(
                                         MenuItem(
                                             menuName = item.menuName,
                                             price = item.price,
-                                            imageUrl = item.firstImage.thumbnailUrl
+                                            imageUrl = item.firstImage.originUrl
                                         )
                                     }
 
@@ -208,7 +207,12 @@ private fun RestaurantContentScreen(
                                     }
                                 }
 
-                                Spacer(Modifier.height(32.dp))
+                                Spacer(Modifier.height(8.dp))
+                                Spacer(Modifier
+                                    .fillMaxWidth()
+                                    .height(8.dp)
+                                    .background(getColor().gray03))
+                                Spacer(Modifier.height(16.dp))
 
                                 Column(modifier = Modifier.padding(start = 16.dp, end = 16.dp)) {
 
