@@ -8,11 +8,9 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.HorizontalDivider
-import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -23,7 +21,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -31,7 +28,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.paging.compose.collectAsLazyPagingItems
 import com.jeju.nanaland.R
 import com.jeju.nanaland.globalvalue.constant.TravelType
-import com.jeju.nanaland.ui.component.common.topbar.CustomTopBarWithMenu
+import com.jeju.nanaland.ui.component.common.topbar.MyTopBar
 import com.jeju.nanaland.ui.profile.component.parts.ReportSheet
 import com.jeju.nanaland.ui.profile.root.component.ProfileScreenNoticeListSection
 import com.jeju.nanaland.ui.profile.root.component.ProfileScreenProfileSection
@@ -42,7 +39,6 @@ import com.jeju.nanaland.ui.theme.body01
 import com.jeju.nanaland.ui.theme.getColor
 import com.jeju.nanaland.util.resource.getString
 import com.jeju.nanaland.util.ui.UiState
-import com.jeju.nanaland.util.ui.clickableNoEffect
 
 /** 마이 페이지 **/
 @Composable
@@ -132,25 +128,16 @@ private fun ProfileScreen(
             .background(getColor().main5)
             .verticalScroll(rememberScrollState())
     ) {
-        CustomTopBarWithMenu(
+        MyTopBar(
             title = if(isMine) getString(R.string.common_나의_나나) else "",
-            drawShadow = false,
             onBackButtonClicked = onBackButtonClicked,
-        ) {
-            Icon(
-                modifier = Modifier
-                    .size(32.dp)
-                    .clickableNoEffect {
-                        if (isMine) moveToSettingsScreen()
-                        else moreOptionDialog = true
-                    },
-                painter = painterResource(
-                    if(isMine) R.drawable.ic_gear_outlined
-                    else R.drawable.ic_more_vert
-                ),
-                contentDescription = null,
+            menus = arrayOf(
+                if(isMine)
+                    R.drawable.ic_gear_outlined to moveToSettingsScreen
+                else
+                    R.drawable.ic_more_vert to { moreOptionDialog = true },
             )
-        }
+        )
         when (val up = userProfile.value) {
             is UiState.Loading -> {}
             is UiState.Success -> {
