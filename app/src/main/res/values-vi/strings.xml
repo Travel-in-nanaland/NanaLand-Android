@@ -98,6 +98,7 @@
     <string name="festival_list_screen_월별_축제">lễ hội hàng tháng</string>
     <string name="festival_list_screen_종료된_축제">Lễ hội đã kết thúc</string>
     <string name="festival_list_screen_계절별_축제">lễ hội theo mùa</string>
+    <string name="festival_list_screen_image_caption">*Bức ảnh này chỉ để tham khảo.</string>
     <string name="detail_screen_common_더보기">Xem thêm</string>
     <string name="detail_screen_common_접기">thu gọn</string>
     <string name="detail_screen_common_주소">địa chỉ</string>
