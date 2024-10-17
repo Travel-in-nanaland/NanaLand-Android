@@ -100,7 +100,7 @@
     <string name="searching_screen_최근_검색어">Carian terkini</string>
     <string name="searching_screen_모두_지우기">Kosongkan semua</string>
     <string name="searching_screen_최근_검색어가_없습니다">Tiada carian terkini.</string>
-    <string name="searching_screen_most_search">Paling Banyak dicari!</string>
+    <string name="searching_screen_most_search">{Paling} banyak dicari!</string>
     <string name="searching_screen_hot_keywords">eningkatan Pencarian! Tempat Jeju 🍊</string>
 
     <!--검색 결과 화면-->

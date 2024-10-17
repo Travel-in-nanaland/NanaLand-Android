@@ -109,6 +109,7 @@
     <string name="detail_screen_common_입장료">phí vào cửa</string>
     <string name="detail_screen_common_상세_정보">Thông Tin Chi Tiết</string>
     <string name="detail_screen_common_기간">khoảng thời gian</string>
+    <string name="detail_screen_common_소개합니다">Giới thiệu!</string>
     <string name="detail_screen_common_알아두면_좋아요">Tốt để biết!</string>
     <string name="detail_screen_common_이_장소만의_매력_포인트">Điểm Quyến Rũ Độc Đáo của Nơi Này✨</string>
     <string name="detail_screen_common_후기_작성하기">Viết đánh giá</string>
@@ -140,6 +141,7 @@
     <string name="info_modification_proposal_warning">Định dạng email không đúng. Vui lòng nhập lại!</string>
     <string name="info_modification_proposal_necessary">Bắt buộc</string>
     <string name="policy_agree_screen_heading">Nanaland tại Jeju\nChào mừng.</string>
+    <string name="policy_agree_screen_전체_동의">Hoàn toàn đồng ý</string>
     <string name="policy_agree_screen_privacy_policy">Đồng ý với Điều khoản Sử dụng và Chính sách Bảo mật (bắt buộc)</string>
     <string name="policy_agree_screen_marketing_policy">Đồng ý sử dụng cho mục đích tiếp thị (tùy chọn)</string>
     <string name="policy_agree_screen_location_policy">Đồng ý với các điều khoản dịch vụ dựa trên vị trí (tùy chọn)</string>
@@ -376,7 +378,7 @@
     <string name="home_screen_hint_8">Đến cuối cùng, hãy chơi gần sân bay Jeju🛫</string>
     <string name="home_screen_hint_9">Mùa hè ở Jeju là ngày của cẩm tú cầu😀</string>
     <string name="home_screen_hint_10">Một nơi lưu trú Hanok đầy cảm xúc ở đảo Jeju🏠</string>
-    <string name="searching_screen_most_search">Tìm kiếm nhiều nhất!</string>
+    <string name="searching_screen_most_search">Tìm kiếm {nhiều nhất!}</string>
     <string name="detail_screen_common_줄이기">thu gọn</string>
     <string name="type_test_recommended_spot_자세히_보기">Tìm hiểu thêm</string>
     <string name="settings_screen_회원_가입">Đăng ký</string>

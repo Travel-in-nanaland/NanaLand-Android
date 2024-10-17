@@ -100,7 +100,7 @@
     <string name="searching_screen_최근_검색어">Recent searches</string>
     <string name="searching_screen_모두_지우기">Clear All</string>
     <string name="searching_screen_최근_검색어가_없습니다">There are no recent searches</string>
-    <string name="searching_screen_most_search">Most searched for!</string>
+    <string name="searching_screen_most_search">{Most} searched for!</string>
     <string name="searching_screen_hot_keywords">Search Volume UP! JEJU Place 🍊</string>
 
     <!--검색 결과 화면-->

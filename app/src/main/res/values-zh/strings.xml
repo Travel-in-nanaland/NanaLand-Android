@@ -100,7 +100,7 @@
     <string name="searching_screen_최근_검색어">最近搜索词</string>
     <string name="searching_screen_모두_지우기">全部清除</string>
     <string name="searching_screen_최근_검색어가_없습니다">没有最近的搜索</string>
-    <string name="searching_screen_most_search">最多搜索！</string>
+    <string name="searching_screen_most_search">{最}多搜索！</string>
     <string name="searching_screen_hot_keywords">搜索量上升！ JEJU Place 🍊</string>
 
     <!--검색 결과 화면-->
