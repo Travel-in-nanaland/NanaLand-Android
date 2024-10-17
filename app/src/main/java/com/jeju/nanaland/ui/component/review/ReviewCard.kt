@@ -46,7 +46,7 @@ import com.jeju.nanaland.util.ui.drawColoredShadow
 fun ReviewCard(
     data: ReviewData,
     toggleReviewFavorite: (Int) -> Unit,
-    onProfileClick: (Int) -> Unit,
+    onProfileClick: (Int?) -> Unit,
     onMenuButtonClick: () -> Unit,
 ) {
     val scrollState = rememberScrollState()
@@ -78,7 +78,10 @@ fun ReviewCard(
             Row(
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                Row(Modifier.clickableNoEffect { onProfileClick(data.memberId) }) {
+                Row(Modifier.clickableNoEffect { onProfileClick(
+                    if(data.myReview) null
+                    else data.memberId)
+                }) {
                     ReviewProfileImage(imageUrl = data.profileImage.originUrl)
 
                     Spacer(Modifier.width(8.dp))
@@ -111,7 +114,7 @@ fun ReviewCard(
                 ReviewFavoriteButton(
                     isFavorite = data.reviewHeart,
                     favoriteCount = data.heartCount,
-                    toggleFavorite = { toggleReviewFavorite(data.id) }
+                    toggleFavorite = { if(!data.myReview) toggleReviewFavorite(data.id) }
                 )
             }
 

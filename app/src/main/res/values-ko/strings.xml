@@ -164,7 +164,7 @@
     <string name="detail_screen_common_기간">기간</string>
     <string name="detail_screen_common_소개합니다">소개합니다!</string>
     <string name="detail_screen_common_알아두면_좋아요">알아두면 좋아요!</string>
-    <string name="detail_screen_common_이_장소만의_매력_포인트">이 장소만의 매력 포인트✨</string>
+    <string name="detail_screen_common_이_장소만의_매력_포인트">이 장소만의 {매력 포인트}✨</string>
 
     <!--정보 수정 제안-->
     <string name="detail_screen_common_후기_작성하기">후기 작성하기</string>
@@ -424,7 +424,7 @@
     <string name="review_keyword_mood">분위기</string>
     <string name="review_keyword_with">동반자</string>
     <string name="review_keyword_infra">편의 시설</string>
-    <string name="nanapick_list_screen_recommended_post">금주 {추천}나나’s Pick</string>
+    <string name="nanapick_list_screen_recommended_post">금주 {추천} 나나’s Pick</string>
     <string name="nanapick_list_screen_see_all">모두보기</string>
     <string name="common_나가기">나가기</string>
     <string name="common_재시작">재시도</string>

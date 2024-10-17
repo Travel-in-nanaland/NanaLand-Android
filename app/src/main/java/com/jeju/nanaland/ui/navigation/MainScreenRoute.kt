@@ -21,9 +21,8 @@ import com.jeju.nanaland.globalvalue.constant.ROUTE_RESTAURANT_LIST
 import com.jeju.nanaland.globalvalue.constant.ROUTE_REVIEW_WRITE_ROUTE
 import com.jeju.nanaland.globalvalue.constant.ROUTE_SETTINGS
 import com.jeju.nanaland.globalvalue.constant.ROUTE_SIGN_IN
-import com.jeju.nanaland.globalvalue.constant.ROUTE_TYPE_TESTING
-import com.jeju.nanaland.globalvalue.constant.ROUTE_TYPE_TEST_RESULT
 import com.jeju.nanaland.globalvalue.type.CategoryType
+import com.jeju.nanaland.globalvalue.userdata.UserData
 import com.jeju.nanaland.ui.main.MainScreen
 import com.jeju.nanaland.util.intent.DeepLinkData
 import com.jeju.nanaland.util.navigation.navigate
@@ -79,8 +78,15 @@ fun NavGraphBuilder.mainScreen(
             popUpTo(ROUTE_MAIN) { inclusive = true }
             launchSingleTop = true
         } },
-        moveToTypeTestScreen = { navController.navigate(ROUTE_TYPE_TESTING) },
-        moveToTypeTestResultScreen = { navController.navigate(ROUTE_TYPE_TEST_RESULT,  bundleOf("travelType" to it, "isMine" to true)) },
+        moveToTypeTestScreen = { navController.navigate(ROUTE.TypeTest.Testing()) },
+        moveToTypeTestResultScreen = { navController.navigate(
+            ROUTE.TypeTest.Result(
+                name = UserData.nickname,
+                travelType = it,
+                isMine = true,
+                isFirst = false
+            )
+        ) },
         moveToReviewWriteScreen = { navController.navigate(ROUTE_REVIEW_WRITE_ROUTE) },
         moveToProfileNoticeListScreen = {
             if(it == null) navController.navigate(ROUTE.Profile.NoticeList)

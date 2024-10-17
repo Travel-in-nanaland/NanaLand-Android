@@ -19,6 +19,8 @@ data class MemberReviewDetail (
     val content: String,
     @SerializedName("createdAt")
     val createdAt: String,
+    @SerializedName("reviewHeart")
+    val isWish: Boolean,
     @SerializedName("heartCount")
     val heartCount: Int,
     @SerializedName("images")

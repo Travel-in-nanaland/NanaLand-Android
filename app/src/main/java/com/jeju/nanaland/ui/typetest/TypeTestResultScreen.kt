@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Icon
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -26,17 +27,17 @@ import com.jeju.nanaland.ui.component.common.BottomOkButton
 import com.jeju.nanaland.ui.component.common.BottomOkButtonOutlined
 import com.jeju.nanaland.ui.component.common.CustomSurface
 import com.jeju.nanaland.ui.component.signup.typetestresult.TypeTestResultScreenImage
-import com.jeju.nanaland.ui.component.signup.typetestresult.TypeTestResultScreenText1
-import com.jeju.nanaland.ui.component.signup.typetestresult.TypeTestResultScreenText2
 import com.jeju.nanaland.ui.component.signup.typetestresult.TypeTestResultScreenText3
+import com.jeju.nanaland.ui.theme.body01
 import com.jeju.nanaland.ui.theme.getColor
+import com.jeju.nanaland.ui.theme.largeTitle01
 import com.jeju.nanaland.util.resource.getString
 import com.jeju.nanaland.util.ui.clickableNoEffect
 import com.jeju.nanaland.util.ui.scrollableVerticalArrangement
 
-
 @Composable
 fun TypeTestResultScreen(
+    name: String,
     travelType: TravelType,
     filledButtonString: String,
     moveToRecommendedSpotScreen: () -> Unit,
@@ -67,11 +68,19 @@ fun TypeTestResultScreen(
                         ) {
                             Spacer(Modifier.height(60.dp))
 
-                            TypeTestResultScreenText1()
+                            Text(
+                                text = getString(R.string.type_test_screen_text_result_header, name),
+                                color = getColor().black,
+                                style = body01
+                            )
 
                             Spacer(Modifier.height(4.dp))
 
-                            TypeTestResultScreenText2(travelType = travelType)
+                            Text(
+                                text = travelType.toViewString(),
+                                color = getColor().main,
+                                style = largeTitle01
+                            )
 
                             Spacer(Modifier.height(32.dp))
 

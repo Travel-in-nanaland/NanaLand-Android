@@ -12,6 +12,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.jeju.nanaland.globalvalue.type.LanguageType
 import com.jeju.nanaland.ui.theme.getColor
 import com.jeju.nanaland.util.language.getLanguage
 import com.jeju.nanaland.util.ui.clickableNoEffect
@@ -50,7 +51,7 @@ fun HomeScreenAdContent(
 
             Spacer(Modifier.weight(1f))
 
-            if (getLanguage() == "ko" || getLanguage() == "zh") {
+            if (getLanguage() == LanguageType.Korean || getLanguage() == LanguageType.Chinese) {
                 HomeScreenAdImage(idx = idx)
             }
         }

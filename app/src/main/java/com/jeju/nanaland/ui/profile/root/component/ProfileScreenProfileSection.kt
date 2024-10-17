@@ -31,6 +31,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.jeju.nanaland.R
 import com.jeju.nanaland.domain.entity.member.UserProfile
+import com.jeju.nanaland.globalvalue.constant.toViewString
 import com.jeju.nanaland.ui.theme.body02
 import com.jeju.nanaland.ui.theme.caption01
 import com.jeju.nanaland.ui.theme.caption01SemiBold
@@ -92,7 +93,7 @@ fun ProfileScreenProfileSection(
                     .background(getColor().white)
                     .padding(horizontal = 12.dp, vertical = 2.dp)
                     .clickableNoEffect { moveToTypeTestResultScreen() },
-                text = profile.travelType ?: getString(R.string.mypage_screen_없음),
+                text = profile.travelType?.toViewString() ?: getString(R.string.mypage_screen_없음),
                 color = getColor().main,
                 style = caption01,
             )

@@ -1,23 +1,22 @@
 package com.jeju.nanaland.ui.navigation
 
-import androidx.core.os.bundleOf
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
-import com.jeju.nanaland.globalvalue.constant.ROUTE_TYPE_TEST_COMPLETION
-import com.jeju.nanaland.globalvalue.constant.ROUTE_TYPE_TEST_LOADING
+import androidx.navigation.toRoute
+import com.jeju.nanaland.globalvalue.constant.ROUTE
 import com.jeju.nanaland.ui.typetest.TypeTestCompletionScreen
-import com.jeju.nanaland.util.navigation.navigate
 
-fun NavGraphBuilder.typeTestCompletionScreen(navController: NavController) = composable(route = ROUTE_TYPE_TEST_COMPLETION) {
+fun NavGraphBuilder.typeTestCompletionScreen(navController: NavController) = composable<ROUTE.TypeTest.TestEnd> {
+    val data: ROUTE.TypeTest.Loading= it.toRoute()
+
     TypeTestCompletionScreen(
         moveToTypeTestLoadingScreen = {
-            val bundle = bundleOf(
-                "isFirst" to (it.arguments?.getBoolean("isFirst") == true),
-                "travelType" to (it.arguments?.getString("travelType") ?: "")
-            )
-            navController.popBackStack(ROUTE_TYPE_TEST_COMPLETION, true)
-            navController.navigate(ROUTE_TYPE_TEST_LOADING, bundle)
+            navController.popBackStack(ROUTE.TypeTest.TestEnd, true)
+            navController.navigate( ROUTE.TypeTest.Loading(
+                isFirst = data.isFirst,
+                travelType =  data.travelType
+            ))
         }
     )
 }

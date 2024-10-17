@@ -54,13 +54,13 @@ private fun TypeTestLoadingScreen(
             )
 
             Spacer(Modifier.height(4.dp))
+
             Text(
                 text = getString(R.string.type_test_screen_text_page2_text2),
                 color = getColor().black,
                 style = title02,
                 textAlign = TextAlign.Center
             )
-            TypeTestLoadingScreenText2()
 
             Spacer(Modifier.height(100.dp))
         }
