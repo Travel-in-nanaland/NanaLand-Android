@@ -92,7 +92,6 @@ private fun RecommendedSpotScreen(
                             RecommendedSpotScreenItem(
                                 imageUri = item.firstImage.originUrl,
                                 title = item.title ?: "",
-                                description = item.intro ?: "",
                                 onDetailClick = { moveToDetailScreen(item.id, item.category) }
                             )
 
