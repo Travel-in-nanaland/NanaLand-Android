@@ -12,8 +12,6 @@ data class RecommendedPostData(
     val firstImage: ImageUrl,
     @SerializedName("title")
     val title: String,
-    @SerializedName("introduction")
-    val intro: String,
     @SerializedName("favorite")
     val favorite: Boolean
 )
