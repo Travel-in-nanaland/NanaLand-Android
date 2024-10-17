@@ -167,7 +167,7 @@
     <string name="detail_screen_common_기간">기간</string>
     <string name="detail_screen_common_소개합니다">소개합니다!</string>
     <string name="detail_screen_common_알아두면_좋아요">알아두면 좋아요!</string>
-    <string name="detail_screen_common_이_장소만의_매력_포인트">이 장소만의 매력 포인트✨</string>
+    <string name="detail_screen_common_이_장소만의_매력_포인트">이 장소만의 {매력 포인트}✨</string>
 
     <!--정보 수정 제안-->
     <string name="detail_screen_common_후기_작성하기">후기 작성하기</string>

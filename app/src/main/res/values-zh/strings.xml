@@ -167,7 +167,7 @@
     <string name="detail_screen_common_기간">日程</string>
     <string name="detail_screen_common_소개합니다">为您介绍!</string>
     <string name="detail_screen_common_알아두면_좋아요">了解更多</string>
-    <string name="detail_screen_common_이_장소만의_매력_포인트">这个地方的魅力✨</string>
+    <string name="detail_screen_common_이_장소만의_매력_포인트">这个地方{独有的魅力点}✨</string>
 
     <!--정보 수정 제안-->
     <string name="detail_screen_common_후기_작성하기">写评价</string>
