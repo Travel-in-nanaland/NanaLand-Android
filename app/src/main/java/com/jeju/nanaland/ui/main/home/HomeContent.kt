@@ -7,21 +7,25 @@ import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.jeju.nanaland.R
 import com.jeju.nanaland.domain.entity.member.RecommendedPostData
 import com.jeju.nanaland.domain.entity.nanapick.NanaPickBannerData
 import com.jeju.nanaland.globalvalue.userdata.UserData
 import com.jeju.nanaland.ui.component.main.home.HomeScreenAdBanner
 import com.jeju.nanaland.ui.component.main.home.HomeScreenCategoryButtons
-import com.jeju.nanaland.ui.component.main.home.HomeScreenRecommendText
 import com.jeju.nanaland.ui.component.main.home.HomeScreenRecommendedPosts
 import com.jeju.nanaland.ui.component.main.home.HomeScreenTopBanner
+import com.jeju.nanaland.ui.theme.getColor
+import com.jeju.nanaland.ui.theme.title02Bold
 import com.jeju.nanaland.util.listfilter.ListFilter
+import com.jeju.nanaland.util.resource.getString
 import com.jeju.nanaland.util.ui.ScreenPreview
 import com.jeju.nanaland.util.ui.UiState
 
@@ -108,7 +112,17 @@ private fun HomeContent(
         Column(
             modifier = Modifier.padding(start = 16.dp, end = 16.dp, bottom = 20.dp)
         ) {
-            HomeScreenRecommendText(text = if (UserData.provider == "GUEST") "나나" else UserData.nickname)
+
+            Text(
+                text = getString(R.string.home_screen_recommend,
+                    if(UserData.nickname == "GUEST")
+                        getString(R.string.home_screen_recommend_default_name)
+                    else
+                        UserData.nickname
+                    ),
+                color = getColor().black,
+                style = title02Bold
+            )
 
             Spacer(Modifier.height(10.dp))
 

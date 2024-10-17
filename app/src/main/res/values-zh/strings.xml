@@ -30,7 +30,6 @@
     <string name="common_나의_나나">我的nana</string>
     <string name="common_전체">全部</string>
     <string name="common_건">件</string>
-    <string name="common_년">년</string>
     <string name="common_봄_desc">3, 4月</string>
     <string name="common_가을_desc">9, 10月</string>
     <string name="common_겨울_desc">11, 12, 1, 2月</string>
@@ -69,8 +68,8 @@
     <string name="home_screen_ad3_content">那些传统市场依然存在呢？</string>
     <string name="home_screen_ad4_title">济州岛七月举办的独特节日🎈</string>
     <string name="home_screen_ad4_content">来看看充满济州岛风情的世界宝藏节日吧！</string>
-    <string name="home_screen_recommend1">为</string>
-    <string name="home_screen_recommend2">为您准备的%s推荐</string>
+    <string name="home_screen_recommend">为您准备的 %s 推荐</string>
+    <string name="home_screen_recommend_default_name">Nana</string>
 
     <string name="home_screen_hint_1">济州岛的油菜花节正进行中！🏵️</string>
     <string name="home_screen_hint_2">一起去济州的绿茶田吧！😎</string>
@@ -101,13 +100,11 @@
     <string name="searching_screen_최근_검색어">最近搜索词</string>
     <string name="searching_screen_모두_지우기">全部清除</string>
     <string name="searching_screen_최근_검색어가_없습니다">没有最近的搜索</string>
-    <string name="searching_screen_가장_많이">""</string>
-    <string name="searching_screen_검색하고_있어요">搜索量最多</string>
+    <string name="searching_screen_most_search">{最}多搜索！</string>
     <string name="searching_screen_hot_keywords">搜索量上升！ JEJU Place 🍊</string>
 
     <!--검색 결과 화면-->
     <string name="search_result_screen_no_result">没有符合条件的搜索结果</string>
-    <string name="search_result_screen_preparing_service">该服务正在准备中。下次见！</string>
 
     <!--비회원 회원가입 유도 다이얼로그-->
     <string name="non_member_dialog_guide">必须成为会员\n才能使用所有服务✨</string>
@@ -187,8 +184,7 @@
     <string name="info_modification_proposal_장소_삭제">删除地点</string>
     <string name="info_modification_proposal_heading2">请分享其他信息！</string>
     <string name="info_modification_proposal_제공_서비스">提供服务</string>
-    <string name="info_modification_proposal_사진_추가하기">添加照片</string>
-    <string name="info_modification_proposal_text2">如果您附上实际核实过的信息及照片，\n将能提供更准确的信息</string>
+    <string name="detail_screen_common_줄이기">关闭</string>
     <string name="info_modification_proposal_heading3">建议修改信息</string>
     <string name="info_modification_proposal_hint1">如有修改请求的详细内容或其他事项，请留下您的意见</string>
     <string name="info_modification_proposal_text3">请输入接收信息修改建议结果的电子邮件</string>
@@ -313,7 +309,6 @@
 
     <!--마이페이지 화면-->
     <string name="mypage_screen_프로필_수정">编辑个人资料</string>
-    <string name="mypage_screen_여행_유형">旅行类型</string>
     <string name="mypage_screen_테스트_다시하기">再次测试</string>
     <string name="mypage_screen_테스트_하기">测试</string>
     <string name="mypage_screen_없음">无</string>
@@ -366,9 +361,7 @@
 
     <!--접근 권한 안내 화면-->
     <string name="permission_checking_screen_접근_권한_안내">权限指南</string>
-    <string name="permission_checking_screen_guide1">使用nanaland in Jeju\n需要以下访问权限</string>
-    <string name="permission_checking_screen_guide2">""</string>
-    <string name="permission_checking_screen_guide3">""</string>
+    <string name="permission_checking_screen_guide">使用nanaland in Jeju\n需要以下访问权限</string>
     <string name="permission_checking_screen_text1">必要访问权限是使用Nanaland in Jeju服务所必需的，如果权限被拒绝，服务将受到限制。</string>
     <string name="permission_checking_screen_text2">如不同意选择性访问权限，Nanaland in Jeju服务的部分功能将受到限制。</string>
     <string name="permission_checking_screen_알려드립니다">提醒您</string>
@@ -462,4 +455,5 @@
     <string name="loading_wait_text_desc3">请稍等！\n我们正在仔细处理您的想法，确保\n它们能够顺利传达💌</string>
     <string name="loading_wait_text_desc4">请稍等！\n您的反馈对我们来说是莫大的\n支持🍀</string>
     <string name="settings_screen_회원_가입">注册</string>
+    <string name="type_test_recommended_spot_자세히_보기">了解更多</string>
 </resources>
