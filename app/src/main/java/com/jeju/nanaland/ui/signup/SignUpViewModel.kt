@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.app.Application
 import android.net.Uri
 import android.provider.MediaStore
+import android.util.Log
 import androidx.core.net.toUri
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope

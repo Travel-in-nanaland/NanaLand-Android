@@ -41,7 +41,7 @@ fun ExperienceThumbnailList(
                         contentAlignment = if (idx % 2 == 0) Alignment.CenterStart else Alignment.CenterEnd
                     ) {
                         ExperienceThumbnail(
-                            imageUri = item.firstImage?.thumbnailUrl,
+                            imageUri = item.firstImage?.originUrl,
                             isFavorite = item.favorite,
                             title = item.title,
                             place = item.addressTag,

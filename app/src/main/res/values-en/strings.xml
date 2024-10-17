@@ -30,7 +30,6 @@
     <string name="common_나의_나나">My nana</string>
     <string name="common_전체">ALL</string>
     <string name="common_건">Results</string>
-    <string name="common_년">년</string>
     <string name="common_봄_desc">March, April</string>
     <string name="common_가을_desc">September, October</string>
     <string name="common_겨울_desc">November, December, January, February</string>
@@ -69,8 +68,8 @@
     <string name="home_screen_ad3_content">Which traditional markets are still around?</string>
     <string name="home_screen_ad4_title">Jeju\'s unique festival in July🎈</string>
     <string name="home_screen_ad4_content">Let\'s go see the festival full of the treasures of the world, feeling Jeju Island!</string>
-    <string name="home_screen_recommend1">"Local Recommendations for Our "</string>
-    <string name="home_screen_recommend2">Recommendation from residents for our Nana</string>
+    <string name="home_screen_recommend">Recommendation from residents for our %s</string>
+    <string name="home_screen_recommend_default_name">Nana</string>
 
     <string name="home_screen_hint_1">Jeju\'s Canola Festival is on now! 🏵️</string>
     <string name="home_screen_hint_2">Let\'s visit Jeju\'s green tea fields! 😎</string>
@@ -101,13 +100,11 @@
     <string name="searching_screen_최근_검색어">Recent searches</string>
     <string name="searching_screen_모두_지우기">Clear All</string>
     <string name="searching_screen_최근_검색어가_없습니다">There are no recent searches</string>
-    <string name="searching_screen_가장_많이">""</string>
-    <string name="searching_screen_검색하고_있어요">Most Searched!</string>
+    <string name="searching_screen_most_search">{Most} searched for!</string>
     <string name="searching_screen_hot_keywords">Search Volume UP! JEJU Place 🍊</string>
 
     <!--검색 결과 화면-->
     <string name="search_result_screen_no_result">There are no results for that search. </string>
-    <string name="search_result_screen_preparing_service">This service is being prepared.\nSee you next time!</string>
 
     <!--비회원 회원가입 유도 다이얼로그-->
     <string name="non_member_dialog_guide">You need to become a\nmember to use all services✨</string>
@@ -186,8 +183,7 @@
     <string name="info_modification_proposal_장소_삭제">Delete Location</string>
     <string name="info_modification_proposal_heading2">Share Other Information!</string>
     <string name="info_modification_proposal_제공_서비스">Offering service</string>
-    <string name="info_modification_proposal_사진_추가하기">Add Photos</string>
-    <string name="info_modification_proposal_text2">Attach photos of verified information for more\naccurate details.</string>
+    <string name="detail_screen_common_줄이기">close</string>
     <string name="info_modification_proposal_heading3">Suggest an Information Update</string>
     <string name="info_modification_proposal_hint1">Leave detailed information on the items you want to update or any other comments.</string>
     <string name="info_modification_proposal_text3">Enter your email to receive the results of your\nsuggestion.</string>
@@ -312,7 +308,6 @@
 
     <!--마이페이지 화면-->
     <string name="mypage_screen_프로필_수정">Edit Profile</string>
-    <string name="mypage_screen_여행_유형">Travel Type</string>
     <string name="mypage_screen_테스트_다시하기">Retest</string>
     <string name="mypage_screen_테스트_하기">Testing</string>
     <string name="mypage_screen_없음">None</string>
@@ -365,9 +360,7 @@
 
     <!--접근 권한 안내 화면-->
     <string name="permission_checking_screen_접근_권한_안내">Access Permission Notice</string>
-    <string name="permission_checking_screen_guide1">"The following "</string>
-    <string name="permission_checking_screen_guide2">permissions are required</string>
-    <string name="permission_checking_screen_guide3">\nto use Nanaland in Jeju.</string>
+    <string name="permission_checking_screen_guide">The following {permissions are required}\n to use Nanaland in Jeju.</string>
     <string name="permission_checking_screen_text1">Required permissions are essential for using Nanaland in Jeju. Service usage may be restricted if permissions are denied.</string>
     <string name="permission_checking_screen_text2">Note that if you do not agree to optional permissions, some features of Nanaland in Jeju may be restricted.</string>
     <string name="permission_checking_screen_알려드립니다">Notice</string>
@@ -461,4 +454,5 @@
     <string name="loading_wait_text_desc3">Please wait a moment!\nWe are carefully processing your thoughts to ensure they are well communicated. 💌</string>
     <string name="loading_wait_text_desc4">Please wait a moment!\nYour feedback is a great support\n to us. 🍀</string>
     <string name="settings_screen_회원_가입">Sign Up</string>
+    <string name="type_test_recommended_spot_자세히_보기">Learn more</string>
 </resources>

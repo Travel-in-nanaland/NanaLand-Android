@@ -82,7 +82,7 @@ fun ReviewCard(
                     if(data.myReview) null
                     else data.memberId)
                 }) {
-                    ReviewProfileImage(imageUrl = data.profileImage.thumbnailUrl)
+                    ReviewProfileImage(imageUrl = data.profileImage.originUrl)
 
                     Spacer(Modifier.width(8.dp))
 
@@ -125,7 +125,7 @@ fun ReviewCard(
                     modifier = Modifier.verticalScroll(scrollState)
                 ) {
                     data.images.forEach {
-                        ReviewImage(imageUrl = it.thumbnailUrl)
+                        ReviewImage(imageUrl = it.originUrl)
 
                         Spacer(Modifier.width(8.dp))
                     }

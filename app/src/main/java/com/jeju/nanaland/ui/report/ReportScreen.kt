@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -41,19 +42,24 @@ fun ReportScreen(
     val submitState = viewModel.submitCallState.collectAsStateWithLifecycle()
     val email = viewModel.email.collectAsStateWithLifecycle()
     var cancelDialog by remember { mutableStateOf(false) }
+    var isLoadingDialogShowing by remember { mutableStateOf(false) }
 
-    submitState.value?.let {
-        when (it) {
-            is UiState.Success -> {
-                Toast.makeText(context, getString(R.string.report_write_complete_toast), Toast.LENGTH_LONG).show()
-                moveToBackScreen()
-            }
-            is UiState.Loading -> {
-                SubmitLoadingDialog(getString(R.string.loading_wait_text_desc3))
-            }
-            is UiState.Failure -> {
-                viewModel.setSubmitCallStateNull()
-                Toast.makeText(context, getString(R.string.common_인터넷_문제), Toast.LENGTH_LONG).show()
+    LaunchedEffect(submitState.value) {
+        submitState.value?.let {
+            when (it) {
+                is UiState.Success -> {
+                    isLoadingDialogShowing = false
+                    Toast.makeText(context, getString(R.string.report_write_complete_toast), Toast.LENGTH_LONG).show()
+                    moveToBackScreen()
+                }
+                is UiState.Loading -> {
+                    isLoadingDialogShowing = true
+                }
+                is UiState.Failure -> {
+                    isLoadingDialogShowing = false
+                    viewModel.setSubmitCallStateNull()
+                    Toast.makeText(context, getString(R.string.common_인터넷_문제), Toast.LENGTH_LONG).show()
+                }
             }
         }
     }
@@ -113,5 +119,9 @@ fun ReportScreen(
                     }
             }
         }
+    }
+
+    if (isLoadingDialogShowing) {
+        SubmitLoadingDialog(getString(R.string.loading_wait_text_desc3))
     }
 }

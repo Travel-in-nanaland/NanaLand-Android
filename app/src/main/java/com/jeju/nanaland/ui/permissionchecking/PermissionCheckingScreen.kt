@@ -12,11 +12,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.jeju.nanaland.R
 import com.jeju.nanaland.ui.component.common.CustomSurface
+import com.jeju.nanaland.ui.component.common.text.TextWithPointColor
 import com.jeju.nanaland.ui.component.common.topbar.CustomTopBar
 import com.jeju.nanaland.ui.component.detailscreen.other.DetailScreenNotice
-import com.jeju.nanaland.ui.component.permissionchecking.PermissionCheckingScreenGuideText
 import com.jeju.nanaland.ui.component.permissionchecking.PermissionCheckingScreenHorizontalDivider
 import com.jeju.nanaland.ui.component.permissionchecking.PermissionCheckingScreenItem
+import com.jeju.nanaland.ui.theme.getColor
+import com.jeju.nanaland.ui.theme.title02
+import com.jeju.nanaland.ui.theme.title02Bold
 import com.jeju.nanaland.util.resource.getString
 
 @Composable
@@ -44,7 +47,13 @@ private fun PermissionCheckingScreen(
             Spacer(Modifier.height(32.dp))
 
             Box(Modifier.padding(start = 16.dp, end = 16.dp)) {
-                PermissionCheckingScreenGuideText()
+                TextWithPointColor(
+                    text = getString(R.string.permission_checking_screen_guide),
+                    style = title02,
+                    color = getColor().black,
+                    pointStyle = title02Bold,
+                    pointColor = getColor().black
+                )
             }
 
             Spacer(Modifier.height(24.dp))

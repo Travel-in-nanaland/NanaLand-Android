@@ -30,11 +30,13 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.jeju.nanaland.R
 import com.jeju.nanaland.domain.entity.review.MemberReviewDetail
+import com.jeju.nanaland.globalvalue.type.ReviewCategoryType
 import com.jeju.nanaland.ui.component.common.ExpandableText
 import com.jeju.nanaland.ui.theme.body02
 import com.jeju.nanaland.ui.theme.body02Bold
 import com.jeju.nanaland.ui.theme.caption01
 import com.jeju.nanaland.ui.theme.getColor
+import com.jeju.nanaland.util.log.LogUtil
 import com.jeju.nanaland.util.resource.getString
 import com.jeju.nanaland.util.ui.clickableNoEffect
 import com.jeju.nanaland.util.ui.conditional
@@ -48,14 +50,15 @@ fun ProfileListReviewRow(
     data: MemberReviewDetail,
     onEdit: (MemberReviewDetail) -> Unit,
     onRemove: (MemberReviewDetail) -> Unit,
+    moveToContentScreen: (ReviewCategoryType, Int) -> Unit
 ) {
     ProfileListReviewRow(
         data,
         onEdit = onEdit,
         onRemove = onRemove,
-
         onLike = null,
         onReport = null,
+        moveToContentScreen = moveToContentScreen
     )
 }
 
@@ -66,14 +69,15 @@ fun ProfileListReviewRow(
     data: MemberReviewDetail,
     onLike: (Int, Boolean) -> Unit,
     onReport: (Int) -> Unit,
+    moveToContentScreen: (ReviewCategoryType, Int) -> Unit,
 ) {
     ProfileListReviewRow(
         data,
         onLike = onLike,
         onReport = onReport,
-
         onEdit = null,
         onRemove = null,
+        moveToContentScreen = moveToContentScreen
     )
 
 }
@@ -85,6 +89,7 @@ private fun ProfileListReviewRow(
     onRemove: ((MemberReviewDetail) -> Unit)? = null,
     onLike: ((Int, Boolean) -> Unit)? = null,
     onReport: ((Int) -> Unit)? = null,
+    moveToContentScreen: (ReviewCategoryType, Int) -> Unit = { _, _ -> },
 ) {
     var likeCnt by remember { mutableIntStateOf(data.heartCount) }
     var isLike by remember { mutableStateOf(data.isWish) }
@@ -108,7 +113,12 @@ private fun ProfileListReviewRow(
                 Row {
                     Column(Modifier.weight(1f)) {
                         /** 가게명 **/
-                        Row {
+                        Row(
+                            modifier = Modifier.clickableNoEffect {
+                                moveToContentScreen(data.category, data.postId)
+                                LogUtil.e("", "${data.category}, ${data.id}, ${data.postId}")
+                            }
+                        ) {
                             Text(
                                 modifier = Modifier.weight(1f, false),
                                 text = data.placeName,
@@ -168,7 +178,7 @@ private fun ProfileListReviewRow(
                         modifier = Modifier
                             .size(70.dp)
                             .clip(RoundedCornerShape(8.dp)),
-                        imageModel = { img.thumbnailUrl }
+                        imageModel = { img.originUrl }
                     )
                 }
                 Spacer(modifier = Modifier.width((16 - 8).dp))

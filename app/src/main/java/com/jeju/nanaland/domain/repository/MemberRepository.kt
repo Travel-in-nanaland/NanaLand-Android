@@ -32,11 +32,6 @@ interface MemberRepository {
         image: UriRequestBody?
     ): NetworkResult<String?>
 
-    // 닉네임 중복 확인
-    suspend fun duplicateNickname(
-        data: String,
-    ): NetworkResult<Unit>
-
     // 회원 탈퇴
     suspend fun withdraw(
         data: WithdrawalRequest
