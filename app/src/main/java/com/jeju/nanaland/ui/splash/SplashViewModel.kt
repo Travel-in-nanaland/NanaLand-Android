@@ -1,23 +1,19 @@
 package com.jeju.nanaland.ui.splash
 
 import android.app.Application
-import android.content.res.Configuration
-import android.widget.Toast
 import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.jeju.nanaland.domain.usecase.auth.ReissueAccessTokenUseCase
 import com.jeju.nanaland.domain.usecase.authdatastore.GetRefreshTokenUseCase
 import com.jeju.nanaland.domain.usecase.authdatastore.SaveAccessTokenUseCase
 import com.jeju.nanaland.domain.usecase.authdatastore.SaveRefreshTokenUseCase
 import com.jeju.nanaland.domain.usecase.member.GetUserProfileUseCase
-import com.jeju.nanaland.domain.usecase.settingsdatastore.GetValueUseCase
-import com.jeju.nanaland.domain.usecase.settingsdatastore.SaveValueUseCase
-import com.jeju.nanaland.globalvalue.constant.KEY_LANGUAGE
+import com.jeju.nanaland.domain.usecase.settingsdatastore.GetLanguageUseCase
+import com.jeju.nanaland.domain.usecase.settingsdatastore.SetLanguageUseCase
+import com.jeju.nanaland.globalvalue.type.LanguageType
 import com.jeju.nanaland.globalvalue.type.SplashCheckingState
 import com.jeju.nanaland.globalvalue.userdata.UserData
 import com.jeju.nanaland.util.intent.DeepLinkData
-import com.jeju.nanaland.util.language.customContext
 import com.jeju.nanaland.util.log.LogUtil
 import com.jeju.nanaland.util.network.NetworkManager
 import com.jeju.nanaland.util.network.onError
@@ -33,19 +29,18 @@ import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import java.util.Locale
 import javax.inject.Inject
 
 @HiltViewModel
 class SplashViewModel @Inject constructor(
     private val networkManager: NetworkManager,
-    private val getValueUseCase: GetValueUseCase,
+    private val getLanguageUseCase: GetLanguageUseCase,
     private val getRefreshTokenUseCase: GetRefreshTokenUseCase,
     private val reissueAccessTokenUseCase: ReissueAccessTokenUseCase,
     private val saveAccessTokenUseCase: SaveAccessTokenUseCase,
     private val saveRefreshTokenUseCase: SaveRefreshTokenUseCase,
     private val getUserProfileUseCase: GetUserProfileUseCase,
-    private val saveValueUseCase: SaveValueUseCase,
+    private val setLanguageUseCase: SetLanguageUseCase,
     private val application: Application,
 ) : AndroidViewModel(application) {
 
@@ -73,33 +68,21 @@ class SplashViewModel @Inject constructor(
         deepLinkData: DeepLinkData,
         moveToLanguageInitScreen: () -> Unit
     ) {
-        getValueUseCase(KEY_LANGUAGE)
-            .onEach {
-                if (it.isNullOrEmpty()) {
-                    if (deepLinkData.language != null) {
-                        viewModelScope.launch { saveValueUseCase(
-                            key = KEY_LANGUAGE,
-                            value = deepLinkData.language!!
-                        ) }
-
-                        val conf: Configuration = application.resources.configuration
-                        conf.setLocale(Locale(deepLinkData.language!!))
-                        customContext = application.createConfigurationContext(conf)
-                        _checkingState.update { SplashCheckingState.Authorization }
-                    } else {
-                        moveToLanguageInitScreen()
-                    }
-                    LogUtil.e("checkLanguageState", "언어 선택 안됨")
-                } else {
-                    val conf: Configuration = application.resources.configuration
-                    conf.setLocale(Locale(it))
-                    customContext = application.createConfigurationContext(conf)
-                    _checkingState.update { SplashCheckingState.Authorization }
-                    LogUtil.e("checkLanguageState", "선택된 언어:" + customContext.resources.configuration.locales[0].language)
-                }
+        if(deepLinkData.language != null) {
+            viewModelScope.launch {
+                setLanguageUseCase(LanguageType.codeToLanguage(deepLinkData.language!!))
+                _checkingState.update { SplashCheckingState.Authorization }
             }
-            .catch { LogUtil.e("flow Error", "checkLanguageState") }
-            .launchIn(viewModelScope)
+        } else {
+            getLanguageUseCase().onEach {
+                if(it == null)
+                    moveToLanguageInitScreen()
+                else {
+                    setLanguageUseCase(it)
+                    _checkingState.update { SplashCheckingState.Authorization }
+                }
+            }.launchIn(viewModelScope)
+        }
     }
 
     fun checkSignInState(

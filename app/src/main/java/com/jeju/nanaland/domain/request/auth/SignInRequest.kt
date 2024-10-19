@@ -1,10 +1,11 @@
 package com.jeju.nanaland.domain.request.auth
 
 import com.google.gson.annotations.SerializedName
+import com.jeju.nanaland.globalvalue.type.LanguageType
 
 data class SignInRequest(
     @SerializedName("locale")
-    val locale: String,
+    val locale: LanguageType,
     @SerializedName("provider")
     val provider: String,
     @SerializedName("providerId")

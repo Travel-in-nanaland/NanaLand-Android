@@ -164,7 +164,7 @@
     <string name="detail_screen_common_기간">Tempoh</string>
     <string name="detail_screen_common_소개합니다">Memperkenalkan !</string>
     <string name="detail_screen_common_알아두면_좋아요">Untuk Pengetahuan Anda</string>
-    <string name="detail_screen_common_이_장소만의_매력_포인트">Daya tarikan tempat ini✨</string>
+    <string name="detail_screen_common_이_장소만의_매력_포인트">{Daya Tarikan Unik} Lokasi Ini✨</string>
 
     <!--정보 수정 제안-->
     <string name="detail_screen_common_후기_작성하기">Tulis ulasan</string>

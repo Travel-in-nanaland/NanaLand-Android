@@ -68,7 +68,7 @@ fun RestaurantContentScreen(
     moveToReviewListScreen: (Boolean, String, String, String) -> Unit,
     moveToReviewWritingScreen: (Int, String, String, String) -> Unit,
     moveToReportScreen: (Int) -> Unit,
-    moveToProfileScreen: (Int) -> Unit,
+    moveToProfileScreen: (Int?) -> Unit,
     viewModel: RestaurantContentViewModel = hiltViewModel()
 ) {
     LaunchedEffect(Unit) {
@@ -128,7 +128,7 @@ private fun RestaurantContentScreen(
     moveToInfoModificationProposalScreen: () -> Unit,
     moveToSignInScreen: () -> Unit,
     moveToReportScreen: (Int) -> Unit,
-    moveToProfileScreen: (Int) -> Unit,
+    moveToProfileScreen: (Int?) -> Unit,
     isContent: Boolean
 ) {
     val context = LocalContext.current

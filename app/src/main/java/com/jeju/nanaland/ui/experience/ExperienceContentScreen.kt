@@ -22,7 +22,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.mutableIntStateOf
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
@@ -54,7 +53,6 @@ import com.jeju.nanaland.ui.theme.bodyBold
 import com.jeju.nanaland.ui.theme.getColor
 import com.jeju.nanaland.util.language.getLanguage
 import com.jeju.nanaland.util.resource.getString
-import com.jeju.nanaland.util.resource.getString
 import com.jeju.nanaland.util.ui.ScreenPreview
 import com.jeju.nanaland.util.ui.UiState
 import com.jeju.nanaland.util.ui.clickableNoEffect
@@ -72,7 +70,7 @@ fun ExperienceContentScreen(
     moveToReviewListScreen: (Boolean, String, String, String) -> Unit,
     moveToReviewWritingScreen: (Int, String, String, String) -> Unit,
     moveToReportScreen: (Int) -> Unit,
-    moveToProfileScreen: (Int) -> Unit,
+    moveToProfileScreen: (Int?) -> Unit,
     viewModel: ExperienceContentViewModel = hiltViewModel()
 ) {
     LaunchedEffect(Unit) {
@@ -133,7 +131,7 @@ private fun ExperienceContentScreen(
     moveToInfoModificationProposalScreen: () -> Unit,
     moveToSignInScreen: () -> Unit,
     moveToReportScreen: (Int) -> Unit,
-    moveToProfileScreen: (Int) -> Unit,
+    moveToProfileScreen: (Int?) -> Unit,
     isContent: Boolean
 ) {
     val context = LocalContext.current

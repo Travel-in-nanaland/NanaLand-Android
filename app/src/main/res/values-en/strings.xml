@@ -163,7 +163,7 @@
     <string name="detail_screen_common_기간">Period</string>
     <string name="detail_screen_common_소개합니다">Introduce !</string>
     <string name="detail_screen_common_알아두면_좋아요">Good to know</string>
-    <string name="detail_screen_common_이_장소만의_매력_포인트">The charm of this place✨</string>
+    <string name="detail_screen_common_이_장소만의_매력_포인트">{Unique Charm Points} of this Location✨</string>
 
     <!--정보 수정 제안-->
     <string name="detail_screen_common_후기_작성하기">Write a review</string>

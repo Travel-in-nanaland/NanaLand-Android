@@ -18,6 +18,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.tasks.Task
+import com.jeju.nanaland.globalvalue.type.LanguageType
 import com.jeju.nanaland.ui.component.common.CustomSurface
 import com.jeju.nanaland.ui.component.signin.SignInScreenGoogleLoginButton
 import com.jeju.nanaland.ui.component.signin.SignInScreenGuestModeText
@@ -26,7 +27,7 @@ import com.jeju.nanaland.ui.component.signin.SignInScreenLogoImage
 import com.jeju.nanaland.ui.component.signin.SignInScreenLogoText1
 import com.jeju.nanaland.ui.component.signin.SignInScreenLogoText2
 import com.jeju.nanaland.util.intent.DeepLinkData
-import com.jeju.nanaland.util.language.customContext
+import com.jeju.nanaland.util.language.getLanguage
 import com.jeju.nanaland.util.log.LogUtil
 import com.jeju.nanaland.util.signin.AuthResultContract
 import com.jeju.nanaland.util.signin.getGoogleSignInClient
@@ -125,7 +126,7 @@ private fun SignInScreen(
 
             Spacer(Modifier.weight(1f))
 
-            if (customContext.resources.configuration.locales[0].language == "ko") {
+            if (getLanguage() == LanguageType.Korean) {
                 SignInScreenKakaoLoginButton {
                     LogUtil.e("keyHash", "${KakaoSdk.keyHash}")
                     if (UserApiClient.instance.isKakaoTalkLoginAvailable(context)) {

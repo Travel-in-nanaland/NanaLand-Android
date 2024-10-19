@@ -26,10 +26,10 @@ const val ROUTE_SIGN_UP = "ROUTE_SIGN_UP"
 const val ROUTE_PRIVACY_POLICY_DETAILS = "ROUTE_PRIVACY_POLICY_DETAILS"
 const val ROUTE_MARKETING_POLICY_DETAILS = "ROUTE_MARKETING_POLICY_DETAILS"
 const val ROUTE_LOCATION_POLICY_DETAILS = "ROUTE_LOCATION_POLICY_DETAILS"
-const val ROUTE_TYPE_TESTING = "ROUTE_TYPE_TESTING"
-const val ROUTE_TYPE_TEST_COMPLETION = "ROUTE_TYPE_TEST_COMPLETION"
-const val ROUTE_TYPE_TEST_LOADING = "ROUTE_TYPE_TEST_LOADING"
-const val ROUTE_TYPE_TEST_RESULT = "ROUTE_TYPE_TEST_RESULT"
+//const val ROUTE_TYPE_TESTING = "ROUTE_TYPE_TESTING"
+//const val ROUTE_TYPE_TEST_COMPLETION = "ROUTE_TYPE_TEST_COMPLETION"
+//const val ROUTE_TYPE_TEST_LOADING = "ROUTE_TYPE_TEST_LOADING"
+//const val ROUTE_TYPE_TEST_RESULT = "ROUTE_TYPE_TEST_RESULT"
 //const val ROUTE_PROFILE = "ROUTE_PROFILE"
 //const val ROUTE_PROFILE_UPDATE = "ROUTE_PROFILE_MODIFICATION"
 const val ROUTE_SETTINGS = "ROUTE_SETTINGS"
@@ -88,4 +88,30 @@ sealed class ROUTE {
         @Serializable /** 프로필 리뷰 리스트 화면 **/
         data class ReviewList(val initialScrollToItemId: Int?)
     }
+
+    data object TypeTest {
+        @Serializable /** 타입 테스트 진행 화면 **/
+        data class Testing(val isFirst: Boolean = false)
+
+        @Serializable /** 타입 테스트 종료 화면 **/
+        data class TestEnd(
+            val isFirst: Boolean,
+            val travelType: TravelType
+        )
+
+        @Serializable /** 타입 결과 보여주기 전 화면 **/
+        data class Loading(
+            val isFirst: Boolean,
+            val travelType: TravelType
+        )
+
+        @Serializable /** 타입 설명 화면 **/
+        data class Result(
+            val name: String,
+            val isMine: Boolean,
+            val isFirst: Boolean,
+            val travelType: TravelType? = null,
+        )
+    }
+
 }
