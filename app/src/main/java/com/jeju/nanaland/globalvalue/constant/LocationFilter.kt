@@ -21,6 +21,23 @@ fun getLocationIdx(location: String?) = when (location) {
     else -> 13
 }
 
+fun getLocationFilterList() = listOf(
+    "JEJU",
+    "AEWOL",
+    "JOCHEON",
+    "HANGYEONG",
+    "GUJWA",
+    "HALLIM",
+    "UDO",
+    "CHUJA",
+    "SEOGWIPO",
+    "DAEJEONG",
+    "ANDEOK",
+    "NAMWON",
+    "PYOSEON",
+    "SEONGSAN"
+)
+
 fun getLocationList() = listOf(
     getString(R.string.location_common_제주시),
     getString(R.string.location_common_애월),

@@ -23,13 +23,11 @@ import com.jeju.nanaland.R
 import com.jeju.nanaland.domain.entity.restaurant.RestaurantThumbnailData
 import com.jeju.nanaland.globalvalue.constant.PAGING_THRESHOLD
 import com.jeju.nanaland.globalvalue.constant.getLocationList
+import com.jeju.nanaland.globalvalue.constant.getRestaurantKeywordFilterList
 import com.jeju.nanaland.globalvalue.constant.getRestaurantKeywordList
 import com.jeju.nanaland.globalvalue.type.AnchoredDraggableContentState
 import com.jeju.nanaland.ui.component.common.CustomSurface
 import com.jeju.nanaland.ui.component.common.topbar.CustomTopBar
-import com.jeju.nanaland.ui.component.listscreen.filter.ActivityKeywordFilterDialog
-import com.jeju.nanaland.ui.component.listscreen.filter.CultureArtKeywordFilterDialog
-import com.jeju.nanaland.ui.component.listscreen.filter.ExperienceFilterDialogDimBackground
 import com.jeju.nanaland.ui.component.listscreen.filter.KeywordLocationFilterTopBar
 import com.jeju.nanaland.ui.component.listscreen.filter.LocationFilterBottomDialog
 import com.jeju.nanaland.ui.component.listscreen.filter.RestaurantFilterDialogDimBackground

@@ -8,7 +8,7 @@ import com.jeju.nanaland.domain.request.nature.GetNatureListRequest
 import com.jeju.nanaland.domain.usecase.favorite.ToggleFavoriteUseCase
 import com.jeju.nanaland.domain.usecase.nature.GetNatureListUseCase
 import com.jeju.nanaland.globalvalue.constant.PAGING_SIZE
-import com.jeju.nanaland.globalvalue.constant.getLocationList
+import com.jeju.nanaland.globalvalue.constant.getLocationFilterList
 import com.jeju.nanaland.globalvalue.constant.getLocationSelectionList
 import com.jeju.nanaland.util.log.LogUtil
 import com.jeju.nanaland.util.network.onError
@@ -30,7 +30,7 @@ class NatureListViewModel @Inject constructor(
     private val toggleFavoriteUseCase: ToggleFavoriteUseCase
 ) : ViewModel() {
 
-    private val locationList = getLocationList()
+    private val locationList = getLocationFilterList()
     val selectedLocationList = getLocationSelectionList()
     private val _natureThumbnailCount = MutableStateFlow<UiState<Int>>(UiState.Loading)
     val natureThumbnailCount = _natureThumbnailCount.asStateFlow()

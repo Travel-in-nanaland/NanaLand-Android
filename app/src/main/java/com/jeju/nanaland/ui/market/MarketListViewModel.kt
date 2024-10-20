@@ -8,7 +8,7 @@ import com.jeju.nanaland.domain.request.market.GetMarketListRequest
 import com.jeju.nanaland.domain.usecase.favorite.ToggleFavoriteUseCase
 import com.jeju.nanaland.domain.usecase.market.GetMarketListUseCase
 import com.jeju.nanaland.globalvalue.constant.PAGING_SIZE
-import com.jeju.nanaland.globalvalue.constant.getLocationList
+import com.jeju.nanaland.globalvalue.constant.getLocationFilterList
 import com.jeju.nanaland.globalvalue.constant.getLocationSelectionList
 import com.jeju.nanaland.util.log.LogUtil
 import com.jeju.nanaland.util.network.onError
@@ -30,7 +30,7 @@ class MarketListViewModel @Inject constructor(
     private val toggleFavoriteUseCase: ToggleFavoriteUseCase
 ) : ViewModel() {
 
-    private val locationList = getLocationList()
+    private val locationList = getLocationFilterList()
     val selectedLocationList = getLocationSelectionList()
     private val _marketThumbnailCount = MutableStateFlow<UiState<Int>>(UiState.Loading)
     val marketThumbnailCount = _marketThumbnailCount.asStateFlow()

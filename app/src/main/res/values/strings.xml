@@ -488,4 +488,39 @@
     <string name="common_나가기">나가기</string>
     <string name="common_재시작">재시작</string>
     <string name="splash_screen_text">인터넷 연결을 확인해주세요</string>
+
+    <!--제주맛집 키워드 리스트-->
+    <string name="restaurant_한식">한식</string>
+    <string name="restaurant_중식">중식</string>
+    <string name="restaurant_일식">일식</string>
+    <string name="restaurant_양식">양식</string>
+    <string name="restaurant_분식">분식</string>
+    <string name="restaurant_남미_음식">남미 음식</string>
+    <string name="restaurant_동남아_음식">동남아 음식</string>
+    <string name="restaurant_비건_푸드">비건푸드</string>
+    <string name="restaurant_할랄_푸드">할랄푸드</string>
+    <string name="restaurant_육류_흑돼지">육류/흑돼지</string>
+    <string name="restaurant_해산물">해산물</string>
+    <string name="restaurant_치킨_버거">치킨/버거</string>
+    <string name="restaurant_카페_디저트">카페/디저트</string>
+    <string name="restaurant_펍_요리주점">펍/요리주점</string>
+
+    <!--이색체험 키워드 리스트-->
+    <string name="activity_역사">역사</string>
+    <string name="activity_전시회">전시회</string>
+    <string name="activity_공방">공방</string>
+    <string name="activity_미술관">미술관</string>
+    <string name="activity_박물관">박물관</string>
+    <string name="activity_공원">공원</string>
+    <string name="activity_공연">공연</string>
+    <string name="activity_종교시설">종교시설</string>
+    <string name="activity_테마파크">테마파크</string>
+
+    <string name="activity_지상레저">지상레저</string>
+    <string name="activity_수상레저">수상레저</string>
+    <string name="activity_항공레저">항공레저</string>
+    <string name="activity_해양체험">해양체험</string>
+    <string name="activity_농촌체험">농촌체험</string>
+    <string name="activity_힐링테라피">힐링테라피</string>
+
 </resources>

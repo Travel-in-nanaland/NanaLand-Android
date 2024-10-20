@@ -13,6 +13,8 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
@@ -121,11 +123,11 @@ fun ReviewCard(
             Spacer(Modifier.height(12.dp))
 
             if (data.images.isNotEmpty()) {
-                Row(
+                LazyRow(
                     modifier = Modifier.verticalScroll(scrollState)
                 ) {
-                    data.images.forEach {
-                        ReviewImage(imageUrl = it.originUrl)
+                    itemsIndexed(data.images) { idx, item ->
+                        ReviewImage(imageUrl = item.originUrl)
 
                         Spacer(Modifier.width(8.dp))
                     }
