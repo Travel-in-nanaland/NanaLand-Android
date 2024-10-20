@@ -13,7 +13,7 @@ import com.jeju.nanaland.domain.usecase.festival.GetEndedFestivalListUseCase
 import com.jeju.nanaland.domain.usecase.festival.GetMonthlyFestivalListUseCase
 import com.jeju.nanaland.domain.usecase.festival.GetSeasonalFestivalListUseCase
 import com.jeju.nanaland.globalvalue.constant.PAGING_SIZE
-import com.jeju.nanaland.globalvalue.constant.getLocationList
+import com.jeju.nanaland.globalvalue.constant.getLocationFilterList
 import com.jeju.nanaland.globalvalue.constant.getLocationSelectionList
 import com.jeju.nanaland.globalvalue.type.FestivalCategoryType
 import com.jeju.nanaland.util.log.LogUtil
@@ -42,7 +42,7 @@ class FestivalListViewModel @Inject constructor(
 
     private val _selectedCategoryType = MutableStateFlow(FestivalCategoryType.Monthly)
     val selectedCategoryType = _selectedCategoryType.asStateFlow()
-    private val locationList = listOf("제주시", "애월", "조천", "한경", "구좌", "한림", "우도", "추자", "서귀포시", "대정", "안덕", "남원", "표선", "성산")
+    private val locationList = getLocationFilterList()
     val selectedLocationList = getLocationSelectionList()
     private val seasonList = listOf("spring", "summer", "autumn", "winter")
     val selectedSeasonList = mutableStateListOf(true, false, false, false)
