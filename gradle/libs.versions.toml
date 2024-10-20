@@ -1,0 +1,176 @@
+[versions]
+# Core
+agp = "8.2.1"
+kt = "1.9.20"
+
+# Project
+serialization = "1.9.20"
+coreKtx = "1.12.0"
+appcompat = "1.6.1"
+## hilt
+hilt = "2.37"
+hiltCompiler = "2.46.1"
+hiltNavigation = "1.1.0"
+
+# Other service
+kakao="2.20.1"
+googleService = "4.4.2"
+googleServiceLibrary = "4.3.15"
+googleAuth = "20.7.0"
+googleId = "1.1.0"
+credentials = "1.2.2"
+firebaseAuth = "22.0.0"
+firebaseBom = "32.0.0"
+
+# App
+serializationJson = "1.6.3"
+accompanistSystemuicontroller = "0.30.0"
+glide = "2.2.12"
+datastore = "1.0.0"
+viewpager = "1.1.0-alpha01"
+lottie = "6.4.0"
+accompanistDrawablepainter= "0.34.0"
+
+## Compose
+composeActivity = "1.8.2"
+composeFoundation = "1.6.5"
+composeNavigation="2.8.0-rc01"
+composeBom = "2024.05.00"
+
+## lifecycle
+lifecycleKtx = "2.7.0"
+lifecycleCompose = "2.8.3"
+lifecycleRuntimeCompose ="2.8.4"
+lifecycleViewmodelCompose ="2.6.2"
+
+## retrofit
+okhttp = "4.9.2"
+retrofit = "2.9.0"
+
+## paging
+paging = "3.3.1"
+
+
+# Test
+junit = "4.13.2"
+junitTest = "1.2.1"
+espressoCore = "3.6.1"
+
+
+[libraries]
+# Core
+core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
+
+# Compose
+compose-activity = { group = "androidx.activity", name = "activity-compose", version.ref = "composeActivity" }
+compose-foundation = { group = "androidx.compose.foundation", name = "foundation", version.ref = "composeFoundation" }
+compose-navigation= { group = "androidx.navigation", name = "navigation-compose", version.ref = "composeNavigation" }
+compose-bom = { group = "androidx.compose", name = "compose-bom", version.ref = "composeBom" }
+compose-material3 = { group = "androidx.compose.material3", name = "material3" }
+compose-ui = { group = "androidx.compose.ui", name = "ui" }
+compose-ui-graphics = { group = "androidx.compose.ui", name = "ui-graphics" }
+compose-ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling" }
+compose-ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-tooling-preview" }
+
+# Lifecycle
+lifecycle-ktx = { group = "androidx.lifecycle", name = "lifecycle-runtime-ktx", version.ref = "lifecycleKtx" }
+lifecycle-compose = { group = "androidx.lifecycle", name = "lifecycle-runtime-compose", version.ref = "lifecycleCompose" }
+lifecycle-runtime-compose = { group = "androidx.lifecycle", name = "lifecycle-runtime-compose-android", version.ref = "lifecycleRuntimeCompose" }
+lifecycle-viewmodel-compose = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-compose", version.ref = "lifecycleViewmodelCompose" }
+
+# Test
+junit = { group = "junit", name = "junit", version.ref = "junit" }
+test-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitTest" }
+test-espresso = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
+test-ui-manifest = { group = "androidx.compose.ui", name = "ui-test-manifest" }
+test-ui-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit4" }
+
+# Retrofit
+okhttp = { group = "com.squareup.okhttp3", name = "logging-interceptor", version.ref = "okhttp" }
+retrofit = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofit" }
+retrofit-gson = { group = "com.squareup.retrofit2", name = "converter-gson", version.ref = "retrofit" }
+retrofit-scalar = { group = "com.squareup.retrofit2", name = "converter-scalars", version.ref = "retrofit" }
+
+# Hilt
+hilt = { group = "com.google.dagger", name = "hilt-android", version.ref = "hilt" }
+hilt-compiler = { group = "com.google.dagger", name = "hilt-android-compiler", version.ref = "hiltCompiler" }
+hilt-navigation = { group = "androidx.hilt", name = "hilt-navigation-compose", version.ref = "hiltNavigation" }
+
+# Kakao
+kakao-user = { group = "com.kakao.sdk", name = "v2-user", version.ref = "kakao" } # 카카오 로그인 API 모듈
+kakao-share = { group = "com.kakao.sdk", name = "v2-share", version.ref = "kakao" } # 카카오톡 공유 API 모듈
+
+# Google
+## Services
+google-service-libriry = { group = "com.google.gms", name = "google-services", version.ref = "googleServiceLibrary" }
+## 로그인
+google-auth = { group = "com.google.android.gms", name = "play-services-auth", version.ref = "googleAuth" }
+google-id = { group = "com.google.android.libraries.identity.googleid", name = "googleid", version.ref = "googleId" }
+credentials = { group = "androidx.credentials", name = "credentials", version.ref = "credentials" }
+credentials-auth = { group = "androidx.credentials", name = "credentials-play-services-auth", version.ref = "credentials" }
+## Firebase
+firebase-auth = { group = "com.google.firebase", name = "firebase-auth", version.ref = "firebaseAuth" }
+firebase-bom = { group = "com.google.firebase", name = "firebase-bom", version.ref = "firebaseBom" }
+firebase-analytics = { group = "com.google.firebase", name = "firebase-analytics" }
+firebase-analytics-ktx = { group = "com.google.firebase", name = "firebase-analytics-ktx" }
+firebase-messaging = { group = "com.google.firebase", name = "firebase-messaging" }
+
+# paging
+paging-ktx = { group = "androidx.paging", name = "paging-runtime-ktx", version.ref = "paging" }
+paging-compose = { group = "androidx.paging", name = "paging-compose", version.ref = "paging" }
+
+# Navigation Safe Args
+serialization-json= { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "serializationJson" }
+
+# System UI Controller
+accompanist-systemuicontroller = { group = "com.google.accompanist", name = "accompanist-systemuicontroller", version.ref = "accompanistSystemuicontroller" }
+
+# Landscapist-Glide
+glide = { group = "com.github.skydoves", name = "landscapist-glide", version.ref = "glide" }
+
+# ViewPager
+viewpager = { group = "androidx.viewpager", name = "viewpager", version.ref = "viewpager" }
+
+# Lottie
+compose-lottie= { group = "com.airbnb.android", name = "lottie-compose", version.ref = "lottie" }
+
+# drawable to painter
+accompanist-drawablepainter = { group = "com.google.accompanist", name = "accompanist-drawablepainter", version.ref = "accompanistDrawablepainter" }
+
+# Datastore
+datastore = { group = "androidx.datastore", name = "datastore-preferences", version.ref = "datastore" }
+
+# Appcompat
+appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
+
+[plugins]
+android-application = { id = "com.android.application", version.ref = "agp" }
+kotlin = { id = "org.jetbrains.kotlin.android", version.ref = "kt" }
+
+kapt = { id = "kotlin-kapt" }
+hilt = { id = "com.google.dagger.hilt.android", version.ref = "hiltCompiler" }
+google-service = { id = "com.google.gms.google-services", version.ref = "googleService" }
+
+serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "serialization" }
+parcelize = { id = "kotlin-parcelize" }
+
+[bundles]
+app = ["core-ktx"]
+hilt = ["hilt", "hilt-navigation"]
+compose = [
+    "compose-activity", "compose-foundation", "compose-navigation",
+    "compose-material3", "compose-ui", "compose-ui-graphics", "compose-ui-tooling",
+    "compose-ui-tooling-preview"
+]
+services = [
+    "google-service-libriry", "google-auth", "google-id", "credentials", "credentials-auth",
+    "firebase-auth", "firebase-analytics", "firebase-analytics-ktx",
+    "firebase-messaging", "kakao-user", "kakao-share"
+]
+retrofit = ["okhttp", "retrofit", "retrofit-gson", "retrofit-scalar"]
+paging = ["paging-ktx", "paging-compose"]
+lifecycle = ["lifecycle-ktx", "lifecycle-compose", "lifecycle-runtime-compose", "lifecycle-viewmodel-compose"]
+presentation = [
+    "serialization-json", "accompanist-systemuicontroller", "glide", "viewpager", "compose-lottie",
+    "accompanist-drawablepainter"
+]

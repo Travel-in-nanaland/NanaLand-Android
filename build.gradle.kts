@@ -1,7 +1,7 @@
 plugins {
-    id("com.android.application") version "8.2.1" apply false
-    id("org.jetbrains.kotlin.android") version "1.9.20" apply false
-    id("com.google.dagger.hilt.android") version "2.46.1" apply false
-    id("com.google.gms.google-services") version "4.4.2" apply false
-    id("org.jetbrains.kotlin.plugin.serialization") version "1.9.20" apply false
+    alias(libs.plugins.android.application) apply false
+    alias(libs.plugins.kotlin) apply false
+    alias(libs.plugins.hilt) apply false
+    alias(libs.plugins.google.service) apply false
+    alias(libs.plugins.serialization) apply false
 }

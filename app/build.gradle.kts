@@ -1,13 +1,13 @@
 import com.android.build.gradle.internal.cxx.configure.gradleLocalProperties
 
 plugins {
-    id("com.android.application")
-    id("org.jetbrains.kotlin.android")
-    id("com.google.gms.google-services")
-    id("com.google.dagger.hilt.android")
-    id("kotlin-parcelize")
-    id("kotlin-kapt")
-    id("org.jetbrains.kotlin.plugin.serialization")
+    alias(libs.plugins.android.application)
+    alias(libs.plugins.kotlin)
+    alias(libs.plugins.google.service)
+    alias(libs.plugins.hilt)
+    id(libs.plugins.parcelize.get().pluginId)
+    id(libs.plugins.kapt.get().pluginId)
+    alias(libs.plugins.serialization)
 }
 
 android {
@@ -76,90 +76,36 @@ fun getProperty(propertyKey: String): String {
 
 dependencies {
 
-    implementation("androidx.core:core-ktx:1.12.0")
-    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.7.0")
-    implementation("androidx.lifecycle:lifecycle-runtime-compose:2.8.3")
-    implementation("androidx.activity:activity-compose:1.8.2")
-    implementation(platform("androidx.compose:compose-bom:2024.05.00"))
-    implementation("androidx.compose.foundation:foundation:1.6.5")
-    implementation("androidx.compose.ui:ui")
-    implementation("androidx.compose.ui:ui-graphics")
-    implementation("androidx.compose.ui:ui-tooling-preview")
-    implementation("androidx.compose.material3:material3")
-    implementation("androidx.appcompat:appcompat:1.6.1")
-    implementation("androidx.lifecycle:lifecycle-runtime-compose-android:2.8.4")
-    testImplementation("junit:junit:4.13.2")
-    androidTestImplementation("androidx.test.ext:junit:1.1.5")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
-    androidTestImplementation(platform("androidx.compose:compose-bom:2023.08.00"))
-    androidTestImplementation("androidx.compose.ui:ui-test-junit4")
-    debugImplementation("androidx.compose.ui:ui-tooling")
-    debugImplementation("androidx.compose.ui:ui-test-manifest")
+    implementation(libs.bundles.app)
 
-    // ViewModel
-    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.6.2")
+    testImplementation(libs.junit)
+    androidTestImplementation(platform(libs.compose.bom))
+    androidTestImplementation(libs.test.junit)
+    androidTestImplementation(libs.test.espresso)
+    androidTestImplementation(libs.test.ui.junit4)
+    debugImplementation(libs.compose.ui.tooling)
+    debugImplementation(libs.compose.ui.tooling.preview)
 
-    // Retrofit
-    implementation("com.squareup.retrofit2:retrofit:2.9.0")
-    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
-    implementation("com.squareup.okhttp3:logging-interceptor:4.9.2")
+    implementation(libs.appcompat)
+    implementation(libs.bundles.lifecycle)
 
-    // Retrofit - String Parser
-    implementation("com.squareup.retrofit2:converter-scalars:2.9.0")
+    implementation(platform(libs.compose.bom))
+    implementation(libs.bundles.compose)
 
-    // Hilt
-    implementation("androidx.hilt:hilt-navigation-compose:1.1.0")
-    implementation("com.google.dagger:hilt-android:2.37")
-    kapt("com.google.dagger:hilt-android-compiler:2.46.1")
+    implementation(libs.bundles.retrofit)
 
-    // Navigation Safe Args
-    implementation("androidx.navigation:navigation-compose:2.8.0-rc01")
-    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.3")
+    implementation(libs.bundles.hilt)
+    kapt(libs.hilt.compiler)
 
-    // System UI Controller
-    implementation("com.google.accompanist:accompanist-systemuicontroller:0.30.0")
+    implementation(libs.bundles.presentation)
 
-    // Landscapist-Glide
-    implementation("com.github.skydoves:landscapist-glide:2.2.12")
+    implementation(platform(libs.firebase.bom))
+    implementation(libs.bundles.services)
 
-    // Datastore
-    implementation("androidx.datastore:datastore-preferences:1.0.0")
+    implementation(libs.bundles.paging)
 
-    // ViewPager
-    implementation("androidx.viewpager:viewpager:1.1.0-alpha01")
+    implementation(libs.datastore)
 
-    // Google Play services
-    implementation("com.google.gms:google-services:4.3.15")
-    implementation("com.google.firebase:firebase-auth:22.0.0")
-    implementation("com.google.firebase:firebase-bom:32.0.0")
-    implementation("com.google.android.gms:play-services-auth:20.5.0")
-
-    // Kakao
-    implementation("com.kakao.sdk:v2-user:2.20.1") // 카카오 로그인 API 모듈
-    implementation("com.kakao.sdk:v2-share:2.20.1") // 카카오톡 공유 API 모듈
-
-    // Lottie
-    implementation("com.airbnb.android:lottie-compose:6.4.0")
-
-    // Google 로그인
-    implementation("com.google.android.gms:play-services-auth:20.7.0")
-    implementation("androidx.credentials:credentials:1.2.2")
-    implementation("androidx.credentials:credentials-play-services-auth:1.2.2")
-    implementation("com.google.android.libraries.identity.googleid:googleid:1.1.0")
-
-    // paging
-    implementation("androidx.paging:paging-runtime-ktx:3.3.1")
-    implementation("androidx.paging:paging-compose:3.3.1")
-
-    // drawable to painter
-    implementation("com.google.accompanist:accompanist-drawablepainter:0.34.0")
-
-    // Firebase Bom
-    implementation(platform("com.google.firebase:firebase-bom:32.3.1"))
-    implementation("com.google.firebase:firebase-analytics-ktx")
-
-    implementation("com.google.firebase:firebase-messaging")
-    implementation("com.google.firebase:firebase-analytics")
 }
 
 kapt {
