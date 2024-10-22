@@ -1,4 +1,5 @@
 import com.android.build.gradle.internal.cxx.configure.gradleLocalProperties
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
     alias(libs.plugins.android.application)
@@ -6,8 +7,9 @@ plugins {
     alias(libs.plugins.google.service)
     alias(libs.plugins.hilt)
     id(libs.plugins.parcelize.get().pluginId)
-    id(libs.plugins.kapt.get().pluginId)
+    alias(libs.plugins.kapt)
     alias(libs.plugins.serialization)
+    alias(libs.plugins.compose)
 }
 
 android {
@@ -53,15 +55,20 @@ android {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
     }
+    kotlin {
+        compilerOptions {
+            jvmTarget.set(JvmTarget.JVM_17)
+        }
+    }
     kotlinOptions {
         jvmTarget = "17"
+    }
+    composeCompiler {
+        includeSourceInformation = true
     }
     buildFeatures {
         compose = true
         buildConfig = true
-    }
-    composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.5"
     }
     packaging {
         resources {
@@ -71,7 +78,7 @@ android {
 }
 
 fun getProperty(propertyKey: String): String {
-    return gradleLocalProperties(rootDir).getProperty(propertyKey)
+    return gradleLocalProperties(rootDir, providers).getProperty(propertyKey)
 }
 
 dependencies {

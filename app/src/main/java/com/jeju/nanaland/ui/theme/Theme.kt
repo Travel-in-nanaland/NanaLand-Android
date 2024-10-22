@@ -1,14 +1,9 @@
 package com.jeju.nanaland.ui.theme
 
 import android.app.Activity
-import androidx.compose.foundation.LocalIndication
 import androidx.compose.foundation.isSystemInDarkTheme
-import androidx.compose.material.ripple.LocalRippleTheme
-import androidx.compose.material.ripple.RippleAlpha
-import androidx.compose.material3.LocalContentColor
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
-import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.remember
 import androidx.compose.ui.platform.LocalContext
@@ -17,7 +12,6 @@ import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.unit.Density
 import androidx.core.view.WindowCompat
 import com.jeju.nanaland.util.language.customContext
-import com.jeju.nanaland.util.log.LogUtil
 
 //private val DarkColorScheme = darkColorScheme(
 //    primary = Purple80,
@@ -77,7 +71,7 @@ fun NanaLandTheme(
             }
         }
     }
-    val rippleIndication = androidx.compose.material.ripple.rememberRipple()
+//    val rippleIndication = androidx.compose.material.ripple.rememberRipple()
     val local = LocalContext.current.resources.configuration.locales
 //    LogUtil.e("aaaaaaaaaa", "${darkTheme}")
 //    LogUtil.e("aaaaaaaaaa", "${local}")
@@ -87,8 +81,8 @@ fun NanaLandTheme(
     CompositionLocalProvider(
         LocalColor provides colorScheme,
         LocalDensity provides Density(customDensity, fontScale = 1f),
-        LocalIndication provides rippleIndication,
-        LocalRippleTheme provides CustomRippleTheme
+//        LocalIndication provides rippleIndication,
+//        LocalRippleTheme provides CustomRippleTheme
     ) {
         content()
     }
@@ -100,20 +94,20 @@ fun NanaLandTheme(
 //    )
 }
 
-@Immutable
-private object CustomRippleTheme : androidx.compose.material.ripple.RippleTheme {
-    @Deprecated("Super method deprecated")
-    @Composable
-    override fun defaultColor() = LocalContentColor.current
-
-    @Deprecated("Super method deprecated")
-    @Composable
-    override fun rippleAlpha() = DefaultRippleAlpha
-}
-
-private val DefaultRippleAlpha = RippleAlpha(
-    pressedAlpha = 0.12f,
-    focusedAlpha = 0.12f,
-    draggedAlpha = 0.16f,
-    hoveredAlpha = 0.08f
-)
+//@Immutable
+//private object CustomRippleTheme : androidx.compose.material.ripple.RippleTheme {
+//    @Deprecated("Super method deprecated")
+//    @Composable
+//    override fun defaultColor() = LocalContentColor.current
+//
+//    @Deprecated("Super method deprecated")
+//    @Composable
+//    override fun rippleAlpha() = DefaultRippleAlpha
+//}
+//
+//private val DefaultRippleAlpha = RippleAlpha(
+//    pressedAlpha = 0.12f,
+//    focusedAlpha = 0.12f,
+//    draggedAlpha = 0.16f,
+//    hoveredAlpha = 0.08f
+//)

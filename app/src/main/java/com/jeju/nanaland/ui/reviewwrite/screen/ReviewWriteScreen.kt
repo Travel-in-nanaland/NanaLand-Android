@@ -198,7 +198,7 @@ private fun ReviewWriteUI(
                         contentScale = ContentScale.Crop,
                         alignment = Alignment.Center
                     ),
-                    previewPlaceholder = R.drawable.img_ad_1
+                    previewPlaceholder = painterResource(R.drawable.img_ad_1)
                 )
 
                 Spacer(modifier = Modifier.height(8.dp))
