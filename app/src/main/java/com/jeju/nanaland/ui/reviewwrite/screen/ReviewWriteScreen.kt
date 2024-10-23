@@ -149,7 +149,7 @@ fun ReviewWriteScreen(
             title = getString(R.string.review_write_cancel_dialog_title),
             subTitle = getString(R.string.review_write_cancel_dialog_subtitle),
             onDismissRequest = { cancelDialogVisible = false },
-            onPositive = { navController.popBackStack() },
+            onPositive = { cancelDialogVisible = false; navController.popBackStack() },
             onNegative = { cancelDialogVisible = false }
         )
     }
