@@ -43,7 +43,7 @@ private fun PolicySettingScreen(
 ) {
     CustomSurface {
         CustomTopBar(
-            title = "약관 및 정책",
+            title = getString(R.string.settings_screen_약관_및_정책),
             onBackButtonClicked = { moveToBackScreen() }
         )
 

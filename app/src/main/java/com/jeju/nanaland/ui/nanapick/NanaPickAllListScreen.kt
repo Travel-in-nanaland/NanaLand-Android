@@ -16,11 +16,13 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.jeju.nanaland.R
 import com.jeju.nanaland.domain.entity.nanapick.NanaPickBannerData
 import com.jeju.nanaland.globalvalue.constant.PAGING_THRESHOLD
 import com.jeju.nanaland.ui.component.common.CustomSurface
 import com.jeju.nanaland.ui.component.common.topbar.CustomTopBar
 import com.jeju.nanaland.ui.nanapick.component.NanaPickThumbnailBanner2
+import com.jeju.nanaland.util.resource.getString
 import com.jeju.nanaland.util.ui.UiState
 
 @Composable
@@ -64,7 +66,7 @@ private fun NanaPickAllListScreen(
     }
     CustomSurface {
         CustomTopBar(
-            title = "나나's Pick",
+            title = getString(R.string.common_나나s_Pick),
             onBackButtonClicked = moveToBackScreen
         )
 
