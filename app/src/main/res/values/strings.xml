@@ -523,4 +523,7 @@
     <string name="activity_농촌체험">농촌체험</string>
     <string name="activity_힐링테라피">힐링테라피</string>
 
+    <!--토스트-->
+    <string name="toast_heart_myself">자신이 작성한 후기는 좋아요 누를 수 없습니다.</string>
+
 </resources>

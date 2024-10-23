@@ -1,5 +1,6 @@
 package com.jeju.nanaland.ui.component.review
 
+import android.widget.Toast
 import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -27,6 +28,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.jeju.nanaland.R
@@ -41,6 +43,7 @@ import com.jeju.nanaland.ui.component.review.parts.ReviewRatingText
 import com.jeju.nanaland.ui.component.review.parts.ReviewTags
 import com.jeju.nanaland.ui.theme.caption01
 import com.jeju.nanaland.ui.theme.getColor
+import com.jeju.nanaland.util.resource.getString
 import com.jeju.nanaland.util.ui.clickableNoEffect
 import com.jeju.nanaland.util.ui.drawColoredShadow
 
@@ -51,6 +54,7 @@ fun ReviewCard(
     onProfileClick: (Int?) -> Unit,
     onMenuButtonClick: () -> Unit,
 ) {
+    val context = LocalContext.current
     val scrollState = rememberScrollState()
     val isExpanded = remember { mutableStateOf(false) }
     Box(
@@ -116,7 +120,10 @@ fun ReviewCard(
                 ReviewFavoriteButton(
                     isFavorite = data.reviewHeart,
                     favoriteCount = data.heartCount,
-                    toggleFavorite = { if(!data.myReview) toggleReviewFavorite(data.id) }
+                    toggleFavorite = {
+                        if(!data.myReview) toggleReviewFavorite(data.id)
+                        else Toast.makeText(context, getString(R.string.toast_heart_myself), Toast.LENGTH_SHORT).show()
+                    }
                 )
             }
 

@@ -412,4 +412,5 @@
     <string name="activity_해양체험">Trải nghiệm biển</string>
     <string name="activity_농촌체험">Trải nghiệm nông thôn</string>
     <string name="activity_힐링테라피">Liệu pháp chữa lành</string>
+    <string name="toast_heart_myself">Bạn không thể thích một đánh giá bạn tự viết.</string>
 </resources>

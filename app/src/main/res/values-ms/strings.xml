@@ -484,4 +484,5 @@
     <string name="activity_해양체험">Pengalaman marin</string>
     <string name="activity_농촌체험">Pengalaman luar bandar</string>
     <string name="activity_힐링테라피">Terapi Penyembuhan</string>
+    <string name="toast_heart_myself">Anda tidak boleh menyukai ulasan yang anda tulis sendiri.</string>
 </resources>
