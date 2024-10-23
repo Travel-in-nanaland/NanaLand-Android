@@ -13,7 +13,7 @@ data class NanaPickContentData(
     @SerializedName("firstImage")
     val firstImage: ImageUrl,
     @SerializedName("notice")
-    val notice: String,
+    val notice: String?,
     @SerializedName("nanaDetails")
     val nanaDetails: List<NanaPickSubContentData>,
     @SerializedName("favorite")
