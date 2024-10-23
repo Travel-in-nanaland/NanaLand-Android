@@ -145,7 +145,7 @@ private fun RestaurantContentScreen(
                 modifier = Modifier.fillMaxSize()
             ) {
                 CustomTopBarWithShareButton(
-                    title = "제주 맛집",
+                    title = getString(R.string.common_제주_맛집),
                     onBackButtonClicked = moveToBackScreen,
                     onShareButtonClicked = {
                         val sendIntent: Intent = Intent().apply {

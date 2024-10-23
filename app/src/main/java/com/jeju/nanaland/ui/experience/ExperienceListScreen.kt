@@ -19,6 +19,7 @@ import androidx.compose.runtime.snapshots.SnapshotStateList
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.jeju.nanaland.R
 import com.jeju.nanaland.domain.entity.experience.ExperienceThumbnailData
 import com.jeju.nanaland.globalvalue.constant.PAGING_THRESHOLD
 import com.jeju.nanaland.globalvalue.constant.getActivityKeywordList
@@ -38,7 +39,7 @@ import com.jeju.nanaland.ui.component.listscreen.filter.getActivityKeywordAnchor
 import com.jeju.nanaland.ui.component.listscreen.filter.getCultureKeywordArtAnchoredDraggableState
 import com.jeju.nanaland.ui.component.listscreen.filter.getLocationAnchoredDraggableState
 import com.jeju.nanaland.ui.component.listscreen.list.ExperienceThumbnailList
-import com.jeju.nanaland.ui.component.listscreen.list.RestaurantThumbnailList
+import com.jeju.nanaland.util.resource.getString
 import com.jeju.nanaland.util.ui.ScreenPreview
 import com.jeju.nanaland.util.ui.UiState
 import kotlinx.coroutines.launch
@@ -127,7 +128,7 @@ private fun ExperienceListScreen(
                 modifier = Modifier.fillMaxSize()
             ) {
                 CustomTopBar(
-                    title = "이색 체험",
+                    title = getString(R.string.common_이색_체험),
                     onBackButtonClicked = moveToBackScreen
                 )
 

@@ -27,9 +27,6 @@ import com.jeju.nanaland.globalvalue.constant.getRestaurantKeywordList
 import com.jeju.nanaland.globalvalue.type.AnchoredDraggableContentState
 import com.jeju.nanaland.ui.component.common.CustomSurface
 import com.jeju.nanaland.ui.component.common.topbar.CustomTopBar
-import com.jeju.nanaland.ui.component.listscreen.filter.ActivityKeywordFilterDialog
-import com.jeju.nanaland.ui.component.listscreen.filter.CultureArtKeywordFilterDialog
-import com.jeju.nanaland.ui.component.listscreen.filter.ExperienceFilterDialogDimBackground
 import com.jeju.nanaland.ui.component.listscreen.filter.KeywordLocationFilterTopBar
 import com.jeju.nanaland.ui.component.listscreen.filter.LocationFilterBottomDialog
 import com.jeju.nanaland.ui.component.listscreen.filter.RestaurantFilterDialogDimBackground
@@ -113,7 +110,7 @@ private fun RestaurantListScreen(
                 modifier = Modifier.fillMaxSize()
             ) {
                 CustomTopBar(
-                    title = "제주 맛집",
+                    title = getString(R.string.common_제주_맛집),
                     onBackButtonClicked = moveToBackScreen
                 )
 
