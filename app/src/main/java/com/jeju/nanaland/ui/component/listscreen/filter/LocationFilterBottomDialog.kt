@@ -72,7 +72,7 @@ fun LocationFilterBottomDialog(
     Column(
         modifier = Modifier
             .fillMaxWidth()
-            .height(670.dp)
+            .height(690.dp)
             .offset {
                 IntOffset(
                     x = 0,
@@ -205,7 +205,7 @@ fun getLocationAnchoredDraggableState() = AnchoredDraggableState(
 ).apply {
     updateAnchors(
         DraggableAnchors {
-            AnchoredDraggableContentState.Open at TOTAL_SCREEN_HEIGHT - 668f - SYSTEM_STATUS_BAR_HEIGHT - SYSTEM_NAVIGATION_BAR_HEIGHT
+            AnchoredDraggableContentState.Open at TOTAL_SCREEN_HEIGHT - 688f - SYSTEM_STATUS_BAR_HEIGHT - SYSTEM_NAVIGATION_BAR_HEIGHT
             AnchoredDraggableContentState.Closed at TOTAL_SCREEN_HEIGHT - SYSTEM_STATUS_BAR_HEIGHT
         }
     )
