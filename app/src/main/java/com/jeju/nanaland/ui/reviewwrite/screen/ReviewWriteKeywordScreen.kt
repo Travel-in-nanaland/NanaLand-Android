@@ -104,52 +104,55 @@ private fun ReviewWriteKeywordUI(
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(horizontal = 16.dp)
                 .verticalScroll(scrollState),
         ) {
-            Text(
-                modifier = Modifier.padding(vertical = 24.dp),
-                text = getString(R.string.review_write_keyword_guide,
-                    ReviewWriteViewModel.MIN_KEYWORD_CNT,
-                    ReviewWriteViewModel.MAX_KEYWORD_CNT
-                ),
-                color = getColor().main,
-                style = caption01
-            )
-
-            keywords.forEach { category ->
+            Column(
+                modifier = Modifier.padding(horizontal = 16.dp)
+            ) {
                 Text(
-                    modifier = Modifier.padding(bottom = 12.dp),
-                    text = category.first,
-                    color = getColor().black,
-                    style = bodyBold
+                    modifier = Modifier.padding(vertical = 24.dp),
+                    text = getString(R.string.review_write_keyword_guide,
+                        ReviewWriteViewModel.MIN_KEYWORD_CNT,
+                        ReviewWriteViewModel.MAX_KEYWORD_CNT
+                    ),
+                    color = getColor().main,
+                    style = caption01
                 )
-                FlowRow(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(bottom = 40.dp),
-                    horizontalArrangement = Arrangement.spacedBy(8.dp),
-                    verticalArrangement = Arrangement.spacedBy(10.dp)
-                ) {
-                    category.second.forEach { keyword ->
-                        val isSelect =  keyword in selectKeyword
-                        Text(
-                            modifier = Modifier
-                                .clip(RoundedCornerShape(30.dp))
-                                .border(
-                                    width = 1.dp,
-                                    shape = RoundedCornerShape(30.dp),
-                                    color = if (isSelect) getColor().main90 else getColor().gray02
-                                )
-                                .background(
-                                    color = if (isSelect) getColor().main10 else getColor().white
-                                )
-                                .clickable { onKeyword(keyword) }
-                                .padding(horizontal = 16.dp, vertical = 8.dp),
-                            text = getStringArray(R.array.review_keyword)[keyword.stringIndex],
-                            color = if(isSelect) getColor().main else getColor().gray02,
-                            style = body02
-                        )
+
+                keywords.forEach { category ->
+                    Text(
+                        modifier = Modifier.padding(bottom = 12.dp),
+                        text = category.first,
+                        color = getColor().black,
+                        style = bodyBold
+                    )
+                    FlowRow(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(bottom = 40.dp),
+                        horizontalArrangement = Arrangement.spacedBy(8.dp),
+                        verticalArrangement = Arrangement.spacedBy(10.dp)
+                    ) {
+                        category.second.forEach { keyword ->
+                            val isSelect =  keyword in selectKeyword
+                            Text(
+                                modifier = Modifier
+                                    .clip(RoundedCornerShape(30.dp))
+                                    .border(
+                                        width = 1.dp,
+                                        shape = RoundedCornerShape(30.dp),
+                                        color = if (isSelect) getColor().main90 else getColor().gray02
+                                    )
+                                    .background(
+                                        color = if (isSelect) getColor().main10 else getColor().white
+                                    )
+                                    .clickable { onKeyword(keyword) }
+                                    .padding(horizontal = 16.dp, vertical = 8.dp),
+                                text = getStringArray(R.array.review_keyword)[keyword.stringIndex],
+                                color = if(isSelect) getColor().main else getColor().gray02,
+                                style = body02
+                            )
+                        }
                     }
                 }
             }
