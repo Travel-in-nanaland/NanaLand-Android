@@ -41,7 +41,6 @@ import com.skydoves.landscapist.glide.GlideImage
 fun RecommendedSpotScreenItem(
     imageUri: String?,
     title: String,
-    description: String,
     onDetailClick: ()->Unit
 ) {
     val brush = remember { Brush.verticalGradient(listOf(Color.Transparent, Color(0xB3262627), Color(0xB3262627))) }
@@ -94,7 +93,7 @@ fun RecommendedSpotScreenItem(
 
             Spacer(Modifier.height(4.dp))
 
-            RecommendedSpotScreenSpotDescription(text = description)
+//            RecommendedSpotScreenSpotDescription(text = description)
 
             Spacer(Modifier.height(60.dp))
         }

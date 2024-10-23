@@ -100,6 +100,7 @@ class HomeViewModel @Inject constructor(
                     data?.let {
                         _recommendedPost.update { uiState ->
                             if (uiState is UiState.Success) {
+                                LogUtil.e("e", uiState.data.toString())
                                 val newList = uiState.data.map { item ->
                                     if (item.id == contentId) item.copy(favorite = data.favorite)
                                     else item
@@ -116,7 +117,7 @@ class HomeViewModel @Inject constructor(
 
                 }
             }
-            .catch { LogUtil.e("flow Error", "toggleFavoriteUseCase") }
+            .catch { LogUtil.e("flow Error", "toggleFavoriteUseCase\n${it.stackTraceToString()}") }
             .launchIn(viewModelScope)
     }
 }

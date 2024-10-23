@@ -20,7 +20,7 @@ interface RestaurantApi {
     // 제주 맛집 리스트 조회
     @GET("restaurant/list")
     suspend fun getRestaurantList(
-        @Query("keywordFilterList") keywordFilterList: List<String>,
+        @Query("keywordFilter") keywordFilterList: List<String>,
         @Query("addressFilterList") addressFilterList: List<String>,
         @Query("page") page: Int,
         @Query("size") size: Int,
