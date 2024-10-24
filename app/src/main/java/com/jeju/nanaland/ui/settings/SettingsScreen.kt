@@ -5,6 +5,7 @@ import android.widget.Toast
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
@@ -23,8 +24,9 @@ import com.jeju.nanaland.ui.component.settings.SettingsScreenCategoryItem
 import com.jeju.nanaland.ui.component.settings.SettingsScreenCategoryTitle
 import com.jeju.nanaland.ui.component.settings.SettingsScreenHorizontalDivider
 import com.jeju.nanaland.ui.component.settings.SettingsScreenTopBar
-import com.jeju.nanaland.ui.component.settings.SettingsScreenVersionText
 import com.jeju.nanaland.ui.component.signout.SignOutConfirmDialog
+import com.jeju.nanaland.ui.theme.body01
+import com.jeju.nanaland.ui.theme.getColor
 import com.jeju.nanaland.util.resource.getString
 
 @Composable
@@ -114,10 +116,15 @@ private fun SettingsScreen(
                             Toast.makeText(context, "${context.packageManager.getPackageInfo(context.packageName, 0).versionCode}", Toast.LENGTH_SHORT).show()
                         }
                     }
+                },
+                endView = {
+                    Text(
+                        text = BuildConfig.VERSION_NAME,
+                        color = getColor().black,
+                        style = body01
+                    )
                 }
             )
-
-            SettingsScreenVersionText(BuildConfig.VERSION_NAME)
         }
 
         Spacer(Modifier.height(4.dp))
