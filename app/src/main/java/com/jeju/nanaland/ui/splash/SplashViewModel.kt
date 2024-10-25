@@ -1,7 +1,6 @@
 package com.jeju.nanaland.ui.splash
 
-import android.app.Application
-import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.jeju.nanaland.domain.usecase.auth.ReissueAccessTokenUseCase
 import com.jeju.nanaland.domain.usecase.authdatastore.GetRefreshTokenUseCase
@@ -14,21 +13,16 @@ import com.jeju.nanaland.globalvalue.type.LanguageType
 import com.jeju.nanaland.globalvalue.type.SplashCheckingState
 import com.jeju.nanaland.globalvalue.userdata.UserData
 import com.jeju.nanaland.util.intent.DeepLinkData
-import com.jeju.nanaland.util.log.LogUtil
 import com.jeju.nanaland.util.network.NetworkManager
-import com.jeju.nanaland.util.network.onError
-import com.jeju.nanaland.util.network.onException
-import com.jeju.nanaland.util.network.onSuccess
+import com.jeju.nanaland.util.network.NetworkResult
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.catch
-import kotlinx.coroutines.flow.first
-import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withTimeoutOrNull
 import javax.inject.Inject
 
 @HiltViewModel
@@ -41,104 +35,72 @@ class SplashViewModel @Inject constructor(
     private val saveRefreshTokenUseCase: SaveRefreshTokenUseCase,
     private val getUserProfileUseCase: GetUserProfileUseCase,
     private val setLanguageUseCase: SetLanguageUseCase,
-    private val application: Application,
-) : AndroidViewModel(application) {
+    /*private val application: Application,*/
+) : /*Android*/ViewModel(/*application*/) {
+    private val SPLASH_TIME = 1500L
 
-    private val _checkingState = MutableStateFlow(SplashCheckingState.Network)
+    private val _checkingState = MutableStateFlow(SplashCheckingState.Init)
     val checkingState = _checkingState.asStateFlow()
-    private val _isNetworkConnected = MutableStateFlow(false)
-    val isNetworkConnected = _isNetworkConnected.asStateFlow()
-    private val _isNetworkConnectionDialogShowing = MutableStateFlow(false)
-    val isNetworkConnectionDialogShowing = _isNetworkConnectionDialogShowing.asStateFlow()
 
-    fun checkNetworkState() {
+    fun checkProcess(deepLinkData: DeepLinkData) {
+        _checkingState.update { SplashCheckingState.Init }
+
         viewModelScope.launch {
-            _isNetworkConnectionDialogShowing.value = false
-            delay(1000)
-            _isNetworkConnected.update { networkManager.isNetworkConnected }
-            if (networkManager.isNetworkConnected) {
-                _checkingState.update { SplashCheckingState.Language }
-            } else {
-                _isNetworkConnectionDialogShowing.value = true
-            }
-        }
-    }
+            var splashCheckingState = SplashCheckingState.Network
 
-    fun checkLanguageState(
-        deepLinkData: DeepLinkData,
-        moveToLanguageInitScreen: () -> Unit
-    ) {
-        if(deepLinkData.language != null) {
-            viewModelScope.launch {
-                setLanguageUseCase(LanguageType.codeToLanguage(deepLinkData.language!!))
-                _checkingState.update { SplashCheckingState.Authorization }
-            }
-        } else {
-            getLanguageUseCase().onEach {
-                if(it == null)
-                    moveToLanguageInitScreen()
-                else {
-                    setLanguageUseCase(it)
-                    _checkingState.update { SplashCheckingState.Authorization }
+            launch {
+                splashCheckingState = if (!networkManager.isNetworkConnected) {
+                    SplashCheckingState.Network
+                } else if (!checkLanguageState(deepLinkData.language)) {
+                    SplashCheckingState.Language
+                } else {
+                    withTimeoutOrNull(SPLASH_TIME) {
+                        if (checkAuthState())
+                            SplashCheckingState.Success
+                        else
+                            SplashCheckingState.Authorization
+                    } ?: SplashCheckingState.Network
                 }
-            }.launchIn(viewModelScope)
+            }
+
+            delay(SPLASH_TIME)
+            _checkingState.update { splashCheckingState }
         }
     }
 
-    fun checkSignInState(
-        moveToMainScreen: () -> Unit,
-        moveToSignInScreen: () -> Unit,
-    ) {
-        viewModelScope.launch {
-            val refreshToken = getRefreshTokenUseCase().first()
-            if (refreshToken.isNullOrEmpty()) {
-                moveToSignInScreen()
-            } else {
-                reissueAccessTokenUseCase(refreshToken)
-                    .onEach { networkResult ->
-                        networkResult.onSuccess { code, message, data ->
-                            data?.let {
-                                saveAccessTokenUseCase(data.accessToken ?: "")
-                                saveRefreshTokenUseCase(data.refreshToken ?: "")
-                                getUserData()
-                            }
-                            moveToMainScreen()
-                        }.onError { code, message ->
-                            when (code) {
-                                in 400 .. 499 -> {
-                                    moveToSignInScreen()
-                                }
-                                else -> {
+    private suspend fun checkLanguageState(language: String?): Boolean {
+        if(language != null) {
+            setLanguageUseCase(LanguageType.codeToLanguage(language))
+            return true
+        } else {
+            val lang = getLanguageUseCase().firstOrNull() ?: return false
 
-                                }
-                            }
-                        }.onException {
-
-                        }
-                    }
-                    .catch { LogUtil.e("flow Error", "reissueAccessTokenUseCase") }
-                    .launchIn(viewModelScope)
-            }
+            setLanguageUseCase(lang)
+            return true
         }
     }
+    private suspend fun checkAuthState(): Boolean {
+        val refreshToken = getRefreshTokenUseCase().firstOrNull()
+        if (refreshToken.isNullOrEmpty())
+            return false
 
-    private fun getUserData() {
-        getUserProfileUseCase()
-            .onEach { networkResult ->
-                networkResult.onSuccess { code, message, data ->
-                    data?.let {
-                        UserData.provider = data.provider ?: "GUEST"
-                        if (UserData.provider == "GUEST") {
-                            UserData.nickname = "GUEST"
-                        } else {
-                            UserData.nickname = data.nickname ?: "GUEST"
-                        }
-                    }
-                }.onError { code, message ->
+        val token = reissueAccessTokenUseCase(refreshToken).firstOrNull() ?: return false
+        if(token !is NetworkResult.Success || token.data == null)
+            return false
 
-                }.onException {  }
-            }
-            .catch { LogUtil.e("flow error", "getUserProfileUseCase") }
-            .launchIn(viewModelScope)
+        saveAccessTokenUseCase(token.data.accessToken)
+        saveRefreshTokenUseCase(token.data.refreshToken)
+
+        val profile = getUserProfileUseCase().firstOrNull() ?: return false
+        if(profile !is NetworkResult.Success || profile.data == null)
+            return false
+
+        UserData.provider = profile.data.provider
+        if (UserData.provider == "GUEST")
+            UserData.nickname = "GUEST"
+        else
+            UserData.nickname = profile.data.nickname
+
+        return true
     }
 }
