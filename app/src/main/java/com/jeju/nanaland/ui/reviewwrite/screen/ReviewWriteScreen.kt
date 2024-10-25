@@ -76,6 +76,10 @@ import com.jeju.nanaland.util.resource.getStringArray
 import com.jeju.nanaland.util.ui.UiState
 import com.skydoves.landscapist.ImageOptions
 import com.skydoves.landscapist.glide.GlideImage
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 @Composable
 fun ReviewWriteScreen(
@@ -88,6 +92,7 @@ fun ReviewWriteScreen(
     val uiState = viewModel.uiState.collectAsStateWithLifecycle()
     val callState = viewModel.callState.collectAsStateWithLifecycle()
     var cancelDialogVisible by remember { mutableStateOf(false) }
+    val writeMaximumErrorToast = Toast.makeText(context, getString(R.string.review_write_error_maximum_text, ReviewWriteViewModel.MAX_TEXT_LENGTH ), Toast.LENGTH_SHORT)
     BackHandler {
         cancelDialogVisible = true
     }
@@ -113,8 +118,17 @@ fun ReviewWriteScreen(
         onChangeImages = viewModel::changeImage,
         onChangedText = {
             if(it.length > ReviewWriteViewModel.MAX_TEXT_LENGTH) {
-                Toast.makeText(context, getString(R.string.review_write_error_maximum_text, ReviewWriteViewModel.MAX_TEXT_LENGTH ), Toast.LENGTH_SHORT).show()
-                viewModel.updateReviewText(it.substring(0, ReviewWriteViewModel.MAX_TEXT_LENGTH + 1))
+                writeMaximumErrorToast.show()
+                CoroutineScope(Dispatchers.Default).launch {
+                    delay(1500)
+                    writeMaximumErrorToast.cancel()
+                }
+                val viewMaximumLength = ReviewWriteViewModel.MAX_TEXT_LENGTH + 1
+                if(
+                    it.length == viewMaximumLength || // for overflow view
+                    it.length - viewModel.reviewText.length > 2 // for paste
+                )
+                    viewModel.updateReviewText(it.substring(0, viewMaximumLength))
             }
             else
                 viewModel.updateReviewText(it)
