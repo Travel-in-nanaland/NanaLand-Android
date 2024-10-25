@@ -10,7 +10,7 @@ import com.jeju.nanaland.util.resource.getString
 @Composable
 fun LanguageInitializationScreenText2() {
     Text(
-        text = getString(R.string.profile_initialization_screen_select_language),
+        text = getString(R.string.profile_initialization_screen_sub_title),
         color = getColor().white,
         style = largeTitle01
     )

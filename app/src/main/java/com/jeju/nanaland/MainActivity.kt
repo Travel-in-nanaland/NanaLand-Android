@@ -2,15 +2,11 @@ package com.jeju.nanaland
 
 import android.annotation.SuppressLint
 import android.content.Intent
-import android.os.Build
 import android.os.Bundle
-import android.provider.Settings
-import android.util.Log
 import android.view.WindowManager
 import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.OnBackPressedCallback
-import com.google.android.gms.tasks.OnCompleteListener
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.fillMaxSize
@@ -20,7 +16,6 @@ import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.IntSize
 import androidx.lifecycle.ViewModelProvider
-import com.google.firebase.messaging.FirebaseMessaging
 import com.jeju.nanaland.globalvalue.constant.BOTTOM_NAVIGATION_BAR_HEIGHT
 import com.jeju.nanaland.globalvalue.constant.SCREEN_HEIGHT_WITHOUT_SYSTEM_BAR
 import com.jeju.nanaland.globalvalue.constant.SCREEN_WIDTH
@@ -33,7 +28,6 @@ import com.jeju.nanaland.ui.theme.NanaLandTheme
 import com.jeju.nanaland.ui.theme.getColor
 import com.jeju.nanaland.util.intent.DeepLinkData
 import com.jeju.nanaland.util.log.LogUtil
-import com.kakao.sdk.common.util.Utility
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -160,7 +154,7 @@ class MainActivity : ComponentActivity() {
                 finish()
             } else {
                 backPressedTime = System.currentTimeMillis()
-                Toast.makeText(this@MainActivity, "한 번 더 누르면 앱이 종료됩니다.", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@MainActivity, com.jeju.nanaland.util.resource.getString(R.string.toast_one_more_exit), Toast.LENGTH_SHORT).show()
             }
         }
     }

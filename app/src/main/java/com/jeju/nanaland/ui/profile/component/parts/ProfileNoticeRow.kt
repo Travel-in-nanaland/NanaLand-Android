@@ -61,7 +61,7 @@ fun ProfileNoticeRow(
                 .padding(4.dp),
             painter = painterResource(
                 when(data.noticeCategory){
-                    "공지 사항" -> R.drawable.ic_alarm_notice
+                    "공지 사항" -> R.drawable.ic_alarm_notice // TODO 확인 필요
                     else -> R.drawable.ic_alarm_fix
                 }
             ),
@@ -73,7 +73,7 @@ fun ProfileNoticeRow(
             modifier = Modifier.weight(1f),
         ) {
             Text(
-                text = data.noticeCategory,
+                text = data.noticeCategory, // TODO 확인 필요
                 color = getColor().main,
                 style = caption01SemiBold
             )
