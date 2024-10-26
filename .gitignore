@@ -33,3 +33,6 @@ google-services.json
 *.hprof
 *.aab
 *.apk
+
+# kotlin Build File
+.kotlin/
