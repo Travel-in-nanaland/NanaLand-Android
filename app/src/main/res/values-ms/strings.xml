@@ -3,15 +3,14 @@
     <string name="app_name">nanaland in Jeju</string>
 
     <!--언어 초기화 화면-->
-    <string name="select_language_please">언어를 선택해주세요</string>
 
-    <string name="week_sun_sat_1">월</string>
-    <string name="week_sun_sat_2">화</string>
-    <string name="week_sun_sat_3">수</string>
-    <string name="week_sun_sat_4">목</string>
-    <string name="week_sun_sat_5">금</string>
-    <string name="week_sun_sat_6">토</string>
-    <string name="week_sun_sat_7">일</string>
+    <string name="week_sun_sat_1">MON</string>
+    <string name="week_sun_sat_2">TUE</string>
+    <string name="week_sun_sat_3">WEN</string>
+    <string name="week_sun_sat_4">TUR</string>
+    <string name="week_sun_sat_5">FRI</string>
+    <string name="week_sun_sat_6">SAT</string>
+    <string name="week_sun_sat_7">SUN</string>
 
     <string name="month_name_1">January</string>
     <string name="month_name_2">February</string>
@@ -39,7 +38,7 @@
     <string name="common_나나s_Pick">Pilihan Nana</string>
     <string name="common_홈">Laman Utama</string>
     <string name="common_찜">Simpan</string>
-    <string name="common_제주_맛집">Cerita Jeju</string>
+    <string name="common_제주_맛집">Restoran Jeju</string>
     <string name="common_나의_나나">nana saya</string>
     <string name="common_전체">Seluruh</string>
     <string name="common_건">perkara</string>
@@ -54,10 +53,6 @@
     <string name="common_이메일">E-mel</string>
     <string name="common_확인">Sahkan</string>
     <string name="common_자">aksara</string>
-    <string name="common_한국어">한국어</string>
-    <string name="common_중국어">中国话</string>
-    <string name="common_영어">English</string>
-    <string name="common_말레이시아어">Melayu</string>
     <string name="common_소개">Perkenalan</string>
     <string name="common_닉네임">Jenis Perjalanan</string>
     <string name="common_취소">Batal</string>
@@ -73,6 +68,7 @@
     <string name="sign_in_screen_google_sign_in">Log Masuk Google</string>
 
     <!--홈 화면-->
+    <string name="sign_in_screen_kakao_sign_in">Log Masuk Kakao</string>
     <string name="home_screen_ad1_title">Nak lihat laut yang cantik di Pulau Jeju?</string>
     <string name="home_screen_ad1_content">Mari kita lawati alam semula jadi di Seogwipo-si, Seongsan!</string>
     <string name="home_screen_ad2_title">Mahu lihat bintang yang jarang dilihat?💫</string>
@@ -326,17 +322,16 @@
     <string name="mypage_screen_notice_empty">Tiada Pengumuman</string>
     <string name="profile_update_screen_프로필_수정">Ubah Profil</string>
     <string name="profile_update_screen_수정_완료">Pembetulan selesai</string>
-    <string name="profile_update_screen_warning">소개글은 70자 이내로 작성 가능합니다.</string>
 
     <!--프로필 수정 화면 다이얼로그-->
+    <string name="profile_update_screen_warning">Pengenalan boleh ditulis dalam 70 aksara atau kurang.</string>
     <string name="profile_update_dialog_text1">Adakah anda pasti mahu keluar?</string>
     <string name="profile_update_dialog_text2">Jika anda keluar sekarang,\nApa yang anda tulis akan dipadam.</string>
 
     <!--언어 초기화 화면-->
-    <string name="profile_initialization_screen_hello">안녕하세요!</string>
-    <string name="profile_initialization_screen_select_language">언어를 선택해주세요</string>
 
     <!--약관 설정 화면-->
+    <string name="profile_initialization_screen_select_text">Hai!\nGembira jumpa 👋</string>
     <string name="policy_setting_screen_warning">*Jika tidak bersetuju, beberapa perkhidmatan atau tawaran\nmungkin tidak dapat diterima, sila ambil perhatian.</string>
 
     <!--회원 탈퇴 화면-->
@@ -465,6 +460,7 @@
     <string name="restaurant_동남아_음식">Makanan Asia Tenggara</string>
     <string name="restaurant_비건_푸드">Makanan Vegan</string>
     <string name="restaurant_할랄_푸드">Makanan Halal</string>
+    <string name="restaurant_육류_흑돼지">Daging</string>
     <string name="restaurant_해산물">Makanan laut</string>
     <string name="restaurant_치킨_버거">Ayam/Burger</string>
     <string name="restaurant_카페_디저트">Kafe/Pencuci mulut</string>
@@ -484,4 +480,6 @@
     <string name="activity_해양체험">Pengalaman marin</string>
     <string name="activity_농촌체험">Pengalaman luar bandar</string>
     <string name="activity_힐링테라피">Terapi Penyembuhan</string>
+    <string name="toast_heart_myself">Anda tidak boleh menyukai ulasan yang anda tulis sendiri.</string>
+    <string name="toast_one_more_exit">Jika anda tekan sekali lagi, aplikasi akan ditutup.\"</string>
 </resources>

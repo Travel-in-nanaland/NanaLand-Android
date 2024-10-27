@@ -1,11 +1,9 @@
 package com.jeju.nanaland.ui.settings.policy
 
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -43,37 +41,31 @@ private fun PolicySettingScreen(
 ) {
     CustomSurface {
         CustomTopBar(
-            title = "약관 및 정책",
+            title = getString(R.string.settings_screen_약관_및_정책),
             onBackButtonClicked = { moveToBackScreen() }
         )
 
         Spacer(Modifier.height(24.dp))
 
-        Box(
-            contentAlignment = Alignment.CenterEnd
-        ) {
-            SettingsScreenCategoryItem(
-                text = getString(R.string.policy_agree_screen_marketing_policy),
-                onClick = { updatePolicyAgreement("MARKETING", !isMarketingPolicyAgreed) }
-            )
+        SettingsScreenCategoryItem(
+            text = getString(R.string.policy_agree_screen_marketing_policy),
+            onClick = { updatePolicyAgreement("MARKETING", !isMarketingPolicyAgreed) },
+            endView = {
+                PolicySettingScreenCheckIcon(
+                    isSelected = isMarketingPolicyAgreed
+                )
+            }
+        )
 
-            PolicySettingScreenCheckIcon(
-                isSelected = isMarketingPolicyAgreed
-            )
-        }
-
-        Box(
-            contentAlignment = Alignment.CenterEnd
-        ) {
-            SettingsScreenCategoryItem(
-                text = getString(R.string.policy_agree_screen_location_policy),
-                onClick = { updatePolicyAgreement("LOCATION_SERVICE", !isLocationPolicyAgreed) }
-            )
-
-            PolicySettingScreenCheckIcon(
-                isSelected = isLocationPolicyAgreed
-            )
-        }
+        SettingsScreenCategoryItem(
+            text = getString(R.string.policy_agree_screen_location_policy),
+            onClick = { updatePolicyAgreement("LOCATION_SERVICE", !isLocationPolicyAgreed) },
+            endView = {
+                PolicySettingScreenCheckIcon(
+                    isSelected = isLocationPolicyAgreed
+                )
+            }
+        )
 
         PolicySettingScreenWarningText()
     }

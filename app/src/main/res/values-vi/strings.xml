@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">nanaland in Jeju</string>
-    <string name="select_language_please">언어를 선택해주세요</string>
     <string name="cancel">Cancel</string>
     <string name="done">Done</string>
     <string name="title_time_picker">Select Time</string>
@@ -13,7 +12,7 @@
     <string name="common_나나s_Pick">Lựa chọn của Nana</string>
     <string name="common_홈">Trang chủ</string>
     <string name="common_찜">Được chọn lọc</string>
-    <string name="common_제주_맛집">Nhà hàng</string>
+    <string name="common_제주_맛집">Nhà hàng ở Jeju</string>
     <string name="common_나의_나나">Nana của tôi</string>
     <string name="common_전체">Toàn bộ</string>
     <string name="common_건">trường hợp</string>
@@ -28,10 +27,6 @@
     <string name="common_이메일">Email</string>
     <string name="common_확인">Kiểm tra</string>
     <string name="common_자">ký tự</string>
-    <string name="common_한국어">한국어</string>
-    <string name="common_중국어">中国话</string>
-    <string name="common_영어">English</string>
-    <string name="common_말레이시아어">Melayu</string>
     <string name="common_소개">Giới thiệu</string>
     <string name="common_닉네임">Biệt danh</string>
     <string name="common_취소">Hủy bỏ</string>
@@ -57,6 +52,7 @@
     <string name="common_인터넷_문제">Tôi nghĩ có vấn đề với kết nối internet của tôi!\nBạn có thể quay lại sau khi kiểm tra không?</string>
     <string name="sign_in_screen_로그인_없이_둘러보기">Duyệt mà không cần đăng nhập</string>
     <string name="sign_in_screen_google_sign_in">Đăng nhập bằng Google</string>
+    <string name="sign_in_screen_kakao_sign_in">Đăng nhập bằng Kakao</string>
     <string name="home_screen_ad1_title">Muốn thấy biển đẹp ở Đảo Jeju?</string>
     <string name="home_screen_ad1_content">Hãy đi khám phá thiên nhiên ở Seongsan, Thành phố Seogwipo!!</string>
     <string name="home_screen_ad2_title">Tại sao bạn không đi ngắm những ngôi sao quý giá?💫</string>
@@ -248,8 +244,7 @@
     <string name="profile_update_screen_warning">Giới thiệu có thể được viết trong 70 ký tự hoặc ít hơn.</string>
     <string name="profile_update_dialog_text1">Bạn có chắc chắn muốn rời đi không?</string>
     <string name="profile_update_dialog_text2">Nếu bạn rời đi bây giờ,\nNhững gì bạn đang viết sẽ bị xóa.</string>
-    <string name="profile_initialization_screen_hello">Xin chào</string>
-    <string name="profile_initialization_screen_select_language">Vui lòng chọn ngôn ngữ</string>
+    <string name="profile_initialization_screen_select_text">Chào!\nVui gặp bạn 👋</string>
     <string name="policy_setting_screen_warning">Xin lưu ý rằng nếu bạn không đồng ý, bạn có thể không nhận được các dịch vụ hoặc lợi ích.</string>
     <string name="withdrawal_screen_회원탈퇴">Rút khỏi thành viên</string>
     <string name="withdrawal_screen_heading1">Thông báo rút khỏi dịch vụ</string>
@@ -412,4 +407,6 @@
     <string name="activity_해양체험">Trải nghiệm biển</string>
     <string name="activity_농촌체험">Trải nghiệm nông thôn</string>
     <string name="activity_힐링테라피">Liệu pháp chữa lành</string>
+    <string name="toast_heart_myself">Bạn không thể thích một đánh giá bạn tự viết.</string>
+    <string name="toast_one_more_exit">Nếu bạn nhấn thêm một lần nữa, ứng dụng sẽ đóng.</string>
 </resources>

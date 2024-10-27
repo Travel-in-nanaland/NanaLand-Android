@@ -1,9 +1,6 @@
 <resources>
     <string name="app_name">nanaland in Jeju</string>
     <string name="default_notification_channel_id" translatable="false">1</string>
-    <!--언어 초기화 화면-->
-    <string name="select_language_please">언어를 선택해주세요</string>
-
 
     <string name="week_sun_sat_1">월</string>
     <string name="week_sun_sat_2">화</string>
@@ -54,10 +51,10 @@
     <string name="common_이메일">이메일</string>
     <string name="common_확인">확인</string>
     <string name="common_자">자</string>
-    <string name="common_한국어">한국어</string>
-    <string name="common_중국어">中国话</string>
-    <string name="common_영어">English</string>
-    <string name="common_말레이시아어">Melayu</string>
+    <string name="common_한국어" translatable="false">한국어</string>
+    <string name="common_중국어" translatable="false">中国话</string>
+    <string name="common_영어" translatable="false">English</string>
+    <string name="common_말레이시아어" translatable="false">Melayu</string>
     <string name="common_베트남어" translatable="false">Tiếng Việt</string>
     <string name="common_소개">소개</string>
     <string name="common_닉네임">닉네임</string>
@@ -92,6 +89,7 @@
     <!--로그인 화면-->
     <string name="sign_in_screen_로그인_없이_둘러보기">로그인 없이 둘러보기</string>
     <string name="sign_in_screen_google_sign_in">Google 로그인</string>
+    <string name="sign_in_screen_kakao_sign_in">카카오 로그인</string>
 
     <!--홈 화면-->
     <string name="home_screen_ad1_title">제주도에서 예쁜 바다 보고 싶다고?</string>
@@ -364,8 +362,9 @@
     <string name="profile_update_dialog_text2">지금 돌아가면 변경 내용이 삭제됩니다.</string>
 
     <!--언어 초기화 화면-->
-    <string name="profile_initialization_screen_hello">안녕하세요!</string>
-    <string name="profile_initialization_screen_select_language">언어를 선택해주세요</string>
+    <string name="profile_initialization_screen_title" translatable="false">안녕하세요!</string>
+    <string name="profile_initialization_screen_sub_title" translatable="false">언어를 선택해주세요</string>
+    <string name="profile_initialization_screen_select_text">안녕하세요!\n반갑습니다 👋</string>
 
     <!--약관 설정 화면-->
     <string name="policy_setting_screen_warning">* 비동의시, 받지 못하는 서비스 또는 혜택이 있을 수 있으니 주의하시길 바랍니다.</string>
@@ -410,7 +409,6 @@
     <string name="permission_checking_screen_오디오_및_음악_description">영상 콘텐츠 등록을 위해 필요합니다.</string>
 
     <!--후기 작성 화면-->
-    <!--TODO 번역-->
     <string name="review_write_title">후기 작성</string>
     <string name="review_write_search_hint">장소를 검색하세요</string>
     <string name="review_write_select_rating">{별점}을 {선택}해주세요!</string>
@@ -433,7 +431,6 @@
     <string name="review_write_cancel_dialog_subtitle">지금 나가시면,\n작성 중인 내용이 삭제됩니다.</string>
 
     <!--신고 화면-->
-    <!--TODO 번역-->
     <string name="report_category_title">신고하는 이유를 알려주세요!</string>
     <string name="report_category_subtitle">타당한 근거 없이 신고된 내용은 관리자 확인 후\n반영되지 않을 수 있습니다.</string>
     <string name="report_write_resone_title">신고 사유</string>
@@ -447,7 +444,6 @@
     <string name="loading_wait_text_desc4">잠시만 기다려 주세요!\n여러분의 피드백은 저희에게 큰 힘이 됩니다🍀</string>
 
     <!--리뷰 키워드-->
-    <!--TODO 번역-->
     <string name="review_keyword_mood">분위기</string>
     <string name="review_keyword_with">동반자</string>
     <string name="review_keyword_infra">편의 시설</string>
@@ -470,7 +466,6 @@
     <string name="review_keyword_16">깨끗한 화장실</string>
 
     <!--신고 카테고리-->
-    <!--TODO 번역-->
     <string name="report_reason_1">영리목적 / 홍보성</string>
     <string name="report_reason_2">마음에 들지 않습니다</string>
     <string name="report_reason_3">욕설/인신공격</string>
@@ -522,5 +517,9 @@
     <string name="activity_해양체험">해양체험</string>
     <string name="activity_농촌체험">농촌체험</string>
     <string name="activity_힐링테라피">힐링테라피</string>
+
+    <!--토스트-->
+    <string name="toast_heart_myself">자신이 작성한 후기는 좋아요 누를 수 없습니다.</string>
+    <string name="toast_one_more_exit">한 번 더 누르면 앱이 종료됩니다.</string>
 
 </resources>

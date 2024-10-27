@@ -111,7 +111,7 @@ private fun RestaurantListScreen(
                 modifier = Modifier.fillMaxSize()
             ) {
                 CustomTopBar(
-                    title = "제주 맛집",
+                    title = getString(R.string.common_제주_맛집),
                     onBackButtonClicked = moveToBackScreen
                 )
 

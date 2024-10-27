@@ -189,7 +189,7 @@ private fun SignInScreen(
                     } else {
                         UserApiClient.instance.loginWithKakaoAccount(context) { token, error ->
                             if (error != null) {
-                                Toast.makeText(context, "로그인 실패", Toast.LENGTH_SHORT).show()
+                                Toast.makeText(context, "fail", Toast.LENGTH_SHORT).show()
                             } else if (token != null) {
                                 UserApiClient.instance.me { user, error ->
                                     if (error != null) {

@@ -3,7 +3,6 @@
     <string name="app_name">nanaland in Jeju</string>
 
     <!--언어 초기화 화면-->
-    <string name="select_language_please">언어를 선택해주세요</string>
 
     <string name="week_sun_sat_1">MON</string>
     <string name="week_sun_sat_2">TUE</string>
@@ -26,7 +25,7 @@
     <string name="common_나나s_Pick">nana’s Pick</string>
     <string name="common_홈">Home</string>
     <string name="common_찜">Favorite</string>
-    <string name="common_제주_맛집">Jeju\'s Story</string>
+    <string name="common_제주_맛집">Jeju Restaurants</string>
     <string name="common_나의_나나">My nana</string>
     <string name="common_전체">ALL</string>
     <string name="common_건">Results</string>
@@ -41,14 +40,10 @@
     <string name="common_이메일">Email</string>
     <string name="common_확인">Confirm</string>
     <string name="common_자">characters</string>
-    <string name="common_한국어">한국어</string>
-    <string name="common_중국어">中国话</string>
-    <string name="common_영어">English</string>
-    <string name="common_말레이시아어">Melayu</string>
     <string name="common_소개">Introduction</string>
     <string name="common_닉네임">Nickname</string>
     <string name="common_취소">Cancel</string>
-    <string name="common_삭제">삭제</string>
+    <string name="common_삭제">Delete</string>
     <string name="common_네">Yes</string>
     <string name="common_아니오">No</string>
     <string name="common_필수">(Required)</string>
@@ -60,6 +55,7 @@
     <string name="sign_in_screen_google_sign_in">Google Login</string>
 
     <!--홈 화면-->
+    <string name="sign_in_screen_kakao_sign_in">Kakao Login</string>
     <string name="home_screen_ad1_title">Want to see the beautiful sea in Jeju Island?</string>
     <string name="home_screen_ad1_content">Let\'s tour the nature in Seogwipo-si, Seongsan!</string>
     <string name="home_screen_ad2_title">How about going to see rare stars?💫</string>
@@ -325,17 +321,16 @@
     <string name="mypage_screen_notice_empty">No Announcements Available</string>
     <string name="profile_update_screen_프로필_수정">Edit Profile</string>
     <string name="profile_update_screen_수정_완료">Update</string>
-    <string name="profile_update_screen_warning">소개글은 70자 이내로 작성 가능합니다.</string>
+    <string name="profile_update_screen_warning">The introduction can be written in 70 characters or less.</string>
 
     <!--프로필 수정 화면 다이얼로그-->
     <string name="profile_update_dialog_text1">Are you sure you want to leave?</string>
     <string name="profile_update_dialog_text2">If you leave now,\nWhat you are writing will be deleted.</string>
 
     <!--언어 초기화 화면-->
-    <string name="profile_initialization_screen_hello">안녕하세요!</string>
-    <string name="profile_initialization_screen_select_language">언어를 선택해주세요</string>
 
     <!--약관 설정 화면-->
+    <string name="profile_initialization_screen_select_text">Hello!\nNice to meet you 👋</string>
     <string name="policy_setting_screen_warning">* If you disagree, you may not be able to receive some services or benefits, please be aware.</string>
 
     <!--회원 탈퇴 화면-->
@@ -484,4 +479,6 @@
     <string name="activity_해양체험">Marine experience</string>
     <string name="activity_농촌체험">Rural experience</string>
     <string name="activity_힐링테라피">Healing Therapy</string>
+    <string name="toast_heart_myself">You cannot like a review you wrote yourself.</string>
+    <string name="toast_one_more_exit">If you press it once more, the app will close.</string>
 </resources>

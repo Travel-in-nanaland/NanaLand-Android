@@ -52,7 +52,7 @@ fun NanaPickThumbnailBanner2(
         )
 
         Text(
-            text = item.subHeading,
+            text = item.version,
             color = getColor().black,
             style = caption02
         )

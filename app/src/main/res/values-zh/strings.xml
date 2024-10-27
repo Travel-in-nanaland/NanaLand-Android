@@ -3,7 +3,6 @@
     <string name="app_name">nanaland in Jeju</string>
 
     <!--언어 초기화 화면-->
-    <string name="select_language_please">언어를 선택해주세요</string>
 
     <string name="week_sun_sat_1">日</string>
     <string name="week_sun_sat_2">一</string>
@@ -26,7 +25,7 @@
     <string name="common_나나s_Pick">nana推荐</string>
     <string name="common_홈">首页</string>
     <string name="common_찜">收藏</string>
-    <string name="common_제주_맛집">济州故事</string>
+    <string name="common_제주_맛집">济州美食餐馆</string>
     <string name="common_나의_나나">我的nana</string>
     <string name="common_전체">全部</string>
     <string name="common_건">件</string>
@@ -41,10 +40,6 @@
     <string name="common_이메일">电子邮件</string>
     <string name="common_확인">确认</string>
     <string name="common_자">字</string>
-    <string name="common_한국어">한국어</string>
-    <string name="common_중국어">中国话</string>
-    <string name="common_영어">English</string>
-    <string name="common_말레이시아어">Melayu</string>
     <string name="common_소개">介绍</string>
     <string name="common_닉네임">昵称</string>
     <string name="common_취소">取消</string>
@@ -60,6 +55,7 @@
     <string name="sign_in_screen_google_sign_in">使用 Google 登录</string>
 
     <!--홈 화면-->
+    <string name="sign_in_screen_kakao_sign_in">使用 Kakao 登录</string>
     <string name="home_screen_ad1_title">想看济州岛美丽的大海吗？</string>
     <string name="home_screen_ad1_content">那就来西归浦市城山体验大自然吧！</string>
     <string name="home_screen_ad2_title">想去看稀有的星星吗？💫</string>
@@ -326,17 +322,15 @@
     <string name="mypage_screen_notice_empty">没有公告</string>
     <string name="profile_update_screen_프로필_수정">编辑个人资料</string>
     <string name="profile_update_screen_수정_완료">修改完成</string>
-    <string name="profile_update_screen_warning">소개글은 70자 이내로 작성 가능합니다.</string>
-
+    <string name="profile_update_screen_warning">介绍可以在70个字符以内书写。</string>
     <!--프로필 수정 화면 다이얼로그-->
     <string name="profile_update_dialog_text1">您确定要离开吗？</string>
     <string name="profile_update_dialog_text2">如果您现在离开，\n您正在写的内容将被删除。</string>
 
     <!--언어 초기화 화면-->
-    <string name="profile_initialization_screen_hello">안녕하세요!</string>
-    <string name="profile_initialization_screen_select_language">언어를 선택해주세요</string>
 
     <!--약관 설정 화면-->
+    <string name="profile_initialization_screen_select_text">你好!\n很高兴见到你 👋</string>
     <string name="policy_setting_screen_warning">*不同意时，可能无法享受某些服务或优惠，请注意</string>
 
     <!--회원 탈퇴 화면-->
@@ -485,4 +479,6 @@
     <string name="activity_해양체험">海洋体验</string>
     <string name="activity_농촌체험">农村体验</string>
     <string name="activity_힐링테라피">治愈疗法</string>
+    <string name="toast_heart_myself">您不能点赞自己写的评价。</string>
+    <string name="toast_one_more_exit">如果你再按一次，应用程序将关闭。</string>
 </resources>
