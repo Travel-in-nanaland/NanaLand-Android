@@ -23,6 +23,7 @@ import com.jeju.nanaland.globalvalue.constant.getLocationIdx
 import com.jeju.nanaland.globalvalue.constant.getLocationList
 import com.jeju.nanaland.globalvalue.type.AnchoredDraggableContentState
 import com.jeju.nanaland.ui.component.common.CustomSurface
+import com.jeju.nanaland.ui.component.common.icon.GoToUpInList
 import com.jeju.nanaland.ui.component.common.topbar.CustomTopBar
 import com.jeju.nanaland.ui.component.listscreen.filter.FestivalFilterDialogDimBackground
 import com.jeju.nanaland.ui.component.listscreen.filter.LocationFilterBottomDialog
@@ -131,6 +132,8 @@ private fun NatureListScreen(
                     moveToSignInScreen = moveToSignInScreen,
                 )
             }
+
+            GoToUpInList(lazyGridState)
 
             if (isDimBackgroundShowing.value) {
                 FestivalFilterDialogDimBackground(
