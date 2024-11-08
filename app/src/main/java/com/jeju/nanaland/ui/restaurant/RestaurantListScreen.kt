@@ -27,6 +27,7 @@ import com.jeju.nanaland.globalvalue.constant.getRestaurantKeywordList
 import com.jeju.nanaland.globalvalue.type.AnchoredDraggableContentState
 import com.jeju.nanaland.ui.component.common.CustomSurface
 import com.jeju.nanaland.ui.component.common.icon.GoToUpInList
+import com.jeju.nanaland.ui.component.common.layoutSet.ListEmptyByFilter
 import com.jeju.nanaland.ui.component.common.topbar.CustomTopBar
 import com.jeju.nanaland.ui.component.listscreen.filter.KeywordLocationFilterTopBar
 import com.jeju.nanaland.ui.component.listscreen.filter.LocationFilterBottomDialog
@@ -134,14 +135,31 @@ private fun RestaurantListScreen(
                     },
                     showDimBackground = { isDimBackgroundShowing.value = true }
                 )
-
-                RestaurantThumbnailList(
-                    listState = lazyGridState,
-                    thumbnailList = restaurantThumbnailList,
-                    toggleFavorite = toggleFavorite,
-                    moveToRestaurantContentScreen = moveToRestaurantContentScreen,
-                    moveToSignInScreen = moveToSignInScreen
+                if (//if filter on
+                    (
+                        !(selectedLocationList.all { it } || selectedLocationList.all { !it }) || // if location filter on
+                        !(selectedRestaurantKeywordList.all { it } || selectedRestaurantKeywordList.all { !it }) // if keyword filter on
+                    ) &&
+                    (restaurantThumbnailList is UiState.Success && restaurantThumbnailList.data.isEmpty()) // and list is empty
                 )
+                    ListEmptyByFilter {
+                        selectedLocationList.forEachIndexed { i, _ ->
+                            selectedLocationList[i] = false
+                        }
+                        selectedRestaurantKeywordList.forEachIndexed { i, _ ->
+                            selectedRestaurantKeywordList[i] = false
+                        }
+                        clearRestaurantList()
+                        getRestaurantList()
+                    }
+                else
+                    RestaurantThumbnailList(
+                        listState = lazyGridState,
+                        thumbnailList = restaurantThumbnailList,
+                        toggleFavorite = toggleFavorite,
+                        moveToRestaurantContentScreen = moveToRestaurantContentScreen,
+                        moveToSignInScreen = moveToSignInScreen
+                    )
             }
 
             GoToUpInList(lazyGridState)

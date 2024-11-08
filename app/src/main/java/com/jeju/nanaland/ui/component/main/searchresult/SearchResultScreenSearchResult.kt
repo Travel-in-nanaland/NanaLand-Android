@@ -36,29 +36,38 @@ fun SearchResultScreenSearchResult(
         when (allSearchResultList) {
             is UiState.Loading -> {}
             is UiState.Success -> {
-                Column(
-                    modifier = Modifier
-                        .imePadding()
-                        .verticalScroll(rememberScrollState())
-                        .padding(start = 16.dp, end = 16.dp)
-                ) {
-                    SearchCategoryType.entries.sortedByDescending {
-                        allSearchResultList.data[it.name]?.count ?: -1
-                    }.forEach {
-                        if (it != SearchCategoryType.All) {
-                            SearchResultScreenPreviewByCategory(
-                                category = it,
-                                allSearchResultList = allSearchResultList.data,
-                                getSearchResult = getSearchResult,
-                                updateSearchCategoryType = updateSearchCategoryType,
-                                onFavoriteButtonClick = toggleAllSearchResultFavorite,
-                                onPostClick = onPostClick,
-                                moveToSignInScreen = moveToSignInScreen,
-                            )
-
-                            Spacer(Modifier.height(40.dp))
-                        }
+                if(allSearchResultList.data.all { it.value.count == 0 }) {
+                    Box(
+                        Modifier.fillMaxSize(),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        SearchResultScreenEmptySearchResultContent()
                     }
+                } else {
+                    Column(
+                        modifier = Modifier
+                            .imePadding()
+                            .verticalScroll(rememberScrollState())
+                            .padding(start = 16.dp, end = 16.dp)
+                    ) {
+                            SearchCategoryType.entries.sortedByDescending {
+                                allSearchResultList.data[it.name]?.count ?: -1
+                            }.forEach {
+                                if (it != SearchCategoryType.All) {
+                                    SearchResultScreenPreviewByCategory(
+                                        category = it,
+                                        allSearchResultList = allSearchResultList.data,
+                                        getSearchResult = getSearchResult,
+                                        updateSearchCategoryType = updateSearchCategoryType,
+                                        onFavoriteButtonClick = toggleAllSearchResultFavorite,
+                                        onPostClick = onPostClick,
+                                        moveToSignInScreen = moveToSignInScreen,
+                                    )
+
+                                    Spacer(Modifier.height(40.dp))
+                                }
+                            }
+                        }
                 }
             }
             is UiState.Failure -> {}

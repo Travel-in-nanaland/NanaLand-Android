@@ -1,5 +1,6 @@
 package com.jeju.nanaland.ui.experience
 
+import android.util.Log
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.gestures.animateTo
 import androidx.compose.foundation.layout.Box
@@ -29,6 +30,7 @@ import com.jeju.nanaland.globalvalue.type.AnchoredDraggableContentState
 import com.jeju.nanaland.globalvalue.type.ExperienceCategoryType
 import com.jeju.nanaland.ui.component.common.CustomSurface
 import com.jeju.nanaland.ui.component.common.icon.GoToUpInList
+import com.jeju.nanaland.ui.component.common.layoutSet.ListEmptyByFilter
 import com.jeju.nanaland.ui.component.common.topbar.CustomTopBar
 import com.jeju.nanaland.ui.component.listscreen.category.ExperienceCategoryListTab
 import com.jeju.nanaland.ui.component.listscreen.filter.ActivityKeywordFilterDialog
@@ -154,15 +156,37 @@ private fun ExperienceListScreen(
                         AnchoredDraggableContentState.Open) } },
                     showDimBackground = { isDimBackgroundShowing.value = true }
                 )
-
-                ExperienceThumbnailList(
-                    experienceCategory = selectedCategoryType.toString(),
-                    listState = lazyGridState,
-                    thumbnailList = experienceThumbnailDataList,
-                    toggleFavorite = toggleFavorite,
-                    moveToExperienceContentScreen = moveToExperienceContentScreen,
-                    moveToSignInScreen = moveToSignInScreen
+                Log.d("asd","""
+!(${selectedLocationList.all { it }} || ${selectedLocationList.all { !it }}) || // if location filter
+                        (${selectedCategoryType == ExperienceCategoryType.Activity} && !(${selectedActivityKeywordList.all { it }} || ${selectedActivityKeywordList.all { !it }})) ||  // if activity and  filter
+                        (${selectedCategoryType != ExperienceCategoryType.Activity} && !(${selectedCultureArtKeywordList.all { it }} || ${selectedCultureArtKeywordList.all { !it }}))// if art and  filter
+                        ) &&  ${(experienceThumbnailDataList as? UiState.Success)?.data}
+                    (${experienceThumbnailDataList is UiState.Success && experienceThumbnailDataList.data.isEmpty()}) // and list is empty                
+                """.trimIndent())
+                if (
+                    (// if filter on
+                        !(selectedLocationList.all { it } || selectedLocationList.all { !it }) || // if location filter
+                        (selectedCategoryType == ExperienceCategoryType.Activity && !(selectedActivityKeywordList.all { it } || selectedActivityKeywordList.all { !it })) ||  // if activity and  filter
+                        (selectedCategoryType != ExperienceCategoryType.Activity && !(selectedCultureArtKeywordList.all { it } || selectedCultureArtKeywordList.all { !it }))// if art and  filter
+                    ) &&
+                    (experienceThumbnailDataList is UiState.Success && experienceThumbnailDataList.data.isEmpty()) // and list is empty
                 )
+                    ListEmptyByFilter {
+                        selectedLocationList.forEachIndexed { i, _ ->
+                            selectedLocationList[i] = false
+                        }
+                        clearExperienceList()
+                        getExperienceList()
+                    }
+                else
+                    ExperienceThumbnailList(
+                        experienceCategory = selectedCategoryType.toString(),
+                        listState = lazyGridState,
+                        thumbnailList = experienceThumbnailDataList,
+                        toggleFavorite = toggleFavorite,
+                        moveToExperienceContentScreen = moveToExperienceContentScreen,
+                        moveToSignInScreen = moveToSignInScreen
+                    )
             }
 
             GoToUpInList(lazyGridState)

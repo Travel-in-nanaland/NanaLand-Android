@@ -24,6 +24,7 @@ import com.jeju.nanaland.globalvalue.constant.getLocationList
 import com.jeju.nanaland.globalvalue.type.AnchoredDraggableContentState
 import com.jeju.nanaland.ui.component.common.CustomSurface
 import com.jeju.nanaland.ui.component.common.icon.GoToUpInList
+import com.jeju.nanaland.ui.component.common.layoutSet.ListEmptyByFilter
 import com.jeju.nanaland.ui.component.common.topbar.CustomTopBar
 import com.jeju.nanaland.ui.component.listscreen.filter.FestivalFilterDialogDimBackground
 import com.jeju.nanaland.ui.component.listscreen.filter.LocationFilterBottomDialog
@@ -123,14 +124,25 @@ private fun NatureListScreen(
                         AnchoredDraggableContentState.Open) } },
                     showDimBackground = { isDimBackgroundShowing.value = true }
                 )
-
-                NatureThumbnailList(
-                    listState = lazyGridState,
-                    thumbnailList = natureThumbnailList,
-                    toggleFavorite = toggleFavorite,
-                    moveToNatureContentScreen = moveToNatureContentScreen,
-                    moveToSignInScreen = moveToSignInScreen,
+                if (
+                    !(selectedLocationList.all { it } || selectedLocationList.all { !it }) && // if filter on
+                    (natureThumbnailList is UiState.Success && natureThumbnailList.data.isEmpty()) // and list is empty
                 )
+                    ListEmptyByFilter {
+                        selectedLocationList.forEachIndexed { i, _ ->
+                            selectedLocationList[i] = false
+                        }
+                        clearNatureList()
+                        getNatureList()
+                    }
+                else
+                    NatureThumbnailList(
+                        listState = lazyGridState,
+                        thumbnailList = natureThumbnailList,
+                        toggleFavorite = toggleFavorite,
+                        moveToNatureContentScreen = moveToNatureContentScreen,
+                        moveToSignInScreen = moveToSignInScreen,
+                    )
             }
 
             GoToUpInList(lazyGridState)

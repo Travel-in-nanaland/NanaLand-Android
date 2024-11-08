@@ -27,6 +27,7 @@ import com.jeju.nanaland.globalvalue.type.AnchoredDraggableContentState
 import com.jeju.nanaland.globalvalue.type.FestivalCategoryType
 import com.jeju.nanaland.ui.component.common.CustomSurface
 import com.jeju.nanaland.ui.component.common.icon.GoToUpInList
+import com.jeju.nanaland.ui.component.common.layoutSet.ListEmptyByFilter
 import com.jeju.nanaland.ui.component.common.topbar.CustomTopBar
 import com.jeju.nanaland.ui.component.listscreen.category.FestivalCategoryListTab
 import com.jeju.nanaland.ui.component.listscreen.filter.DateFilterBottomDialog
@@ -204,13 +205,31 @@ private fun FestivalListScreen(
                     }
                 }
 
-                FestivalThumbnailList(
-                    listState = lazyGridState,
-                    thumbnailList = festivalThumbnailList,
-                    toggleFavorite = toggleFavorite,
-                    moveToFestivalContentScreen = moveToFestivalContentScreen,
-                    moveToSignInScreen = moveToSignInScreen,
+                if(
+                    !(selectedLocationList.all { it } || selectedLocationList.all { !it }) && // if filter on
+                    (festivalThumbnailList is UiState.Success && festivalThumbnailList.data.isEmpty()) // and list is empty
                 )
+                    ListEmptyByFilter {
+                        updateStartCalendar(Calendar.getInstance())
+                        updateEndCalendar(Calendar.getInstance())
+                        selectedLocationList.forEachIndexed { i, _ ->
+                            selectedLocationList[i] = false
+                        }
+                        clearFestivalList()
+                        when(selectedCategoryType) {
+                            FestivalCategoryType.Monthly -> getMonthlyFestivalList()
+                            FestivalCategoryType.Ended -> getEndedFestivalList()
+                            FestivalCategoryType.Seasonal -> getSeasonalFestivalList()
+                        }
+                    }
+                else
+                    FestivalThumbnailList(
+                        listState = lazyGridState,
+                        thumbnailList = festivalThumbnailList,
+                        toggleFavorite = toggleFavorite,
+                        moveToFestivalContentScreen = moveToFestivalContentScreen,
+                        moveToSignInScreen = moveToSignInScreen,
+                    )
             }
 
             GoToUpInList(lazyGridState)

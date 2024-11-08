@@ -122,6 +122,8 @@
     <string name="searching_screen_most_search">{가장 많이} 검색하고 있어요!</string>
     <string name="searching_screen_hot_keywords">검색량 UP ! JEJU Place 🍊</string>
 
+    <string name="favorite_screen_empty_list">아직 찜한 컨텐츠가 없습니다\n마음에 드는 컨텐츠에 하트를 눌러보세요!</string>
+
     <!--검색 결과 화면-->
     <string name="search_result_screen_no_result">해당 검색 결과가 없습니다.</string>
 
@@ -147,6 +149,9 @@
 
     <!--리스트 화면 공통-->
     <string name="list_screen_common_전_지역">전 지역</string>
+    <string name="list_screen_common_empty_list_by_filter_head">해당 컨텐츠가 없습니다.</string>
+    <string name="list_screen_common_empty_list_by_filter_sub">필터를 조정하거나 초기화해 보세요!</string>
+    <string name="list_screen_common_reset_filter">필터 초기화</string>
 
     <!--지역 공통-->
     <string name="location_common_제주시">제주시</string>

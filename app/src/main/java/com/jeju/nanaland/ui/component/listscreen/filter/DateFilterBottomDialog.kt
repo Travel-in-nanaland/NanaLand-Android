@@ -67,7 +67,7 @@ fun DateFilterBottomDialog(
         if (anchoredDraggableState.targetValue == AnchoredDraggableContentState.Open) {
             dateRangeCalendarManager.value?.mMinSelectedDate = startCalendar
             dateRangeCalendarManager.value?.mMaxSelectedDate = endCalendar
-//            adapterEventCalendarMonths.value?.invalidateCalendar()
+            adapterEventCalendarMonths.value?.invalidateCalendar()
         }
     }
     Column(
