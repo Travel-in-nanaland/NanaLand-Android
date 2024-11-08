@@ -42,7 +42,9 @@ fun SearchResultScreenSearchResult(
                         .verticalScroll(rememberScrollState())
                         .padding(start = 16.dp, end = 16.dp)
                 ) {
-                    SearchCategoryType.entries.forEach {
+                    SearchCategoryType.entries.sortedByDescending {
+                        allSearchResultList.data[it.name]?.count ?: -1
+                    }.forEach {
                         if (it != SearchCategoryType.All) {
                             SearchResultScreenPreviewByCategory(
                                 category = it,
