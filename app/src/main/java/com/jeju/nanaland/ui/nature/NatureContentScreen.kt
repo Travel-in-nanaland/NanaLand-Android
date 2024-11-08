@@ -17,6 +17,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.jeju.nanaland.BuildConfig
 import com.jeju.nanaland.R
 import com.jeju.nanaland.domain.entity.nature.NatureContent
 import com.jeju.nanaland.ui.component.common.CustomSurface
@@ -97,7 +98,7 @@ private fun NatureContentScreen(
                                     onShareButtonClicked = {
                                         val sendIntent: Intent = Intent().apply {
                                             action = Intent.ACTION_SEND
-                                            putExtra(Intent.EXTRA_TEXT, "http://13.125.110.80:8080/share/${getLanguage()}?category=nature&id=${contentId}")
+                                            putExtra(Intent.EXTRA_TEXT, "${BuildConfig.BASE_URL}/share/${getLanguage()}?category=nature&id=${contentId}")
                                             type = "text/plain"
                                         }
                                         val shareIntent = Intent.createChooser(sendIntent, null)

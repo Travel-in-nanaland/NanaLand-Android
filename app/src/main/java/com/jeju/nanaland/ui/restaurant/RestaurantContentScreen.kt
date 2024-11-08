@@ -29,6 +29,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.jeju.nanaland.BuildConfig
 import com.jeju.nanaland.R
 import com.jeju.nanaland.domain.entity.restaurant.RestaurantContentData
 import com.jeju.nanaland.domain.entity.review.ReviewListData
@@ -150,7 +151,7 @@ private fun RestaurantContentScreen(
                     onShareButtonClicked = {
                         val sendIntent: Intent = Intent().apply {
                             action = Intent.ACTION_SEND
-                            putExtra(Intent.EXTRA_TEXT, "http://13.125.110.80:8080/share/${getLanguage()}?category=restaurant&id=${contentId}")
+                            putExtra(Intent.EXTRA_TEXT, "${BuildConfig.BASE_URL}/share/${getLanguage()}?category=restaurant&id=${contentId}")
                             type = "text/plain"
                         }
                         val shareIntent = Intent.createChooser(sendIntent, null)
