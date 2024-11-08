@@ -92,7 +92,8 @@ private fun ReviewWriteKeywordUI(
     val keywords = remember { listOf(
         Pair(getString(R.string.review_keyword_mood), ReviewKeyword.Mood.entries),
         Pair(getString(R.string.review_keyword_with), ReviewKeyword.With.entries),
-        Pair(getString(R.string.review_keyword_infra), ReviewKeyword.Infra.entries)
+        Pair(getString(R.string.review_keyword_infra), ReviewKeyword.Infra.entries),
+        Pair(getString(R.string.review_keyword_etc), ReviewKeyword.Etc.entries)
     ) }
 
     CustomSurface {

@@ -67,7 +67,7 @@ class ReviewWriteViewModel @Inject constructor(
     companion object{
         const val MAX_IMAGE_CNT = 5
         const val MAX_TEXT_LENGTH = 200
-        const val MIN_KEYWORD_CNT = 3
+        const val MIN_KEYWORD_CNT = 1
         const val MAX_KEYWORD_CNT = 6
     }
     var isEdit = false

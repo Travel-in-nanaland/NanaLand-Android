@@ -72,6 +72,7 @@
         <item>@string/review_keyword_14</item>
         <item>@string/review_keyword_15</item>
         <item>@string/review_keyword_16</item>
+        <item>@string/review_keyword_17</item>
     </string-array>
 
     <!--신고 카테고리-->

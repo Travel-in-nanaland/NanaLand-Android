@@ -414,6 +414,7 @@
     <string name="review_write_select_rating">{별점}을 {선택}해주세요!</string>
     <string name="review_write_writing">{방문 후기}를 {작성}해주세요!</string>
     <string name="review_write_writing_hint">내용을 작성해 주세요</string>
+    <string name="review_write_keyword">{키워드}를 {선택}해주세요!</string>
     <string name="review_write_add_keyword">키워드 추가</string>
     <string name="review_write_complete">올리기</string>
     <string name="review_write_error_maximum_picture">사진은 %d개까지 선택 가능합니다</string>
@@ -447,6 +448,7 @@
     <string name="review_keyword_mood">분위기</string>
     <string name="review_keyword_with">동반자</string>
     <string name="review_keyword_infra">편의 시설</string>
+    <string name="review_keyword_etc">기타</string>
 
     <string name="review_keyword_1">기념일에 가면 좋아요</string>
     <string name="review_keyword_2">아기자기해요</string>
@@ -464,6 +466,7 @@
     <string name="review_keyword_14">넓은 장소</string>
     <string name="review_keyword_15">주차장</string>
     <string name="review_keyword_16">깨끗한 화장실</string>
+    <string name="review_keyword_17">선택할 키워드가 없어요</string>
 
     <!--신고 카테고리-->
     <string name="report_reason_1">영리목적 / 홍보성</string>

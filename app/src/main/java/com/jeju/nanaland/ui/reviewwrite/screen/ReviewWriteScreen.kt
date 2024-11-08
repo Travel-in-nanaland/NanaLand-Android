@@ -243,6 +243,18 @@ private fun ReviewWriteUI(
 
                 MyDivider()
                 TextWithPointColor(
+                    text = getString(R.string.review_write_keyword),
+                    style = bodyBold
+                )
+                Spacer(modifier = Modifier.height(16.dp))
+                ReviewKeywordChip(
+                    keywords = uiState.reviewKeyword,
+                    onRemoveKeyword = onRemoveKeyword,
+                    moveToKeywordScreen = moveToKeywordScreen
+                )
+
+                MyDivider()
+                TextWithPointColor(
                     text = getString(R.string.review_write_writing),
                     style = bodyBold
                 )
@@ -266,11 +278,6 @@ private fun ReviewWriteUI(
                     onText = onChangedText
                 )
 
-                ReviewKeywordChip(
-                    keywords = uiState.reviewKeyword,
-                    onRemoveKeyword = onRemoveKeyword,
-                    moveToKeywordScreen = moveToKeywordScreen
-                )
                 Spacer(modifier = Modifier.height(32.dp))
             }
             BottomOkButton(getString(R.string.review_write_complete),uiState.canSubmit){
@@ -390,61 +397,76 @@ private fun ReviewKeywordChip(
     onRemoveKeyword: (ReviewKeyword) -> Unit,
     moveToKeywordScreen: () -> Unit
 ) {
-    FlowRow(
-        modifier = Modifier
-            .fillMaxWidth(),
-        horizontalArrangement = Arrangement.spacedBy(8.dp),
-        verticalArrangement = Arrangement.spacedBy(12.dp)
-    ) {
-        Row(
-            modifier = Modifier
-                .border(
-                    width = 1.dp,
-                    shape = RoundedCornerShape(30.dp),
-                    color = getColor().main
-                )
-                .clickable { moveToKeywordScreen() }
-                .padding(horizontal = 16.dp, vertical = 8.dp),
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            Text(
-                text = getString(R.string.review_write_add_keyword),
-                color = getColor().main,
-                style = body02
-            )
-            Spacer(modifier = Modifier.width(8.dp))
-            Icon(
-                modifier = Modifier.size(16.dp),
-                imageVector = Icons.Default.Add,
-                contentDescription = null,
-                tint = getColor().main
-            )
+    if(keywords.isEmpty()) {
+        Row(Modifier.fillMaxWidth()) {
+            Spacer(modifier = Modifier.weight(1f))
+            ReviewKeywordAddButton(moveToKeywordScreen)
+            Spacer(modifier = Modifier.weight(1f))
         }
+    } else {
+        FlowRow(
+            modifier = Modifier
+                .fillMaxWidth(),
+            horizontalArrangement = Arrangement.spacedBy(8.dp),
+            verticalArrangement = Arrangement.spacedBy(12.dp)
+        ) {
+            ReviewKeywordAddButton(moveToKeywordScreen)
 
-        keywords.forEach {
-            Row(
-                modifier = Modifier
-                    .background(
-                        color = getColor().main10,
-                        shape = RoundedCornerShape(30.dp)
+            keywords.forEach {
+                Row(
+                    modifier = Modifier
+                        .background(
+                            color = getColor().main10,
+                            shape = RoundedCornerShape(30.dp)
+                        )
+                        .padding(horizontal = 16.dp, vertical = 8.dp)
+                        .clickable { onRemoveKeyword(it) },
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Text(
+                        text = getStringArray(R.array.review_keyword)[it.stringIndex],
+                        color = getColor().main,
+                        style = body02
                     )
-                    .padding(horizontal = 16.dp, vertical = 8.dp)
-                    .clickable { onRemoveKeyword(it) },
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                Text(
-                    text = getStringArray(R.array.review_keyword)[it.stringIndex],
-                    color = getColor().main,
-                    style = body02
-                )
-                Spacer(modifier = Modifier.width(8.dp))
-                Icon(
-                    modifier = Modifier.size(16.dp),
-                    imageVector = Icons.Default.Clear,
-                    contentDescription = null,
-                    tint = getColor().main
-                )
+                    Spacer(modifier = Modifier.width(8.dp))
+                    Icon(
+                        modifier = Modifier.size(16.dp),
+                        imageVector = Icons.Default.Clear,
+                        contentDescription = null,
+                        tint = getColor().main
+                    )
+                }
             }
         }
+    }
+}
+
+@Composable
+private fun ReviewKeywordAddButton(
+    moveToKeywordScreen: () -> Unit
+) {
+    Row(
+        modifier = Modifier
+            .border(
+                width = 1.dp,
+                shape = RoundedCornerShape(30.dp),
+                color = getColor().main
+            )
+            .clickable { moveToKeywordScreen() }
+            .padding(horizontal = 16.dp, vertical = 8.dp),
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        Text(
+            text = getString(R.string.review_write_add_keyword),
+            color = getColor().main,
+            style = body02
+        )
+        Spacer(modifier = Modifier.width(8.dp))
+        Icon(
+            modifier = Modifier.size(16.dp),
+            imageVector = Icons.Default.Add,
+            contentDescription = null,
+            tint = getColor().main
+        )
     }
 }

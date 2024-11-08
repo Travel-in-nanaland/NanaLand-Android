@@ -43,5 +43,9 @@ sealed interface ReviewKeyword {
         @SerializedName("BATHROOM")
         BATHROOM { override val stringIndex = 15 },
     }
+    enum class Etc: ReviewKeyword {
+        @SerializedName("NOTHING")//TODO API 데이터
+        NOTHING { override val stringIndex = 16 },
+    }
 }
 
