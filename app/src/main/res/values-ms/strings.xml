@@ -34,7 +34,6 @@
     <string name="common_7대_자연">7Keajaiban Alam</string>
     <string name="common_축제">Festival</string>
     <string name="common_전통시장">Pasaran Tradisional</string>
-    <string name="common_이색_체험">Aktiviti Menarik</string>
     <string name="common_나나s_Pick">Pilihan Nana</string>
     <string name="common_홈">Laman Utama</string>
     <string name="common_찜">Simpan</string>
@@ -77,7 +76,7 @@
     <string name="home_screen_ad3_content">Pasar tradisional apa yang masih ada?</string>
     <string name="home_screen_ad4_title">Festival khas di Jeju pada bulan Julai🎈</string>
     <string name="home_screen_ad4_content">Mari saksikan festival yang penuh dengan harta karun dunia, rasa Pulau Jeju!</string>
-    <string name="home_screen_recommend">Cadangan daripada penduduk untuk %s kami</string>
+    <string name="home_screen_recommend">Cadangan daripada penduduk untuk %s kami🍊</string>
     <string name="home_screen_recommend_default_name">Nana</string>
 
     <string name="home_screen_hint_1">Festival Bunga Canola di Jeju sedang berlangsung! 🏵️</string>

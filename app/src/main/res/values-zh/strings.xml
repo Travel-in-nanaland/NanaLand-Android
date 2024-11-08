@@ -21,7 +21,6 @@
     <string name="common_7대_자연">七大自然</string>
     <string name="common_축제">庆典</string>
     <string name="common_전통시장">传统市场</string>
-    <string name="common_이색_체험">特色体验</string>
     <string name="common_나나s_Pick">nana推荐</string>
     <string name="common_홈">首页</string>
     <string name="common_찜">收藏</string>
@@ -64,7 +63,7 @@
     <string name="home_screen_ad3_content">那些传统市场依然存在呢？</string>
     <string name="home_screen_ad4_title">济州岛七月举办的独特节日🎈</string>
     <string name="home_screen_ad4_content">来看看充满济州岛风情的世界宝藏节日吧！</string>
-    <string name="home_screen_recommend">为您准备的 %s 推荐</string>
+    <string name="home_screen_recommend">为您准备的 %s 推荐🍊</string>
     <string name="home_screen_recommend_default_name">Nana</string>
 
     <string name="home_screen_hint_1">济州岛的油菜花节正进行中！🏵️</string>

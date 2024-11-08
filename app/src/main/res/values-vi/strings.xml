@@ -8,7 +8,6 @@
     <string name="common_7대_자연">7 kỳ quan thiên nhiên</string>
     <string name="common_축제">Lễ hội</string>
     <string name="common_전통시장">Chợ truyền thống</string>
-    <string name="common_이색_체험">Trải nghiệm độc đáo</string>
     <string name="common_나나s_Pick">Lựa chọn của Nana</string>
     <string name="common_홈">Trang chủ</string>
     <string name="common_찜">Được chọn lọc</string>
@@ -362,7 +361,7 @@
     <string name="loading_wait_text_desc4">Vui lòng chờ một chút!\nPhản hồi của bạn là nguồn động lực lớn\ncho chúng tôi. 🍀</string>
     <string name="type_test_recommended_spot_text">Dành cho %s</string>
     <string name="type_test_recommended_spot_추천_여행지">Điểm đến du lịch được đề xuất</string>
-    <string name="home_screen_recommend">Gợi ý từ người dân cho %s của chúng tôi</string>
+    <string name="home_screen_recommend">Gợi ý từ người dân cho %s của chúng tôi🍊</string>
     <string name="home_screen_recommend_default_name">Nana</string>
     <string name="home_screen_hint_1">Hiện tại đảo Jeju đang có lễ hội hoa cải dầu🏵️</string>
     <string name="home_screen_hint_2">Hãy đến các cánh đồng trà xanh ở đảo Jeju nào😎</string>

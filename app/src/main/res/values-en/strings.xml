@@ -21,7 +21,6 @@
     <string name="common_7대_자연">7 Natural Wonders</string>
     <string name="common_축제">Festival</string>
     <string name="common_전통시장">Traditional Markets</string>
-    <string name="common_이색_체험">Unique activity</string>
     <string name="common_나나s_Pick">nana’s Pick</string>
     <string name="common_홈">Home</string>
     <string name="common_찜">Favorite</string>
@@ -64,7 +63,7 @@
     <string name="home_screen_ad3_content">Which traditional markets are still around?</string>
     <string name="home_screen_ad4_title">Jeju\'s unique festival in July🎈</string>
     <string name="home_screen_ad4_content">Let\'s go see the festival full of the treasures of the world, feeling Jeju Island!</string>
-    <string name="home_screen_recommend">Recommendation from residents for our %s</string>
+    <string name="home_screen_recommend">Recommendation from residents for our %s🍊</string>
     <string name="home_screen_recommend_default_name">Nana</string>
 
     <string name="home_screen_hint_1">Jeju\'s Canola Festival is on now! 🏵️</string>

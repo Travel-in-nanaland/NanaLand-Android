@@ -128,7 +128,7 @@ private fun ExperienceListScreen(
                 modifier = Modifier.fillMaxSize()
             ) {
                 CustomTopBar(
-                    title = getString(R.string.common_이색_체험),
+                    title = getString(R.string.common_액티비티), // TODO!!변경
                     onBackButtonClicked = moveToBackScreen
                 )
 

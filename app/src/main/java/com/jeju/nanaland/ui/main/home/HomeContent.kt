@@ -1,7 +1,9 @@
 package com.jeju.nanaland.ui.main.home
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.layout.padding
@@ -18,11 +20,12 @@ import com.jeju.nanaland.R
 import com.jeju.nanaland.domain.entity.member.RecommendedPostData
 import com.jeju.nanaland.domain.entity.nanapick.NanaPickBannerData
 import com.jeju.nanaland.globalvalue.userdata.UserData
-import com.jeju.nanaland.ui.component.main.home.HomeScreenAdBanner
 import com.jeju.nanaland.ui.component.main.home.HomeScreenCategoryButtons
+import com.jeju.nanaland.ui.component.main.home.HomeScreenPopularPlaces
 import com.jeju.nanaland.ui.component.main.home.HomeScreenRecommendedPosts
 import com.jeju.nanaland.ui.component.main.home.HomeScreenTopBanner
 import com.jeju.nanaland.ui.theme.getColor
+import com.jeju.nanaland.ui.theme.shadowDivider
 import com.jeju.nanaland.ui.theme.title02Bold
 import com.jeju.nanaland.util.listfilter.ListFilter
 import com.jeju.nanaland.util.resource.getString
@@ -85,54 +88,72 @@ private fun HomeContent(
             onBannerClick = moveToCategoryContentScreen
         )
 
-        Spacer(Modifier.height(16.dp))
+        Spacer(Modifier.height(28.dp))
 
-        Column(
-            modifier = Modifier.padding(start = 16.dp, end = 16.dp)
-        ) {
-            HomeScreenCategoryButtons(
-                moveToNatureListScreen = moveToNatureListScreen,
-                moveToFestivalListScreen = moveToFestivalListScreen,
-                moveToMarketListScreen = moveToMarketListScreen,
-                moveToExperienceListScreen = moveToExperienceListScreen,
-                moveToRestaurantListScreen = moveToRestaurantListScreen,
-            )
-        }
-
-        Spacer(Modifier.height(32.dp))
-
-        HomeScreenAdBanner(
+        HomeScreenCategoryButtons(
             moveToNatureListScreen = moveToNatureListScreen,
             moveToFestivalListScreen = moveToFestivalListScreen,
-            moveToMarketListScreen = moveToMarketListScreen
+            moveToMarketListScreen = moveToMarketListScreen,
+            moveToExperienceListScreen = moveToExperienceListScreen,
+            moveToRestaurantListScreen = moveToRestaurantListScreen,
         )
 
-        Spacer(Modifier.height(32.dp))
+        Spacer(
+            modifier = Modifier
+                .padding(top = 32.dp, bottom = 24.dp)
+                .height(8.dp)
+                .fillMaxWidth()
+                .shadowDivider()
+                .background(getColor().gray03)
+        )
 
-        Column(
-            modifier = Modifier.padding(start = 16.dp, end = 16.dp, bottom = 20.dp)
-        ) {
+//        HomeScreenAdBanner(
+//            moveToNatureListScreen = moveToNatureListScreen,
+//            moveToFestivalListScreen = moveToFestivalListScreen,
+//            moveToMarketListScreen = moveToMarketListScreen
+//        )
 
-            Text(
-                text = getString(R.string.home_screen_recommend,
-                    if(UserData.nickname == "GUEST")
-                        getString(R.string.home_screen_recommend_default_name)
-                    else
-                        UserData.nickname
-                    ),
-                color = getColor().black,
-                style = title02Bold
-            )
+        Text(
+            modifier = Modifier.padding(horizontal = 16.dp),
+            text = getString(R.string.home_screen_recommend,
+                if(UserData.nickname == "GUEST")
+                    getString(R.string.home_screen_recommend_default_name)
+                else
+                    UserData.nickname
+            ),
+            color = getColor().black,
+            style = title02Bold
+        )
+        Spacer(Modifier.height(12.dp))
+        HomeScreenRecommendedPosts(
+            recommendedPosts = recommendedPosts,
+            onFavoriteButtonClick = toggleFavorite,
+            onClick = moveToCategoryContentScreen,
+            moveToSignInScreen = moveToSignInScreen,
+        )
 
-            Spacer(Modifier.height(10.dp))
+        Spacer(
+            modifier = Modifier
+                .padding(top = 32.dp, bottom = 24.dp)
+                .height(8.dp)
+                .fillMaxWidth()
+                .shadowDivider()
+                .background(getColor().gray03)
+        )
 
-            HomeScreenRecommendedPosts(
-                recommendedPosts = recommendedPosts,
-                onFavoriteButtonClick = toggleFavorite,
-                onClick = moveToCategoryContentScreen,
-                moveToSignInScreen = moveToSignInScreen,
-            )
-        }
+        Text(
+            modifier = Modifier.padding(horizontal = 16.dp),
+            text = getString(R.string.home_screen_popular),
+            color = getColor().black,
+            style = title02Bold
+        )
+        Spacer(Modifier.height(12.dp))
+        HomeScreenPopularPlaces(
+            recommendedPosts = recommendedPosts,
+            onFavoriteButtonClick = toggleFavorite,
+            onClick = moveToCategoryContentScreen,
+            moveToSignInScreen = moveToSignInScreen,
+        )
     }
 }
 
