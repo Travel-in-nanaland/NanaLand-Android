@@ -1,7 +1,10 @@
 package com.jeju.nanaland.ui.component.thumbnail.parts
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -27,17 +30,19 @@ fun ThumbnailFavoriteButton(
 
     Image(
         modifier = Modifier
-            .size(32.dp)
+            .size(20.dp)
             .clickableNoEffect {
                 if (UserData.provider == "GUEST") {
                     isNonMemberGuideDialogShowing.value = true
                 } else {
                     onClick()
                 }
-            },
+            }
+            .background(getColor().white, shape = CircleShape)
+            .padding(5.dp),
         painter = painterResource(if (isFavorite) R.drawable.ic_heart_filled else R.drawable.ic_heart_outlined_white_filled_translucent),
         contentDescription = null,
-        colorFilter = if (isFavorite) ColorFilter.tint(getColor().main) else null
+        colorFilter = ColorFilter.tint(if (isFavorite)  getColor().main else getColor().black25)
     )
 
     if (isNonMemberGuideDialogShowing.value) {

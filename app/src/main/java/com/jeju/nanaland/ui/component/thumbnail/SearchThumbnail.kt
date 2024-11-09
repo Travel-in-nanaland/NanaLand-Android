@@ -11,8 +11,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.jeju.nanaland.ui.component.thumbnail.parts.ThumbnailImage
 import com.jeju.nanaland.ui.component.thumbnail.parts.ThumbnailFavoriteButton
+import com.jeju.nanaland.ui.component.thumbnail.parts.ThumbnailImage
 import com.jeju.nanaland.ui.component.thumbnail.parts.ThumbnailTitle
 import com.jeju.nanaland.ui.theme.NanaLandTheme
 import com.jeju.nanaland.util.ui.ComponentPreview
@@ -37,8 +37,8 @@ fun SearchThumbnail(
             ThumbnailImage(imageUri = imageUri)
             Box(
                 modifier = Modifier
-                    .align(Alignment.TopEnd)
-                    .padding(top = 8.dp, end = 8.dp)
+                    .align(Alignment.BottomEnd)
+                    .padding(6.dp)
             ) {
                 ThumbnailFavoriteButton(
                     isFavorite = isFavorite,

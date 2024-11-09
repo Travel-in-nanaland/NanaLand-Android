@@ -39,8 +39,8 @@ fun MarketThumbnail(
             ThumbnailImage(imageUri = imageUri)
             Box(
                 modifier = Modifier
-                    .align(Alignment.TopEnd)
-                    .padding(top = 8.dp, end = 8.dp)
+                    .align(Alignment.BottomEnd)
+                    .padding(6.dp)
             ) {
                 ThumbnailFavoriteButton(
                     isFavorite = isFavorite,
