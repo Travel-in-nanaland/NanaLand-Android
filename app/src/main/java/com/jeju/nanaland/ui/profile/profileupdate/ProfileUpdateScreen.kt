@@ -14,11 +14,14 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
@@ -28,6 +31,7 @@ import com.jeju.nanaland.domain.request.UriRequestBody
 import com.jeju.nanaland.globalvalue.constant.INTRODUCTION_CONSTRAINT
 import com.jeju.nanaland.ui.component.common.CustomSurface
 import com.jeju.nanaland.ui.component.common.DialogCommon
+import com.jeju.nanaland.ui.component.common.dialog.BottomSheetSelectDialog
 import com.jeju.nanaland.ui.component.common.topbar.CustomTopBar
 import com.jeju.nanaland.ui.component.signup.profilesetting.SignUpScreenCharacterCount
 import com.jeju.nanaland.ui.component.signup.profilesetting.SignUpScreenTextField
@@ -40,6 +44,7 @@ import com.jeju.nanaland.ui.theme.getColor
 import com.jeju.nanaland.util.log.LogUtil
 import com.jeju.nanaland.util.resource.getString
 import com.jeju.nanaland.util.ui.scrollableVerticalArrangement
+import kotlin.random.Random
 
 @Composable
 fun ProfileUpdateScreen(
@@ -77,6 +82,7 @@ fun ProfileUpdateScreen(
     )
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun ProfileUpdateScreen(
     prevNickname: String,
@@ -95,6 +101,8 @@ private fun ProfileUpdateScreen(
     isContent: Boolean
 ) {
     val isWarningDialogShowing = remember { mutableStateOf(false) }
+    var isProfileImageDialogShowing by remember { mutableStateOf(false) }
+
     BackHandler {
         if (prevProfileImageUri != inputProfileImageUri || prevNickname != inputNickname || prevIntroduction != inputIntroduction) {
             isWarningDialogShowing.value = true
@@ -137,13 +145,7 @@ private fun ProfileUpdateScreen(
                 ) {
                     ProfileUpdateScreenProfileContent(
                         imageUri = inputProfileImageUri,
-                        onClick = {
-                            takePhotoFromAlbumLauncher.launch(
-                                PickVisualMediaRequest(
-                                    ActivityResultContracts.PickVisualMedia.ImageOnly
-                                )
-                            )
-                        }
+                        onClick = { isProfileImageDialogShowing = true }
                     )
 
                     Spacer(Modifier.height(48.dp))
@@ -214,6 +216,25 @@ private fun ProfileUpdateScreen(
             onDismissRequest = { isWarningDialogShowing.value = false },
             onPositive = moveToBackScreen,
             onNegative = { isWarningDialogShowing.value = false }
+        )
+    }
+    if(isProfileImageDialogShowing) {
+        BottomSheetSelectDialog(
+            onDismiss = { isProfileImageDialogShowing = false },
+            items = arrayOf(
+                getString(R.string.profile_update_screen_select_image_album) to {
+                    isProfileImageDialogShowing = false
+                    takePhotoFromAlbumLauncher.launch(
+                        PickVisualMediaRequest(
+                            ActivityResultContracts.PickVisualMedia.ImageOnly
+                        )
+                    )
+                },
+                getString(R.string.profile_update_screen_select_image_remove) to {
+                    isProfileImageDialogShowing = false
+//                    TODO 삭제 API
+                },
+            ).sliceArray(0 until if(Random.nextBoolean()) 1 else 2) // TODO is default image
         )
     }
 }

@@ -76,6 +76,7 @@
     <string name="common_사진">사진</string>
     <string name="common_동영상">동영상</string>
     <string name="common_원">%s원</string>
+    <string name="common_close">닫기</string>
 
     <!--시간 관련-->
     <string name="common_방금전" translatable="false">방금 전</string>
@@ -361,6 +362,8 @@
     <string name="profile_update_screen_프로필_수정">프로필 수정</string>
     <string name="profile_update_screen_수정_완료">수정 완료</string>
     <string name="profile_update_screen_warning">소개글은 70자 이내로 작성 가능합니다.</string>
+    <string name="profile_update_screen_select_image_album">앨범에서 선택</string>
+    <string name="profile_update_screen_select_image_remove">프로필 사진 삭제</string>
 
     <!--프로필 수정 화면 다이얼로그-->
     <string name="profile_update_dialog_text1">변경 내용을\n삭제하시겠습니까?</string>

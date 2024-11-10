@@ -13,6 +13,7 @@ import androidx.compose.ui.geometry.Rect
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Paint
+import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.graphics.drawOutline
 import androidx.compose.ui.graphics.drawscope.drawIntoCanvas
 import androidx.compose.ui.unit.dp
@@ -61,10 +62,11 @@ fun Modifier.dropShadow(
     blur: Int,
     spread: Int,
     color: Int,
-    alpha: Int
+    alpha: Int,
+    shape: Shape = RoundedCornerShape(0.dp)
 ) = this.drawBehind {
     val shadowSize = Size(size.width + spread.dp.toPx(), size.height + spread.dp.toPx())
-    val shadowOutline = RoundedCornerShape(0.dp).createOutline(shadowSize, layoutDirection, this)
+    val shadowOutline = shape.createOutline(shadowSize, layoutDirection, this)
 
     val paint = Paint().apply {
         this.color = Color(color).copy(alpha = alpha / 100f)
@@ -90,7 +92,8 @@ fun Modifier.innerShadow(
     blur: Int,
     spread: Int,
     color: Int,
-    alpha: Int
+    alpha: Int,
+    shape: Shape = RoundedCornerShape(0.dp)
 ) = drawWithContent {
     drawContent()
 
@@ -100,7 +103,7 @@ fun Modifier.innerShadow(
         this.isAntiAlias = true
     }
 
-    val shadowOutline = RoundedCornerShape(0.dp).createOutline(size, layoutDirection, this)
+    val shadowOutline = shape.createOutline(size, layoutDirection, this)
 
     drawIntoCanvas { canvas ->
         canvas.saveLayer(rect, paint)
