@@ -12,15 +12,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavController
 import com.airbnb.lottie.compose.LottieAnimation
 import com.airbnb.lottie.compose.LottieCompositionSpec
 import com.airbnb.lottie.compose.animateLottieCompositionAsState
 import com.airbnb.lottie.compose.rememberLottieComposition
 import com.jeju.nanaland.R
-import com.jeju.nanaland.globalvalue.constant.ROUTE_REVIEW_WRITE_COMPLETE
-import com.jeju.nanaland.globalvalue.constant.ROUTE_REVIEW_WRITE_ROUTE
-import com.jeju.nanaland.globalvalue.constant.ROUTE_REVIEW_WRITE_SEARCH
+import com.jeju.nanaland.domain.navigation.NavViewModel
+import com.jeju.nanaland.domain.navigation.ROUTE
 import com.jeju.nanaland.globalvalue.type.ReviewCategoryType
 import com.jeju.nanaland.ui.component.common.BottomOkButton
 import com.jeju.nanaland.ui.component.common.BottomOkButtonOutlined
@@ -40,19 +38,15 @@ private fun ReviewWriteCompleteScreenPreview() {
 
 @Composable
 fun ReviewWriteCompleteScreen(
-    navController: NavController,
+    navViewModel: NavViewModel,
+
     categoryType: ReviewCategoryType
 ) {
     ReviewWriteCompleteUI(
         category = categoryType,
-        onAgain = { navController.popBackStack() },
+        onAgain = { navViewModel.popBackStack() },
         onAdd = {
-            if(navController.previousBackStackEntry?.destination?.route == ROUTE_REVIEW_WRITE_SEARCH)
-                navController.popBackStack()
-            else
-                navController.navigate(ROUTE_REVIEW_WRITE_ROUTE) {
-                    popUpTo(ROUTE_REVIEW_WRITE_COMPLETE) { inclusive = true }
-                }
+            navViewModel.navigatePopUpTo(ROUTE.Content.ReviewWrite(),ROUTE.Content.ReviewWrite.Complete(""))
         }
     )
 }

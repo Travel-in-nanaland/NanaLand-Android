@@ -1,12 +1,12 @@
 package com.jeju.nanaland.ui.noticeDetail
 
-import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
-import com.jeju.nanaland.globalvalue.constant.ROUTE
+import com.jeju.nanaland.domain.navigation.NavViewModel
+import com.jeju.nanaland.domain.navigation.ROUTE
 
-fun NavGraphBuilder.noticeDetailScreen(navController: NavController) = composable<ROUTE.NoticeDetail> {
+fun NavGraphBuilder.noticeDetailScreen(navViewModel: NavViewModel) = composable<ROUTE.Main.Profile.NoticeList.NoticeDetail> {
     NoticeDetailScreen(
-        moveToBackScreen = { navController.popBackStack() }
+        moveToBackScreen = { navViewModel.popBackStack() }
     )
 }

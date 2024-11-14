@@ -27,7 +27,6 @@ import com.jeju.nanaland.ui.component.main.home.HomeScreenTopBanner
 import com.jeju.nanaland.ui.theme.getColor
 import com.jeju.nanaland.ui.theme.shadowDivider
 import com.jeju.nanaland.ui.theme.title02Bold
-import com.jeju.nanaland.util.listfilter.ListFilter
 import com.jeju.nanaland.util.resource.getString
 import com.jeju.nanaland.util.ui.ScreenPreview
 import com.jeju.nanaland.util.ui.UiState
@@ -35,8 +34,8 @@ import com.jeju.nanaland.util.ui.UiState
 @Composable
 fun HomeContent(
     moveToCategoryContentScreen: (Int, String?, Boolean) -> Unit,
-    moveToNatureListScreen: (ListFilter) -> Unit,
-    moveToFestivalListScreen: (ListFilter) -> Unit,
+    moveToNatureListScreen: (String?) -> Unit,
+    moveToFestivalListScreen: (String?) -> Unit,
     moveToMarketListScreen: () -> Unit,
     moveToExperienceListScreen: () -> Unit,
     moveToRestaurantListScreen: () -> Unit,
@@ -70,8 +69,8 @@ private fun HomeContent(
     recommendedPosts: UiState<List<RecommendedPostData>>,
     toggleFavorite: (Int, String?) -> Unit,
     moveToCategoryContentScreen: (Int, String?, Boolean) -> Unit,
-    moveToNatureListScreen: (ListFilter) -> Unit,
-    moveToFestivalListScreen: (ListFilter) -> Unit,
+    moveToNatureListScreen: (String?) -> Unit,
+    moveToFestivalListScreen: (String?) -> Unit,
     moveToMarketListScreen: () -> Unit,
     moveToExperienceListScreen: () -> Unit,
     moveToRestaurantListScreen: () -> Unit,

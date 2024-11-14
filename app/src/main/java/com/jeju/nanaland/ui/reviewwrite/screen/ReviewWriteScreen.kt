@@ -49,13 +49,10 @@ import androidx.compose.ui.unit.dp
 import androidx.core.os.bundleOf
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import androidx.navigation.NavController
-import androidx.navigation.navOptions
 import com.jeju.nanaland.R
+import com.jeju.nanaland.domain.navigation.NavViewModel
+import com.jeju.nanaland.domain.navigation.ROUTE
 import com.jeju.nanaland.domain.request.UriRequestBody
-import com.jeju.nanaland.globalvalue.constant.ROUTE_REVIEW_WRITE
-import com.jeju.nanaland.globalvalue.constant.ROUTE_REVIEW_WRITE_COMPLETE
-import com.jeju.nanaland.globalvalue.constant.ROUTE_REVIEW_WRITE_KEYWORD
 import com.jeju.nanaland.globalvalue.type.ReviewCategoryType
 import com.jeju.nanaland.globalvalue.type.ReviewKeyword
 import com.jeju.nanaland.ui.component.common.BottomOkButton
@@ -70,7 +67,6 @@ import com.jeju.nanaland.ui.reviewwrite.ReviewWriteViewModel
 import com.jeju.nanaland.ui.theme.body02
 import com.jeju.nanaland.ui.theme.bodyBold
 import com.jeju.nanaland.ui.theme.getColor
-import com.jeju.nanaland.util.navigation.navigate
 import com.jeju.nanaland.util.resource.getString
 import com.jeju.nanaland.util.resource.getStringArray
 import com.jeju.nanaland.util.ui.UiState
@@ -83,7 +79,7 @@ import kotlinx.coroutines.launch
 
 @Composable
 fun ReviewWriteScreen(
-    navController: NavController,
+    navViewModel: NavViewModel,
     id: Int,
     category: ReviewCategoryType,
     viewModel: ReviewWriteViewModel = hiltViewModel()
@@ -100,7 +96,7 @@ fun ReviewWriteScreen(
         uiState = uiState.value,
         reviewText = viewModel.reviewText,
         moveToBackScreen = { cancelDialogVisible = true },
-        moveToKeywordScreen = { navController.navigate(ROUTE_REVIEW_WRITE_KEYWORD) },
+        moveToKeywordScreen = { navViewModel.navigate(ROUTE.Content.ReviewWrite.Keyword) },
         moveToCompleteScreen = {
             viewModel.submit(
                 id = id,
@@ -143,12 +139,7 @@ fun ReviewWriteScreen(
                 )
             }
             is UiState.Success -> {
-                val bundle = bundleOf(
-                    "category" to category.toString()
-                )
-                navController.navigate(ROUTE_REVIEW_WRITE_COMPLETE, bundle, navOptions = navOptions{
-                    popUpTo(ROUTE_REVIEW_WRITE) { inclusive = true}
-                })
+                navViewModel.navigatePopUpTo(ROUTE.Content.ReviewWrite.Complete(category.toString()), ROUTE.Content.ReviewWrite())
                 viewModel.setCallStateNull()
                 viewModel.updateReviewText("")
             }
@@ -163,7 +154,7 @@ fun ReviewWriteScreen(
             title = getString(R.string.review_write_cancel_dialog_title),
             subTitle = getString(R.string.review_write_cancel_dialog_subtitle),
             onDismissRequest = { cancelDialogVisible = false },
-            onPositive = { cancelDialogVisible = false; navController.popBackStack() },
+            onPositive = { cancelDialogVisible = false; navViewModel.popBackStack() },
             onNegative = { cancelDialogVisible = false }
         )
     }

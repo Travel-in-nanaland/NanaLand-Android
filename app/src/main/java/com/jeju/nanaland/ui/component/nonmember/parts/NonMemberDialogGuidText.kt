@@ -7,7 +7,6 @@ import com.jeju.nanaland.R
 import com.jeju.nanaland.ui.theme.getColor
 import com.jeju.nanaland.ui.theme.title01Bold
 import com.jeju.nanaland.util.resource.getString
-import com.jeju.nanaland.util.type.getCategoryType
 
 @Composable
 fun NonMemberDialogGuidText() {

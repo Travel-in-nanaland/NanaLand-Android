@@ -7,10 +7,10 @@ import androidx.navigation.toRoute
 import com.jeju.nanaland.domain.entity.report.ClaimType
 import com.jeju.nanaland.domain.entity.report.ReportDetail
 import com.jeju.nanaland.domain.entity.report.ReportType
+import com.jeju.nanaland.domain.navigation.ROUTE
 import com.jeju.nanaland.domain.request.UriRequestBody
 import com.jeju.nanaland.domain.usecase.member.GetUserProfileUseCase
 import com.jeju.nanaland.domain.usecase.report.ReportReviewUseCase
-import com.jeju.nanaland.globalvalue.constant.ROUTE
 import com.jeju.nanaland.util.network.onError
 import com.jeju.nanaland.util.network.onSuccess
 import com.jeju.nanaland.util.ui.UiState

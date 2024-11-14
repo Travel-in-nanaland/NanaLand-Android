@@ -12,14 +12,13 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.jeju.nanaland.ui.component.main.home.parts.HomeScreenAdContent
-import com.jeju.nanaland.util.listfilter.ListFilter
 import kotlinx.coroutines.delay
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun HomeScreenAdBanner(
-    moveToNatureListScreen: (ListFilter) -> Unit,
-    moveToFestivalListScreen: (ListFilter) -> Unit,
+    moveToNatureListScreen: (String?) -> Unit,
+    moveToFestivalListScreen: (String?) -> Unit,
     moveToMarketListScreen: () -> Unit
 ) {
     val pagerState = rememberPagerState(
@@ -43,10 +42,10 @@ fun HomeScreenAdBanner(
             idx = page,
             onClick = {
                 when (page % 4) {
-                    0 -> moveToNatureListScreen(ListFilter("성산"))
-                    1 -> moveToNatureListScreen(ListFilter("애월"))
+                    0 -> moveToNatureListScreen("성산")
+                    1 -> moveToNatureListScreen("애월")
                     2 -> moveToMarketListScreen()
-                    else -> moveToFestivalListScreen(ListFilter("2024.07.01~2024.07.31"))
+                    else -> moveToFestivalListScreen("2024.07.01~2024.07.31")
                 }
             }
         )

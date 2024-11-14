@@ -42,7 +42,6 @@ import com.jeju.nanaland.ui.component.listscreen.filter.getLocationAnchoredDragg
 import com.jeju.nanaland.ui.component.listscreen.filter.getSeasonAnchoredDraggableState
 import com.jeju.nanaland.ui.component.listscreen.list.FestivalThumbnailList
 import com.jeju.nanaland.ui.theme.NanaLandTheme
-import com.jeju.nanaland.util.listfilter.ListFilter
 import com.jeju.nanaland.util.resource.getString
 import com.jeju.nanaland.util.ui.ScreenPreview
 import com.jeju.nanaland.util.ui.UiState
@@ -51,7 +50,7 @@ import java.util.Calendar
 
 @Composable
 fun FestivalListScreen(
-    filter: ListFilter?,
+    filter: String?,
     moveToBackScreen: () -> Unit,
     moveToFestivalContentScreen: (Int) -> Unit,
     moveToSignInScreen: () -> Unit,
@@ -66,20 +65,19 @@ fun FestivalListScreen(
     val festivalThumbnailCount = viewModel.festivalThumbnailCount.collectAsState().value
 
     LaunchedEffect(Unit) {
-        if (filter?.filter != null) {
-            val startYear = filter.filter!!.split("~")[0].split(".")[0]
-            val startMonth = filter.filter!!.split("~")[0].split(".")[1]
-            val startDate = filter.filter!!.split("~")[0].split(".")[2]
-            val endYear = filter.filter!!.split("~")[1].split(".")[0]
-            val endMonth = filter.filter!!.split("~")[1].split(".")[1]
-            val endDate = filter.filter!!.split("~")[1].split(".")[2]
+        if (filter != null) {
+            val startYear = filter.split("~")[0].split(".")[0]
+            val startMonth = filter.split("~")[0].split(".")[1]
+            val startDate = filter.split("~")[0].split(".")[2]
+            val endYear = filter.split("~")[1].split(".")[0]
+            val endMonth = filter.split("~")[1].split(".")[1]
+            val endDate = filter.split("~")[1].split(".")[2]
             viewModel.updateStartCalendar(Calendar.getInstance().apply {
                 set(startYear.toInt(), startMonth.toInt() - 1, startDate.toInt())
             })
             viewModel.updateEndCalendar(Calendar.getInstance().apply {
                 set(endYear.toInt(), endMonth.toInt() - 1, endDate.toInt())
             })
-            filter.filter = null
         }
         viewModel.getMonthlyFestivalList()
     }

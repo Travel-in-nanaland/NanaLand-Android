@@ -27,8 +27,8 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.navigation.NavController
 import com.jeju.nanaland.R
+import com.jeju.nanaland.domain.navigation.NavViewModel
 import com.jeju.nanaland.globalvalue.type.ReviewKeyword
 import com.jeju.nanaland.ui.component.common.BottomOkButton
 import com.jeju.nanaland.ui.component.common.CustomSurface
@@ -50,7 +50,7 @@ private fun ReviewWriteKeywordScreenPreview() {
 
 @Composable
 fun ReviewWriteKeywordScreen(
-    navController: NavController,
+    navViewModel: NavViewModel,
     viewModel: ReviewWriteViewModel = hiltViewModel()
 ) {
     val context = LocalContext.current
@@ -59,7 +59,7 @@ fun ReviewWriteKeywordScreen(
     }
 
     ReviewWriteKeywordUI(
-        moveToBackScreen = { navController.popBackStack() },
+        moveToBackScreen = { navViewModel.popBackStack() },
         selectKeyword = selectKeyword,
         onKeyword = {
             val isSelect = it in selectKeyword
@@ -74,7 +74,7 @@ fun ReviewWriteKeywordScreen(
         },
         onComplete = {
             viewModel.setKeyword(selectKeyword)
-            navController.popBackStack()
+            navViewModel.popBackStack()
         }
     )
 }

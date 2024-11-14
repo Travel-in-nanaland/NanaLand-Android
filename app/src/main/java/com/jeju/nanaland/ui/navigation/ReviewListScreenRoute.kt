@@ -1,41 +1,29 @@
 package com.jeju.nanaland.ui.navigation
 
-import androidx.core.os.bundleOf
-import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
-import com.jeju.nanaland.globalvalue.constant.ROUTE
-import com.jeju.nanaland.globalvalue.constant.ROUTE_MAIN
-import com.jeju.nanaland.globalvalue.constant.ROUTE_REVIEW_LIST
-import com.jeju.nanaland.globalvalue.constant.ROUTE_REVIEW_WRITE_ROUTE
-import com.jeju.nanaland.globalvalue.constant.ROUTE_SIGN_IN
+import androidx.navigation.toRoute
+import com.jeju.nanaland.domain.navigation.NavViewModel
+import com.jeju.nanaland.domain.navigation.ROUTE
 import com.jeju.nanaland.globalvalue.type.ReviewCategoryType
 import com.jeju.nanaland.ui.review.ReviewListScreen
-import com.jeju.nanaland.util.log.LogUtil
-import com.jeju.nanaland.util.navigation.navigate
 
-fun NavGraphBuilder.reviewListScreen(navController: NavController) = composable(route = ROUTE_REVIEW_LIST) {
+fun NavGraphBuilder.reviewListScreen(navViewModel: NavViewModel) = composable<ROUTE.Content.ReviewList> {
+    val data: ROUTE.Content.ReviewList = it.toRoute()
+
     ReviewListScreen(
-        isFavorite = it.arguments?.getBoolean("isFavorite"),
-        contentId = it.arguments?.getInt("contentId"),
-        category = it.arguments?.getString("category"),
-        thumbnailUrl = it.arguments?.getString("thumbnailUrl"),
-        contentTitle = it.arguments?.getString("title"),
-        contentAddress = it.arguments?.getString("address"),
-        moveToBackScreen = { navController.popBackStack() },
+        isFavorite = data.isFavorite,
+        contentId = data.contentId,
+        category = data.category,
+        thumbnailUrl = data.thumbnailUrl,
+        contentTitle = data.contentTitle,
+        contentAddress = data.contentAddress,
+        moveToBackScreen = { navViewModel.popBackStack() },
         moveToReviewWritingScreen = { id, image, title, address ->
-            LogUtil.e("moveToReviewWritingScreen", "moveToReviewWritingScreen")
-            val bundle = bundleOf(
-                "id" to id,
-                "category" to ReviewCategoryType.EXPERIENCE.toString()
-            )
-            navController.navigate(ROUTE_REVIEW_WRITE_ROUTE, bundle)
+            navViewModel.navigate(ROUTE.Content.ReviewWrite(id, ReviewCategoryType.EXPERIENCE.toString()))
         },
-        moveToSignInScreen = { navController.navigate(ROUTE_SIGN_IN) {
-            popUpTo(ROUTE_MAIN) { inclusive = true }
-            launchSingleTop = true
-        } },
-        moveToReportScreen = { navController.navigate(ROUTE.Report(it, true)) },
-        moveToProfileScreen = { navController.navigate(ROUTE.Profile.StartDest(it)) }
+        moveToSignInScreen = { navViewModel.navigatePopUpTo(ROUTE.Splash.SignIn, ROUTE.Main) },
+        moveToReportScreen = { navViewModel.navigate(ROUTE.Report(it, true)) },
+        moveToProfileScreen = { navViewModel.navigate(ROUTE.Main.Profile.StartDest(it)) }
     )
 }

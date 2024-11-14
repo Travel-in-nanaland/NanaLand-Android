@@ -7,13 +7,13 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.toRoute
 import com.jeju.nanaland.R
+import com.jeju.nanaland.domain.navigation.ROUTE
 import com.jeju.nanaland.domain.request.UriRequestBody
 import com.jeju.nanaland.domain.request.member.UpdateUserProfileRequest
 import com.jeju.nanaland.domain.usecase.member.DuplicateNicknameUseCase
 import com.jeju.nanaland.domain.usecase.member.UpdateUserProfileUseCase
 import com.jeju.nanaland.globalvalue.constant.INTRODUCTION_CONSTRAINT
 import com.jeju.nanaland.globalvalue.constant.NICKNAME_CONSTRAINT
-import com.jeju.nanaland.globalvalue.constant.ROUTE
 import com.jeju.nanaland.globalvalue.constant.nicknameRegex
 import com.jeju.nanaland.util.network.NetworkResult
 import com.jeju.nanaland.util.network.onError
@@ -42,7 +42,7 @@ class ProfileUpdateViewModel @Inject constructor(
     private val duplicateNicknameUseCase: DuplicateNicknameUseCase,
     savedStateHandle: SavedStateHandle
 ) : ViewModel() {
-    val stateHandle: ROUTE.Profile.Update = savedStateHandle.toRoute()
+    val stateHandle: ROUTE.Main.Profile.Update = savedStateHandle.toRoute()
 
     private val _inputNickname = MutableStateFlow(stateHandle.nickname)
     val inputNickname = _inputNickname.asStateFlow()

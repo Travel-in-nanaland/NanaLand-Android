@@ -1,35 +1,27 @@
 package com.jeju.nanaland.ui.navigation
 
 import androidx.core.os.bundleOf
-import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
-import com.jeju.nanaland.globalvalue.constant.ROUTE
-import com.jeju.nanaland.globalvalue.constant.ROUTE_EXPERIENCE_CONTENT
-import com.jeju.nanaland.globalvalue.constant.ROUTE_FESTIVAL_CONTENT
-import com.jeju.nanaland.globalvalue.constant.ROUTE_MAIN
-import com.jeju.nanaland.globalvalue.constant.ROUTE_MARKET_CONTENT
-import com.jeju.nanaland.globalvalue.constant.ROUTE_NATURE_CONTENT
-import com.jeju.nanaland.globalvalue.constant.ROUTE_RECOMMENDED_SPOT
+import com.jeju.nanaland.domain.navigation.NavViewModel
+import com.jeju.nanaland.domain.navigation.ROUTE
 import com.jeju.nanaland.ui.typetest.recommendedspot.RecommendedSpotScreen
-import com.jeju.nanaland.util.navigation.navigate
 
-fun NavGraphBuilder.recommendedSpotScreen(navController: NavController) = composable(route = ROUTE_RECOMMENDED_SPOT) {
+fun NavGraphBuilder.recommendedSpotScreen(navViewModel: NavViewModel) = composable<ROUTE.RecommendedSpot> {
     RecommendedSpotScreen(
-        moveToMainScreen = { navController.navigate(ROUTE_MAIN) {
-            popUpTo(ROUTE.TypeTest.Result) { inclusive = true }
-            launchSingleTop = true
-        } },
-        moveToBackScreen = { navController.popBackStack() },
-        moveToDetailScreen = { id, category ->
-            val bundle = bundleOf(
-                "contentId" to id
+        moveToMainScreen = {
+            navViewModel.navigatePopUpTo(
+                ROUTE.Main,
+                ROUTE.TypeTest.Result("",true, true)
             )
+       },
+        moveToBackScreen = { navViewModel.popBackStack() },
+        moveToDetailScreen = { id, category ->
             when(category) {
-                "NATURE" -> navController.navigate(ROUTE_NATURE_CONTENT, bundle)
-                "EXPERIENCE" -> navController.navigate(ROUTE_EXPERIENCE_CONTENT, bundle)
-                "FESTIVAL" -> navController.navigate(ROUTE_FESTIVAL_CONTENT, bundle)
-                "MARKET" -> navController.navigate(ROUTE_MARKET_CONTENT, bundle)
+                "NATURE" -> navViewModel.navigate(ROUTE.Content.Nature.Detail(id))
+                "EXPERIENCE" -> navViewModel.navigate(ROUTE.Content.Experience(id))
+                "FESTIVAL" -> navViewModel.navigate(ROUTE.Content.Festival.Detail(id))
+                "MARKET" -> navViewModel.navigate(ROUTE.Content.Market.Detail(id))
             }
         }
 

@@ -31,13 +31,12 @@ import androidx.compose.ui.draw.blur
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
-import androidx.core.os.bundleOf
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import androidx.navigation.NavController
 import com.jeju.nanaland.R
 import com.jeju.nanaland.domain.entity.review.ReviewKeywordResult
-import com.jeju.nanaland.globalvalue.constant.ROUTE_REVIEW_WRITE
+import com.jeju.nanaland.domain.navigation.NavViewModel
+import com.jeju.nanaland.domain.navigation.ROUTE
 import com.jeju.nanaland.ui.component.common.CustomSurface
 import com.jeju.nanaland.ui.component.common.topbar.CustomTopBar
 import com.jeju.nanaland.ui.reviewwrite.ReviewWriteViewModel
@@ -46,7 +45,6 @@ import com.jeju.nanaland.ui.theme.body02SemiBold
 import com.jeju.nanaland.ui.theme.caption01
 import com.jeju.nanaland.ui.theme.caption02
 import com.jeju.nanaland.ui.theme.getColor
-import com.jeju.nanaland.util.navigation.navigate
 import com.jeju.nanaland.util.resource.getString
 import com.jeju.nanaland.util.ui.UiState
 import com.jeju.nanaland.util.ui.clickableNoEffect
@@ -56,7 +54,7 @@ import com.skydoves.landscapist.glide.GlideImage
 
 @Composable
 fun ReviewWriteSearchScreen(
-    navController: NavController,
+    navViewModel: NavViewModel,
     viewModel: ReviewWriteViewModel = hiltViewModel()
 ) {
     val keyword = viewModel.keywordText.collectAsStateWithLifecycle()
@@ -66,13 +64,10 @@ fun ReviewWriteSearchScreen(
         keyword = keyword.value,
         onKeyword = { viewModel.keywordText.value = it },
         data = searchResult.value,
-        moveToBackScreen = { navController.popBackStack() },
+        moveToBackScreen = { navViewModel.popBackStack() },
         moveToWriteScreen = {
             viewModel.init(it.id, it.category, false)
-            navController.navigate(ROUTE_REVIEW_WRITE, bundleOf(
-                "id" to it.id,
-                "category" to it.category.toString(),
-            ))
+            navViewModel.navigate(ROUTE.Content.ReviewWrite(it.id, it.category.toString()))
         }
     )
 }

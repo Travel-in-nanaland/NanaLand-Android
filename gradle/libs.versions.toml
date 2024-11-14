@@ -33,9 +33,9 @@ accompanistDrawablepainter= "0.34.0"
 
 ## Compose
 composeActivity = "1.9.3"
-composeFoundation = "1.7.4"
+composeFoundation = "1.7.5"
 composeNavigation="2.8.3"
-composeBom = "2024.10.00"
+composeBom = "2024.10.01"
 
 ## lifecycle
 lifecycleKtx = "2.8.6"

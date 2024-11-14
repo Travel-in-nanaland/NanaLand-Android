@@ -31,7 +31,6 @@ import com.jeju.nanaland.ui.component.listscreen.filter.LocationFilterBottomDial
 import com.jeju.nanaland.ui.component.listscreen.filter.LocationFilterTopBar
 import com.jeju.nanaland.ui.component.listscreen.filter.getLocationAnchoredDraggableState
 import com.jeju.nanaland.ui.component.listscreen.list.NatureThumbnailList
-import com.jeju.nanaland.util.listfilter.ListFilter
 import com.jeju.nanaland.util.resource.getString
 import com.jeju.nanaland.util.ui.ScreenPreview
 import com.jeju.nanaland.util.ui.UiState
@@ -39,7 +38,7 @@ import kotlinx.coroutines.launch
 
 @Composable
 fun NatureListScreen(
-    filter: ListFilter?,
+    filter: String?,
     moveToBackScreen: () -> Unit,
     moveToNatureContentScreen: (Int) -> Unit,
     moveToSignInScreen: () -> Unit,
@@ -50,9 +49,8 @@ fun NatureListScreen(
     val natureThumbnailList = viewModel.natureThumbnailList.collectAsState().value
 
     LaunchedEffect(Unit) {
-        if (filter?.filter != null) {
-            selectedLocationList[getLocationIdx(filter.filter)] = true
-            filter.filter = null
+        if (filter != null) {
+            selectedLocationList[getLocationIdx(filter)] = true
         }
     }
 

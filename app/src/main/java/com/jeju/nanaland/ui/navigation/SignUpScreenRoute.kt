@@ -1,26 +1,24 @@
 package com.jeju.nanaland.ui.navigation
 
-import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
-import com.jeju.nanaland.globalvalue.constant.ROUTE
-import com.jeju.nanaland.globalvalue.constant.ROUTE_SIGN_IN
-import com.jeju.nanaland.globalvalue.constant.ROUTE_SIGN_UP
+import androidx.navigation.toRoute
+import com.jeju.nanaland.domain.navigation.NavViewModel
+import com.jeju.nanaland.domain.navigation.ROUTE
 import com.jeju.nanaland.ui.signup.SignUpScreen
 
-fun NavGraphBuilder.signUpScreen(navController: NavController) = composable(route = ROUTE_SIGN_UP) {
+fun NavGraphBuilder.signUpScreen(navViewModel: NavViewModel) = composable<ROUTE.Splash.SignIn.PolicyAgree.SignUp> {
+    val data: ROUTE.Splash.SignIn.PolicyAgree.SignUp = it.toRoute()
+
     SignUpScreen(
-        provider = it.arguments?.getString("provider") ?: "",
-        email = it.arguments?.getString("email") ?: "",
-        providerId = it.arguments?.getString("providerId") ?: "",
-        isPrivacyPolicyAgreed = it.arguments?.getBoolean("isPrivacyPolicyAgreed") ?: true,
-        isMarketingPolicyAgreed = it.arguments?.getBoolean("isMarketingPolicyAgreed") ?: false,
-        isLocationPolicyAgreed = it.arguments?.getBoolean("isLocationPolicyAgreed") ?: false,
+        provider = data.provider,
+        email = data.email,
+        providerId = data.providerId,
+        isPrivacyPolicyAgreed = data.isPrivacyPolicyAgreed,
+        isMarketingPolicyAgreed = data.isMarketingPolicyAgreed,
+        isLocationPolicyAgreed = data.isLocationPolicyAgreed,
         moveToTypeTestingScreen = {
-            navController.navigate(ROUTE.TypeTest.Testing(true)) {
-                popUpTo(ROUTE_SIGN_IN) { inclusive = true }
-                launchSingleTop = true
-            }
+            navViewModel.navigatePopUpTo(ROUTE.TypeTest.Testing(true), ROUTE.Splash.SignIn)
         }
     )
 }

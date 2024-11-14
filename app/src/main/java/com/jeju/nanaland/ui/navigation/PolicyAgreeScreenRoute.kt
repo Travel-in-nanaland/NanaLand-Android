@@ -1,38 +1,30 @@
 package com.jeju.nanaland.ui.navigation
 
-import androidx.core.os.bundleOf
-import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
-import com.jeju.nanaland.globalvalue.constant.ROUTE_LOCATION_POLICY_DETAILS
-import com.jeju.nanaland.globalvalue.constant.ROUTE_MARKETING_POLICY_DETAILS
-import com.jeju.nanaland.globalvalue.constant.ROUTE_POLICY_AGREE
-import com.jeju.nanaland.globalvalue.constant.ROUTE_PRIVACY_POLICY_DETAILS
-import com.jeju.nanaland.globalvalue.constant.ROUTE_SIGN_UP
+import androidx.navigation.toRoute
+import com.jeju.nanaland.domain.navigation.NavViewModel
+import com.jeju.nanaland.domain.navigation.ROUTE.Splash.SignIn.PolicyAgree
 import com.jeju.nanaland.ui.signup.PolicyAgreeScreen
-import com.jeju.nanaland.util.navigation.navigate
 
-fun NavGraphBuilder.policyAgreeScreen(navController: NavController) = composable(route = ROUTE_POLICY_AGREE) {
+fun NavGraphBuilder.policyAgreeScreen(navViewModel: NavViewModel) = composable<PolicyAgree> {
+    val data: PolicyAgree = it.toRoute()
+
     PolicyAgreeScreen(
-        moveToPrivacyPolicyDetailsScreen = { navController.navigate(ROUTE_PRIVACY_POLICY_DETAILS) {
-            launchSingleTop = true
-        } },
-        moveToMarketingPolicyScreen = { navController.navigate(ROUTE_MARKETING_POLICY_DETAILS) {
-            launchSingleTop = true
-        } },
-        moveToLocationPolicyScreen = { navController.navigate(ROUTE_LOCATION_POLICY_DETAILS) {
-            launchSingleTop = true
-        } },
+        moveToPrivacyPolicyDetailsScreen = { navViewModel.navigate(PolicyAgree.Detail) },
+        moveToMarketingPolicyScreen = { navViewModel.navigate(PolicyAgree.Marketing) },
+        moveToLocationPolicyScreen = { navViewModel.navigate(PolicyAgree.Location) },
         moveToSignUpProfileSettingScreen = { isPrivacyPolicyAgreed, isMarketingPolicyAgreed, isLocationPolicyAgreed ->
-            val bundle = bundleOf(
-                "provider" to (it.arguments?.getString("provider") ?: ""),
-                "email" to (it.arguments?.getString("email") ?: ""),
-                "providerId" to (it.arguments?.getString("providerId") ?: ""),
-                "isPrivacyPolicyAgreed" to isPrivacyPolicyAgreed,
-                "isMarketingPolicyAgreed" to isMarketingPolicyAgreed,
-                "isLocationPolicyAgreed" to isLocationPolicyAgreed
+            navViewModel.navigate(
+                PolicyAgree.SignUp(
+                    data.provider,
+                    data.email,
+                    data.providerId,
+                    isPrivacyPolicyAgreed,
+                    isMarketingPolicyAgreed,
+                    isLocationPolicyAgreed
+                )
             )
-            navController.navigate(ROUTE_SIGN_UP, bundle)
         }
     )
 }

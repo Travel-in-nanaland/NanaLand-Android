@@ -2,50 +2,45 @@ package com.jeju.nanaland.ui.navigation
 
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
-import androidx.core.os.bundleOf
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.navigation.NavController
+import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
-import androidx.navigation.navOptions
 import androidx.navigation.navigation
-import com.jeju.nanaland.globalvalue.constant.ROUTE_REVIEW_WRITE
-import com.jeju.nanaland.globalvalue.constant.ROUTE_REVIEW_WRITE_COMPLETE
-import com.jeju.nanaland.globalvalue.constant.ROUTE_REVIEW_WRITE_KEYWORD
-import com.jeju.nanaland.globalvalue.constant.ROUTE_REVIEW_WRITE_ROUTE
-import com.jeju.nanaland.globalvalue.constant.ROUTE_REVIEW_WRITE_SEARCH
+import androidx.navigation.toRoute
+import com.jeju.nanaland.domain.navigation.NavViewModel
+import com.jeju.nanaland.domain.navigation.ROUTE
 import com.jeju.nanaland.globalvalue.type.ReviewCategoryType
 import com.jeju.nanaland.ui.reviewwrite.ReviewWriteViewModel
 import com.jeju.nanaland.ui.reviewwrite.screen.ReviewWriteCompleteScreen
 import com.jeju.nanaland.ui.reviewwrite.screen.ReviewWriteKeywordScreen
 import com.jeju.nanaland.ui.reviewwrite.screen.ReviewWriteScreen
 import com.jeju.nanaland.ui.reviewwrite.screen.ReviewWriteSearchScreen
-import com.jeju.nanaland.util.navigation.navigate
 
-fun NavGraphBuilder.reviewWriteRoute(navController: NavController) {
-    val startViewForRouting = ROUTE_REVIEW_WRITE_ROUTE + "routing"
-    navigation(
-        route = ROUTE_REVIEW_WRITE_ROUTE,
-        startDestination = startViewForRouting
+fun NavGraphBuilder.reviewWriteRoute(
+    navViewModel: NavViewModel,
+    getBackStackEntry: (Any) -> NavBackStackEntry
+) {
+    navigation<ROUTE.Content.ReviewWrite>(
+        startDestination = ROUTE.Content.ReviewWrite.StartViewForRouting
     ) {
-        composable(startViewForRouting) {
-            val parentEntry = remember(it) { navController.getBackStackEntry(ROUTE_REVIEW_WRITE_ROUTE) }
+        composable<ROUTE.Content.ReviewWrite.StartViewForRouting> {
+            val parentEntry = remember(it) { getBackStackEntry(ROUTE.Content.ReviewWrite) }
             val viewModel:ReviewWriteViewModel = hiltViewModel(parentEntry)
+            val data: ROUTE.Content.ReviewWrite = it.toRoute()
 
             LaunchedEffect(Unit) {
-                val id = it.arguments?.getInt("id", -1)?.takeIf { it != -1 }
-                val category = it.arguments?.getString("category")?.let { ReviewCategoryType.valueOf(it) }
-                val isEdit = it.arguments?.getBoolean("isEdit") == true
+                val id = data.id
+                val category = data.category?.let { ReviewCategoryType.valueOf(it) }
+                val isEdit = data.isEdit
                 viewModel.init(id, category, isEdit)
 
-                val popUpTo = navOptions { popUpTo(startViewForRouting) { inclusive = true } }
                 if(id == null && category == null) // Move To Review Search
-                    navController.navigate(ROUTE_REVIEW_WRITE_SEARCH, popUpTo)
+                    navViewModel.navigatePopUpTo(ROUTE.Content.ReviewWrite.Search, ROUTE.Content.ReviewWrite.StartViewForRouting)
                 else if(id != null && category != null) {
-                    navController.navigate(
-                        route = ROUTE_REVIEW_WRITE,
-                        args = bundleOf("id" to id, "category" to category.toString()),
-                        navOptions = popUpTo
+                    navViewModel.navigatePopUpTo(
+                        ROUTE.Content.ReviewWrite.Write(id, category.toString()),
+                        ROUTE.Content.ReviewWrite.StartViewForRouting
                     )
                 }
                 else
@@ -53,32 +48,34 @@ fun NavGraphBuilder.reviewWriteRoute(navController: NavController) {
             }
         }
 
-        composable(ROUTE_REVIEW_WRITE_SEARCH){
-            val parentEntry = remember(it) { navController.getBackStackEntry(ROUTE_REVIEW_WRITE_ROUTE) }
+        composable<ROUTE.Content.ReviewWrite.Search> {
+            val parentEntry = remember(it) { getBackStackEntry(ROUTE.Content.ReviewWrite) }
             ReviewWriteSearchScreen(
-                navController = navController,
+                navViewModel = navViewModel,
                 viewModel = hiltViewModel(parentEntry)
             )
         }
-        composable(ROUTE_REVIEW_WRITE){
-            val parentEntry = remember(it) { navController.getBackStackEntry(ROUTE_REVIEW_WRITE_ROUTE) }
+        composable<ROUTE.Content.ReviewWrite.Write> {
+            val parentEntry = remember(it) { getBackStackEntry(ROUTE.Content.ReviewWrite) }
+            val data: ROUTE.Content.ReviewWrite.Write = it.toRoute()
             ReviewWriteScreen(
-                navController = navController,
-                id = it.arguments?.getInt("id")!!,
-                category = ReviewCategoryType.valueOf(it.arguments?.getString("category")!!),
+                navViewModel = navViewModel,
+                id = data.id,
+                category = ReviewCategoryType.valueOf(data.category),
                 viewModel = hiltViewModel(parentEntry)
             )
         }
 
-        composable(ROUTE_REVIEW_WRITE_KEYWORD){
-            val parentEntry = remember(it) { navController.getBackStackEntry(ROUTE_REVIEW_WRITE_ROUTE) }
-            ReviewWriteKeywordScreen(navController, hiltViewModel(parentEntry))
+        composable<ROUTE.Content.ReviewWrite.Keyword>{
+            val parentEntry = remember(it) { getBackStackEntry(ROUTE.Content.ReviewWrite) }
+            ReviewWriteKeywordScreen(navViewModel, hiltViewModel(parentEntry))
         }
 
-        composable(ROUTE_REVIEW_WRITE_COMPLETE){
+        composable<ROUTE.Content.ReviewWrite.Complete>{
+            val data: ROUTE.Content.ReviewWrite.Complete = it.toRoute()
             ReviewWriteCompleteScreen(
-                navController,
-                ReviewCategoryType.valueOf(it.arguments?.getString("category")!!)
+                navViewModel,
+                ReviewCategoryType.valueOf(data.category)
             )
         }
     }

@@ -16,7 +16,6 @@ import com.jeju.nanaland.ui.component.main.home.HomeScreenTopBar
 import com.jeju.nanaland.ui.main.home.search.SearchResultContent
 import com.jeju.nanaland.ui.main.home.search.SearchViewModel
 import com.jeju.nanaland.ui.main.home.search.SearchingContent
-import com.jeju.nanaland.util.listfilter.ListFilter
 import com.jeju.nanaland.util.ui.ScreenPreview
 
 @Composable
@@ -24,8 +23,8 @@ fun HomeScreen(
     moveToNotificationScreen: () -> Unit,
     moveToCategoryContentScreen: (Int, String?, Boolean) -> Unit,
     moveToRestaurantListScreen: () -> Unit,
-    moveToNatureListScreen: (ListFilter) -> Unit,
-    moveToFestivalListScreen: (ListFilter) -> Unit,
+    moveToNatureListScreen: (String?) -> Unit,
+    moveToFestivalListScreen: (String?) -> Unit,
     moveToMarketListScreen: () -> Unit,
     moveToExperienceListScreen: () -> Unit,
     moveToSignInScreen: () -> Unit,
@@ -70,8 +69,8 @@ private fun HomeScreen(
     moveToNotificationScreen: () -> Unit,
     moveToCategoryContentScreen: (Int, String?, Boolean) -> Unit,
     moveToRestaurantListScreen: () -> Unit,
-    moveToNatureListScreen: (ListFilter) -> Unit,
-    moveToFestivalListScreen: (ListFilter) -> Unit,
+    moveToNatureListScreen: (String?) -> Unit,
+    moveToFestivalListScreen: (String?) -> Unit,
     moveToMarketListScreen: () -> Unit,
     moveToExperienceListScreen: () -> Unit,
     moveToSignInScreen: () -> Unit,
