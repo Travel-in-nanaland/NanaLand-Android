@@ -26,7 +26,8 @@ fun HomeScreen(
     moveToNatureListScreen: (String?) -> Unit,
     moveToFestivalListScreen: (String?) -> Unit,
     moveToMarketListScreen: () -> Unit,
-    moveToExperienceListScreen: () -> Unit,
+    moveToActivityListScreen: () -> Unit,
+    moveToArtListScreen: () -> Unit,
     moveToSignInScreen: () -> Unit,
     updateHomeScreenViewType: (HomeScreenViewType) -> Unit,
     homeViewModel: HomeViewModel = hiltViewModel(),
@@ -51,7 +52,8 @@ fun HomeScreen(
         moveToNatureListScreen = moveToNatureListScreen,
         moveToFestivalListScreen = moveToFestivalListScreen,
         moveToMarketListScreen = moveToMarketListScreen,
-        moveToExperienceListScreen = moveToExperienceListScreen,
+        moveToActivityListScreen = moveToActivityListScreen,
+        moveToArtListScreen = moveToArtListScreen,
         moveToSignInScreen = moveToSignInScreen,
         isContent = true
     )
@@ -72,7 +74,8 @@ private fun HomeScreen(
     moveToNatureListScreen: (String?) -> Unit,
     moveToFestivalListScreen: (String?) -> Unit,
     moveToMarketListScreen: () -> Unit,
-    moveToExperienceListScreen: () -> Unit,
+    moveToActivityListScreen: () -> Unit,
+    moveToArtListScreen: () -> Unit,
     moveToSignInScreen: () -> Unit,
     isContent: Boolean
 ) {
@@ -98,7 +101,8 @@ private fun HomeScreen(
                     moveToNatureListScreen = moveToNatureListScreen,
                     moveToFestivalListScreen = moveToFestivalListScreen,
                     moveToMarketListScreen = moveToMarketListScreen,
-                    moveToExperienceListScreen = moveToExperienceListScreen,
+                    moveToActivityListScreen = moveToActivityListScreen,
+                    moveToArtListScreen = moveToArtListScreen,
                     moveToSignInScreen = moveToSignInScreen,
                 )
             }

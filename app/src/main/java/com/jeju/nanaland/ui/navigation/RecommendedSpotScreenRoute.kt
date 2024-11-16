@@ -1,6 +1,5 @@
 package com.jeju.nanaland.ui.navigation
 
-import androidx.core.os.bundleOf
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import com.jeju.nanaland.domain.navigation.NavViewModel
@@ -19,7 +18,7 @@ fun NavGraphBuilder.recommendedSpotScreen(navViewModel: NavViewModel) = composab
         moveToDetailScreen = { id, category ->
             when(category) {
                 "NATURE" -> navViewModel.navigate(ROUTE.Content.Nature.Detail(id))
-                "EXPERIENCE" -> navViewModel.navigate(ROUTE.Content.Experience(id))
+                "EXPERIENCE" -> navViewModel.navigate(ROUTE.Content.Experience.Detail(false,id))
                 "FESTIVAL" -> navViewModel.navigate(ROUTE.Content.Festival.Detail(id))
                 "MARKET" -> navViewModel.navigate(ROUTE.Content.Market.Detail(id))
             }

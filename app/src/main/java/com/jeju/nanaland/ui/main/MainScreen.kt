@@ -63,7 +63,8 @@ fun MainScreen(
     moveToNatureListScreen: (String?) -> Unit,
     moveToFestivalListScreen: (String?) -> Unit,
     moveToMarketListScreen: () -> Unit,
-    moveToExperienceListScreen: () -> Unit,
+    moveToActivityListScreen: () -> Unit,
+    moveToArtListScreen: () -> Unit,
     moveToSettingsScreen: () -> Unit,
     moveToProfileModificationScreen: (String?, String?, String?) -> Unit,
     moveToSignInScreen: () -> Unit,
@@ -96,7 +97,7 @@ fun MainScreen(
                 "market" -> {
                     moveToCategoryContentScreen(contentId ?: 0, "MARKET", false)
                 }
-                "experience" -> {
+                "experience" -> {//TODO
                     moveToCategoryContentScreen(contentId ?: 0, "EXPERIENCE", false)
                 }
                 "restaurant" -> {
@@ -130,7 +131,8 @@ fun MainScreen(
         moveToNatureListScreen = moveToNatureListScreen,
         moveToFestivalListScreen = moveToFestivalListScreen,
         moveToMarketListScreen = moveToMarketListScreen,
-        moveToExperienceListScreen = moveToExperienceListScreen,
+        moveToActivityListScreen = moveToActivityListScreen,
+        moveToArtListScreen = moveToArtListScreen,
         moveToSettingsScreen = moveToSettingsScreen,
         moveToProfileModificationScreen = moveToProfileModificationScreen,
         moveToSignInScreen = moveToSignInScreen,
@@ -159,7 +161,8 @@ private fun MainScreen(
     moveToNatureListScreen: (String?) -> Unit,
     moveToFestivalListScreen: (String?) -> Unit,
     moveToMarketListScreen: () -> Unit,
-    moveToExperienceListScreen: () -> Unit,
+    moveToActivityListScreen: () -> Unit,
+    moveToArtListScreen: () -> Unit,
     moveToSettingsScreen: () -> Unit,
     moveToProfileModificationScreen: (String?, String?, String?) -> Unit,
     moveToSignInScreen: () -> Unit,
@@ -204,7 +207,8 @@ private fun MainScreen(
                             moveToNatureListScreen = moveToNatureListScreen,
                             moveToFestivalListScreen = moveToFestivalListScreen,
                             moveToMarketListScreen = moveToMarketListScreen,
-                            moveToExperienceListScreen = moveToExperienceListScreen,
+                            moveToActivityListScreen = moveToActivityListScreen,
+                            moveToArtListScreen = moveToArtListScreen,
                             moveToSignInScreen = moveToSignInScreen,
                             updateHomeScreenViewType = { viewType ->
                                 homeScreenViewType.value = viewType

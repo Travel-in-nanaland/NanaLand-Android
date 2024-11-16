@@ -14,7 +14,7 @@ fun NavGraphBuilder.notificationScreen(navViewModel: NavViewModel) = composable<
                 NotificationType.NATURE -> navViewModel.navigate(ROUTE.Content.Nature.Detail(id))
                 NotificationType.FESTIVAL -> navViewModel.navigate(ROUTE.Content.Festival.Detail(id))
                 NotificationType.MARKET -> navViewModel.navigate(ROUTE.Content.Market.Detail(id))
-                NotificationType.EXPERIENCE -> navViewModel.navigate(ROUTE.Content.Experience(id))
+                NotificationType.EXPERIENCE -> navViewModel.navigate(ROUTE.Content.Experience.Detail(false,id))
                 NotificationType.NANA -> navViewModel.navigate(ROUTE.Main.NanaPick.Detail(id))
                 NotificationType.RESTAURANT -> navViewModel.navigate(ROUTE.Content.Restaurant.Detail(id))
                 else -> {}

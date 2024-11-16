@@ -139,22 +139,11 @@ sealed class ROUTE {
         }
 
         @Serializable
-        /** 이색체험 라우트 **/
-        data class Experience(val contentId: Int, val isSearch: Boolean=false,val categoryType: String = ""): ROUTE() {
+        /** 액티비티 or 이색체험 리스트 화면 **/
+        data class Experience(val isActivity: Boolean): ROUTE() {
             @Serializable
-            /** 액티비티 리스트 화면 **/
-            data object Activity: ROUTE() {
-                @Serializable
-                /** 액티비티 상세 화면 **/
-                data class Detail(val contentId: Int, val isSearch: Boolean=false): ROUTE()
-            }
-            @Serializable
-            /** 문화예술 리스트 화면 **/
-            data object Art: ROUTE() {
-                @Serializable
-                /** 문화예술 상세 화면 **/
-                data class Detail(val contentId: Int, val isSearch: Boolean=false): ROUTE()
-            }
+            /** 액티비티 or 이색체험 상세 화면 **/
+            data class Detail(val isActivity: Boolean, val contentId: Int, val isSearch: Boolean=false): ROUTE()
         }
         @Serializable
         /** 제주 맛집 리스트 화면 **/

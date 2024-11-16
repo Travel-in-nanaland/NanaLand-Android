@@ -20,7 +20,7 @@ fun NavGraphBuilder.mainScreen(
                 "NATURE" ->  { navViewModel.navigate(ROUTE.Content.Nature.Detail(contentId, isSearch)) }
                 "FESTIVAL" ->  { navViewModel.navigate(ROUTE.Content.Festival.Detail(contentId, isSearch)) }
                 "MARKET" ->  { navViewModel.navigate(ROUTE.Content.Market.Detail(contentId, isSearch)) }
-                "EXPERIENCE" ->  { navViewModel.navigate(ROUTE.Content.Experience(contentId, isSearch)) }
+                "EXPERIENCE" ->  { navViewModel.navigate(ROUTE.Content.Experience.Detail(false, contentId, isSearch)) }
                 "RESTAURANT" ->  { navViewModel.navigate(ROUTE.Content.Restaurant.Detail(contentId, isSearch)) }
                 else  ->  { navViewModel.navigate(ROUTE.Main.NanaPick.Detail(contentId)) }
             }
@@ -33,7 +33,8 @@ fun NavGraphBuilder.mainScreen(
             navViewModel.navigate(ROUTE.Content.Festival(filter))
         },
         moveToMarketListScreen = { navViewModel.navigate(ROUTE.Content.Market) },
-        moveToExperienceListScreen = { navViewModel.navigate(ROUTE.Content.Experience.Art /*TODO*/) },
+        moveToActivityListScreen = { navViewModel.navigate(ROUTE.Content.Experience(true)) },
+        moveToArtListScreen = { navViewModel.navigate(ROUTE.Content.Experience(false)) },
         moveToSettingsScreen = { navViewModel.navigate(ROUTE.Main.Profile.Setting) },
         moveToProfileModificationScreen = { profileImageUri, nickname, introduction ->
             navViewModel.navigate(

@@ -145,7 +145,7 @@ fun NavGraphBuilder.profileScreenRoute(
                     ReviewCategoryType.NATURE -> { navViewModel.navigate(ROUTE.Content.Nature.Detail(id, false)) }
                     ReviewCategoryType.FESTIVAL -> { navViewModel.navigate(ROUTE.Content.Festival.Detail(id, false)) }
                     ReviewCategoryType.MARKET -> { navViewModel.navigate(ROUTE.Content.Market.Detail(id, false)) }
-                    ReviewCategoryType.EXPERIENCE -> { navViewModel.navigate(ROUTE.Content.Experience(id, false)) }
+                    ReviewCategoryType.EXPERIENCE -> { navViewModel.navigate(ROUTE.Content.Experience.Detail(false,id, false)) }
                     ReviewCategoryType.NANA, ReviewCategoryType.NANA_CONTENT -> { navViewModel.navigate(ROUTE.Main.NanaPick.Detail(id)) }
                     ReviewCategoryType.RESTAURANT -> { navViewModel.navigate(ROUTE.Content.Restaurant.Detail(id, false)) }
                 }

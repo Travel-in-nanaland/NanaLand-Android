@@ -37,7 +37,8 @@ fun HomeContent(
     moveToNatureListScreen: (String?) -> Unit,
     moveToFestivalListScreen: (String?) -> Unit,
     moveToMarketListScreen: () -> Unit,
-    moveToExperienceListScreen: () -> Unit,
+    moveToActivityListScreen: () -> Unit,
+    moveToArtListScreen: () -> Unit,
     moveToRestaurantListScreen: () -> Unit,
     moveToSignInScreen: () -> Unit,
     viewModel: HomeViewModel = hiltViewModel()
@@ -56,7 +57,8 @@ fun HomeContent(
         moveToNatureListScreen = moveToNatureListScreen,
         moveToFestivalListScreen = moveToFestivalListScreen,
         moveToMarketListScreen = moveToMarketListScreen,
-        moveToExperienceListScreen = moveToExperienceListScreen,
+        moveToActivityListScreen = moveToActivityListScreen,
+        moveToArtListScreen = moveToArtListScreen,
         moveToRestaurantListScreen = moveToRestaurantListScreen,
         moveToSignInScreen = moveToSignInScreen,
         isContent = true
@@ -72,7 +74,8 @@ private fun HomeContent(
     moveToNatureListScreen: (String?) -> Unit,
     moveToFestivalListScreen: (String?) -> Unit,
     moveToMarketListScreen: () -> Unit,
-    moveToExperienceListScreen: () -> Unit,
+    moveToActivityListScreen: () -> Unit,
+    moveToArtListScreen: () -> Unit,
     moveToRestaurantListScreen: () -> Unit,
     moveToSignInScreen: () -> Unit,
     isContent: Boolean
@@ -93,7 +96,8 @@ private fun HomeContent(
             moveToNatureListScreen = moveToNatureListScreen,
             moveToFestivalListScreen = moveToFestivalListScreen,
             moveToMarketListScreen = moveToMarketListScreen,
-            moveToExperienceListScreen = moveToExperienceListScreen,
+            moveToActivityListScreen = moveToActivityListScreen,
+            moveToArtListScreen = moveToArtListScreen,
             moveToRestaurantListScreen = moveToRestaurantListScreen,
         )
 

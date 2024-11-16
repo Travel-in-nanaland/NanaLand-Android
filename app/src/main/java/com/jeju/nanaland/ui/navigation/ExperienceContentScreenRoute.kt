@@ -2,10 +2,15 @@ package com.jeju.nanaland.ui.navigation
 
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
+import androidx.navigation.toRoute
 import com.jeju.nanaland.domain.navigation.NavViewModel
 import com.jeju.nanaland.domain.navigation.ROUTE
+import com.jeju.nanaland.globalvalue.type.ExperienceCategoryType
+import com.jeju.nanaland.globalvalue.type.ReviewCategoryType
+import com.jeju.nanaland.ui.experience.ExperienceContentScreen
 
-fun NavGraphBuilder.experienceContentScreen(navViewModel: NavViewModel) = composable<ROUTE.Content.Experience.Art> {
+fun NavGraphBuilder.experienceContentScreen(navViewModel: NavViewModel) = composable<ROUTE.Content.Experience.Detail> {
+    val data: ROUTE.Content.Experience.Detail = it.toRoute()
 //    TODO
 //    val parentEntry = remember(it) { navController.previousBackStackEntry!! }
 //    val isSearch = it.arguments?.getBoolean("isSearch") ?: false
@@ -48,43 +53,30 @@ fun NavGraphBuilder.experienceContentScreen(navViewModel: NavViewModel) = compos
 //        else -> { _, _ -> }
 //    }
 
-//    ExperienceContentScreen(
-//        experienceCategory = it.arguments?.getString("experienceCategoryType") ?: "",
-//        contentId = it.arguments?.getInt("contentId"),
-//        isSearch = isSearch,
-//        updatePrevScreenListFavorite = updatePrevScreenListFavorite,
-//        moveToBackScreen = { navController.popBackStack() },
-//        moveToInfoModificationProposalScreen = {
-//            val bundle = bundleOf(
-//                "postId" to it.arguments?.getInt("contentId"),
-//                "category" to "EXPERIENCE"
-//            )
-//            navController.navigate(ROUTE_INFORMATION_MODIFICATION_PROPOSAL_CATEGORY, bundle)
-//        },
-//        moveToReviewWritingScreen = { id, image, title, address ->
-//            LogUtil.e("moveToReviewWritingScreen", "moveToReviewWritingScreen")
-//            val bundle = bundleOf(
-//                "id" to id,
-//                "category" to ReviewCategoryType.EXPERIENCE.toString()
-//            )
-//            navController.navigate(ROUTE_REVIEW_WRITE_ROUTE, bundle)
-//        },
-//        moveToSignInScreen = { navController.navigate(ROUTE_SIGN_IN) {
-//            popUpTo(ROUTE_MAIN) { inclusive = true }
-//            launchSingleTop = true
-//        } },
-//        moveToReviewListScreen = { isFavorite, image, title, address ->
-//            val bundle = bundleOf(
-//                "isFavorite" to isFavorite,
-//                "contentId" to it.arguments?.getInt("contentId"),
-//                "category" to ReviewCategoryType.EXPERIENCE.toString(),
-//                "image" to image,
-//                "title" to title,
-//                "address" to address
-//            )
-//            navController.navigate(ROUTE_REVIEW_LIST, bundle)
-//        },
-//        moveToReportScreen = { navController.navigate(ROUTE.Report(it, true)) },
-//        moveToProfileScreen = { navController.navigate(ROUTE.Profile.StartDest(it)) }
-//    )
+    ExperienceContentScreen(
+        experienceCategory = if(data.isActivity) ExperienceCategoryType.Activity.toString() else ExperienceCategoryType.CultureArt.toString(),
+        contentId = data.contentId,
+        isSearch = data.isSearch,
+        updatePrevScreenListFavorite = {_,_ -> /*updatePrevScreenListFavorite*/ },
+        moveToBackScreen = { navViewModel.popBackStack() },
+        moveToInfoModificationProposalScreen = {
+            navViewModel.navigate(ROUTE.InformationModification(data.contentId, "EXPERIENCE"))
+        },
+        moveToReviewWritingScreen = { id, image, title, address ->
+            navViewModel.navigate(ROUTE.Content.ReviewWrite(id, category = ReviewCategoryType.EXPERIENCE.toString()))
+        },
+        moveToSignInScreen = { navViewModel.navigatePopUpTo(ROUTE.Splash.SignIn, ROUTE.Main) },
+        moveToReviewListScreen = { isFavorite, image, title, address ->
+            navViewModel.navigate(ROUTE.Content.ReviewList(
+                isFavorite,
+                data.contentId,
+                ReviewCategoryType.RESTAURANT.toString(),
+                image,
+                title,
+                address
+            ))
+        },
+        moveToReportScreen = { navViewModel.navigate(ROUTE.Report(it, true)) },
+        moveToProfileScreen = { navViewModel.navigate(ROUTE.Main.Profile.StartDest(it)) }
+    )
 }

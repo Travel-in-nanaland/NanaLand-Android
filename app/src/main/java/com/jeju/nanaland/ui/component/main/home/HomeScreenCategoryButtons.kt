@@ -17,7 +17,8 @@ fun HomeScreenCategoryButtons(
     moveToNatureListScreen: (String?) -> Unit,
     moveToFestivalListScreen: (String?) -> Unit,
     moveToMarketListScreen: () -> Unit,
-    moveToExperienceListScreen: () -> Unit,
+    moveToActivityListScreen: () -> Unit,
+    moveToArtListScreen: () -> Unit,
     moveToRestaurantListScreen: () -> Unit,
 ) {
     Row(
@@ -43,12 +44,12 @@ fun HomeScreenCategoryButtons(
         HomeScreenCategoryButton(
             resId = R.drawable.img_category_activity,
             text = getString(R.string.common_액티비티),
-            onClick = moveToExperienceListScreen
+            onClick = moveToActivityListScreen
         )
         HomeScreenCategoryButton(
             resId = R.drawable.img_category_art,
             text = getString(R.string.common_문화예술),
-            onClick = moveToRestaurantListScreen
+            onClick = moveToArtListScreen
         )
         HomeScreenCategoryButton(
             resId = R.drawable.img_category_restaurant,

@@ -32,7 +32,6 @@ import com.jeju.nanaland.ui.component.common.CustomSurface
 import com.jeju.nanaland.ui.component.common.icon.GoToUpInList
 import com.jeju.nanaland.ui.component.common.layoutSet.ListEmptyByFilter
 import com.jeju.nanaland.ui.component.common.topbar.CustomTopBar
-import com.jeju.nanaland.ui.component.listscreen.category.ExperienceCategoryListTab
 import com.jeju.nanaland.ui.component.listscreen.filter.ActivityKeywordFilterDialog
 import com.jeju.nanaland.ui.component.listscreen.filter.CultureArtKeywordFilterDialog
 import com.jeju.nanaland.ui.component.listscreen.filter.ExperienceFilterDialogDimBackground
@@ -49,6 +48,7 @@ import kotlinx.coroutines.launch
 
 @Composable
 fun ExperienceListScreen(
+    isActivity: Boolean,
     moveToBackScreen: () -> Unit,
     moveToExperienceContentScreen: (Int, String) -> Unit,
     moveToSignInScreen: () -> Unit,
@@ -60,12 +60,13 @@ fun ExperienceListScreen(
     val selectedCultureArtKeywordList = viewModel.selectedCultureArtKeywordList
     val experienceThumbnailList = viewModel.experienceThumbnailList.collectAsState().value
     val experienceThumbnailCount = viewModel.experienceThumbnailCount.collectAsState().value
-    LaunchedEffect(Unit) {
-        viewModel.getExperienceList()
+    LaunchedEffect(isActivity) {
+        viewModel.updateSelectedCategoryType(if(isActivity) ExperienceCategoryType.Activity else ExperienceCategoryType.CultureArt)
     }
     ExperienceListScreen(
+        title = getString(if(isActivity) R.string.common_액티비티 else R.string.common_문화예술),
         selectedCategoryType = selectedCategoryType,
-        updateSelectedCategoryType = viewModel::updateSelectedCategoryType,
+//        updateSelectedCategoryType = viewModel::updateSelectedCategoryType,
         selectedLocationList = selectedLocationList,
         selectedActivityKeywordList = selectedActivityKeywordList,
         selectedCultureArtKeywordList = selectedCultureArtKeywordList,
@@ -84,8 +85,9 @@ fun ExperienceListScreen(
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 private fun ExperienceListScreen(
+    title: String,
     selectedCategoryType: ExperienceCategoryType,
-    updateSelectedCategoryType: (ExperienceCategoryType) -> Unit,
+//    updateSelectedCategoryType: (ExperienceCategoryType) -> Unit,
     selectedLocationList: SnapshotStateList<Boolean>,
     selectedActivityKeywordList: SnapshotStateList<Boolean>,
     selectedCultureArtKeywordList: SnapshotStateList<Boolean>,
@@ -131,16 +133,17 @@ private fun ExperienceListScreen(
                 modifier = Modifier.fillMaxSize()
             ) {
                 CustomTopBar(
-                    title = getString(R.string.common_액티비티), // TODO!!변경
+                    title = title,
                     onBackButtonClicked = moveToBackScreen
                 )
 
                 Spacer(Modifier.height(16.dp))
 
-                ExperienceCategoryListTab(
-                    selectedCategoryType = selectedCategoryType,
-                    updateSelectedCategoryType = updateSelectedCategoryType
-                )
+
+//                ExperienceCategoryListTab(
+//                    selectedCategoryType = selectedCategoryType,
+//                    updateSelectedCategoryType = updateSelectedCategoryType
+//                )
 
                 KeywordLocationFilterTopBar(
                     count = experienceThumbnailCount,
