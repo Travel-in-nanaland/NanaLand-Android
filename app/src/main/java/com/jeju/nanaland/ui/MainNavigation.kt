@@ -119,25 +119,33 @@ fun MainNavigation(
         natureListScreen(navViewModel)
 
         // 자연 상세 화면
-        natureContentScreen(navViewModel)
+        natureContentScreen(navViewModel) {
+            navController.previousBackStackEntry!!
+        }
 
         // 축제 리스트 화면
         festivalListScreen(navViewModel)
 
         // 축제 상세 화면
-        festivalContentScreen(navViewModel)
+        festivalContentScreen(navViewModel) {
+            navController.previousBackStackEntry!!
+        }
 
         // 전통시장 리스트 화면
         marketListScreen(navViewModel)
 
         // 전통시장 상세 화면
-        marketContentScreen(navViewModel)
+        marketContentScreen(navViewModel) {
+            navController.previousBackStackEntry!!
+        }
 
         // 이색체험 리스트 화면
         experienceListScreen(navViewModel)
 
         // 이색체험 상세 화면
-        experienceContentScreen(navViewModel)
+        experienceContentScreen(navViewModel) {
+            navController.previousBackStackEntry!!
+        }
 
         // 나나픽 전체 리스트 화면
         nanapickAllListScreen(navViewModel)
@@ -149,7 +157,9 @@ fun MainNavigation(
         restaurantListScreen(navViewModel)
 
         // 제주 맛집 상세 화면
-        restaurantContentScreen(navViewModel)
+        restaurantContentScreen(navViewModel) {
+            navController.previousBackStackEntry!!
+        }
 
         // 정보 수정 제안 카테고리 선택 화면
         informationModificationProposalCategoryScreen(navViewModel)
