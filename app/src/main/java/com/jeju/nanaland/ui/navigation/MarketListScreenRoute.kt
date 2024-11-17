@@ -10,8 +10,7 @@ fun NavGraphBuilder.marketListScreen(navViewModel: NavViewModel) = composable<RO
     MarketListScreen(
         moveToBackScreen = { navViewModel.popBackStack() },
         moveToMarketContentScreen = { contentId ->
-//            TODO
-//            navViewModel.navigate(ROUTE.Content.Market.Detail(contentId))
+            navViewModel.navigate(ROUTE.Content.Market.Detail(contentId))
         },
         moveToSignInScreen = { navViewModel.navigatePopUpTo(ROUTE.Splash.SignIn, ROUTE.Main) }
     )
