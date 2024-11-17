@@ -12,6 +12,8 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
@@ -20,14 +22,16 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.jeju.nanaland.BuildConfig
 import com.jeju.nanaland.R
 import com.jeju.nanaland.domain.entity.nature.NatureContent
+import com.jeju.nanaland.globalvalue.userdata.UserData
 import com.jeju.nanaland.ui.component.common.CustomSurface
-import com.jeju.nanaland.ui.component.common.topbar.CustomTopBar
+import com.jeju.nanaland.ui.component.common.topbar.MyTopBar
 import com.jeju.nanaland.ui.component.detailscreen.other.DetailScreenDescription
 import com.jeju.nanaland.ui.component.detailscreen.other.DetailScreenInformation
 import com.jeju.nanaland.ui.component.detailscreen.other.DetailScreenInformationModificationProposalButton
 import com.jeju.nanaland.ui.component.detailscreen.other.DetailScreenNotice
 import com.jeju.nanaland.ui.component.detailscreen.other.DetailScreenTopBannerImage
 import com.jeju.nanaland.ui.component.detailscreen.other.MoveToTopButton
+import com.jeju.nanaland.ui.component.nonmember.NonMemberGuideDialog
 import com.jeju.nanaland.util.language.getLanguage
 import com.jeju.nanaland.util.resource.getString
 import com.jeju.nanaland.util.ui.ScreenPreview
@@ -74,11 +78,39 @@ private fun NatureContentScreen(
     val context = LocalContext.current
     val scrollState = rememberScrollState()
     val coroutineScope = rememberCoroutineScope()
-    CustomSurface {
-        CustomTopBar(
-            title = getString(R.string.common_7대_자연),
-            onBackButtonClicked = moveToBackScreen
+    val isNonMemberGuideDialogShowing = remember { mutableStateOf(false) }
+    if (isNonMemberGuideDialogShowing.value) {
+        NonMemberGuideDialog(
+            onCloseClick = { isNonMemberGuideDialogShowing.value = false },
+            moveToSignInScreen = moveToSignInScreen
         )
+    }
+
+    CustomSurface {
+        MyTopBar(
+            title = getString(R.string.common_7대_자연),
+            onBackButtonClicked = moveToBackScreen,
+            menus = arrayOf(
+                (if ((natureContent as? UiState.Success)?.data?.favorite == true) R.drawable.ic_heart_filled
+                else R.drawable.ic_heart_outlined_thick) to {
+                    if (UserData.provider == "GUEST") {
+                        isNonMemberGuideDialogShowing.value = true
+                    } else if(natureContent is UiState.Success){
+                        toggleFavorite(natureContent.data.id, updatePrevScreenListFavorite)
+                    }
+                },
+                R.drawable.ic_share_outlined to {
+                    val sendIntent: Intent = Intent().apply {
+                        action = Intent.ACTION_SEND
+                        putExtra(Intent.EXTRA_TEXT, "${BuildConfig.BASE_URL}/share/${getLanguage()}?category=nature&id=${contentId}")
+                        type = "text/plain"
+                    }
+                    val shareIntent = Intent.createChooser(sendIntent, null)
+                    context.startActivity(shareIntent)
+                }
+            )
+        )
+
         when (natureContent) {
             is UiState.Loading -> {}
             is UiState.Success -> {

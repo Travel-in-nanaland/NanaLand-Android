@@ -55,6 +55,7 @@ fun MyTopBar(
                     .padding(4.dp),
                 painter = painterResource(id = R.drawable.ic_arrow_left),
                 contentDescription = null,
+                tint = getColor().black
             )
         }
 
@@ -81,6 +82,7 @@ fun MyTopBar(
                     .clickableNoEffect(it.second),
                 painter = painterResource(id = it.first),
                 contentDescription = null,
+                tint = getColor().black
             )
         }
         if(menus.isEmpty() && onBackButtonClicked != null)
