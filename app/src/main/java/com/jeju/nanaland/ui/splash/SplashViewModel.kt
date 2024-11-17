@@ -47,14 +47,13 @@ class SplashViewModel @Inject constructor(
 
         viewModelScope.launch {
             var splashCheckingState = SplashCheckingState.Network
-
-            launch {
+            val checkJob = launch {
                 splashCheckingState = if (!networkManager.isNetworkConnected) {
                     SplashCheckingState.Network
                 } else if (!checkLanguageState(deepLinkData.language)) {
                     SplashCheckingState.Language
                 } else {
-                    withTimeoutOrNull(SPLASH_TIME) {
+                    withTimeoutOrNull(SPLASH_TIME * 3) {
                         if (checkAuthState())
                             SplashCheckingState.Success
                         else
@@ -62,8 +61,11 @@ class SplashViewModel @Inject constructor(
                     } ?: SplashCheckingState.Network
                 }
             }
+            val minAnimTimeJob = launch { delay(SPLASH_TIME) }
 
-            delay(SPLASH_TIME)
+            checkJob.join()
+            minAnimTimeJob.join()
+
             _checkingState.update { splashCheckingState }
         }
     }
