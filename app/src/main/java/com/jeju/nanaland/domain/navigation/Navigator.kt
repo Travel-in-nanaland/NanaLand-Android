@@ -34,10 +34,12 @@ class Navigator @Inject constructor() {
         action: Triple<Boolean, ROUTE?, NavOptions>
     ) {
         if(action.first){
-            if(action.second != null)
-                navController.popBackStack(action.second!!, action.third.isPopUpToInclusive())
-            else
-                navController.popBackStack()
+            if(navController.previousBackStackEntry != null) {
+                if(action.second != null)
+                    navController.popBackStack(action.second!!, action.third.isPopUpToInclusive())
+                else
+                    navController.popBackStack()
+            }
         } else {
             if(action.second != null) {
                 navController.navigate(action.second!!, action.third)
