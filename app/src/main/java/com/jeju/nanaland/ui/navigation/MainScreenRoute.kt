@@ -65,6 +65,9 @@ fun NavGraphBuilder.mainScreen(
         },
         moveToNanaPickAllListScreen = {
             navViewModel.navigate(ROUTE.Main.NanaPick.AllList)
+        },
+        moveToReviewEditScreen = { id, category ->
+            navViewModel.navigate(ROUTE.Content.ReviewWrite(id, category.toString(), true))
         }
     )
 }

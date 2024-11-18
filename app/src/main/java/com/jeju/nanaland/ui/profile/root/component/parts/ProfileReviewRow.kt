@@ -1,5 +1,6 @@
 package com.jeju.nanaland.ui.profile.root.component.parts
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -19,8 +20,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.ColorFilter
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import com.jeju.nanaland.R
 import com.jeju.nanaland.domain.entity.review.MemberReviewDetail
 import com.jeju.nanaland.ui.theme.body02Bold
 import com.jeju.nanaland.ui.theme.caption01
@@ -33,9 +37,11 @@ import com.skydoves.landscapist.glide.GlideImage
 @Composable
 fun ProfileReviewRow(
     data: MemberReviewDetail,
-    onClick: (Int) -> Unit
+    onClick: (Int) -> Unit,
+    onMenuClick: (MemberReviewDetail) -> Unit,
 ) {
     val haveImg = data.images.isNotEmpty()
+
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -74,7 +80,7 @@ fun ProfileReviewRow(
             overflow = TextOverflow.Ellipsis
         )
         Row(
-            modifier = Modifier.padding(8.dp),
+            modifier = Modifier.padding(start = 8.dp, top = 4.dp, bottom = 8.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
             Text(
@@ -95,6 +101,15 @@ fun ProfileReviewRow(
                 color = getColor().black,
                 style = caption01,
             )
+            Image(
+                modifier = Modifier
+                    .size(20.dp)
+                    .clickableNoEffect { onMenuClick(data) },
+                painter = painterResource(R.drawable.ic_more_vert),
+                contentDescription = null,
+                colorFilter = ColorFilter.tint(getColor().gray01)
+            )
         }
+
     }
 }

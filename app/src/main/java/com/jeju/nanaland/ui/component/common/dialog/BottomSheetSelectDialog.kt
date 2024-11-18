@@ -61,9 +61,7 @@ fun BottomSheetSelectDialog(
                 DefaultLayout(
                     Modifier.background(getColor().white, RoundedCornerShape(12.dp))
                 ) {
-                    Column(
-                        verticalArrangement = Arrangement.spacedBy(20.dp),
-                    ) {
+                    Column {
                         items.forEach {
                             DefaultTextView(it.first, it.second)
                         }

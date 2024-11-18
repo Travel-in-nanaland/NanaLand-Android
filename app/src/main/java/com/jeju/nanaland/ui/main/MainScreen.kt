@@ -37,6 +37,7 @@ import com.jeju.nanaland.globalvalue.constant.TOP_BAR_HEIGHT
 import com.jeju.nanaland.globalvalue.constant.TravelType
 import com.jeju.nanaland.globalvalue.type.HomeScreenViewType
 import com.jeju.nanaland.globalvalue.type.MainScreenViewType
+import com.jeju.nanaland.globalvalue.type.ReviewCategoryType
 import com.jeju.nanaland.globalvalue.type.SearchCategoryType
 import com.jeju.nanaland.ui.component.common.CustomSurface
 import com.jeju.nanaland.ui.main.favorite.FavoriteScreen
@@ -74,6 +75,7 @@ fun MainScreen(
     moveToProfileNoticeListScreen: (Int?) -> Unit,
     moveToProfileReviewListScreen: (Int?) -> Unit,
     moveToNanaPickAllListScreen: () -> Unit,
+    moveToReviewEditScreen: (Int, ReviewCategoryType) -> Unit,
     viewModel: MainViewModel = hiltViewModel(),
     homeViewModel: HomeViewModel = hiltViewModel(),
     searchViewModel: SearchViewModel = hiltViewModel(),
@@ -142,6 +144,7 @@ fun MainScreen(
         moveToProfileNoticeListScreen = moveToProfileNoticeListScreen,
         moveToProfileReviewListScreen = moveToProfileReviewListScreen,
         moveToNanaPickAllListScreen = moveToNanaPickAllListScreen,
+        moveToReviewEditScreen = moveToReviewEditScreen,
         isContent = true
     )
 }
@@ -172,6 +175,7 @@ private fun MainScreen(
     moveToProfileNoticeListScreen: (Int?) -> Unit,
     moveToProfileReviewListScreen: (Int?) -> Unit,
     moveToNanaPickAllListScreen: () -> Unit,
+    moveToReviewEditScreen: (Int, ReviewCategoryType) -> Unit,
     isContent: Boolean
 ) {
     val homeScreenViewType = remember { mutableStateOf(HomeScreenViewType.Home) }
@@ -242,6 +246,7 @@ private fun MainScreen(
                             moveToReviewWriteScreen = moveToReviewWriteScreen,
                             moveToProfileNoticeListScreen = moveToProfileNoticeListScreen,
                             moveToProfileReviewListScreen = moveToProfileReviewListScreen,
+                            moveToReviewEditScreen = moveToReviewEditScreen,
                         )
                     }
                 }

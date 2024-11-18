@@ -16,7 +16,8 @@ import com.jeju.nanaland.ui.profile.root.component.parts.ProfileReviewRow
 @Composable
 fun ProfileScreenReviewListSection(
     reviews: List<MemberReviewDetail>,
-    onClick: (Int) -> Unit
+    onClick: (Int) -> Unit,
+    onMenuClick: (MemberReviewDetail) -> Unit,
 ) {
     val verticalItemSpacing = 16
     val data = reviews.take(calculateMaximumItemCount(
@@ -44,7 +45,7 @@ fun ProfileScreenReviewListSection(
             item { Spacer(modifier = Modifier.height(8.dp)) }
             item { Spacer(modifier = Modifier.height(8.dp)) }
             items(data) {
-                ProfileReviewRow(it, onClick)
+                ProfileReviewRow(it, onClick, onMenuClick)
             }
         },
     )

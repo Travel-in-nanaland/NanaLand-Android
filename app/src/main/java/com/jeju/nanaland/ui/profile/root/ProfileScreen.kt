@@ -10,14 +10,17 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -27,9 +30,12 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.paging.compose.collectAsLazyPagingItems
 import com.jeju.nanaland.R
+import com.jeju.nanaland.domain.entity.review.MemberReviewDetail
 import com.jeju.nanaland.globalvalue.constant.TravelType
+import com.jeju.nanaland.globalvalue.type.ReviewCategoryType
+import com.jeju.nanaland.ui.component.common.dialog.BottomSheetSelectDialog
 import com.jeju.nanaland.ui.component.common.topbar.MyTopBar
-import com.jeju.nanaland.ui.profile.component.parts.ReportSheet
+import com.jeju.nanaland.ui.profile.component.parts.RemoveDialog
 import com.jeju.nanaland.ui.profile.root.component.ProfileScreenNoticeListSection
 import com.jeju.nanaland.ui.profile.root.component.ProfileScreenProfileSection
 import com.jeju.nanaland.ui.profile.root.component.ProfileScreenReviewListSection
@@ -37,8 +43,10 @@ import com.jeju.nanaland.ui.profile.root.component.parts.ProfileScreenMoreInfoPa
 import com.jeju.nanaland.ui.profile.root.component.parts.ProfileScreenTabPart
 import com.jeju.nanaland.ui.theme.body01
 import com.jeju.nanaland.ui.theme.getColor
+import com.jeju.nanaland.util.network.NetworkResult
 import com.jeju.nanaland.util.resource.getString
 import com.jeju.nanaland.util.ui.UiState
+import kotlinx.coroutines.launch
 
 /** 마이 페이지 **/
 @Composable
@@ -52,6 +60,7 @@ fun ProfileScreen(
     moveToReviewWriteScreen: () -> Unit,
     moveToProfileReviewListScreen: (Int?) -> Unit,
     moveToProfileNoticeListScreen: (Int?) -> Unit,
+    moveToReviewEditScreen: (Int, ReviewCategoryType) -> Unit,
 ) {
     ProfileScreen(
         isMine = true,
@@ -64,8 +73,10 @@ fun ProfileScreen(
         moveToReviewWriteScreen = moveToReviewWriteScreen,
         moveToProfileReviewListScreen = moveToProfileReviewListScreen,
         moveToProfileNoticeListScreen = moveToProfileNoticeListScreen,
+        moveToReviewEditScreen = moveToReviewEditScreen,
 
         moveToReportScreen = {},
+        moveToReviewReportScreen = {},
     )
 }
 /** 타인 프로필 **/
@@ -75,6 +86,7 @@ fun ProfileScreen(
     moveToTypeTestResultScreen: (String, TravelType) -> Unit,
     moveToProfileReviewListScreen: (Int?) -> Unit,
     moveToReportScreen: (Int) -> Unit,
+    moveToReviewReportScreen: (Int) -> Unit,
 ) {
     ProfileScreen(
         isMine = false,
@@ -82,6 +94,7 @@ fun ProfileScreen(
         moveToTypeTestResultScreen = moveToTypeTestResultScreen,
         moveToProfileReviewListScreen = moveToProfileReviewListScreen,
         moveToReportScreen = moveToReportScreen,
+        moveToReviewReportScreen = moveToReviewReportScreen,
 
         moveToSettingsScreen = {},
         moveToReviewWriteScreen = {},
@@ -89,9 +102,11 @@ fun ProfileScreen(
         moveToSignInScreen = {},
         moveToTypeTestScreen = {},
         moveToProfileNoticeListScreen = {},
+        moveToReviewEditScreen = {_,_ -> },
     )
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun ProfileScreen(
     isMine: Boolean,
@@ -105,14 +120,41 @@ private fun ProfileScreen(
     moveToProfileReviewListScreen: (Int?) -> Unit,
     moveToProfileNoticeListScreen: (Int?) -> Unit,
     moveToReportScreen: (Int) -> Unit,
+    moveToReviewReportScreen: (Int) -> Unit,
+    moveToReviewEditScreen: (Int, ReviewCategoryType) -> Unit,
     viewModel: ProfileViewModel = hiltViewModel()
 ) {
+    val scope = rememberCoroutineScope()
     val userProfile = viewModel.userProfile.collectAsState()
     val reviews = viewModel.reviews.collectAsLazyPagingItems()
     val notices = if(isMine)
         viewModel.notices.collectAsLazyPagingItems()
     else
         null
+
+    var selectReview by remember { mutableStateOf<MemberReviewDetail?>(null) }
+    var removeReviewId by remember { mutableIntStateOf(-1) }
+    val menuOptions =
+        if(isMine){
+            arrayOf(
+                getString(R.string.common_수정) to {
+                    selectReview?.let { moveToReviewEditScreen(it.id, it.category) }
+                    selectReview = null
+                },
+                getString(R.string.common_삭제) to {
+                    selectReview?.let { removeReviewId = it.id }
+                    Unit
+                }
+            )
+        }
+        else {
+            arrayOf(
+                getString(R.string.common_신고하기) to {
+                    selectReview?.let { moveToReviewReportScreen(it.id) }
+                    selectReview = null
+                }
+            )
+        }
 
     LaunchedEffect(Unit) {
         viewModel.init()
@@ -193,9 +235,11 @@ private fun ProfileScreen(
                         HorizontalDivider()
 
                     if (isReviewList.value) {
-                        ProfileScreenReviewListSection(reviewList) {
-                            moveToProfileReviewListScreen(it)
-                        }
+                        ProfileScreenReviewListSection(
+                            reviewList,
+                            onClick = moveToProfileReviewListScreen,
+                            onMenuClick = { selectReview = it },
+                        )
                     } else if (!noticeList.isNullOrEmpty()) {
                         ProfileScreenNoticeListSection(noticeList) {
                             moveToProfileNoticeListScreen(it)
@@ -230,9 +274,24 @@ private fun ProfileScreen(
     }
 
     if(moreOptionDialog)
-        ReportSheet(
-            onDismissRequest = { moreOptionDialog = false },
-            onReport = { viewModel.userId?.let { moveToReportScreen(it) } }
+        BottomSheetSelectDialog(
+            onDismiss = { moreOptionDialog = false },
+            items = arrayOf(getString(R.string.common_신고하기) to { viewModel.userId?.let { moveToReportScreen(it) } })
+        )
+    if(selectReview != null)
+        BottomSheetSelectDialog(
+            onDismiss = { selectReview = null },
+            items = menuOptions
+        )
+    if(removeReviewId != -1)
+        RemoveDialog(
+            onDismissRequest = { removeReviewId = -1 },
+            onDelete = { scope.launch {
+                if(viewModel.setRemove(removeReviewId) is NetworkResult.Success) {
+                    removeReviewId = -1
+                    reviews.refresh()
+                }
+            } }
         )
 }
 

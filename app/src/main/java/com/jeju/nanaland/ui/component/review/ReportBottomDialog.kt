@@ -41,6 +41,7 @@ fun ReportBottomDialog(
     hideDimBackground: () -> Unit,
     anchoredDraggableState: AnchoredDraggableState<AnchoredDraggableContentState>
 ) {
+
     val coroutineScope = rememberCoroutineScope()
     Column(
         modifier = Modifier
@@ -79,7 +80,7 @@ fun ReportBottomDialog(
                 .fillMaxWidth()
                 .padding(start = 16.dp)
                 .clickableNoEffect { onClick() },
-            text = getString(R.string.common_신고),
+            text = getString(R.string.common_신고하기), //TODO
             color = getColor().black,
             style = body01
         )

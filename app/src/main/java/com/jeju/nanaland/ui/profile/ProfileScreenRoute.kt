@@ -48,6 +48,9 @@ fun NavGraphBuilder.profileScreenRoute(
                         ProfileScreen(
                             onBackButtonClicked = { navViewModel.popBackStack() },
                             moveToSettingsScreen = { navViewModel.navigate(ROUTE.Main.Profile.Setting) },
+                            moveToReviewEditScreen = { id, category ->
+                                navViewModel.navigate(ROUTE.Content.ReviewWrite(id, category.toString(), true))
+                            },
                             moveToProfileModificationScreen = { profileImageUri, nickname, introduction ->
                                 navViewModel.navigate(
                                     ROUTE.Main.Profile.Update(
@@ -93,6 +96,11 @@ fun NavGraphBuilder.profileScreenRoute(
                             },
                             moveToReportScreen = {
                                 navViewModel.navigate(ROUTE.Report(it, false))
+                            },
+                            moveToReviewReportScreen = {
+                                navViewModel.navigate(
+                                    ROUTE.Report(it, true)
+                                )
                             }
                         )
                     }
