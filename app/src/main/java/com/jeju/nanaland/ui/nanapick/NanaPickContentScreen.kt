@@ -39,6 +39,7 @@ import com.jeju.nanaland.util.resource.getString
 import com.jeju.nanaland.util.ui.UiState
 import com.jeju.nanaland.util.ui.drawColoredShadow
 import kotlinx.coroutines.launch
+import kotlin.math.max
 
 @Composable
 fun NanaPickContentScreen(
@@ -133,7 +134,8 @@ private fun NanaPickContentScreen(
                     }
 
                     NanaPickContentTopBanner(
-                        height = if (400 - (scrollState.value / density) > 185) 400 - (scrollState.value / density).toInt() else 185,
+                        height = max(400 - (scrollState.value / density).toInt(), 185),
+                        isEllipsis = scrollState.value / density > (400 - 185) / 2,
                         contentId = contentId,
                         nanaPickContent = nanaPickContent,
                         onBackButtonClicked = moveToBackScreen,

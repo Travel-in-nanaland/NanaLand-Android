@@ -42,6 +42,7 @@ import com.skydoves.landscapist.glide.GlideImage
 @Composable
 fun NanaPickContentTopBanner(
     height: Int,
+    isEllipsis: Boolean,
     contentId: Int?,
     nanaPickContent: UiState.Success<NanaPickContentData>,
     onBackButtonClicked: () -> Unit,
@@ -116,8 +117,8 @@ fun NanaPickContentTopBanner(
 
             Spacer(modifier = Modifier.weight(1f))
 
-            NanaPickContentTopBannerSubTitle(text = nanaPickContent.data.subHeading)
-            NanaPickContentTopBannerTitle(text = nanaPickContent.data.heading)
+            NanaPickContentTopBannerSubTitle(text = nanaPickContent.data.subHeading, isEllipsis)
+            NanaPickContentTopBannerTitle(text = nanaPickContent.data.heading, isEllipsis)
             Spacer(modifier = Modifier.height(16.dp))
         }
     }
