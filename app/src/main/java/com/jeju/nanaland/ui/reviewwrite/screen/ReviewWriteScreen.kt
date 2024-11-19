@@ -46,7 +46,6 @@ import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
-import androidx.core.os.bundleOf
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.jeju.nanaland.R
@@ -139,7 +138,7 @@ fun ReviewWriteScreen(
                 )
             }
             is UiState.Success -> {
-                navViewModel.navigatePopUpTo(ROUTE.Content.ReviewWrite.Complete(category.toString()), ROUTE.Content.ReviewWrite())
+                navViewModel.navigatePopUpTo(ROUTE.Content.ReviewWrite.Complete(category.toString()), ROUTE.Content.ReviewWrite.StartDest())
                 viewModel.setCallStateNull()
                 viewModel.updateReviewText("")
             }

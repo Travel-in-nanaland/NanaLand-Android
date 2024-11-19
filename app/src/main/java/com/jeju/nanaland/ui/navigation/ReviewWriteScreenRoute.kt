@@ -22,12 +22,12 @@ fun NavGraphBuilder.reviewWriteRoute(
     getBackStackEntry: (Any) -> NavBackStackEntry
 ) {
     navigation<ROUTE.Content.ReviewWrite>(
-        startDestination = ROUTE.Content.ReviewWrite.StartViewForRouting
+        startDestination = ROUTE.Content.ReviewWrite.StartDest()
     ) {
-        composable<ROUTE.Content.ReviewWrite.StartViewForRouting> {
+        composable<ROUTE.Content.ReviewWrite.StartDest> {
             val parentEntry = remember(it) { getBackStackEntry(ROUTE.Content.ReviewWrite) }
             val viewModel:ReviewWriteViewModel = hiltViewModel(parentEntry)
-            val data: ROUTE.Content.ReviewWrite = it.toRoute()
+            val data: ROUTE.Content.ReviewWrite.StartDest = it.toRoute()
 
             LaunchedEffect(Unit) {
                 val id = data.id
@@ -36,11 +36,11 @@ fun NavGraphBuilder.reviewWriteRoute(
                 viewModel.init(id, category, isEdit)
 
                 if(id == null && category == null) // Move To Review Search
-                    navViewModel.navigatePopUpTo(ROUTE.Content.ReviewWrite.Search, ROUTE.Content.ReviewWrite.StartViewForRouting)
+                    navViewModel.navigatePopUpTo(ROUTE.Content.ReviewWrite.Search, data)
                 else if(id != null && category != null) {
                     navViewModel.navigatePopUpTo(
                         ROUTE.Content.ReviewWrite.Write(id, category.toString()),
-                        ROUTE.Content.ReviewWrite.StartViewForRouting
+                        data
                     )
                 }
                 else

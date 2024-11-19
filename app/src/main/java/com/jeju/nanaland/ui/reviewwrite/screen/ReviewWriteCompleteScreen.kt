@@ -46,7 +46,7 @@ fun ReviewWriteCompleteScreen(
         category = categoryType,
         onAgain = { navViewModel.popBackStack() },
         onAdd = {
-            navViewModel.navigatePopUpTo(ROUTE.Content.ReviewWrite(),ROUTE.Content.ReviewWrite.Complete(""))
+            navViewModel.navigatePopUpTo(ROUTE.Content.ReviewWrite.StartDest(),ROUTE.Content.ReviewWrite.Complete(""))
         }
     )
 }

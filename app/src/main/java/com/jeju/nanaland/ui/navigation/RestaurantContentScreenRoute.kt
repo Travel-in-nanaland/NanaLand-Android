@@ -72,7 +72,7 @@ fun NavGraphBuilder.restaurantContentScreen(
             navViewModel.navigate(ROUTE.InformationModification(data.contentId, "RESTAURANT"))
         },
         moveToReviewWritingScreen = { id, image, title, address ->
-            navViewModel.navigate(ROUTE.Content.ReviewWrite(id, ReviewCategoryType.RESTAURANT.toString()))
+            navViewModel.navigate(ROUTE.Content.ReviewWrite.StartDest(id, ReviewCategoryType.RESTAURANT.toString()))
         },
         moveToSignInScreen = { navViewModel.navigatePopUpTo(ROUTE.Splash.SignIn, ROUTE.Main) },
         moveToReviewListScreen = { isFavorite, image, title, address ->

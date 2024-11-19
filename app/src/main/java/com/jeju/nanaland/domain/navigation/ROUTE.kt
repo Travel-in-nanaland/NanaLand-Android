@@ -76,7 +76,7 @@ sealed class ROUTE {
         /** 프로필 화면 **/
         data class Profile(
             val userId: Int? = null // null: 마이 페이지, not null: 타인 페이지
-        ): ROUTE() {
+        ) {
             @Serializable
             data class StartDest(val userId: Int? = null): ROUTE()
 
@@ -154,13 +154,13 @@ sealed class ROUTE {
         }
         @Serializable
         /** 후기 작성 화면 **/
-        data class ReviewWrite(
-            val id: Int? = null,
-            val category: String? = null,
-            val isEdit: Boolean = false
-        ): ROUTE() {
+        data object ReviewWrite {
             @Serializable
-            data object StartViewForRouting: ROUTE()
+            data class StartDest(
+                val id: Int? = null,
+                val category: String? = null,
+                val isEdit: Boolean = false
+            ): ROUTE()
             @Serializable
             data object Search: ROUTE()
             @Serializable

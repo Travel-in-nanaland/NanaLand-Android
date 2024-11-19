@@ -20,7 +20,7 @@ fun NavGraphBuilder.reviewListScreen(navViewModel: NavViewModel) = composable<RO
         contentAddress = data.contentAddress,
         moveToBackScreen = { navViewModel.popBackStack() },
         moveToReviewWritingScreen = { id, image, title, address ->
-            navViewModel.navigate(ROUTE.Content.ReviewWrite(id, ReviewCategoryType.EXPERIENCE.toString()))
+            navViewModel.navigate(ROUTE.Content.ReviewWrite.StartDest(id, ReviewCategoryType.EXPERIENCE.toString()))
         },
         moveToSignInScreen = { navViewModel.navigatePopUpTo(ROUTE.Splash.SignIn, ROUTE.Main) },
         moveToReportScreen = { navViewModel.navigate(ROUTE.Report(it, true)) },

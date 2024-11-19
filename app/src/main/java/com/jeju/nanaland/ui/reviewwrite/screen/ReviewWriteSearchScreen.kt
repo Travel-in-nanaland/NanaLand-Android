@@ -67,7 +67,7 @@ fun ReviewWriteSearchScreen(
         moveToBackScreen = { navViewModel.popBackStack() },
         moveToWriteScreen = {
             viewModel.init(it.id, it.category, false)
-            navViewModel.navigate(ROUTE.Content.ReviewWrite(it.id, it.category.toString()))
+            navViewModel.navigate(ROUTE.Content.ReviewWrite.StartDest(it.id, it.category.toString()))
         }
     )
 }

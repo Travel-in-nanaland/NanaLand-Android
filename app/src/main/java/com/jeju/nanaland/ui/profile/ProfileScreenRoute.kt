@@ -49,7 +49,7 @@ fun NavGraphBuilder.profileScreenRoute(
                             onBackButtonClicked = { navViewModel.popBackStack() },
                             moveToSettingsScreen = { navViewModel.navigate(ROUTE.Main.Profile.Setting) },
                             moveToReviewEditScreen = { id, category ->
-                                navViewModel.navigate(ROUTE.Content.ReviewWrite(id, category.toString(), true))
+                                navViewModel.navigate(ROUTE.Content.ReviewWrite.StartDest(id, category.toString(), true))
                             },
                             moveToProfileModificationScreen = { profileImageUri, nickname, introduction ->
                                 navViewModel.navigate(
@@ -70,7 +70,7 @@ fun NavGraphBuilder.profileScreenRoute(
                                     isFirst = false
                                 )
                             ) },
-                            moveToReviewWriteScreen = { navViewModel.navigate(ROUTE.Content.ReviewWrite()) },
+                            moveToReviewWriteScreen = { navViewModel.navigate(ROUTE.Content.ReviewWrite.StartDest()) },
                             moveToProfileNoticeListScreen = {
                                 if(it == null) navViewModel.navigate(ROUTE.Main.Profile.NoticeList)
                                 else navViewModel.navigate(ROUTE.Main.Profile.NoticeList.NoticeDetail(it))
@@ -144,7 +144,7 @@ fun NavGraphBuilder.profileScreenRoute(
                 )
             },
             moveToReviewEditScreen = { id, category ->
-                navViewModel.navigate(ROUTE.Content.ReviewWrite(id, category.toString(), true))
+                navViewModel.navigate(ROUTE.Content.ReviewWrite.StartDest(id, category.toString(), true))
             },
             initialScrollToItemId = data.initialScrollToItemId ?: -1,
             viewModel = hiltViewModel(parentEntry),

@@ -75,7 +75,7 @@ fun NavGraphBuilder.experienceContentScreen(
             navViewModel.navigate(ROUTE.InformationModification(data.contentId, "EXPERIENCE"))
         },
         moveToReviewWritingScreen = { id, image, title, address ->
-            navViewModel.navigate(ROUTE.Content.ReviewWrite(id, category = ReviewCategoryType.EXPERIENCE.toString()))
+            navViewModel.navigate(ROUTE.Content.ReviewWrite.StartDest(id, category = ReviewCategoryType.EXPERIENCE.toString()))
         },
         moveToSignInScreen = { navViewModel.navigatePopUpTo(ROUTE.Splash.SignIn, ROUTE.Main) },
         moveToReviewListScreen = { isFavorite, image, title, address ->

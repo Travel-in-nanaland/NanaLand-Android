@@ -55,7 +55,7 @@ fun NavGraphBuilder.mainScreen(
                 isFirst = false
             )
         ) },
-        moveToReviewWriteScreen = { navViewModel.navigate(ROUTE.Content.ReviewWrite()) },
+        moveToReviewWriteScreen = { navViewModel.navigate(ROUTE.Content.ReviewWrite.StartDest()) },
         moveToProfileNoticeListScreen = {
             if(it == null) navViewModel.navigate(ROUTE.Main.Profile.NoticeList)
             else navViewModel.navigate(ROUTE.Main.Profile.NoticeList.NoticeDetail(it))
@@ -67,7 +67,7 @@ fun NavGraphBuilder.mainScreen(
             navViewModel.navigate(ROUTE.Main.NanaPick.AllList)
         },
         moveToReviewEditScreen = { id, category ->
-            navViewModel.navigate(ROUTE.Content.ReviewWrite(id, category.toString(), true))
+            navViewModel.navigate(ROUTE.Content.ReviewWrite.StartDest(id, category.toString(), true))
         }
     )
 }
