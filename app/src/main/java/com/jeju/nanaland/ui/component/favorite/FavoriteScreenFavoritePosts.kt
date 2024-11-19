@@ -52,7 +52,7 @@ fun FavoriteScreenFavoritePosts(
             ) {
                 SearchThumbnail(
                     imageUri = item.firstImage?.originUrl,
-                    isFavorite = true,
+                    isFavorite = item.favorite,
                     title = item.title,
                     onFavoriteButtonClick = {
                         onFavoriteButtonClick(item.id, item.category)
