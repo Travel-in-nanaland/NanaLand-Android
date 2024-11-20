@@ -222,20 +222,14 @@ private fun ReviewWriteUI(
                 )
 
                 MyDivider()
-                TextWithPointColor(
-                    text = getString(R.string.review_write_select_rating),
-                    style = bodyBold
-                )
+                Title(getString(R.string.review_write_select_rating), true)
                 Spacer(modifier = Modifier.height(16.dp))
                 StarRating(rating = uiState.reviewRating) {
                     onChangedRating(it)
                 }
 
                 MyDivider()
-                TextWithPointColor(
-                    text = getString(R.string.review_write_keyword),
-                    style = bodyBold
-                )
+                Title(getString(R.string.review_write_keyword), true)
                 Spacer(modifier = Modifier.height(16.dp))
                 ReviewKeywordChip(
                     keywords = uiState.reviewKeyword,
@@ -244,12 +238,17 @@ private fun ReviewWriteUI(
                 )
 
                 MyDivider()
-                TextWithPointColor(
-                    text = getString(R.string.review_write_writing),
-                    style = bodyBold
-                )
+                Title(getString(R.string.review_write_writing), true)
                 Spacer(modifier = Modifier.height(16.dp))
+                ReviewText(
+                    text = reviewText,
+                    maxTextLength = ReviewWriteViewModel.MAX_TEXT_LENGTH,
+                    onText = onChangedText
+                )
 
+                MyDivider()
+                Title(getString(R.string.review_write_picture), false)
+                Spacer(modifier = Modifier.height(16.dp))
                 UploadImages(
                     images = uiState.reviewImage.map { it.second },
                     onChangeImages = { images ->
@@ -260,12 +259,6 @@ private fun ReviewWriteUI(
                             )
                         })
                     }
-                )
-
-                ReviewText(
-                    text = reviewText,
-                    maxTextLength = ReviewWriteViewModel.MAX_TEXT_LENGTH,
-                    onText = onChangedText
                 )
 
                 Spacer(modifier = Modifier.height(32.dp))
@@ -458,5 +451,25 @@ private fun ReviewKeywordAddButton(
             contentDescription = null,
             tint = getColor().main
         )
+    }
+}
+
+@Composable
+private fun Title(
+    text: String,
+    isEssential: Boolean
+) {
+    Row {
+        TextWithPointColor(
+            text = text,
+            style = bodyBold
+        )
+        if(isEssential)
+            Text(
+                modifier = Modifier.padding(start = 2.dp, bottom = 8.dp),
+                text = "*",
+                style = body02,
+                color = getColor().main
+            )
     }
 }

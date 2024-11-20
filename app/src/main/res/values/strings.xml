@@ -425,6 +425,7 @@
     <string name="review_write_writing_hint">내용을 작성해 주세요</string>
     <string name="review_write_keyword">{키워드}를 {선택}해주세요!</string>
     <string name="review_write_add_keyword">키워드 추가</string>
+    <string name="review_write_picture">{사진}을 {선택}해주세요!</string>
     <string name="review_write_complete">올리기</string>
     <string name="review_write_error_maximum_picture">사진은 %d개까지 선택 가능합니다</string>
     <string name="review_write_error_maximum_text">내용은 %d자 이내로 작성 가능합니다</string>
