@@ -19,7 +19,8 @@ import com.jeju.nanaland.ui.reviewwrite.screen.ReviewWriteSearchScreen
 
 fun NavGraphBuilder.reviewWriteRoute(
     navViewModel: NavViewModel,
-    getBackStackEntry: (Any) -> NavBackStackEntry
+    getBackStackEntry: (Any) -> NavBackStackEntry,
+    previousBackStackEntry: () -> NavBackStackEntry?
 ) {
     navigation<ROUTE.Content.ReviewWrite>(
         startDestination = ROUTE.Content.ReviewWrite.StartDest()
@@ -75,6 +76,7 @@ fun NavGraphBuilder.reviewWriteRoute(
             val data: ROUTE.Content.ReviewWrite.Complete = it.toRoute()
             ReviewWriteCompleteScreen(
                 navViewModel,
+                previousBackStackEntry()?.destination?.route?.contains(ROUTE.Content.ReviewWrite.Search::class.qualifiedName.toString()) == true,
                 ReviewCategoryType.valueOf(data.category)
             )
         }

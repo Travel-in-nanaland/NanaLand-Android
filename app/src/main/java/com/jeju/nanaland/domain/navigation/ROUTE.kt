@@ -154,7 +154,7 @@ sealed class ROUTE {
         }
         @Serializable
         /** 후기 작성 화면 **/
-        data object ReviewWrite {
+        data object ReviewWrite:ROUTE() {
             @Serializable
             data class StartDest(
                 val id: Int? = null,

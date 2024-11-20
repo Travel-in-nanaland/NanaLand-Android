@@ -138,7 +138,7 @@ fun ReviewWriteScreen(
                 )
             }
             is UiState.Success -> {
-                navViewModel.navigatePopUpTo(ROUTE.Content.ReviewWrite.Complete(category.toString()), ROUTE.Content.ReviewWrite.StartDest())
+                navViewModel.navigatePopUpTo(ROUTE.Content.ReviewWrite.Complete(category.toString()), ROUTE.Content.ReviewWrite)
                 viewModel.setCallStateNull()
                 viewModel.updateReviewText("")
             }

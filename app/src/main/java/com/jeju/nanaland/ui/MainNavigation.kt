@@ -186,9 +186,11 @@ fun MainNavigation(
         languageChangeScreen(navViewModel)
 
         // 후기 작성 화면
-        reviewWriteRoute(navViewModel) {
+        reviewWriteRoute(navViewModel, {
             navController.getBackStackEntry(it)
-        }
+        }, {
+            navController.previousBackStackEntry
+        })
 
         // 타인 프로필 화면
         profileScreenRoute(navViewModel) {

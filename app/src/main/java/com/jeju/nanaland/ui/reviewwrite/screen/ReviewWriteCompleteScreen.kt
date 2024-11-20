@@ -39,14 +39,17 @@ private fun ReviewWriteCompleteScreenPreview() {
 @Composable
 fun ReviewWriteCompleteScreen(
     navViewModel: NavViewModel,
-
+    previousScreenIsSearch: Boolean,
     categoryType: ReviewCategoryType
 ) {
     ReviewWriteCompleteUI(
         category = categoryType,
         onAgain = { navViewModel.popBackStack() },
         onAdd = {
-            navViewModel.navigatePopUpTo(ROUTE.Content.ReviewWrite.StartDest(),ROUTE.Content.ReviewWrite.Complete(""))
+            if(previousScreenIsSearch)
+                navViewModel.popBackStack()
+            else
+                navViewModel.navigatePopUpTo(ROUTE.Content.ReviewWrite,ROUTE.Content.ReviewWrite.Complete(""))
         }
     )
 }
