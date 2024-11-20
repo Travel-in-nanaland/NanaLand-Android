@@ -5,18 +5,15 @@ import com.jeju.nanaland.domain.entity.member.RecommendedPostData
 import com.jeju.nanaland.domain.entity.member.UserProfile
 import com.jeju.nanaland.domain.request.member.UpdateLanguageRequest
 import com.jeju.nanaland.domain.request.member.UpdatePolicyAgreementRequest
+import com.jeju.nanaland.domain.request.member.UpdateUserProfileRequest
 import com.jeju.nanaland.domain.request.member.UpdateUserTypeRequest
 import com.jeju.nanaland.domain.request.member.WithdrawalRequest
 import com.jeju.nanaland.domain.response.ResponseWrapper
-import okhttp3.MultipartBody
-import okhttp3.RequestBody
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
-import retrofit2.http.Multipart
 import retrofit2.http.PATCH
 import retrofit2.http.POST
-import retrofit2.http.Part
 import retrofit2.http.Query
 
 interface MemberApi {
@@ -47,11 +44,10 @@ interface MemberApi {
     ): Response<ResponseWrapper<Any?>>
 
     // 유저 프로필 수정
-    @Multipart
     @PATCH("member/profile")
     suspend fun updateUserProfile(
-        @Part("reqDto") data: RequestBody,
-        @Part image: MultipartBody.Part?
+        @Body data: UpdateUserProfileRequest,
+        @Query("fileKey") fileKey: String?
     ): Response<ResponseWrapper<String?>>
 
     // 회원 탈퇴

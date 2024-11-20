@@ -46,6 +46,14 @@ import com.jeju.nanaland.util.resource.getString
 import com.jeju.nanaland.util.ui.scrollableVerticalArrangement
 import kotlin.random.Random
 
+private fun intToDrawbleId(index: Int): Int = when(index) {
+    0 -> R.drawable.img_default_profile_gray
+    1 -> R.drawable.img_default_profile_light_gray
+    2 -> R.drawable.img_default_profile_deep_blue
+    3 -> R.drawable.img_default_profile_light_purple
+    else -> throw Exception()
+}
+
 @Composable
 fun ProfileUpdateScreen(
     profileImageUri: String,
@@ -63,7 +71,7 @@ fun ProfileUpdateScreen(
     ProfileUpdateScreen(
         prevNickname = nickname,
         prevIntroduction = introduction,
-        prevProfileImageUri = inputProfileImageUri.value,
+        prevProfileImageUri = profileImageUri,
         inputNickname = inputNickname.value,
         updateInputNickname = viewModel::updateInputNickname,
         inputNicknameError = inputNicknameState.value,
@@ -74,7 +82,7 @@ fun ProfileUpdateScreen(
         updateProfileImageUri = viewModel::updateProfileImageUri,
         updateProfile = {
             val image = if(profileImageUri == inputProfileImageUri.value) null
-                else UriRequestBody(context, Uri.parse(inputProfileImageUri.value))
+                else inputProfileImageUri.value
             viewModel.updateProfile(image = image, moveToBackScreen = moveToBackScreen)
         },
         moveToBackScreen = moveToBackScreen,
@@ -95,7 +103,7 @@ private fun ProfileUpdateScreen(
     inputIntroductionError: Int?,
     updateInputIntroduction: (String) -> Unit,
     inputProfileImageUri: String?,
-    updateProfileImageUri: (Uri) -> Unit,
+    updateProfileImageUri: (String) -> Unit,
     updateProfile: () -> Unit,
     moveToBackScreen: () -> Unit,
     isContent: Boolean
@@ -115,7 +123,7 @@ private fun ProfileUpdateScreen(
             Log.e("PickImage", "success")
             Log.e("PickImage", "${uri}")
             uri?.let {
-                updateProfileImageUri(uri)
+                updateProfileImageUri(uri.toString())
             }
         }
 
@@ -144,7 +152,9 @@ private fun ProfileUpdateScreen(
                     modifier = Modifier.padding(start = 16.dp, end = 16.dp)
                 ) {
                     ProfileUpdateScreenProfileContent(
-                        imageUri = inputProfileImageUri,
+                        imageUri = inputProfileImageUri?.toIntOrNull()?.run {
+                            intToDrawbleId(this)
+                        } ?: inputProfileImageUri,
                         onClick = { isProfileImageDialogShowing = true }
                     )
 
@@ -232,9 +242,13 @@ private fun ProfileUpdateScreen(
                 },
                 getString(R.string.profile_update_screen_select_image_remove) to {
                     isProfileImageDialogShowing = false
-//                    TODO 삭제 API
+                    updateProfileImageUri(Random.nextInt(4).toString())
                 },
-            ).sliceArray(0 until if(Random.nextBoolean()) 1 else 2) // TODO is default image
+            ).sliceArray(
+                0 until
+                        if(inputProfileImageUri?.contains("/default/") == true) 1
+                    else 2
+            )
         )
     }
 }

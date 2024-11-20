@@ -3,7 +3,6 @@ package com.jeju.nanaland.domain.repository
 import com.jeju.nanaland.domain.entity.member.HotPostData
 import com.jeju.nanaland.domain.entity.member.RecommendedPostData
 import com.jeju.nanaland.domain.entity.member.UserProfile
-import com.jeju.nanaland.domain.request.UriRequestBody
 import com.jeju.nanaland.domain.request.member.UpdateLanguageRequest
 import com.jeju.nanaland.domain.request.member.UpdatePolicyAgreementRequest
 import com.jeju.nanaland.domain.request.member.UpdateUserProfileRequest
@@ -33,7 +32,7 @@ interface MemberRepository {
     // 유저 프로필 수정
     suspend fun updateUserProfile(
         data: UpdateUserProfileRequest,
-        image: UriRequestBody?
+        image: String
     ): NetworkResult<String?>
 
     // 회원 탈퇴

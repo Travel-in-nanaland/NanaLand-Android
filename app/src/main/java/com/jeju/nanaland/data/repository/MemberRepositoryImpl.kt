@@ -1,12 +1,10 @@
 package com.jeju.nanaland.data.repository
 
-import com.google.gson.GsonBuilder
 import com.jeju.nanaland.data.api.MemberApi
 import com.jeju.nanaland.domain.entity.member.HotPostData
 import com.jeju.nanaland.domain.entity.member.RecommendedPostData
 import com.jeju.nanaland.domain.entity.member.UserProfile
 import com.jeju.nanaland.domain.repository.MemberRepository
-import com.jeju.nanaland.domain.request.UriRequestBody
 import com.jeju.nanaland.domain.request.member.UpdateLanguageRequest
 import com.jeju.nanaland.domain.request.member.UpdatePolicyAgreementRequest
 import com.jeju.nanaland.domain.request.member.UpdateUserProfileRequest
@@ -14,8 +12,6 @@ import com.jeju.nanaland.domain.request.member.UpdateUserTypeRequest
 import com.jeju.nanaland.domain.request.member.WithdrawalRequest
 import com.jeju.nanaland.util.network.NetworkResult
 import com.jeju.nanaland.util.network.NetworkResultHandler
-import okhttp3.MediaType.Companion.toMediaTypeOrNull
-import okhttp3.RequestBody.Companion.toRequestBody
 
 class MemberRepositoryImpl(
     private val memberApi: MemberApi
@@ -50,12 +46,9 @@ class MemberRepositoryImpl(
 
     override suspend fun updateUserProfile(
         data: UpdateUserProfileRequest,
-        image: UriRequestBody?
+        image: String
     ): NetworkResult<String?> {
-        val gson = GsonBuilder().setLenient().setPrettyPrinting().create();
-        val json = gson.toJson(data)
-        val requestBody = json.toRequestBody("application/json".toMediaTypeOrNull())
-        return handleResult { memberApi.updateUserProfile(requestBody, image?.toMultipartBody("multipartFile")) }
+        return handleResult { memberApi.updateUserProfile(data, image) }
     }
 
     override suspend fun withdraw(
