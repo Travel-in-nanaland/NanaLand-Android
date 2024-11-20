@@ -17,6 +17,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.jeju.nanaland.R
+import com.jeju.nanaland.domain.entity.member.HotPostData
 import com.jeju.nanaland.domain.entity.member.RecommendedPostData
 import com.jeju.nanaland.domain.entity.nanapick.NanaPickBannerData
 import com.jeju.nanaland.globalvalue.userdata.UserData
@@ -45,13 +46,16 @@ fun HomeContent(
 ) {
     val homePreviewBanner = viewModel.homeBannerPreview.collectAsState().value
     val recommendedPosts = viewModel.recommendedPosts.collectAsState().value
+    val hotPosts = viewModel.hotPosts.collectAsState().value
     LaunchedEffect(Unit) {
         viewModel.getHomeBannerPreview()
         viewModel.getRecommendedPost()
+        viewModel.getHotPost()
     }
     HomeContent(
         homePreviewBanner = homePreviewBanner,
         recommendedPosts = recommendedPosts,
+        hotPosts = hotPosts,
         toggleFavorite = viewModel::toggleFavorite,
         moveToCategoryContentScreen = moveToCategoryContentScreen,
         moveToNatureListScreen = moveToNatureListScreen,
@@ -69,6 +73,7 @@ fun HomeContent(
 private fun HomeContent(
     homePreviewBanner: UiState<List<NanaPickBannerData>>,
     recommendedPosts: UiState<List<RecommendedPostData>>,
+    hotPosts: UiState<List<HotPostData>>,
     toggleFavorite: (Int, String?) -> Unit,
     moveToCategoryContentScreen: (Int, String?, Boolean) -> Unit,
     moveToNatureListScreen: (String?) -> Unit,
@@ -152,7 +157,7 @@ private fun HomeContent(
         )
         Spacer(Modifier.height(12.dp))
         HomeScreenPopularPlaces(
-            recommendedPosts = recommendedPosts,
+            hotPosts = hotPosts,
             onFavoriteButtonClick = toggleFavorite,
             onClick = moveToCategoryContentScreen,
             moveToSignInScreen = moveToSignInScreen,

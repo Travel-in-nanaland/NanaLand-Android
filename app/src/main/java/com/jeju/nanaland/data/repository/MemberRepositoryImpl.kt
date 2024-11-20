@@ -2,6 +2,7 @@ package com.jeju.nanaland.data.repository
 
 import com.google.gson.GsonBuilder
 import com.jeju.nanaland.data.api.MemberApi
+import com.jeju.nanaland.domain.entity.member.HotPostData
 import com.jeju.nanaland.domain.entity.member.RecommendedPostData
 import com.jeju.nanaland.domain.entity.member.UserProfile
 import com.jeju.nanaland.domain.repository.MemberRepository
@@ -14,10 +15,7 @@ import com.jeju.nanaland.domain.request.member.WithdrawalRequest
 import com.jeju.nanaland.util.network.NetworkResult
 import com.jeju.nanaland.util.network.NetworkResultHandler
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
-import okhttp3.MultipartBody
-import okhttp3.RequestBody.Companion.asRequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
-import java.io.File
 
 class MemberRepositoryImpl(
     private val memberApi: MemberApi
@@ -30,6 +28,9 @@ class MemberRepositoryImpl(
     // 유저 타입에 따른 추천 게시물 2개 반환
     override suspend fun getRecommendedPost(): NetworkResult<List<RecommendedPostData>> {
         return handleResult { memberApi.getRecommendedPost() }
+    }
+    override suspend fun getHotPost(): NetworkResult<List<HotPostData>> {
+        return handleResult { memberApi.getHotPost() }
     }
 
     override suspend fun getRandomRecommendedPost(): NetworkResult<List<RecommendedPostData>> {

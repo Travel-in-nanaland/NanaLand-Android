@@ -17,7 +17,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
-import com.jeju.nanaland.domain.entity.member.RecommendedPostData
+import com.jeju.nanaland.domain.entity.member.HotPostData
 import com.jeju.nanaland.ui.component.thumbnail.parts.ThumbnailFavoriteButton
 import com.jeju.nanaland.ui.theme.caption01
 import com.jeju.nanaland.ui.theme.getColor
@@ -28,7 +28,7 @@ import com.skydoves.landscapist.glide.GlideImage
 
 @Composable
 fun HomeScreenPopularPlaces(
-    recommendedPosts: UiState<List<RecommendedPostData>>, // TODO
+    hotPosts: UiState<List<HotPostData>>,
     onFavoriteButtonClick: (Int, String?) -> Unit,
     onClick: (Int, String?, Boolean) -> Unit,
     moveToSignInScreen: () -> Unit,
@@ -37,9 +37,9 @@ fun HomeScreenPopularPlaces(
         modifier = Modifier.padding(horizontal = 16.dp),
         verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
-        when (recommendedPosts) {
+        when (hotPosts) {
             is UiState.Loading -> {
-                for (i in 1..5) {
+                for (i in 1..3) {
                     RoundedView {
                         Spacer(
                             Modifier
@@ -50,15 +50,14 @@ fun HomeScreenPopularPlaces(
             }
             is UiState.Failure -> {}
             is UiState.Success -> {
-                for (i in 1..5) //TODO 양 늘리기 삭제
-                repeat(recommendedPosts.data.size) { idx ->
-                    val item = recommendedPosts.data[idx]
+                repeat(hotPosts.data.size) { idx ->
+                    val item = hotPosts.data[idx]
                     RoundedView {
                         PlaceView(
                             imageUri = item.firstImage.originUrl,
                             isFavorite = item.favorite,
                             title = item.title,
-                            subTitle = "todo sub title - " +item.title, // TODO
+                            subTitle = item.address,
                             onFavoriteButtonClick = { onFavoriteButtonClick(item.id, item.category) },
                             onClick = { onClick(item.id, item.category, false) },
                             moveToSignInScreen = moveToSignInScreen

@@ -1,5 +1,6 @@
 package com.jeju.nanaland.data.api
 
+import com.jeju.nanaland.domain.entity.member.HotPostData
 import com.jeju.nanaland.domain.entity.member.RecommendedPostData
 import com.jeju.nanaland.domain.entity.member.UserProfile
 import com.jeju.nanaland.domain.request.member.UpdateLanguageRequest
@@ -30,6 +31,9 @@ interface MemberApi {
     @GET("member/recommended")
     suspend fun getRecommendedPost(
     ): Response<ResponseWrapper<List<RecommendedPostData>>>
+    @GET("member/hot")
+    suspend fun getHotPost(
+    ): Response<ResponseWrapper<List<HotPostData>>>
 
     // 랜덤 추천 게시물 2개 반환
     @GET("member/recommended/random")

@@ -1,5 +1,6 @@
 package com.jeju.nanaland.domain.repository
 
+import com.jeju.nanaland.domain.entity.member.HotPostData
 import com.jeju.nanaland.domain.entity.member.RecommendedPostData
 import com.jeju.nanaland.domain.entity.member.UserProfile
 import com.jeju.nanaland.domain.request.UriRequestBody
@@ -17,6 +18,9 @@ interface MemberRepository {
 
     // 유저 타입에 따른 추천 게시물 2개 반환
     suspend fun getRecommendedPost(): NetworkResult<List<RecommendedPostData>>
+
+    // 인기 게시물
+    suspend fun getHotPost(): NetworkResult<List<HotPostData>>
 
     // 랜덤 추천 게시물 2개 반환
     suspend fun getRandomRecommendedPost(): NetworkResult<List<RecommendedPostData>>

@@ -2,12 +2,13 @@ package com.jeju.nanaland.ui.main.home
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.jeju.nanaland.domain.entity.member.HotPostData
 import com.jeju.nanaland.domain.entity.member.RecommendedPostData
 import com.jeju.nanaland.domain.entity.nanapick.NanaPickBannerData
 import com.jeju.nanaland.domain.request.favorite.ToggleFavoriteRequest
 import com.jeju.nanaland.domain.usecase.favorite.ToggleFavoriteUseCase
+import com.jeju.nanaland.domain.usecase.member.GetHotPostUseCase
 import com.jeju.nanaland.domain.usecase.member.GetRandomRecommendedPostUseCase
-import com.jeju.nanaland.domain.usecase.member.GetRecommendedPostUseCase
 import com.jeju.nanaland.domain.usecase.nanapick.GetHomePreviewBannerUseCase
 import com.jeju.nanaland.globalvalue.type.HomeScreenViewType
 import com.jeju.nanaland.util.log.LogUtil
@@ -28,6 +29,7 @@ import javax.inject.Inject
 class HomeViewModel @Inject constructor(
     private val getHomePreviewBannerUseCase: GetHomePreviewBannerUseCase,
     private val getRandomRecommendedPostUseCase: GetRandomRecommendedPostUseCase,
+    private val getHotPostUseCase: GetHotPostUseCase,
     private val toggleFavoriteUseCase: ToggleFavoriteUseCase
 ) : ViewModel() {
 
@@ -39,6 +41,8 @@ class HomeViewModel @Inject constructor(
     val homeBannerPreview = _homeBannerPreview.asStateFlow()
     private val _recommendedPost = MutableStateFlow<UiState<List<RecommendedPostData>>>(UiState.Loading)
     val recommendedPosts = _recommendedPost.asStateFlow()
+    private val _hotPost = MutableStateFlow<UiState<List<HotPostData>>>(UiState.Loading)
+    val hotPosts = _hotPost.asStateFlow()
 
     fun updateInputText(text: String) {
         _inputText.update { text }
@@ -85,6 +89,25 @@ class HomeViewModel @Inject constructor(
                 }
             }
             .catch { LogUtil.e("flow Error", "getRecommendedPostUseCase") }
+            .launchIn(viewModelScope)
+    }
+    fun getHotPost() {
+        _hotPost.update { UiState.Loading }
+        getHotPostUseCase()
+            .onEach { networkResult ->
+                networkResult.onSuccess { code, message, data ->
+                    data?.let {
+                        _hotPost.update {
+                            UiState.Success(data)
+                        }
+                    }
+                }.onError { code, message ->
+
+                }.onException {
+
+                }
+            }
+            .catch { LogUtil.e("flow Error", "getHotPostUseCase") }
             .launchIn(viewModelScope)
     }
 
