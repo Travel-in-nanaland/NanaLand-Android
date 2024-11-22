@@ -1,6 +1,5 @@
 package com.jeju.nanaland.ui.experience
 
-import android.util.Log
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.gestures.animateTo
 import androidx.compose.foundation.layout.Box
@@ -159,13 +158,6 @@ private fun ExperienceListScreen(
                         AnchoredDraggableContentState.Open) } },
                     showDimBackground = { isDimBackgroundShowing.value = true }
                 )
-                Log.d("asd","""
-!(${selectedLocationList.all { it }} || ${selectedLocationList.all { !it }}) || // if location filter
-                        (${selectedCategoryType == ExperienceCategoryType.Activity} && !(${selectedActivityKeywordList.all { it }} || ${selectedActivityKeywordList.all { !it }})) ||  // if activity and  filter
-                        (${selectedCategoryType != ExperienceCategoryType.Activity} && !(${selectedCultureArtKeywordList.all { it }} || ${selectedCultureArtKeywordList.all { !it }}))// if art and  filter
-                        ) &&  ${(experienceThumbnailDataList as? UiState.Success)?.data}
-                    (${experienceThumbnailDataList is UiState.Success && experienceThumbnailDataList.data.isEmpty()}) // and list is empty                
-                """.trimIndent())
                 if (
                     (// if filter on
                         !(selectedLocationList.all { it } || selectedLocationList.all { !it }) || // if location filter
