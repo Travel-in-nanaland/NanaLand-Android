@@ -5,6 +5,7 @@ import com.jeju.nanaland.BuildConfig
 import com.jeju.nanaland.data.api.AuthApi
 import com.jeju.nanaland.data.api.BoardApi
 import com.jeju.nanaland.data.api.ExperienceApi
+import com.jeju.nanaland.data.api.FTPApi
 import com.jeju.nanaland.data.api.FavoriteApi
 import com.jeju.nanaland.data.api.FestivalApi
 import com.jeju.nanaland.data.api.MarketApi
@@ -178,5 +179,11 @@ object NetworkModule {
     @Provides
     fun provideRestaurantApi(@AccessTokenAutoAdded retrofit: Retrofit): RestaurantApi {
         return retrofit.create(RestaurantApi::class.java)
+    }
+
+    @Singleton
+    @Provides
+    fun provideFTPApi(@AccessTokenAutoAdded retrofit: Retrofit): FTPApi {
+        return retrofit.create(FTPApi::class.java)
     }
 }

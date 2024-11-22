@@ -9,7 +9,7 @@ class UpdateUserProfileUseCase(
 ) {
     operator fun invoke(
         data: UpdateUserProfileRequest,
-        image: String
+        image: String?
     ) = flow {
         val response = repository.updateUserProfile(data, image)
         emit(response)

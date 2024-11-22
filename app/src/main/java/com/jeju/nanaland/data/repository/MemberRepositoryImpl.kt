@@ -46,7 +46,7 @@ class MemberRepositoryImpl(
 
     override suspend fun updateUserProfile(
         data: UpdateUserProfileRequest,
-        image: String
+        image: String?
     ): NetworkResult<String?> {
         return handleResult { memberApi.updateUserProfile(data, image) }
     }

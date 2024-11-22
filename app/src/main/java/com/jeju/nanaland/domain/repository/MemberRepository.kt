@@ -32,7 +32,7 @@ interface MemberRepository {
     // 유저 프로필 수정
     suspend fun updateUserProfile(
         data: UpdateUserProfileRequest,
-        image: String
+        image: String?
     ): NetworkResult<String?>
 
     // 회원 탈퇴

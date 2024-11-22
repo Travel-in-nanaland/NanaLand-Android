@@ -15,6 +15,7 @@ import okhttp3.Protocol
 import okhttp3.Request
 import okhttp3.Response
 import okhttp3.ResponseBody
+import retrofit2.Invocation
 import javax.inject.Inject
 
 class TokenInterceptor @Inject constructor(
@@ -30,20 +31,26 @@ class TokenInterceptor @Inject constructor(
     override fun intercept(chain: Interceptor.Chain): Response {
         lateinit var response: Response
         return runBlocking<Response> {
+            val request = chain.request()
+            request.tag(Invocation::class.java)?.let { invocation ->
+                (invocation.arguments().firstOrNull() as? String)?.let { isWithoutAuthHeader ->
+                    return@runBlocking chain.proceed(request)
+                }
+            }
+
             mutex.withLock {
                 val accessToken = getAccessTokenUseCase().first()
                 if (accessToken.isNullOrEmpty()) {
-                    response = errorResponse(chain.request())
+                    response = errorResponse(request)
                     LogUtil.e("Network Error", "Access Token is Null or Empty")
                 } else {
                     LogUtil.e("TokenInterceptor", "${accessToken}")
-                    val request = chain.request().newBuilder().header("Authorization", "Bearer $accessToken").build()
-                    response = chain.proceed(request)
+                    response = chain.proceed(request.newBuilder().header("Authorization", "Bearer $accessToken").build())
                     if (response.code == 401) {
                         response.close()
                         val refreshToken = getRefreshTokenUseCase().first()
                         if (refreshToken.isNullOrEmpty()) {
-                            response = errorResponse(chain.request())
+                            response = errorResponse(request)
                             LogUtil.e("Network Error", "Refresh Token is Null or Empty")
                         } else {
                             reissueAccessTokenUseCase(refreshToken).first().onSuccess { code, message, data ->
@@ -51,12 +58,11 @@ class TokenInterceptor @Inject constructor(
                                 val newRefreshToken = data?.refreshToken ?: ""
                                 saveRefreshTokenUseCase(newRefreshToken)
                                 saveAccessTokenUseCase(newAccessToken)
-                                val newRequest = chain.request().newBuilder().header("Authorization", "Bearer $newAccessToken").build()
-                                response = chain.proceed(newRequest)
+                                response = chain.proceed(request.newBuilder().header("Authorization", "Bearer $newAccessToken").build())
                             }.onError { code, message ->
-                                response = errorResponse(chain.request())
+                                response = errorResponse(request)
                             }.onException {
-                                response = errorResponse(chain.request())
+                                response = errorResponse(request)
                             }
                         }
                     }

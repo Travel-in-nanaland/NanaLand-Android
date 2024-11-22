@@ -7,8 +7,10 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.toRoute
 import com.jeju.nanaland.R
+import com.jeju.nanaland.domain.entity.file.FileCategory
 import com.jeju.nanaland.domain.navigation.ROUTE
 import com.jeju.nanaland.domain.request.member.UpdateUserProfileRequest
+import com.jeju.nanaland.domain.usecase.file.PutFileUseCase
 import com.jeju.nanaland.domain.usecase.member.DuplicateNicknameUseCase
 import com.jeju.nanaland.domain.usecase.member.UpdateUserProfileUseCase
 import com.jeju.nanaland.globalvalue.constant.INTRODUCTION_CONSTRAINT
@@ -40,6 +42,7 @@ import javax.inject.Inject
 class ProfileUpdateViewModel @Inject constructor(
     private val updateProfileUseCase: UpdateUserProfileUseCase,
     private val duplicateNicknameUseCase: DuplicateNicknameUseCase,
+    private val putFileUseCase: PutFileUseCase,
     savedStateHandle: SavedStateHandle
 ) : ViewModel() {
     val stateHandle: ROUTE.Main.Profile.Update = savedStateHandle.toRoute()
@@ -97,9 +100,14 @@ class ProfileUpdateViewModel @Inject constructor(
             description = _inputIntroduction.value
         )
 
-        // profile image remove
-        image?.toIntOrNull()?.let { defaultImageIndex ->
-            updateProfileUseCase(requestData, intToAPIString(defaultImageIndex))
+        viewModelScope.launch {
+            val fileKey = image?.toIntOrNull()?.let {
+                intToAPIString(it)
+            } ?: image?.let {
+                putFileUseCase(it, FileCategory.Profile)
+            }
+
+            updateProfileUseCase(requestData, fileKey)
                 .onEach { networkResult ->
                     networkResult.onSuccess { code, message, data ->
                         moveToBackScreen()
