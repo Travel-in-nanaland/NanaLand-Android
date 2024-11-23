@@ -168,7 +168,6 @@ private fun ProfileScreen(
         modifier = Modifier
             .fillMaxSize()
             .background(getColor().main5)
-            .verticalScroll(rememberScrollState())
     ) {
         MyTopBar(
             title = if(isMine) getString(R.string.common_나의_나나) else "",
@@ -180,96 +179,98 @@ private fun ProfileScreen(
                     R.drawable.ic_more_vert to { moreOptionDialog = true },
             )
         )
-        when (val up = userProfile.value) {
-            is UiState.Loading -> {}
-            is UiState.Success -> {
-                val reviewList = reviews.itemSnapshotList.items.take(12)
-                val noticeList = notices?.itemSnapshotList?.items
+        Column(Modifier.verticalScroll(rememberScrollState())) {
+            when (val up = userProfile.value) {
+                is UiState.Loading -> {}
+                is UiState.Success -> {
+                    val reviewList = reviews.itemSnapshotList.items.take(12)
+                    val noticeList = notices?.itemSnapshotList?.items
 
-                Spacer(Modifier.height(24.dp))
+                    Spacer(Modifier.height(24.dp))
 
-                ProfileScreenProfileSection(
-                    profile = up.data,
-                    isMine = isMine,
-                    moveToSignInScreen = moveToSignInScreen,
-                    moveToProfileModificationScreen = {
-                        moveToProfileModificationScreen(
-                            up.data.profileImage.originUrl,
-                            up.data.nickname,
-                            up.data.description
-                        )
-                    },
-                    moveToTypeTestScreen = moveToTypeTestScreen,
-                    moveToTypeTestResultScreen = {
-                        up.data.travelType?.let {
-                            moveToTypeTestResultScreen(up.data.nickname, it)
-                        }
-                    }
-                )
-
-                Spacer(Modifier.height(24.dp))
-
-                ProfileScreenTabPart(
-                    isReviewList = isReviewList.value,
-                    reviewSize = reviewList.size,
-                    moveToReviewScreen = { moveToProfileReviewListScreen(null) },
-                    toggleReviewNoticeTab = if(!isMine) null else {
-                        { viewModel.setIsReviewList(!isReviewList.value) }
-                    }
-                )
-                Column(Modifier.background(getColor().white)) {
-
-                    if (isMine) {
-                        if (!isReviewList.value || !viewModel.isGuest)
-                            ProfileScreenMoreInfoPart(
-                                isReviewList = isReviewList.value,
-                                listSize = if (isReviewList.value) reviewList.size else noticeList?.size
-                                    ?: 0,
-                                moveToListPage = {
-                                    if (isReviewList.value) moveToProfileReviewListScreen(null)
-                                    else moveToProfileNoticeListScreen(null)
-                                },
-                                moveToReviewWriteScreen = moveToReviewWriteScreen
+                    ProfileScreenProfileSection(
+                        profile = up.data,
+                        isMine = isMine,
+                        moveToSignInScreen = moveToSignInScreen,
+                        moveToProfileModificationScreen = {
+                            moveToProfileModificationScreen(
+                                up.data.profileImage.originUrl,
+                                up.data.nickname,
+                                up.data.description
                             )
-                    } else
-                        HorizontalDivider()
+                        },
+                        moveToTypeTestScreen = moveToTypeTestScreen,
+                        moveToTypeTestResultScreen = {
+                            up.data.travelType?.let {
+                                moveToTypeTestResultScreen(up.data.nickname, it)
+                            }
+                        }
+                    )
 
-                    if (isReviewList.value) {
-                        ProfileScreenReviewListSection(
-                            reviewList,
-                            onClick = moveToProfileReviewListScreen,
-                            onMenuClick = { selectReview = it },
-                        )
-                    } else if (!noticeList.isNullOrEmpty()) {
-                        ProfileScreenNoticeListSection(noticeList) {
-                            moveToProfileNoticeListScreen(it)
+                    Spacer(Modifier.height(24.dp))
+
+                    ProfileScreenTabPart(
+                        isReviewList = isReviewList.value,
+                        reviewSize = reviewList.size,
+                        moveToReviewScreen = { moveToProfileReviewListScreen(null) },
+                        toggleReviewNoticeTab = if(!isMine) null else {
+                            { viewModel.setIsReviewList(!isReviewList.value) }
+                        }
+                    )
+                    Column(Modifier.background(getColor().white)) {
+
+                        if (isMine) {
+                            if (!isReviewList.value || !viewModel.isGuest)
+                                ProfileScreenMoreInfoPart(
+                                    isReviewList = isReviewList.value,
+                                    listSize = if (isReviewList.value) reviewList.size else noticeList?.size
+                                        ?: 0,
+                                    moveToListPage = {
+                                        if (isReviewList.value) moveToProfileReviewListScreen(null)
+                                        else moveToProfileNoticeListScreen(null)
+                                    },
+                                    moveToReviewWriteScreen = moveToReviewWriteScreen
+                                )
+                        } else
+                            HorizontalDivider()
+
+                        if (isReviewList.value) {
+                            ProfileScreenReviewListSection(
+                                reviewList,
+                                onClick = moveToProfileReviewListScreen,
+                                onMenuClick = { selectReview = it },
+                            )
+                        } else if (!noticeList.isNullOrEmpty()) {
+                            ProfileScreenNoticeListSection(noticeList) {
+                                moveToProfileNoticeListScreen(it)
+                            }
                         }
                     }
-                }
 
-                if (isMine){
-                    if(isReviewList.value) {
-                        if (viewModel.isGuest) {
-                            ListCenterText(getString(R.string.mypage_screen_review_guest))
+                    if (isMine){
+                        if(isReviewList.value) {
+                            if (viewModel.isGuest) {
+                                ListCenterText(getString(R.string.mypage_screen_review_guest))
+                                return@Column
+                            }
+                            else if (reviewList.isEmpty()) {
+                                ListCenterText(getString(R.string.mypage_screen_review_empty))
+                                return@Column
+                            }
+                        }
+                        else if(noticeList.isNullOrEmpty()){
+                            ListCenterText(getString(R.string.mypage_screen_notice_empty))
                             return@Column
                         }
-                        else if (reviewList.isEmpty()) {
-                            ListCenterText(getString(R.string.mypage_screen_review_empty))
-                            return@Column
-                        }
                     }
-                    else if(noticeList.isNullOrEmpty()){
-                        ListCenterText(getString(R.string.mypage_screen_notice_empty))
-                        return@Column
-                    }
-                }
-                Spacer(modifier = Modifier
-                    .fillMaxWidth()
-                    .weight(1f)
-                    .background(getColor().white))
+                    Spacer(modifier = Modifier
+                        .fillMaxWidth()
+                        .weight(1f)
+                        .background(getColor().white))
 
+                }
+                is UiState.Failure -> {}
             }
-            is UiState.Failure -> {}
         }
     }
 
