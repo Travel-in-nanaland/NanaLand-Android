@@ -59,7 +59,7 @@ import com.jeju.nanaland.ui.component.common.CustomSurface
 import com.jeju.nanaland.ui.component.common.UploadImages
 import com.jeju.nanaland.ui.component.common.dialog.SubmitLoadingDialog
 import com.jeju.nanaland.ui.component.common.text.TextWithPointColor
-import com.jeju.nanaland.ui.component.common.topbar.CustomTopBar
+import com.jeju.nanaland.ui.component.common.topbar.TopBarCommon
 import com.jeju.nanaland.ui.reviewwrite.ReviewWriteUiState
 import com.jeju.nanaland.ui.reviewwrite.ReviewWriteViewModel
 import com.jeju.nanaland.ui.theme.body02
@@ -175,7 +175,7 @@ private fun ReviewWriteUI(
     val scrollState = rememberScrollState()
 
     CustomSurface {
-        CustomTopBar(
+        TopBarCommon(
             title = getString(R.string.review_write_title),
             onBackButtonClicked = moveToBackScreen
         )

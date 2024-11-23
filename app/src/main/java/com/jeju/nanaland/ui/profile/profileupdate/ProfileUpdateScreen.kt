@@ -29,7 +29,7 @@ import com.jeju.nanaland.R
 import com.jeju.nanaland.globalvalue.constant.INTRODUCTION_CONSTRAINT
 import com.jeju.nanaland.ui.component.common.CustomSurface
 import com.jeju.nanaland.ui.component.common.dialog.BottomSheetSelectDialog
-import com.jeju.nanaland.ui.component.common.topbar.CustomTopBar
+import com.jeju.nanaland.ui.component.common.topbar.TopBarCommon
 import com.jeju.nanaland.ui.component.signup.profilesetting.SignUpScreenCharacterCount
 import com.jeju.nanaland.ui.component.signup.profilesetting.SignUpScreenTextField
 import com.jeju.nanaland.ui.profile.profileupdate.component.ProfileUpdateScreenBottomButton
@@ -125,7 +125,7 @@ private fun ProfileUpdateScreen(
         }
 
     CustomSurface {
-        CustomTopBar(
+        TopBarCommon(
             title = getString(R.string.profile_update_screen_프로필_수정),
             onBackButtonClicked = {
                 if (prevNickname != inputNickname || prevIntroduction != inputIntroduction) {

@@ -37,7 +37,7 @@ import androidx.paging.LoadState
 import androidx.paging.compose.LazyPagingItems
 import com.jeju.nanaland.R
 import com.jeju.nanaland.ui.component.common.CustomSurface
-import com.jeju.nanaland.ui.component.common.topbar.CustomTopBar
+import com.jeju.nanaland.ui.component.common.topbar.TopBarCommon
 import com.jeju.nanaland.ui.theme.getColor
 import com.jeju.nanaland.util.ui.clickableNoEffect
 
@@ -83,7 +83,7 @@ fun <T : Any> ProfileListFrame(
                     .imePadding()
                     .padding(bottom = if (isImeKeyboardShowing) 0.dp else it.calculateBottomPadding())
             ) {
-                CustomTopBar(
+                TopBarCommon(
                     title = title,
                     onBackButtonClicked = moveToBackScreen
                 )

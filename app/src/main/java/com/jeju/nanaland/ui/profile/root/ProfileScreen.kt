@@ -34,7 +34,7 @@ import com.jeju.nanaland.domain.entity.review.MemberReviewDetail
 import com.jeju.nanaland.globalvalue.constant.TravelType
 import com.jeju.nanaland.globalvalue.type.ReviewCategoryType
 import com.jeju.nanaland.ui.component.common.dialog.BottomSheetSelectDialog
-import com.jeju.nanaland.ui.component.common.topbar.MyTopBar
+import com.jeju.nanaland.ui.component.common.topbar.TopBarCommon
 import com.jeju.nanaland.ui.profile.component.parts.RemoveDialog
 import com.jeju.nanaland.ui.profile.root.component.ProfileScreenNoticeListSection
 import com.jeju.nanaland.ui.profile.root.component.ProfileScreenProfileSection
@@ -169,7 +169,7 @@ private fun ProfileScreen(
             .fillMaxSize()
             .background(getColor().main5)
     ) {
-        MyTopBar(
+        TopBarCommon(
             title = if(isMine) getString(R.string.common_나의_나나) else "",
             onBackButtonClicked = onBackButtonClicked,
             menus = arrayOf(

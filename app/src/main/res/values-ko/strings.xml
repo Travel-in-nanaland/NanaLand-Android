@@ -201,7 +201,6 @@
 
 
     <!--회원가입 프로필 설정 화면-->
-    <string name="sign_up_profile_setting_guide">사용할 이름을 작성 및\n프로필을 선택해 주세요.</string>
     <string name="sign_up_profile_setting_hint">이름을 입력해 주세요</string>
     <string name="sign_up_profile_setting_warning1">해당 닉네임은 사용할 수 없습니다.</string>
     <string name="sign_up_profile_setting_warning2">해당 닉네임은 다른 사용자가 사용 중입니다.</string>

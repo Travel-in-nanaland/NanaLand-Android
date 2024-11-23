@@ -200,7 +200,6 @@
 
 
     <!--회원가입 프로필 설정 화면-->
-    <string name="sign_up_profile_setting_guide">Enter your name and\nselect a profile picture.</string>
     <string name="sign_up_profile_setting_hint">Please enter your name</string>
     <string name="sign_up_profile_setting_warning1">This nickname cannot be used.</string>
     <string name="sign_up_profile_setting_warning2">This nickname is already in use by another user.</string>

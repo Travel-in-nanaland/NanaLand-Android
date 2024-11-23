@@ -24,7 +24,7 @@ import com.jeju.nanaland.R
 import com.jeju.nanaland.domain.request.UriRequestBody
 import com.jeju.nanaland.ui.component.common.CustomSurface
 import com.jeju.nanaland.ui.component.common.dialog.SubmitLoadingDialog
-import com.jeju.nanaland.ui.component.common.topbar.CustomTopBar
+import com.jeju.nanaland.ui.component.common.topbar.TopBarCommon
 import com.jeju.nanaland.ui.report.screen.ReportCategoryScreen
 import com.jeju.nanaland.ui.report.screen.ReportWriteScreen
 import com.jeju.nanaland.ui.theme.getColor
@@ -90,7 +90,7 @@ fun ReportScreen(
                     .imePadding()
                     .padding(bottom = if (isImeKeyboardShowing) 0.dp else it.calculateBottomPadding())
             ) {
-                CustomTopBar(
+                TopBarCommon(
                     title = getString(R.string.common_신고),
                     onBackButtonClicked = {
                         if(page.value <= 1)

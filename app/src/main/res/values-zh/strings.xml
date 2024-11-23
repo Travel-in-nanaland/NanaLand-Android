@@ -200,7 +200,6 @@
     <string name="policy_agree_screen_location_policy">同意基于位置的服务条款</string>
 
     <!--회원가입 프로필 설정 화면-->
-    <string name="sign_up_profile_setting_guide">请填写要使用的名\n称并选择头像</string>
     <string name="sign_up_profile_setting_hint">请输入名字</string>
     <string name="sign_up_profile_setting_warning1">该昵称已被其他用户使用。</string>
     <string name="sign_up_profile_setting_warning2">该昵称无法使用。</string>

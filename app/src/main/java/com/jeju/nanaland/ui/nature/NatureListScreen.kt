@@ -25,7 +25,7 @@ import com.jeju.nanaland.globalvalue.type.AnchoredDraggableContentState
 import com.jeju.nanaland.ui.component.common.CustomSurface
 import com.jeju.nanaland.ui.component.common.icon.GoToUpInList
 import com.jeju.nanaland.ui.component.common.layoutSet.ListEmptyByFilter
-import com.jeju.nanaland.ui.component.common.topbar.CustomTopBar
+import com.jeju.nanaland.ui.component.common.topbar.TopBarCommon
 import com.jeju.nanaland.ui.component.listscreen.filter.FestivalFilterDialogDimBackground
 import com.jeju.nanaland.ui.component.listscreen.filter.LocationFilterBottomDialog
 import com.jeju.nanaland.ui.component.listscreen.filter.LocationFilterTopBar
@@ -109,7 +109,7 @@ private fun NatureListScreen(
             Column(
                 modifier = Modifier.fillMaxSize()
             ) {
-                CustomTopBar(
+                TopBarCommon(
                     title = getString(R.string.common_7대_자연),
                     onBackButtonClicked = moveToBackScreen
                 )

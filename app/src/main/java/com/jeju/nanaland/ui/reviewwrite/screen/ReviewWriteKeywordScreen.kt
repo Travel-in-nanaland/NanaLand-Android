@@ -32,7 +32,7 @@ import com.jeju.nanaland.domain.navigation.NavViewModel
 import com.jeju.nanaland.globalvalue.type.ReviewKeyword
 import com.jeju.nanaland.ui.component.common.BottomOkButton
 import com.jeju.nanaland.ui.component.common.CustomSurface
-import com.jeju.nanaland.ui.component.common.topbar.CustomTopBar
+import com.jeju.nanaland.ui.component.common.topbar.TopBarCommon
 import com.jeju.nanaland.ui.reviewwrite.ReviewWriteViewModel
 import com.jeju.nanaland.ui.theme.body02
 import com.jeju.nanaland.ui.theme.bodyBold
@@ -97,7 +97,7 @@ private fun ReviewWriteKeywordUI(
     ) }
 
     CustomSurface {
-        CustomTopBar(
+        TopBarCommon(
             title = getString(R.string.review_write_keyword_title),
             onBackButtonClicked =  moveToBackScreen
         )

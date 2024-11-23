@@ -29,7 +29,7 @@ import com.jeju.nanaland.globalvalue.type.InputEmailState
 import com.jeju.nanaland.ui.component.common.CustomSurface
 import com.jeju.nanaland.ui.component.common.UploadImages
 import com.jeju.nanaland.ui.component.common.dialog.SubmitLoadingDialog
-import com.jeju.nanaland.ui.component.common.topbar.CustomTopBar
+import com.jeju.nanaland.ui.component.common.topbar.TopBarCommon
 import com.jeju.nanaland.ui.component.infomodification.writing.InfoModificationProposalWritingScreenBottomButton
 import com.jeju.nanaland.ui.component.infomodification.writing.InfoModificationProposalWritingScreenDescription
 import com.jeju.nanaland.ui.component.infomodification.writing.InfoModificationProposalWritingScreenHeading
@@ -113,7 +113,7 @@ private fun InformationModificationProposalWritingScreen(
         }
 
     CustomSurface {
-        CustomTopBar(
+        TopBarCommon(
             title = getString(R.string.info_modification_proposal_정보_수정_제안2),
             onBackButtonClicked = moveToBackScreen
         )

@@ -13,7 +13,7 @@ import androidx.compose.ui.unit.dp
 import com.jeju.nanaland.R
 import com.jeju.nanaland.ui.component.common.CustomSurface
 import com.jeju.nanaland.ui.component.common.text.TextWithPointColor
-import com.jeju.nanaland.ui.component.common.topbar.CustomTopBar
+import com.jeju.nanaland.ui.component.common.topbar.TopBarCommon
 import com.jeju.nanaland.ui.component.detailscreen.other.DetailScreenNotice
 import com.jeju.nanaland.ui.component.permissionchecking.PermissionCheckingScreenHorizontalDivider
 import com.jeju.nanaland.ui.component.permissionchecking.PermissionCheckingScreenItem
@@ -38,7 +38,7 @@ private fun PermissionCheckingScreen(
     isContent: Boolean
 ) {
     CustomSurface {
-        CustomTopBar(
+        TopBarCommon(
             title = getString(R.string.permission_checking_screen_접근_권한_안내),
             onBackButtonClicked = moveToBackScreen
         )

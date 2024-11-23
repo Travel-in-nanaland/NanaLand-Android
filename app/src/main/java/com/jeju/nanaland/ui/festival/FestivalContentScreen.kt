@@ -24,7 +24,7 @@ import com.jeju.nanaland.R
 import com.jeju.nanaland.domain.entity.festival.FestivalContentData
 import com.jeju.nanaland.globalvalue.userdata.UserData
 import com.jeju.nanaland.ui.component.common.CustomSurface
-import com.jeju.nanaland.ui.component.common.topbar.MyTopBar
+import com.jeju.nanaland.ui.component.common.topbar.TopBarCommon
 import com.jeju.nanaland.ui.component.detailscreen.other.DetailScreenDescription
 import com.jeju.nanaland.ui.component.detailscreen.other.DetailScreenInformation
 import com.jeju.nanaland.ui.component.detailscreen.other.DetailScreenInformationModificationProposalButton
@@ -86,7 +86,7 @@ private fun FestivalContentScreen(
     }
 
     CustomSurface {
-        MyTopBar(
+        TopBarCommon(
             title = getString(R.string.common_축제),
             onBackButtonClicked = moveToBackScreen,
             menus = arrayOf(

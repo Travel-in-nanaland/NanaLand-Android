@@ -20,7 +20,7 @@ import com.jeju.nanaland.R
 import com.jeju.nanaland.domain.entity.nanapick.NanaPickBannerData
 import com.jeju.nanaland.globalvalue.constant.PAGING_THRESHOLD
 import com.jeju.nanaland.ui.component.common.CustomSurface
-import com.jeju.nanaland.ui.component.common.topbar.CustomTopBar
+import com.jeju.nanaland.ui.component.common.topbar.TopBarCommon
 import com.jeju.nanaland.ui.nanapick.component.NanaPickThumbnailBanner2
 import com.jeju.nanaland.util.resource.getString
 import com.jeju.nanaland.util.ui.UiState
@@ -65,7 +65,7 @@ private fun NanaPickAllListScreen(
         }
     }
     CustomSurface {
-        CustomTopBar(
+        TopBarCommon(
             title = getString(R.string.common_나나s_Pick),
             onBackButtonClicked = moveToBackScreen
         )

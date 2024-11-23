@@ -40,15 +40,29 @@ import java.util.Calendar
 /* test code
 var index by remember { mutableStateOf(0) }
 DialogCommon(
-    type = CommonDialogType.entries[index],
-    onDismiss = { index = (index +1) % CommonDialogType.entries.size },
+    type = DialogCommonType.entries[index],
+    onDismiss = { index = (index +1) % DialogCommonType.entries.size },
     onYes = {  }
 )
 */
 
+enum class DialogCommonType {
+    PlzAppReview,    // 앱 후기 작성 촉구 팝업
+    AlarmPermission, // 알림 동의 팝업
+    Push,            // 서비스 push 알림 동의 팝업
+    AlarmDismiss,    // 알림 비동의 팝업
+    Language,        // 언어 선택 확인 팝업
+    Logout,          // 로그아웃 팝업
+    Withdrawal,      // 탈퇴하기 팝업
+    Write,           // 프로필 수정 중 뒤로가기 팝업, 리뷰 작성 중 뒤로가기 팝업
+    Login,           // 회원가입 유도 팝업
+    RemoveReview,    // 리뷰 삭제 팝업
+    Internet,        // 인터넷 연결 확인 팝업
+}
+
 @Composable
 fun DialogCommon(
-    type: CommonDialogType,
+    type: DialogCommonType,
     onDismiss: () -> Unit,
     onYes: () -> Unit,
     onNo: (() -> Unit) = {},
@@ -58,25 +72,25 @@ fun DialogCommon(
 
     val (title, subTitle) = remember(type) {
         when (type) {
-            CommonDialogType.PlzAppReview -> getString(R.string.dialog_msg_title_1)    to getString(R.string.dialog_msg_sub_title_1)
-            CommonDialogType.AlarmPermission -> getString(R.string.dialog_msg_title_2) to getString(R.string.dialog_msg_sub_title_2)
-            CommonDialogType.Push -> getString(
+            DialogCommonType.PlzAppReview -> getString(R.string.dialog_msg_title_1)    to getString(R.string.dialog_msg_sub_title_1)
+            DialogCommonType.AlarmPermission -> getString(R.string.dialog_msg_title_2) to getString(R.string.dialog_msg_sub_title_2)
+            DialogCommonType.Push -> getString(
                 R.string.dialog_msg_title_3, currentDate.get(Calendar.YEAR), currentDate.get(Calendar.MONTH) + 1, currentDate.get(Calendar.DATE)
             ) to getString(R.string.dialog_msg_sub_title_3)
-            CommonDialogType.AlarmDismiss -> getString(R.string.dialog_msg_title_4)    to getString(R.string.dialog_msg_sub_title_4)
-            CommonDialogType.Language -> getString(R.string.dialog_msg_title_5)        to null
-            CommonDialogType.Logout -> getString(R.string.dialog_msg_title_6)          to null
-            CommonDialogType.Withdrawal -> getString(R.string.dialog_msg_title_7)      to getString(R.string.dialog_msg_sub_title_7)
-            CommonDialogType.Write -> getString(R.string.dialog_msg_title_8)           to getString(R.string.dialog_msg_sub_title_8)
-            CommonDialogType.Login -> getString(R.string.dialog_msg_title_9)           to null
-            CommonDialogType.RemoveReview -> getString(R.string.dialog_msg_title_10)   to null
-            CommonDialogType.Internet -> getString(R.string.dialog_msg_title_11)       to null
+            DialogCommonType.AlarmDismiss -> getString(R.string.dialog_msg_title_4)    to getString(R.string.dialog_msg_sub_title_4)
+            DialogCommonType.Language -> getString(R.string.dialog_msg_title_5)        to null
+            DialogCommonType.Logout -> getString(R.string.dialog_msg_title_6)          to null
+            DialogCommonType.Withdrawal -> getString(R.string.dialog_msg_title_7)      to getString(R.string.dialog_msg_sub_title_7)
+            DialogCommonType.Write -> getString(R.string.dialog_msg_title_8)           to getString(R.string.dialog_msg_sub_title_8)
+            DialogCommonType.Login -> getString(R.string.dialog_msg_title_9)           to null
+            DialogCommonType.RemoveReview -> getString(R.string.dialog_msg_title_10)   to null
+            DialogCommonType.Internet -> getString(R.string.dialog_msg_title_11)       to null
         }
     }
     val image = remember(type) {
         when (type) {
-            CommonDialogType.Login -> R.drawable.ic_logo to Size(72, 72)
-            CommonDialogType.Internet -> R.drawable.ic_warning_triangle to Size(38,38)
+            DialogCommonType.Login -> R.drawable.ic_logo to Size(72, 72)
+            DialogCommonType.Internet -> R.drawable.ic_warning_triangle to Size(38,38)
             else -> null
         }
     }
@@ -89,21 +103,21 @@ fun DialogCommon(
                 subTitle = subTitle,
                 innerButtons = {
                     when (type) {
-                        CommonDialogType.PlzAppReview -> InnerButton(
+                        DialogCommonType.PlzAppReview -> InnerButton(
                             6.dp,
                             Triple(R.string.dialog_btn_later, false, onNo),
                             Triple(R.string.dialog_btn_write, true, onYes)
                         )
-                        CommonDialogType.AlarmPermission -> InnerButton(
+                        DialogCommonType.AlarmPermission -> InnerButton(
                             6.dp,
                             Triple(R.string.dialog_btn_agree, false, onNo),
                             Triple(R.string.dialog_btn_no_agree, true, onYes)
                         )
-                        CommonDialogType.Push -> InnerButton(
+                        DialogCommonType.Push -> InnerButton(
                             32.dp,
                             Triple(R.string.common_확인, true, onYes),
                         )
-                        CommonDialogType.Login -> Box(
+                        DialogCommonType.Login -> Box(
                             modifier = Modifier
                                 .fillMaxWidth()
                                 .padding(horizontal = 32.dp)
@@ -130,7 +144,7 @@ fun DialogCommon(
                                 )
                             }
                         }
-                        CommonDialogType.Internet -> InnerButton(
+                        DialogCommonType.Internet -> InnerButton(
                             6.dp,
                             Triple(R.string.dialog_btn_out, false, onNo),
                             Triple(R.string.dialog_btn_retry, true, onYes)
@@ -144,7 +158,7 @@ fun DialogCommon(
                 },
                 outerButtons = {
                     when (type) {
-                        CommonDialogType.Login ->  Text(
+                        DialogCommonType.Login ->  Text(
                             text = getString(R.string.sign_in_screen_로그인_없이_둘러보기),
                             style = body02,
                             color = getColor().gray02,
@@ -157,19 +171,7 @@ fun DialogCommon(
         }
     }
 }
-enum class CommonDialogType {
-    PlzAppReview,    // 앱 후기 작성 촉구 팝업
-    AlarmPermission, // 알림 동의 팝업
-    Push,            // 서비스 push 알림 동의 팝업
-    AlarmDismiss,    // 알림 비동의 팝업
-    Language,        // 언어 선택 확인 팝업
-    Logout,          // 로그아웃 팝업
-    Withdrawal,      // 탈퇴하기 팝업
-    Write,           // 프로필 수정 중 뒤로가기 팝업, 리뷰 작성 중 뒤로가기 팝업
-    Login,           // 회원가입 유도 팝업
-    RemoveReview,    // 리뷰 삭제 팝업
-    Internet,        // 인터넷 연결 확인 팝업
-}
+
 @Composable
 private fun DialogBox(
     image: Pair<Int, Size>? = null,

@@ -23,7 +23,8 @@ import com.airbnb.lottie.compose.rememberLottieComposition
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.jeju.nanaland.R
 import com.jeju.nanaland.globalvalue.type.SplashCheckingState
-import com.jeju.nanaland.ui.splash.component.NetworkConnectionDialog
+import com.jeju.nanaland.ui.component.common.dialog.DialogCommon
+import com.jeju.nanaland.ui.component.common.dialog.DialogCommonType
 import com.jeju.nanaland.util.intent.DeepLinkData
 
 @Composable
@@ -83,11 +84,11 @@ private fun SplashScreen(
         )
     }
     if (isNetworkConnectionDialogShowing) {
-        NetworkConnectionDialog(
-            exit = { (context as Activity).finish() },
-            retry = {
-                retry()
-            }
+        DialogCommon(
+            type = DialogCommonType.Internet,
+            onDismiss = {},
+            onYes = retry,
+            onNo = { (context as Activity).finish() }
         )
     }
 }

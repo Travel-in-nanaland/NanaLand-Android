@@ -17,7 +17,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.jeju.nanaland.R
 import com.jeju.nanaland.globalvalue.type.WithdrawalReasonType
 import com.jeju.nanaland.ui.component.common.CustomSurface
-import com.jeju.nanaland.ui.component.common.topbar.CustomTopBar
+import com.jeju.nanaland.ui.component.common.topbar.TopBarCommon
 import com.jeju.nanaland.ui.component.permissionchecking.PermissionCheckingScreenHorizontalDivider
 import com.jeju.nanaland.ui.component.withdrawal.WithdrawalScreenAgreeText
 import com.jeju.nanaland.ui.component.withdrawal.WithdrawalScreenCancelButton
@@ -60,7 +60,7 @@ private fun WithdrawalScreen(
     val isDialogShowing = remember { mutableStateOf(false) }
 
     CustomSurface {
-        CustomTopBar(
+        TopBarCommon(
             title = getString(R.string.withdrawal_screen_회원탈퇴),
             onBackButtonClicked = { moveToBackScreen() }
         )

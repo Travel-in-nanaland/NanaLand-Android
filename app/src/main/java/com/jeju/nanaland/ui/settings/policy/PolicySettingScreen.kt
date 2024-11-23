@@ -9,7 +9,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.jeju.nanaland.R
 import com.jeju.nanaland.ui.component.common.CustomSurface
-import com.jeju.nanaland.ui.component.common.topbar.CustomTopBar
+import com.jeju.nanaland.ui.component.common.topbar.TopBarCommon
 import com.jeju.nanaland.ui.component.settings.SettingsScreenCategoryItem
 import com.jeju.nanaland.ui.component.settings.policy.PolicySettingScreenCheckIcon
 import com.jeju.nanaland.ui.component.settings.policy.PolicySettingScreenWarningText
@@ -40,7 +40,7 @@ private fun PolicySettingScreen(
     isContent: Boolean
 ) {
     CustomSurface {
-        CustomTopBar(
+        TopBarCommon(
             title = getString(R.string.settings_screen_약관_및_정책),
             onBackButtonClicked = { moveToBackScreen() }
         )

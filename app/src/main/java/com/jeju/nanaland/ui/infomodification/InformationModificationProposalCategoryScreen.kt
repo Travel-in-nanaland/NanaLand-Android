@@ -11,7 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.jeju.nanaland.R
 import com.jeju.nanaland.ui.component.common.CustomSurface
-import com.jeju.nanaland.ui.component.common.topbar.CustomTopBar
+import com.jeju.nanaland.ui.component.common.topbar.TopBarCommon
 import com.jeju.nanaland.ui.component.infomodification.category.InfoModificationProposalScreenBox
 import com.jeju.nanaland.ui.component.infomodification.category.InfoModificationProposalScreenText1
 import com.jeju.nanaland.ui.component.infomodification.category.InfoModificationProposalScreenText2
@@ -37,7 +37,7 @@ private fun InformationModificationProposalCategoryScreen(
     isContent: Boolean
 ) {
     CustomSurface {
-        CustomTopBar(
+        TopBarCommon(
             title = getString(R.string.info_modification_proposal_정보_수정_제안2),
             onBackButtonClicked = moveToBackScreen
         )

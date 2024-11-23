@@ -23,7 +23,7 @@ import com.jeju.nanaland.domain.entity.favorite.FavoriteThumbnailData
 import com.jeju.nanaland.globalvalue.type.MainScreenViewType
 import com.jeju.nanaland.globalvalue.type.SearchCategoryType
 import com.jeju.nanaland.globalvalue.userdata.UserData
-import com.jeju.nanaland.ui.component.common.topbar.CustomTopBarNoBackButton
+import com.jeju.nanaland.ui.component.common.topbar.TopBarCommon
 import com.jeju.nanaland.ui.component.favorite.FavoriteScreenCategorySelectionTab
 import com.jeju.nanaland.ui.component.favorite.FavoriteScreenFavoritePosts
 import com.jeju.nanaland.ui.component.main.searchresult.parts.SearchResultScreenItemCount
@@ -77,7 +77,7 @@ private fun FavoriteScreen(
     isContent: Boolean
 ) {
     Column {
-        CustomTopBarNoBackButton(title = getString(R.string.common_찜))
+        TopBarCommon(title = getString(R.string.common_찜))
 
         Spacer(Modifier.height(16.dp))
 

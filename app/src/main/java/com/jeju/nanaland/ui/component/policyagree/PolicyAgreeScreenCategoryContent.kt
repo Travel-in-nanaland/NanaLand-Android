@@ -43,8 +43,6 @@ fun PolicyAgreeScreenCategoryContent(
                 isNecessary = isNecessary
             )
 
-            Spacer(Modifier.weight(1f))
-
             PolicyAgreeScreenArrowIcon()
         }
     }

@@ -201,7 +201,6 @@
 
 
     <!--회원가입 프로필 설정 화면-->
-    <string name="sign_up_profile_setting_guide"> Sila tulis nama penggunaan\ndan pilih profil.</string>
     <string name="sign_up_profile_setting_hint">Sila masukkan nama</string>
     <string name="sign_up_profile_setting_warning1">Nama panggilan ini sudah digunakan oleh pengguna lain.</string>
     <string name="sign_up_profile_setting_warning2">Nama panggilan ini tidak boleh digunakan.</string>

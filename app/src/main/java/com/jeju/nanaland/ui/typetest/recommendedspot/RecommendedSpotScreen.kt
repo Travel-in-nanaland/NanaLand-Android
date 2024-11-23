@@ -17,7 +17,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.jeju.nanaland.R
 import com.jeju.nanaland.domain.entity.member.RecommendedPostData
 import com.jeju.nanaland.ui.component.common.CustomSurface
-import com.jeju.nanaland.ui.component.common.topbar.CustomTopBar
+import com.jeju.nanaland.ui.component.common.topbar.TopBarCommon
 import com.jeju.nanaland.ui.component.signup.recommendedspot.RecommendedSpotScreenBottomButton
 import com.jeju.nanaland.ui.component.signup.recommendedspot.RecommendedSpotScreenItem
 import com.jeju.nanaland.ui.component.signup.recommendedspot.RecommendedSpotScreenText1
@@ -50,7 +50,7 @@ private fun RecommendedSpotScreen(
     isContent: Boolean
 ) {
     CustomSurface {
-        CustomTopBar(
+        TopBarCommon(
             title = getString(R.string.type_test_recommended_spot_추천_여행지),
             onBackButtonClicked = moveToBackScreen
         )

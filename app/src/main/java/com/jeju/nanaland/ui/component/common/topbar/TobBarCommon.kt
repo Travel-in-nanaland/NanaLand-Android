@@ -22,14 +22,14 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.jeju.nanaland.R
 import com.jeju.nanaland.globalvalue.constant.TOP_BAR_HEIGHT
+import com.jeju.nanaland.ui.theme.bodyBold
 import com.jeju.nanaland.ui.theme.getColor
 import com.jeju.nanaland.ui.theme.shadowTopNav
-import com.jeju.nanaland.ui.theme.title01Bold
 import com.jeju.nanaland.util.ui.clickableNoEffect
 import com.jeju.nanaland.util.ui.conditional
 
 @Composable
-fun MyTopBar(
+fun TopBarCommon(
     title: String = "",
     showShadow: Boolean = true,
     onBackButtonClicked: (() -> Unit)? = null,
@@ -69,7 +69,7 @@ fun MyTopBar(
                 .weight(1f),
             text = title,
             color = getColor().black,
-            style = title01Bold,
+            style = bodyBold,
             textAlign = TextAlign.Center,
             maxLines = 2,
             overflow = TextOverflow.Ellipsis
@@ -98,15 +98,15 @@ private fun PreviewMyTopBars(){
         modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
-        MyTopBar(
+        TopBarCommon(
             title = "가나다라",
             showShadow = false
         )
-        MyTopBar(
+        TopBarCommon(
             title = "가나다라",
             onBackButtonClicked = {}
         )
-        MyTopBar(
+        TopBarCommon(
             title = "가나다라마바사아자차카타파하가나다라마바사아자차카타파하가나다라마바사아자차카타파하",
             onBackButtonClicked = {},
             menus = arrayOf(
@@ -114,7 +114,7 @@ private fun PreviewMyTopBars(){
                 R.drawable.ic_share to {}
             )
         )
-        MyTopBar(
+        TopBarCommon(
             title = "가나다라",
             onBackButtonClicked = {},
             menus = arrayOf(

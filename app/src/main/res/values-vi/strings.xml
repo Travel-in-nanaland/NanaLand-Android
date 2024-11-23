@@ -141,7 +141,6 @@
     <string name="policy_agree_screen_privacy_policy">Đồng ý với Điều khoản Sử dụng và Chính sách Bảo mật (bắt buộc)</string>
     <string name="policy_agree_screen_marketing_policy">Đồng ý sử dụng cho mục đích tiếp thị (tùy chọn)</string>
     <string name="policy_agree_screen_location_policy">Đồng ý với các điều khoản dịch vụ dựa trên vị trí (tùy chọn)</string>
-    <string name="sign_up_profile_setting_guide">Viết tên bạn muốn sử dụng và chọn\nhồ sơ.</string>
     <string name="sign_up_profile_setting_hint">Vui lòng nhập tên của bạn</string>
     <string name="sign_up_profile_setting_warning1">Biệt danh đó không thể sử dụng.</string>
     <string name="sign_up_profile_setting_warning2">Biệt danh đó đã được sử dụng bởi người dùng khác.</string>

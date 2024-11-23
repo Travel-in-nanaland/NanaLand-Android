@@ -15,9 +15,9 @@ import androidx.compose.ui.unit.dp
 import com.jeju.nanaland.R
 import com.jeju.nanaland.ui.component.common.CustomSurface
 import com.jeju.nanaland.ui.component.signup.typetestloading.TypeTestLoadingScreenGif
+import com.jeju.nanaland.ui.theme.body01
 import com.jeju.nanaland.ui.theme.getColor
-import com.jeju.nanaland.ui.theme.largeTitle02
-import com.jeju.nanaland.ui.theme.title02
+import com.jeju.nanaland.ui.theme.title01Bold
 import com.jeju.nanaland.util.resource.getString
 import kotlinx.coroutines.delay
 
@@ -49,7 +49,7 @@ private fun TypeTestLoadingScreen(
             Text(
                 text = getString(R.string.type_test_screen_text_page2_text1),
                 color = getColor().main,
-                style = largeTitle02,
+                style = title01Bold,
                 textAlign = TextAlign.Center
             )
 
@@ -58,7 +58,7 @@ private fun TypeTestLoadingScreen(
             Text(
                 text = getString(R.string.type_test_screen_text_page2_text2),
                 color = getColor().black,
-                style = title02,
+                style = body01,
                 textAlign = TextAlign.Center
             )
 

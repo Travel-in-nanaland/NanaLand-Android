@@ -36,7 +36,7 @@ import com.jeju.nanaland.domain.entity.review.ReviewListData
 import com.jeju.nanaland.globalvalue.type.AnchoredDraggableContentState
 import com.jeju.nanaland.ui.component.common.CustomSurface
 import com.jeju.nanaland.ui.component.common.ReviewBottomBar
-import com.jeju.nanaland.ui.component.common.topbar.CustomTopBarWithShareButton
+import com.jeju.nanaland.ui.component.common.topbar.TopBarCommon
 import com.jeju.nanaland.ui.component.detailscreen.other.DetailScreenInformation
 import com.jeju.nanaland.ui.component.detailscreen.other.DetailScreenInformationModificationProposalButton
 import com.jeju.nanaland.ui.component.detailscreen.other.DetailScreenTopBannerImage
@@ -145,18 +145,20 @@ private fun RestaurantContentScreen(
             Column(
                 modifier = Modifier.fillMaxSize()
             ) {
-                CustomTopBarWithShareButton(
+                TopBarCommon(
                     title = getString(R.string.common_제주_맛집),
                     onBackButtonClicked = moveToBackScreen,
-                    onShareButtonClicked = {
-                        val sendIntent: Intent = Intent().apply {
-                            action = Intent.ACTION_SEND
-                            putExtra(Intent.EXTRA_TEXT, "${BuildConfig.BASE_URL}/share/${getLanguage()}?category=restaurant&id=${contentId}")
-                            type = "text/plain"
+                    menus = arrayOf(
+                        R.drawable.ic_share to {
+                            val sendIntent: Intent = Intent().apply {
+                                action = Intent.ACTION_SEND
+                                putExtra(Intent.EXTRA_TEXT, "${BuildConfig.BASE_URL}/share/${getLanguage()}?category=restaurant&id=${contentId}")
+                                type = "text/plain"
+                            }
+                            val shareIntent = Intent.createChooser(sendIntent, null)
+                            context.startActivity(shareIntent)
                         }
-                        val shareIntent = Intent.createChooser(sendIntent, null)
-                        context.startActivity(shareIntent)
-                    }
+                    )
                 )
 
                 Box(

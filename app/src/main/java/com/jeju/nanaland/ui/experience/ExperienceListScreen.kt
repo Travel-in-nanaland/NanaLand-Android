@@ -30,7 +30,7 @@ import com.jeju.nanaland.globalvalue.type.ExperienceCategoryType
 import com.jeju.nanaland.ui.component.common.CustomSurface
 import com.jeju.nanaland.ui.component.common.icon.GoToUpInList
 import com.jeju.nanaland.ui.component.common.layoutSet.ListEmptyByFilter
-import com.jeju.nanaland.ui.component.common.topbar.CustomTopBar
+import com.jeju.nanaland.ui.component.common.topbar.TopBarCommon
 import com.jeju.nanaland.ui.component.listscreen.filter.ActivityKeywordFilterDialog
 import com.jeju.nanaland.ui.component.listscreen.filter.CultureArtKeywordFilterDialog
 import com.jeju.nanaland.ui.component.listscreen.filter.ExperienceFilterDialogDimBackground
@@ -131,7 +131,7 @@ private fun ExperienceListScreen(
             Column(
                 modifier = Modifier.fillMaxSize()
             ) {
-                CustomTopBar(
+                TopBarCommon(
                     title = title,
                     onBackButtonClicked = moveToBackScreen
                 )

@@ -28,7 +28,7 @@ import com.jeju.nanaland.globalvalue.type.FestivalCategoryType
 import com.jeju.nanaland.ui.component.common.CustomSurface
 import com.jeju.nanaland.ui.component.common.icon.GoToUpInList
 import com.jeju.nanaland.ui.component.common.layoutSet.ListEmptyByFilter
-import com.jeju.nanaland.ui.component.common.topbar.CustomTopBar
+import com.jeju.nanaland.ui.component.common.topbar.TopBarCommon
 import com.jeju.nanaland.ui.component.listscreen.category.FestivalCategoryListTab
 import com.jeju.nanaland.ui.component.listscreen.filter.DateFilterBottomDialog
 import com.jeju.nanaland.ui.component.listscreen.filter.DateLocationFilterTopBar
@@ -159,7 +159,7 @@ private fun FestivalListScreen(
             Column(
                 modifier = Modifier.fillMaxSize()
             ) {
-                CustomTopBar(
+                TopBarCommon(
                     title = getString(R.string.common_축제),
                     onBackButtonClicked = moveToBackScreen
                 )

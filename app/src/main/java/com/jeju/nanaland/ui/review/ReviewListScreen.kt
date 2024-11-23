@@ -36,7 +36,7 @@ import com.jeju.nanaland.globalvalue.constant.TOP_BAR_HEIGHT
 import com.jeju.nanaland.globalvalue.type.AnchoredDraggableContentState
 import com.jeju.nanaland.ui.component.common.CustomSurface
 import com.jeju.nanaland.ui.component.common.ReviewBottomBar
-import com.jeju.nanaland.ui.component.common.topbar.CustomTopBar
+import com.jeju.nanaland.ui.component.common.topbar.TopBarCommon
 import com.jeju.nanaland.ui.component.detailscreen.other.MoveToTopButton
 import com.jeju.nanaland.ui.component.review.ReportBottomDialog
 import com.jeju.nanaland.ui.component.review.ReportDialogDimBackground
@@ -154,7 +154,7 @@ private fun ReviewListScreen(
             Column(
                 modifier = Modifier.fillMaxSize()
             ) {
-                CustomTopBar(
+                TopBarCommon(
                     title = "",
                     onBackButtonClicked = moveToBackScreen
                 )
