@@ -12,9 +12,9 @@ fun NavGraphBuilder.typeTestingScreen(navViewModel: NavViewModel) = composable<R
 
     TypeTestingScreen(
         moveToTypeTestCompletionScreen = { travelType ->
-            navViewModel.navigatePopUpTo(
+            navViewModel.popBackStack(data, true)
+            navViewModel.navigate(
                 ROUTE.TypeTest.TestEnd(data.isFirst,travelType),
-                ROUTE.TypeTest.Testing()
             )
         },
         moveToBackScreen = {

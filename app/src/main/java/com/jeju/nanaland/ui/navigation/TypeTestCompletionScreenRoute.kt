@@ -8,16 +8,16 @@ import com.jeju.nanaland.domain.navigation.ROUTE
 import com.jeju.nanaland.ui.typetest.TypeTestCompletionScreen
 
 fun NavGraphBuilder.typeTestCompletionScreen(navViewModel: NavViewModel) = composable<ROUTE.TypeTest.TestEnd> {
-    val data: ROUTE.TypeTest.Loading= it.toRoute()
+    val data: ROUTE.TypeTest.TestEnd = it.toRoute()
 
     TypeTestCompletionScreen(
         moveToTypeTestLoadingScreen = {
-            navViewModel.navigatePopUpTo(
+            navViewModel.popBackStack(data, true)
+            navViewModel.navigate(
                 ROUTE.TypeTest.Loading(
                     isFirst = data.isFirst,
                     travelType =  data.travelType
-                ),
-                data
+                )
             )
         },
     )

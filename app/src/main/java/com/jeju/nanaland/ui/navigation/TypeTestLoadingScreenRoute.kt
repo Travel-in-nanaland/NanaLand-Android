@@ -13,14 +13,14 @@ fun NavGraphBuilder.typeTestLoadingScreen(navViewModel: NavViewModel) = composab
 
     TypeTestLoadingScreen(
         moveToTypeTestResultScreen = {
-            navViewModel.navigatePopUpTo(
+            navViewModel.popBackStack(data, true)
+            navViewModel.navigate(
                 ROUTE.TypeTest.Result(
                     name = UserData.nickname,
                     travelType = data.travelType,
                     isMine = true,
                     isFirst = data.isFirst
-                ),
-                data
+                )
             )
         },
     )
