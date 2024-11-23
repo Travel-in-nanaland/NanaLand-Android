@@ -6,6 +6,7 @@ import com.jeju.nanaland.data.api.AuthApi
 import com.jeju.nanaland.data.api.BoardApi
 import com.jeju.nanaland.data.api.ExperienceApi
 import com.jeju.nanaland.data.api.FTPApi
+import com.jeju.nanaland.data.api.FTPWithoutTokenApi
 import com.jeju.nanaland.data.api.FavoriteApi
 import com.jeju.nanaland.data.api.FestivalApi
 import com.jeju.nanaland.data.api.MarketApi
@@ -185,5 +186,10 @@ object NetworkModule {
     @Provides
     fun provideFTPApi(@AccessTokenAutoAdded retrofit: Retrofit): FTPApi {
         return retrofit.create(FTPApi::class.java)
+    }
+    @Singleton
+    @Provides
+    fun provideFTPWithoutTokenApi(@HeaderManuallyAdded retrofit: Retrofit): FTPWithoutTokenApi {
+        return retrofit.create(FTPWithoutTokenApi::class.java)
     }
 }

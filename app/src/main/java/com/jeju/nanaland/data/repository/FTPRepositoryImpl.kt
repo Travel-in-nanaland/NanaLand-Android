@@ -4,6 +4,7 @@ import android.content.Context
 import android.net.Uri
 import android.provider.MediaStore
 import com.jeju.nanaland.data.api.FTPApi
+import com.jeju.nanaland.data.api.FTPWithoutTokenApi
 import com.jeju.nanaland.domain.entity.file.FileCategory
 import com.jeju.nanaland.domain.entity.file.FileComplete
 import com.jeju.nanaland.domain.entity.file.FileInitCommand
@@ -18,6 +19,7 @@ import okhttp3.RequestBody.Companion.toRequestBody
 
 class FTPRepositoryImpl(
     private val api: FTPApi,
+    private val apiWihtoutToken: FTPWithoutTokenApi,
     @ApplicationContext private val context: Context
 ): FTPRepository, NetworkResultHandler {
     private val chunkSize = 5 * 1024 * 1024 // 5MB
@@ -61,7 +63,7 @@ class FTPRepositoryImpl(
         val resultPartInfos = mutableListOf<FilePart>()
         val uploadJobs = infoList.map { info ->
             launch {
-                val response = api.put(info.url, chunkList[info.number - 1].toRequestBody())
+                val response = apiWihtoutToken.put(info.url, chunkList[info.number - 1].toRequestBody())
                 response.headers()["ETag"]?.let { eTag ->
                     resultPartInfos.add(FilePart(info.number, eTag))
                 }

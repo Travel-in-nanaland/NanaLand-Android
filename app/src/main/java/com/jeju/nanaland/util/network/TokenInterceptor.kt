@@ -15,7 +15,6 @@ import okhttp3.Protocol
 import okhttp3.Request
 import okhttp3.Response
 import okhttp3.ResponseBody
-import retrofit2.Invocation
 import javax.inject.Inject
 
 class TokenInterceptor @Inject constructor(
@@ -32,11 +31,6 @@ class TokenInterceptor @Inject constructor(
         lateinit var response: Response
         return runBlocking<Response> {
             val request = chain.request()
-            request.tag(Invocation::class.java)?.let { invocation ->
-                (invocation.arguments().firstOrNull() as? String)?.let { isWithoutAuthHeader ->
-                    return@runBlocking chain.proceed(request)
-                }
-            }
 
             mutex.withLock {
                 val accessToken = getAccessTokenUseCase().first()
