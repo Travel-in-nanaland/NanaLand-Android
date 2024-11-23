@@ -160,7 +160,7 @@ private fun SettingsScreen(
 
     if (isSignOutDialogShowing.value) {
         SignOutConfirmDialog(
-            onConfirm = { signOut(moveToLanguageInitScreen) },
+            onConfirm = { signOut(moveToSignInScreen) },
             onCancel = { isSignOutDialogShowing.value = false }
         )
     }
