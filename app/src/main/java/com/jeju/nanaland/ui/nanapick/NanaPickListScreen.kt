@@ -219,6 +219,8 @@ private fun NanaPickListScreen(
                 is UiState.Loading -> {}
                 is UiState.Success -> {
                     nanaPickList.data.forEachIndexed() { idx, item ->
+                        if(idx >= 3) return@forEachIndexed
+
                         NanaPickThumbnailBanner1(
                             item = item,
                             onClick = moveToNanaPickContentScreen
