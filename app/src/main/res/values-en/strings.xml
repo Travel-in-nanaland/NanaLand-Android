@@ -102,8 +102,8 @@
     <string name="search_result_screen_no_result">There are no results for that search. </string>
 
     <!--비회원 회원가입 유도 다이얼로그-->
-    <string name="non_member_dialog_guide">You need to become a\nmember to use all services✨</string>
-    <string name="non_member_dialog_go_sign_up">Sign Up for Membership</string>
+    <string name="dialog_msg_title_9">You need to become a\nmember to use all services✨</string>
+    <string name="dialog_btn_go_sign_up">Sign Up for Membership</string>
 
     <!--날짜 선택 다이얼로그-->
     <string name="date_filter_dialog_날짜_선택">Select date</string>
@@ -286,7 +286,7 @@
     <string name="language_change_screen_guide">The language at the top is set as default.</string>
 
     <!--언어 설정 화면 다이얼로그-->
-    <string name="language_change_dialog_text">Do you want to change\nto this language?</string>
+    <string name="dialog_msg_title_5">Do you want to change\nto this language?</string>
 
     <!--설정 화면-->
     <string name="settings_screen_설정">Settings</string>
@@ -299,7 +299,7 @@
     <string name="settings_screen_회원_탈퇴">Withdraw membership</string>
 
     <!--로그아웃 다이얼로그-->
-    <string name="sign_out_dialog_text">Are you sure\nyou want to log out?</string>
+    <string name="dialog_msg_title_6">Are you sure\nyou want to log out?</string>
 
     <!--마이페이지 화면-->
     <string name="mypage_screen_프로필_수정">Edit Profile</string>
@@ -349,8 +349,8 @@
     <string name="withdrawal_screen_warning">I have read and agree to the information provided.</string>
 
     <!--회원 탈퇴 다이얼로그-->
-    <string name="withdrawal_dialog_text1">Are you sure you don\'t want\nto receive Jeju travel\ninformation and benefits?😢</string>
-    <string name="withdrawal_dialog_text2">*If you rejoin within 90 days, you can log in with\nyour existing account.</string>
+    <string name="dialog_msg_title_7">Are you sure you don\'t want\nto receive Jeju travel\ninformation and benefits?😢</string>
+    <string name="dialog_msg_sub_title_7">*If you rejoin within 90 days, you can log in with\nyour existing account.</string>
 
     <!--접근 권한 안내 화면-->
     <string name="permission_checking_screen_접근_권한_안내">Access Permission Notice</string>
@@ -403,8 +403,8 @@
     <string name="review_write_keyword_complete_sub2">Your meticulous writing\nSomeone\'s travel choices\nIt enriched me!</string>
     <string name="review_write_keyword_complete_btn_again">Go see content again</string>
     <string name="review_write_keyword_complete_btn_add">Add another review</string>
-    <string name="review_write_cancel_dialog_title">Are you sure you want to leave?</string>
-    <string name="review_write_cancel_dialog_subtitle">If you leave now,\nWhat you are writing will be deleted.</string>
+    <string name="dialog_msg_title_8">Are you sure you want to leave?</string>
+    <string name="dialog_msg_sub_title_8">If you leave now,\nWhat you are writing will be deleted.</string>
     <string name="report_category_title">Please tell us why you are reporting it!</string>
     <string name="report_category_subtitle">Information reported without valid grounds must be confirmed by the administrator.\nIt may not be reflected.</string>
     <string name="report_write_resone_title">Reason for reporting</string>
@@ -416,9 +416,10 @@
     <string name="review_keyword_infra">Amenities</string>
     <string name="nanapick_list_screen_recommended_post">This week’s {recommendation}, Nana’s Pick</string>
     <string name="nanapick_list_screen_see_all">See all</string>
-    <string name="common_나가기">Exit</string>
-    <string name="common_재시작">Retry</string>
-    <string name="splash_screen_text">Please check your internet connection</string>
+    <string name="dialog_btn_out">Exit</string>
+    <string name="dialog_btn_retry">Retry</string>
+    <string name="dialog_msg_title_11">Please check your internet connection</string>
+    <string name="review_keyword_etc">Etc</string>
     <string name="review_keyword_1">Good for anniversaries</string>
     <string name="review_keyword_2">It\'s cute</string>
     <string name="review_keyword_3">It\'s luxurious</string>
@@ -435,6 +436,7 @@
     <string name="review_keyword_14">Wide</string>
     <string name="review_keyword_15">Parking lot</string>
     <string name="review_keyword_16">Clean toilet</string>
+    <string name="review_keyword_17">No keywords to choose</string>
     <string name="report_reason_1">For profit / promotional purpose</string>
     <string name="report_reason_2">I don\'t like it</string>
     <string name="report_reason_3">Profanity/personal attacks</string>

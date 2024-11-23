@@ -11,7 +11,7 @@ import com.jeju.nanaland.util.resource.getString
 @Composable
 fun NonMemberDialogGuidText() {
     Text(
-        text = getString(R.string.non_member_dialog_guide),
+        text = getString(R.string.dialog_msg_title_9),
         color = getColor().black,
         style = title01Bold,
         textAlign = TextAlign.Center

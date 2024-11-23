@@ -102,8 +102,8 @@
     <string name="search_result_screen_no_result">Carian anda tidak\nmengembalikan sebarang hasil.</string>
 
     <!--비회원 회원가입 유도 다이얼로그-->
-    <string name="non_member_dialog_guide">Anda perlu menjadi ahli untuk menggunakan semua perkhidmatan✨</string>
-    <string name="non_member_dialog_go_sign_up">Daftar Ahli</string>
+    <string name="dialog_msg_title_9">Anda perlu menjadi ahli untuk menggunakan semua perkhidmatan✨</string>
+    <string name="dialog_btn_go_sign_up">Daftar Ahli</string>
 
 
     <!--날짜 선택 다이얼로그-->
@@ -287,7 +287,7 @@
     <string name="language_change_screen_guide">Bahasa di atas telah\nditetapkan sebagai lalai.</string>
 
     <!--언어 설정 화면 다이얼로그-->
-    <string name="language_change_dialog_text">Adakah anda ingin menukar\nkepada bahasa tersebut?</string>
+    <string name="dialog_msg_title_5">Adakah anda ingin menukar\nkepada bahasa tersebut?</string>
 
     <!--설정 화면-->
     <string name="settings_screen_설정">Tetapan</string>
@@ -300,7 +300,7 @@
     <string name="settings_screen_회원_탈퇴">Daftar keluar</string>
 
     <!--로그아웃 다이얼로그-->
-    <string name="sign_out_dialog_text">Adakah anda benar\n-benar ingin log keluar?</string>
+    <string name="dialog_msg_title_6">Adakah anda benar\n-benar ingin log keluar?</string>
 
     <!--마이페이지 화면-->
     <string name="mypage_screen_프로필_수정">Ubah Profil</string>
@@ -350,8 +350,8 @@
     <string name="withdrawal_screen_warning">Saya telah membaca dan\nbersetuju dengan panduan ini</string>
 
     <!--회원 탈퇴 다이얼로그-->
-    <string name="withdrawal_dialog_text1">Betul-betul tidak mahu\nmenerima maklumat dan\ntawaran perjalanan ke Jeju?😢</string>
-    <string name="withdrawal_dialog_text2">*Jika menyertai semula dalam masa 90 hari,</string>
+    <string name="dialog_msg_title_7">Betul-betul tidak mahu\nmenerima maklumat dan\ntawaran perjalanan ke Jeju?😢</string>
+    <string name="dialog_msg_sub_title_7">*Jika menyertai semula dalam masa 90 hari,</string>
 
     <!--접근 권한 안내 화면-->
     <string name="permission_checking_screen_접근_권한_안내">Panduan Keizinan Akses</string>
@@ -404,8 +404,8 @@
     <string name="review_write_keyword_complete_sub2">Penulisan anda yang teliti\nPilihan perjalanan seseorang\nIa memperkayakan saya!</string>
     <string name="review_write_keyword_complete_btn_again">Lihat kandungan semula</string>
     <string name="review_write_keyword_complete_btn_add">Tambah ulasan lain</string>
-    <string name="review_write_cancel_dialog_title">Adakah anda pasti mahu keluar?</string>
-    <string name="review_write_cancel_dialog_subtitle">Jika anda keluar sekarang,\nApa yang anda tulis akan dipadam.</string>
+    <string name="dialog_msg_title_8">Adakah anda pasti mahu keluar?</string>
+    <string name="dialog_msg_sub_title_8">Jika anda keluar sekarang,\nApa yang anda tulis akan dipadam.</string>
     <string name="report_category_title">Sila beritahu kami mengapa anda melaporkannya!</string>
     <string name="report_category_subtitle">Maklumat yang dilaporkan tanpa alasan yang sah mesti disahkan oleh pentadbir.\nIa mungkin tidak akan diterima.</string>
     <string name="report_write_resone_title">Sebab untuk laporan</string>
@@ -417,9 +417,10 @@
     <string name="review_keyword_infra">Kemudahan</string>
     <string name="nanapick_list_screen_recommended_post">{Cadangan} minggu ini, Pilihan Nana</string>
     <string name="nanapick_list_screen_see_all">Lihat semua</string>
-    <string name="common_나가기">Keluar</string>
-    <string name="common_재시작">Cuba Lagi</string>
-    <string name="splash_screen_text">Sila periksa sambungan internet anda</string>
+    <string name="dialog_btn_out">Keluar</string>
+    <string name="dialog_btn_retry">Cuba Lagi</string>
+    <string name="dialog_msg_title_11">Sila periksa sambungan internet anda</string>
+    <string name="review_keyword_etc">Lain-lain</string>
     <string name="review_keyword_1">Sesuai untuk ulang tahun</string>
     <string name="review_keyword_2">Ia comel</string>
     <string name="review_keyword_3">Ia mewah</string>
@@ -436,6 +437,7 @@
     <string name="review_keyword_14">Luas</string>
     <string name="review_keyword_15">Tempat letak kereta</string>
     <string name="review_keyword_16">Tandas bersih</string>
+    <string name="review_keyword_17">Tiada kata kunci.</string>
     <string name="report_reason_1">Untuk tujuan keuntungan / promosi</string>
     <string name="report_reason_2">Saya tidak suka</string>
     <string name="report_reason_3">000 results</string>

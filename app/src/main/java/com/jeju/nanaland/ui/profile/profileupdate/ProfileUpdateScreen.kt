@@ -1,6 +1,5 @@
 package com.jeju.nanaland.ui.profile.profileupdate
 
-import android.net.Uri
 import android.util.Log
 import androidx.activity.compose.BackHandler
 import androidx.activity.compose.rememberLauncherForActivityResult
@@ -27,10 +26,8 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.jeju.nanaland.R
-import com.jeju.nanaland.domain.request.UriRequestBody
 import com.jeju.nanaland.globalvalue.constant.INTRODUCTION_CONSTRAINT
 import com.jeju.nanaland.ui.component.common.CustomSurface
-import com.jeju.nanaland.ui.component.common.DialogCommon
 import com.jeju.nanaland.ui.component.common.dialog.BottomSheetSelectDialog
 import com.jeju.nanaland.ui.component.common.topbar.CustomTopBar
 import com.jeju.nanaland.ui.component.signup.profilesetting.SignUpScreenCharacterCount
@@ -220,13 +217,13 @@ private fun ProfileUpdateScreen(
     }
 
     if (isWarningDialogShowing.value) {
-        DialogCommon(
-            title = getString(R.string.review_write_cancel_dialog_title),
-            subTitle = getString(R.string.review_write_cancel_dialog_subtitle),
-            onDismissRequest = { isWarningDialogShowing.value = false },
-            onPositive = moveToBackScreen,
-            onNegative = { isWarningDialogShowing.value = false }
-        )
+//        DialogCommon(
+//            title = getString(R.string.dialog_msg_title_8),
+//            subTitle = getString(R.string.dialog_msg_sub_title_8),
+//            onDismissRequest = { isWarningDialogShowing.value = false },
+//            onPositive = moveToBackScreen,
+//            onNegative = { isWarningDialogShowing.value = false }
+//        )TODO
     }
     if(isProfileImageDialogShowing) {
         BottomSheetSelectDialog(

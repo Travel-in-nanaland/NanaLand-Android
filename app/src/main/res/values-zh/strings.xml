@@ -102,8 +102,8 @@
     <string name="search_result_screen_no_result">没有符合条件的搜索结果</string>
 
     <!--비회원 회원가입 유도 다이얼로그-->
-    <string name="non_member_dialog_guide">必须成为会员\n才能使用所有服务✨</string>
-    <string name="non_member_dialog_go_sign_up">去注册会员</string>
+    <string name="dialog_msg_title_9">必须成为会员\n才能使用所有服务✨</string>
+    <string name="dialog_btn_go_sign_up">去注册会员</string>
 
 
     <!--날짜 선택 다이얼로그-->
@@ -287,7 +287,7 @@
     <string name="language_change_screen_guide">以顶部的语言设为默认设置</string>
 
     <!--언어 설정 화면 다이얼로그-->
-    <string name="language_change_dialog_text">您想更改为该语言吗？</string>
+    <string name="dialog_msg_title_5">您想更改为该语言吗？</string>
 
     <!--설정 화면-->
     <string name="settings_screen_설정">设置</string>
@@ -300,7 +300,7 @@
     <string name="settings_screen_회원_탈퇴">注销会员</string>
 
     <!--로그아웃 다이얼로그-->
-    <string name="sign_out_dialog_text">确定要登出吗？</string>
+    <string name="dialog_msg_title_6">确定要登出吗？</string>
 
     <!--마이페이지 화면-->
     <string name="mypage_screen_프로필_수정">编辑个人资料</string>
@@ -349,8 +349,8 @@
     <string name="withdrawal_screen_warning">我已确认指南事项并同意。</string>
 
     <!--회원 탈퇴 다이얼로그-->
-    <string name="withdrawal_dialog_text1">真的不想收到济州岛旅\n行信息和优惠吗？😢</string>
-    <string name="withdrawal_dialog_text2">*90天内重新加入时，可以用原账户登录。</string>
+    <string name="dialog_msg_title_7">真的不想收到济州岛旅\n行信息和优惠吗？😢</string>
+    <string name="dialog_msg_sub_title_7">*90天内重新加入时，可以用原账户登录。</string>
 
     <!--접근 권한 안내 화면-->
     <string name="permission_checking_screen_접근_권한_안내">权限指南</string>
@@ -403,8 +403,8 @@
     <string name="review_write_keyword_complete_sub2">你细致入微的写作/让n某人的旅行选择\n更加丰富！</string>
     <string name="review_write_keyword_complete_btn_again">再去看看内容</string>
     <string name="review_write_keyword_complete_btn_add">添加另一条评价</string>
-    <string name="review_write_cancel_dialog_title">您确定要离开吗？</string>
-    <string name="review_write_cancel_dialog_subtitle">如果您现在离开，\n您正在写的内容将被删除。</string>
+    <string name="dialog_msg_title_8">您确定要离开吗？</string>
+    <string name="dialog_msg_sub_title_8">如果您现在离开，\n您正在写的内容将被删除。</string>
     <string name="report_category_title">请告诉我们举报原因！</string>
     <string name="report_category_subtitle">无有效理由的举报信息必须由管理员确认。\n可能不会反映。</string>
     <string name="report_write_resone_title">举报原因</string>
@@ -416,9 +416,10 @@
     <string name="review_keyword_infra">便利设施</string>
     <string name="nanapick_list_screen_recommended_post">本周{推荐}，Nana精选</string>
     <string name="nanapick_list_screen_see_all">查看全部</string>
-    <string name="common_나가기">退出</string>
-    <string name="common_재시작">重试</string>
-    <string name="splash_screen_text">请检查您的网络连接</string>
+    <string name="dialog_btn_out">退出</string>
+    <string name="dialog_btn_retry">重试</string>
+    <string name="dialog_msg_title_11">请检查您的网络连接</string>
+    <string name="review_keyword_etc">其他</string>
     <string name="review_keyword_1">适合于纪念日</string>
     <string name="review_keyword_2">小巧可爱</string>
     <string name="review_keyword_3">很高档</string>
@@ -435,6 +436,7 @@
     <string name="review_keyword_14">宽敞</string>
     <string name="review_keyword_15">停车场</string>
     <string name="review_keyword_16">洁净的卫生间</string>
+    <string name="review_keyword_17">无关键词可选。</string>
     <string name="report_reason_1">用于营利/推广目的</string>
     <string name="report_reason_2">我不喜欢</string>
     <string name="report_reason_3">侮辱性/人身攻击</string>

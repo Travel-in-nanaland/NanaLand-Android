@@ -102,8 +102,8 @@
     <string name="search_result_screen_no_result">해당 검색 결과가 없습니다.</string>
 
     <!--비회원 회원가입 유도 다이얼로그-->
-    <string name="non_member_dialog_guide">나나랜드의 회원이 되셔야,\n모든 서비스를\n이용하실 수 있습니다✨</string>
-    <string name="non_member_dialog_go_sign_up">회원가입 하러 가기</string>
+    <string name="dialog_msg_title_9">나나랜드의 회원이 되셔야,\n모든 서비스를\n이용하실 수 있습니다✨</string>
+    <string name="dialog_btn_go_sign_up">회원가입 하러 가기</string>
 
 
     <!--날짜 선택 다이얼로그-->
@@ -290,7 +290,7 @@
     <string name="language_change_screen_guide">맨 위에 있는 언어로\n기본 설정 되어 있습니다.</string>
 
     <!--언어 설정 화면 다이얼로그-->
-    <string name="language_change_dialog_text">해당 언어로\n변경하시겠습니까?</string>
+    <string name="dialog_msg_title_5">해당 언어로\n변경하시겠습니까?</string>
 
     <!--설정 화면-->
     <string name="settings_screen_설정">설정</string>
@@ -303,7 +303,7 @@
     <string name="settings_screen_회원_탈퇴">회원 탈퇴</string>
 
     <!--로그아웃 다이얼로그-->
-    <string name="sign_out_dialog_text">정말 로그아웃을\n하시겠습니까?</string>
+    <string name="dialog_msg_title_6">정말 로그아웃을\n하시겠습니까?</string>
 
     <!--마이페이지 화면-->
     <string name="mypage_screen_프로필_수정">프로필 수정</string>
@@ -353,8 +353,8 @@
     <string name="withdrawal_screen_warning">안내사항을 확인하였으며 동의합니다.</string>
 
     <!--회원 탈퇴 다이얼로그-->
-    <string name="withdrawal_dialog_text1">정말 제주도 여행 정보와 혜택을\n받지 않으시겠습니까? 😢</string>
-    <string name="withdrawal_dialog_text2">*90일 이내에 재가입 시,\n기존 계정으로 로그인이 됩니다.</string>
+    <string name="dialog_msg_title_7">정말 제주도 여행 정보와 혜택을\n받지 않으시겠습니까? 😢</string>
+    <string name="dialog_msg_sub_title_7">*90일 이내에 재가입 시,\n기존 계정으로 로그인이 됩니다.</string>
 
     <!--접근 권한 안내 화면-->
     <string name="permission_checking_screen_접근_권한_안내">접근 권한 안내</string>
@@ -408,8 +408,8 @@
     <string name="review_write_keyword_complete_sub2">당신의 세심한 글이\n누군가의 여행 선택지를\n풍요롭게 해줬어요 !</string>
     <string name="review_write_keyword_complete_btn_again">콘텐츠 다시 보러 가기</string>
     <string name="review_write_keyword_complete_btn_add">다른 리뷰 추가하기</string>
-    <string name="review_write_cancel_dialog_title">정말 나가시겠습니까?</string>
-    <string name="review_write_cancel_dialog_subtitle">지금 나가시면,\n작성 중인 내용이 삭제됩니다.</string>
+    <string name="dialog_msg_title_8">정말 나가시겠습니까?</string>
+    <string name="dialog_msg_sub_title_8">지금 나가시면,\n작성 중인 내용이 삭제됩니다.</string>
     <string name="report_category_title">신고하는 이유를 알려주세요!</string>
     <string name="report_category_subtitle">타당한 근거 없이 신고된 내용은 관리자 확인 후\n반영되지 않을 수 있습니다.</string>
     <string name="report_write_resone_title">신고 사유</string>
@@ -421,11 +421,12 @@
     <string name="review_keyword_infra">편의 시설</string>
     <string name="nanapick_list_screen_recommended_post">금주 {추천} 나나’s Pick</string>
     <string name="nanapick_list_screen_see_all">모두보기</string>
-    <string name="common_나가기">나가기</string>
-    <string name="common_재시작">재시도</string>
-    <string name="splash_screen_text">인터넷 연결을 확인해주세요</string>
+    <string name="dialog_btn_out">나가기</string>
+    <string name="dialog_btn_retry">재시도</string>
+    <string name="dialog_msg_title_11">인터넷 연결을 확인해주세요</string>
 
     <!--리뷰 키워드-->
+    <string name="review_keyword_etc">기타</string>
     <string name="review_keyword_1">기념일에 가면 좋아요</string>
     <string name="review_keyword_2">아기자기해요</string>
     <string name="review_keyword_3">고급스러워요</string>
@@ -444,6 +445,7 @@
     <string name="review_keyword_16">깨끗한 화장실</string>
 
     <!--신고 카테고리-->
+    <string name="review_keyword_17">선택할 키워드가 없어요</string>
     <string name="report_reason_1">영리목적 / 홍보성</string>
     <string name="report_reason_2">마음에 들지 않습니다</string>
     <string name="report_reason_3">욕설/인신공격</string>

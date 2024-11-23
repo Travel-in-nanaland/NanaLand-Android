@@ -66,8 +66,8 @@
     <string name="searching_screen_최근_검색어가_없습니다">Không có tìm kiếm gần đây.</string>
     <string name="searching_screen_hot_keywords">Tăng lượt tìm kiếm! Địa điểm JEJU 🍊</string>
     <string name="search_result_screen_no_result">Không có kết quả tìm kiếm tương ứng.</string>
-    <string name="non_member_dialog_guide">Bạn phải trở thành thành viên của Nana Land để sử dụng tất cả các dịch vụ✨</string>
-    <string name="non_member_dialog_go_sign_up">Đi đăng ký</string>
+    <string name="dialog_msg_title_9">Bạn phải trở thành thành viên của Nana Land để sử dụng tất cả các dịch vụ✨</string>
+    <string name="dialog_btn_go_sign_up">Đi đăng ký</string>
     <string name="date_filter_dialog_날짜_선택">Chọn ngày</string>
     <string name="date_filter_dialog_초기화">đặt lại</string>
     <string name="location_filter_dialog_지역">khu vực</string>
@@ -214,7 +214,7 @@
     <string name="type_test_screen_button1">Điểm đến %s</string>
     <string name="type_test_screen_button2">Về màn hình chính</string>
     <string name="language_change_screen_guide">được đặt mặc định theo\n ngôn ngữ ở trên cùng.</string>
-    <string name="language_change_dialog_text">Bạn có muốn thay đổi \n sang ngôn ngữ đó không?</string>
+    <string name="dialog_msg_title_5">Bạn có muốn thay đổi \n sang ngôn ngữ đó không?</string>
     <string name="settings_screen_설정">Cài đặt</string>
     <string name="settings_screen_사용_설정">Đã bật</string>
     <string name="settings_screen_약관_및_정책">Điều khoản và Chính sách</string>
@@ -223,7 +223,7 @@
     <string name="settings_screen_버전_정보">Thông tin phiên bản</string>
     <string name="settings_screen_로그아웃">Đăng xuất</string>
     <string name="settings_screen_회원_탈퇴">Rút khỏi thành viên</string>
-    <string name="sign_out_dialog_text">Bạn có chắc chắn muốn đăng xuất\n không?</string>
+    <string name="dialog_msg_title_6">Bạn có chắc chắn muốn đăng xuất\n không?</string>
     <string name="mypage_screen_프로필_수정">Chỉnh sửa hồ sơ</string>
     <string name="mypage_screen_테스트_다시하기">Kiểm tra lại</string>
     <string name="mypage_screen_테스트_하기">Kiểm tra</string>
@@ -259,8 +259,8 @@
     <string name="withdrawal_screen_reason4">Ít lượt truy cập</string>
     <string name="withdrawal_screen_탈퇴">Rút lui</string>
     <string name="withdrawal_screen_warning">Tôi đã đọc các hướng dẫn và đồng ý.</string>
-    <string name="withdrawal_dialog_text1">Bạn có thực sự muốn nhận thông tin du lịch và lợi ích của đảo Jeju không? 😢</string>
-    <string name="withdrawal_dialog_text2">Nếu bạn đăng ký lại trong vòng 90 ngày, bạn sẽ được đăng nhập bằng tài khoản hiện tại của mình.</string>
+    <string name="dialog_msg_title_7">Bạn có thực sự muốn nhận thông tin du lịch và lợi ích của đảo Jeju không? 😢</string>
+    <string name="dialog_msg_sub_title_7">Nếu bạn đăng ký lại trong vòng 90 ngày, bạn sẽ được đăng nhập bằng tài khoản hiện tại của mình.</string>
     <string name="permission_checking_screen_접근_권한_안내">Thông tin quyền truy cập</string>
     <string name="permission_checking_screen_guide">Để sử dụng Nana Land tại đảo Jeju, \nCác {Cho phép quyền truy cập} sau đây là cần thiết.</string>
     <string name="permission_checking_screen_text1">Quyền truy cập bắt buộc cần thiết để sử dụng dịch vụ Nana Land tại Jeju, và nếu quyền bị từ chối, việc sử dụng dịch vụ sẽ bị hạn chế.</string>
@@ -296,8 +296,8 @@
     <string name="review_write_keyword_complete_sub2">Bài viết tỉ mỉ của bạn\nLựa chọn du lịch của ai đó\nNó đã làm phong phú tôi!</string>
     <string name="review_write_keyword_complete_btn_again">Xem lại nội dung</string>
     <string name="review_write_keyword_complete_btn_add">Thêm một đánh giá khác</string>
-    <string name="review_write_cancel_dialog_title">Bạn có chắc chắn muốn rời đi không?</string>
-    <string name="review_write_cancel_dialog_subtitle">Nếu bạn rời đi bây giờ,\nNhững gì bạn đang viết sẽ bị xóa.</string>
+    <string name="dialog_msg_title_8">Bạn có chắc chắn muốn rời đi không?</string>
+    <string name="dialog_msg_sub_title_8">Nếu bạn rời đi bây giờ,\nNhững gì bạn đang viết sẽ bị xóa.</string>
     <string name="report_category_title">Hãy cho chúng tôi biết lý do bạn báo cáo!</string>
     <string name="report_category_subtitle">Thông tin báo cáo không có căn cứ hợp lệ phải được xác nhận bởi quản trị viên.\nCó thể sẽ không được phản ánh.</string>
     <string name="report_write_resone_title">Lý do báo cáo</string>
@@ -309,9 +309,9 @@
     <string name="review_keyword_infra">Tiện nghi</string>
     <string name="nanapick_list_screen_recommended_post">Gợi ý tuần này, {Lựa chọn} của Nana</string>
     <string name="nanapick_list_screen_see_all">Xem tất cả</string>
-    <string name="common_나가기">Thoát</string>
-    <string name="common_재시작">Thử Lại</string>
-    <string name="splash_screen_text">Vui lòng kiểm tra kết nối internet của bạn</string>
+    <string name="dialog_btn_out">Thoát</string>
+    <string name="dialog_btn_retry">Thử Lại</string>
+    <string name="dialog_msg_title_11">Vui lòng kiểm tra kết nối internet của bạn</string>
     <string name="week_sun_sat_1">tháng</string>
     <string name="week_sun_sat_2">cơn giận</string>
     <string name="week_sun_sat_3">số</string>
@@ -331,6 +331,7 @@
     <string name="month_name_10">Tháng Mười</string>
     <string name="month_name_11">Tháng Mười Một</string>
     <string name="month_name_12">Tháng Mười Hai</string>
+    <string name="review_keyword_etc">Khác</string>
     <string name="review_keyword_1">Phù hợp cho kỷ niệm</string>
     <string name="review_keyword_2">Nó dễ thương</string>
     <string name="review_keyword_3">Nó sang trọng</string>
@@ -347,6 +348,7 @@
     <string name="review_keyword_14">Rộng rãi</string>
     <string name="review_keyword_15">Bãi đậu xe</string>
     <string name="review_keyword_16">Nhà vệ sinh sạch sẽ</string>
+    <string name="review_keyword_17">Không có từ khóa.</string>
     <string name="report_reason_1">Vì mục đích lợi nhuận / quảng cáo</string>
     <string name="report_reason_2">Tôi không thích</string>
     <string name="report_reason_3">Lăng mạ / Tấn công cá nhân</string>

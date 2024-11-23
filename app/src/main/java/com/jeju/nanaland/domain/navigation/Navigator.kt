@@ -1,5 +1,6 @@
 package com.jeju.nanaland.domain.navigation
 
+import android.util.Log
 import androidx.navigation.NavHostController
 import androidx.navigation.NavOptions
 import kotlinx.coroutines.channels.BufferOverflow
@@ -33,6 +34,7 @@ class Navigator @Inject constructor() {
         navController: NavHostController,
         action: Triple<Boolean, ROUTE?, NavOptions>
     ) {
+        Log.d("asd","@@@@@$action")
         if(action.first){
             if(navController.previousBackStackEntry != null) {
                 if(action.second != null)

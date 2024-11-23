@@ -56,7 +56,6 @@ import com.jeju.nanaland.globalvalue.type.ReviewCategoryType
 import com.jeju.nanaland.globalvalue.type.ReviewKeyword
 import com.jeju.nanaland.ui.component.common.BottomOkButton
 import com.jeju.nanaland.ui.component.common.CustomSurface
-import com.jeju.nanaland.ui.component.common.DialogCommon
 import com.jeju.nanaland.ui.component.common.UploadImages
 import com.jeju.nanaland.ui.component.common.dialog.SubmitLoadingDialog
 import com.jeju.nanaland.ui.component.common.text.TextWithPointColor
@@ -149,13 +148,13 @@ fun ReviewWriteScreen(
         }
     }
     if(cancelDialogVisible) {
-        DialogCommon(
-            title = getString(R.string.review_write_cancel_dialog_title),
-            subTitle = getString(R.string.review_write_cancel_dialog_subtitle),
-            onDismissRequest = { cancelDialogVisible = false },
-            onPositive = { cancelDialogVisible = false; navViewModel.popBackStack() },
-            onNegative = { cancelDialogVisible = false }
-        )
+//        DialogCommon(
+//            title = getString(R.string.dialog_msg_title_8),
+//            subTitle = getString(R.string.dialog_msg_sub_title_8),
+//            onDismissRequest = { cancelDialogVisible = false },
+//            onPositive = { cancelDialogVisible = false; navViewModel.popBackStack() },
+//            onNegative = { cancelDialogVisible = false }
+//        )TODO
     }
 }
 

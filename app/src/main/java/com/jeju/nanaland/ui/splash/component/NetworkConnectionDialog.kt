@@ -62,7 +62,7 @@ fun NetworkConnectionDialog(
                         Spacer(Modifier.height(8.dp))
 
                         Text(
-                            text = getString(R.string.splash_screen_text),
+                            text = getString(R.string.dialog_msg_title_11),
                             color = getColor().black,
                             style = title01Bold,
                             textAlign = TextAlign.Center
@@ -73,14 +73,14 @@ fun NetworkConnectionDialog(
 
                     Row(Modifier.height(IntrinsicSize.Min)) {
                         SettingsScreenDialogCancelButton(
-                            text = getString(R.string.common_나가기),
+                            text = getString(R.string.dialog_btn_out),
                             onClick = { exit() }
                         )
 
                         WithdrawalScreenDialogVerticalDivider()
 
                         SettingsScreenDialogConfirmButton(
-                            text = getString(R.string.common_재시작),
+                            text = getString(R.string.dialog_btn_retry),
                             onClick = { retry() }
                         )
                     }

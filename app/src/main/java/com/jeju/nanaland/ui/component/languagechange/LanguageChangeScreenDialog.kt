@@ -50,7 +50,7 @@ fun LanguageChangeScreenDialog(
                         verticalArrangement = Arrangement.Center
                     ) {
                         Text(
-                            text = getString(R.string.language_change_dialog_text),
+                            text = getString(R.string.dialog_msg_title_5),
                             color = getColor().black,
                             style = title01Bold,
                             textAlign = TextAlign.Center

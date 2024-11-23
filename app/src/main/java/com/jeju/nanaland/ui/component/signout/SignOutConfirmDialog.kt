@@ -50,7 +50,7 @@ fun SignOutConfirmDialog(
                         verticalArrangement = Arrangement.Center
                     ) {
                         Text(
-                            text = getString(R.string.sign_out_dialog_text),
+                            text = getString(R.string.dialog_msg_title_6),
                             color = getColor().black,
                             style = title01Bold,
                             textAlign = TextAlign.Center
