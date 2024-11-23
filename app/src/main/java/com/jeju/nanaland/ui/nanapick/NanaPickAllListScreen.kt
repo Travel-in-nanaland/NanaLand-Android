@@ -81,7 +81,7 @@ private fun NanaPickAllListScreen(
                     horizontalArrangement = Arrangement.spacedBy(48.dp)
                 ) {
                     item {
-                        Spacer(Modifier.height((40 - 24).dp))
+                        Spacer(Modifier.height((40 /*피그마 패딩*/ - 24 /*아이템 간격*/).dp))
                     }
                     item { }
 
@@ -91,6 +91,11 @@ private fun NanaPickAllListScreen(
                             onClick = moveToNanaPickContentScreen
                         )
                     }
+
+                    item {
+                        Spacer(Modifier.height((40 - 24).dp))
+                    }
+                    item { }
                 }
             }
             is UiState.Failure -> {}
