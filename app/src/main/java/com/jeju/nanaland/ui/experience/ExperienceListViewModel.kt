@@ -1,17 +1,16 @@
 package com.jeju.nanaland.ui.experience
 
-import androidx.compose.runtime.mutableStateListOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.jeju.nanaland.domain.entity.experience.ExperienceThumbnailData
 import com.jeju.nanaland.domain.request.experience.GetExperienceListRequest
 import com.jeju.nanaland.domain.request.favorite.ToggleFavoriteRequest
-import com.jeju.nanaland.domain.usecase.experience.GetExperienceContentUseCase
 import com.jeju.nanaland.domain.usecase.experience.GetExperienceListUseCase
 import com.jeju.nanaland.domain.usecase.favorite.ToggleFavoriteUseCase
 import com.jeju.nanaland.globalvalue.constant.PAGING_SIZE
 import com.jeju.nanaland.globalvalue.constant.getActivityKeywordSelectionList
 import com.jeju.nanaland.globalvalue.constant.getCultureArtKeywordSelectionList
+import com.jeju.nanaland.globalvalue.constant.getLocationFilterList
 import com.jeju.nanaland.globalvalue.constant.getLocationSelectionList
 import com.jeju.nanaland.globalvalue.type.ExperienceCategoryType
 import com.jeju.nanaland.util.log.LogUtil
@@ -36,7 +35,7 @@ class ExperienceListViewModel @Inject constructor(
 
     private val _selectedCategoryType = MutableStateFlow(ExperienceCategoryType.Activity)
     val selectedCategoryType = _selectedCategoryType.asStateFlow()
-    private val locationList = listOf("제주시", "애월", "조천", "한경", "구좌", "한림", "우도", "추자", "서귀포시", "대정", "안덕", "남원", "표선", "성산")
+    private val locationList = getLocationFilterList()
     val selectedLocationList = getLocationSelectionList()
     private val activityKeywordList = listOf("LAND_LEISURE", "WATER_LEISURE", "AIR_LEISURE", "MARINE_EXPERIENCE", "RURAL_EXPERIENCE", "HEALING_THERAPY")
     val selectedActivityKeywordList = getActivityKeywordSelectionList()
