@@ -25,6 +25,7 @@ import com.jeju.nanaland.ui.component.main.home.HomeScreenCategoryButtons
 import com.jeju.nanaland.ui.component.main.home.HomeScreenPopularPlaces
 import com.jeju.nanaland.ui.component.main.home.HomeScreenRecommendedPosts
 import com.jeju.nanaland.ui.component.main.home.HomeScreenTopBanner
+import com.jeju.nanaland.ui.theme.bodyBold
 import com.jeju.nanaland.ui.theme.getColor
 import com.jeju.nanaland.ui.theme.shadowDivider
 import com.jeju.nanaland.ui.theme.title02Bold
@@ -130,7 +131,7 @@ private fun HomeContent(
                     UserData.nickname
             ),
             color = getColor().black,
-            style = title02Bold
+            style = bodyBold
         )
         Spacer(Modifier.height(12.dp))
         HomeScreenRecommendedPosts(

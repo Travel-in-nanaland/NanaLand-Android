@@ -1,7 +1,6 @@
 package com.jeju.nanaland.ui.component.main.searching
 
 import androidx.compose.foundation.horizontalScroll
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -40,10 +39,10 @@ fun SearchingScreenRecentSearchContent(
             SearchingScreenRecentSearchText()
 
             Spacer(Modifier.weight(1f))
-
-            SearchingScreenDeleteAllRecentSearchText(
-                onClick = deleteAllRecentSearches
-            )
+            if(recentSearchList.isNotEmpty())
+                SearchingScreenDeleteAllRecentSearchText(
+                    onClick = deleteAllRecentSearches
+                )
         }
 
         if (recentSearchList.isEmpty()) {

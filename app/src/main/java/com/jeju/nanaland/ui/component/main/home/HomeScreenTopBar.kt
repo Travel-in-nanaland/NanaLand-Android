@@ -1,6 +1,5 @@
 package com.jeju.nanaland.ui.component.main.home
 
-import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -37,7 +36,6 @@ import com.jeju.nanaland.globalvalue.constant.TOP_BAR_HEIGHT
 import com.jeju.nanaland.globalvalue.type.HomeScreenViewType
 import com.jeju.nanaland.globalvalue.type.SearchCategoryType
 import com.jeju.nanaland.ui.theme.NanaLandTheme
-import com.jeju.nanaland.ui.theme.body02
 import com.jeju.nanaland.ui.theme.getColor
 import com.jeju.nanaland.ui.theme.searchText
 import com.jeju.nanaland.util.language.customContext
@@ -97,7 +95,7 @@ fun HomeScreenTopBar(
                 onValueChange(it)
             },
             singleLine = true,
-            textStyle = body02,
+            textStyle = searchText,
             keyboardOptions = KeyboardOptions(imeAction = ImeAction.Search),
             keyboardActions = KeyboardActions(
                 onSearch = {
@@ -133,7 +131,7 @@ fun HomeScreenTopBar(
                             Text(
                                 text = getString(R.string.searching_screen_textfiled_hint),
                                 color = getColor().gray01,
-                                style = body02
+                                style = searchText
                             )
                         } else {
                             Text(
