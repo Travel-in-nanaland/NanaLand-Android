@@ -65,8 +65,8 @@ fun DialogCommon(
     type: DialogCommonType,
     onDismiss: () -> Unit,
     onYes: () -> Unit,
-    onNo: (() -> Unit) = {},
-    onOther: (() -> Unit) = {},
+    onNo: () -> Unit = onDismiss,
+    onOther: () -> Unit = onDismiss,
 ) {
     val currentDate = Calendar.getInstance()
 
@@ -159,6 +159,7 @@ fun DialogCommon(
                 outerButtons = {
                     when (type) {
                         DialogCommonType.Login ->  Text(
+                            modifier = Modifier.clickableNoEffect(onOther),
                             text = getString(R.string.sign_in_screen_로그인_없이_둘러보기),
                             style = body02,
                             color = getColor().gray02,

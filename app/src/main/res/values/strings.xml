@@ -330,6 +330,7 @@
     <string name="settings_screen_사용_설정">사용 설정</string>
     <string name="settings_screen_약관_및_정책">약관 및 정책</string>
     <string name="settings_screen_접근권한_안내">접근권한 안내</string>
+    <string name="settings_screen_알림_설정">알림 설정</string>
     <string name="settings_screen_언어_설정">언어 설정</string>
     <string name="settings_screen_버전_정보">버전 정보</string>
     <string name="settings_screen_로그아웃">로그아웃</string>

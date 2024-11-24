@@ -17,11 +17,11 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.jeju.nanaland.R
 import com.jeju.nanaland.globalvalue.type.WithdrawalReasonType
 import com.jeju.nanaland.ui.component.common.CustomSurface
+import com.jeju.nanaland.ui.component.common.dialog.DialogCommon
+import com.jeju.nanaland.ui.component.common.dialog.DialogCommonType
 import com.jeju.nanaland.ui.component.common.topbar.TopBarCommon
 import com.jeju.nanaland.ui.component.permissionchecking.PermissionCheckingScreenHorizontalDivider
-import com.jeju.nanaland.ui.component.withdrawal.WithdrawalScreenAgreeText
 import com.jeju.nanaland.ui.component.withdrawal.WithdrawalScreenCancelButton
-import com.jeju.nanaland.ui.component.withdrawal.WithdrawalScreenConfirmDialog
 import com.jeju.nanaland.ui.component.withdrawal.WithdrawalScreenGuideLineDescription
 import com.jeju.nanaland.ui.component.withdrawal.WithdrawalScreenGuideLineHeading
 import com.jeju.nanaland.ui.component.withdrawal.WithdrawalScreenLogo
@@ -108,10 +108,6 @@ private fun WithdrawalScreen(
                     WithdrawalScreenGuideLineDescription(
                         text = getString(R.string.withdrawal_screen_text5)
                     )
-
-                    Spacer(Modifier.height(16.dp))
-
-                    WithdrawalScreenAgreeText()
                 }
 
                 Spacer(Modifier.height(16.dp))
@@ -174,9 +170,10 @@ private fun WithdrawalScreen(
     }
 
     if (isDialogShowing.value) {
-        WithdrawalScreenConfirmDialog(
-            onConfirm = { withdraw(moveToLanguageInitScreen) },
-            onCancel = { isDialogShowing.value = false }
+        DialogCommon(
+            DialogCommonType.Withdrawal,
+            onDismiss = { isDialogShowing.value = false },
+            onYes = { withdraw(moveToLanguageInitScreen) }
         )
     }
 }

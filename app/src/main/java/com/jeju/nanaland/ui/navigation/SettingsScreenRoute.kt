@@ -13,7 +13,7 @@ fun NavGraphBuilder.settingsScreen(navViewModel: NavViewModel) = composable<ROUT
         moveToPermissionCheckingScreen = { navViewModel.navigate(ROUTE.Main.Profile.Setting.PermissionChecking) },
         moveToLanguageChangeScreen = { navViewModel.navigate(ROUTE.Main.Profile.Setting.LanguageChange) },
         moveToWithdrawalScreen = { navViewModel.navigate(ROUTE.Main.Profile.Setting.Withdraw) },
-        moveToLanguageInitScreen = { navViewModel.navigatePopUpTo(ROUTE.Splash.LanguageSetting, ROUTE.Main) },
+        moveToNoticeScreen = { navViewModel.navigate(ROUTE.Main.Profile.NoticeList) },
         moveToSignInScreen = { navViewModel.navigatePopUpTo(ROUTE.Splash.SignIn, ROUTE.Main) }
     )
 }

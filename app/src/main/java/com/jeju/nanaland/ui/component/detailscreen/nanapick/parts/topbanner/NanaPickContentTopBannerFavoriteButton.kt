@@ -11,7 +11,8 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.jeju.nanaland.R
 import com.jeju.nanaland.globalvalue.userdata.UserData
-import com.jeju.nanaland.ui.component.nonmember.NonMemberGuideDialog
+import com.jeju.nanaland.ui.component.common.dialog.DialogCommon
+import com.jeju.nanaland.ui.component.common.dialog.DialogCommonType
 import com.jeju.nanaland.ui.theme.NanaLandTheme
 import com.jeju.nanaland.ui.theme.getColor
 import com.jeju.nanaland.util.ui.ComponentPreviewBlack
@@ -42,9 +43,10 @@ fun NanaPickContentTopBannerFavoriteButton(
     )
 
     if (isNonMemberGuideDialogShowing.value) {
-        NonMemberGuideDialog(
-            onCloseClick = { isNonMemberGuideDialogShowing.value = false },
-            moveToSignInScreen = moveToSignInScreen
+        DialogCommon(
+            DialogCommonType.Login,
+            onDismiss = { isNonMemberGuideDialogShowing.value = false },
+            onYes = moveToSignInScreen,
         )
     }
 }

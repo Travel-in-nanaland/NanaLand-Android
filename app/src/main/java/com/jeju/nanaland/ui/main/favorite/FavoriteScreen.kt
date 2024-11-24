@@ -23,11 +23,12 @@ import com.jeju.nanaland.domain.entity.favorite.FavoriteThumbnailData
 import com.jeju.nanaland.globalvalue.type.MainScreenViewType
 import com.jeju.nanaland.globalvalue.type.SearchCategoryType
 import com.jeju.nanaland.globalvalue.userdata.UserData
+import com.jeju.nanaland.ui.component.common.dialog.DialogCommon
+import com.jeju.nanaland.ui.component.common.dialog.DialogCommonType
 import com.jeju.nanaland.ui.component.common.topbar.TopBarCommon
 import com.jeju.nanaland.ui.component.favorite.FavoriteScreenCategorySelectionTab
 import com.jeju.nanaland.ui.component.favorite.FavoriteScreenFavoritePosts
 import com.jeju.nanaland.ui.component.main.searchresult.parts.SearchResultScreenItemCount
-import com.jeju.nanaland.ui.component.nonmember.NonMemberGuideDialog
 import com.jeju.nanaland.ui.theme.body01
 import com.jeju.nanaland.ui.theme.getColor
 import com.jeju.nanaland.util.resource.getString
@@ -121,9 +122,10 @@ private fun FavoriteScreen(
     }
 
     if (UserData.provider == "GUEST") {
-        NonMemberGuideDialog(
-            onCloseClick = { updateMainScreenViewType(prevViewType) },
-            moveToSignInScreen = moveToSignInScreen
+        DialogCommon(
+            DialogCommonType.Login,
+            onDismiss = { updateMainScreenViewType(prevViewType) },
+            onYes = moveToSignInScreen,
         )
     }
 }

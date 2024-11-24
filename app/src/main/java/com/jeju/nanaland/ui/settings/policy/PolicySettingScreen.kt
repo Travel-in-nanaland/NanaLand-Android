@@ -9,9 +9,9 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.jeju.nanaland.R
 import com.jeju.nanaland.ui.component.common.CustomSurface
+import com.jeju.nanaland.ui.component.common.toggle.SwitchCommon
 import com.jeju.nanaland.ui.component.common.topbar.TopBarCommon
 import com.jeju.nanaland.ui.component.settings.SettingsScreenCategoryItem
-import com.jeju.nanaland.ui.component.settings.policy.PolicySettingScreenCheckIcon
 import com.jeju.nanaland.ui.component.settings.policy.PolicySettingScreenWarningText
 import com.jeju.nanaland.util.resource.getString
 
@@ -51,9 +51,11 @@ private fun PolicySettingScreen(
             text = getString(R.string.policy_agree_screen_marketing_policy),
             onClick = { updatePolicyAgreement("MARKETING", !isMarketingPolicyAgreed) },
             endView = {
-                PolicySettingScreenCheckIcon(
-                    isSelected = isMarketingPolicyAgreed
-                )
+                SwitchCommon(
+                    checked = isMarketingPolicyAgreed,
+                ) {
+                    updatePolicyAgreement("MARKETING", !isMarketingPolicyAgreed)
+                }
             }
         )
 
@@ -61,9 +63,11 @@ private fun PolicySettingScreen(
             text = getString(R.string.policy_agree_screen_location_policy),
             onClick = { updatePolicyAgreement("LOCATION_SERVICE", !isLocationPolicyAgreed) },
             endView = {
-                PolicySettingScreenCheckIcon(
-                    isSelected = isLocationPolicyAgreed
-                )
+                SwitchCommon(
+                    checked = isLocationPolicyAgreed,
+                ) {
+                    updatePolicyAgreement("LOCATION_SERVICE", !isLocationPolicyAgreed)
+                }
             }
         )
 

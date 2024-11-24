@@ -24,13 +24,14 @@ import com.jeju.nanaland.R
 import com.jeju.nanaland.domain.entity.market.MarketContent
 import com.jeju.nanaland.globalvalue.userdata.UserData
 import com.jeju.nanaland.ui.component.common.CustomSurface
+import com.jeju.nanaland.ui.component.common.dialog.DialogCommon
+import com.jeju.nanaland.ui.component.common.dialog.DialogCommonType
 import com.jeju.nanaland.ui.component.common.topbar.TopBarCommon
 import com.jeju.nanaland.ui.component.detailscreen.other.DetailScreenDescription
 import com.jeju.nanaland.ui.component.detailscreen.other.DetailScreenInformation
 import com.jeju.nanaland.ui.component.detailscreen.other.DetailScreenInformationModificationProposalButton
 import com.jeju.nanaland.ui.component.detailscreen.other.DetailScreenTopBannerImage
 import com.jeju.nanaland.ui.component.detailscreen.other.MoveToTopButton
-import com.jeju.nanaland.ui.component.nonmember.NonMemberGuideDialog
 import com.jeju.nanaland.util.language.getLanguage
 import com.jeju.nanaland.util.resource.getString
 import com.jeju.nanaland.util.ui.ScreenPreview
@@ -79,9 +80,10 @@ private fun MarketContentScreen(
     val coroutineScope = rememberCoroutineScope()
     val isNonMemberGuideDialogShowing = remember { mutableStateOf(false) }
     if (isNonMemberGuideDialogShowing.value) {
-        NonMemberGuideDialog(
-            onCloseClick = { isNonMemberGuideDialogShowing.value = false },
-            moveToSignInScreen = moveToSignInScreen
+        DialogCommon(
+            DialogCommonType.Login,
+            onDismiss = { isNonMemberGuideDialogShowing.value = false },
+            onYes = moveToSignInScreen,
         )
     }
 
