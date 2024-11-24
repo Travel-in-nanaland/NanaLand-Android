@@ -3,7 +3,6 @@ package com.jeju.nanaland.ui.component.listscreen.filter.parts.keyword
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.border
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -24,11 +23,11 @@ import androidx.compose.ui.unit.dp
 import com.jeju.nanaland.R
 import com.jeju.nanaland.ui.theme.caption01
 import com.jeju.nanaland.ui.theme.getColor
+import com.jeju.nanaland.util.ui.clickableNoEffect
 
 @Composable
 fun KeywordFilterBox(
     text: String,
-    showDimBackground: () -> Unit,
     keywordList: List<String>,
     openKeywordFilterDialog: () -> Unit,
     selectedKeywordList: SnapshotStateList<Boolean>
@@ -45,10 +44,7 @@ fun KeywordFilterBox(
                 ),
                 shape = RoundedCornerShape(50)
             )
-            .clickable {
-                showDimBackground()
-                openKeywordFilterDialog()
-            },
+            .clickableNoEffect(openKeywordFilterDialog),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.Center
     ) {

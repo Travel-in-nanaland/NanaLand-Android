@@ -90,7 +90,7 @@ private fun NatureContentScreen(
 
     CustomSurface {
         TopBarCommon(
-            title = getString(R.string.common_7대_자연),
+            title = getString(R.string.common_자연),
             onBackButtonClicked = moveToBackScreen,
             menus = arrayOf(
                 (if ((natureContent as? UiState.Success)?.data?.favorite == true) R.drawable.ic_heart_filled

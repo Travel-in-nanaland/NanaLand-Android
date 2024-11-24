@@ -12,23 +12,19 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.jeju.nanaland.R
-import com.jeju.nanaland.ui.component.listscreen.filter.parts.FilteredItemCount
 import com.jeju.nanaland.ui.component.listscreen.filter.parts.keyword.KeywordFilterBox
 import com.jeju.nanaland.ui.component.listscreen.filter.parts.location.LocationFilterBox
 import com.jeju.nanaland.util.resource.getString
-import com.jeju.nanaland.util.ui.UiState
 
 @Composable
 fun KeywordLocationFilterTopBar(
     text: String = getString(R.string.common_종류),
-    count: UiState<Int>,
     selectedKeywordList: SnapshotStateList<Boolean>,
     keywordList: List<String>,
     selectedLocationList: SnapshotStateList<Boolean>,
     locationList: List<String>,
     openKeywordFilterDialog: () -> Unit,
     openLocationFilterDialog: () -> Unit,
-    showDimBackground: () -> Unit,
 ) {
     Row(
         modifier = Modifier
@@ -37,17 +33,10 @@ fun KeywordLocationFilterTopBar(
             .height(56.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
-        when (count) {
-            is UiState.Loading -> {}
-            is UiState.Success -> { FilteredItemCount(count = count.data) }
-            is UiState.Failure -> {}
-        }
-
         Spacer(Modifier.weight(1f))
 
         KeywordFilterBox(
             text = text,
-            showDimBackground = showDimBackground,
             keywordList = keywordList,
             openKeywordFilterDialog = openKeywordFilterDialog,
             selectedKeywordList = selectedKeywordList
@@ -56,7 +45,6 @@ fun KeywordLocationFilterTopBar(
         Spacer(Modifier.width(8.dp))
 
         LocationFilterBox(
-            showDimBackground = showDimBackground,
             locationList = locationList,
             openLocationFilterDialog = openLocationFilterDialog,
             selectedLocationList = selectedLocationList

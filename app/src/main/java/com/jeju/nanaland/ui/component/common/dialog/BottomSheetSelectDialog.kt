@@ -43,7 +43,13 @@ fun BottomSheetSelectDialog(
     val scope = rememberCoroutineScope()
 
     ModalBottomSheet(
-        onDismissRequest = onDismiss,
+        onDismissRequest = {
+            scope.launch { state.hide() }.invokeOnCompletion {
+                if (!state.isVisible) {
+                    onDismiss()
+                }
+            }
+        },
         sheetState = state,
         shape = RoundedCornerShape(topStart = 12.dp, topEnd = 12.dp),
         containerColor = getColor().white,

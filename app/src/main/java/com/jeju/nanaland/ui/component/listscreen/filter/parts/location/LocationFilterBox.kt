@@ -32,7 +32,6 @@ import com.jeju.nanaland.util.ui.clickableNoEffect
 
 @Composable
 fun LocationFilterBox(
-    showDimBackground: () -> Unit,
     locationList: List<String>,
     openLocationFilterDialog: () -> Unit,
     selectedLocationList: SnapshotStateList<Boolean>,
@@ -49,10 +48,7 @@ fun LocationFilterBox(
                 ),
                 shape = RoundedCornerShape(50)
             )
-            .clickableNoEffect {
-                showDimBackground()
-                openLocationFilterDialog()
-            },
+            .clickableNoEffect(openLocationFilterDialog),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.Center
     ) {
@@ -92,7 +88,6 @@ private fun LocationFilterBoxPreview() {
     val selectedLocationList = remember { mutableStateListOf(false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false) }
     NanaLandTheme {
         LocationFilterBox(
-            showDimBackground = {},
             locationList = locationList,
             openLocationFilterDialog = {},
             selectedLocationList = selectedLocationList

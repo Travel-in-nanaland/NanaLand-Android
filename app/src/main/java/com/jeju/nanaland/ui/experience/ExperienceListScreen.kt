@@ -1,7 +1,6 @@
 package com.jeju.nanaland.ui.experience
 
 import androidx.compose.foundation.ExperimentalFoundationApi
-import androidx.compose.foundation.gestures.animateTo
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -12,9 +11,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.derivedStateOf
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.setValue
 import androidx.compose.runtime.snapshots.SnapshotStateList
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
@@ -25,20 +26,14 @@ import com.jeju.nanaland.globalvalue.constant.PAGING_THRESHOLD
 import com.jeju.nanaland.globalvalue.constant.getActivityKeywordList
 import com.jeju.nanaland.globalvalue.constant.getCultureArtKeywordList
 import com.jeju.nanaland.globalvalue.constant.getLocationList
-import com.jeju.nanaland.globalvalue.type.AnchoredDraggableContentState
 import com.jeju.nanaland.globalvalue.type.ExperienceCategoryType
 import com.jeju.nanaland.ui.component.common.CustomSurface
+import com.jeju.nanaland.ui.component.common.dialog.BottomSheetFilterDialog
+import com.jeju.nanaland.ui.component.common.dialog.BottomSheetFilterDialogType
 import com.jeju.nanaland.ui.component.common.icon.GoToUpInList
 import com.jeju.nanaland.ui.component.common.layoutSet.ListEmptyByFilter
 import com.jeju.nanaland.ui.component.common.topbar.TopBarCommon
-import com.jeju.nanaland.ui.component.listscreen.filter.ActivityKeywordFilterDialog
-import com.jeju.nanaland.ui.component.listscreen.filter.CultureArtKeywordFilterDialog
-import com.jeju.nanaland.ui.component.listscreen.filter.ExperienceFilterDialogDimBackground
 import com.jeju.nanaland.ui.component.listscreen.filter.KeywordLocationFilterTopBar
-import com.jeju.nanaland.ui.component.listscreen.filter.LocationFilterBottomDialog
-import com.jeju.nanaland.ui.component.listscreen.filter.getActivityKeywordAnchoredDraggableState
-import com.jeju.nanaland.ui.component.listscreen.filter.getCultureKeywordArtAnchoredDraggableState
-import com.jeju.nanaland.ui.component.listscreen.filter.getLocationAnchoredDraggableState
 import com.jeju.nanaland.ui.component.listscreen.list.ExperienceThumbnailList
 import com.jeju.nanaland.util.resource.getString
 import com.jeju.nanaland.util.ui.ScreenPreview
@@ -65,7 +60,6 @@ fun ExperienceListScreen(
     ExperienceListScreen(
         title = getString(if(isActivity) R.string.common_액티비티 else R.string.common_문화예술),
         selectedCategoryType = selectedCategoryType,
-//        updateSelectedCategoryType = viewModel::updateSelectedCategoryType,
         selectedLocationList = selectedLocationList,
         selectedActivityKeywordList = selectedActivityKeywordList,
         selectedCultureArtKeywordList = selectedCultureArtKeywordList,
@@ -86,7 +80,6 @@ fun ExperienceListScreen(
 private fun ExperienceListScreen(
     title: String,
     selectedCategoryType: ExperienceCategoryType,
-//    updateSelectedCategoryType: (ExperienceCategoryType) -> Unit,
     selectedLocationList: SnapshotStateList<Boolean>,
     selectedActivityKeywordList: SnapshotStateList<Boolean>,
     selectedCultureArtKeywordList: SnapshotStateList<Boolean>,
@@ -105,10 +98,9 @@ private fun ExperienceListScreen(
     val locationList = remember { getLocationList() }
     val activityKeywordList = remember { getActivityKeywordList() }
     val cultureArtKeywordList = remember { getCultureArtKeywordList() }
-    val isDimBackgroundShowing = remember { mutableStateOf(false) }
-    val locationFilterDialogAnchoredDraggableState = remember { getLocationAnchoredDraggableState() }
-    val activityKeywordFilterDialogAnchoredDraggableState = remember { getActivityKeywordAnchoredDraggableState() }
-    val cultureArtKeywordFilterDialogAnchoredDraggableState = remember { getCultureKeywordArtAnchoredDraggableState() }
+    var isLocationFilterShowing by remember { mutableStateOf(false) }
+    var isActivityFilterShowing by remember { mutableStateOf(false) }
+    var isArtFilterShowing by remember { mutableStateOf(false) }
 
     val loadMore = remember {
         derivedStateOf {
@@ -139,24 +131,16 @@ private fun ExperienceListScreen(
                 Spacer(Modifier.height(16.dp))
 
 
-//                ExperienceCategoryListTab(
-//                    selectedCategoryType = selectedCategoryType,
-//                    updateSelectedCategoryType = updateSelectedCategoryType
-//                )
-
                 KeywordLocationFilterTopBar(
-                    count = experienceThumbnailCount,
                     selectedKeywordList = if (selectedCategoryType == ExperienceCategoryType.Activity) selectedActivityKeywordList else selectedCultureArtKeywordList,
                     keywordList = if (selectedCategoryType == ExperienceCategoryType.Activity) getActivityKeywordList() else getCultureArtKeywordList(),
                     selectedLocationList = selectedLocationList,
                     locationList = getLocationList(),
                     openKeywordFilterDialog = {
-                        if (selectedCategoryType == ExperienceCategoryType.Activity) { coroutineScope.launch { activityKeywordFilterDialogAnchoredDraggableState.animateTo(AnchoredDraggableContentState.Open) } }
-                        else { coroutineScope.launch { cultureArtKeywordFilterDialogAnchoredDraggableState.animateTo(AnchoredDraggableContentState.Open) } }
+                        if (selectedCategoryType == ExperienceCategoryType.Activity) isActivityFilterShowing = true
+                        else isArtFilterShowing = true
                     },
-                    openLocationFilterDialog = { coroutineScope.launch { locationFilterDialogAnchoredDraggableState.animateTo(
-                        AnchoredDraggableContentState.Open) } },
-                    showDimBackground = { isDimBackgroundShowing.value = true }
+                    openLocationFilterDialog = { isLocationFilterShowing = true }
                 )
                 if (
                     (// if filter on
@@ -186,56 +170,29 @@ private fun ExperienceListScreen(
 
             GoToUpInList(lazyGridState)
 
-            if (isDimBackgroundShowing.value) {
-                ExperienceFilterDialogDimBackground(
-                    isDimBackgroundShowing = isDimBackgroundShowing,
-                    locationAnchoredDraggableState = locationFilterDialogAnchoredDraggableState,
-                    activityKeywordAnchoredDraggableState = activityKeywordFilterDialogAnchoredDraggableState,
-                    cultureArtKeywordAnchoredDraggableState = cultureArtKeywordFilterDialogAnchoredDraggableState
+            if(isLocationFilterShowing || isActivityFilterShowing || isArtFilterShowing) {
+                BottomSheetFilterDialog(
+                    type = if(isLocationFilterShowing) BottomSheetFilterDialogType.Location
+                    else if(isActivityFilterShowing) BottomSheetFilterDialogType.Activity
+                    else BottomSheetFilterDialogType.Art,
+                    onDismiss = {
+                        isLocationFilterShowing = false
+                        isActivityFilterShowing = false
+                        isArtFilterShowing = false
+                    },
+                    stringList = if(isLocationFilterShowing) locationList
+                    else if(isActivityFilterShowing) activityKeywordList
+                    else cultureArtKeywordList,
+                    selectedList = if(isLocationFilterShowing) selectedLocationList
+                    else if(isActivityFilterShowing) selectedActivityKeywordList
+                    else selectedCultureArtKeywordList,
+                    updateList = getExperienceList,
+                    clearList = {
+                        clearExperienceList()
+                        coroutineScope.launch { lazyGridState.scrollToItem(0) }
+                    }
                 )
             }
-
-            LocationFilterBottomDialog(
-                locationList = locationList,
-                hideDimBackground = { isDimBackgroundShowing.value = false },
-                anchoredDraggableState = locationFilterDialogAnchoredDraggableState,
-                selectedLocationList = selectedLocationList,
-                updateList = {
-                    getExperienceList()
-                },
-                clearList = {
-                    clearExperienceList()
-                    coroutineScope.launch { lazyGridState.scrollToItem(0) }
-                }
-            )
-
-            ActivityKeywordFilterDialog(
-                keywordList = activityKeywordList,
-                hideDimBackground = { isDimBackgroundShowing.value = false },
-                anchoredDraggableState = activityKeywordFilterDialogAnchoredDraggableState,
-                selectedKeywordList = selectedActivityKeywordList,
-                updateList = {
-                    getExperienceList()
-                },
-                clearList = {
-                    clearExperienceList()
-                    coroutineScope.launch { lazyGridState.scrollToItem(0) }
-                }
-            )
-
-            CultureArtKeywordFilterDialog(
-                keywordList = cultureArtKeywordList,
-                hideDimBackground = { isDimBackgroundShowing.value = false },
-                anchoredDraggableState = cultureArtKeywordFilterDialogAnchoredDraggableState,
-                selectedKeywordList = selectedCultureArtKeywordList,
-                updateList = {
-                    getExperienceList()
-                },
-                clearList = {
-                    clearExperienceList()
-                    coroutineScope.launch { lazyGridState.scrollToItem(0) }
-                }
-            )
         }
     }
 }

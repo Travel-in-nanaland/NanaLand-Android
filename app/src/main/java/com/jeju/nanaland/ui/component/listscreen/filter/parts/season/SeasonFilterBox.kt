@@ -26,7 +26,6 @@ import com.jeju.nanaland.util.ui.clickableNoEffect
 
 @Composable
 fun SeasonFilterBox(
-    showDimBackground: () -> Unit,
     openSeasonFilterDialog: () -> Unit,
     selectedSeasonList: SnapshotStateList<Boolean>
 ) {
@@ -41,10 +40,7 @@ fun SeasonFilterBox(
                 ),
                 shape = RoundedCornerShape(50)
             )
-            .clickableNoEffect {
-                showDimBackground()
-                openSeasonFilterDialog()
-            },
+            .clickableNoEffect (openSeasonFilterDialog),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.Center
     ) {

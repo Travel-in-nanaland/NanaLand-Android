@@ -28,7 +28,7 @@ fun HomeScreenCategoryButtons(
         Spacer(Modifier)
         HomeScreenCategoryButton(
             resId = R.drawable.img_category_nature,
-            text = getString(R.string.common_7대_자연),
+            text = getString(R.string.common_자연),
             onClick = { moveToNatureListScreen(null) }
         )
         HomeScreenCategoryButton(

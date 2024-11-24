@@ -28,7 +28,6 @@ import java.util.Calendar
 
 @Composable
 fun DateFilterBox(
-    showDimBackground: () -> Unit,
     openDateFilterDialog: () -> Unit,
     startCalendar: Calendar,
     endCalendar: Calendar,
@@ -44,10 +43,7 @@ fun DateFilterBox(
                 ),
                 shape = RoundedCornerShape(50)
             )
-            .clickableNoEffect {
-                showDimBackground()
-                openDateFilterDialog()
-            },
+            .clickableNoEffect(openDateFilterDialog),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.Center
     ) {
@@ -80,7 +76,6 @@ fun DateFilterBox(
 private fun DateFilterBoxPreview() {
     NanaLandTheme {
         DateFilterBox(
-            showDimBackground = {},
             openDateFilterDialog = {},
             startCalendar = Calendar.getInstance(),
             endCalendar = Calendar.getInstance()

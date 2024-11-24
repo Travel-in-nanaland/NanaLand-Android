@@ -12,9 +12,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.derivedStateOf
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.setValue
 import androidx.compose.runtime.snapshots.SnapshotStateList
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
@@ -26,15 +28,12 @@ import com.jeju.nanaland.globalvalue.constant.getLocationList
 import com.jeju.nanaland.globalvalue.constant.getRestaurantKeywordList
 import com.jeju.nanaland.globalvalue.type.AnchoredDraggableContentState
 import com.jeju.nanaland.ui.component.common.CustomSurface
+import com.jeju.nanaland.ui.component.common.dialog.BottomSheetFilterDialog
+import com.jeju.nanaland.ui.component.common.dialog.BottomSheetFilterDialogType
 import com.jeju.nanaland.ui.component.common.icon.GoToUpInList
 import com.jeju.nanaland.ui.component.common.layoutSet.ListEmptyByFilter
 import com.jeju.nanaland.ui.component.common.topbar.TopBarCommon
 import com.jeju.nanaland.ui.component.listscreen.filter.KeywordLocationFilterTopBar
-import com.jeju.nanaland.ui.component.listscreen.filter.LocationFilterBottomDialog
-import com.jeju.nanaland.ui.component.listscreen.filter.RestaurantFilterDialogDimBackground
-import com.jeju.nanaland.ui.component.listscreen.filter.RestaurantKeywordFilterDialog
-import com.jeju.nanaland.ui.component.listscreen.filter.getLocationAnchoredDraggableState
-import com.jeju.nanaland.ui.component.listscreen.filter.getRestaurantKeywordAnchoredDraggableState
 import com.jeju.nanaland.ui.component.listscreen.list.RestaurantThumbnailList
 import com.jeju.nanaland.util.resource.getString
 import com.jeju.nanaland.util.ui.UiState
@@ -85,9 +84,8 @@ private fun RestaurantListScreen(
     val lazyGridState = rememberLazyGridState()
     val locationList = remember { getLocationList() }
     val keywordList = remember { getRestaurantKeywordList() }
-    val isDimBackgroundShowing = remember { mutableStateOf(false) }
-    val locationFilterDialogAnchoredDraggableState = remember { getLocationAnchoredDraggableState() }
-    val restaurantKeywordFilterDialogAnchoredDraggableState = remember { getRestaurantKeywordAnchoredDraggableState() }
+    var isLocationFilterShowing by remember { mutableStateOf(false) }
+    var isRestaurantFilterShowing by remember { mutableStateOf(false) }
 
     val loadMore = remember {
         derivedStateOf {
@@ -120,20 +118,12 @@ private fun RestaurantListScreen(
 
                 KeywordLocationFilterTopBar(
                     text = getString(R.string.common_종류),
-                    count = restaurantThumbnailCount,
                     selectedKeywordList = selectedRestaurantKeywordList,
                     keywordList = getRestaurantKeywordList(),
                     selectedLocationList = selectedLocationList,
                     locationList = getLocationList(),
-                    openKeywordFilterDialog = {
-                        coroutineScope.launch { restaurantKeywordFilterDialogAnchoredDraggableState.animateTo(
-                            AnchoredDraggableContentState.Open) }
-                    },
-                    openLocationFilterDialog = {
-                        coroutineScope.launch { locationFilterDialogAnchoredDraggableState.animateTo(
-                        AnchoredDraggableContentState.Open) }
-                    },
-                    showDimBackground = { isDimBackgroundShowing.value = true }
+                    openKeywordFilterDialog = { isRestaurantFilterShowing = true },
+                    openLocationFilterDialog = { isLocationFilterShowing = true },
                 )
                 if (//if filter on
                     (
@@ -164,41 +154,21 @@ private fun RestaurantListScreen(
 
             GoToUpInList(lazyGridState)
 
-            if (isDimBackgroundShowing.value) {
-                RestaurantFilterDialogDimBackground(
-                    isDimBackgroundShowing = isDimBackgroundShowing,
-                    locationAnchoredDraggableState = locationFilterDialogAnchoredDraggableState,
-                    keywordAnchoredDraggableState = restaurantKeywordFilterDialogAnchoredDraggableState,
+            if (isLocationFilterShowing || isRestaurantFilterShowing)
+                BottomSheetFilterDialog(
+                    type = if(isLocationFilterShowing) BottomSheetFilterDialogType.Location else BottomSheetFilterDialogType.Restaurant,
+                    onDismiss = {
+                        isLocationFilterShowing = false
+                        isRestaurantFilterShowing = false
+                    },
+                    stringList = if(isLocationFilterShowing) locationList else keywordList,
+                    selectedList = if(isLocationFilterShowing) selectedLocationList else selectedRestaurantKeywordList,
+                    updateList = getRestaurantList,
+                    clearList = {
+                        clearRestaurantList()
+                        coroutineScope.launch { lazyGridState.scrollToItem(0) }
+                    }
                 )
-            }
-
-            LocationFilterBottomDialog(
-                locationList = locationList,
-                hideDimBackground = { isDimBackgroundShowing.value = false },
-                anchoredDraggableState = locationFilterDialogAnchoredDraggableState,
-                selectedLocationList = selectedLocationList,
-                updateList = {
-                    getRestaurantList()
-                },
-                clearList = {
-                    clearRestaurantList()
-                    coroutineScope.launch { lazyGridState.scrollToItem(0) }
-                }
-            )
-
-            RestaurantKeywordFilterDialog(
-                keywordList = keywordList,
-                hideDimBackground = { isDimBackgroundShowing.value = false },
-                anchoredDraggableState = restaurantKeywordFilterDialogAnchoredDraggableState,
-                selectedKeywordList = selectedRestaurantKeywordList,
-                updateList = {
-                    getRestaurantList()
-                },
-                clearList = {
-                    clearRestaurantList()
-                    coroutineScope.launch { lazyGridState.scrollToItem(0) }
-                }
-            )
         }
     }
 }
