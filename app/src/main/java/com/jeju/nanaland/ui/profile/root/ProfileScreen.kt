@@ -34,8 +34,9 @@ import com.jeju.nanaland.domain.entity.review.MemberReviewDetail
 import com.jeju.nanaland.globalvalue.constant.TravelType
 import com.jeju.nanaland.globalvalue.type.ReviewCategoryType
 import com.jeju.nanaland.ui.component.common.dialog.BottomSheetSelectDialog
+import com.jeju.nanaland.ui.component.common.dialog.DialogCommon
+import com.jeju.nanaland.ui.component.common.dialog.DialogCommonType
 import com.jeju.nanaland.ui.component.common.topbar.TopBarCommon
-import com.jeju.nanaland.ui.profile.component.parts.RemoveDialog
 import com.jeju.nanaland.ui.profile.root.component.ProfileScreenNoticeListSection
 import com.jeju.nanaland.ui.profile.root.component.ProfileScreenProfileSection
 import com.jeju.nanaland.ui.profile.root.component.ProfileScreenReviewListSection
@@ -285,14 +286,15 @@ private fun ProfileScreen(
             items = menuOptions
         )
     if(removeReviewId != -1)
-        RemoveDialog(
-            onDismissRequest = { removeReviewId = -1 },
-            onDelete = { scope.launch {
+        DialogCommon(
+            DialogCommonType.RemoveReview,
+            onDismiss = { removeReviewId = -1 },
+            onYes = { scope.launch {
                 if(viewModel.setRemove(removeReviewId) is NetworkResult.Success) {
                     removeReviewId = -1
                     reviews.refresh()
                 }
-            } }
+            } },
         )
 }
 

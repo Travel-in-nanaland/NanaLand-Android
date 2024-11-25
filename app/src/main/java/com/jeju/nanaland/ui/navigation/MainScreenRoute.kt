@@ -2,8 +2,10 @@ package com.jeju.nanaland.ui.navigation
 
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
+import androidx.navigation.toRoute
 import com.jeju.nanaland.domain.navigation.NavViewModel
 import com.jeju.nanaland.domain.navigation.ROUTE
+import com.jeju.nanaland.globalvalue.type.MainScreenViewType
 import com.jeju.nanaland.globalvalue.userdata.UserData
 import com.jeju.nanaland.ui.main.MainScreen
 import com.jeju.nanaland.util.intent.DeepLinkData
@@ -12,7 +14,17 @@ fun NavGraphBuilder.mainScreen(
     deepLinkData: DeepLinkData,
     navViewModel: NavViewModel
 ) = composable<ROUTE.Main> {
+    val data: ROUTE.Main = it.toRoute()
+
     MainScreen(
+        viewTypeByPopStack = when (data.toScreenIndex) {
+            0 -> MainScreenViewType.Home
+            1 -> MainScreenViewType.Favorite
+            2 -> MainScreenViewType.NanaPick
+            3 -> MainScreenViewType.MyPage
+            else -> null
+        },
+        retry = {navViewModel.navigate(ROUTE.Main())},
         deepLinkData = deepLinkData,
         moveToNotificationScreen = { navViewModel.navigate(ROUTE.Main.Home.Notification) },
         moveToCategoryContentScreen = { contentId, category, isSearch ->
@@ -45,7 +57,7 @@ fun NavGraphBuilder.mainScreen(
                 )
             )
         },
-        moveToSignInScreen = { navViewModel.navigatePopUpTo(ROUTE.Splash.SignIn, ROUTE.Main) },
+        moveToSignInScreen = { navViewModel.navigatePopUpTo(ROUTE.Splash.SignIn, ROUTE.Main()) },
         moveToTypeTestScreen = { navViewModel.navigate(ROUTE.TypeTest.Testing()) },
         moveToTypeTestResultScreen = { navViewModel.navigate(
             ROUTE.TypeTest.Result(

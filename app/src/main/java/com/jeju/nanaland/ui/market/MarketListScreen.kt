@@ -1,10 +1,10 @@
 package com.jeju.nanaland.ui.market
 
 import androidx.compose.foundation.ExperimentalFoundationApi
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.grid.rememberLazyGridState
+import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
@@ -22,6 +22,7 @@ import com.jeju.nanaland.domain.entity.market.MarketThumbnail
 import com.jeju.nanaland.globalvalue.constant.PAGING_THRESHOLD
 import com.jeju.nanaland.globalvalue.constant.getLocationList
 import com.jeju.nanaland.ui.component.common.CustomSurface
+import com.jeju.nanaland.ui.component.common.bottombar.MainNavigationBar
 import com.jeju.nanaland.ui.component.common.dialog.BottomSheetFilterDialog
 import com.jeju.nanaland.ui.component.common.dialog.BottomSheetFilterDialogType
 import com.jeju.nanaland.ui.component.common.icon.GoToUpInList
@@ -38,6 +39,10 @@ fun MarketListScreen(
     moveToBackScreen: () -> Unit,
     moveToMarketContentScreen: (Int) -> Unit,
     moveToSignInScreen: () -> Unit,
+    toHome: () -> Unit,
+    toFavorite: () -> Unit,
+    toNana: () -> Unit,
+    toProfile: () -> Unit,
     viewModel: MarketListViewModel = hiltViewModel()
 ) {
     val selectedLocationList = viewModel.selectedLocationList
@@ -53,6 +58,10 @@ fun MarketListScreen(
         moveToBackScreen = moveToBackScreen,
         moveToMarketContentScreen = moveToMarketContentScreen,
         moveToSignInScreen = moveToSignInScreen,
+        toHome = toHome,
+        toFavorite = toFavorite,
+        toNana = toNana,
+        toProfile = toProfile,
         isContent = true
     )
 }
@@ -69,6 +78,10 @@ private fun MarketListScreen(
     moveToBackScreen: () -> Unit,
     moveToMarketContentScreen: (Int) -> Unit,
     moveToSignInScreen: () -> Unit,
+    toHome: () -> Unit,
+    toFavorite: () -> Unit,
+    toNana: () -> Unit,
+    toProfile: () -> Unit,
     isContent: Boolean
 ) {
     val coroutineScope = rememberCoroutineScope()
@@ -91,9 +104,11 @@ private fun MarketListScreen(
     }
 
     CustomSurface {
-        Box(
-            modifier = Modifier.fillMaxSize()
+        Scaffold(
+            bottomBar = { MainNavigationBar(toHome,toFavorite,toNana,toProfile) },
+            floatingActionButton = { GoToUpInList(lazyGridState) },
         ) {
+            it
             Column(
                 modifier = Modifier.fillMaxSize()
             ) {
@@ -116,8 +131,6 @@ private fun MarketListScreen(
                     moveToSignInScreen = moveToSignInScreen
                 )
             }
-
-            GoToUpInList(lazyGridState)
 
             if(isLocationFilterShowing)
                 BottomSheetFilterDialog(

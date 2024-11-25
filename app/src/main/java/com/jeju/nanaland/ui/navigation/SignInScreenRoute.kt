@@ -13,7 +13,7 @@ fun NavGraphBuilder.signInScreen(
 ) = composable<ROUTE.Splash.SignIn> {
     SignInScreen(
         deepLinkData = deepLinkData,
-        moveToMainScreen = { navViewModel.navigatePopUpTo(ROUTE.Main, ROUTE.Splash.SignIn) },
+        moveToMainScreen = { navViewModel.navigatePopUpTo(ROUTE.Main(), ROUTE.Splash.SignIn) },
         moveToSignUpScreen = { provider, email, id ->
             navViewModel.navigate(ROUTE.Splash.SignIn.PolicyAgree(provider, email, id))
         }

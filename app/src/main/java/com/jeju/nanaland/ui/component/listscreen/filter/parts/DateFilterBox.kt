@@ -1,4 +1,4 @@
-package com.jeju.nanaland.ui.component.listscreen.filter.parts.date
+package com.jeju.nanaland.ui.component.listscreen.filter.parts
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image

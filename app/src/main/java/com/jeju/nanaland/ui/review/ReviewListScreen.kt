@@ -16,14 +16,17 @@ import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.itemsIndexed
 import androidx.compose.foundation.lazy.grid.rememberLazyGridState
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.derivedStateOf
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
@@ -34,18 +37,20 @@ import com.jeju.nanaland.domain.entity.review.ReviewData
 import com.jeju.nanaland.globalvalue.constant.PAGING_THRESHOLD
 import com.jeju.nanaland.globalvalue.constant.TOP_BAR_HEIGHT
 import com.jeju.nanaland.globalvalue.type.AnchoredDraggableContentState
+import com.jeju.nanaland.globalvalue.type.ReviewCategoryType
 import com.jeju.nanaland.ui.component.common.CustomSurface
 import com.jeju.nanaland.ui.component.common.ReviewBottomBar
+import com.jeju.nanaland.ui.component.common.dialog.BottomSheetSelectDialog
+import com.jeju.nanaland.ui.component.common.dialog.DialogCommon
+import com.jeju.nanaland.ui.component.common.dialog.DialogCommonType
 import com.jeju.nanaland.ui.component.common.topbar.TopBarCommon
 import com.jeju.nanaland.ui.component.detailscreen.other.MoveToTopButton
-import com.jeju.nanaland.ui.component.review.ReportBottomDialog
-import com.jeju.nanaland.ui.component.review.ReportDialogDimBackground
 import com.jeju.nanaland.ui.component.review.ReviewCard
-import com.jeju.nanaland.ui.component.review.getReportAnchoredDraggableState
 import com.jeju.nanaland.ui.theme.body02Bold
 import com.jeju.nanaland.ui.theme.getColor
 import com.jeju.nanaland.ui.theme.title01Bold
 import com.jeju.nanaland.ui.theme.title02
+import com.jeju.nanaland.util.network.NetworkResult
 import com.jeju.nanaland.util.resource.getString
 import com.jeju.nanaland.util.ui.UiState
 import kotlinx.coroutines.launch
@@ -63,6 +68,7 @@ fun ReviewListScreen(
     moveToSignInScreen: () -> Unit,
     moveToReportScreen:(Int) -> Unit,
     moveToProfileScreen: (Int?) -> Unit,
+    moveToReviewEditScreen: (Int, ReviewCategoryType) -> Unit,
     viewModel: ReviewListViewModel = hiltViewModel()
 ) {
     LaunchedEffect(Unit) {
@@ -72,10 +78,13 @@ fun ReviewListScreen(
         )
         viewModel.initContentFavorite(isFavorite)
     }
+    val scope = rememberCoroutineScope()
     val reviewCount = viewModel.reviewCount.collectAsState().value
     val reviewRating = viewModel.reviewRating.collectAsState().value
     val reviewList = viewModel.reviewList.collectAsState().value
     val contentFavorite = viewModel.contentFavorite.collectAsState().value
+    var removeReviewId by remember { mutableIntStateOf(-1) }
+
     ReviewListScreen(
         contentFavorite = contentFavorite,
         reviewCount = reviewCount,
@@ -108,11 +117,30 @@ fun ReviewListScreen(
         moveToSignInScreen = moveToSignInScreen,
         moveToReportScreen = moveToReportScreen,
         moveToProfileScreen = moveToProfileScreen,
+        onEdit = { moveToReviewEditScreen(it.id, ReviewCategoryType.valueOf(category!!)) },
+        onRemove = { data ->
+            removeReviewId = data.id
+        },
         isContent = true
     )
+    if (removeReviewId != -1) {
+        DialogCommon(
+            DialogCommonType.RemoveReview,
+            onDismiss = { removeReviewId = -1 },
+            onYes = { scope.launch {
+                if(viewModel.setRemove(removeReviewId) is NetworkResult.Success) {
+                    removeReviewId = -1
+                    viewModel.getReviewList(
+                        contentId = contentId,
+                        category = category
+                    )
+                }
+            } },
+        )
+    }
 }
 
-@OptIn(ExperimentalFoundationApi::class)
+@OptIn(ExperimentalFoundationApi::class, ExperimentalMaterial3Api::class)
 @Composable
 private fun ReviewListScreen(
     contentFavorite: Boolean,
@@ -127,12 +155,14 @@ private fun ReviewListScreen(
     moveToSignInScreen: () -> Unit,
     moveToReportScreen: (Int) -> Unit,
     moveToProfileScreen: (Int?) -> Unit,
+    onEdit: (ReviewData) -> Unit,
+    onRemove: (ReviewData) -> Unit,
     isContent: Boolean
 ) {
     val lazyGridState = rememberLazyGridState()
     val coroutineScope = rememberCoroutineScope()
-    val reportDialogAnchoredDraggableState = remember { getReportAnchoredDraggableState() }
-    val isDimBackgroundShowing = remember { mutableIntStateOf(-1) }
+    val selectedReviewId = remember { mutableIntStateOf(-1) }
+
     val loadMore = remember {
         derivedStateOf {
             val layoutInfo = lazyGridState.layoutInfo
@@ -239,11 +269,9 @@ private fun ReviewListScreen(
                                         data = item,
                                         toggleReviewFavorite = toggleReviewFavorite,
                                         onProfileClick = moveToProfileScreen,
-                                        onMenuButtonClick = {
-                                            isDimBackgroundShowing.intValue = item.id
-                                            coroutineScope.launch { reportDialogAnchoredDraggableState.animateTo(
-                                                AnchoredDraggableContentState.Open) }
-                                        }
+                                        onMenuButtonClick = { selectedReviewId.intValue = item.id },
+                                        onEdit = onEdit,
+                                        onRemove = onRemove
                                     )
                                 }
                             }
@@ -270,18 +298,12 @@ private fun ReviewListScreen(
                 }
             }
 
-            if (isDimBackgroundShowing.intValue > 0) {
-                ReportDialogDimBackground(
-                    isDimBackgroundShowing = isDimBackgroundShowing,
-                    reportAnchoredDraggableState = reportDialogAnchoredDraggableState
+            if(selectedReviewId.intValue != -1) {
+                BottomSheetSelectDialog(
+                    onDismiss = { selectedReviewId.intValue = -1 },
+                    items = arrayOf(getString(R.string.common_신고하기) to { moveToReportScreen(selectedReviewId.intValue) })
                 )
             }
-
-            ReportBottomDialog(
-                onClick = { moveToReportScreen(isDimBackgroundShowing.intValue) },
-                hideDimBackground = { isDimBackgroundShowing.intValue = -1 },
-                anchoredDraggableState = reportDialogAnchoredDraggableState
-            )
         }
     }
 }

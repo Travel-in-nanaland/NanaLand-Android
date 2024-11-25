@@ -12,8 +12,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.jeju.nanaland.R
-import com.jeju.nanaland.ui.component.listscreen.filter.parts.keyword.KeywordFilterBox
-import com.jeju.nanaland.ui.component.listscreen.filter.parts.location.LocationFilterBox
+import com.jeju.nanaland.ui.component.listscreen.filter.parts.KeywordFilterBox
+import com.jeju.nanaland.ui.component.listscreen.filter.parts.LocationFilterBox
 import com.jeju.nanaland.util.resource.getString
 
 @Composable

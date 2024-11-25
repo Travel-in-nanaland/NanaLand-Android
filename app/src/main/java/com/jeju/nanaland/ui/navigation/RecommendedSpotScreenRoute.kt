@@ -10,7 +10,7 @@ fun NavGraphBuilder.recommendedSpotScreen(navViewModel: NavViewModel) = composab
     RecommendedSpotScreen(
         moveToMainScreen = {
             navViewModel.navigatePopUpTo(
-                ROUTE.Main,
+                ROUTE.Main(),
                 ROUTE.TypeTest.Result("",true, true)
             )
        },

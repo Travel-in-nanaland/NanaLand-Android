@@ -29,6 +29,8 @@ import com.jeju.nanaland.R
 import com.jeju.nanaland.globalvalue.constant.INTRODUCTION_CONSTRAINT
 import com.jeju.nanaland.ui.component.common.CustomSurface
 import com.jeju.nanaland.ui.component.common.dialog.BottomSheetSelectDialog
+import com.jeju.nanaland.ui.component.common.dialog.DialogCommon
+import com.jeju.nanaland.ui.component.common.dialog.DialogCommonType
 import com.jeju.nanaland.ui.component.common.topbar.TopBarCommon
 import com.jeju.nanaland.ui.component.signup.profilesetting.SignUpScreenCharacterCount
 import com.jeju.nanaland.ui.component.signup.profilesetting.SignUpScreenTextField
@@ -217,13 +219,11 @@ private fun ProfileUpdateScreen(
     }
 
     if (isWarningDialogShowing.value) {
-//        DialogCommon(
-//            title = getString(R.string.dialog_msg_title_8),
-//            subTitle = getString(R.string.dialog_msg_sub_title_8),
-//            onDismissRequest = { isWarningDialogShowing.value = false },
-//            onPositive = moveToBackScreen,
-//            onNegative = { isWarningDialogShowing.value = false }
-//        )TODO
+        DialogCommon(
+            DialogCommonType.Write,
+            onDismiss = { isWarningDialogShowing.value = false },
+            onYes = moveToBackScreen,
+        )
     }
     if(isProfileImageDialogShowing) {
         BottomSheetSelectDialog(

@@ -1,10 +1,14 @@
 package com.jeju.nanaland.ui.reviewwrite.screen
 
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -21,7 +25,6 @@ import com.jeju.nanaland.domain.navigation.NavViewModel
 import com.jeju.nanaland.domain.navigation.ROUTE
 import com.jeju.nanaland.globalvalue.type.ReviewCategoryType
 import com.jeju.nanaland.ui.component.common.BottomOkButton
-import com.jeju.nanaland.ui.component.common.BottomOkButtonOutlined
 import com.jeju.nanaland.ui.component.common.CustomSurface
 import com.jeju.nanaland.ui.component.common.text.TextWithPointColor
 import com.jeju.nanaland.ui.theme.getColor
@@ -68,52 +71,53 @@ private fun ReviewWriteCompleteUI(
     val progress by animateLottieCompositionAsState(composition)
 
     CustomSurface {
-        Column(
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-            Spacer(Modifier.height(80.dp))
-
-            LottieAnimation(
+        Box {
+            Column(
                 modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(horizontal = 55.dp),
-                composition = composition,
-                progress = { progress },
-            )
+                    .fillMaxSize()
+                    .verticalScroll(rememberScrollState()),
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
 
-            Spacer(Modifier.height(40.dp))
+                Spacer(Modifier.height(80.dp))
 
-            Text(
-                text = uiData.second,
-                color = getColor().main,
-                style = largeTitle02,
-                textAlign = TextAlign.Center
-            )
+                LottieAnimation(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(horizontal = 55.dp),
+                    composition = composition,
+                    progress = { progress },
+                )
 
-            Spacer(Modifier.height(8.dp))
+                Spacer(Modifier.height(40.dp))
 
-            TextWithPointColor(
-                text = uiData.third,
-                color = getColor().black,
-                style = title02.copy(textAlign = TextAlign.Center),
-            )
+                Text(
+                    text = uiData.second,
+                    color = getColor().main,
+                    style = largeTitle02,
+                    textAlign = TextAlign.Center
+                )
 
-            Spacer(Modifier.weight(1f))
+                Spacer(Modifier.height(8.dp))
 
-            BottomOkButton(
-                text = getString(R.string.review_write_keyword_complete_btn_again),
-                isActivated = true,
-                onClick = onAgain
-            )
+                TextWithPointColor(
+                    text = uiData.third,
+                    color = getColor().black,
+                    style = title02.copy(textAlign = TextAlign.Center),
+                )
+            }
 
-            Spacer(Modifier.height(16.dp))
-
-            BottomOkButtonOutlined(
-                text = getString(R.string.review_write_keyword_complete_btn_add),
-                onClick = onAdd
-            )
-
-            Spacer(Modifier.height(20.dp))
+            Box(
+                modifier = Modifier
+                    .align(Alignment.BottomCenter)
+                    .padding(bottom = 24.dp)
+            ) {
+                BottomOkButton(
+                    text = getString(R.string.review_write_keyword_complete_btn_again),
+                    isActivated = true,
+                    onClick = onAgain
+                )
+            }
         }
     }
 }

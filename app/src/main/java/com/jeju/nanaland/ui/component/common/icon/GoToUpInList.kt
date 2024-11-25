@@ -5,7 +5,6 @@ import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyListState
@@ -17,7 +16,6 @@ import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
@@ -27,7 +25,7 @@ import com.jeju.nanaland.util.ui.clickableNoEffect
 import kotlinx.coroutines.launch
 
 @Composable
-fun BoxScope.GoToUpInList(
+fun GoToUpInList(
     scrollState: ScrollState,
     modifier: Modifier = Modifier,
 ) = GoToUpInListWrapper(
@@ -38,7 +36,7 @@ fun BoxScope.GoToUpInList(
 )
 
 @Composable
-fun BoxScope.GoToUpInList(
+fun GoToUpInList(
     scrollState: LazyGridState,
     modifier: Modifier = Modifier,
 ) = GoToUpInListWrapper(
@@ -49,7 +47,7 @@ fun BoxScope.GoToUpInList(
 )
 
 @Composable
-fun BoxScope.GoToUpInList(
+fun GoToUpInList(
     scrollState: LazyListState,
     modifier: Modifier = Modifier,
 ) = GoToUpInListWrapper(
@@ -62,7 +60,7 @@ fun BoxScope.GoToUpInList(
 
 
 @Composable
-private fun <T> BoxScope.GoToUpInListWrapper(
+private fun <T> GoToUpInListWrapper(
     modifier: Modifier,
     state: T,
     isScrolled: (T) -> Boolean,
@@ -76,9 +74,7 @@ private fun <T> BoxScope.GoToUpInListWrapper(
     }
 
     AnimatedVisibility(
-        modifier = modifier
-            .align(Alignment.BottomEnd)
-            .padding(bottom = 24.dp, end = 16.dp),
+        modifier = modifier.padding(bottom = 24.dp, end = 16.dp),
         visible = rememberIsScrolled,
         enter = fadeIn(),
         exit = fadeOut()

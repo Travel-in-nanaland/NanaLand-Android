@@ -12,6 +12,10 @@ fun NavGraphBuilder.marketListScreen(navViewModel: NavViewModel) = composable<RO
         moveToMarketContentScreen = { contentId ->
             navViewModel.navigate(ROUTE.Content.Market.Detail(contentId))
         },
-        moveToSignInScreen = { navViewModel.navigatePopUpTo(ROUTE.Splash.SignIn, ROUTE.Main) }
+        moveToSignInScreen = { navViewModel.navigatePopUpTo(ROUTE.Splash.SignIn, ROUTE.Main()) },
+        toHome = { navViewModel.navigatePopUpTo(ROUTE.Main(0), ROUTE.Content.Market) },
+        toFavorite = { navViewModel.navigatePopUpTo(ROUTE.Main(1), ROUTE.Content.Market) },
+        toNana = { navViewModel.navigatePopUpTo(ROUTE.Main(2), ROUTE.Content.Market) },
+        toProfile = { navViewModel.navigatePopUpTo(ROUTE.Main(3), ROUTE.Content.Market) },
     )
 }

@@ -10,7 +10,7 @@ import androidx.compose.runtime.snapshots.SnapshotStateList
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.jeju.nanaland.ui.component.listscreen.filter.parts.season.SeasonFilterBox
+import com.jeju.nanaland.ui.component.listscreen.filter.parts.SeasonFilterBox
 
 @Composable
 fun SeasonFilterTopBar(

@@ -20,7 +20,7 @@ fun NavGraphBuilder.typeTestingScreen(navViewModel: NavViewModel) = composable<R
         moveToBackScreen = {
             if(data.isFirst) {
                 navViewModel.navigatePopUpTo(
-                    ROUTE.Main,
+                    ROUTE.Main(),
                     ROUTE.TypeTest.Testing()
                 )
             } else {

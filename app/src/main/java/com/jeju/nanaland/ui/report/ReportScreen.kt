@@ -23,6 +23,8 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.jeju.nanaland.R
 import com.jeju.nanaland.domain.request.UriRequestBody
 import com.jeju.nanaland.ui.component.common.CustomSurface
+import com.jeju.nanaland.ui.component.common.dialog.DialogCommon
+import com.jeju.nanaland.ui.component.common.dialog.DialogCommonType
 import com.jeju.nanaland.ui.component.common.dialog.SubmitLoadingDialog
 import com.jeju.nanaland.ui.component.common.topbar.TopBarCommon
 import com.jeju.nanaland.ui.report.screen.ReportCategoryScreen
@@ -71,13 +73,11 @@ fun ReportScreen(
     }
 
     if(cancelDialog) {
-//        DialogCommon(
-//            title = getString(R.string.dialog_msg_title_8),
-//            subTitle = getString(R.string.dialog_msg_sub_title_8),
-//            onDismissRequest = { cancelDialog = false },
-//            onPositive = moveToBackScreen,
-//            onNegative = { cancelDialog = false }
-//        )TODO
+        DialogCommon(
+            DialogCommonType.Write,
+            onDismiss = { cancelDialog = false },
+            onYes = moveToBackScreen,
+        )
     }
 
     CustomSurface { isImeKeyboardShowing ->

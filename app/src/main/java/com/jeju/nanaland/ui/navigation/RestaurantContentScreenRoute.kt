@@ -74,7 +74,7 @@ fun NavGraphBuilder.restaurantContentScreen(
         moveToReviewWritingScreen = { id, image, title, address ->
             navViewModel.navigate(ROUTE.Content.ReviewWrite.StartDest(id, ReviewCategoryType.RESTAURANT.toString()))
         },
-        moveToSignInScreen = { navViewModel.navigatePopUpTo(ROUTE.Splash.SignIn, ROUTE.Main) },
+        moveToSignInScreen = { navViewModel.navigatePopUpTo(ROUTE.Splash.SignIn, ROUTE.Main()) },
         moveToReviewListScreen = { isFavorite, image, title, address ->
             navViewModel.navigate(ROUTE.Content.ReviewList(
                 isFavorite,
@@ -86,6 +86,9 @@ fun NavGraphBuilder.restaurantContentScreen(
             ))
         },
         moveToReportScreen = { navViewModel.navigate(ROUTE.Report(it, true)) },
-        moveToProfileScreen = { navViewModel.navigate(ROUTE.Main.Profile.StartDest(it)) }
+        moveToProfileScreen = { navViewModel.navigate(ROUTE.Main.Profile.StartDest(it)) },
+        moveToReviewEditScreen = { id, category ->
+            navViewModel.navigate(ROUTE.Content.ReviewWrite.StartDest(id, category.toString(), true))
+        }
     )
 }

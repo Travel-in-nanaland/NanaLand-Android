@@ -16,6 +16,10 @@ fun NavGraphBuilder.festivalListScreen(navViewModel: NavViewModel) = composable<
         moveToFestivalContentScreen = { contentId ->
             navViewModel.navigate(ROUTE.Content.Festival.Detail(contentId))
         },
-        moveToSignInScreen = { navViewModel.navigatePopUpTo(ROUTE.Splash.SignIn, ROUTE.Main) }
+        moveToSignInScreen = { navViewModel.navigatePopUpTo(ROUTE.Splash.SignIn, ROUTE.Main()) },
+        toHome = { navViewModel.navigatePopUpTo(ROUTE.Main(0), data) },
+        toFavorite = { navViewModel.navigatePopUpTo(ROUTE.Main(1), data) },
+        toNana = { navViewModel.navigatePopUpTo(ROUTE.Main(2), data) },
+        toProfile = { navViewModel.navigatePopUpTo(ROUTE.Main(3), data) },
     )
 }

@@ -11,8 +11,8 @@ import androidx.compose.runtime.snapshots.SnapshotStateList
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.jeju.nanaland.ui.component.listscreen.filter.parts.date.DateFilterBox
-import com.jeju.nanaland.ui.component.listscreen.filter.parts.location.LocationFilterBox
+import com.jeju.nanaland.ui.component.listscreen.filter.parts.DateFilterBox
+import com.jeju.nanaland.ui.component.listscreen.filter.parts.LocationFilterBox
 import java.util.Calendar
 
 @Composable

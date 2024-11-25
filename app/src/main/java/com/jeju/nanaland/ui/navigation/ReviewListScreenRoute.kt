@@ -22,8 +22,11 @@ fun NavGraphBuilder.reviewListScreen(navViewModel: NavViewModel) = composable<RO
         moveToReviewWritingScreen = { id, image, title, address ->
             navViewModel.navigate(ROUTE.Content.ReviewWrite.StartDest(id, ReviewCategoryType.EXPERIENCE.toString()))
         },
-        moveToSignInScreen = { navViewModel.navigatePopUpTo(ROUTE.Splash.SignIn, ROUTE.Main) },
+        moveToSignInScreen = { navViewModel.navigatePopUpTo(ROUTE.Splash.SignIn, ROUTE.Main()) },
         moveToReportScreen = { navViewModel.navigate(ROUTE.Report(it, true)) },
-        moveToProfileScreen = { navViewModel.navigate(ROUTE.Main.Profile.StartDest(it)) }
+        moveToProfileScreen = { navViewModel.navigate(ROUTE.Main.Profile.StartDest(it)) },
+        moveToReviewEditScreen = { id, category ->
+            navViewModel.navigate(ROUTE.Content.ReviewWrite.StartDest(id, category.toString(), true))
+        }
     )
 }

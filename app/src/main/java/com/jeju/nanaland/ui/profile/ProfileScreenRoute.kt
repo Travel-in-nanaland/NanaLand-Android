@@ -60,7 +60,7 @@ fun NavGraphBuilder.profileScreenRoute(
                                     )
                                 )
                             },
-                            moveToSignInScreen = { navViewModel.navigatePopUpTo(ROUTE.Splash.SignIn, ROUTE.Main) },
+                            moveToSignInScreen = { navViewModel.navigatePopUpTo(ROUTE.Splash.SignIn, ROUTE.Main()) },
                             moveToTypeTestScreen = { navViewModel.navigate(ROUTE.TypeTest.Testing()) },
                             moveToTypeTestResultScreen = { navViewModel.navigate(
                                 ROUTE.TypeTest.Result(

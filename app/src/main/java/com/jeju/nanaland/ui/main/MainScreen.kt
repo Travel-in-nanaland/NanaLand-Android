@@ -12,7 +12,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
@@ -27,7 +26,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -50,13 +48,15 @@ import com.jeju.nanaland.ui.profile.root.ProfileScreen
 import com.jeju.nanaland.ui.theme.NanaLandTheme
 import com.jeju.nanaland.ui.theme.caption02SemiBold
 import com.jeju.nanaland.ui.theme.getColor
+import com.jeju.nanaland.ui.theme.shadowBottomNav
 import com.jeju.nanaland.util.intent.DeepLinkData
 import com.jeju.nanaland.util.resource.getString
-import com.jeju.nanaland.util.ui.drawColoredShadow
 import kotlinx.coroutines.flow.emptyFlow
 
 @Composable
 fun MainScreen(
+    viewTypeByPopStack: MainScreenViewType?,
+    retry:()->Unit,
     deepLinkData: DeepLinkData,
     moveToNotificationScreen: () -> Unit,
     moveToCategoryContentScreen: (Int, String?, Boolean) -> Unit,
@@ -114,6 +114,13 @@ fun MainScreen(
     val viewType = viewModel.viewType.collectAsState().value
     val prevViewType = viewModel.prevViewType.collectAsState().value
     val navigationItemContentList = viewModel.getNavigationItemContentList()
+    
+    LaunchedEffect(viewTypeByPopStack) {
+        viewTypeByPopStack?.let {
+            viewModel.updateViewType(it)
+            retry()
+        }
+    }
     MainScreen(
         viewType = viewType,
         prevViewType = prevViewType,
@@ -266,17 +273,7 @@ fun MainNavigationBar(
     NavigationBar(
         modifier = Modifier
             .height(TOP_BAR_HEIGHT.dp)
-            .drawColoredShadow(
-                color = getColor().black,
-                alpha = 0.1f,
-                shadowRadius = 10.dp,
-                offsetX = 0.dp,
-                offsetY = 0.dp
-            )
-            .graphicsLayer {
-                clip = true
-                shape = RoundedCornerShape(topStart = 10.dp, topEnd = 10.dp)
-            },
+            .shadowBottomNav(),
         containerColor = Color(0xFFFFFFFF),
         windowInsets = WindowInsets(0, 0, 0, 0)
     ) {

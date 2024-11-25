@@ -32,7 +32,7 @@ fun NavGraphBuilder.typeTestResultScreen(navViewModel: NavViewModel) = composabl
             {
                 if(data.isFirst) {
                     navViewModel.navigatePopUpTo(
-                        ROUTE.Main,
+                        ROUTE.Main(),
                         data
                     )
                 }

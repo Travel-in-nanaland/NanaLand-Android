@@ -1,12 +1,12 @@
 package com.jeju.nanaland.ui.experience
 
 import androidx.compose.foundation.ExperimentalFoundationApi
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.lazy.grid.rememberLazyGridState
+import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
@@ -28,6 +28,7 @@ import com.jeju.nanaland.globalvalue.constant.getCultureArtKeywordList
 import com.jeju.nanaland.globalvalue.constant.getLocationList
 import com.jeju.nanaland.globalvalue.type.ExperienceCategoryType
 import com.jeju.nanaland.ui.component.common.CustomSurface
+import com.jeju.nanaland.ui.component.common.bottombar.MainNavigationBar
 import com.jeju.nanaland.ui.component.common.dialog.BottomSheetFilterDialog
 import com.jeju.nanaland.ui.component.common.dialog.BottomSheetFilterDialogType
 import com.jeju.nanaland.ui.component.common.icon.GoToUpInList
@@ -46,6 +47,10 @@ fun ExperienceListScreen(
     moveToBackScreen: () -> Unit,
     moveToExperienceContentScreen: (Int, String) -> Unit,
     moveToSignInScreen: () -> Unit,
+    toHome: () -> Unit,
+    toFavorite: () -> Unit,
+    toNana: () -> Unit,
+    toProfile: () -> Unit,
     viewModel: ExperienceListViewModel = hiltViewModel()
 ) {
     val selectedCategoryType = viewModel.selectedCategoryType.collectAsState().value
@@ -71,6 +76,10 @@ fun ExperienceListScreen(
         moveToBackScreen = moveToBackScreen,
         moveToExperienceContentScreen = moveToExperienceContentScreen,
         moveToSignInScreen = moveToSignInScreen,
+        toHome = toHome,
+        toFavorite = toFavorite,
+        toNana = toNana,
+        toProfile = toProfile,
         isContent = true
     )
 }
@@ -91,6 +100,10 @@ private fun ExperienceListScreen(
     moveToBackScreen: () -> Unit,
     moveToExperienceContentScreen: (Int, String) -> Unit,
     moveToSignInScreen: () -> Unit,
+    toHome: () -> Unit,
+    toFavorite: () -> Unit,
+    toNana: () -> Unit,
+    toProfile: () -> Unit,
     isContent: Boolean
 ) {
     val coroutineScope = rememberCoroutineScope()
@@ -117,9 +130,11 @@ private fun ExperienceListScreen(
     }
 
     CustomSurface {
-        Box(
-            modifier = Modifier.fillMaxSize()
+        Scaffold(
+            bottomBar = { MainNavigationBar(toHome,toFavorite,toNana,toProfile) },
+            floatingActionButton = { GoToUpInList(lazyGridState) },
         ) {
+            it
             Column(
                 modifier = Modifier.fillMaxSize()
             ) {
@@ -167,8 +182,6 @@ private fun ExperienceListScreen(
                         moveToSignInScreen = moveToSignInScreen
                     )
             }
-
-            GoToUpInList(lazyGridState)
 
             if(isLocationFilterShowing || isActivityFilterShowing || isArtFilterShowing) {
                 BottomSheetFilterDialog(

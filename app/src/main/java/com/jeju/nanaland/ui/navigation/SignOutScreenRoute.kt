@@ -9,6 +9,6 @@ import com.jeju.nanaland.ui.withdrawal.WithdrawalScreen
 fun NavGraphBuilder.withdrawalScreen(navViewModel: NavViewModel) = composable<ROUTE.Main.Profile.Setting.Withdraw> {
     WithdrawalScreen(
         moveToBackScreen = { navViewModel.popBackStack() },
-        moveToLanguageInitScreen = { navViewModel.navigatePopUpTo(ROUTE.Splash.LanguageSetting, ROUTE.Main) }
+        moveToLanguageInitScreen = { navViewModel.navigatePopUpTo(ROUTE.Splash.LanguageSetting, ROUTE.Main()) }
     )
 }

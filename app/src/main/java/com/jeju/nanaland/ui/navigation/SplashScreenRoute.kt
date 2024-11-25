@@ -14,7 +14,7 @@ fun NavGraphBuilder.splashScreen(
     SplashScreen(
         deepLinkData = deepLinkData,
         moveToMainScreen = {
-            navViewModel.navigatePopUpTo(ROUTE.Main, ROUTE.Splash)
+            navViewModel.navigatePopUpTo(ROUTE.Main(), ROUTE.Splash)
         },
         moveToLanguageInitScreen = {
             navViewModel.navigatePopUpTo(ROUTE.Splash.LanguageSetting, ROUTE.Splash)

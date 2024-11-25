@@ -57,6 +57,8 @@ import com.jeju.nanaland.globalvalue.type.ReviewKeyword
 import com.jeju.nanaland.ui.component.common.BottomOkButton
 import com.jeju.nanaland.ui.component.common.CustomSurface
 import com.jeju.nanaland.ui.component.common.UploadImages
+import com.jeju.nanaland.ui.component.common.dialog.DialogCommon
+import com.jeju.nanaland.ui.component.common.dialog.DialogCommonType
 import com.jeju.nanaland.ui.component.common.dialog.SubmitLoadingDialog
 import com.jeju.nanaland.ui.component.common.text.TextWithPointColor
 import com.jeju.nanaland.ui.component.common.topbar.TopBarCommon
@@ -64,6 +66,7 @@ import com.jeju.nanaland.ui.reviewwrite.ReviewWriteUiState
 import com.jeju.nanaland.ui.reviewwrite.ReviewWriteViewModel
 import com.jeju.nanaland.ui.theme.body02
 import com.jeju.nanaland.ui.theme.bodyBold
+import com.jeju.nanaland.ui.theme.caption01SemiBold
 import com.jeju.nanaland.ui.theme.getColor
 import com.jeju.nanaland.util.resource.getString
 import com.jeju.nanaland.util.resource.getStringArray
@@ -148,13 +151,11 @@ fun ReviewWriteScreen(
         }
     }
     if(cancelDialogVisible) {
-//        DialogCommon(
-//            title = getString(R.string.dialog_msg_title_8),
-//            subTitle = getString(R.string.dialog_msg_sub_title_8),
-//            onDismissRequest = { cancelDialogVisible = false },
-//            onPositive = { cancelDialogVisible = false; navViewModel.popBackStack() },
-//            onNegative = { cancelDialogVisible = false }
-//        )TODO
+        DialogCommon(
+            DialogCommonType.Write,
+            onDismiss = { cancelDialogVisible = false },
+            onYes = {cancelDialogVisible = false; navViewModel.popBackStack()},
+        )
     }
 }
 
@@ -401,8 +402,8 @@ private fun ReviewKeywordChip(
                             color = getColor().main10,
                             shape = RoundedCornerShape(30.dp)
                         )
-                        .padding(horizontal = 16.dp, vertical = 8.dp)
-                        .clickable { onRemoveKeyword(it) },
+                        .clickable { onRemoveKeyword(it) }
+                        .padding(horizontal = 12.dp, vertical = 6.dp),
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     Text(
@@ -435,15 +436,15 @@ private fun ReviewKeywordAddButton(
                 color = getColor().main
             )
             .clickable { moveToKeywordScreen() }
-            .padding(horizontal = 16.dp, vertical = 8.dp),
+            .padding(horizontal = 12.dp, vertical = 6.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
         Text(
             text = getString(R.string.review_write_add_keyword),
             color = getColor().main,
-            style = body02
+            style = caption01SemiBold
         )
-        Spacer(modifier = Modifier.width(8.dp))
+        Spacer(modifier = Modifier.width(4.dp))
         Icon(
             modifier = Modifier.size(16.dp),
             imageVector = Icons.Default.Add,

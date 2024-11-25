@@ -12,6 +12,10 @@ fun NavGraphBuilder.restaurantListScreen(navViewModel: NavViewModel) = composabl
         moveToRestaurantContentScreen = { contentId ->
             navViewModel.navigate(ROUTE.Content.Restaurant.Detail(contentId))
         },
-        moveToSignInScreen = { navViewModel.navigatePopUpTo(ROUTE.Splash.SignIn, ROUTE.Main) }
+        moveToSignInScreen = { navViewModel.navigatePopUpTo(ROUTE.Splash.SignIn, ROUTE.Main()) },
+        toHome = { navViewModel.navigatePopUpTo(ROUTE.Main(0), ROUTE.Content.Restaurant) },
+        toFavorite = { navViewModel.navigatePopUpTo(ROUTE.Main(1), ROUTE.Content.Restaurant) },
+        toNana = { navViewModel.navigatePopUpTo(ROUTE.Main(2), ROUTE.Content.Restaurant) },
+        toProfile = { navViewModel.navigatePopUpTo(ROUTE.Main(3), ROUTE.Content.Restaurant) },
     )
 }

@@ -48,11 +48,13 @@ sealed class ROUTE {
 
     @Serializable
     /** 시작 메인 화면 **/
-    data object Main: ROUTE() {
+    data class Main(
+        val toScreenIndex:Int? = null
+    ): ROUTE() {
 
         @Serializable
         /** 메인 홈 화면 **/
-        data object Home: ROUTE() {
+        data object Home {
             @Serializable
             data object Notification: ROUTE()
             @Serializable
@@ -60,11 +62,11 @@ sealed class ROUTE {
         }
         @Serializable
         /** 찜 화면 **/
-        data object Favorite: ROUTE()
+        data object Favorite
 
         @Serializable
         /** 나나픽 화면 **/
-        data object NanaPick: ROUTE() { // ROUTE_RESTAURANT_LIST
+        data object NanaPick { // ROUTE_RESTAURANT_LIST
             @Serializable
             /** 나나픽 전체보기 화면 **/
             data object AllList: ROUTE() // ROUTE_RESTAURANT_CONTENT

@@ -12,8 +12,9 @@ import androidx.paging.compose.collectAsLazyPagingItems
 import com.jeju.nanaland.R
 import com.jeju.nanaland.globalvalue.type.ReviewCategoryType
 import com.jeju.nanaland.ui.component.common.dialog.BottomSheetSelectDialog
+import com.jeju.nanaland.ui.component.common.dialog.DialogCommon
+import com.jeju.nanaland.ui.component.common.dialog.DialogCommonType
 import com.jeju.nanaland.ui.profile.component.ProfileListFrame
-import com.jeju.nanaland.ui.profile.component.parts.RemoveDialog
 import com.jeju.nanaland.ui.profile.profileReviewList.component.ProfileListReviewRow
 import com.jeju.nanaland.ui.profile.root.ProfileViewModel
 import com.jeju.nanaland.util.network.NetworkResult
@@ -68,14 +69,15 @@ fun ProfileReviewListScreen(
             )
     }
     if(removeReviewId != -1)
-        RemoveDialog(
-            onDismissRequest = { removeReviewId = -1 },
-            onDelete = { scope.launch {
+        DialogCommon(
+            DialogCommonType.RemoveReview,
+            onDismiss = { removeReviewId = -1 },
+            onYes = { scope.launch {
                 if(viewModel.setRemove(removeReviewId) is NetworkResult.Success) {
                     removeReviewId = -1
                     reviews.refresh()
                 }
-            } }
+            } },
         )
 
     if(reportReviewId != -1)
@@ -83,4 +85,16 @@ fun ProfileReviewListScreen(
             onDismiss = { reportReviewId = -1 },
             items = arrayOf(getString(R.string.common_신고하기) to { moveToReviewReportScreen(reportReviewId) })
         )
+    if (removeReviewId != -1) {
+        DialogCommon(
+            DialogCommonType.RemoveReview,
+            onDismiss = { removeReviewId = -1 },
+            onYes = { scope.launch {
+                if(viewModel.setRemove(removeReviewId) is NetworkResult.Success) {
+                    removeReviewId = -1
+                    viewModel.init()
+                }
+            } },
+        )
+    }
 }

@@ -1,6 +1,5 @@
 package com.jeju.nanaland.ui.component.review
 
-import android.widget.Toast
 import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -53,6 +52,8 @@ fun ReviewCard(
     toggleReviewFavorite: (Int) -> Unit,
     onProfileClick: (Int?) -> Unit,
     onMenuButtonClick: () -> Unit,
+    onEdit: (ReviewData) -> Unit,
+    onRemove: (ReviewData) -> Unit,
 ) {
     val context = LocalContext.current
     val scrollState = rememberScrollState()
@@ -117,14 +118,41 @@ fun ReviewCard(
 
                 Spacer(Modifier.weight(1f))
 
-                ReviewFavoriteButton(
-                    isFavorite = data.reviewHeart,
-                    favoriteCount = data.heartCount,
-                    toggleFavorite = {
-                        if(!data.myReview) toggleReviewFavorite(data.id)
-                        else Toast.makeText(context, getString(R.string.toast_heart_myself), Toast.LENGTH_SHORT).show()
+                if(data.myReview){
+                    Row {
+                        Text(
+                            modifier = Modifier
+                                .background(
+                                    color = getColor().gray03,
+                                    shape = RoundedCornerShape(30.dp)
+                                )
+                                .padding(horizontal = 8.dp, vertical = 2.dp)
+                                .clickableNoEffect { onEdit(data) },
+                            text = getString(R.string.common_수정),
+                            color = getColor().gray01,
+                            style = caption01
+                        )
+                        Spacer(Modifier.width(8.dp))
+                        Text(
+                            modifier = Modifier
+                                .background(
+                                    color = getColor().gray03,
+                                    shape = RoundedCornerShape(30.dp)
+                                )
+                                .padding(horizontal = 8.dp, vertical = 2.dp)
+                                .clickableNoEffect { onRemove(data) },
+                            text = getString(R.string.common_삭제),
+                            color = getColor().gray01,
+                            style = caption01
+                        )
                     }
-                )
+                } else {
+                    ReviewFavoriteButton(
+                        isFavorite = data.reviewHeart,
+                        favoriteCount = data.heartCount,
+                        toggleFavorite = { toggleReviewFavorite(data.id) }
+                    )
+                }
             }
 
             Spacer(Modifier.height(12.dp))
