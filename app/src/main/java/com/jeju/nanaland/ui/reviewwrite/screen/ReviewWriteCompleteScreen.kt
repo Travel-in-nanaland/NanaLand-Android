@@ -27,9 +27,9 @@ import com.jeju.nanaland.globalvalue.type.ReviewCategoryType
 import com.jeju.nanaland.ui.component.common.BottomOkButton
 import com.jeju.nanaland.ui.component.common.CustomSurface
 import com.jeju.nanaland.ui.component.common.text.TextWithPointColor
+import com.jeju.nanaland.ui.theme.body01
 import com.jeju.nanaland.ui.theme.getColor
-import com.jeju.nanaland.ui.theme.largeTitle02
-import com.jeju.nanaland.ui.theme.title02
+import com.jeju.nanaland.ui.theme.title01Bold
 import com.jeju.nanaland.util.resource.getString
 import com.jeju.nanaland.util.ui.ScreenPreview
 
@@ -94,7 +94,7 @@ private fun ReviewWriteCompleteUI(
                 Text(
                     text = uiData.second,
                     color = getColor().main,
-                    style = largeTitle02,
+                    style = title01Bold,
                     textAlign = TextAlign.Center
                 )
 
@@ -103,7 +103,7 @@ private fun ReviewWriteCompleteUI(
                 TextWithPointColor(
                     text = uiData.third,
                     color = getColor().black,
-                    style = title02.copy(textAlign = TextAlign.Center),
+                    style = body01.copy(textAlign = TextAlign.Center),
                 )
                 Spacer(Modifier.height(100.dp))
             }

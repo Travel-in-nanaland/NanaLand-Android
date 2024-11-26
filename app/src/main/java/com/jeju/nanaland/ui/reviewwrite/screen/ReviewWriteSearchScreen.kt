@@ -30,6 +30,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.blur
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -100,7 +101,6 @@ private fun ReviewWriteSearchUI(
             Box(
                 modifier = Modifier
                     .fillMaxSize(),
-                contentAlignment = Alignment.Center
             ) {
                 when (data) {
                     is UiState.Failure -> ResultNetworkErrorView()
@@ -175,11 +175,12 @@ private fun ResultDataRowView(
 ) {
     if(data.isEmpty()){
         Text(
+            modifier = Modifier.fillMaxWidth().padding(top = 40.dp),
             text = getString(R.string.search_result_screen_no_result),
             style = body01,
-            color = getColor().gray01
+            color = getColor().gray01,
+            textAlign = TextAlign.Center
         )
-        Spacer(modifier = Modifier.height(40.dp))
     } else {
         LazyColumn(
             modifier = Modifier
@@ -238,6 +239,7 @@ private fun ResultSkeletonRowView(
     dataCnt: Int = 16,
 ) {
     LazyColumn(
+        modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.spacedBy(8.dp)
     ) {
         items(dataCnt) {
