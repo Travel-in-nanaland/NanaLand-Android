@@ -11,7 +11,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -27,7 +26,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.paging.compose.collectAsLazyPagingItems
 import com.jeju.nanaland.R
 import com.jeju.nanaland.domain.entity.review.MemberReviewDetail
@@ -37,11 +35,9 @@ import com.jeju.nanaland.ui.component.common.dialog.BottomSheetSelectDialog
 import com.jeju.nanaland.ui.component.common.dialog.DialogCommon
 import com.jeju.nanaland.ui.component.common.dialog.DialogCommonType
 import com.jeju.nanaland.ui.component.common.topbar.TopBarCommon
-import com.jeju.nanaland.ui.profile.root.component.ProfileScreenNoticeListSection
 import com.jeju.nanaland.ui.profile.root.component.ProfileScreenProfileSection
 import com.jeju.nanaland.ui.profile.root.component.ProfileScreenReviewListSection
-import com.jeju.nanaland.ui.profile.root.component.parts.ProfileScreenMoreInfoPart
-import com.jeju.nanaland.ui.profile.root.component.parts.ProfileScreenTabPart
+import com.jeju.nanaland.ui.profile.root.component.parts.ProfileScreenTopPart
 import com.jeju.nanaland.ui.theme.body01
 import com.jeju.nanaland.ui.theme.getColor
 import com.jeju.nanaland.util.network.NetworkResult
@@ -161,7 +157,7 @@ private fun ProfileScreen(
         viewModel.init()
     }
 
-    val isReviewList = viewModel.isReviewList.collectAsStateWithLifecycle()
+//    val isReviewList = viewModel.isReviewList.collectAsStateWithLifecycle()
     var moreOptionDialog by remember { mutableStateOf(false) }
 
 
@@ -210,46 +206,50 @@ private fun ProfileScreen(
 
                     Spacer(Modifier.height(24.dp))
 
-                    ProfileScreenTabPart(
-                        isReviewList = isReviewList.value,
+                    ProfileScreenTopPart(
                         reviewSize = reviewList.size,
-                        moveToReviewScreen = { moveToProfileReviewListScreen(null) },
-                        toggleReviewNoticeTab = if(!isMine) null else {
-                            { viewModel.setIsReviewList(!isReviewList.value) }
-                        }
+                        moveToReviewScreen = { moveToProfileReviewListScreen(null) }
                     )
-                    Column(Modifier.background(getColor().white)) {
+//                    ProfileScreenTabPart(
+//                        isReviewList = isReviewList.value,
+//                        reviewSize = reviewList.size,
+//                        moveToReviewScreen = { moveToProfileReviewListScreen(null) },
+//                        toggleReviewNoticeTab = if(!isMine) null else {
+//                            { viewModel.setIsReviewList(!isReviewList.value) }
+//                        }
+//                    )
+//                    Column(Modifier.background(getColor().white)) {
 
-                        if (isMine) {
-                            if (!isReviewList.value || !viewModel.isGuest)
-                                ProfileScreenMoreInfoPart(
-                                    isReviewList = isReviewList.value,
-                                    listSize = if (isReviewList.value) reviewList.size else noticeList?.size
-                                        ?: 0,
-                                    moveToListPage = {
-                                        if (isReviewList.value) moveToProfileReviewListScreen(null)
-                                        else moveToProfileNoticeListScreen(null)
-                                    },
-                                    moveToReviewWriteScreen = moveToReviewWriteScreen
-                                )
-                        } else
-                            HorizontalDivider()
+//                        if (isMine) {
+//                            if (/*!isReviewList.value || */!viewModel.isGuest)
+//                                ProfileScreenMoreInfoPart(
+//                                    isReviewList = isReviewList.value,
+//                                    listSize = if (isReviewList.value) reviewList.size else noticeList?.size
+//                                        ?: 0,
+//                                    moveToListPage = {
+//                                        if (isReviewList.value) moveToProfileReviewListScreen(null)
+//                                        else moveToProfileNoticeListScreen(null)
+//                                    },
+//                                    moveToReviewWriteScreen = moveToReviewWriteScreen
+//                                )
+//                        } else
+//                            HorizontalDivider()
 
-                        if (isReviewList.value) {
-                            ProfileScreenReviewListSection(
-                                reviewList,
-                                onClick = moveToProfileReviewListScreen,
-                                onMenuClick = { selectReview = it },
-                            )
-                        } else if (!noticeList.isNullOrEmpty()) {
-                            ProfileScreenNoticeListSection(noticeList) {
-                                moveToProfileNoticeListScreen(it)
-                            }
-                        }
-                    }
+//                        if (isReviewList.value) {
+                    ProfileScreenReviewListSection(
+                        reviewList,
+                        onClick = moveToProfileReviewListScreen,
+                        onMenuClick = { selectReview = it },
+                    )
+//                        } else if (!noticeList.isNullOrEmpty()) {
+//                            ProfileScreenNoticeListSection(noticeList) {
+//                                moveToProfileNoticeListScreen(it)
+//                            }
+//                        }
+//                    }
 
                     if (isMine){
-                        if(isReviewList.value) {
+//                        if(isReviewList.value) {
                             if (viewModel.isGuest) {
                                 ListCenterText(getString(R.string.mypage_screen_review_guest))
                                 return@Column
@@ -258,11 +258,11 @@ private fun ProfileScreen(
                                 ListCenterText(getString(R.string.mypage_screen_review_empty))
                                 return@Column
                             }
-                        }
-                        else if(noticeList.isNullOrEmpty()){
-                            ListCenterText(getString(R.string.mypage_screen_notice_empty))
-                            return@Column
-                        }
+//                        }
+//                        else if(noticeList.isNullOrEmpty()){
+//                            ListCenterText(getString(R.string.mypage_screen_notice_empty))
+//                            return@Column
+//                        }
                     }
                     Spacer(modifier = Modifier
                         .fillMaxWidth()

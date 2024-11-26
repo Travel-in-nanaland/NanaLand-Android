@@ -344,6 +344,7 @@
     <!--마이페이지 화면-->
     <string name="mypage_screen_프로필_수정">프로필 수정</string>
     <string name="mypage_screen_테스트_다시하기">테스트 다시하기</string>
+    <string name="mypage_screen_다시하기">다시하기</string>
     <string name="mypage_screen_테스트_하기">테스트 하기</string>
     <string name="mypage_screen_없음">없음</string>
     <string name="mypage_screen_로그인이_필요해요">로그인이 필요해요</string>
