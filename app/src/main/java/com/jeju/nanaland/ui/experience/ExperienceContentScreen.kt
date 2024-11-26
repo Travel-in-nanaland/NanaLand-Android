@@ -301,7 +301,7 @@ private fun ExperienceContentScreen(
                                             data = it,
                                             toggleReviewFavorite = toggleReviewFavorite,
                                             onProfileClick = moveToProfileScreen,
-                                            onMenuButtonClick = { selectedReviewId.intValue = it.id },
+                                            onReport = { selectedReviewId.intValue = it.id },
                                             onEdit = onEdit,
                                             onRemove = onRemove
                                         )

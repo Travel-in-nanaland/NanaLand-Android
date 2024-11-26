@@ -82,7 +82,7 @@ fun NavGraphBuilder.experienceContentScreen(
             navViewModel.navigate(ROUTE.Content.ReviewList(
                 isFavorite,
                 data.contentId,
-                ReviewCategoryType.RESTAURANT.toString(),
+                ReviewCategoryType.EXPERIENCE.toString(),
                 image,
                 title,
                 address

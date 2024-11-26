@@ -9,9 +9,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.jeju.nanaland.R
+import com.jeju.nanaland.ui.theme.bodyBold
 import com.jeju.nanaland.ui.theme.caption01
 import com.jeju.nanaland.ui.theme.getColor
-import com.jeju.nanaland.ui.theme.title02Bold
 import com.jeju.nanaland.util.resource.getString
 
 @Composable
@@ -22,7 +22,7 @@ fun InfoModificationProposalWritingScreenHeading(text: String) {
         Text(
             text = text,
             color = getColor().black,
-            style = title02Bold
+            style = bodyBold
         )
 
         Spacer(Modifier.width(8.dp))

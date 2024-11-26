@@ -2,7 +2,6 @@ package com.jeju.nanaland.ui.report.screen
 
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.gestures.scrollable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -26,8 +25,9 @@ import androidx.compose.ui.unit.dp
 import com.jeju.nanaland.R
 import com.jeju.nanaland.domain.entity.report.ClaimType
 import com.jeju.nanaland.ui.theme.body02
+import com.jeju.nanaland.ui.theme.bodyBold
+import com.jeju.nanaland.ui.theme.caption01
 import com.jeju.nanaland.ui.theme.getColor
-import com.jeju.nanaland.ui.theme.title01Bold
 import com.jeju.nanaland.util.resource.getString
 import com.jeju.nanaland.util.resource.getStringArray
 
@@ -44,12 +44,12 @@ fun ReportCategoryScreen(
     ) {
         Text(
             text = getString(R.string.report_category_title),
-            style = title01Bold,
+            style = bodyBold,
             color = getColor().black
         )
         Text(
             text = getString(R.string.report_category_subtitle),
-            style = body02,
+            style = caption01,
             color = getColor().gray01
         )
         Spacer(modifier = Modifier.height(32.dp))

@@ -1,7 +1,6 @@
 package com.jeju.nanaland.ui.component.review
 
 import androidx.compose.animation.animateContentSize
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -11,7 +10,6 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.itemsIndexed
@@ -26,9 +24,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.jeju.nanaland.R
 import com.jeju.nanaland.domain.entity.review.ReviewData
@@ -41,6 +37,7 @@ import com.jeju.nanaland.ui.component.review.parts.ReviewProfileName
 import com.jeju.nanaland.ui.component.review.parts.ReviewRatingText
 import com.jeju.nanaland.ui.component.review.parts.ReviewTags
 import com.jeju.nanaland.ui.theme.caption01
+import com.jeju.nanaland.ui.theme.caption02
 import com.jeju.nanaland.ui.theme.getColor
 import com.jeju.nanaland.util.resource.getString
 import com.jeju.nanaland.util.ui.clickableNoEffect
@@ -51,7 +48,7 @@ fun ReviewCard(
     data: ReviewData,
     toggleReviewFavorite: (Int) -> Unit,
     onProfileClick: (Int?) -> Unit,
-    onMenuButtonClick: () -> Unit,
+    onReport: () -> Unit,
     onEdit: (ReviewData) -> Unit,
     onRemove: (ReviewData) -> Unit,
 ) {
@@ -187,21 +184,20 @@ fun ReviewCard(
             modifier = Modifier.align(Alignment.BottomEnd),
             verticalAlignment = Alignment.CenterVertically
         ) {
+            if(!data.myReview)
+                Text(
+                    modifier = Modifier.clickableNoEffect(onReport),
+                    text = getString(R.string.common_신고하기),
+                    color = getColor().gray01,
+                    style = caption02
+                )
+            Spacer(Modifier.weight(1f))
             Text(
                 text = data.createdAt.replace("-", "."),
                 color = getColor().gray01,
                 style = caption01
             )
 
-            if(!data.myReview)
-                Image(
-                    modifier = Modifier
-                        .size(20.dp)
-                        .clickableNoEffect { onMenuButtonClick() },
-                    painter = painterResource(R.drawable.ic_more_vert),
-                    contentDescription = null,
-                    colorFilter = ColorFilter.tint(getColor().gray01)
-                )
         }
     }
 }

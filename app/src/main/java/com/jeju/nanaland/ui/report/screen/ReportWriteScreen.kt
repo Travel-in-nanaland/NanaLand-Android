@@ -38,7 +38,6 @@ import com.jeju.nanaland.ui.theme.body02
 import com.jeju.nanaland.ui.theme.bodyBold
 import com.jeju.nanaland.ui.theme.caption01
 import com.jeju.nanaland.ui.theme.getColor
-import com.jeju.nanaland.ui.theme.title02Bold
 import com.jeju.nanaland.util.resource.getString
 import com.jeju.nanaland.util.ui.clickableNoEffect
 
@@ -67,7 +66,7 @@ fun ReportWriteScreen(
             ) {
                 Text(
                     text = getString(R.string.report_write_resone_title),
-                    style = title02Bold,
+                    style = bodyBold,
                     color = getColor().black
                 )
                 Spacer(modifier = Modifier.width(12.dp))
@@ -77,7 +76,7 @@ fun ReportWriteScreen(
                     color = getColor().main
                 )
             }
-            Spacer(modifier = Modifier.height(8.dp))
+            Spacer(modifier = Modifier.height(12.dp))
             InputTextField(
                 text = reason,
                 hint = getString(R.string.report_write_resone_hint, REASON_LENGTH_MIN),
@@ -97,7 +96,7 @@ fun ReportWriteScreen(
             ) {
                 Text(
                     text = getString(R.string.common_이메일),
-                    style = title02Bold,
+                    style = bodyBold,
                     color = getColor().black
                 )
                 Spacer(modifier = Modifier.width(12.dp))
@@ -107,7 +106,12 @@ fun ReportWriteScreen(
                     color = getColor().main
                 )
             }
-            Spacer(modifier = Modifier.height(8.dp))
+            Text(
+                text = getString(R.string.report_write_email_subtitle),
+                style = caption01,
+                color = getColor().gray01
+            )
+            Spacer(modifier = Modifier.height(12.dp))
             InputTextField(
                 text = email,
                 hint = getString(R.string.info_modification_proposal_hint2, REASON_LENGTH_MIN),
@@ -120,7 +124,7 @@ fun ReportWriteScreen(
                 text = getString(R.string.common_사진) +
                         " / " +
                         getString(R.string.common_동영상),
-                style = title02Bold,
+                style = bodyBold,
                 color = getColor().black
             )
             Spacer(modifier = Modifier.height(8.dp))

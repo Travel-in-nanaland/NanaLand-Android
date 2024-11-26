@@ -105,6 +105,7 @@ private fun ReviewWriteCompleteUI(
                     color = getColor().black,
                     style = title02.copy(textAlign = TextAlign.Center),
                 )
+                Spacer(Modifier.height(100.dp))
             }
 
             Box(

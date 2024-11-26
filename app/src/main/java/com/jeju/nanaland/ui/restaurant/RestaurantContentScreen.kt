@@ -54,7 +54,6 @@ import com.jeju.nanaland.ui.component.review.TotalRatingStar
 import com.jeju.nanaland.ui.component.review.TotalReviewCountText
 import com.jeju.nanaland.ui.theme.bodyBold
 import com.jeju.nanaland.ui.theme.getColor
-import com.jeju.nanaland.ui.theme.title02Bold
 import com.jeju.nanaland.util.language.getLanguage
 import com.jeju.nanaland.util.network.NetworkResult
 import com.jeju.nanaland.util.resource.getString
@@ -212,7 +211,7 @@ private fun RestaurantContentScreen(
                                     Text(
                                         text = getString(R.string.detail_screen_common_대표_메뉴),
                                         color = getColor().black,
-                                        style = title02Bold
+                                        style = bodyBold
                                     )
                                 }
 
@@ -346,7 +345,7 @@ private fun RestaurantContentScreen(
                                             data = it,
                                             toggleReviewFavorite = toggleReviewFavorite,
                                             onProfileClick = moveToProfileScreen,
-                                            onMenuButtonClick = { selectedReviewId.intValue = it.id },
+                                            onReport = { selectedReviewId.intValue = it.id },
                                             onEdit = onEdit,
                                             onRemove = onRemove
                                         )

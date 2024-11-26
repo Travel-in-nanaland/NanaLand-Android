@@ -269,7 +269,7 @@ private fun ReviewListScreen(
                                         data = item,
                                         toggleReviewFavorite = toggleReviewFavorite,
                                         onProfileClick = moveToProfileScreen,
-                                        onMenuButtonClick = { selectedReviewId.intValue = item.id },
+                                        onReport = { selectedReviewId.intValue = item.id },
                                         onEdit = onEdit,
                                         onRemove = onRemove
                                     )
