@@ -244,7 +244,7 @@ val caption02 = TextStyle(
     )
 )
 val caption02SemiBold = TextStyle(
-    fontSize = (baseFontSize + 0).sp,
+    fontSize = (baseFontSize + 2).sp,
     fontWeight = FontWeight.Normal,
     fontFamily = appleSdGothicNeo,
     platformStyle = PlatformTextStyle(false),

@@ -38,7 +38,7 @@ import com.jeju.nanaland.R
 import com.jeju.nanaland.ui.theme.NanaLandTheme
 import com.jeju.nanaland.ui.theme.body02
 import com.jeju.nanaland.ui.theme.getColor
-import com.jeju.nanaland.ui.theme.title01Bold
+import com.jeju.nanaland.ui.theme.title02Bold
 import com.jeju.nanaland.util.resource.getString
 
 
@@ -116,7 +116,7 @@ private fun TitleText_Normal(str: String) {
     Text(
         text = str,
         color = getColor().black,
-        style = title01Bold
+        style = title02Bold
     )
 }
 
@@ -129,7 +129,7 @@ private fun TitleText_Highlight(str: String) {
     if(sliceStrings.isEmpty())
         Text(
             text = str,
-            style = title01Bold,
+            style = title02Bold,
             onTextLayout = {
                 val updateSliceStrings = mutableListOf<String>()
                 for(i in 0 until it.lineCount){
@@ -158,7 +158,7 @@ private fun TitleText_Highlight(
         Text(
             text = str,
             color = getColor().black,
-            style = title01Bold,
+            style = title02Bold,
             onTextLayout = {
                 if(textLayoutResult == null)
                     textLayoutResult = it
