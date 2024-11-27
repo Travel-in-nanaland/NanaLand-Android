@@ -1,14 +1,17 @@
 package com.jeju.nanaland.ui.festival
 
 import android.content.Intent
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
@@ -17,6 +20,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.jeju.nanaland.BuildConfig
@@ -30,12 +34,14 @@ import com.jeju.nanaland.ui.component.common.topbar.TopBarCommon
 import com.jeju.nanaland.ui.component.detailscreen.other.DetailScreenDescription
 import com.jeju.nanaland.ui.component.detailscreen.other.DetailScreenInformation
 import com.jeju.nanaland.ui.component.detailscreen.other.DetailScreenInformationModificationProposalButton
-import com.jeju.nanaland.ui.component.detailscreen.other.DetailScreenTopBannerImage
 import com.jeju.nanaland.ui.component.detailscreen.other.MoveToTopButton
+import com.jeju.nanaland.ui.theme.body02
+import com.jeju.nanaland.ui.theme.getColor
 import com.jeju.nanaland.util.language.getLanguage
 import com.jeju.nanaland.util.resource.getString
 import com.jeju.nanaland.util.ui.ScreenPreview
 import com.jeju.nanaland.util.ui.UiState
+import com.skydoves.landscapist.glide.GlideImage
 import kotlinx.coroutines.launch
 
 @Composable
@@ -116,7 +122,23 @@ private fun FestivalContentScreen(
             is UiState.Success -> {
                 Box(modifier = Modifier.fillMaxSize()) {
                     Column(modifier = Modifier.verticalScroll(scrollState)) {
-                        DetailScreenTopBannerImage(imageUri = festivalContent.data.images[0].originUrl)
+                        Box {
+                            GlideImage(
+                                modifier = Modifier.fillMaxWidth().height(240.dp),
+                                imageModel = { festivalContent.data.images[0].originUrl },
+                            )
+                            if(!festivalContent.data.isNotOver)
+                                Text(
+                                    modifier = Modifier
+                                        .background(getColor().black50)
+                                        .fillMaxWidth()
+                                        .padding(vertical = 10.dp),
+                                    text = getString(R.string.festival_list_screen_close_detail),
+                                    style = body02,
+                                    color = getColor().white,
+                                    textAlign = TextAlign.Center
+                                )
+                        }
 
                         Spacer(Modifier.height(24.dp))
 

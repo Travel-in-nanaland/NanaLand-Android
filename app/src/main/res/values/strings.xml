@@ -176,6 +176,8 @@
     <string name="festival_list_screen_종료된_축제">종료된 축제</string>
     <string name="festival_list_screen_계절별_축제">계절별 축제</string>
     <string name="festival_list_screen_image_caption">*참고용 사진입니다.</string>
+    <string name="festival_list_screen_close_thumbnail">내년에 다시 만나요🖐</string>
+    <string name="festival_list_screen_close_detail">종료된 축제입니다. 내년에 다시 만나요🖐</string>
 
     <!--상세 화면 공통-->
     <string name="detail_screen_common_더보기">더보기</string>

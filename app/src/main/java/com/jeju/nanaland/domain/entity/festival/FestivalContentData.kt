@@ -27,5 +27,7 @@ data class FestivalContentData(
     @SerializedName("period")
     val period: String,
     @SerializedName("favorite")
-    val favorite: Boolean
+    val favorite: Boolean,
+    @SerializedName("onGoing")
+    val isNotOver: Boolean
 )

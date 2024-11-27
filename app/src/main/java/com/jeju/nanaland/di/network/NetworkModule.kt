@@ -56,7 +56,7 @@ object NetworkModule {
             .connectTimeout(20, TimeUnit.SECONDS)
 //            .addNetworkInterceptor(httpLoggingInterceptor)
             .addInterceptor(HttpLoggingInterceptor().apply { level = HttpLoggingInterceptor.Level.BODY })
-//            .addInterceptor(logInterceptor)
+            .addInterceptor(logInterceptor)
             .addInterceptor(tokenInterceptor)
 //            .authenticator(authenticator)
             .build()

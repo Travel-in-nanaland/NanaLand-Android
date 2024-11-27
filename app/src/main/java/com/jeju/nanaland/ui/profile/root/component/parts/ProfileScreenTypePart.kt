@@ -108,7 +108,7 @@ fun ProfileScreenTypePart(
                 TypePart(null)
                 Spacer(modifier = Modifier.weight(1f))
                 if(isMine)
-                TextWithArrow(getString(R.string.mypage_screen_테스트_하기), moveToTypeTestScreen)
+                    TextWithArrow(getString(R.string.mypage_screen_테스트_하기), moveToTypeTestScreen)
             }
         }
     }

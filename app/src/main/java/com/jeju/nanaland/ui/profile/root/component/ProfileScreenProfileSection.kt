@@ -30,7 +30,7 @@ fun ProfileScreenProfileSection(
         )
 
         Spacer(Modifier.height(12.dp))
-        if(profile.provider == "GUEST" || profile.description.isBlank())
+        if(profile.provider == "GUEST" || profile.travelType == null)
             Spacer(Modifier.height(12.dp))
 
         if(profile.provider != "GUEST") {
