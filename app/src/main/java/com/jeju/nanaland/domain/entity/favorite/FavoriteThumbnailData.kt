@@ -13,5 +13,7 @@ data class FavoriteThumbnailData(
     @SerializedName("title")
     val title: String,
     @SerializedName("favorite")
-    val favorite: Boolean
+    val favorite: Boolean,
+    @SerializedName("onGoing")
+    val isNotOver: Boolean?
 )
