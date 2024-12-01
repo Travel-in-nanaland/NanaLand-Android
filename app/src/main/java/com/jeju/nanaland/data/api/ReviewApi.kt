@@ -6,18 +6,16 @@ import com.jeju.nanaland.domain.entity.review.ReviewFavorite
 import com.jeju.nanaland.domain.entity.review.ReviewKeywordResult
 import com.jeju.nanaland.domain.entity.review.ReviewListData
 import com.jeju.nanaland.domain.entity.review.ReviewThumbnailData
+import com.jeju.nanaland.domain.request.review.CreateReviewRequest
 import com.jeju.nanaland.domain.response.ResponsePagingWrapper
 import com.jeju.nanaland.domain.response.ResponseWrapper
 import com.jeju.nanaland.globalvalue.type.ReviewCategoryType
-import okhttp3.MultipartBody
-import okhttp3.RequestBody
 import retrofit2.Response
+import retrofit2.http.Body
 import retrofit2.http.DELETE
 import retrofit2.http.GET
-import retrofit2.http.Multipart
 import retrofit2.http.POST
 import retrofit2.http.PUT
-import retrofit2.http.Part
 import retrofit2.http.Path
 import retrofit2.http.Query
 
@@ -65,13 +63,11 @@ interface ReviewApi {
     ): Response<ResponseWrapper<ResponsePagingWrapper<MemberReviewDetail>>>
 
     // 리뷰 생성
-    @Multipart
     @POST("review/{id}")
     suspend fun createReview(
         @Path("id") id: Int,
         @Query("category") category: ReviewCategoryType,
-        @Part("createReviewDto") data: RequestBody,
-        @Part images: List<MultipartBody.Part>?
+        @Body data: CreateReviewRequest
     ): Response<ResponseWrapper<String?>>
 
     // 리뷰 좋아요 토글
@@ -81,11 +77,9 @@ interface ReviewApi {
     ): Response<ResponseWrapper<ReviewFavorite>>
 
     // 내가 쓴 리뷰 수정
-    @Multipart
     @PUT("review/my/{id}")
     suspend fun modifyUserReview(
         @Path("id") id: Int,
-        @Part("editReviewDto") data: RequestBody,
-        @Part newImages: List<MultipartBody.Part>?
+        @Body data: CreateReviewRequest
     ): Response<ResponseWrapper<String>>
 }

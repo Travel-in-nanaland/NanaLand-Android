@@ -1,6 +1,5 @@
 package com.jeju.nanaland.ui.reviewwrite.screen
 
-import android.net.Uri
 import android.widget.Toast
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.background
@@ -51,7 +50,6 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.jeju.nanaland.R
 import com.jeju.nanaland.domain.navigation.NavViewModel
 import com.jeju.nanaland.domain.navigation.ROUTE
-import com.jeju.nanaland.domain.request.UriRequestBody
 import com.jeju.nanaland.globalvalue.type.ReviewCategoryType
 import com.jeju.nanaland.globalvalue.type.ReviewKeyword
 import com.jeju.nanaland.ui.component.common.BottomOkButton
@@ -107,7 +105,7 @@ fun ReviewWriteScreen(
                 newImages = uiState.value.reviewImage.filter{
                     it.first == -1
                 }.map {
-                    UriRequestBody(context, Uri.parse(it.second))
+                    it.second
                 }
             )
         },

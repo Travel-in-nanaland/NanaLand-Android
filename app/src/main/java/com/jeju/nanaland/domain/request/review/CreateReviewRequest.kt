@@ -10,6 +10,8 @@ data class CreateReviewRequest(
     val content: String,
     @SerializedName("reviewKeywords")
     val keywords: List<ReviewKeyword>,
+    @SerializedName("fileKeys")
+    val images: List<String>?,
     @SerializedName("editImageInfoList")
     val editImages: List<EditImage>? = null
 )
