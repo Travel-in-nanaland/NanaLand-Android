@@ -155,9 +155,10 @@ object RepositoryModule {
     @Singleton
     @Provides
     fun provideRecentSearchDataStoreRepository(
-        @DataStoreModule.RecentSearchDataStore dataStore: DataStore<Preferences>
+        @DataStoreModule.RecentSearchDataStore dataStore: DataStore<Preferences>,
+        @DataStoreModule.RecentSearchInContentDataStore dataStoreInContent: DataStore<Preferences>
     ): RecentSearchDataStoreRepository {
-        return RecentSearchDataStoreRepositoryImpl(dataStore)
+        return RecentSearchDataStoreRepositoryImpl(dataStore,dataStoreInContent)
     }
 
     @Singleton

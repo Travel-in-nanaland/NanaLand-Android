@@ -9,4 +9,6 @@ class AddRecentSearchUseCase(
         key: String,
         value: String
     ) = repository.addRecentSearch(key, value)
+
+    suspend fun inContent(key: String, value: String) = repository.addRecentSearchInContent(key, value)
 }

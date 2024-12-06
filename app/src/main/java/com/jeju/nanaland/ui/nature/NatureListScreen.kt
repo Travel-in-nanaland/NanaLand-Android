@@ -42,6 +42,7 @@ fun NatureListScreen(
     moveToBackScreen: () -> Unit,
     moveToNatureContentScreen: (Int) -> Unit,
     moveToSignInScreen: () -> Unit,
+    moveToSearchScreen: () -> Unit,
     toHome: () -> Unit,
     toFavorite: () -> Unit,
     toNana: () -> Unit,
@@ -68,6 +69,7 @@ fun NatureListScreen(
         moveToBackScreen = moveToBackScreen,
         moveToNatureContentScreen = moveToNatureContentScreen,
         moveToSignInScreen = moveToSignInScreen,
+        moveToSearchScreen = moveToSearchScreen,
         toHome = toHome,
         toFavorite = toFavorite,
         toNana = toNana,
@@ -88,6 +90,7 @@ private fun NatureListScreen(
     moveToBackScreen: () -> Unit,
     moveToNatureContentScreen: (Int) -> Unit,
     moveToSignInScreen: () -> Unit,
+    moveToSearchScreen: () -> Unit,
     toHome: () -> Unit,
     toFavorite: () -> Unit,
     toNana: () -> Unit,
@@ -124,7 +127,8 @@ private fun NatureListScreen(
             ) {
                 TopBarCommon(
                     title = getString(R.string.common_자연),
-                    onBackButtonClicked = moveToBackScreen
+                    onBackButtonClicked = moveToBackScreen,
+                    menus = arrayOf(R.drawable.ic_search_normal to moveToSearchScreen)
                 )
 
                 LocationFilterTopBar(

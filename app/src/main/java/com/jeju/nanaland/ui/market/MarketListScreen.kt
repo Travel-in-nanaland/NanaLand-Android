@@ -39,6 +39,7 @@ fun MarketListScreen(
     moveToBackScreen: () -> Unit,
     moveToMarketContentScreen: (Int) -> Unit,
     moveToSignInScreen: () -> Unit,
+    moveToSearchScreen: () -> Unit,
     toHome: () -> Unit,
     toFavorite: () -> Unit,
     toNana: () -> Unit,
@@ -58,6 +59,7 @@ fun MarketListScreen(
         moveToBackScreen = moveToBackScreen,
         moveToMarketContentScreen = moveToMarketContentScreen,
         moveToSignInScreen = moveToSignInScreen,
+        moveToSearchScreen = moveToSearchScreen,
         toHome = toHome,
         toFavorite = toFavorite,
         toNana = toNana,
@@ -78,6 +80,7 @@ private fun MarketListScreen(
     moveToBackScreen: () -> Unit,
     moveToMarketContentScreen: (Int) -> Unit,
     moveToSignInScreen: () -> Unit,
+    moveToSearchScreen: () -> Unit,
     toHome: () -> Unit,
     toFavorite: () -> Unit,
     toNana: () -> Unit,
@@ -114,7 +117,8 @@ private fun MarketListScreen(
             ) {
                 TopBarCommon(
                     title = getString(R.string.common_전통시장),
-                    onBackButtonClicked = moveToBackScreen
+                    onBackButtonClicked = moveToBackScreen,
+                    menus = arrayOf(R.drawable.ic_search_normal to moveToSearchScreen)
                 )
 
                 LocationFilterTopBar(

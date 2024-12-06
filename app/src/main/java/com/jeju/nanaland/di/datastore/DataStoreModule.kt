@@ -27,6 +27,10 @@ object DataStoreModule {
 
     @Qualifier
     @Retention(AnnotationRetention.BINARY)
+    annotation class RecentSearchInContentDataStore
+
+    @Qualifier
+    @Retention(AnnotationRetention.BINARY)
     annotation class UserSettingsDataStore
 
     @Singleton
@@ -48,6 +52,17 @@ object DataStoreModule {
     ): DataStore<Preferences> {
         return PreferenceDataStoreFactory.create(
             produceFile = { context.preferencesDataStoreFile("recent_search") }
+        )
+    }
+
+    @Singleton
+    @Provides
+    @RecentSearchInContentDataStore
+    fun provideRecentSearchInContentDataStore(
+        @ApplicationContext context: Context
+    ): DataStore<Preferences> {
+        return PreferenceDataStoreFactory.create(
+            produceFile = { context.preferencesDataStoreFile("recent_search_in_content") }
         )
     }
 

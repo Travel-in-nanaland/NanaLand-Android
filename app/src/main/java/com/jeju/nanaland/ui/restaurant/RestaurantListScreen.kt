@@ -43,6 +43,7 @@ fun RestaurantListScreen(
     moveToBackScreen: () -> Unit,
     moveToRestaurantContentScreen: (Int) -> Unit,
     moveToSignInScreen: () -> Unit,
+    moveToSearchScreen: () -> Unit,
     toHome: () -> Unit,
     toFavorite: () -> Unit,
     toNana: () -> Unit,
@@ -64,6 +65,7 @@ fun RestaurantListScreen(
         moveToBackScreen = moveToBackScreen,
         moveToRestaurantContentScreen = moveToRestaurantContentScreen,
         moveToSignInScreen = moveToSignInScreen,
+        moveToSearchScreen = moveToSearchScreen,
         toHome = toHome,
         toFavorite = toFavorite,
         toNana = toNana,
@@ -85,6 +87,7 @@ private fun RestaurantListScreen(
     moveToBackScreen: () -> Unit,
     moveToRestaurantContentScreen: (Int) -> Unit,
     moveToSignInScreen: () -> Unit,
+    moveToSearchScreen: () -> Unit,
     toHome: () -> Unit,
     toFavorite: () -> Unit,
     toNana: () -> Unit,
@@ -124,7 +127,8 @@ private fun RestaurantListScreen(
             ) {
                 TopBarCommon(
                     title = getString(R.string.common_제주_맛집),
-                    onBackButtonClicked = moveToBackScreen
+                    onBackButtonClicked = moveToBackScreen,
+                    menus = arrayOf(R.drawable.ic_search_normal to moveToSearchScreen)
                 )
 
                 Spacer(Modifier.height(16.dp))

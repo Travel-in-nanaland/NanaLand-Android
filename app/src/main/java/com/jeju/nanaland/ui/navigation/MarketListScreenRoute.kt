@@ -17,5 +17,6 @@ fun NavGraphBuilder.marketListScreen(navViewModel: NavViewModel) = composable<RO
         toFavorite = { navViewModel.navigatePopUpTo(ROUTE.Main(1), ROUTE.Content.Market) },
         toNana = { navViewModel.navigatePopUpTo(ROUTE.Main(2), ROUTE.Content.Market) },
         toProfile = { navViewModel.navigatePopUpTo(ROUTE.Main(3), ROUTE.Content.Market) },
+        moveToSearchScreen = { navViewModel.navigate(ROUTE.Content.SearchInContent(ROUTE.Content.Market.toString())) }
     )
 }

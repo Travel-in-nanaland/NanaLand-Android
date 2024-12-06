@@ -184,6 +184,11 @@ sealed class ROUTE {
             val contentTitle: String?,
             val contentAddress: String?,
         ): ROUTE()
+
+        @Serializable
+        data class SearchInContent(
+            val routeString: String
+        ): ROUTE()
     }
 
     @Serializable

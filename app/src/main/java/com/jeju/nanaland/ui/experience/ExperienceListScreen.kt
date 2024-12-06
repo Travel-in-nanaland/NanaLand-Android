@@ -47,6 +47,7 @@ fun ExperienceListScreen(
     moveToBackScreen: () -> Unit,
     moveToExperienceContentScreen: (Int, String) -> Unit,
     moveToSignInScreen: () -> Unit,
+    moveToSearchScreen: () -> Unit,
     toHome: () -> Unit,
     toFavorite: () -> Unit,
     toNana: () -> Unit,
@@ -76,6 +77,7 @@ fun ExperienceListScreen(
         moveToBackScreen = moveToBackScreen,
         moveToExperienceContentScreen = moveToExperienceContentScreen,
         moveToSignInScreen = moveToSignInScreen,
+        moveToSearchScreen = moveToSearchScreen,
         toHome = toHome,
         toFavorite = toFavorite,
         toNana = toNana,
@@ -100,6 +102,7 @@ private fun ExperienceListScreen(
     moveToBackScreen: () -> Unit,
     moveToExperienceContentScreen: (Int, String) -> Unit,
     moveToSignInScreen: () -> Unit,
+    moveToSearchScreen: () -> Unit,
     toHome: () -> Unit,
     toFavorite: () -> Unit,
     toNana: () -> Unit,
@@ -140,7 +143,8 @@ private fun ExperienceListScreen(
             ) {
                 TopBarCommon(
                     title = title,
-                    onBackButtonClicked = moveToBackScreen
+                    onBackButtonClicked = moveToBackScreen,
+                    menus = arrayOf(R.drawable.ic_search_normal to moveToSearchScreen)
                 )
 
                 Spacer(Modifier.height(16.dp))

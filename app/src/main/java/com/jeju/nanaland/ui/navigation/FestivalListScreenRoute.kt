@@ -21,5 +21,6 @@ fun NavGraphBuilder.festivalListScreen(navViewModel: NavViewModel) = composable<
         toFavorite = { navViewModel.navigatePopUpTo(ROUTE.Main(1), data) },
         toNana = { navViewModel.navigatePopUpTo(ROUTE.Main(2), data) },
         toProfile = { navViewModel.navigatePopUpTo(ROUTE.Main(3), data) },
+        moveToSearchScreen = { navViewModel.navigate(ROUTE.Content.SearchInContent(ROUTE.Content.Festival.toString())) }
     )
 }
