@@ -3,6 +3,7 @@ package com.jeju.nanaland.ui.infomodification
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -57,7 +58,9 @@ private fun InformationModificationProposalCompleteScreen(
     CustomSurface {
         Box{
             Column(
-                modifier = Modifier.verticalScroll(rememberScrollState()),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .verticalScroll(rememberScrollState()),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Spacer(Modifier.height(80.dp))
@@ -72,8 +75,7 @@ private fun InformationModificationProposalCompleteScreen(
 
 
                 Text(
-                    text = getString(R.string.info_modification_proposal_heading4)
-                    ,
+                    text = getString(R.string.info_modification_proposal_heading4),
                     color = getColor().main,
                     style = largeTitle02,
                     textAlign = TextAlign.Center
