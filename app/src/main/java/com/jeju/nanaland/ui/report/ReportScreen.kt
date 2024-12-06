@@ -21,7 +21,6 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.jeju.nanaland.R
-import com.jeju.nanaland.domain.request.UriRequestBody
 import com.jeju.nanaland.ui.component.common.CustomSurface
 import com.jeju.nanaland.ui.component.common.dialog.DialogCommon
 import com.jeju.nanaland.ui.component.common.dialog.DialogCommonType
@@ -113,7 +112,7 @@ fun ReportScreen(
                                 email = email,
                                 claimType = viewModel.reportReason!!,
                                 content = reason,
-                                images = images.map { UriRequestBody(context, it) },
+                                images = images.map { it.toString() },
                             )
                     }
             }

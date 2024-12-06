@@ -10,12 +10,10 @@ interface ReportRepository {
     // 정보 수정 제안
     suspend fun informationModificationProposal(
         data: InformationModificationProposalRequest,
-        images: List<UriRequestBody>
     ): NetworkResult<String?>
 
     // 리뷰 신고
     suspend fun reportReview(
         data: ReportDetail,
-        images: List<UriRequestBody>
     ): NetworkResult<String?>
 }

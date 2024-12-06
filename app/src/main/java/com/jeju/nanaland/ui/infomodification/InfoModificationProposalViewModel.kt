@@ -1,14 +1,13 @@
 package com.jeju.nanaland.ui.infomodification
 
 import android.annotation.SuppressLint
-import android.app.Application
 import android.net.Uri
 import androidx.compose.runtime.mutableStateListOf
-import androidx.core.net.toUri
-import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.jeju.nanaland.domain.request.UriRequestBody
+import com.jeju.nanaland.domain.entity.file.FileCategory
 import com.jeju.nanaland.domain.request.report.InformationModificationProposalRequest
+import com.jeju.nanaland.domain.usecase.file.PutFileUseCase
 import com.jeju.nanaland.domain.usecase.member.GetUserProfileUseCase
 import com.jeju.nanaland.domain.usecase.report.InformationModificationProposalUseCase
 import com.jeju.nanaland.globalvalue.constant.emailRegex
@@ -24,14 +23,15 @@ import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class InfoModificationProposalViewModel @Inject constructor(
     private val infoModificationUseCase: InformationModificationProposalUseCase,
     getUserProfileUseCase: GetUserProfileUseCase,
-    private val application: Application
-) : AndroidViewModel(application) {
+    private val putFileUseCase: PutFileUseCase,
+) : ViewModel() {
 
     private val _imageUri = MutableStateFlow<String?>(null)
     val imageUri = _imageUri.asStateFlow()
@@ -79,52 +79,32 @@ class InfoModificationProposalViewModel @Inject constructor(
 
     @SuppressLint("Range", "Recycle")
     fun sendReport(postId: Int, fixType: String, category: String, moveToCompleteScreen: () -> Unit) {
-        val requestData = InformationModificationProposalRequest(
-            postId = postId,
-            fixType = fixType,
-            category = category,
-            content = _inputDescription.value,
-            email = _inputEmail.value
-        )
-
-//        val fileExtension = getFileExtension(application, _imageUri.value!!.toUri())
-//        val fileName = "temporary_file" + if (fileExtension != null) ".$fileExtension" else ""
-//
-//        val imageFile = File(application.cacheDir, fileName)
-//        imageFile.createNewFile()
-//
-//        try {
-//            val oStream = FileOutputStream(imageFile)
-//            val inputStream = application.contentResolver.openInputStream(_imageUri.value!!.toUri())
-//
-//            inputStream?.let {
-//                copy(inputStream, oStream)
-//            }
-//
-//            oStream.flush()
-//        } catch (e: Exception) {
-//            e.printStackTrace()
-//        }
-
-//        var imageFile: File? = null
-//        if (_imageUri.value?.contains("content") == true) {
-//            val cursor = application.contentResolver.query(_imageUri.value!!.toUri(), null, null, null, null)
-//            cursor?.moveToNext()
-//            val path = cursor?.getString(cursor.getColumnIndex(MediaStore.Images.ImageColumns.DATA))
-//            imageFile = path?.let { File(it) }
-//        }
-
-        infoModificationUseCase(requestData, selectedImageList.map { UriRequestBody(application, it.toUri()) })
-            .onEach { networkResult ->
-                networkResult.onSuccess { code, message, data ->
-                    moveToCompleteScreen()
-                }.onError { code, message ->
-
-                }.onException {
-
-                }
+        viewModelScope.launch {
+            val images = selectedImageList.map {
+                putFileUseCase(it, FileCategory.InfoFixReport)
             }
-            .catch { LogUtil.e("flow error", "infoModificationUseCase") }
-            .launchIn(viewModelScope)
+            val requestData = InformationModificationProposalRequest(
+                postId = postId,
+                fixType = fixType,
+                category = category,
+                content = _inputDescription.value,
+                email = _inputEmail.value,
+                images = images
+            )
+
+
+            infoModificationUseCase(requestData)
+                .onEach { networkResult ->
+                    networkResult.onSuccess { code, message, data ->
+                        moveToCompleteScreen()
+                    }.onError { code, message ->
+
+                    }.onException {
+
+                    }
+                }
+                .catch { LogUtil.e("flow error", "infoModificationUseCase") }
+                .launchIn(viewModelScope)
+        }
     }
 }

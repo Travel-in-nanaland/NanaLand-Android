@@ -4,11 +4,12 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.toRoute
+import com.jeju.nanaland.domain.entity.file.FileCategory
 import com.jeju.nanaland.domain.entity.report.ClaimType
 import com.jeju.nanaland.domain.entity.report.ReportDetail
 import com.jeju.nanaland.domain.entity.report.ReportType
 import com.jeju.nanaland.domain.navigation.ROUTE
-import com.jeju.nanaland.domain.request.UriRequestBody
+import com.jeju.nanaland.domain.usecase.file.PutFileUseCase
 import com.jeju.nanaland.domain.usecase.member.GetUserProfileUseCase
 import com.jeju.nanaland.domain.usecase.report.ReportReviewUseCase
 import com.jeju.nanaland.util.network.onError
@@ -20,12 +21,14 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class ReportViewModel @Inject constructor(
     private val reportReviewUseCase: ReportReviewUseCase,
     getUserProfileUseCase: GetUserProfileUseCase,
+    private val putFileUseCase: PutFileUseCase,
     savedStateHandle: SavedStateHandle
 ) : ViewModel() {
     val stateHandle: ROUTE.Report = savedStateHandle.toRoute()
@@ -65,26 +68,30 @@ class ReportViewModel @Inject constructor(
         email: String,
         claimType: ClaimType,
         content: String,
-        images: List<UriRequestBody>
+        images: List<String>
     ) {
-        _submitCallState.update { UiState.Loading }
+        viewModelScope.launch {
+            _submitCallState.update { UiState.Loading }
 
-        reportReviewUseCase(
-            ReportDetail(
-                id = stateHandle.reportId,
-                reportType = if(stateHandle.isReview) ReportType.REVIEW else ReportType.MEMBER,
-                email = email,
-                claimType = claimType,
-                content = content,
-            ),
-            images
-        ).onEach {
-            it.onSuccess { code, message, data ->
-                _submitCallState.update { UiState.Success(Unit) }
-            }.onError { code, message ->
-                _submitCallState.update { UiState.Failure("") }
-            }
-        }.launchIn(viewModelScope)
+            reportReviewUseCase(
+                ReportDetail(
+                    id = stateHandle.reportId,
+                    reportType = if(stateHandle.isReview) ReportType.REVIEW else ReportType.MEMBER,
+                    email = email,
+                    claimType = claimType,
+                    content = content,
+                    images = images.map {
+                        putFileUseCase(it, FileCategory.ClaimReport)
+                    }
+                ),
+            ).onEach {
+                it.onSuccess { code, message, data ->
+                    _submitCallState.update { UiState.Success(Unit) }
+                }.onError { code, message ->
+                    _submitCallState.update { UiState.Failure("") }
+                }
+            }.launchIn(viewModelScope)
+        }
     }
     fun setSubmitCallStateNull(){
         _submitCallState.update { null }
