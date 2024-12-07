@@ -26,6 +26,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.jeju.nanaland.R
+import com.jeju.nanaland.ui.component.common.CustomSurface
 import com.jeju.nanaland.ui.component.common.text.TextWithPointColor
 import com.jeju.nanaland.ui.component.main.searchresult.SearchResultScreenSearchResult
 import com.jeju.nanaland.ui.searchInContent.component.SearchInContentSearchBar
@@ -50,48 +51,49 @@ fun SearchInContentScreen(
     val result by viewModel.categorizedSearchResultList.collectAsState()
     val recentSearchList by viewModel.recentSearchList.collectAsState()
 
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .statusBarsPadding()
-            .navigationBarsPadding()
-    ) {
-        SearchInContentSearchBar(
-            text = inputText,
-            onText = viewModel::updateInputText,
-            onSearch = {
-                isResultPage = true
-                viewModel.onSearch(it)
-            },
-            moveToBackScreen = {
-                if(!isResultPage)
-                    moveToBackScreen()
-                else
-                    isResultPage = false
-            }
-        )
-
-        Spacer(Modifier.height(16.dp))
-
-        if(isResultPage)
-            SearchResultScreenSearchResult(
-                selectedCategory = viewModel.getSearchCategoryType(),
-                allSearchResultList = UiState.Loading,
-                categorizedSearchResultList = result,
-                getSearchResult = { viewModel.getSearchResult(inputText) },
-                updateSearchCategoryType = { },
-                toggleAllSearchResultFavorite = { _, _ -> },
-                toggleSearchResultFavorite = viewModel::toggleSearchResultFavorite,
-                onPostClick = moveToCategoryContentScreen,
-                moveToSignInScreen = moveToSignInScreen,
+    CustomSurface {
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+        ) {
+            SearchInContentSearchBar(
+                text = inputText,
+                onText = viewModel::updateInputText,
+                onSearch = {
+                    isResultPage = true
+                    viewModel.onSearch(it)
+                },
+                moveToBackScreen = {
+                    if(!isResultPage)
+                        moveToBackScreen()
+                    else
+                        isResultPage = false
+                }
             )
-        else
-            RecentScreen(
-                recentSearchList = recentSearchList,
-                onSearch = viewModel::selectRecentSearch,
-                onRemove = viewModel::removeRecentSearch,
-                onRemoveAll = viewModel::removeRecentSearchAll
-            )
+
+            Spacer(Modifier.height(16.dp))
+
+            if(isResultPage)
+                SearchResultScreenSearchResult(
+                    selectedCategory = viewModel.getSearchCategoryType(),
+                    allSearchResultList = UiState.Loading,
+                    categorizedSearchResultList = result,
+                    getSearchResult = { viewModel.getSearchResult(inputText) },
+                    updateSearchCategoryType = { },
+                    toggleAllSearchResultFavorite = { _, _ -> },
+                    toggleSearchResultFavorite = viewModel::toggleSearchResultFavorite,
+                    onPostClick = moveToCategoryContentScreen,
+                    moveToSignInScreen = moveToSignInScreen,
+                )
+            else
+                RecentScreen(
+                    recentSearchList = recentSearchList,
+                    onSearch = viewModel::selectRecentSearch,
+                    onRemove = viewModel::removeRecentSearch,
+                    onRemoveAll = viewModel::removeRecentSearchAll
+                )
+        }
+
     }
 }
 

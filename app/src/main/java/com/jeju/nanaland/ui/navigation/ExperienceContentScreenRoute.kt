@@ -92,6 +92,7 @@ fun NavGraphBuilder.experienceContentScreen(
         moveToProfileScreen = { navViewModel.navigate(ROUTE.Main.Profile.StartDest(it)) },
         moveToReviewEditScreen = { id, category ->
             navViewModel.navigate(ROUTE.Content.ReviewWrite.StartDest(id, category.toString(), true))
-        }
+        },
+        moveToMap = { navViewModel.navigate(it) }
     )
 }

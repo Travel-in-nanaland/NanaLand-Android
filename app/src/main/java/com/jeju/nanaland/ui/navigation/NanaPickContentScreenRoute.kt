@@ -10,6 +10,7 @@ fun NavGraphBuilder.nanaPickContentScreen(navViewModel: NavViewModel) = composab
     NanaPickContentScreen(
         contentId = it.arguments?.getInt("contentId"),
         moveToBackScreen = { navViewModel.popBackStack() },
-        moveToSignInScreen = { navViewModel.navigatePopUpTo(ROUTE.Splash.SignIn, ROUTE.Main()) }
+        moveToSignInScreen = { navViewModel.navigatePopUpTo(ROUTE.Splash.SignIn, ROUTE.Main()) },
+        moveToMap = { navViewModel.navigate(it) }
     )
 }

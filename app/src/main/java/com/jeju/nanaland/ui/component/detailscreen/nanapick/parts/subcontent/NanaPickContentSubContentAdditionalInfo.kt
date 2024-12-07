@@ -11,7 +11,8 @@ import com.jeju.nanaland.util.ui.ComponentPreview
 fun NanaPickContentSubContentAdditionalInfo(
     infoEmoji: String?,
     infoKey: String?,
-    infoValue: String?
+    infoValue: String?,
+    moveToMap: (()-> Unit)?,
 ) {
 
     DetailScreenInformation(
@@ -30,7 +31,8 @@ fun NanaPickContentSubContentAdditionalInfo(
             else -> R.drawable.ic_phone_outlined
         },
         title = "${infoKey ?: ""} : ".useNonBreakingSpace(),
-        content = infoValue.useNonBreakingSpace()
+        content = infoValue.useNonBreakingSpace(),
+        moveToMap = moveToMap
     )
 
 }

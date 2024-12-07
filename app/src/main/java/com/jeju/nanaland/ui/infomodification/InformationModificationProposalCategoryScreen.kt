@@ -76,7 +76,7 @@ private fun InformationModificationProposalCategoryScreen(
             InfoModificationProposalScreenBox(
                 drawableId = R.drawable.ic_location_outlined,
                 text = getString(R.string.info_modification_proposal_장소명_및_위치),
-                onClick = { moveToInfoModificationProposalWritingScreen("LOCATION") }
+                onClick = { moveToInfoModificationProposalWritingScreen("LOCATION") },
             )
 
             Spacer(Modifier.height(16.dp))

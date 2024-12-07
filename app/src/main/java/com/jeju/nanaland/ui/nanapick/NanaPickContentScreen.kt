@@ -26,6 +26,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.jeju.nanaland.R
 import com.jeju.nanaland.domain.entity.nanapick.NanaPickContentData
+import com.jeju.nanaland.domain.navigation.ROUTE
 import com.jeju.nanaland.ui.component.common.CustomSurface
 import com.jeju.nanaland.ui.component.detailscreen.nanapick.NanaPickContentAttractivePointDialog
 import com.jeju.nanaland.ui.component.detailscreen.nanapick.NanaPickContentSubContents
@@ -46,6 +47,7 @@ fun NanaPickContentScreen(
     contentId: Int?,
     moveToBackScreen: () -> Unit,
     moveToSignInScreen: () -> Unit,
+    moveToMap: (ROUTE.Content.Map)-> Unit,
     viewModel: NanaPickContentViewModel = hiltViewModel()
 ) {
     LaunchedEffect(Unit) {
@@ -58,6 +60,7 @@ fun NanaPickContentScreen(
         moveToBackScreen = moveToBackScreen,
         toggleFavorite = { viewModel.toggleFavorite(contentId) },
         moveToSignInScreen = moveToSignInScreen,
+        moveToMap = moveToMap,
         isContent = true
     )
 }
@@ -69,6 +72,7 @@ private fun NanaPickContentScreen(
     toggleFavorite: () -> Unit,
     moveToBackScreen: () -> Unit,
     moveToSignInScreen: () -> Unit,
+    moveToMap: (ROUTE.Content.Map)-> Unit,
     isContent: Boolean
 ) {
     val density = LocalDensity.current.density
@@ -125,7 +129,7 @@ private fun NanaPickContentScreen(
 
                             Spacer(Modifier.height(48.dp))
 
-                            NanaPickContentSubContents(nanaPickContent = nanaPickContent.data) {
+                            NanaPickContentSubContents(nanaPickContent = nanaPickContent.data, moveToMap = moveToMap) {
                                 attractiveDialogText = it
                             }
                         }

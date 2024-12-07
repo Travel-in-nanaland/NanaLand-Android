@@ -69,6 +69,7 @@ fun NavGraphBuilder.natureContentScreen(
         moveToInfoModificationProposalScreen = {
             navViewModel.navigate(ROUTE.InformationModification(data.contentId, "NATURE"))
         },
-        moveToSignInScreen = { navViewModel.navigatePopUpTo(ROUTE.Splash.SignIn, ROUTE.Main()) }
+        moveToSignInScreen = { navViewModel.navigatePopUpTo(ROUTE.Splash.SignIn, ROUTE.Main()) },
+        moveToMap = { navViewModel.navigate(it) }
     )
 }

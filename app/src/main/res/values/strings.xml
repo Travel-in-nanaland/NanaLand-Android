@@ -528,6 +528,13 @@
     <string name="activity_농촌체험">농촌체험</string>
     <string name="activity_힐링테라피">힐링테라피</string>
 
+    <!--맵-->
+    <string name="map_view_map">지도 보기</string>
+    <string name="map_other_app">다른 지도 보기</string>
+    <string name="map_app_google">구글 지도</string>
+    <string name="map_app_naver">네이버 지도</string>
+    <string name="map_app_kakao">카카오 지도</string>
+
     <!--토스트-->
     <string name="toast_heart_myself">자신이 작성한 후기는 좋아요 누를 수 없습니다.</string>
     <string name="toast_one_more_exit">한 번 더 누르면 앱이 종료됩니다.</string>

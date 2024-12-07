@@ -189,6 +189,15 @@ sealed class ROUTE {
         data class SearchInContent(
             val routeString: String
         ): ROUTE()
+
+        @Serializable
+        data class Map(
+            val name: String,
+            val localLocate: String?,
+            val koreaLocate: String,
+            val lat: Double,
+            val lng: Double,
+        ): ROUTE()
     }
 
     @Serializable

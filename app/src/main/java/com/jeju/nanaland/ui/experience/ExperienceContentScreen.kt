@@ -36,6 +36,7 @@ import com.jeju.nanaland.R
 import com.jeju.nanaland.domain.entity.experience.ExperienceContent
 import com.jeju.nanaland.domain.entity.review.ReviewData
 import com.jeju.nanaland.domain.entity.review.ReviewListData
+import com.jeju.nanaland.domain.navigation.ROUTE
 import com.jeju.nanaland.globalvalue.type.ExperienceCategoryType
 import com.jeju.nanaland.globalvalue.type.ReviewCategoryType
 import com.jeju.nanaland.ui.component.common.CustomSurface
@@ -77,6 +78,7 @@ fun ExperienceContentScreen(
     moveToReportScreen: (Int) -> Unit,
     moveToProfileScreen: (Int?) -> Unit,
     moveToReviewEditScreen: (Int, ReviewCategoryType) -> Unit,
+    moveToMap: (ROUTE.Content.Map)-> Unit,
     viewModel: ExperienceContentViewModel = hiltViewModel()
 ) {
     LaunchedEffect(Unit) {
@@ -120,6 +122,7 @@ fun ExperienceContentScreen(
         },
         moveToReportScreen = moveToReportScreen,
         moveToProfileScreen = moveToProfileScreen,
+        moveToMap = moveToMap,
         onEdit = { moveToReviewEditScreen(it.id, ReviewCategoryType.EXPERIENCE) },
         onRemove = { data ->
             removeReviewId = data.id
@@ -157,6 +160,7 @@ private fun ExperienceContentScreen(
     moveToSignInScreen: () -> Unit,
     moveToReportScreen: (Int) -> Unit,
     moveToProfileScreen: (Int?) -> Unit,
+    moveToMap: (ROUTE.Content.Map)-> Unit,
     onEdit: (ReviewData) -> Unit,
     onRemove: (ReviewData) -> Unit,
     isContent: Boolean
@@ -223,7 +227,14 @@ private fun ExperienceContentScreen(
                                         DetailScreenInformation(
                                             drawableId = R.drawable.ic_location_outlined,
                                             title = getString(R.string.detail_screen_common_주소),
-                                            content = experienceContent.data.address
+                                            content = experienceContent.data.address,
+                                            moveToMap = { moveToMap(ROUTE.Content.Map(
+                                                name = experienceContent.data.title,
+                                                localLocate = experienceContent.data.address,
+                                                koreaLocate = experienceContent.data.address,
+                                                lat = 33.359451, // TODO
+                                                lng = 126.545839,
+                                            )) }
                                         )
 
                                         Spacer(Modifier.height(24.dp))

@@ -36,6 +36,7 @@ import com.jeju.nanaland.R
 import com.jeju.nanaland.domain.entity.restaurant.RestaurantContentData
 import com.jeju.nanaland.domain.entity.review.ReviewData
 import com.jeju.nanaland.domain.entity.review.ReviewListData
+import com.jeju.nanaland.domain.navigation.ROUTE
 import com.jeju.nanaland.globalvalue.type.ReviewCategoryType
 import com.jeju.nanaland.ui.component.common.CustomSurface
 import com.jeju.nanaland.ui.component.common.ReviewBottomBar
@@ -74,6 +75,7 @@ fun RestaurantContentScreen(
     moveToReportScreen: (Int) -> Unit,
     moveToProfileScreen: (Int?) -> Unit,
     moveToReviewEditScreen: (Int, ReviewCategoryType) -> Unit,
+    moveToMap: (ROUTE.Content.Map)-> Unit,
     viewModel: RestaurantContentViewModel = hiltViewModel()
 ) {
     LaunchedEffect(Unit) {
@@ -117,6 +119,7 @@ fun RestaurantContentScreen(
         },
         moveToReportScreen = moveToReportScreen,
         moveToProfileScreen = moveToProfileScreen,
+        moveToMap = moveToMap,
         onEdit = { moveToReviewEditScreen(it.id, ReviewCategoryType.RESTAURANT) },
         onRemove = { data ->
             removeReviewId = data.id
@@ -153,6 +156,7 @@ private fun RestaurantContentScreen(
     moveToSignInScreen: () -> Unit,
     moveToReportScreen: (Int) -> Unit,
     moveToProfileScreen: (Int?) -> Unit,
+    moveToMap: (ROUTE.Content.Map)-> Unit,
     onEdit: (ReviewData) -> Unit,
     onRemove: (ReviewData) -> Unit,
     isContent: Boolean
@@ -247,7 +251,14 @@ private fun RestaurantContentScreen(
                                         DetailScreenInformation(
                                             drawableId = R.drawable.ic_location_outlined,
                                             title = getString(R.string.detail_screen_common_주소),
-                                            content = restaurantContent.data.address
+                                            content = restaurantContent.data.address,
+                                            moveToMap = { moveToMap(ROUTE.Content.Map(
+                                                name = restaurantContent.data.title,
+                                                localLocate = restaurantContent.data.address,
+                                                koreaLocate = restaurantContent.data.address,
+                                                lat = 33.359451, // TODO
+                                                lng = 126.545839,
+                                            )) }
                                         )
 
                                         Spacer(Modifier.height(24.dp))

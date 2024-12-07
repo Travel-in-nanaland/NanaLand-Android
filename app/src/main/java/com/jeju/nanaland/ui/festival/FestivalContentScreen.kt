@@ -26,6 +26,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.jeju.nanaland.BuildConfig
 import com.jeju.nanaland.R
 import com.jeju.nanaland.domain.entity.festival.FestivalContentData
+import com.jeju.nanaland.domain.navigation.ROUTE
 import com.jeju.nanaland.globalvalue.userdata.UserData
 import com.jeju.nanaland.ui.component.common.CustomSurface
 import com.jeju.nanaland.ui.component.common.dialog.DialogCommon
@@ -52,6 +53,7 @@ fun FestivalContentScreen(
     moveToBackScreen: () -> Unit,
     moveToInfoModificationProposalScreen: () -> Unit,
     moveToSignInScreen: () -> Unit,
+    moveToMap: (ROUTE.Content.Map)-> Unit,
     viewModel: FestivalContentViewModel = hiltViewModel()
 ) {
     LaunchedEffect(Unit) {
@@ -66,6 +68,7 @@ fun FestivalContentScreen(
         moveToBackScreen = moveToBackScreen,
         moveToInfoModificationProposalScreen = moveToInfoModificationProposalScreen,
         moveToSignInScreen = moveToSignInScreen,
+        moveToMap = moveToMap,
         isContent = true
     )
 }
@@ -79,6 +82,7 @@ private fun FestivalContentScreen(
     moveToBackScreen: () -> Unit,
     moveToInfoModificationProposalScreen: () -> Unit,
     moveToSignInScreen: () -> Unit,
+    moveToMap: (ROUTE.Content.Map)-> Unit,
     isContent: Boolean
 ) {
     val context = LocalContext.current
@@ -167,7 +171,14 @@ private fun FestivalContentScreen(
                                 DetailScreenInformation(
                                     drawableId = R.drawable.ic_location_outlined,
                                     title = getString(R.string.detail_screen_common_주소),
-                                    content = festivalContent.data.address
+                                    content = festivalContent.data.address,
+                                    moveToMap = { moveToMap(ROUTE.Content.Map(
+                                        name = festivalContent.data.title,
+                                        localLocate = festivalContent.data.address,
+                                        koreaLocate = festivalContent.data.address,
+                                        lat = 33.359451, // TODO
+                                        lng = 126.545839,
+                                    )) }
                                 )
 
                                 Spacer(Modifier.height(24.dp))

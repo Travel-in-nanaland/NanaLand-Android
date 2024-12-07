@@ -22,6 +22,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.jeju.nanaland.BuildConfig
 import com.jeju.nanaland.R
 import com.jeju.nanaland.domain.entity.market.MarketContent
+import com.jeju.nanaland.domain.navigation.ROUTE
 import com.jeju.nanaland.globalvalue.userdata.UserData
 import com.jeju.nanaland.ui.component.common.CustomSurface
 import com.jeju.nanaland.ui.component.common.dialog.DialogCommon
@@ -46,6 +47,7 @@ fun MarketContentScreen(
     moveToBackScreen: () -> Unit,
     moveToInfoModificationProposalScreen: () -> Unit,
     moveToSignInScreen: () -> Unit,
+    moveToMap: (ROUTE.Content.Map)-> Unit,
     viewModel: MarketContentViewModel = hiltViewModel()
 ) {
     LaunchedEffect(Unit) {
@@ -60,6 +62,7 @@ fun MarketContentScreen(
         moveToBackScreen = moveToBackScreen,
         moveToInfoModificationProposalScreen = moveToInfoModificationProposalScreen,
         moveToSignInScreen = moveToSignInScreen,
+        moveToMap = moveToMap,
         isContent = true
     )
 }
@@ -73,6 +76,7 @@ private fun MarketContentScreen(
     moveToBackScreen: () -> Unit,
     moveToInfoModificationProposalScreen: () -> Unit,
     moveToSignInScreen: () -> Unit,
+    moveToMap: (ROUTE.Content.Map)-> Unit,
     isContent: Boolean
 ) {
     val context = LocalContext.current
@@ -196,7 +200,14 @@ private fun MarketContentScreen(
                                 DetailScreenInformation(
                                     drawableId = R.drawable.ic_location_outlined,
                                     title = getString(R.string.detail_screen_common_주소),
-                                    content = marketContent.data.address
+                                    content = marketContent.data.address,
+                                    moveToMap = { moveToMap(ROUTE.Content.Map(
+                                        name = marketContent.data.title,
+                                        localLocate = marketContent.data.address,
+                                        koreaLocate = marketContent.data.address,
+                                        lat = 33.359451, // TODO
+                                        lng = 126.545839,
+                                    )) }
                                 )
 
                                 Spacer(Modifier.height(24.dp))

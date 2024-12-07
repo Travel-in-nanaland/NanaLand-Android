@@ -35,6 +35,7 @@ android {
             useSupportLibrary = true
         }
         buildConfigField("String", "BASE_URL", getProperty("baseUrl"))
+        buildConfigField("String", "KAKAO_KEY", getProperty("kakaoKey"))
 //        buildConfigField("String", "NEXT_URL", getProperty("nextUrl"))
 //        buildConfigField("String", "DEV_ACCESS_TOKEN", getProperty("accessToken"))
     }

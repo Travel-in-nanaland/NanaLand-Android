@@ -14,6 +14,7 @@ hiltNavigation = "1.2.0"
 
 # Other service
 kakao="2.20.1"
+kakaoMap="2.12.8"
 googleService = "4.4.2"
 googleServiceLibrary = "4.4.2"
 googleAuth = "21.2.0"
@@ -99,6 +100,7 @@ hilt-navigation = { group = "androidx.hilt", name = "hilt-navigation-compose", v
 # Kakao
 kakao-user = { group = "com.kakao.sdk", name = "v2-user", version.ref = "kakao" } # 카카오 로그인 API 모듈
 kakao-share = { group = "com.kakao.sdk", name = "v2-share", version.ref = "kakao" } # 카카오톡 공유 API 모듈
+kakao-map = { group = "com.kakao.maps.open", name = "android", version.ref = "kakaoMap" }
 
 # Google
 ## Services
@@ -167,7 +169,7 @@ compose = [
 services = [
     "google-service-libriry", "google-auth", "google-id", "credentials", "credentials-auth",
     "firebase-auth", "firebase-analytics", "firebase-analytics-ktx",
-    "firebase-messaging", "kakao-user", "kakao-share"
+    "firebase-messaging", "kakao-user", "kakao-share", "kakao-map"
 ]
 retrofit = ["okhttp", "retrofit", "retrofit-gson", "retrofit-scalar"]
 paging = ["paging-ktx", "paging-compose"]

@@ -24,7 +24,8 @@ fun Modifier.shadowBottomNav() = dropShadow(
     blur = 10,
     spread = 0,
     color = 0x262627,
-    alpha = 10
+    alpha = 10,
+    shape = RoundedCornerShape(12.dp,12.dp,0.dp,0.dp)
 )
 
 fun Modifier.shadowInfo() = dropShadow(

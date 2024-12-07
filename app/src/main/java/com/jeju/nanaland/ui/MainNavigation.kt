@@ -47,6 +47,7 @@ import com.jeju.nanaland.ui.navigation.withdrawalScreen
 import com.jeju.nanaland.ui.noticeDetail.noticeDetailScreen
 import com.jeju.nanaland.ui.notification.notificationScreen
 import com.jeju.nanaland.ui.profile.profileScreenRoute
+import com.jeju.nanaland.ui.searchInContent.mapRoute
 import com.jeju.nanaland.ui.searchInContent.searchInContentRoute
 import com.jeju.nanaland.util.intent.DeepLinkData
 
@@ -208,5 +209,7 @@ fun MainNavigation(
         noticeDetailScreen(navViewModel)
 
         searchInContentRoute(navViewModel)
+
+        mapRoute(navViewModel)
     }
 }
