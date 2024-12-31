@@ -59,7 +59,7 @@ fun TextWithIntent(
         text = text,
         modifier = modifier.clickableNoEffect {
             try {
-                context.startActivity(intent)
+                intent?.let(context::startActivity)
             } catch (e: ActivityNotFoundException) {
                 e.printStackTrace()
             }
