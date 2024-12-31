@@ -40,10 +40,10 @@ fun ThumbnailFavoriteButton(
                 }
             }
             .background(getColor().white, shape = CircleShape)
-            .padding(5.dp),
-        painter = painterResource(if (isFavorite) R.drawable.ic_heart_filled else R.drawable.ic_heart_outlined_white_filled_translucent),
+            .padding(2.dp),
+        painter = painterResource(R.drawable.ic_heart_filled),
         contentDescription = null,
-        colorFilter = ColorFilter.tint(if (isFavorite)  getColor().main else getColor().black25)
+        colorFilter = ColorFilter.tint(if (isFavorite) getColor().main else getColor().black25)
     )
 
     if (isNonMemberGuideDialogShowing.value) {
