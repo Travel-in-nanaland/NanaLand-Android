@@ -4,13 +4,24 @@ import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.net.Uri
 import android.util.Patterns
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.material3.LocalTextStyle
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextLayoutResult
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
@@ -20,6 +31,9 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.TextUnit
+import androidx.compose.ui.unit.dp
+import com.jeju.nanaland.R
+import com.jeju.nanaland.ui.theme.getColor
 import com.jeju.nanaland.util.ui.clickableNoEffect
 
 @Composable
@@ -43,43 +57,58 @@ fun TextWithIntent(
     style: TextStyle = LocalTextStyle.current
 ) {
     val context = LocalContext.current
+    var intentType by remember { mutableStateOf<String?>(null) }
     val intent = remember(text) {
         when {
-            Patterns.PHONE.matcher(text).matches() -> Intent(
-                Intent.ACTION_DIAL, text.toUriWithAddIfNotStarts("tel:")
-            )
-            Patterns.WEB_URL.matcher(text).matches() -> Intent(
-                Intent.ACTION_VIEW, text.toUriWithAddIfNotStarts("http://", "https://")
-            )
+            Patterns.PHONE.matcher(text).matches() -> {
+                intentType = "tel"
+                Intent(Intent.ACTION_DIAL, text.toUriWithAddIfNotStarts("tel:"))
+            }
+            Patterns.WEB_URL.matcher(text).matches() -> {
+                intentType = "web"
+                Intent(Intent.ACTION_VIEW, text.toUriWithAddIfNotStarts("http://", "https://"))
+            }
             else -> null
         }
     }
 
-    Text(
-        text = text,
-        modifier = modifier.clickableNoEffect {
-            try {
-                intent?.let(context::startActivity)
-            } catch (e: ActivityNotFoundException) {
-                e.printStackTrace()
-            }
-        },
-        color = color,
-        fontSize = fontSize,
-        fontStyle = fontStyle,
-        fontWeight = fontWeight,
-        fontFamily = fontFamily,
-        letterSpacing = letterSpacing,
-        textAlign = textAlign,
-        lineHeight = lineHeight,
-        overflow = overflow,
-        softWrap = softWrap,
-        maxLines = maxLines,
-        minLines = minLines,
-        onTextLayout = onTextLayout,
-        style = style,
-        textDecoration = if (intent != null) TextDecoration.Underline else TextDecoration.None
-    )
+    Row(verticalAlignment = Alignment.CenterVertically) {
+        Text(
+            text = text,
+            modifier = modifier.clickableNoEffect {
+                try {
+                    intent?.let(context::startActivity)
+                } catch (e: ActivityNotFoundException) {
+                    e.printStackTrace()
+                }
+            },
+            color = color,
+            fontSize = fontSize,
+            fontStyle = fontStyle,
+            fontWeight = fontWeight,
+            fontFamily = fontFamily,
+            letterSpacing = letterSpacing,
+            textAlign = textAlign,
+            lineHeight = lineHeight,
+            overflow = overflow,
+            softWrap = softWrap,
+            maxLines = maxLines,
+            minLines = minLines,
+            onTextLayout = onTextLayout,
+            style = style,
+            textDecoration = if (intentType == "web") TextDecoration.Underline else TextDecoration.None
+        )
+        if(intentType == "tel") {
+            Spacer(Modifier.width(2.dp))
+            Image(
+                modifier = Modifier.size(12.dp),
+                painter = painterResource(R.drawable.ic_arrow_right),
+                contentDescription = null,
+                colorFilter = ColorFilter.tint(getColor().black)
+            )
+        }
+
+    }
 }
 
 private fun String.toUriWithAddIfNotStarts(vararg ifNot: String): Uri {
