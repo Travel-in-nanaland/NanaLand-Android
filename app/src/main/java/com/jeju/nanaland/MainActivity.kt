@@ -96,13 +96,18 @@ class MainActivity : ComponentActivity() {
         // 공유용 토큰
 //        viewModel.saveRefreshToken("eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI2IiwiYXV0aCI6IlJPTEVfTUVNQkVSIiwiZXhwIjoxNzE1MzU1MDQ3fQ.0qaNAfkEohRBwOAUjiv-3Ob2-tfOUL_XhaVKeFcpp3qQxyVPlbTRz8Q0hzruHNRO5b-p3RymfQxc3CRw24Hvaw")
 
+        var isInit = false
+        var navController: NavHostController
         setContent {
-            val navController: NavHostController = rememberNavController()
-            LaunchedEffect(key1 = true) {
-                lifecycleScope.launch {
-                    repeatOnLifecycle(Lifecycle.State.STARTED) {
-                        navHelper.navAction.collect {
-                            navHelper.runnableNavigate(navController, it)
+            navController = rememberNavController()
+            if(!isInit){
+                isInit = true
+                LaunchedEffect(Unit) {
+                    lifecycleScope.launch {
+                        repeatOnLifecycle(Lifecycle.State.STARTED) {
+                            navHelper.navAction.collect {
+                                navHelper.runnableNavigate(navController, it)
+                            }
                         }
                     }
                 }
