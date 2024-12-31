@@ -121,18 +121,35 @@ class HomeViewModel @Inject constructor(
             .onEach { networkResult ->
                 networkResult.onSuccess { code, message, data ->
                     data?.let {
-                        _recommendedPost.update { uiState ->
-                            if (uiState is UiState.Success) {
-                                LogUtil.e("e", uiState.data.toString())
-                                val newList = uiState.data.map { item ->
-                                    if (item.id == contentId) item.copy(favorite = data.favorite)
-                                    else item
+                        (_recommendedPost.value as? UiState.Success)?.let { recommendedPost ->
+                            val targetIndex = recommendedPost.data.indexOfFirst {
+                                it.id == contentId
+                            }
+                            if(targetIndex != -1) {
+                                _recommendedPost.update {
+                                    UiState.Success(
+                                        recommendedPost.data.toTypedArray().also {
+                                            it[targetIndex] = it[targetIndex].copy(favorite = data.favorite)
+                                        }.toList()
+                                    )
                                 }
-                                UiState.Success(newList)
-                            } else {
-                                uiState
                             }
                         }
+                        (_hotPost.value as? UiState.Success)?.let { hotPost ->
+                            val targetIndex = hotPost.data.indexOfFirst {
+                                it.id == contentId
+                            }
+                            if(targetIndex != -1) {
+                                _hotPost.update {
+                                    UiState.Success(
+                                        hotPost.data.toTypedArray().also {
+                                            it[targetIndex] = it[targetIndex].copy(favorite = data.favorite)
+                                        }.toList()
+                                    )
+                                }
+                            }
+                        }
+
                     }
                 }.onError { code, message ->
 
