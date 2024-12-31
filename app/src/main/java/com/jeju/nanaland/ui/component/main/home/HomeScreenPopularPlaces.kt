@@ -19,9 +19,9 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
 import com.jeju.nanaland.domain.entity.member.HotPostData
 import com.jeju.nanaland.ui.component.thumbnail.parts.ThumbnailFavoriteButton
+import com.jeju.nanaland.ui.theme.body02Bold
 import com.jeju.nanaland.ui.theme.caption01
 import com.jeju.nanaland.ui.theme.getColor
-import com.jeju.nanaland.ui.theme.largeTitle02
 import com.jeju.nanaland.util.ui.UiState
 import com.jeju.nanaland.util.ui.clickableNoEffect
 import com.skydoves.landscapist.glide.GlideImage
@@ -56,8 +56,8 @@ fun HomeScreenPopularPlaces(
                         PlaceView(
                             imageUri = item.firstImage.originUrl,
                             isFavorite = item.favorite,
-                            title = item.title,
-                            subTitle = item.address,
+                            title = item.address,
+                            subTitle = item.title,
                             onFavoriteButtonClick = { onFavoriteButtonClick(item.id, item.category) },
                             onClick = { onClick(item.id, item.category, false) },
                             moveToSignInScreen = moveToSignInScreen
@@ -124,13 +124,12 @@ private fun PlaceView(
             Text(
                 text = title,
                 color = getColor().white,
-                style = largeTitle02,
+                style = caption01,
             )
-            Spacer(Modifier.height(1.dp))
             Text(
                 text = subTitle,
                 color = getColor().white,
-                style = caption01,
+                style = body02Bold,
             )
         }
 
