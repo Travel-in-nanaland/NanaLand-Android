@@ -3,17 +3,16 @@ package com.jeju.nanaland.ui.signup
 import android.annotation.SuppressLint
 import android.app.Application
 import android.net.Uri
-import android.provider.MediaStore
-import android.util.Log
-import androidx.core.net.toUri
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import com.jeju.nanaland.R
+import com.jeju.nanaland.domain.entity.file.FileCategory
 import com.jeju.nanaland.domain.entity.member.ConsentItem
 import com.jeju.nanaland.domain.request.auth.SignUpRequest
 import com.jeju.nanaland.domain.usecase.auth.SignUpUseCase
 import com.jeju.nanaland.domain.usecase.authdatastore.SaveAccessTokenUseCase
 import com.jeju.nanaland.domain.usecase.authdatastore.SaveRefreshTokenUseCase
+import com.jeju.nanaland.domain.usecase.file.PutFileUseCase
 import com.jeju.nanaland.domain.usecase.member.DuplicateNicknameUseCase
 import com.jeju.nanaland.domain.usecase.settingsdatastore.GetLanguageUseCase
 import com.jeju.nanaland.globalvalue.constant.NICKNAME_CONSTRAINT
@@ -36,8 +35,8 @@ import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
-import java.io.File
 import javax.inject.Inject
 
 @HiltViewModel
@@ -47,6 +46,7 @@ class SignUpViewModel @Inject constructor(
     private val saveAccessTokenUseCase: SaveAccessTokenUseCase,
     private val saveRefreshTokenUseCase: SaveRefreshTokenUseCase,
     private val duplicateNicknameUseCase: DuplicateNicknameUseCase,
+    private val putFileUseCase: PutFileUseCase,
     private val application: Application
 ) : AndroidViewModel(application) {
 
@@ -94,14 +94,6 @@ class SignUpViewModel @Inject constructor(
             locale = getLanguageUseCase().firstOrNull() ?: LanguageType.English
         }
 
-        var imageFile: File? = null
-        if (_profileImageUri.value?.contains("content") == true) {
-            val cursor = application.contentResolver.query(_profileImageUri.value!!.toUri(), null, null, null, null)
-            cursor?.moveToNext()
-            val path = cursor?.getString(cursor.getColumnIndex(MediaStore.Images.ImageColumns.DATA))
-            imageFile = path?.let { File(it) }
-        }
-
         val requestData = SignUpRequest(
             consentItems = listOf(
                 ConsentItem("TERMS_OF_USE", isPrivacyPolicyAgreed),
@@ -114,29 +106,32 @@ class SignUpViewModel @Inject constructor(
             locale = locale,
             nickname = _inputNickname.value
         )
+        viewModelScope.launch {
+            val image = _profileImageUri.value?.let { putFileUseCase(it, FileCategory.Profile) }
 
-        signUpUseCase(requestData, imageFile)
-            .onEach { networkResult ->
-                networkResult.onSuccess { code, message, data ->
-                    data?.let {
-                        saveAccessTokenUseCase(it.accessToken ?: "")
-                        saveRefreshTokenUseCase(it.refreshToken ?: "")
-                        UserData.nickname = _inputNickname.value
-                        UserData.provider = provider
-                        moveToTypeTestingScreen()
-                    }
-                }.onError { code, message ->
-                    when (code) {
-                        409 -> {
-                            _errorNickname.update { R.string.sign_up_profile_setting_warning2 }
+            signUpUseCase(requestData, image)
+                .onEach { networkResult ->
+                    networkResult.onSuccess { code, message, data ->
+                        data?.let {
+                            saveAccessTokenUseCase(it.accessToken ?: "")
+                            saveRefreshTokenUseCase(it.refreshToken ?: "")
+                            UserData.nickname = _inputNickname.value
+                            UserData.provider = provider
+                            moveToTypeTestingScreen()
                         }
-                    }
-                }.onException {
+                    }.onError { code, message ->
+                        when (code) {
+                            409 -> {
+                                _errorNickname.update { R.string.sign_up_profile_setting_warning2 }
+                            }
+                        }
+                    }.onException {
 
+                    }
                 }
-            }
-            .catch { LogUtil.e("flow Error", "signUpUseCase") }
-            .launchIn(viewModelScope)
+                .catch { LogUtil.e("flow Error", "signUpUseCase") }
+                .launchIn(viewModelScope)
+        }
     }
     private fun nicknameIsError(): Boolean {
         return if (_inputNickname.value.length > NICKNAME_CONSTRAINT) {
