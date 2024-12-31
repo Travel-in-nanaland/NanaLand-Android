@@ -29,6 +29,7 @@ import com.jeju.nanaland.ui.component.common.icon.GoToUpInList
 import com.jeju.nanaland.ui.component.common.topbar.TopBarCommon
 import com.jeju.nanaland.ui.component.listscreen.filter.LocationFilterTopBar
 import com.jeju.nanaland.ui.component.listscreen.list.MarketThumbnailList
+import com.jeju.nanaland.ui.theme.getColor
 import com.jeju.nanaland.util.resource.getString
 import com.jeju.nanaland.util.ui.ScreenPreview
 import com.jeju.nanaland.util.ui.UiState
@@ -108,6 +109,7 @@ private fun MarketListScreen(
 
     CustomSurface {
         Scaffold(
+            containerColor = getColor().surface,
             bottomBar = { MainNavigationBar(toHome,toFavorite,toNana,toProfile) },
             floatingActionButton = { GoToUpInList(lazyGridState) },
         ) {

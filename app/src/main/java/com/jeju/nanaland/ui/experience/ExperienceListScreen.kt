@@ -36,6 +36,7 @@ import com.jeju.nanaland.ui.component.common.layoutSet.ListEmptyByFilter
 import com.jeju.nanaland.ui.component.common.topbar.TopBarCommon
 import com.jeju.nanaland.ui.component.listscreen.filter.KeywordLocationFilterTopBar
 import com.jeju.nanaland.ui.component.listscreen.list.ExperienceThumbnailList
+import com.jeju.nanaland.ui.theme.getColor
 import com.jeju.nanaland.util.resource.getString
 import com.jeju.nanaland.util.ui.ScreenPreview
 import com.jeju.nanaland.util.ui.UiState
@@ -134,6 +135,7 @@ private fun ExperienceListScreen(
 
     CustomSurface {
         Scaffold(
+            containerColor = getColor().surface,
             bottomBar = { MainNavigationBar(toHome,toFavorite,toNana,toProfile) },
             floatingActionButton = { GoToUpInList(lazyGridState) },
         ) {

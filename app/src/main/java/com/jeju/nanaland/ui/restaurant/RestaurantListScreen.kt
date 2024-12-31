@@ -34,6 +34,7 @@ import com.jeju.nanaland.ui.component.common.layoutSet.ListEmptyByFilter
 import com.jeju.nanaland.ui.component.common.topbar.TopBarCommon
 import com.jeju.nanaland.ui.component.listscreen.filter.KeywordLocationFilterTopBar
 import com.jeju.nanaland.ui.component.listscreen.list.RestaurantThumbnailList
+import com.jeju.nanaland.ui.theme.getColor
 import com.jeju.nanaland.util.resource.getString
 import com.jeju.nanaland.util.ui.UiState
 import kotlinx.coroutines.launch
@@ -118,6 +119,7 @@ private fun RestaurantListScreen(
 
     CustomSurface {
         Scaffold(
+            containerColor = getColor().surface,
             bottomBar = { MainNavigationBar(toHome,toFavorite,toNana,toProfile) },
             floatingActionButton = { GoToUpInList(lazyGridState) },
         ) {
