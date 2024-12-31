@@ -8,7 +8,11 @@ enum class ReviewCategoryType {
     @SerializedName("NANA_CONTENT")
     NANA_CONTENT,
     @SerializedName("EXPERIENCE")
-    EXPERIENCE, //  TODO 분리?
+    EXPERIENCE,
+    @SerializedName("ACTIVITY")
+    ACTIVITY,
+    @SerializedName("CULTURE_AND_ARTS")
+    ART,
     @SerializedName("FESTIVAL")
     FESTIVAL,
     @SerializedName("NATURE")
