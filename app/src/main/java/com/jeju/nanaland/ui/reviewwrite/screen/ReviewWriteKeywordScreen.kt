@@ -150,7 +150,7 @@ private fun ReviewWriteKeywordUI(
                                     .clickable { onKeyword(keyword) }
                                     .padding(horizontal = 16.dp, vertical = 8.dp),
                                 text = getStringArray(R.array.review_keyword)[keyword.stringIndex],
-                                color = if(isSelect) getColor().main else getColor().gray02,
+                                color = if(isSelect) getColor().main else getColor().gray01,
                                 style = body02
                             )
                         }
