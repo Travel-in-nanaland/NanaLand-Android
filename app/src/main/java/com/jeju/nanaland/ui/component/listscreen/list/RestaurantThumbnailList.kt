@@ -2,7 +2,9 @@ package com.jeju.nanaland.ui.component.listscreen.list
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyGridState
@@ -13,6 +15,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.jeju.nanaland.domain.entity.restaurant.RestaurantThumbnailData
+import com.jeju.nanaland.globalvalue.constant.TOP_BAR_HEIGHT
 import com.jeju.nanaland.ui.component.thumbnail.ExperienceThumbnail
 import com.jeju.nanaland.util.ui.UiState
 
@@ -50,6 +53,9 @@ fun RestaurantThumbnailList(
                             moveToSignInScreen = moveToSignInScreen,
                         )
                     }
+                }
+                items(2) {
+                    Spacer(modifier = Modifier.fillMaxWidth().height(TOP_BAR_HEIGHT.dp))
                 }
             }
         }
