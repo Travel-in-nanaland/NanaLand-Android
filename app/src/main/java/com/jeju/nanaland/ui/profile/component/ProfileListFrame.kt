@@ -25,9 +25,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -40,6 +39,7 @@ import com.jeju.nanaland.ui.component.common.CustomSurface
 import com.jeju.nanaland.ui.component.common.topbar.TopBarCommon
 import com.jeju.nanaland.ui.theme.getColor
 import com.jeju.nanaland.util.ui.clickableNoEffect
+import kotlinx.coroutines.launch
 
 @Composable
 fun <T : Any> ProfileListFrame(
@@ -49,21 +49,11 @@ fun <T : Any> ProfileListFrame(
     data: LazyPagingItems<T>,
     rowView: @Composable (T) -> Unit
 ) {
+    val scope = rememberCoroutineScope()
     val state = rememberLazyListState()
     val isVisibleFAB by remember {
         derivedStateOf {
             state.firstVisibleItemIndex != 0
-        }
-    }
-    var scrollTo by remember { mutableIntStateOf(initialScrollToItem) }
-
-    LaunchedEffect(scrollTo) {
-        if (scrollTo == 0){
-            state.animateScrollToItem(0)
-            scrollTo = -1
-        }
-        else if(0 < scrollTo){
-            state.animateScrollToItem(1 + scrollTo)
         }
     }
 
@@ -71,7 +61,9 @@ fun <T : Any> ProfileListFrame(
         Scaffold(
             floatingActionButton = {
                 FAB(isVisibleFAB) {
-                    scrollTo = 0
+                    scope.launch {
+                        state.animateScrollToItem(0)
+                    }
                 }
             },
             containerColor = getColor().surface,
@@ -107,6 +99,12 @@ fun <T : Any> ProfileListFrame(
                     }
             }
         }
+    }
+
+    LaunchedEffect(initialScrollToItem) {
+        Thread.sleep(200)
+        if(0 < initialScrollToItem)
+            state.animateScrollToItem(1 + initialScrollToItem)
     }
 }
 
