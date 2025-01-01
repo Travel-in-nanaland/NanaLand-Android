@@ -78,7 +78,10 @@ private fun LanguageChangeScreen(
         DialogCommon(
             type = DialogCommonType.Language,
             onDismiss = { isConfirmDialogShowing.value = false },
-            onYes = { updateLanguage(selectedLanguage.value) }
+            onYes = {
+                isConfirmDialogShowing.value = false
+                updateLanguage(selectedLanguage.value)
+            }
         )
     }
 }
