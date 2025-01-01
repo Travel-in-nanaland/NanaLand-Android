@@ -112,12 +112,12 @@ private fun DefaultLayout(
 ) = Box(
     modifier = Modifier
         .padding(horizontal = 15.dp)
-        .offset(y = -2.dp)
+        .offset(y = (-2).dp)
         .shadow(                                // 기존 common custom shadow 사용시 뒤에가 비침
             elevation = 1.dp,
             shape = RoundedCornerShape(12.dp),
-            ambientColor = Color.Gray.copy(alpha = 0.9f),
-            spotColor = Color.Gray.copy(alpha = 0.9f)
+            ambientColor = Color.Black.copy(alpha = 0.25f),
+            spotColor = Color.Black.copy(alpha = 0.25f)
         )
         .padding(horizontal = 1.dp)
         .offset(y = 2.dp)
