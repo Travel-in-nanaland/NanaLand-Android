@@ -33,7 +33,6 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import com.jeju.nanaland.R
-import com.jeju.nanaland.ui.theme.getColor
 import com.jeju.nanaland.util.ui.clickableNoEffect
 
 @Composable
@@ -104,7 +103,7 @@ fun TextWithIntent(
                 modifier = Modifier.size(12.dp),
                 painter = painterResource(R.drawable.ic_arrow_right),
                 contentDescription = null,
-                colorFilter = ColorFilter.tint(getColor().black)
+                colorFilter = ColorFilter.tint(color)
             )
         }
 
