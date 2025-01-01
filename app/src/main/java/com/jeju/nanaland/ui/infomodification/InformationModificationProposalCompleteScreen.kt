@@ -32,11 +32,9 @@ import com.jeju.nanaland.util.resource.getString
 @Composable
 fun InformationModificationProposalCompleteScreen(
     moveToContentScreen: () -> Unit,
-    moveToInfoModificationProposalCategoryScreen: () -> Unit,
 ) {
     InformationModificationProposalCompleteScreen(
         moveToContentScreen = moveToContentScreen,
-        moveToInfoModificationProposalCategoryScreen = moveToInfoModificationProposalCategoryScreen,
         isContent = true
     )
 }
@@ -44,7 +42,6 @@ fun InformationModificationProposalCompleteScreen(
 @Composable
 private fun InformationModificationProposalCompleteScreen(
     moveToContentScreen: () -> Unit,
-    moveToInfoModificationProposalCategoryScreen: () -> Unit,
     isContent: Boolean
 ) {
     val rawRes = remember {

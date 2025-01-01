@@ -13,7 +13,7 @@ fun NavGraphBuilder.informationModificationProposalCategoryScreen(navViewModel: 
     InformationModificationProposalCategoryScreen(
         moveToBackScreen = { navViewModel.popBackStack() },
         moveToInfoModificationProposalWritingScreen = { fixType ->
-            navViewModel.navigate(ROUTE.InformationModification.Write(data.postId, data.category, fixType))
+            navViewModel.navigatePopUpTo(ROUTE.InformationModification.Write(data.postId, data.category, fixType), data)
         }
     )
 }

@@ -8,7 +8,6 @@ import com.jeju.nanaland.ui.infomodification.InformationModificationProposalComp
 
 fun NavGraphBuilder.informationModificationProposalCompleteScreen(navViewModel: NavViewModel) = composable<ROUTE.InformationModification.Complete> {
     InformationModificationProposalCompleteScreen(
-        moveToContentScreen = { navViewModel.popBackStack(ROUTE.InformationModification(0,""), true) },
-        moveToInfoModificationProposalCategoryScreen = { navViewModel.popBackStack(ROUTE.InformationModification(0,""), false) }
+        moveToContentScreen = { navViewModel.popBackStack() },
     )
 }
