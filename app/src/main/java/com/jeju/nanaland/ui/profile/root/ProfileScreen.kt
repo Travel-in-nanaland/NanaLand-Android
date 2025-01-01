@@ -2,15 +2,22 @@ package com.jeju.nanaland.ui.profile.root
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -23,6 +30,7 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -39,10 +47,12 @@ import com.jeju.nanaland.ui.profile.root.component.ProfileScreenProfileSection
 import com.jeju.nanaland.ui.profile.root.component.ProfileScreenReviewListSection
 import com.jeju.nanaland.ui.profile.root.component.parts.ProfileScreenTopPart
 import com.jeju.nanaland.ui.theme.body01
+import com.jeju.nanaland.ui.theme.caption01SemiBold
 import com.jeju.nanaland.ui.theme.getColor
 import com.jeju.nanaland.util.network.NetworkResult
 import com.jeju.nanaland.util.resource.getString
 import com.jeju.nanaland.util.ui.UiState
+import com.jeju.nanaland.util.ui.clickableNoEffect
 import kotlinx.coroutines.launch
 
 /** 마이 페이지 **/
@@ -124,10 +134,6 @@ private fun ProfileScreen(
     val scope = rememberCoroutineScope()
     val userProfile = viewModel.userProfile.collectAsState()
     val reviews = viewModel.reviews.collectAsLazyPagingItems()
-    val notices = if(isMine)
-        viewModel.notices.collectAsLazyPagingItems()
-    else
-        null
 
     var selectReview by remember { mutableStateOf<MemberReviewDetail?>(null) }
     var removeReviewId by remember { mutableIntStateOf(-1) }
@@ -157,122 +163,85 @@ private fun ProfileScreen(
         viewModel.init()
     }
 
-//    val isReviewList = viewModel.isReviewList.collectAsStateWithLifecycle()
     var moreOptionDialog by remember { mutableStateOf(false) }
 
-
-    Column(
+    Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(getColor().main5)
     ) {
-        TopBarCommon(
-            title = if(isMine) getString(R.string.common_나의_나나) else "",
-            onBackButtonClicked = onBackButtonClicked,
-            menus = arrayOf(
-                if(isMine)
-                    R.drawable.ic_gear_outlined to moveToSettingsScreen
-                else
-                    R.drawable.ic_more_vert to { moreOptionDialog = true },
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+        ) {
+            TopBarCommon(
+                title = if(isMine) getString(R.string.common_나의_나나) else "",
+                onBackButtonClicked = onBackButtonClicked,
+                menus = arrayOf(
+                    if(isMine)
+                        R.drawable.ic_gear_outlined to moveToSettingsScreen
+                    else
+                        R.drawable.ic_more_vert to { moreOptionDialog = true },
+                )
             )
-        )
-        Column(Modifier.verticalScroll(rememberScrollState())) {
-            when (val up = userProfile.value) {
-                is UiState.Loading -> {}
-                is UiState.Success -> {
-                    val reviewList = reviews.itemSnapshotList.items.take(12)
-                    val noticeList = notices?.itemSnapshotList?.items
+            Column(Modifier.weight(1f).verticalScroll(rememberScrollState())) {
+                when (val up = userProfile.value) {
+                    is UiState.Loading -> {}
+                    is UiState.Success -> {
+                        val reviewList = reviews.itemSnapshotList.items.take(12)
+                        Column(
+                            Modifier.background(getColor().main5)
+                        ) {
 
-                    Spacer(Modifier.height(24.dp))
+                            Spacer(Modifier.height(24.dp))
 
-                    ProfileScreenProfileSection(
-                        profile = up.data,
-                        isMine = isMine,
-                        moveToSignInScreen = moveToSignInScreen,
-                        moveToProfileModificationScreen = {
-                            moveToProfileModificationScreen(
-                                up.data.profileImage.originUrl,
-                                up.data.nickname,
-                                up.data.description
+                            ProfileScreenProfileSection(
+                                profile = up.data,
+                                isMine = isMine,
+                                moveToSignInScreen = moveToSignInScreen,
+                                moveToProfileModificationScreen = {
+                                    moveToProfileModificationScreen(
+                                        up.data.profileImage.originUrl,
+                                        up.data.nickname,
+                                        up.data.description
+                                    )
+                                },
+                                moveToTypeTestScreen = moveToTypeTestScreen,
+                                moveToTypeTestResultScreen = {
+                                    up.data.travelType?.let {
+                                        moveToTypeTestResultScreen(up.data.nickname, it)
+                                    }
+                                }
                             )
-                        },
-                        moveToTypeTestScreen = moveToTypeTestScreen,
-                        moveToTypeTestResultScreen = {
-                            up.data.travelType?.let {
-                                moveToTypeTestResultScreen(up.data.nickname, it)
-                            }
+
+                            ProfileScreenTopPart(
+                                reviewSize = reviewList.size,
+                                moveToReviewScreen = { moveToProfileReviewListScreen(null) }
+                            )
                         }
-                    )
 
-                    Spacer(Modifier.height(24.dp))
+                        ProfileScreenReviewListSection(
+                            reviewList,
+                            onClick = moveToProfileReviewListScreen,
+                            onMenuClick = { selectReview = it },
+                        )
 
-                    ProfileScreenTopPart(
-                        reviewSize = reviewList.size,
-                        moveToReviewScreen = { moveToProfileReviewListScreen(null) }
-                    )
-//                    ProfileScreenTabPart(
-//                        isReviewList = isReviewList.value,
-//                        reviewSize = reviewList.size,
-//                        moveToReviewScreen = { moveToProfileReviewListScreen(null) },
-//                        toggleReviewNoticeTab = if(!isMine) null else {
-//                            { viewModel.setIsReviewList(!isReviewList.value) }
-//                        }
-//                    )
-//                    Column(Modifier.background(getColor().white)) {
-
-//                        if (isMine) {
-//                            if (/*!isReviewList.value || */!viewModel.isGuest)
-//                                ProfileScreenMoreInfoPart(
-//                                    isReviewList = isReviewList.value,
-//                                    listSize = if (isReviewList.value) reviewList.size else noticeList?.size
-//                                        ?: 0,
-//                                    moveToListPage = {
-//                                        if (isReviewList.value) moveToProfileReviewListScreen(null)
-//                                        else moveToProfileNoticeListScreen(null)
-//                                    },
-//                                    moveToReviewWriteScreen = moveToReviewWriteScreen
-//                                )
-//                        } else
-//                            HorizontalDivider()
-
-//                        if (isReviewList.value) {
-                    ProfileScreenReviewListSection(
-                        reviewList,
-                        onClick = moveToProfileReviewListScreen,
-                        onMenuClick = { selectReview = it },
-                    )
-//                        } else if (!noticeList.isNullOrEmpty()) {
-//                            ProfileScreenNoticeListSection(noticeList) {
-//                                moveToProfileNoticeListScreen(it)
-//                            }
-//                        }
-//                    }
-
-                    if (isMine){
-//                        if(isReviewList.value) {
+                        if (isMine){
                             if (viewModel.isGuest) {
                                 ListCenterText(getString(R.string.mypage_screen_review_guest))
-                                return@Column
                             }
                             else if (reviewList.isEmpty()) {
                                 ListCenterText(getString(R.string.mypage_screen_review_empty))
-                                return@Column
                             }
-//                        }
-//                        else if(noticeList.isNullOrEmpty()){
-//                            ListCenterText(getString(R.string.mypage_screen_notice_empty))
-//                            return@Column
-//                        }
+                        }
                     }
-                    Spacer(modifier = Modifier
-                        .fillMaxWidth()
-                        .weight(1f)
-                        .background(getColor().white))
-
+                    is UiState.Failure -> {}
                 }
-                is UiState.Failure -> {}
             }
         }
+
+        if(isMine && !viewModel.isGuest)
+            WriteReviewFAB(onClick = moveToReviewWriteScreen)
+
     }
 
     if(moreOptionDialog)
@@ -314,4 +283,38 @@ private fun ColumnScope.ListCenterText(txt: String){
             textAlign = TextAlign.Center
         )
     }
+}
+
+// 후기 작성 FAB
+@Composable
+private fun BoxScope.WriteReviewFAB(
+    onClick: () -> Unit = {}
+) {
+    Row(
+        verticalAlignment = Alignment.CenterVertically,
+        modifier = Modifier
+            .align(Alignment.BottomEnd)
+            .padding(bottom = 24.dp, end = 16.dp)
+            .background(
+                getColor().main,
+                shape = RoundedCornerShape(50)
+            )
+            .clickableNoEffect(onClick)
+            .padding(vertical = 5.dp)
+            .padding(start = 8.dp, end = 11.dp)
+    ) {
+        Icon(
+            modifier = Modifier.size(20.dp),
+            painter = painterResource(R.drawable.ic_pencil_outlined),
+            contentDescription = null,
+            tint = getColor().white
+        )
+        Spacer(Modifier.width(2.dp))
+        Text(
+            text = getString(R.string.review_write_title),
+            color = getColor().white,
+            style = caption01SemiBold
+        )
+    }
+
 }

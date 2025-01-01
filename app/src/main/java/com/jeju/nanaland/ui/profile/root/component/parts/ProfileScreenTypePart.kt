@@ -43,7 +43,7 @@ fun ProfileScreenTypePart(
     profile: UserProfile,
     isMine: Boolean,
     moveToTypeTestScreen: () -> Unit,
-    moveToTypeTestResultScreen: () -> Unit
+    moveToTypeTestResultScreen: () -> Unit,
 ) {
     Row(Modifier
         .fillMaxWidth()
@@ -85,7 +85,7 @@ fun ProfileScreenTypePart(
             Spacer(modifier = Modifier.width(12.dp))
 
             Column(Modifier.fillMaxHeight()) {
-                TypePart(profile.travelType)
+                TypePart(profile.travelType, onClick = moveToTypeTestResultScreen)
 
                 Spacer(modifier = Modifier.weight(1f))
 
@@ -116,7 +116,8 @@ fun ProfileScreenTypePart(
 
 @Composable
 private fun TypePart(
-    type: TravelType?
+    type: TravelType?,
+    onClick: () -> Unit = {}
 ) {
     Text(
         modifier = Modifier
@@ -125,6 +126,7 @@ private fun TypePart(
                 color = getColor().main,
                 shape = RoundedCornerShape(30.dp)
             )
+            .clickableNoEffect(onClick)
             .padding(horizontal = 12.dp, vertical = 2.dp),
         text = type?.toViewString() ?: getString(R.string.mypage_screen_없음),
         color = getColor().main,
