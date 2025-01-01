@@ -5,9 +5,10 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.ExperimentalLayoutApi
+import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -38,6 +39,7 @@ import com.jeju.nanaland.util.resource.getString
 import com.jeju.nanaland.util.ui.clickableNoEffect
 
 
+@OptIn(ExperimentalLayoutApi::class)
 @Composable
 fun ProfileScreenTypePart(
     profile: UserProfile,
@@ -47,7 +49,6 @@ fun ProfileScreenTypePart(
 ) {
     Row(Modifier
         .fillMaxWidth()
-        .height(76.dp)
         .padding(horizontal = 16.dp)
         .dropShadow(
             positionX = 0,
@@ -84,12 +85,12 @@ fun ProfileScreenTypePart(
             )
             Spacer(modifier = Modifier.width(12.dp))
 
-            Column(Modifier.fillMaxHeight()) {
+            Column(Modifier.weight(1f)) {
                 TypePart(profile.travelType, onClick = moveToTypeTestResultScreen)
 
-                Spacer(modifier = Modifier.weight(1f))
+                Spacer(modifier = Modifier.height(8.dp))
 
-                Row(
+                FlowRow (
                     horizontalArrangement = Arrangement.spacedBy(8.dp)
                 ) {
                     profile.hashTags.forEach {
@@ -98,10 +99,8 @@ fun ProfileScreenTypePart(
                 }
             }
 
-            Spacer(modifier = Modifier.weight(1f))
             if(isMine)
                 TextWithArrow(getString(R.string.mypage_screen_다시하기), moveToTypeTestScreen)
-            Spacer(modifier = Modifier.width(2.dp))
 
         } else {
             Column {
