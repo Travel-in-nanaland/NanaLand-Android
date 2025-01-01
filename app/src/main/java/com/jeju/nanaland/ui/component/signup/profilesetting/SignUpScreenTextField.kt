@@ -51,7 +51,7 @@ fun SignUpScreenTextField(
                     .border(
                         border = BorderStroke(
                             width = 1.dp,
-                            color = if (error == null) getColor().gray02 else getColor().warning
+                            color = if (error == null || inputText.isEmpty()) getColor().gray02 else getColor().warning
                         ),
                         shape = RoundedCornerShape(12.dp)
                     )
@@ -64,7 +64,7 @@ fun SignUpScreenTextField(
                 }
             }
 
-            if (error != null) {
+            if (error != null && inputText.isNotEmpty()) {
                 Spacer(Modifier.height(8.dp))
 
                 Row(verticalAlignment = Alignment.CenterVertically) {

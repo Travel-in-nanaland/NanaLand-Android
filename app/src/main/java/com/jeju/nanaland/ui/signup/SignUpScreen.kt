@@ -137,7 +137,7 @@ private fun SignUpScreen(
                     ) {
                         SignUpScreenCharacterCount(
                             count = inputNickname.length,
-                            isError = inputNicknameError != null
+                            isError = inputNicknameError != null && inputNickname.isNotEmpty()
                         )
                     }
 
