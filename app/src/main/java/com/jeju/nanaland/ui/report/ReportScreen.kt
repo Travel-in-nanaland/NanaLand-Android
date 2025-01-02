@@ -2,13 +2,8 @@ package com.jeju.nanaland.ui.report
 
 import android.widget.Toast
 import androidx.activity.compose.BackHandler
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.imePadding
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -28,7 +23,6 @@ import com.jeju.nanaland.ui.component.common.dialog.SubmitLoadingDialog
 import com.jeju.nanaland.ui.component.common.topbar.TopBarCommon
 import com.jeju.nanaland.ui.report.screen.ReportCategoryScreen
 import com.jeju.nanaland.ui.report.screen.ReportWriteScreen
-import com.jeju.nanaland.ui.theme.getColor
 import com.jeju.nanaland.util.resource.getString
 import com.jeju.nanaland.util.ui.UiState
 
@@ -79,44 +73,33 @@ fun ReportScreen(
         )
     }
 
-    CustomSurface { isImeKeyboardShowing ->
-        Scaffold(
-            containerColor = getColor().surface,
-            contentWindowInsets = WindowInsets(0, 0, 0, 0)
-        ) {
-            Column(
-                modifier = Modifier
-                    .imePadding()
-                    .padding(bottom = if (isImeKeyboardShowing) 0.dp else it.calculateBottomPadding())
-            ) {
-                TopBarCommon(
-                    title = getString(R.string.common_신고),
-                    onBackButtonClicked = {
-                        if(page.value <= 1)
-                            moveToBackScreen()
-                        else
-                            cancelDialog = true
-                    }
-                )
-                Spacer(modifier = Modifier.height(32.dp))
-
-                if(page.value == 1)
-                    ReportCategoryScreen {
-                        viewModel.setReason(it)
-                        viewModel.setPage(2)
-                    }
-                else if(page.value == 2)
-                    ReportWriteScreen(email.value) { reason, email, images ->
-                        if(submitState.value !is UiState.Loading)
-                            viewModel.submit(
-                                email = email,
-                                claimType = viewModel.reportReason!!,
-                                content = reason,
-                                images = images.map { it.toString() },
-                            )
-                    }
+    CustomSurface {
+        TopBarCommon(
+            title = getString(R.string.common_신고),
+            onBackButtonClicked = {
+                if(page.value <= 1)
+                    moveToBackScreen()
+                else
+                    cancelDialog = true
             }
-        }
+        )
+        Spacer(modifier = Modifier.height(32.dp))
+
+        if(page.value == 1)
+            ReportCategoryScreen {
+                viewModel.setReason(it)
+                viewModel.setPage(2)
+            }
+        else if(page.value == 2)
+            ReportWriteScreen(email.value) { reason, email, images ->
+                if(submitState.value !is UiState.Loading)
+                    viewModel.submit(
+                        email = email,
+                        claimType = viewModel.reportReason!!,
+                        content = reason,
+                        images = images.map { it.toString() },
+                    )
+            }
     }
 
     if (isLoadingDialogShowing) {
