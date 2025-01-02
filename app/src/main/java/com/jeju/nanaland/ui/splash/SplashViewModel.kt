@@ -42,32 +42,31 @@ class SplashViewModel @Inject constructor(
     private val _checkingState = MutableStateFlow(SplashCheckingState.Init)
     val checkingState = _checkingState.asStateFlow()
 
-    fun checkProcess(deepLinkData: DeepLinkData) {
+    fun stateSetInit(){
         _checkingState.update { SplashCheckingState.Init }
-
-        viewModelScope.launch {
-            var splashCheckingState = SplashCheckingState.Network
-            val checkJob = launch {
-                splashCheckingState = if (!networkManager.isNetworkConnected) {
-                    SplashCheckingState.Network
-                } else if (!checkLanguageState(deepLinkData.language)) {
-                    SplashCheckingState.Language
-                } else {
-                    withTimeoutOrNull(SPLASH_TIME * 3) {
-                        if (checkAuthState())
-                            SplashCheckingState.Success
-                        else
-                            SplashCheckingState.Authorization
-                    } ?: SplashCheckingState.Network
-                }
+    }
+    fun checkProcess(deepLinkData: DeepLinkData) = viewModelScope.launch {
+        var splashCheckingState = SplashCheckingState.Network
+        val checkJob = launch {
+            splashCheckingState = if (!networkManager.isNetworkConnected) {
+                SplashCheckingState.Network
+            } else if (!checkLanguageState(deepLinkData.language)) {
+                SplashCheckingState.Language
+            } else {
+                withTimeoutOrNull(SPLASH_TIME * 3) {
+                    if (checkAuthState())
+                        SplashCheckingState.Success
+                    else
+                        SplashCheckingState.Authorization
+                } ?: SplashCheckingState.Network
             }
-            val minAnimTimeJob = launch { delay(SPLASH_TIME) }
-
-            checkJob.join()
-            minAnimTimeJob.join()
-
-            _checkingState.update { splashCheckingState }
         }
+        val minAnimTimeJob = launch { delay(SPLASH_TIME) }
+
+        checkJob.join()
+        minAnimTimeJob.join()
+
+        _checkingState.update { splashCheckingState }
     }
 
     private suspend fun checkLanguageState(language: String?): Boolean {

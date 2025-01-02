@@ -52,7 +52,7 @@ fun SplashScreen(
         isNetworkConnectionDialogShowing = isNetworkConnectionDialogShowing,
         retry = {
             isNetworkConnectionDialogShowing = false
-            viewModel.checkProcess(deepLinkData)
+            viewModel.stateSetInit()
         }
     )
 
