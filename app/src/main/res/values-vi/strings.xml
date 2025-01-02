@@ -5,6 +5,7 @@
     <string name="done">Done</string>
     <string name="title_time_picker">Select Time</string>
     <string name="select_time">Select a Time</string>
+    <string name="common_자연">Thiên nhiên</string>
     <string name="common_축제">Lễ hội</string>
     <string name="common_전통시장">Chợ truyền thống</string>
     <string name="common_나나s_Pick">Lựa chọn của Nana</string>
@@ -43,6 +44,7 @@
     <string name="common_공지사항">Thông báo</string>
     <string name="common_수정">Chỉnh sửa</string>
     <string name="common_신고">Báo cáo</string>
+    <string name="common_신고하기">Báo cáo</string>
     <string name="common_사진">Hình ảnh</string>
     <string name="common_동영상">Video</string>
     <string name="common_원">%swon</string>
@@ -66,6 +68,7 @@
     <string name="searching_screen_hot_keywords">Tăng lượt tìm kiếm! Địa điểm JEJU 🍊</string>
     <string name="search_result_screen_no_result">Không có kết quả tìm kiếm tương ứng.</string>
     <string name="dialog_msg_title_9">Bạn phải trở thành thành viên của Nana Land để sử dụng tất cả các dịch vụ✨</string>
+    <string name="dialog_btn_no_agree">Đồng ý</string>
     <string name="dialog_btn_go_sign_up">Đi đăng ký</string>
     <string name="date_filter_dialog_날짜_선택">Chọn ngày</string>
     <string name="date_filter_dialog_초기화">đặt lại</string>
@@ -75,6 +78,7 @@
     <string name="season_filter_dialog_계절_선택">Chọn mùa</string>
     <string name="filter_dialog_common_적용하기">Áp dụng</string>
     <string name="list_screen_common_전_지역">Tất cả các khu vực</string>
+    <string name="list_screen_common_reset_filter">Đặt lại bộ lọc</string>
     <string name="location_common_제주시">Jeju City</string>
     <string name="location_common_애월">Aewol</string>
     <string name="location_common_조천">Jocheon</string>
@@ -93,6 +97,7 @@
     <string name="festival_list_screen_종료된_축제">Lễ hội đã kết thúc</string>
     <string name="festival_list_screen_계절별_축제">lễ hội theo mùa</string>
     <string name="festival_list_screen_image_caption">*Bức ảnh này chỉ để tham khảo.</string>
+    <string name="festival_list_screen_close_detail">Lễ hội này đã kết thúc. Hẹn gặp lại vào năm sau 🖐️</string>
     <string name="detail_screen_common_더보기">Xem thêm</string>
     <string name="detail_screen_common_접기">thu gọn</string>
     <string name="detail_screen_common_주소">địa chỉ</string>
@@ -140,6 +145,7 @@
     <string name="policy_agree_screen_privacy_policy">Đồng ý với Điều khoản Sử dụng và Chính sách Bảo mật (bắt buộc)</string>
     <string name="policy_agree_screen_marketing_policy">Đồng ý sử dụng cho mục đích tiếp thị (tùy chọn)</string>
     <string name="policy_agree_screen_location_policy">Đồng ý với các điều khoản dịch vụ dựa trên vị trí (tùy chọn)</string>
+    <string name="sign_up_profile_setting_guide_sub_title">Vui lòng đặt tên và ảnh bạn muốn sử dụng</string>
     <string name="sign_up_profile_setting_hint">Vui lòng nhập tên của bạn</string>
     <string name="sign_up_profile_setting_warning1">Biệt danh đó không thể sử dụng.</string>
     <string name="sign_up_profile_setting_warning2">Biệt danh đó đã được sử dụng bởi người dùng khác.</string>
@@ -217,6 +223,7 @@
     <string name="settings_screen_사용_설정">Đã bật</string>
     <string name="settings_screen_약관_및_정책">Điều khoản và Chính sách</string>
     <string name="settings_screen_접근권한_안내">Thông tin quyền truy cập</string>
+    <string name="settings_screen_알림_설정">Cài đặt thông báo</string>
     <string name="settings_screen_언어_설정">Cài đặt ngôn ngữ</string>
     <string name="settings_screen_버전_정보">Thông tin phiên bản</string>
     <string name="settings_screen_로그아웃">Đăng xuất</string>
@@ -224,6 +231,7 @@
     <string name="dialog_msg_title_6">Bạn có chắc chắn muốn đăng xuất\n không?</string>
     <string name="mypage_screen_프로필_수정">Chỉnh sửa hồ sơ</string>
     <string name="mypage_screen_테스트_다시하기">Kiểm tra lại</string>
+    <string name="mypage_screen_다시하기">Thử lại</string>
     <string name="mypage_screen_테스트_하기">Kiểm tra</string>
     <string name="mypage_screen_없음">Không Có</string>
     <string name="mypage_screen_로그인이_필요해요">Tôi cần đăng nhập</string>
@@ -239,6 +247,7 @@
     <string name="profile_update_screen_프로필_수정">Chỉnh sửa hồ sơ</string>
     <string name="profile_update_screen_수정_완료">Chỉnh sửa hoàn tất</string>
     <string name="profile_update_screen_warning">Giới thiệu có thể được viết trong 70 ký tự hoặc ít hơn.</string>
+    <string name="profile_update_screen_select_image_remove">Xóa ảnh đại diện</string>
     <string name="profile_update_dialog_text1">Bạn có chắc chắn muốn rời đi không?</string>
     <string name="profile_update_dialog_text2">Nếu bạn rời đi bây giờ,\nNhững gì bạn đang viết sẽ bị xóa.</string>
     <string name="profile_initialization_screen_select_text">Chào!\nVui gặp bạn 👋</string>
@@ -281,7 +290,9 @@
     <string name="review_write_select_rating">Vui lòng {chọn} một {xếp hạng sao}!</string>
     <string name="review_write_writing">Vui lòng {viết} một {đánh giá sau chuyến thăm}!</string>
     <string name="review_write_writing_hint">Vui lòng điền vào chi tiết</string>
+    <string name="review_write_keyword">Vui lòng {chọn} một {từ khóa}!</string>
     <string name="review_write_add_keyword">Thêm từ khóa</string>
+    <string name="review_write_picture">Vui lòng {chọn} một {ảnh}!</string>
     <string name="review_write_complete">Nâng cao</string>
     <string name="review_write_error_maximum_picture">Bạn có thể chọn tối đa %d ảnh</string>
     <string name="review_write_error_maximum_text">Nội dung có thể được viết trong vòng %d ký tự.</string>
@@ -301,6 +312,7 @@
     <string name="report_write_resone_title">Lý do báo cáo</string>
     <string name="report_write_resone_hint">Vui lòng viết ít nhất %d ký tự về lý do báo cáo.</string>
     <string name="report_write_resone_error">Vui lòng viết ít nhất %d ký tự về lý do báo cáo.</string>
+    <string name="report_write_email_subtitle">Vui lòng nhập chính xác địa chỉ email của bạn. Nếu nhập sai, bạn có thể không nhận được kết quả.</string>
     <string name="report_write_complete_toast">Nội dung báo cáo phù hợp với chính sách hoạt động.\nSẽ được xử lý trong vòng tối đa 24 giờ.</string>
     <string name="review_keyword_mood">Bầu không khí</string>
     <string name="review_keyword_with">Bạn đồng hành</string>
@@ -362,6 +374,7 @@
     <string name="type_test_recommended_spot_text">Dành cho %s</string>
     <string name="type_test_recommended_spot_추천_여행지">Điểm đến du lịch được đề xuất</string>
     <string name="home_screen_recommend">Gợi ý từ người dân cho %s của chúng tôi🍊</string>
+    <string name="home_screen_popular">Địa điểm phổ biến ngay bây giờ 🔥</string>
     <string name="home_screen_recommend_default_name">Nana</string>
     <string name="home_screen_hint_1">Hiện tại đảo Jeju đang có lễ hội hoa cải dầu🏵️</string>
     <string name="home_screen_hint_2">Hãy đến các cánh đồng trà xanh ở đảo Jeju nào😎</string>
@@ -408,4 +421,15 @@
     <string name="activity_힐링테라피">Liệu pháp chữa lành</string>
     <string name="toast_heart_myself">Bạn không thể thích một đánh giá bạn tự viết.</string>
     <string name="toast_one_more_exit">Nếu bạn nhấn thêm một lần nữa, ứng dụng sẽ đóng.</string>
+    <string name="common_외">%s và %d</string>
+    <string name="common_close">Đóng</string>
+    <string name="list_screen_common_empty_list_by_filter_head">Không có nội dung tương ứng</string>
+    <string name="list_screen_common_empty_list_by_filter_sub">Điều chỉnh hoặc đặt lại bộ lọc của bạn!</string>
+    <string name="festival_list_screen_close_thumbnail">Hẹn gặp lại vào năm sau 🖐️</string>
+    <string name="sign_up_profile_setting_guide_title">Cài đặt hồ sơ</string>
+    <string name="profile_update_screen_select_image_album">Chọn từ album</string>
+    <string name="dialog_btn_later">Sau đó</string>
+    <string name="dialog_btn_write">Viết</string>
+    <string name="dialog_btn_agree">Không đồng ý</string>
+    <string name="dialog_msg_title_4">Bạn có muốn tắt thông báo không?</string>
 </resources>

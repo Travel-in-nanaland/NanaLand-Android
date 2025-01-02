@@ -18,6 +18,7 @@
     <string name="select_time">Select a Time</string>
 
     <!--전체 공통-->
+    <string name="common_자연">Nature</string>
     <string name="common_축제">Festival</string>
     <string name="common_전통시장">Traditional Markets</string>
     <string name="common_나나s_Pick">nana’s Pick</string>
@@ -63,6 +64,7 @@
     <string name="home_screen_ad4_title">Jeju\'s unique festival in July🎈</string>
     <string name="home_screen_ad4_content">Let\'s go see the festival full of the treasures of the world, feeling Jeju Island!</string>
     <string name="home_screen_recommend">Recommendation from residents for our %s🍊</string>
+    <string name="home_screen_popular">Popular places right now 🔥</string>
     <string name="home_screen_recommend_default_name">Nana</string>
 
     <string name="home_screen_hint_1">Jeju\'s Canola Festival is on now! 🏵️</string>
@@ -102,6 +104,7 @@
 
     <!--비회원 회원가입 유도 다이얼로그-->
     <string name="dialog_msg_title_9">You need to become a\nmember to use all services✨</string>
+    <string name="dialog_btn_no_agree">Agree</string>
     <string name="dialog_btn_go_sign_up">Sign Up for Membership</string>
 
     <!--날짜 선택 다이얼로그-->
@@ -123,6 +126,7 @@
     <string name="list_screen_common_전_지역">All Regions</string>
 
     <!--지역 공통-->
+    <string name="list_screen_common_reset_filter">Reset filter</string>
     <string name="location_common_제주시">Jeju City</string>
     <string name="location_common_애월">Aewol</string>
     <string name="location_common_조천">Jocheon</string>
@@ -145,6 +149,7 @@
     <string name="festival_list_screen_image_caption">*Reference photos.</string>
 
     <!--상세 화면 공통-->
+    <string name="festival_list_screen_close_detail">The festival has ended. See you again next year 🖐️</string>
     <string name="detail_screen_common_더보기">more</string>
     <string name="detail_screen_common_접기">close</string>
     <string name="detail_screen_common_주소">Address</string>
@@ -199,6 +204,7 @@
 
 
     <!--회원가입 프로필 설정 화면-->
+    <string name="sign_up_profile_setting_guide_sub_title">Please set the name and photo you want to use</string>
     <string name="sign_up_profile_setting_hint">Please enter your name</string>
     <string name="sign_up_profile_setting_warning1">This nickname cannot be used.</string>
     <string name="sign_up_profile_setting_warning2">This nickname is already in use by another user.</string>
@@ -291,6 +297,7 @@
     <string name="settings_screen_사용_설정">Set usage</string>
     <string name="settings_screen_약관_및_정책">Terms and policies</string>
     <string name="settings_screen_접근권한_안내">Access permission guide</string>
+    <string name="settings_screen_알림_설정">Notification settings</string>
     <string name="settings_screen_언어_설정">Language settings</string>
     <string name="settings_screen_버전_정보">Version Information</string>
     <string name="settings_screen_로그아웃">Log out</string>
@@ -302,6 +309,7 @@
     <!--마이페이지 화면-->
     <string name="mypage_screen_프로필_수정">Edit Profile</string>
     <string name="mypage_screen_테스트_다시하기">Retest</string>
+    <string name="mypage_screen_다시하기">Do it again</string>
     <string name="mypage_screen_테스트_하기">Testing</string>
     <string name="mypage_screen_없음">None</string>
     <string name="mypage_screen_로그인이_필요해요">Login is required</string>
@@ -321,6 +329,7 @@
     <string name="profile_update_screen_warning">The introduction can be written in 70 characters or less.</string>
 
     <!--프로필 수정 화면 다이얼로그-->
+    <string name="profile_update_screen_select_image_remove">Delete profile picture</string>
     <string name="profile_update_dialog_text1">Are you sure you want to leave?</string>
     <string name="profile_update_dialog_text2">If you leave now,\nWhat you are writing will be deleted.</string>
 
@@ -377,6 +386,7 @@
     <string name="common_공지사항">Announcement</string>
     <string name="common_수정">Correction</string>
     <string name="common_신고">Declaration</string>
+    <string name="common_신고하기">Report</string>
     <string name="common_사진">Picture</string>
     <string name="common_동영상">Videos</string>
     <string name="common_원">%swon</string>
@@ -388,7 +398,9 @@
     <string name="review_write_select_rating">Please {select} a {star rating}!</string>
     <string name="review_write_writing">Please {write} a {visit review}!</string>
     <string name="review_write_writing_hint">Please fill in the details</string>
+    <string name="review_write_keyword">Please {select} a {keyword}!</string>
     <string name="review_write_add_keyword">Add keyword</string>
+    <string name="review_write_picture">Please {select} a {photo}!</string>
     <string name="review_write_complete">Raise</string>
     <string name="review_write_error_maximum_picture">You can select up to %d photos</string>
     <string name="review_write_error_maximum_text">Content can be written within %d characters.</string>
@@ -408,6 +420,7 @@
     <string name="report_write_resone_title">Reason for reporting</string>
     <string name="report_write_resone_hint">Please write at least %d characters about the reason for the report.</string>
     <string name="report_write_resone_error">Please write at least %d characters about the reason for the report.</string>
+    <string name="report_write_email_subtitle">Please enter your email address accurately. If you enter something incorrectly, you may not receive results.</string>
     <string name="report_write_complete_toast">The reported contents are in accordance with the operating policy.\nIt will be processed within a maximum of 24 hours.</string>
     <string name="review_keyword_mood">Atmosphere</string>
     <string name="review_keyword_with">Companion</string>
@@ -480,4 +493,15 @@
     <string name="activity_힐링테라피">Healing Therapy</string>
     <string name="toast_heart_myself">You cannot like a review you wrote yourself.</string>
     <string name="toast_one_more_exit">If you press it once more, the app will close.</string>
+    <string name="common_외">%s and %d</string>
+    <string name="common_close">Close</string>
+    <string name="list_screen_common_empty_list_by_filter_head">No such content</string>
+    <string name="list_screen_common_empty_list_by_filter_sub">Adjust or reset filters!</string>
+    <string name="festival_list_screen_close_thumbnail">See you again next year 🖐️</string>
+    <string name="sign_up_profile_setting_guide_title">Profile settings</string>
+    <string name="profile_update_screen_select_image_album">Select from album</string>
+    <string name="dialog_btn_later">Later</string>
+    <string name="dialog_btn_write">Write</string>
+    <string name="dialog_btn_agree">Disagree</string>
+    <string name="dialog_msg_title_4">Would you like to turn off notifications?</string>
 </resources>

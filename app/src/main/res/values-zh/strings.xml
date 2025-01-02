@@ -4,13 +4,13 @@
 
     <!--언어 초기화 화면-->
 
-    <string name="week_sun_sat_1">日</string>
-    <string name="week_sun_sat_2">一</string>
-    <string name="week_sun_sat_3">二</string>
-    <string name="week_sun_sat_4">三</string>
-    <string name="week_sun_sat_5">四</string>
-    <string name="week_sun_sat_6">五</string>
-    <string name="week_sun_sat_7">六</string>
+    <string name="week_sun_sat_1">一</string>
+    <string name="week_sun_sat_2">二</string>
+    <string name="week_sun_sat_3">三</string>
+    <string name="week_sun_sat_4">四</string>
+    <string name="week_sun_sat_5">五</string>
+    <string name="week_sun_sat_6">六</string>
+    <string name="week_sun_sat_7">日</string>
 
     <string name="cancel">Cancel</string>
     <string name="done">Done</string>
@@ -18,6 +18,7 @@
     <string name="select_time">Select a Time</string>
 
     <!--전체 공통-->
+    <string name="common_자연">自然</string>
     <string name="common_축제">庆典</string>
     <string name="common_전통시장">传统市场</string>
     <string name="common_나나s_Pick">nana推荐</string>
@@ -63,6 +64,7 @@
     <string name="home_screen_ad4_title">济州岛七月举办的独特节日🎈</string>
     <string name="home_screen_ad4_content">来看看充满济州岛风情的世界宝藏节日吧！</string>
     <string name="home_screen_recommend">为您准备的 %s 推荐🍊</string>
+    <string name="home_screen_popular">当前热门地点 🔥</string>
     <string name="home_screen_recommend_default_name">Nana</string>
 
     <string name="home_screen_hint_1">济州岛的油菜花节正进行中！🏵️</string>
@@ -102,6 +104,7 @@
 
     <!--비회원 회원가입 유도 다이얼로그-->
     <string name="dialog_msg_title_9">必须成为会员\n才能使用所有服务✨</string>
+    <string name="dialog_btn_no_agree">同意</string>
     <string name="dialog_btn_go_sign_up">去注册会员</string>
 
 
@@ -124,6 +127,7 @@
     <string name="list_screen_common_전_지역">全区域</string>
 
     <!--지역 공통-->
+    <string name="list_screen_common_reset_filter">重置过滤器</string>
     <string name="location_common_제주시">济州市</string>
     <string name="location_common_애월">涯月</string>
     <string name="location_common_조천">朝天</string>
@@ -146,6 +150,7 @@
     <string name="festival_list_screen_image_caption">*参考照片。</string>
 
     <!--상세 화면 공통-->
+    <string name="festival_list_screen_close_detail">活动已结束。明年再见 🖐️</string>
     <string name="detail_screen_common_더보기">更多</string>
     <string name="detail_screen_common_접기">折叠</string>
     <string name="detail_screen_common_주소">地址</string>
@@ -199,6 +204,7 @@
     <string name="policy_agree_screen_location_policy">同意基于位置的服务条款</string>
 
     <!--회원가입 프로필 설정 화면-->
+    <string name="sign_up_profile_setting_guide_sub_title">请设置您想使用的姓名和照片</string>
     <string name="sign_up_profile_setting_hint">请输入名字</string>
     <string name="sign_up_profile_setting_warning1">该昵称已被其他用户使用。</string>
     <string name="sign_up_profile_setting_warning2">该昵称无法使用。</string>
@@ -292,6 +298,7 @@
     <string name="settings_screen_사용_설정">应用设置</string>
     <string name="settings_screen_약관_및_정책">条款与政策</string>
     <string name="settings_screen_접근권한_안내">权限指南</string>
+    <string name="settings_screen_알림_설정">通知设置</string>
     <string name="settings_screen_언어_설정">语言设置</string>
     <string name="settings_screen_버전_정보">版本信息</string>
     <string name="settings_screen_로그아웃">登出</string>
@@ -303,6 +310,7 @@
     <!--마이페이지 화면-->
     <string name="mypage_screen_프로필_수정">编辑个人资料</string>
     <string name="mypage_screen_테스트_다시하기">再次测试</string>
+    <string name="mypage_screen_다시하기">再试一次</string>
     <string name="mypage_screen_테스트_하기">测试</string>
     <string name="mypage_screen_없음">无</string>
     <string name="mypage_screen_로그인이_필요해요">需要登录</string>
@@ -321,6 +329,7 @@
     <string name="profile_update_screen_수정_완료">修改完成</string>
     <string name="profile_update_screen_warning">介绍可以在70个字符以内书写。</string>
     <!--프로필 수정 화면 다이얼로그-->
+    <string name="profile_update_screen_select_image_remove">删除个人资料照片</string>
     <string name="profile_update_dialog_text1">您确定要离开吗？</string>
     <string name="profile_update_dialog_text2">如果您现在离开，\n您正在写的内容将被删除。</string>
 
@@ -377,6 +386,7 @@
     <string name="common_공지사항">公告</string>
     <string name="common_수정">修改</string>
     <string name="common_신고">举报</string>
+    <string name="common_신고하기">举报</string>
     <string name="common_사진">图片</string>
     <string name="common_동영상">视频</string>
     <string name="common_원">%s韩元</string>
@@ -388,7 +398,9 @@
     <string name="review_write_select_rating">请{选择}一个{星级评分}！</string>
     <string name="review_write_writing">请{写下}一个{访问评价}！</string>
     <string name="review_write_writing_hint">请填写详细信息</string>
+    <string name="review_write_keyword">请{选择}一个{关键词}！</string>
     <string name="review_write_add_keyword">添加关键词</string>
+    <string name="review_write_picture">请{选择}一张{照片}！</string>
     <string name="review_write_complete">上传</string>
     <string name="review_write_error_maximum_picture">您最多可以选择%d张照片</string>
     <string name="review_write_error_maximum_text">内容可在%d个字符内书写。</string>
@@ -408,6 +420,7 @@
     <string name="report_write_resone_title">举报原因</string>
     <string name="report_write_resone_hint">请写下至少%d个字的举报理由。</string>
     <string name="report_write_resone_error">请写下至少%d个字的举报理由。</string>
+    <string name="report_write_email_subtitle">请准确输入您的电子邮件地址。如果输入错误，可能无法收到结果。</string>
     <string name="report_write_complete_toast">举报内容符合运营政策。\n将在最多24小时内处理。</string>
     <string name="review_keyword_mood">氛围</string>
     <string name="review_keyword_with">同伴</string>
@@ -480,4 +493,15 @@
     <string name="activity_힐링테라피">治愈疗法</string>
     <string name="toast_heart_myself">您不能点赞自己写的评价。</string>
     <string name="toast_one_more_exit">如果你再按一次，应用程序将关闭。</string>
+    <string name="common_외">%s和%d</string>
+    <string name="common_close">关闭</string>
+    <string name="list_screen_common_empty_list_by_filter_head">没有这样的内容</string>
+    <string name="list_screen_common_empty_list_by_filter_sub">调整或重置过滤器！</string>
+    <string name="festival_list_screen_close_thumbnail">明年再见 🖐️</string>
+    <string name="sign_up_profile_setting_guide_title">个人资料设置</string>
+    <string name="profile_update_screen_select_image_album">从相册中选择</string>
+    <string name="dialog_btn_later">稍后</string>
+    <string name="dialog_btn_write">写</string>
+    <string name="dialog_btn_agree">不同意</string>
+    <string name="dialog_msg_title_4">您是否想关闭通知？</string>
 </resources>

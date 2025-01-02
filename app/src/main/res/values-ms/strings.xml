@@ -31,6 +31,7 @@
     <string name="select_time">Select a Time</string>
 
     <!--전체 공통-->
+    <string name="common_자연">Alam</string>
     <string name="common_축제">Festival</string>
     <string name="common_전통시장">Pasaran Tradisional</string>
     <string name="common_나나s_Pick">Pilihan Nana</string>
@@ -76,6 +77,7 @@
     <string name="home_screen_ad4_title">Festival khas di Jeju pada bulan Julai🎈</string>
     <string name="home_screen_ad4_content">Mari saksikan festival yang penuh dengan harta karun dunia, rasa Pulau Jeju!</string>
     <string name="home_screen_recommend">Cadangan daripada penduduk untuk %s kami🍊</string>
+    <string name="home_screen_popular">Tempat popular sekarang 🔥</string>
     <string name="home_screen_recommend_default_name">Nana</string>
 
     <string name="home_screen_hint_1">Festival Bunga Canola di Jeju sedang berlangsung! 🏵️</string>
@@ -102,6 +104,7 @@
 
     <!--비회원 회원가입 유도 다이얼로그-->
     <string name="dialog_msg_title_9">Anda perlu menjadi ahli untuk menggunakan semua perkhidmatan✨</string>
+    <string name="dialog_btn_no_agree">Setuju</string>
     <string name="dialog_btn_go_sign_up">Daftar Ahli</string>
 
 
@@ -124,6 +127,7 @@
     <string name="list_screen_common_전_지역">Semua Kawasan</string>
 
     <!--지역 공통-->
+    <string name="list_screen_common_reset_filter">Tetapkan semula penapis</string>
     <string name="location_common_제주시">Jeju City</string>
     <string name="location_common_애월">Aewol</string>
     <string name="location_common_조천">Jocheon</string>
@@ -146,6 +150,7 @@
     <string name="festival_list_screen_image_caption">*Gambar untuk rujukan.</string>
 
     <!--상세 화면 공통-->
+    <string name="festival_list_screen_close_detail">Festival ini telah tamat. Jumpa lagi tahun depan 🖐️</string>
     <string name="detail_screen_common_더보기">Lihat Lagi</string>
     <string name="detail_screen_common_접기">Sembunyi</string>
     <string name="detail_screen_common_주소">Alamat</string>
@@ -200,6 +205,7 @@
 
 
     <!--회원가입 프로필 설정 화면-->
+    <string name="sign_up_profile_setting_guide_sub_title">Sila tetapkan nama dan foto yang anda mahu gunakan</string>
     <string name="sign_up_profile_setting_hint">Sila masukkan nama</string>
     <string name="sign_up_profile_setting_warning1">Nama panggilan ini sudah digunakan oleh pengguna lain.</string>
     <string name="sign_up_profile_setting_warning2">Nama panggilan ini tidak boleh digunakan.</string>
@@ -292,6 +298,7 @@
     <string name="settings_screen_사용_설정">Tetapkan penggunaan</string>
     <string name="settings_screen_약관_및_정책">Terma dan dasar</string>
     <string name="settings_screen_접근권한_안내">Panduan akses kebenaran</string>
+    <string name="settings_screen_알림_설정">Tetapan pemberitahuan</string>
     <string name="settings_screen_언어_설정">Tetapan bahasa</string>
     <string name="settings_screen_버전_정보">Maklumat versi</string>
     <string name="settings_screen_로그아웃">Log keluar</string>
@@ -303,6 +310,7 @@
     <!--마이페이지 화면-->
     <string name="mypage_screen_프로필_수정">Ubah Profil</string>
     <string name="mypage_screen_테스트_다시하기">Uji semula</string>
+    <string name="mypage_screen_다시하기">Cuba lagi</string>
     <string name="mypage_screen_테스트_하기">Ujian</string>
     <string name="mypage_screen_없음">Tiada</string>
     <string name="mypage_screen_로그인이_필요해요">Log masuk diperlukan</string>
@@ -322,6 +330,7 @@
 
     <!--프로필 수정 화면 다이얼로그-->
     <string name="profile_update_screen_warning">Pengenalan boleh ditulis dalam 70 aksara atau kurang.</string>
+    <string name="profile_update_screen_select_image_remove">Padam gambar profil</string>
     <string name="profile_update_dialog_text1">Adakah anda pasti mahu keluar?</string>
     <string name="profile_update_dialog_text2">Jika anda keluar sekarang,\nApa yang anda tulis akan dipadam.</string>
 
@@ -378,6 +387,7 @@
     <string name="common_공지사항">Pengumuman</string>
     <string name="common_수정">Pembetulan</string>
     <string name="common_신고">Laporan</string>
+    <string name="common_신고하기">Lapor</string>
     <string name="common_사진">Gambar</string>
     <string name="common_동영상">Video</string>
     <string name="common_원">%swon</string>
@@ -389,7 +399,9 @@
     <string name="review_write_select_rating">Sila {pilih} penilaian {bintang}!</string>
     <string name="review_write_writing">Sila {tulis} ulasan {kunjungan}!</string>
     <string name="review_write_writing_hint">Sila isikan butiran</string>
+    <string name="review_write_keyword">Sila {pilih} satu {kata kunci}!</string>
     <string name="review_write_add_keyword">Tambah kata kunci</string>
+    <string name="review_write_picture">Sila {pilih} satu {foto}!</string>
     <string name="review_write_complete">Naikkan</string>
     <string name="review_write_error_maximum_picture">Anda boleh memilih sehingga %d gambar</string>
     <string name="review_write_error_maximum_text">Kandungan boleh ditulis dalam %d aksara.</string>
@@ -409,6 +421,7 @@
     <string name="report_write_resone_title">Sebab untuk laporan</string>
     <string name="report_write_resone_hint">Sila tulis sekurang-kurangnya %d aksara mengenai sebab untuk laporan ini.</string>
     <string name="report_write_resone_error">Sila tulis sekurang-kurangnya %d aksara mengenai sebab untuk laporan ini.</string>
+    <string name="report_write_email_subtitle">Sila masukkan alamat e-mel anda dengan betul. Jika anda memasukkan maklumat yang salah, anda mungkin tidak menerima hasil.</string>
     <string name="report_write_complete_toast">Kandungan yang dilaporkan akan diproses dalam \ntempoh maksimum 24 jam mengikut dasar operasi.</string>
     <string name="review_keyword_mood">Suasana</string>
     <string name="review_keyword_with">Teman</string>
@@ -481,4 +494,15 @@
     <string name="activity_힐링테라피">Terapi Penyembuhan</string>
     <string name="toast_heart_myself">Anda tidak boleh menyukai ulasan yang anda tulis sendiri.</string>
     <string name="toast_one_more_exit">Jika anda tekan sekali lagi, aplikasi akan ditutup.\"</string>
+    <string name="common_외">%s dan %d</string>
+    <string name="common_close">Tutup</string>
+    <string name="list_screen_common_empty_list_by_filter_head">Tiada kandungan yang sesuai</string>
+    <string name="list_screen_common_empty_list_by_filter_sub">Laraskan atau tetapkan semula penapis anda!</string>
+    <string name="festival_list_screen_close_thumbnail">Jumpa lagi tahun depan 🖐️</string>
+    <string name="sign_up_profile_setting_guide_title">Tetapan profil</string>
+    <string name="profile_update_screen_select_image_album">Pilih dari album</string>
+    <string name="dialog_btn_later">Kemudian</string>
+    <string name="dialog_btn_write">Tulis</string>
+    <string name="dialog_btn_agree">Tidak setuju</string>
+    <string name="dialog_msg_title_4">Adakah anda mahu mematikan pemberitahuan?</string>
 </resources>
