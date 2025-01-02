@@ -26,10 +26,12 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.jeju.nanaland.R
 import com.jeju.nanaland.domain.entity.review.MemberReviewDetail
+import com.jeju.nanaland.globalvalue.type.ReviewCategoryType
 import com.jeju.nanaland.ui.theme.body02SemiBold
 import com.jeju.nanaland.ui.theme.caption02
 import com.jeju.nanaland.ui.theme.dropShadow
 import com.jeju.nanaland.ui.theme.getColor
+import com.jeju.nanaland.util.resource.getString
 import com.jeju.nanaland.util.ui.clickableNoEffect
 import com.skydoves.landscapist.glide.GlideImage
 
@@ -91,9 +93,10 @@ fun ProfileReviewRow(
                             shape = RoundedCornerShape(30.dp)
                         ).padding(horizontal = 6.dp),
                     text = when(data.category) {
-//                ReviewCategoryType.EXPERIENCE -> getString(R.string.common_제주_맛집)
-//                ReviewCategoryType.RESTAURANT -> getString(R.string.common_제주_맛집)
-                        else -> "TODO"
+                        ReviewCategoryType.ACTIVITY -> getString(R.string.common_액티비티)
+                        ReviewCategoryType.ART -> getString(R.string.common_문화예술)
+                        ReviewCategoryType.RESTAURANT -> getString(R.string.common_제주_맛집)
+                        else -> "    "
                     },
                     style = caption02,
                     color = getColor().main
