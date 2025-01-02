@@ -261,6 +261,7 @@ private fun ProfileScreen(
             onYes = { scope.launch {
                 if(viewModel.setRemove(removeReviewId) is NetworkResult.Success) {
                     removeReviewId = -1
+                    selectReview = null
                     reviews.refresh()
                 }
             } },
