@@ -47,7 +47,7 @@ import com.jeju.nanaland.ui.profile.root.component.ProfileScreenProfileSection
 import com.jeju.nanaland.ui.profile.root.component.ProfileScreenReviewListSection
 import com.jeju.nanaland.ui.profile.root.component.parts.ProfileScreenTopPart
 import com.jeju.nanaland.ui.theme.body01
-import com.jeju.nanaland.ui.theme.caption01SemiBold
+import com.jeju.nanaland.ui.theme.caption02SemiBold
 import com.jeju.nanaland.ui.theme.getColor
 import com.jeju.nanaland.util.network.NetworkResult
 import com.jeju.nanaland.util.resource.getString
@@ -314,7 +314,7 @@ private fun BoxScope.WriteReviewFAB(
         Text(
             text = getString(R.string.review_write_title),
             color = getColor().white,
-            style = caption01SemiBold
+            style = caption02SemiBold
         )
     }
 
