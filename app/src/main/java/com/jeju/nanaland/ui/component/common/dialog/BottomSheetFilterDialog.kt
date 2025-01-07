@@ -253,7 +253,7 @@ fun BottomSheetFilterDialog(
     BottomSheetFilterDialogImpl(
         onDismiss = onDismiss,
         isShow = isShow,
-        title = getString(R.string.date_filter_dialog_날짜_선택),
+        title = getString(R.string.season_filter_dialog_계절_선택),
         onApply = null
     ) {
         Spacer(Modifier.height(19.dp))
