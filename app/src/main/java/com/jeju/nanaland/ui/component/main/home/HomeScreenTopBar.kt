@@ -43,6 +43,7 @@ import com.jeju.nanaland.util.language.customContext
 import com.jeju.nanaland.util.resource.getString
 import com.jeju.nanaland.util.ui.ScreenPreview
 import com.jeju.nanaland.util.ui.clickableNoEffect
+import com.jeju.nanaland.util.ui.conditional
 import kotlin.random.Random
 
 @Composable
@@ -76,10 +77,16 @@ fun HomeScreenTopBar(
                     }
                 }
                 .padding(start = 16.dp, end = 8.dp)
-                .size(32.dp),
+                .conditional(currentViewType != HomeScreenViewType.Home){
+                    padding(end = 8.dp)
+                }
+                .size(32.dp)
+                .conditional(currentViewType != HomeScreenViewType.Home){
+                    padding(4.dp)
+                },
             painter = painterResource(id = if (currentViewType == HomeScreenViewType.Home) R.drawable.ic_logo else R.drawable.ic_arrow_left),
             contentDescription = null,
-            colorFilter = ColorFilter.tint(if(currentViewType == HomeScreenViewType.Home) Color.White else getColor().main)
+            colorFilter = if(currentViewType == HomeScreenViewType.Home) ColorFilter.tint(Color.White) else null
         )
         BasicTextField(
             modifier = Modifier
