@@ -10,7 +10,6 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -18,7 +17,6 @@ import com.jeju.nanaland.R
 import com.jeju.nanaland.domain.entity.member.RecommendedPostData
 import com.jeju.nanaland.ui.component.common.CustomSurface
 import com.jeju.nanaland.ui.component.common.topbar.TopBarCommon
-import com.jeju.nanaland.ui.component.signup.recommendedspot.RecommendedSpotScreenBottomButton
 import com.jeju.nanaland.ui.component.signup.recommendedspot.RecommendedSpotScreenItem
 import com.jeju.nanaland.ui.component.signup.recommendedspot.RecommendedSpotScreenText1
 import com.jeju.nanaland.ui.component.signup.recommendedspot.RecommendedSpotScreenText2
@@ -92,13 +90,13 @@ private fun RecommendedSpotScreen(
                 Spacer(Modifier.height(80.dp))
             }
 
-            Box(
-                modifier = Modifier
-                    .align(Alignment.BottomCenter)
-                    .padding(bottom = 20.dp)
-            ) {
-                RecommendedSpotScreenBottomButton { moveToMainScreen() }
-            }
+//            Box(
+//                modifier = Modifier
+//                    .align(Alignment.BottomCenter)
+//                    .padding(bottom = 20.dp)
+//            ) {
+//                RecommendedSpotScreenBottomButton { moveToMainScreen() }
+//            }
         }
     }
 }
