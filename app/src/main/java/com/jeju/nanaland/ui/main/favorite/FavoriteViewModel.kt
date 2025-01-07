@@ -69,7 +69,8 @@ class FavoriteViewModel @Inject constructor(
             SearchCategoryType.Nature -> getFavoriteNatureListUseCase(requestData)
             SearchCategoryType.Festival -> getFavoriteFestivalListUseCase(requestData)
             SearchCategoryType.Market -> getFavoriteMarketListUseCase(requestData)
-            SearchCategoryType.Experience -> getFavoriteExperienceListUseCase(requestData)
+            SearchCategoryType.Activity -> getFavoriteExperienceListUseCase(requestData, SearchCategoryType.Activity)
+            SearchCategoryType.Art -> getFavoriteExperienceListUseCase(requestData, SearchCategoryType.Art)
             SearchCategoryType.NanaPick -> getFavoriteNanaPickListUseCase(requestData)
             SearchCategoryType.Restaurant -> getFavoriteRestaurantListUseCase(requestData)
         }.onEach {  networkResult ->

@@ -17,8 +17,10 @@ data class AllSearchResultListData(
     val festival: SearchResultData,
     @SerializedName("nature")
     val nature: SearchResultData,
-    @SerializedName("experience")
-    val experience: SearchResultData,
+    @SerializedName("activity")
+    val activity: SearchResultData,
+    @SerializedName("cultureAndArts")
+    val art: SearchResultData,
     @SerializedName("market")
     val market: SearchResultData,
     @SerializedName("restaurant")

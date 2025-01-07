@@ -38,6 +38,7 @@ import com.jeju.nanaland.R
 import com.jeju.nanaland.domain.entity.review.ReviewKeywordResult
 import com.jeju.nanaland.domain.navigation.NavViewModel
 import com.jeju.nanaland.domain.navigation.ROUTE
+import com.jeju.nanaland.globalvalue.type.ReviewCategoryType
 import com.jeju.nanaland.ui.component.common.CustomSurface
 import com.jeju.nanaland.ui.component.common.topbar.TopBarCommon
 import com.jeju.nanaland.ui.reviewwrite.ReviewWriteViewModel
@@ -214,7 +215,12 @@ private fun ResultDataRowView(
                                     shape = RoundedCornerShape(50)
                                 )
                                 .padding(horizontal = 12.dp, vertical = 1.dp),
-                            text = it.categoryValue,
+                            text = when(it.category) {
+                                ReviewCategoryType.ACTIVITY -> getString(R.string.common_액티비티)
+                                ReviewCategoryType.ART -> getString(R.string.common_문화예술)
+                                ReviewCategoryType.RESTAURANT -> getString(R.string.common_제주_맛집)
+                                else -> ""
+                            },
                             color = getColor().main,
                             style = caption02
                         )

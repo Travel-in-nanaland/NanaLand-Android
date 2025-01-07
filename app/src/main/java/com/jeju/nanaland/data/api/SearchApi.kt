@@ -64,6 +64,7 @@ interface SearchApi {
     @GET("search/experience")
     suspend fun getExperienceSearchResultList(
         @Query("keyword") keyword: String,
+        @Query("experienceType") type: String,
         @Query("page") page: Int,
         @Query("size") size: Int
     ): Response<ResponseWrapper<SearchResultData>>

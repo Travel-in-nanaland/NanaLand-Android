@@ -88,11 +88,13 @@ class SearchRepositoryImpl(
 
     // 이색체험 검색 결과
     override suspend fun getExperienceSearchResultList(
-        data: GetSearchResultListRequest
+        data: GetSearchResultListRequest,
+        type: String
     ): NetworkResult<SearchResultData> {
         return handleResult {
             searchApi.getExperienceSearchResultList(
                 keyword = data.keyword,
+                type = type,
                 page = data.page,
                 size = data.size
             )

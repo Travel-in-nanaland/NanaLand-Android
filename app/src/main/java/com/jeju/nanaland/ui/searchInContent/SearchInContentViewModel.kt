@@ -98,8 +98,8 @@ class SearchInContentViewModel @Inject constructor(
 
 
     fun getSearchCategoryType() = when(category) {
-        ROUTE.Content.Experience(true).toString() -> SearchCategoryType.Experience
-        ROUTE.Content.Experience(false).toString() -> SearchCategoryType.Experience
+        ROUTE.Content.Experience(true).toString() -> SearchCategoryType.Activity
+        ROUTE.Content.Experience(false).toString() -> SearchCategoryType.Art
         ROUTE.Content.Festival.toString() -> SearchCategoryType.Festival
         ROUTE.Content.Nature.toString() -> SearchCategoryType.Nature
         ROUTE.Content.Market.toString() -> SearchCategoryType.Market
@@ -146,8 +146,8 @@ class SearchInContentViewModel @Inject constructor(
         )
 
         when (category) {
-            ROUTE.Content.Experience(true).toString() -> getExperienceSearchResultListUseCase(requestData) // TODO
-            ROUTE.Content.Experience(false).toString() -> getExperienceSearchResultListUseCase(requestData) // TODO
+            ROUTE.Content.Experience(true).toString() -> getExperienceSearchResultListUseCase(requestData, SearchCategoryType.Activity)
+            ROUTE.Content.Experience(false).toString() -> getExperienceSearchResultListUseCase(requestData, SearchCategoryType.Art)
             ROUTE.Content.Festival.toString() -> getFestivalSearchResultListUseCase(requestData)
             ROUTE.Content.Nature.toString() -> getNatureSearchResultListUseCase(requestData)
             ROUTE.Content.Market.toString() -> getMarketSearchResultListUseCase(requestData)
