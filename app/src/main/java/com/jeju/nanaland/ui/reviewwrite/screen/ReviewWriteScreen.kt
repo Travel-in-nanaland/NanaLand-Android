@@ -92,6 +92,7 @@ fun ReviewWriteScreen(
         cancelDialogVisible = true
     }
     ReviewWriteUI(
+        isEdit = viewModel.isEdit,
         uiState = uiState.value,
         reviewText = viewModel.reviewText,
         moveToBackScreen = { cancelDialogVisible = true },
@@ -160,6 +161,7 @@ fun ReviewWriteScreen(
 
 @Composable
 private fun ReviewWriteUI(
+    isEdit: Boolean,
     uiState: ReviewWriteUiState,
     reviewText: String,
     moveToBackScreen: () -> Unit,
@@ -175,7 +177,7 @@ private fun ReviewWriteUI(
 
     CustomSurface {
         TopBarCommon(
-            title = getString(R.string.review_write_title),
+            title = getString( if(!isEdit) R.string.review_write_title  else  R.string.review_write_title_edit),
             onBackButtonClicked = moveToBackScreen
         )
 

@@ -420,6 +420,7 @@
 
     <!--후기 작성 화면-->
     <string name="review_write_title">후기 작성</string>
+    <string name="review_write_title_edit">후기 수정</string>
     <string name="review_write_search_hint">장소를 검색하세요</string>
     <string name="review_write_select_rating">{별점}을 {선택}해주세요!</string>
     <string name="review_write_writing">{방문 후기}를 {작성}해주세요!</string>
