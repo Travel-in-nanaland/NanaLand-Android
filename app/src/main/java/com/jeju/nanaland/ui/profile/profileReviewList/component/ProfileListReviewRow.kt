@@ -35,6 +35,7 @@ import com.jeju.nanaland.ui.component.common.ExpandableText
 import com.jeju.nanaland.ui.theme.body02
 import com.jeju.nanaland.ui.theme.body02Bold
 import com.jeju.nanaland.ui.theme.caption01
+import com.jeju.nanaland.ui.theme.caption02
 import com.jeju.nanaland.ui.theme.getColor
 import com.jeju.nanaland.util.log.LogUtil
 import com.jeju.nanaland.util.resource.getString
@@ -208,6 +209,16 @@ private fun ProfileListReviewRow(
                 Row(
                     verticalAlignment = Alignment.CenterVertically
                 ) {
+                    /** 신고하기 **/
+                    onReport?.let {
+                        Text(
+                            modifier = Modifier.clickableNoEffect{ onReport(data.id) },
+                            text = getString(R.string.common_신고하기),
+                            color = getColor().gray01,
+                            style = caption02
+                        )
+                    }
+
                     /** 좋아요 **/
                     if(onLike == null)
                         Like(true, data.heartCount)
@@ -220,17 +231,6 @@ private fun ProfileListReviewRow(
                         style = caption01,
                         color = getColor().gray01
                     )
-                    /** 신고 버튼 **/
-                    onReport?.let {
-                        Icon(
-                            modifier = Modifier
-                                .size(20.dp)
-                                .clickableNoEffect { onReport(data.id) },
-                            painter = painterResource(R.drawable.ic_more_vert),
-                            contentDescription = null,
-                            tint = getColor().gray01
-                        )
-                    }
                 }
             }
         }
