@@ -87,7 +87,7 @@ fun ProfileScreenIntroducePart(
                     color = getColor().black,
                     style = caption01,
                 )
-            } else {
+            } else if(!isGuest){
                 Text(
                     text = getString(R.string.mypage_screen_desc_hint),
                     color = getColor().gray01,
