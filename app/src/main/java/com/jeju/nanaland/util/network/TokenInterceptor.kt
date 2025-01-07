@@ -36,7 +36,8 @@ class TokenInterceptor @Inject constructor(
             mutex.withLock {
                 val accessToken = getAccessTokenUseCase().first()
                 if (accessToken.isNullOrEmpty()) {
-                    response = errorResponse(request)
+                    response = chain.proceed(request.newBuilder().build())
+//                    response = errorResponse(request)
                     LogUtil.e("Network Error", "Access Token is Null or Empty")
                 } else {
                     LogUtil.e("TokenInterceptor", "${accessToken}")
