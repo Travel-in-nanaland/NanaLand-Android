@@ -26,6 +26,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.focus.onFocusChanged
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.painterResource
@@ -61,7 +62,7 @@ fun HomeScreenTopBar(
     Row(
         modifier = Modifier
             .height(TOP_BAR_HEIGHT.dp)
-            .background(getColor().white),
+            .background(Color.Transparent),
         verticalAlignment = Alignment.CenterVertically
     ) {
         Image(
@@ -77,7 +78,8 @@ fun HomeScreenTopBar(
                 .padding(start = 16.dp, end = 8.dp)
                 .size(32.dp),
             painter = painterResource(id = if (currentViewType == HomeScreenViewType.Home) R.drawable.ic_logo else R.drawable.ic_arrow_left),
-            contentDescription = null
+            contentDescription = null,
+            colorFilter = ColorFilter.tint(if(currentViewType == HomeScreenViewType.Home) Color.White else getColor().main)
         )
         BasicTextField(
             modifier = Modifier
@@ -113,7 +115,7 @@ fun HomeScreenTopBar(
                     .border(
                         border = BorderStroke(
                             width = 1.dp,
-                            color = getColor().main
+                            color = if(currentViewType == HomeScreenViewType.Home) Color.White else getColor().main
                         ),
                         shape = RoundedCornerShape(50)
                     ),
@@ -136,8 +138,7 @@ fun HomeScreenTopBar(
                         } else {
                             Text(
                                 text = customContext.resources.getStringArray(R.array.home_screen_hint)[Random.nextInt(0, 10)],
-                                color = getColor().gray01,
-
+                                color = if(currentViewType == HomeScreenViewType.Home) Color.White else getColor().gray01,
                                 style = searchText
                             )
                         }
@@ -170,7 +171,7 @@ fun HomeScreenTopBar(
                     .clickableNoEffect { moveToNotificationScreen() },
                 painter = painterResource(id = R.drawable.ic_bell_outlined),
                 contentDescription = null,
-                colorFilter = ColorFilter.tint(getColor().main)
+                colorFilter = ColorFilter.tint(Color.White)
             )
         }
 

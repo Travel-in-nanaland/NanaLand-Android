@@ -23,7 +23,7 @@ import com.jeju.nanaland.util.ui.clickableNoEffect
 @Composable
 fun HomeScreenNanaPickBanner(
     item: NanaPickBannerData,
-    height: Int = 220,
+    height: Int = 300,
     onClick: (Int) -> Unit,
 ) {
     val brush = remember { Brush.verticalGradient(listOf(Color.Transparent, Color(0x99262627))) }
@@ -57,7 +57,7 @@ fun HomeScreenNanaPickBanner(
 
             HomeScreenNanaPickBannerTitle(text = item.subHeading)
         }
-        HomeScreenNanaPickBannerVersion(text = item.version)
+//        HomeScreenNanaPickBannerVersion(text = item.version)
     }
 }
 
