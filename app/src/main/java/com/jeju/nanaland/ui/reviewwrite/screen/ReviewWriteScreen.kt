@@ -409,7 +409,7 @@ private fun ReviewKeywordChip(
                     Text(
                         text = getStringArray(R.array.review_keyword)[it.stringIndex],
                         color = getColor().main,
-                        style = body02
+                        style = caption01SemiBold
                     )
                     Spacer(modifier = Modifier.width(8.dp))
                     Icon(
