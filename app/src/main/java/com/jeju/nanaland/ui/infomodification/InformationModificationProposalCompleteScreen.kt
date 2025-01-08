@@ -24,9 +24,9 @@ import com.airbnb.lottie.compose.rememberLottieComposition
 import com.jeju.nanaland.R
 import com.jeju.nanaland.ui.component.common.BottomOkButton
 import com.jeju.nanaland.ui.component.common.CustomSurface
+import com.jeju.nanaland.ui.theme.body01
 import com.jeju.nanaland.ui.theme.getColor
-import com.jeju.nanaland.ui.theme.largeTitle02
-import com.jeju.nanaland.ui.theme.title02
+import com.jeju.nanaland.ui.theme.title01Bold
 import com.jeju.nanaland.util.resource.getString
 
 @Composable
@@ -74,7 +74,7 @@ private fun InformationModificationProposalCompleteScreen(
                 Text(
                     text = getString(R.string.info_modification_proposal_heading4),
                     color = getColor().main,
-                    style = largeTitle02,
+                    style = title01Bold,
                     textAlign = TextAlign.Center
                 )
 
@@ -83,7 +83,7 @@ private fun InformationModificationProposalCompleteScreen(
                 Text(
                     text = getString(R.string.info_modification_proposal_text4),
                     color = getColor().black,
-                    style = title02,
+                    style = body01,
                     textAlign = TextAlign.Center
                 )
 
