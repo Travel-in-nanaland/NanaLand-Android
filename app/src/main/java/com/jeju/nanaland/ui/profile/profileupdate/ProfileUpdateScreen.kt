@@ -243,7 +243,8 @@ private fun ProfileUpdateScreen(
                 },
             ).sliceArray(
                 0 until
-                        if(inputProfileImageUri?.contains("/default/") == true) 1
+                        if(inputProfileImageUri?.contains("/default/") == true
+                            || inputProfileImageUri?.toIntOrNull() != null) 1
                     else 2
             )
         )
