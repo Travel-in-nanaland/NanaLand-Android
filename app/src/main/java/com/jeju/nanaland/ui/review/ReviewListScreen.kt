@@ -2,7 +2,6 @@ package com.jeju.nanaland.ui.review
 
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.gestures.animateTo
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -36,7 +35,6 @@ import com.jeju.nanaland.R
 import com.jeju.nanaland.domain.entity.review.ReviewData
 import com.jeju.nanaland.globalvalue.constant.PAGING_THRESHOLD
 import com.jeju.nanaland.globalvalue.constant.TOP_BAR_HEIGHT
-import com.jeju.nanaland.globalvalue.type.AnchoredDraggableContentState
 import com.jeju.nanaland.globalvalue.type.ReviewCategoryType
 import com.jeju.nanaland.ui.component.common.CustomSurface
 import com.jeju.nanaland.ui.component.common.ReviewBottomBar
@@ -46,10 +44,10 @@ import com.jeju.nanaland.ui.component.common.dialog.DialogCommonType
 import com.jeju.nanaland.ui.component.common.topbar.TopBarCommon
 import com.jeju.nanaland.ui.component.detailscreen.other.MoveToTopButton
 import com.jeju.nanaland.ui.component.review.ReviewCard
+import com.jeju.nanaland.ui.theme.body01
 import com.jeju.nanaland.ui.theme.body02Bold
 import com.jeju.nanaland.ui.theme.getColor
-import com.jeju.nanaland.ui.theme.title01Bold
-import com.jeju.nanaland.ui.theme.title02
+import com.jeju.nanaland.ui.theme.title02Bold
 import com.jeju.nanaland.util.network.NetworkResult
 import com.jeju.nanaland.util.resource.getString
 import com.jeju.nanaland.util.ui.UiState
@@ -205,7 +203,7 @@ private fun ReviewListScreen(
                                     Text(
                                         text = getString(R.string.common_후기),
                                         color = getColor().black,
-                                        style = title01Bold
+                                        style = title02Bold
                                     )
 
                                     Spacer(Modifier.width(4.dp))
@@ -213,7 +211,7 @@ private fun ReviewListScreen(
                                     Text(
                                         text = reviewCount.data.toString(),
                                         color = getColor().main,
-                                        style = title02
+                                        style = body01
                                     )
                                 }
                             }
