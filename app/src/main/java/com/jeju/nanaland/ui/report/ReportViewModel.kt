@@ -44,6 +44,9 @@ class ReportViewModel @Inject constructor(
     var reportReason: ClaimType? = null
         private set
 
+    private val _canSubmit = MutableStateFlow(false)
+    val canSubmit = _canSubmit.asStateFlow()
+
     init {
         getUserProfileUseCase()
             .onEach { networkResult ->
