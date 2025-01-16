@@ -4,11 +4,11 @@ import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyRow
@@ -69,13 +69,14 @@ fun ReviewCard(
                 shape = RoundedCornerShape(12.dp)
             )
             .animateContentSize()
-            .then(
-                if (isExpanded.value) {
-                    Modifier.height(IntrinsicSize.Max)
-                } else {
-                    Modifier.height(if (data.images.isEmpty()) 200.dp else 300.dp)
-                }
-            )
+            .heightIn(max = 1000.dp)
+//            .then(
+//                if (isExpanded.value) {
+//                    Modifier.height(IntrinsicSize.Max)
+//                } else {
+//                    Modifier.height(if (data.images.isEmpty()) 200.dp else 300.dp)
+//                }
+//            )
             .padding(16.dp)
     ) {
         Column {

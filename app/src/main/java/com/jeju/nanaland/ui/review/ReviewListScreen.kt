@@ -11,10 +11,9 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.lazy.grid.GridCells
-import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
-import androidx.compose.foundation.lazy.grid.itemsIndexed
-import androidx.compose.foundation.lazy.grid.rememberLazyGridState
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.itemsIndexed
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -157,7 +156,7 @@ private fun ReviewListScreen(
     onRemove: (ReviewData) -> Unit,
     isContent: Boolean
 ) {
-    val lazyGridState = rememberLazyGridState()
+    val lazyGridState = rememberLazyListState()
     val coroutineScope = rememberCoroutineScope()
     val selectedReviewId = remember { mutableIntStateOf(-1) }
 
@@ -187,10 +186,9 @@ private fun ReviewListScreen(
                     onBackButtonClicked = moveToBackScreen
                 )
 
-                LazyVerticalGrid(
+                LazyColumn(
                     state = lazyGridState,
                     modifier = Modifier.weight(1f),
-                    columns = GridCells.Fixed(1)
                 ) {
                     item {
                         when (reviewCount) {
