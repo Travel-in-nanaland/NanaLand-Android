@@ -106,10 +106,10 @@ private fun ReviewWriteSearchUI(
                 when (data) {
                     is UiState.Failure -> ResultNetworkErrorView()
                     is UiState.Loading -> {
-                        if(successData.isEmpty())
+//                        if(successData.isEmpty())
                             ResultSkeletonRowView()
-                        else
-                            ResultDataRowView(successData, true, moveToWriteScreen)
+//                        else
+//                            ResultDataRowView(successData, true, moveToWriteScreen)
                     }
                     is UiState.Success -> ResultDataRowView(successData, false, moveToWriteScreen)
                 }
