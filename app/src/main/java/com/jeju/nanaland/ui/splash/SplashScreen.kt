@@ -1,6 +1,7 @@
 package com.jeju.nanaland.ui.splash
 
 import android.app.Activity
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
@@ -15,11 +16,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.airbnb.lottie.compose.LottieAnimation
-import com.airbnb.lottie.compose.LottieCompositionSpec
-import com.airbnb.lottie.compose.animateLottieCompositionAsState
-import com.airbnb.lottie.compose.rememberLottieComposition
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.jeju.nanaland.R
 import com.jeju.nanaland.globalvalue.type.SplashCheckingState
@@ -64,7 +62,14 @@ private fun SplashScreen(
     retry: () -> Unit,
 ) {
     val context = LocalContext.current
-
+    val randomSplashImage = remember {
+        listOf(
+            R.drawable.splash_01,
+            R.drawable.splash_02,
+            R.drawable.splash_03,
+            R.drawable.splash_04,
+        ).random()
+    }
     SetStatusBar()
     Box(
         modifier = Modifier
@@ -72,15 +77,21 @@ private fun SplashScreen(
         contentAlignment = Alignment.Center
     ) {
 
-        val composition by rememberLottieComposition(
-            LottieCompositionSpec.RawRes(R.raw.splash)
-        )
-        val progress by animateLottieCompositionAsState(composition)
-        LottieAnimation(
+//        val composition by rememberLottieComposition(
+//            LottieCompositionSpec.RawRes(R.raw.splash)
+//        )
+//        val progress by animateLottieCompositionAsState(composition)
+//        LottieAnimation(
+//            modifier = Modifier.fillMaxSize(),
+//            composition = composition,
+//            progress = { progress },
+//            contentScale = ContentScale.Crop
+//        )
+        Image(
             modifier = Modifier.fillMaxSize(),
-            composition = composition,
-            progress = { progress },
-            contentScale = ContentScale.Crop
+            painter = painterResource(id = randomSplashImage),
+            contentScale = ContentScale.Crop,
+            contentDescription = null
         )
     }
     if (isNetworkConnectionDialogShowing) {
