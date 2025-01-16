@@ -175,6 +175,12 @@ private fun ExperienceListScreen(
                         selectedLocationList.forEachIndexed { i, _ ->
                             selectedLocationList[i] = false
                         }
+                        selectedActivityKeywordList.forEachIndexed { i, _ ->
+                            selectedActivityKeywordList[i] = false
+                        }
+                        selectedCultureArtKeywordList.forEachIndexed { i, _ ->
+                            selectedCultureArtKeywordList[i] = false
+                        }
                         clearExperienceList()
                         getExperienceList()
                     }
@@ -185,7 +191,20 @@ private fun ExperienceListScreen(
                         thumbnailList = experienceThumbnailDataList,
                         toggleFavorite = toggleFavorite,
                         moveToExperienceContentScreen = moveToExperienceContentScreen,
-                        moveToSignInScreen = moveToSignInScreen
+                        moveToSignInScreen = moveToSignInScreen,
+                        filterReset = {
+                            selectedLocationList.forEachIndexed { i, _ ->
+                                selectedLocationList[i] = false
+                            }
+                            selectedActivityKeywordList.forEachIndexed { i, _ ->
+                                selectedActivityKeywordList[i] = false
+                            }
+                            selectedCultureArtKeywordList.forEachIndexed { i, _ ->
+                                selectedCultureArtKeywordList[i] = false
+                            }
+                            clearExperienceList()
+                            coroutineScope.launch { lazyGridState.scrollToItem(0) }
+                        }
                     )
             }
 

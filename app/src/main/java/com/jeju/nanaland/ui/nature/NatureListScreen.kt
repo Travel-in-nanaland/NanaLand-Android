@@ -156,6 +156,13 @@ private fun NatureListScreen(
                         toggleFavorite = toggleFavorite,
                         moveToNatureContentScreen = moveToNatureContentScreen,
                         moveToSignInScreen = moveToSignInScreen,
+                        filterReset = {
+                            selectedLocationList.forEachIndexed { i, _ ->
+                                selectedLocationList[i] = false
+                            }
+                            clearNatureList()
+                            coroutineScope.launch { lazyGridState.scrollToItem(0) }
+                        }
                     )
             }
 

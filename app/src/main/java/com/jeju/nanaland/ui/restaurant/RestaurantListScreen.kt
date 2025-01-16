@@ -167,7 +167,14 @@ private fun RestaurantListScreen(
                         thumbnailList = restaurantThumbnailList,
                         toggleFavorite = toggleFavorite,
                         moveToRestaurantContentScreen = moveToRestaurantContentScreen,
-                        moveToSignInScreen = moveToSignInScreen
+                        moveToSignInScreen = moveToSignInScreen,
+                        filterReset = {
+                            selectedLocationList.forEachIndexed { i, _ ->
+                                selectedLocationList[i] = false
+                            }
+                            clearRestaurantList()
+                            coroutineScope.launch { lazyGridState.scrollToItem(0) }
+                        }
                     )
             }
 

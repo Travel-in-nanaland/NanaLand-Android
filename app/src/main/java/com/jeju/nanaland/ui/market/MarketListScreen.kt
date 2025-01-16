@@ -134,7 +134,14 @@ private fun MarketListScreen(
                     thumbnailList = marketThumbnailList,
                     toggleFavorite = toggleFavorite,
                     moveToMarketContentScreen = moveToMarketContentScreen,
-                    moveToSignInScreen = moveToSignInScreen
+                    moveToSignInScreen = moveToSignInScreen,
+                    filterReset = {
+                        selectedLocationList.forEachIndexed { i, _ ->
+                            selectedLocationList[i] = false
+                        }
+                        clearMarketList()
+                        coroutineScope.launch { lazyGridState.scrollToItem(0) }
+                    }
                 )
             }
 

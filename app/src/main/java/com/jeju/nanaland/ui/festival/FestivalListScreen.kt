@@ -236,6 +236,13 @@ private fun FestivalListScreen(
                         toggleFavorite = toggleFavorite,
                         moveToFestivalContentScreen = moveToFestivalContentScreen,
                         moveToSignInScreen = moveToSignInScreen,
+                        filterReset = {
+                            selectedLocationList.forEachIndexed { i, _ ->
+                                selectedLocationList[i] = false
+                            }
+                            clearFestivalList()
+                            coroutineScope.launch { lazyGridState.scrollToItem(0) }
+                        }
                     )
             }
 
