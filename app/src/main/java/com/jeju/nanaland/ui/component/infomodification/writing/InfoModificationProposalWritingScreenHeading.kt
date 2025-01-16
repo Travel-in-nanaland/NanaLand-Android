@@ -28,7 +28,7 @@ fun InfoModificationProposalWritingScreenHeading(text: String) {
         Spacer(Modifier.width(8.dp))
 
         Text(
-            text = getString(R.string.info_modification_proposal_necessary),
+            text = "*" + getString(R.string.info_modification_proposal_necessary),
             color = getColor().main,
             style = caption01
         )
