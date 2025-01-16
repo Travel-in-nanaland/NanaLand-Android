@@ -21,8 +21,6 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -112,6 +110,7 @@ fun MainScreen(
         }
     }
     val viewType = viewModel.viewType.collectAsState().value
+    val homeScreenViewType = viewModel.homeScreenViewType.collectAsState().value
     val prevViewType = viewModel.prevViewType.collectAsState().value
     val navigationItemContentList = viewModel.getNavigationItemContentList()
     
@@ -122,6 +121,8 @@ fun MainScreen(
         }
     }
     MainScreen(
+        homeScreenViewType = homeScreenViewType,
+        onHomeScreenViewType = viewModel::updateHomeScreenViewType,
         viewType = viewType,
         prevViewType = prevViewType,
         navigationItemContentList = navigationItemContentList,
@@ -159,6 +160,8 @@ fun MainScreen(
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 private fun MainScreen(
+    homeScreenViewType: HomeScreenViewType,
+    onHomeScreenViewType: (HomeScreenViewType) -> Unit,
     viewType: MainScreenViewType,
     prevViewType: MainScreenViewType,
     navigationItemContentList: List<MainViewModel.NavigationItemContent>,
@@ -185,12 +188,11 @@ private fun MainScreen(
     moveToReviewEditScreen: (Int, ReviewCategoryType) -> Unit,
     isContent: Boolean
 ) {
-    val homeScreenViewType = remember { mutableStateOf(HomeScreenViewType.Home) }
     CustomSurface { isImeKeyboardShowing ->
         Scaffold(
             topBar = {},
             bottomBar = {
-                if (homeScreenViewType.value == HomeScreenViewType.Home) {
+                if (homeScreenViewType == HomeScreenViewType.Home) {
                     MainNavigationBar(
                         viewType,
                         navigationItemContentList,
@@ -221,9 +223,7 @@ private fun MainScreen(
                             moveToActivityListScreen = moveToActivityListScreen,
                             moveToArtListScreen = moveToArtListScreen,
                             moveToSignInScreen = moveToSignInScreen,
-                            updateHomeScreenViewType = { viewType ->
-                                homeScreenViewType.value = viewType
-                            }
+                            updateHomeScreenViewType = onHomeScreenViewType
                         )
                     }
                     MainScreenViewType.Favorite -> {
