@@ -389,6 +389,7 @@
     <string name="common_신고하기">举报</string>
     <string name="common_사진">图片</string>
     <string name="common_동영상">视频</string>
+    <string name="common_사진_동영상">照片/视频</string>
     <string name="common_원">%s韩元</string>
     <string name="common_시간전">%d小时前</string>
     <string name="common_인터넷_문제">网络不太顺畅！\n能检查后回来吗？</string>
@@ -408,9 +409,9 @@
     <string name="review_write_keyword_guide">*您必须选择至少%d个项目，最多可以选择%d个项目。</string>
     <string name="review_write_keyword_error_over">最多可以选择%d个</string>
     <string name="review_write_keyword_complete_title1">感谢您精彩的写作👻</string>
-    <string name="review_write_keyword_complete_sub1">就像你的魅力一样\n{旅游目的地的吸引力也增加了！}</string>
+    <string name="review_write_keyword_complete_sub1">就像你的魅力一样\n{旅游目的地的吸引力也增加了！}\n\n越来越期待了🧚‍♀️</string>
     <string name="review_write_keyword_complete_title2">非常喜欢！</string>
-    <string name="review_write_keyword_complete_sub2">你细致入微的写作/让n某人的旅行选择\n更加丰富！</string>
+    <string name="review_write_keyword_complete_sub2">你细致入微的写作/让n某人的旅行选择\n更加丰富！\n\n下次也会期待的</string>
     <string name="review_write_keyword_complete_btn_again">再去看看内容</string>
     <string name="review_write_keyword_complete_btn_add">添加另一条评价</string>
     <string name="dialog_msg_title_8">您确定要离开吗？</string>

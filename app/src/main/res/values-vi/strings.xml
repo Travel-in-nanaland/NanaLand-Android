@@ -47,6 +47,7 @@
     <string name="common_신고하기">Báo cáo</string>
     <string name="common_사진">Hình ảnh</string>
     <string name="common_동영상">Video</string>
+    <string name="common_사진_동영상">Ảnh/Video</string>
     <string name="common_원">%swon</string>
     <string name="common_시간전">%d giờ trước</string>
     <string name="common_인터넷_문제">Tôi nghĩ có vấn đề với kết nối internet của tôi!\nBạn có thể quay lại sau khi kiểm tra không?</string>
@@ -300,9 +301,9 @@
     <string name="review_write_keyword_guide">*Bạn phải chọn ít nhất %d mục và có thể chọn tối đa %d mục.</string>
     <string name="review_write_keyword_error_over">Bạn có thể chọn tối đa %d</string>
     <string name="review_write_keyword_complete_title1">Cảm ơn bạn vì bài viết hấp dẫn của bạn 👻</string>
-    <string name="review_write_keyword_complete_sub1">Cũng giống như sự quyến rũ của bạn\n{Sức hấp dẫn của điểm đến du lịch cũng tăng lên!}</string>
+    <string name="review_write_keyword_complete_sub1">Cũng giống như sự quyến rũ của bạn\n{Sức hấp dẫn của điểm đến du lịch cũng tăng lên!}\n\nTôi nghĩ tôi ngày càng phấn khích hơn🧚‍♀️</string>
     <string name="review_write_keyword_complete_title2">Bạn thích nó nhiều như vậy sao?</string>
-    <string name="review_write_keyword_complete_sub2">Bài viết tỉ mỉ của bạn\nLựa chọn du lịch của ai đó\nNó đã làm phong phú tôi!</string>
+    <string name="review_write_keyword_complete_sub2">Bài viết tỉ mỉ của bạn\nLựa chọn du lịch của ai đó\nNó đã làm phong phú tôi!\n\nTôi cũng mong chờ lần tới</string>
     <string name="review_write_keyword_complete_btn_again">Xem lại nội dung</string>
     <string name="review_write_keyword_complete_btn_add">Thêm một đánh giá khác</string>
     <string name="dialog_msg_title_8">Bạn có chắc chắn muốn rời đi không?</string>

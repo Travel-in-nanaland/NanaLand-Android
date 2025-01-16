@@ -125,9 +125,7 @@ fun ReportWriteScreen(
             )
             Spacer(modifier = Modifier.height(48.dp))
             Text(
-                text = getString(R.string.common_사진) +
-                        " / " +
-                        getString(R.string.common_동영상),
+                text = getString(R.string.common_사진_동영상),
                 style = bodyBold,
                 color = getColor().black
             )

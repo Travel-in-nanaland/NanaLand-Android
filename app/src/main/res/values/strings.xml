@@ -76,6 +76,7 @@
     <string name="common_신고하기">신고하기</string>
     <string name="common_사진">사진</string>
     <string name="common_동영상">동영상</string>
+    <string name="common_사진_동영상">사진 / 동영상</string>
     <string name="common_원">%s원</string>
     <string name="common_외">%s 외 %d</string>
     <string name="common_close">닫기</string>

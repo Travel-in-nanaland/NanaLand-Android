@@ -389,6 +389,7 @@
     <string name="common_신고하기">Report</string>
     <string name="common_사진">Picture</string>
     <string name="common_동영상">Videos</string>
+    <string name="common_사진_동영상">Photos/Videos</string>
     <string name="common_원">%swon</string>
     <string name="common_시간전">%d  hour ago</string>
     <string name="common_인터넷_문제">I think there\'s a problem with my internet connection!\nCan you come back after checking?</string>
@@ -408,9 +409,9 @@
     <string name="review_write_keyword_guide">*You must select at least %d items, and you can select up to %d items.</string>
     <string name="review_write_keyword_error_over">You can select up to %d</string>
     <string name="review_write_keyword_complete_title1">Thank you for your fascinating writing 👻</string>
-    <string name="review_write_keyword_complete_sub1">As much as your charm\n{The attractiveness of the travel destination also increased!}</string>
+    <string name="review_write_keyword_complete_sub1">As much as your charm\n{The attractiveness of the travel destination also increased!}\n\nIt’s getting more exciting! 🧚‍♀️</string>
     <string name="review_write_keyword_complete_title2">You like it so much?</string>
-    <string name="review_write_keyword_complete_sub2">Your meticulous writing\nSomeone\'s travel choices\nIt enriched me!</string>
+    <string name="review_write_keyword_complete_sub2">Your meticulous writing\nSomeone\'s travel choices\nIt enriched me!\n\nI look forward to next time too</string>
     <string name="review_write_keyword_complete_btn_again">Go see content again</string>
     <string name="review_write_keyword_complete_btn_add">Add another review</string>
     <string name="dialog_msg_title_8">Are you sure you want to leave?</string>
