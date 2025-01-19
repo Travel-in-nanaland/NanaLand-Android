@@ -16,6 +16,7 @@ import com.jeju.nanaland.util.log.LogUtil
 import com.jeju.nanaland.util.network.onError
 import com.jeju.nanaland.util.network.onException
 import com.jeju.nanaland.util.network.onSuccess
+import com.jeju.nanaland.util.ui.UiState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -42,6 +43,9 @@ class InfoModificationProposalViewModel @Inject constructor(
     private val _inputEmailState = MutableStateFlow(InputEmailState.Idle)
     val inputEmailState = _inputEmailState.asStateFlow()
     val selectedImageList = mutableStateListOf<String>()
+
+    private val _callState = MutableStateFlow<UiState<Unit>?>(null)
+    val callState = _callState.asStateFlow()
 
     init {
         getUserProfileUseCase()
@@ -78,8 +82,10 @@ class InfoModificationProposalViewModel @Inject constructor(
     }
 
     @SuppressLint("Range", "Recycle")
-    fun sendReport(postId: Int, fixType: String, category: String, moveToCompleteScreen: () -> Unit) {
+    fun sendReport(postId: Int, fixType: String, category: String) {
         viewModelScope.launch {
+            _callState.update { UiState.Loading }
+
             val images = selectedImageList.map {
                 putFileUseCase(it, FileCategory.InfoFixReport)
             }
@@ -96,15 +102,21 @@ class InfoModificationProposalViewModel @Inject constructor(
             infoModificationUseCase(requestData)
                 .onEach { networkResult ->
                     networkResult.onSuccess { code, message, data ->
-                        moveToCompleteScreen()
+                        _callState.update { UiState.Success(Unit) }
                     }.onError { code, message ->
-
+                        _callState.update { UiState.Failure("") }
                     }.onException {
-
+                        _callState.update { UiState.Failure("") }
                     }
                 }
-                .catch { LogUtil.e("flow error", "infoModificationUseCase") }
+                .catch {
+                    _callState.update { UiState.Failure("") }
+                    LogUtil.e("flow error", "infoModificationUseCase")
+                }
                 .launchIn(viewModelScope)
         }
+    }
+    fun setCallStateNull(){
+        _callState.update { null }
     }
 }

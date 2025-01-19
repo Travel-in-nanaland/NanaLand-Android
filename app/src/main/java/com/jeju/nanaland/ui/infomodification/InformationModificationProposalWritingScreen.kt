@@ -2,6 +2,7 @@ package com.jeju.nanaland.ui.infomodification
 
 import android.net.Uri
 import android.util.Log
+import android.widget.Toast
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.layout.Column
@@ -15,15 +16,14 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.runtime.snapshots.SnapshotStateList
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.jeju.nanaland.R
 import com.jeju.nanaland.globalvalue.type.InputEmailState
 import com.jeju.nanaland.ui.component.common.CustomSurface
@@ -37,6 +37,7 @@ import com.jeju.nanaland.ui.component.infomodification.writing.InfoModificationP
 import com.jeju.nanaland.ui.theme.getColor
 import com.jeju.nanaland.ui.theme.title02Bold
 import com.jeju.nanaland.util.resource.getString
+import com.jeju.nanaland.util.ui.UiState
 import com.jeju.nanaland.util.ui.scrollableVerticalArrangement
 
 @Composable
@@ -53,13 +54,26 @@ fun InformationModificationProposalWritingScreen(
     val inputEmail = viewModel.inputEmail.collectAsState().value
     val inputEmailState = viewModel.inputEmailState.collectAsState().value
     val selectedImageList = viewModel.selectedImageList
-    var isSubmitLoading by remember {
-        mutableStateOf(false)
+    val callState = viewModel.callState.collectAsStateWithLifecycle()
+
+    val context = LocalContext.current
+
+    callState.value?.let {
+        when (it) {
+            is UiState.Loading -> {
+                SubmitLoadingDialog(
+                    getString(R.string.loading_wait_text_desc4),
+                )
+            }
+            is UiState.Success -> {
+                moveToCompleteScreen()
+            }
+            is UiState.Failure -> {
+                viewModel.setCallStateNull()
+                Toast.makeText(context, getString(R.string.common_인터넷_문제), Toast.LENGTH_LONG).show()
+            }
+        }
     }
-    SubmitLoadingDialog(
-        getString(R.string.loading_wait_text_desc4),
-        isVisible = isSubmitLoading
-    )
 
     InformationModificationProposalWritingScreen(
         imageUri = imageUri,
@@ -70,16 +84,13 @@ fun InformationModificationProposalWritingScreen(
         updateInputDescription = viewModel::updateInputDescription,
         updateInputEmail = viewModel::updateInputEmail,
         sendReport = {
-            isSubmitLoading = true
-            viewModel.sendReport( // TODO: 에러 처리(현재 에러시 무한 로딩 예상)
+            viewModel.sendReport(
                 postId = postId,
                 fixType = fixType,
                 category = category,
-                moveToCompleteScreen = it
             )
         },
         moveToBackScreen = moveToBackScreen,
-        moveToCompleteScreen = moveToCompleteScreen,
         selectedImageList = selectedImageList,
         onChangeImages = viewModel::changeImage,
         isContent = true
@@ -95,9 +106,8 @@ private fun InformationModificationProposalWritingScreen(
     updateImageUri: (Uri) -> Unit,
     updateInputDescription: (String) -> Unit,
     updateInputEmail: (String) -> Unit,
-    sendReport: (() -> Unit) -> Unit,
+    sendReport: () -> Unit,
     moveToBackScreen: () -> Unit,
-    moveToCompleteScreen: () -> Unit,
     selectedImageList: SnapshotStateList<String>,
     onChangeImages: (List<String>) -> Unit,
     isContent: Boolean
@@ -193,7 +203,7 @@ private fun InformationModificationProposalWritingScreen(
             item {
                 InfoModificationProposalWritingScreenBottomButton(
                     isActivated = (inputDescription.isNotEmpty() && inputEmail.isNotEmpty() && inputEmailState == InputEmailState.Idle),
-                    onClick = { sendReport(moveToCompleteScreen) }
+                    onClick = sendReport
                 )
 
                 Spacer(Modifier.height(20.dp))
