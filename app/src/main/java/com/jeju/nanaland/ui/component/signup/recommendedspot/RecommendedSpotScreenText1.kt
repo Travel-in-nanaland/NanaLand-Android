@@ -6,16 +6,15 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import com.jeju.nanaland.R
-import com.jeju.nanaland.globalvalue.userdata.UserData
 import com.jeju.nanaland.ui.theme.getColor
 import com.jeju.nanaland.ui.theme.title02
 import com.jeju.nanaland.util.resource.getString
 
 @Composable
-fun RecommendedSpotScreenText1() {
+fun RecommendedSpotScreenText1(name: String) {
     Text(
         modifier = Modifier.fillMaxWidth(),
-        text = getString(R.string.type_test_recommended_spot_text, UserData.nickname),
+        text = getString(R.string.type_test_recommended_spot_text, name),
         color = getColor().black,
         style = title02,
         textAlign = TextAlign.Center

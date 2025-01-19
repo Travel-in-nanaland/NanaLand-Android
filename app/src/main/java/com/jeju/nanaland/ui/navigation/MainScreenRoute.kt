@@ -63,6 +63,7 @@ fun NavGraphBuilder.mainScreen(
         moveToTypeTestScreen = { navViewModel.navigate(ROUTE.TypeTest.Testing()) },
         moveToTypeTestResultScreen = { navViewModel.navigate(
             ROUTE.TypeTest.Result(
+                id = null,
                 name = UserData.nickname,
                 travelType = it,
                 isMine = true,

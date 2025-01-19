@@ -17,14 +17,13 @@ fun NavGraphBuilder.typeTestResultScreen(navViewModel: NavViewModel) = composabl
             getString(R.string.type_test_screen_button2)
         else
             getString(R.string.mypage_screen_테스트_다시하기)
-
     TypeTestResultScreen(
         name = data.name,
         travelType = data.travelType ?: TravelType.GAMGYUL,
         filledButtonString = filledButtonString,
         moveToRecommendedSpotScreen = {
             navViewModel.navigatePopUpTo(
-                ROUTE.RecommendedSpot,
+                ROUTE.RecommendedSpot(data.id, data.name),
                 data
             )
         },

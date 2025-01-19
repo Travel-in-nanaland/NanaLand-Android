@@ -6,8 +6,8 @@ import kotlinx.coroutines.flow.flow
 class GetRecommendedPostUseCase(
     private val repository: MemberRepository
 ) {
-    operator fun invoke() = flow {
-        val response = repository.getRecommendedPost()
+    operator fun invoke(memberId: Int? = null) = flow {
+        val response = repository.getRecommendedPost(memberId)
         emit(response)
     }
 }

@@ -16,6 +16,7 @@ fun NavGraphBuilder.typeTestLoadingScreen(navViewModel: NavViewModel) = composab
             navViewModel.popBackStack(data, true)
             navViewModel.navigate(
                 ROUTE.TypeTest.Result(
+                    id = null,
                     name = UserData.nickname,
                     travelType = data.travelType,
                     isMine = true,

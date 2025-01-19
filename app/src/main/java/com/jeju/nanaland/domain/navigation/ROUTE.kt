@@ -44,7 +44,10 @@ sealed class ROUTE {
 
     @Serializable
     /** 유형 테스트별 추천 여행지 화면 **/
-    data object RecommendedSpot: ROUTE()
+    data class RecommendedSpot(
+        val memberId:Int? = null,
+        val name: String
+    ): ROUTE()
 
     @Serializable
     /** 시작 메인 화면 **/
@@ -240,6 +243,7 @@ sealed class ROUTE {
         @Serializable
         /** 타입 설명 화면 **/
         data class Result(
+            val id: Int?,
             val name: String,
             val isMine: Boolean,
             val isFirst: Boolean,

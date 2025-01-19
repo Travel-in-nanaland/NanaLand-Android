@@ -64,6 +64,7 @@ fun NavGraphBuilder.profileScreenRoute(
                             moveToTypeTestScreen = { navViewModel.navigate(ROUTE.TypeTest.Testing()) },
                             moveToTypeTestResultScreen = { navViewModel.navigate(
                                 ROUTE.TypeTest.Result(
+                                    id = null,
                                     name = UserData.nickname,
                                     travelType = it,
                                     isMine = true,
@@ -85,6 +86,7 @@ fun NavGraphBuilder.profileScreenRoute(
                             onBackButtonClicked = { navViewModel.popBackStack() },
                             moveToTypeTestResultScreen = { name, type ->
                                 navViewModel.navigate( ROUTE.TypeTest.Result(
+                                    id = data.userId,
                                     name = name,
                                     travelType = type,
                                     isMine = false,

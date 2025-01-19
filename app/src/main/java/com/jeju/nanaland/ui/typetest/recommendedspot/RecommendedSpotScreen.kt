@@ -24,15 +24,17 @@ import com.jeju.nanaland.util.resource.getString
 
 @Composable
 fun RecommendedSpotScreen(
-    moveToMainScreen: () -> Unit,
+//    moveToMainScreen: () -> Unit,
+    name: String,
     moveToBackScreen: () -> Unit,
     moveToDetailScreen:(Int, String) -> Unit,
     viewModel: RecommendedSpotViewModel = hiltViewModel()
 ) {
     val recommendedPostList = viewModel.recommendedPostList.collectAsState().value
     RecommendedSpotScreen(
+        name=name,
         recommendedPostList = recommendedPostList,
-        moveToMainScreen = moveToMainScreen,
+//        moveToMainScreen = moveToMainScreen,
         moveToBackScreen = moveToBackScreen,
         moveToDetailScreen = moveToDetailScreen,
         isContent = true
@@ -42,7 +44,8 @@ fun RecommendedSpotScreen(
 @Composable
 private fun RecommendedSpotScreen(
     recommendedPostList: List<RecommendedPostData>,
-    moveToMainScreen: () -> Unit,
+    name: String,
+//    moveToMainScreen: () -> Unit,
     moveToBackScreen: () -> Unit,
     moveToDetailScreen:(Int, String) -> Unit,
     isContent: Boolean
@@ -62,7 +65,7 @@ private fun RecommendedSpotScreen(
                 Spacer(Modifier.height(32.dp))
 
                 Column(Modifier.padding(start = 16.dp, end = 16.dp)) {
-                    RecommendedSpotScreenText1()
+                    RecommendedSpotScreenText1(name)
                     RecommendedSpotScreenText2()
                 }
 

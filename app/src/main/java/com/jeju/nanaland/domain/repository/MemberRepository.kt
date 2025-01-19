@@ -16,7 +16,7 @@ interface MemberRepository {
     suspend fun getUserProfile(id: Int? = null): NetworkResult<UserProfile>
 
     // 유저 타입에 따른 추천 게시물 2개 반환
-    suspend fun getRecommendedPost(): NetworkResult<List<RecommendedPostData>>
+    suspend fun getRecommendedPost(memberId: Int? = null): NetworkResult<List<RecommendedPostData>>
 
     // 인기 게시물
     suspend fun getHotPost(): NetworkResult<List<HotPostData>>
