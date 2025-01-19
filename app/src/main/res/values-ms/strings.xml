@@ -25,16 +25,16 @@
     <string name="month_name_11">November</string>
     <string name="month_name_12">December</string>
 
+    <string name="year">Tahun %d</string>
     <string name="cancel">Cancel</string>
     <string name="done">Done</string>
     <string name="title_time_picker">Select Time</string>
     <string name="select_time">Select a Time</string>
 
     <!--전체 공통-->
-    <string name="common_7대_자연">7Keajaiban Alam</string>
+    <string name="common_자연">Alam</string>
     <string name="common_축제">Festival</string>
     <string name="common_전통시장">Pasaran Tradisional</string>
-    <string name="common_이색_체험">Aktiviti Menarik</string>
     <string name="common_나나s_Pick">Pilihan Nana</string>
     <string name="common_홈">Laman Utama</string>
     <string name="common_찜">Simpan</string>
@@ -77,7 +77,8 @@
     <string name="home_screen_ad3_content">Pasar tradisional apa yang masih ada?</string>
     <string name="home_screen_ad4_title">Festival khas di Jeju pada bulan Julai🎈</string>
     <string name="home_screen_ad4_content">Mari saksikan festival yang penuh dengan harta karun dunia, rasa Pulau Jeju!</string>
-    <string name="home_screen_recommend">Cadangan daripada penduduk untuk %s kami</string>
+    <string name="home_screen_recommend">Cadangan daripada penduduk untuk %s kami🍊</string>
+    <string name="home_screen_popular">Tempat popular sekarang 🔥</string>
     <string name="home_screen_recommend_default_name">Nana</string>
 
     <string name="home_screen_hint_1">Festival Bunga Canola di Jeju sedang berlangsung! 🏵️</string>
@@ -100,15 +101,18 @@
     <string name="searching_screen_hot_keywords">eningkatan Pencarian! Tempat Jeju 🍊</string>
 
     <!--검색 결과 화면-->
+    <string name="favorite_screen_empty_list">Anda belum menandakan kandungan sebagai kegemaran\nTekan hati pada kandungan yang anda suka!</string>
     <string name="search_result_screen_no_result">Carian anda tidak\nmengembalikan sebarang hasil.</string>
 
     <!--비회원 회원가입 유도 다이얼로그-->
-    <string name="non_member_dialog_guide">Anda perlu menjadi ahli untuk menggunakan semua perkhidmatan✨</string>
-    <string name="non_member_dialog_go_sign_up">Daftar Ahli</string>
+    <string name="dialog_msg_title_9">Anda perlu menjadi ahli untuk menggunakan semua perkhidmatan✨</string>
+    <string name="dialog_btn_no_agree">Setuju</string>
+    <string name="dialog_btn_go_sign_up">Daftar Ahli</string>
 
 
     <!--날짜 선택 다이얼로그-->
     <string name="date_filter_dialog_날짜_선택">Tarikh</string>
+    <string name="date_filter_dialog_all_select">Pilih Semua Bulan Ini</string>
     <string name="date_filter_dialog_초기화">Set Semula</string>
 
     <!--지역 선택 다이얼로그-->
@@ -126,6 +130,7 @@
     <string name="list_screen_common_전_지역">Semua Kawasan</string>
 
     <!--지역 공통-->
+    <string name="list_screen_common_reset_filter">Tetapkan semula penapis</string>
     <string name="location_common_제주시">Jeju City</string>
     <string name="location_common_애월">Aewol</string>
     <string name="location_common_조천">Jocheon</string>
@@ -148,6 +153,7 @@
     <string name="festival_list_screen_image_caption">*Gambar untuk rujukan.</string>
 
     <!--상세 화면 공통-->
+    <string name="festival_list_screen_close_detail">Festival ini telah tamat. Jumpa lagi tahun depan 🖐️</string>
     <string name="detail_screen_common_더보기">Lihat Lagi</string>
     <string name="detail_screen_common_접기">Sembunyi</string>
     <string name="detail_screen_common_주소">Alamat</string>
@@ -202,7 +208,7 @@
 
 
     <!--회원가입 프로필 설정 화면-->
-    <string name="sign_up_profile_setting_guide"> Sila tulis nama penggunaan\ndan pilih profil.</string>
+    <string name="sign_up_profile_setting_guide_sub_title">Sila tetapkan nama dan foto yang anda mahu gunakan</string>
     <string name="sign_up_profile_setting_hint">Sila masukkan nama</string>
     <string name="sign_up_profile_setting_warning1">Nama panggilan ini sudah digunakan oleh pengguna lain.</string>
     <string name="sign_up_profile_setting_warning2">Nama panggilan ini tidak boleh digunakan.</string>
@@ -288,24 +294,27 @@
     <string name="language_change_screen_guide">Bahasa di atas telah\nditetapkan sebagai lalai.</string>
 
     <!--언어 설정 화면 다이얼로그-->
-    <string name="language_change_dialog_text">Adakah anda ingin menukar\nkepada bahasa tersebut?</string>
+    <string name="dialog_msg_sub_title_4">Anda mungkin tidak dapat menerima\npelbagai acara dan berita dari nanaland!</string>
+    <string name="dialog_msg_title_5">Adakah anda ingin menukar\nkepada bahasa tersebut?</string>
 
     <!--설정 화면-->
     <string name="settings_screen_설정">Tetapan</string>
     <string name="settings_screen_사용_설정">Tetapkan penggunaan</string>
     <string name="settings_screen_약관_및_정책">Terma dan dasar</string>
     <string name="settings_screen_접근권한_안내">Panduan akses kebenaran</string>
+    <string name="settings_screen_알림_설정">Tetapan pemberitahuan</string>
     <string name="settings_screen_언어_설정">Tetapan bahasa</string>
     <string name="settings_screen_버전_정보">Maklumat versi</string>
     <string name="settings_screen_로그아웃">Log keluar</string>
     <string name="settings_screen_회원_탈퇴">Daftar keluar</string>
 
     <!--로그아웃 다이얼로그-->
-    <string name="sign_out_dialog_text">Adakah anda benar\n-benar ingin log keluar?</string>
+    <string name="dialog_msg_title_6">Adakah anda benar\n-benar ingin log keluar?</string>
 
     <!--마이페이지 화면-->
     <string name="mypage_screen_프로필_수정">Ubah Profil</string>
     <string name="mypage_screen_테스트_다시하기">Uji semula</string>
+    <string name="mypage_screen_다시하기">Cuba lagi</string>
     <string name="mypage_screen_테스트_하기">Ujian</string>
     <string name="mypage_screen_없음">Tiada</string>
     <string name="mypage_screen_로그인이_필요해요">Log masuk diperlukan</string>
@@ -325,6 +334,7 @@
 
     <!--프로필 수정 화면 다이얼로그-->
     <string name="profile_update_screen_warning">Pengenalan boleh ditulis dalam 70 aksara atau kurang.</string>
+    <string name="profile_update_screen_select_image_remove">Padam gambar profil</string>
     <string name="profile_update_dialog_text1">Adakah anda pasti mahu keluar?</string>
     <string name="profile_update_dialog_text2">Jika anda keluar sekarang,\nApa yang anda tulis akan dipadam.</string>
 
@@ -351,8 +361,8 @@
     <string name="withdrawal_screen_warning">Saya telah membaca dan\nbersetuju dengan panduan ini</string>
 
     <!--회원 탈퇴 다이얼로그-->
-    <string name="withdrawal_dialog_text1">Betul-betul tidak mahu\nmenerima maklumat dan\ntawaran perjalanan ke Jeju?😢</string>
-    <string name="withdrawal_dialog_text2">*Jika menyertai semula dalam masa 90 hari,</string>
+    <string name="dialog_msg_title_7">Betul-betul tidak mahu\nmenerima maklumat dan\ntawaran perjalanan ke Jeju?😢</string>
+    <string name="dialog_msg_sub_title_7">*Jika menyertai semula dalam masa 90 hari,</string>
 
     <!--접근 권한 안내 화면-->
     <string name="permission_checking_screen_접근_권한_안내">Panduan Keizinan Akses</string>
@@ -381,18 +391,23 @@
     <string name="common_공지사항">Pengumuman</string>
     <string name="common_수정">Pembetulan</string>
     <string name="common_신고">Laporan</string>
+    <string name="common_신고하기">Lapor</string>
     <string name="common_사진">Gambar</string>
     <string name="common_동영상">Video</string>
+    <string name="common_사진_동영상">Foto/Video</string>
     <string name="common_원">%swon</string>
     <string name="common_시간전">%d jam yang lalu</string>
     <string name="common_인터넷_문제">Saya rasa ada masalah dengan sambungan internet saya!\nBoleh anda kembali selepas menyemak?</string>
     <string name="detail_screen_common_영업_시간">Waktu Operasi</string>
     <string name="review_write_title">Tulis ulasan</string>
+    <string name="review_write_title_edit">Edit Ulasan</string>
     <string name="review_write_search_hint">Cari Lokasi</string>
     <string name="review_write_select_rating">Sila {pilih} penilaian {bintang}!</string>
     <string name="review_write_writing">Sila {tulis} ulasan {kunjungan}!</string>
     <string name="review_write_writing_hint">Sila isikan butiran</string>
+    <string name="review_write_keyword">Sila {pilih} satu {kata kunci}!</string>
     <string name="review_write_add_keyword">Tambah kata kunci</string>
+    <string name="review_write_picture">Sila {pilih} satu {foto}!</string>
     <string name="review_write_complete">Naikkan</string>
     <string name="review_write_error_maximum_picture">Anda boleh memilih sehingga %d gambar</string>
     <string name="review_write_error_maximum_text">Kandungan boleh ditulis dalam %d aksara.</string>
@@ -400,27 +415,30 @@
     <string name="review_write_keyword_guide">*Anda mesti memilih sekurang-kurangnya %d item, dan boleh memilih sehingga %d item.</string>
     <string name="review_write_keyword_error_over">Anda boleh memilih sehingga %d</string>
     <string name="review_write_keyword_complete_title1">Terima kasih atas penulisan anda yang menarik 👻</string>
-    <string name="review_write_keyword_complete_sub1">Seperti daya tarikan anda\n{Daya tarikan destinasi pelancongan juga meningkat!}</string>
+    <string name="review_write_keyword_complete_sub1">Seperti daya tarikan anda\n{Daya tarikan destinasi pelancongan juga meningkat!}\n\nSaya rasa saya semakin teruja🧚‍♀️</string>
     <string name="review_write_keyword_complete_title2">Anda suka sangat?</string>
-    <string name="review_write_keyword_complete_sub2">Penulisan anda yang teliti\nPilihan perjalanan seseorang\nIa memperkayakan saya!</string>
+    <string name="review_write_keyword_complete_sub2">Penulisan anda yang teliti\nPilihan perjalanan seseorang\nIa memperkayakan saya!\n\nSaya juga menantikan kali seterusnya</string>
     <string name="review_write_keyword_complete_btn_again">Lihat kandungan semula</string>
     <string name="review_write_keyword_complete_btn_add">Tambah ulasan lain</string>
-    <string name="review_write_cancel_dialog_title">Adakah anda pasti mahu keluar?</string>
-    <string name="review_write_cancel_dialog_subtitle">Jika anda keluar sekarang,\nApa yang anda tulis akan dipadam.</string>
+    <string name="dialog_msg_title_8">Adakah anda pasti mahu keluar?</string>
+    <string name="dialog_msg_sub_title_8">Jika anda keluar sekarang,\nApa yang anda tulis akan dipadam.</string>
     <string name="report_category_title">Sila beritahu kami mengapa anda melaporkannya!</string>
     <string name="report_category_subtitle">Maklumat yang dilaporkan tanpa alasan yang sah mesti disahkan oleh pentadbir.\nIa mungkin tidak akan diterima.</string>
     <string name="report_write_resone_title">Sebab untuk laporan</string>
     <string name="report_write_resone_hint">Sila tulis sekurang-kurangnya %d aksara mengenai sebab untuk laporan ini.</string>
     <string name="report_write_resone_error">Sila tulis sekurang-kurangnya %d aksara mengenai sebab untuk laporan ini.</string>
+    <string name="report_write_email_subtitle">Sila masukkan alamat e-mel anda dengan betul. Jika anda memasukkan maklumat yang salah, anda mungkin tidak menerima hasil.</string>
     <string name="report_write_complete_toast">Kandungan yang dilaporkan akan diproses dalam \ntempoh maksimum 24 jam mengikut dasar operasi.</string>
     <string name="review_keyword_mood">Suasana</string>
     <string name="review_keyword_with">Teman</string>
     <string name="review_keyword_infra">Kemudahan</string>
     <string name="nanapick_list_screen_recommended_post">{Cadangan} minggu ini, Pilihan Nana</string>
     <string name="nanapick_list_screen_see_all">Lihat semua</string>
-    <string name="common_나가기">Keluar</string>
-    <string name="common_재시작">Cuba Lagi</string>
-    <string name="splash_screen_text">Sila periksa sambungan internet anda</string>
+    <string name="dialog_btn_out">Keluar</string>
+    <string name="dialog_btn_retry">Cuba Lagi</string>
+    <string name="dialog_msg_title_10">Adakah anda mahu\nmemadam ulasan ini?</string>
+    <string name="dialog_msg_title_11">Sila periksa sambungan internet anda</string>
+    <string name="review_keyword_etc">Lain-lain</string>
     <string name="review_keyword_1">Sesuai untuk ulang tahun</string>
     <string name="review_keyword_2">Ia comel</string>
     <string name="review_keyword_3">Ia mewah</string>
@@ -437,6 +455,7 @@
     <string name="review_keyword_14">Luas</string>
     <string name="review_keyword_15">Tempat letak kereta</string>
     <string name="review_keyword_16">Tandas bersih</string>
+    <string name="review_keyword_17">Tiada kata kunci.</string>
     <string name="report_reason_1">Untuk tujuan keuntungan / promosi</string>
     <string name="report_reason_2">Saya tidak suka</string>
     <string name="report_reason_3">000 results</string>
@@ -482,4 +501,21 @@
     <string name="activity_힐링테라피">Terapi Penyembuhan</string>
     <string name="toast_heart_myself">Anda tidak boleh menyukai ulasan yang anda tulis sendiri.</string>
     <string name="toast_one_more_exit">Jika anda tekan sekali lagi, aplikasi akan ditutup.\"</string>
+    <string name="common_외">%s dan %d</string>
+    <string name="common_close">Tutup</string>
+    <string name="list_screen_common_empty_list_by_filter_head">Tiada kandungan yang sesuai</string>
+    <string name="list_screen_common_empty_list_by_filter_sub">Laraskan atau tetapkan semula penapis anda!</string>
+    <string name="festival_list_screen_close_thumbnail">Jumpa lagi tahun depan 🖐️</string>
+    <string name="sign_up_profile_setting_guide_title">Tetapan profil</string>
+    <string name="profile_update_screen_select_image_album">Pilih dari album</string>
+    <string name="dialog_btn_later">Kemudian</string>
+    <string name="dialog_btn_write">Tulis</string>
+    <string name="dialog_btn_agree">Tidak setuju</string>
+    <string name="dialog_msg_sub_title_3">Anda tidak akan menerima maklumat tentang\npelbagai acara/maklumat di nanaland.\n\nPergi ke Tetapan > Keutamaan Pemberitahuan\nuntuk mengubahnya.</string>
+    <string name="dialog_msg_title_4">Adakah anda mahu mematikan pemberitahuan?</string>
+    <string name="dialog_msg_title_2">Kami akan memberitahu anda tentang pelbagai acara,\ndan berita menarik💜</string>
+    <string name="dialog_msg_sub_title_2">Dengan bersetuju untuk pemberitahuan,\nanda boleh menerima maklumat tentang pelbagai acara/maklumat di nanaland.</string>
+    <string name="dialog_msg_title_3">%d Tahun %d Bulan %d Hari\nnanaland di Jeju Pemberitahuan Tolakan\nBerjaya disekat.</string>
+    <string name="dialog_msg_title_1">Adakah kisah Jeju dari nanaland menyeronokkan untuk anda?</string>
+    <string name="dialog_msg_sub_title_1">Satu kata tentang nanaland di Jeju\nTinggalkan nota, dan kami akan membawa\nberita Jeju yang lebih menarik💜</string>
 </resources>

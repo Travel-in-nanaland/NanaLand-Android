@@ -15,7 +15,7 @@ import com.jeju.nanaland.util.ui.clickableNoEffect
 
 @Composable
 fun ColumnScope.ProfileUpdateScreenProfileContent(
-    imageUri: String?,
+    imageUri: Any?,
     onClick: () -> Unit,
 ) {
     Box(

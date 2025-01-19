@@ -12,15 +12,22 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.jeju.nanaland.BuildConfig
 import com.jeju.nanaland.R
 import com.jeju.nanaland.domain.entity.market.MarketContent
+import com.jeju.nanaland.domain.navigation.ROUTE
+import com.jeju.nanaland.globalvalue.userdata.UserData
 import com.jeju.nanaland.ui.component.common.CustomSurface
-import com.jeju.nanaland.ui.component.common.topbar.CustomTopBar
+import com.jeju.nanaland.ui.component.common.dialog.DialogCommon
+import com.jeju.nanaland.ui.component.common.dialog.DialogCommonType
+import com.jeju.nanaland.ui.component.common.topbar.TopBarCommon
 import com.jeju.nanaland.ui.component.detailscreen.other.DetailScreenDescription
 import com.jeju.nanaland.ui.component.detailscreen.other.DetailScreenInformation
 import com.jeju.nanaland.ui.component.detailscreen.other.DetailScreenInformationModificationProposalButton
@@ -40,6 +47,7 @@ fun MarketContentScreen(
     moveToBackScreen: () -> Unit,
     moveToInfoModificationProposalScreen: () -> Unit,
     moveToSignInScreen: () -> Unit,
+    moveToMap: (ROUTE.Content.Map)-> Unit,
     viewModel: MarketContentViewModel = hiltViewModel()
 ) {
     LaunchedEffect(Unit) {
@@ -54,6 +62,7 @@ fun MarketContentScreen(
         moveToBackScreen = moveToBackScreen,
         moveToInfoModificationProposalScreen = moveToInfoModificationProposalScreen,
         moveToSignInScreen = moveToSignInScreen,
+        moveToMap = moveToMap,
         isContent = true
     )
 }
@@ -67,15 +76,44 @@ private fun MarketContentScreen(
     moveToBackScreen: () -> Unit,
     moveToInfoModificationProposalScreen: () -> Unit,
     moveToSignInScreen: () -> Unit,
+    moveToMap: (ROUTE.Content.Map)-> Unit,
     isContent: Boolean
 ) {
     val context = LocalContext.current
     val scrollState = rememberScrollState()
     val coroutineScope = rememberCoroutineScope()
+    val isNonMemberGuideDialogShowing = remember { mutableStateOf(false) }
+    if (isNonMemberGuideDialogShowing.value) {
+        DialogCommon(
+            DialogCommonType.Login,
+            onDismiss = { isNonMemberGuideDialogShowing.value = false },
+            onYes = moveToSignInScreen,
+        )
+    }
+
     CustomSurface {
-        CustomTopBar(
+        TopBarCommon(
             title = getString(R.string.common_전통시장),
-            onBackButtonClicked = moveToBackScreen
+            onBackButtonClicked = moveToBackScreen,
+            menus = arrayOf(
+                (if ((marketContent as? UiState.Success)?.data?.favorite == true) R.drawable.ic_heart_filled
+                else R.drawable.ic_heart_outlined_thick) to {
+                    if (UserData.provider == "GUEST") {
+                        isNonMemberGuideDialogShowing.value = true
+                    } else if(marketContent is UiState.Success){
+                        toggleFavorite(marketContent.data.id, updatePrevScreenListFavorite)
+                    }
+                },
+                R.drawable.ic_share_outlined to {
+                    val sendIntent: Intent = Intent().apply {
+                        action = Intent.ACTION_SEND
+                        putExtra(Intent.EXTRA_TEXT, "${BuildConfig.BASE_URL}/share/${getLanguage()}?category=market&id=${contentId}")
+                        type = "text/plain"
+                    }
+                    val shareIntent = Intent.createChooser(sendIntent, null)
+                    context.startActivity(shareIntent)
+                }
+            )
         )
         when (marketContent) {
             is UiState.Loading -> {}
@@ -96,7 +134,7 @@ private fun MarketContentScreen(
                                 onShareButtonClicked = {
                                     val sendIntent: Intent = Intent().apply {
                                         action = Intent.ACTION_SEND
-                                        putExtra(Intent.EXTRA_TEXT, "http://13.125.110.80:8080/share/${getLanguage()}?category=market&id=${contentId}")
+                                        putExtra(Intent.EXTRA_TEXT, "${BuildConfig.BASE_URL}/share/${getLanguage()}?category=market&id=${contentId}")
                                         type = "text/plain"
                                     }
                                     val shareIntent = Intent.createChooser(sendIntent, null)
@@ -162,7 +200,14 @@ private fun MarketContentScreen(
                                 DetailScreenInformation(
                                     drawableId = R.drawable.ic_location_outlined,
                                     title = getString(R.string.detail_screen_common_주소),
-                                    content = marketContent.data.address
+                                    content = marketContent.data.address,
+                                    moveToMap = { moveToMap(ROUTE.Content.Map(
+                                        name = marketContent.data.title,
+                                        localLocate = marketContent.data.address,
+                                        koreaLocate = marketContent.data.address,
+                                        lat = 33.359451, // TODO
+                                        lng = 126.545839,
+                                    )) }
                                 )
 
                                 Spacer(Modifier.height(24.dp))

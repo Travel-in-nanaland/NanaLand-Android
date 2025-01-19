@@ -1,51 +1,61 @@
 package com.jeju.nanaland.ui.component.main.home
 
+import androidx.compose.foundation.horizontalScroll
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 import com.jeju.nanaland.R
 import com.jeju.nanaland.ui.component.main.home.parts.HomeScreenCategoryButton
-import com.jeju.nanaland.util.listfilter.ListFilter
 import com.jeju.nanaland.util.resource.getString
 
 @Composable
 fun HomeScreenCategoryButtons(
-    moveToNatureListScreen: (ListFilter) -> Unit,
-    moveToFestivalListScreen: (ListFilter) -> Unit,
+    moveToNatureListScreen: (String?) -> Unit,
+    moveToFestivalListScreen: (String?) -> Unit,
     moveToMarketListScreen: () -> Unit,
-    moveToExperienceListScreen: () -> Unit,
+    moveToActivityListScreen: () -> Unit,
+    moveToArtListScreen: () -> Unit,
     moveToRestaurantListScreen: () -> Unit,
 ) {
-    Row() {
+    Row(
+        modifier = Modifier.horizontalScroll(rememberScrollState()),
+        horizontalArrangement = Arrangement.spacedBy(16.dp),
+    ) {
+        Spacer(Modifier)
         HomeScreenCategoryButton(
-            resId = R.drawable.img_nature,
-            text = getString(R.string.common_7대_자연),
-            onClick = { moveToNatureListScreen(ListFilter()) }
+            resId = R.drawable.img_category_nature,
+            text = getString(R.string.common_자연),
+            onClick = { moveToNatureListScreen(null) }
         )
-        Spacer(Modifier.weight(1f))
         HomeScreenCategoryButton(
-            resId = R.drawable.img_festival,
+            resId = R.drawable.img_category_festival,
             text = getString(R.string.common_축제),
-            onClick = { moveToFestivalListScreen(ListFilter()) }
+            onClick = { moveToFestivalListScreen(null) }
         )
-        Spacer(Modifier.weight(1f))
         HomeScreenCategoryButton(
-            resId = R.drawable.img_market,
+            resId = R.drawable.img_category_market,
             text = getString(R.string.common_전통시장),
             onClick = moveToMarketListScreen
         )
-        Spacer(Modifier.weight(1f))
         HomeScreenCategoryButton(
-            resId = R.drawable.img_activity,
-            text = getString(R.string.common_이색_체험),
-            onClick = moveToExperienceListScreen
+            resId = R.drawable.img_category_activity,
+            text = getString(R.string.common_액티비티),
+            onClick = moveToActivityListScreen
         )
-        Spacer(Modifier.weight(1f))
         HomeScreenCategoryButton(
-            resId = R.drawable.img_restaurant,
+            resId = R.drawable.img_category_art,
+            text = getString(R.string.common_문화예술),
+            onClick = moveToArtListScreen
+        )
+        HomeScreenCategoryButton(
+            resId = R.drawable.img_category_restaurant,
             text = getString(R.string.common_제주_맛집),
             onClick = moveToRestaurantListScreen
         )
+        Spacer(Modifier)
     }
 }

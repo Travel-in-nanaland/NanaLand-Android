@@ -1,31 +1,26 @@
 package com.jeju.nanaland.ui.navigation
 
-import androidx.core.os.bundleOf
-import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
-import com.jeju.nanaland.globalvalue.constant.ROUTE_FESTIVAL_CONTENT
-import com.jeju.nanaland.globalvalue.constant.ROUTE_FESTIVAL_LIST
-import com.jeju.nanaland.globalvalue.constant.ROUTE_LANGUAGE_INITIALIZATION
-import com.jeju.nanaland.globalvalue.constant.ROUTE_MAIN
-import com.jeju.nanaland.globalvalue.constant.ROUTE_SIGN_IN
+import androidx.navigation.toRoute
+import com.jeju.nanaland.domain.navigation.NavViewModel
+import com.jeju.nanaland.domain.navigation.ROUTE
 import com.jeju.nanaland.ui.festival.FestivalListScreen
-import com.jeju.nanaland.util.listfilter.ListFilter
-import com.jeju.nanaland.util.navigation.navigate
 
-fun NavGraphBuilder.festivalListScreen(navController: NavController) = composable(route = ROUTE_FESTIVAL_LIST) {
+fun NavGraphBuilder.festivalListScreen(navViewModel: NavViewModel) = composable<ROUTE.Content.Festival> {
+    val data: ROUTE.Content.Festival = it.toRoute()
+
     FestivalListScreen(
-        filter = it.arguments?.getParcelable("filter") as? ListFilter,
-        moveToBackScreen = { navController.popBackStack() },
+        filter = data.filter,
+        moveToBackScreen = { navViewModel.popBackStack() },
         moveToFestivalContentScreen = { contentId ->
-            val bundle = bundleOf(
-                "contentId" to contentId
-            )
-            navController.navigate(ROUTE_FESTIVAL_CONTENT, bundle)
+            navViewModel.navigate(ROUTE.Content.Festival.Detail(contentId))
         },
-        moveToSignInScreen = { navController.navigate(ROUTE_SIGN_IN) {
-            popUpTo(ROUTE_MAIN) { inclusive = true }
-            launchSingleTop = true
-        } }
+        moveToSignInScreen = { navViewModel.navigatePopUpTo(ROUTE.Splash.SignIn, ROUTE.Main()) },
+        toHome = { navViewModel.navigatePopUpTo(ROUTE.Main(0), data) },
+        toFavorite = { navViewModel.navigatePopUpTo(ROUTE.Main(1), data) },
+        toNana = { navViewModel.navigatePopUpTo(ROUTE.Main(2), data) },
+        toProfile = { navViewModel.navigatePopUpTo(ROUTE.Main(3), data) },
+        moveToSearchScreen = { navViewModel.navigate(ROUTE.Content.SearchInContent(ROUTE.Content.Festival.toString())) }
     )
 }

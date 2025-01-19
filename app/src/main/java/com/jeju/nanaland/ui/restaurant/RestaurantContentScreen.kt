@@ -5,7 +5,6 @@ import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
-import androidx.compose.foundation.gestures.animateTo
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -17,41 +16,49 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.jeju.nanaland.BuildConfig
 import com.jeju.nanaland.R
 import com.jeju.nanaland.domain.entity.restaurant.RestaurantContentData
+import com.jeju.nanaland.domain.entity.review.ReviewData
 import com.jeju.nanaland.domain.entity.review.ReviewListData
-import com.jeju.nanaland.globalvalue.type.AnchoredDraggableContentState
+import com.jeju.nanaland.domain.navigation.ROUTE
+import com.jeju.nanaland.globalvalue.type.ReviewCategoryType
 import com.jeju.nanaland.ui.component.common.CustomSurface
 import com.jeju.nanaland.ui.component.common.ReviewBottomBar
-import com.jeju.nanaland.ui.component.common.topbar.CustomTopBarWithShareButton
+import com.jeju.nanaland.ui.component.common.dialog.BottomSheetSelectDialog
+import com.jeju.nanaland.ui.component.common.dialog.DialogCommon
+import com.jeju.nanaland.ui.component.common.dialog.DialogCommonType
+import com.jeju.nanaland.ui.component.common.dialog.FullImageDialog
+import com.jeju.nanaland.ui.component.common.topbar.TopBarCommon
 import com.jeju.nanaland.ui.component.detailscreen.other.DetailScreenInformation
 import com.jeju.nanaland.ui.component.detailscreen.other.DetailScreenInformationModificationProposalButton
 import com.jeju.nanaland.ui.component.detailscreen.other.DetailScreenTopBannerImage
 import com.jeju.nanaland.ui.component.detailscreen.other.ExperienceDetailScreenDescription
 import com.jeju.nanaland.ui.component.detailscreen.other.MoveToTopButton
 import com.jeju.nanaland.ui.component.detailscreen.restaurant.MenuItem
-import com.jeju.nanaland.ui.component.review.ReportBottomDialog
-import com.jeju.nanaland.ui.component.review.ReportDialogDimBackground
 import com.jeju.nanaland.ui.component.review.ReviewCard
 import com.jeju.nanaland.ui.component.review.TotalRatingStar
 import com.jeju.nanaland.ui.component.review.TotalReviewCountText
-import com.jeju.nanaland.ui.component.review.getReportAnchoredDraggableState
 import com.jeju.nanaland.ui.theme.bodyBold
 import com.jeju.nanaland.ui.theme.getColor
-import com.jeju.nanaland.ui.theme.title02Bold
 import com.jeju.nanaland.util.language.getLanguage
+import com.jeju.nanaland.util.network.NetworkResult
 import com.jeju.nanaland.util.resource.getString
 import com.jeju.nanaland.util.ui.UiState
 import com.jeju.nanaland.util.ui.clickableNoEffect
@@ -69,14 +76,19 @@ fun RestaurantContentScreen(
     moveToReviewWritingScreen: (Int, String, String, String) -> Unit,
     moveToReportScreen: (Int) -> Unit,
     moveToProfileScreen: (Int?) -> Unit,
+    moveToReviewEditScreen: (Int, ReviewCategoryType) -> Unit,
+    moveToMap: (ROUTE.Content.Map)-> Unit,
     viewModel: RestaurantContentViewModel = hiltViewModel()
 ) {
     LaunchedEffect(Unit) {
         viewModel.getRestaurantContent(contentId, isSearch)
         viewModel.getReview(contentId)
     }
+    val scope = rememberCoroutineScope()
     val restaurantContent = viewModel.restaurantContent.collectAsState().value
     val reviewList = viewModel.reviewList.collectAsState().value
+    var removeReviewId by remember { mutableIntStateOf(-1) }
+
     RestaurantContentScreen(
         contentId = contentId,
         restaurantContent = restaurantContent,
@@ -109,11 +121,28 @@ fun RestaurantContentScreen(
         },
         moveToReportScreen = moveToReportScreen,
         moveToProfileScreen = moveToProfileScreen,
+        moveToMap = moveToMap,
+        onEdit = { moveToReviewEditScreen(it.id, ReviewCategoryType.RESTAURANT) },
+        onRemove = { data ->
+            removeReviewId = data.id
+        },
         isContent = true
     )
+    if (removeReviewId != -1) {
+        DialogCommon(
+            DialogCommonType.RemoveReview,
+            onDismiss = { removeReviewId = -1 },
+            onYes = { scope.launch {
+                if(viewModel.setRemove(removeReviewId) is NetworkResult.Success) {
+                    removeReviewId = -1
+                    viewModel.getReview(contentId)
+                }
+            } },
+        )
+    }
 }
 
-@OptIn(ExperimentalFoundationApi::class)
+@OptIn(ExperimentalFoundationApi::class, ExperimentalMaterial3Api::class)
 @Composable
 private fun RestaurantContentScreen(
     contentId: Int?,
@@ -129,14 +158,21 @@ private fun RestaurantContentScreen(
     moveToSignInScreen: () -> Unit,
     moveToReportScreen: (Int) -> Unit,
     moveToProfileScreen: (Int?) -> Unit,
+    moveToMap: (ROUTE.Content.Map)-> Unit,
+    onEdit: (ReviewData) -> Unit,
+    onRemove: (ReviewData) -> Unit,
     isContent: Boolean
 ) {
     val context = LocalContext.current
     val scrollState = rememberScrollState()
     val coroutineScope = rememberCoroutineScope()
-    val reportDialogAnchoredDraggableState = remember { getReportAnchoredDraggableState() }
-    val selectedReviewId = remember { mutableIntStateOf(0) }
-    val isDimBackgroundShowing = remember { mutableIntStateOf(-1) }
+    val selectedReviewId = remember { mutableIntStateOf(-1) }
+    val fullImageUrl = remember { mutableStateOf<String?>(null) }
+
+    fullImageUrl.value?.let {
+        FullImageDialog(it) { fullImageUrl.value = null }
+    }
+
     CustomSurface {
         Box(
             modifier = Modifier.fillMaxSize()
@@ -144,18 +180,20 @@ private fun RestaurantContentScreen(
             Column(
                 modifier = Modifier.fillMaxSize()
             ) {
-                CustomTopBarWithShareButton(
+                TopBarCommon(
                     title = getString(R.string.common_제주_맛집),
                     onBackButtonClicked = moveToBackScreen,
-                    onShareButtonClicked = {
-                        val sendIntent: Intent = Intent().apply {
-                            action = Intent.ACTION_SEND
-                            putExtra(Intent.EXTRA_TEXT, "http://13.125.110.80:8080/share/${getLanguage()}?category=restaurant&id=${contentId}")
-                            type = "text/plain"
+                    menus = arrayOf(
+                        R.drawable.ic_share to {
+                            val sendIntent: Intent = Intent().apply {
+                                action = Intent.ACTION_SEND
+                                putExtra(Intent.EXTRA_TEXT, "${BuildConfig.BASE_URL}/share/${getLanguage()}?category=restaurant&id=${contentId}")
+                                type = "text/plain"
+                            }
+                            val shareIntent = Intent.createChooser(sendIntent, null)
+                            context.startActivity(shareIntent)
                         }
-                        val shareIntent = Intent.createChooser(sendIntent, null)
-                        context.startActivity(shareIntent)
-                    }
+                    )
                 )
 
                 Box(
@@ -184,7 +222,7 @@ private fun RestaurantContentScreen(
                                     Text(
                                         text = getString(R.string.detail_screen_common_대표_메뉴),
                                         color = getColor().black,
-                                        style = title02Bold
+                                        style = bodyBold
                                     )
                                 }
 
@@ -220,7 +258,14 @@ private fun RestaurantContentScreen(
                                         DetailScreenInformation(
                                             drawableId = R.drawable.ic_location_outlined,
                                             title = getString(R.string.detail_screen_common_주소),
-                                            content = restaurantContent.data.address
+                                            content = restaurantContent.data.address,
+                                            moveToMap = { moveToMap(ROUTE.Content.Map(
+                                                name = restaurantContent.data.title,
+                                                localLocate = restaurantContent.data.address,
+                                                koreaLocate = restaurantContent.data.address,
+                                                lat = 33.359451, // TODO
+                                                lng = 126.545839,
+                                            )) }
                                         )
 
                                         Spacer(Modifier.height(24.dp))
@@ -317,12 +362,11 @@ private fun RestaurantContentScreen(
                                         ReviewCard(
                                             data = it,
                                             toggleReviewFavorite = toggleReviewFavorite,
+                                            onImageClick = { fullImageUrl.value = it },
                                             onProfileClick = moveToProfileScreen,
-                                            onMenuButtonClick = {
-                                                isDimBackgroundShowing.intValue = it.id
-                                                coroutineScope.launch { reportDialogAnchoredDraggableState.animateTo(
-                                                    AnchoredDraggableContentState.Open) }
-                                            }
+                                            onReport = { selectedReviewId.intValue = it.id },
+                                            onEdit = onEdit,
+                                            onRemove = onRemove
                                         )
 
                                         Spacer(Modifier.height(16.dp))
@@ -389,18 +433,12 @@ private fun RestaurantContentScreen(
                 }
             }
 
-            if (isDimBackgroundShowing.intValue > 0) {
-                ReportDialogDimBackground(
-                    isDimBackgroundShowing = isDimBackgroundShowing,
-                    reportAnchoredDraggableState = reportDialogAnchoredDraggableState
+            if(selectedReviewId.intValue != -1) {
+                BottomSheetSelectDialog(
+                    onDismiss = { selectedReviewId.intValue = -1 },
+                    items = arrayOf(getString(R.string.common_신고하기) to { moveToReportScreen(selectedReviewId.intValue) })
                 )
             }
-
-            ReportBottomDialog(
-                onClick = { moveToReportScreen(isDimBackgroundShowing.intValue) },
-                hideDimBackground = { isDimBackgroundShowing.intValue = -1 },
-                anchoredDraggableState = reportDialogAnchoredDraggableState
-            )
         }
     }
 }

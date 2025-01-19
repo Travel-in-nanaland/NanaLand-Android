@@ -1,7 +1,6 @@
 package com.jeju.nanaland.data.repository
 
 import com.google.firebase.messaging.FirebaseMessaging
-import com.google.gson.GsonBuilder
 import com.jeju.nanaland.data.api.AuthApi
 import com.jeju.nanaland.domain.entity.auth.AuthTokenData
 import com.jeju.nanaland.domain.repository.AuthRepository
@@ -9,11 +8,6 @@ import com.jeju.nanaland.domain.request.auth.SignInRequest
 import com.jeju.nanaland.domain.request.auth.SignUpRequest
 import com.jeju.nanaland.util.network.NetworkResult
 import com.jeju.nanaland.util.network.NetworkResultHandler
-import okhttp3.MediaType.Companion.toMediaTypeOrNull
-import okhttp3.MultipartBody
-import okhttp3.RequestBody.Companion.asRequestBody
-import okhttp3.RequestBody.Companion.toRequestBody
-import java.io.File
 import kotlin.coroutines.resume
 import kotlin.coroutines.suspendCoroutine
 
@@ -40,18 +34,9 @@ class AuthRepositoryImpl(
 
     override suspend fun signUp(
         data: SignUpRequest,
-        image: File?
+        image: String?
     ): NetworkResult<AuthTokenData> {
-        val multipartImage: MultipartBody.Part? = image?.let {
-            val imageBody = image.asRequestBody("image/png".toMediaTypeOrNull())
-            MultipartBody.Part.createFormData("multipartFile", "tmpImageName.jpg", imageBody)
-        }
-
-        val gson = GsonBuilder().setLenient().setPrettyPrinting().create();
-        val json = gson.toJson(data)
-        val requestBody = json.toRequestBody("application/json".toMediaTypeOrNull())
-
-        return handleResult { authApi.signUp(requestBody, multipartImage) }
+        return handleResult { authApi.signUp(data,image) }
     }
 
     override suspend fun getFCMToken(): String? {

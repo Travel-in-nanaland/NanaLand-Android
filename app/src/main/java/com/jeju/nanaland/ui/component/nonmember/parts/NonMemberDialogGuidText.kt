@@ -7,12 +7,11 @@ import com.jeju.nanaland.R
 import com.jeju.nanaland.ui.theme.getColor
 import com.jeju.nanaland.ui.theme.title01Bold
 import com.jeju.nanaland.util.resource.getString
-import com.jeju.nanaland.util.type.getCategoryType
 
 @Composable
 fun NonMemberDialogGuidText() {
     Text(
-        text = getString(R.string.non_member_dialog_guide),
+        text = getString(R.string.dialog_msg_title_9),
         color = getColor().black,
         style = title01Bold,
         textAlign = TextAlign.Center

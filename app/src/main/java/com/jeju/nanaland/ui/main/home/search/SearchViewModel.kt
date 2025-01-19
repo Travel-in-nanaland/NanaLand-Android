@@ -9,8 +9,6 @@ import com.jeju.nanaland.domain.request.favorite.ToggleFavoriteRequest
 import com.jeju.nanaland.domain.request.search.GetAllSearchResultListRequest
 import com.jeju.nanaland.domain.request.search.GetSearchResultListRequest
 import com.jeju.nanaland.domain.response.search.AllSearchResultListData
-import com.jeju.nanaland.domain.response.search.GetAllSearchResultListResponse
-import com.jeju.nanaland.domain.response.search.GetSearchResultListResponse
 import com.jeju.nanaland.domain.usecase.favorite.ToggleFavoriteUseCase
 import com.jeju.nanaland.domain.usecase.recentsearchdatastore.AddRecentSearchUseCase
 import com.jeju.nanaland.domain.usecase.recentsearchdatastore.DeleteRecentSearchUseCase
@@ -115,7 +113,8 @@ class SearchViewModel @Inject constructor(
         }
         when (_selectedCategory.value) {
             SearchCategoryType.All -> getAllSearchResultListUseCase(requestData as GetAllSearchResultListRequest)
-            SearchCategoryType.Experience -> getExperienceSearchResultListUseCase(requestData as GetSearchResultListRequest)
+            SearchCategoryType.Activity -> getExperienceSearchResultListUseCase(requestData as GetSearchResultListRequest, SearchCategoryType.Activity)
+            SearchCategoryType.Art -> getExperienceSearchResultListUseCase(requestData as GetSearchResultListRequest, SearchCategoryType.Art)
             SearchCategoryType.Festival -> getFestivalSearchResultListUseCase(requestData as GetSearchResultListRequest)
             SearchCategoryType.Nature -> getNatureSearchResultListUseCase(requestData as GetSearchResultListRequest)
             SearchCategoryType.Market -> getMarketSearchResultListUseCase(requestData as GetSearchResultListRequest)
@@ -131,7 +130,8 @@ class SearchViewModel @Inject constructor(
                                 SearchCategoryType.Nature.name to data.nature,
                                 SearchCategoryType.Festival.name to data.festival,
                                 SearchCategoryType.Market.name to data.market,
-                                SearchCategoryType.Experience.name to data.experience,
+                                SearchCategoryType.Activity.name to data.activity,
+                                SearchCategoryType.Art.name to data.art,
                                 SearchCategoryType.Restaurant.name to data.restaurant,
                                 SearchCategoryType.NanaPick.name to data.nana
                             )

@@ -1,6 +1,5 @@
 package com.jeju.nanaland.ui.reviewwrite.screen
 
-import android.net.Uri
 import android.widget.Toast
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.background
@@ -46,31 +45,27 @@ import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
-import androidx.core.os.bundleOf
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import androidx.navigation.NavController
-import androidx.navigation.navOptions
 import com.jeju.nanaland.R
-import com.jeju.nanaland.domain.request.UriRequestBody
-import com.jeju.nanaland.globalvalue.constant.ROUTE_REVIEW_WRITE
-import com.jeju.nanaland.globalvalue.constant.ROUTE_REVIEW_WRITE_COMPLETE
-import com.jeju.nanaland.globalvalue.constant.ROUTE_REVIEW_WRITE_KEYWORD
+import com.jeju.nanaland.domain.navigation.NavViewModel
+import com.jeju.nanaland.domain.navigation.ROUTE
 import com.jeju.nanaland.globalvalue.type.ReviewCategoryType
 import com.jeju.nanaland.globalvalue.type.ReviewKeyword
 import com.jeju.nanaland.ui.component.common.BottomOkButton
 import com.jeju.nanaland.ui.component.common.CustomSurface
-import com.jeju.nanaland.ui.component.common.DialogCommon
 import com.jeju.nanaland.ui.component.common.UploadImages
+import com.jeju.nanaland.ui.component.common.dialog.DialogCommon
+import com.jeju.nanaland.ui.component.common.dialog.DialogCommonType
 import com.jeju.nanaland.ui.component.common.dialog.SubmitLoadingDialog
 import com.jeju.nanaland.ui.component.common.text.TextWithPointColor
-import com.jeju.nanaland.ui.component.common.topbar.CustomTopBar
+import com.jeju.nanaland.ui.component.common.topbar.TopBarCommon
 import com.jeju.nanaland.ui.reviewwrite.ReviewWriteUiState
 import com.jeju.nanaland.ui.reviewwrite.ReviewWriteViewModel
 import com.jeju.nanaland.ui.theme.body02
 import com.jeju.nanaland.ui.theme.bodyBold
+import com.jeju.nanaland.ui.theme.caption01SemiBold
 import com.jeju.nanaland.ui.theme.getColor
-import com.jeju.nanaland.util.navigation.navigate
 import com.jeju.nanaland.util.resource.getString
 import com.jeju.nanaland.util.resource.getStringArray
 import com.jeju.nanaland.util.ui.UiState
@@ -83,7 +78,7 @@ import kotlinx.coroutines.launch
 
 @Composable
 fun ReviewWriteScreen(
-    navController: NavController,
+    navViewModel: NavViewModel,
     id: Int,
     category: ReviewCategoryType,
     viewModel: ReviewWriteViewModel = hiltViewModel()
@@ -97,10 +92,11 @@ fun ReviewWriteScreen(
         cancelDialogVisible = true
     }
     ReviewWriteUI(
+        isEdit = viewModel.isEdit,
         uiState = uiState.value,
         reviewText = viewModel.reviewText,
         moveToBackScreen = { cancelDialogVisible = true },
-        moveToKeywordScreen = { navController.navigate(ROUTE_REVIEW_WRITE_KEYWORD) },
+        moveToKeywordScreen = { navViewModel.navigate(ROUTE.Content.ReviewWrite.Keyword) },
         moveToCompleteScreen = {
             viewModel.submit(
                 id = id,
@@ -110,7 +106,7 @@ fun ReviewWriteScreen(
                 newImages = uiState.value.reviewImage.filter{
                     it.first == -1
                 }.map {
-                    UriRequestBody(context, Uri.parse(it.second))
+                    it.second
                 }
             )
         },
@@ -143,12 +139,7 @@ fun ReviewWriteScreen(
                 )
             }
             is UiState.Success -> {
-                val bundle = bundleOf(
-                    "category" to category.toString()
-                )
-                navController.navigate(ROUTE_REVIEW_WRITE_COMPLETE, bundle, navOptions = navOptions{
-                    popUpTo(ROUTE_REVIEW_WRITE) { inclusive = true}
-                })
+                navViewModel.navigatePopUpTo(ROUTE.Content.ReviewWrite.Complete(category.toString()), ROUTE.Content.ReviewWrite)
                 viewModel.setCallStateNull()
                 viewModel.updateReviewText("")
             }
@@ -160,11 +151,9 @@ fun ReviewWriteScreen(
     }
     if(cancelDialogVisible) {
         DialogCommon(
-            title = getString(R.string.review_write_cancel_dialog_title),
-            subTitle = getString(R.string.review_write_cancel_dialog_subtitle),
-            onDismissRequest = { cancelDialogVisible = false },
-            onPositive = { cancelDialogVisible = false; navController.popBackStack() },
-            onNegative = { cancelDialogVisible = false }
+            DialogCommonType.Write,
+            onDismiss = { cancelDialogVisible = false },
+            onYes = {cancelDialogVisible = false; navViewModel.popBackStack()},
         )
     }
 }
@@ -172,6 +161,7 @@ fun ReviewWriteScreen(
 
 @Composable
 private fun ReviewWriteUI(
+    isEdit: Boolean,
     uiState: ReviewWriteUiState,
     reviewText: String,
     moveToBackScreen: () -> Unit,
@@ -186,8 +176,8 @@ private fun ReviewWriteUI(
     val scrollState = rememberScrollState()
 
     CustomSurface {
-        CustomTopBar(
-            title = getString(R.string.review_write_title),
+        TopBarCommon(
+            title = getString( if(!isEdit) R.string.review_write_title  else  R.string.review_write_title_edit),
             onBackButtonClicked = moveToBackScreen
         )
 
@@ -212,7 +202,7 @@ private fun ReviewWriteUI(
                         contentScale = ContentScale.Crop,
                         alignment = Alignment.Center
                     ),
-                    previewPlaceholder = R.drawable.img_ad_1
+                    previewPlaceholder = painterResource(R.drawable.img_ad_1)
                 )
 
                 Spacer(modifier = Modifier.height(8.dp))
@@ -232,22 +222,33 @@ private fun ReviewWriteUI(
                 )
 
                 MyDivider()
-                TextWithPointColor(
-                    text = getString(R.string.review_write_select_rating),
-                    style = bodyBold
-                )
+                Title(getString(R.string.review_write_select_rating), true)
                 Spacer(modifier = Modifier.height(16.dp))
                 StarRating(rating = uiState.reviewRating) {
                     onChangedRating(it)
                 }
 
                 MyDivider()
-                TextWithPointColor(
-                    text = getString(R.string.review_write_writing),
-                    style = bodyBold
-                )
+                Title(getString(R.string.review_write_keyword), true)
                 Spacer(modifier = Modifier.height(16.dp))
+                ReviewKeywordChip(
+                    keywords = uiState.reviewKeyword,
+                    onRemoveKeyword = onRemoveKeyword,
+                    moveToKeywordScreen = moveToKeywordScreen
+                )
 
+                MyDivider()
+                Title(getString(R.string.review_write_writing), true)
+                Spacer(modifier = Modifier.height(16.dp))
+                ReviewText(
+                    text = reviewText,
+                    maxTextLength = ReviewWriteViewModel.MAX_TEXT_LENGTH,
+                    onText = onChangedText
+                )
+
+                MyDivider()
+                Title(getString(R.string.review_write_picture), false)
+                Spacer(modifier = Modifier.height(16.dp))
                 UploadImages(
                     images = uiState.reviewImage.map { it.second },
                     onChangeImages = { images ->
@@ -260,17 +261,6 @@ private fun ReviewWriteUI(
                     }
                 )
 
-                ReviewText(
-                    text = reviewText,
-                    maxTextLength = ReviewWriteViewModel.MAX_TEXT_LENGTH,
-                    onText = onChangedText
-                )
-
-                ReviewKeywordChip(
-                    keywords = uiState.reviewKeyword,
-                    onRemoveKeyword = onRemoveKeyword,
-                    moveToKeywordScreen = moveToKeywordScreen
-                )
                 Spacer(modifier = Modifier.height(32.dp))
             }
             BottomOkButton(getString(R.string.review_write_complete),uiState.canSubmit){
@@ -390,61 +380,96 @@ private fun ReviewKeywordChip(
     onRemoveKeyword: (ReviewKeyword) -> Unit,
     moveToKeywordScreen: () -> Unit
 ) {
-    FlowRow(
-        modifier = Modifier
-            .fillMaxWidth(),
-        horizontalArrangement = Arrangement.spacedBy(8.dp),
-        verticalArrangement = Arrangement.spacedBy(12.dp)
-    ) {
-        Row(
-            modifier = Modifier
-                .border(
-                    width = 1.dp,
-                    shape = RoundedCornerShape(30.dp),
-                    color = getColor().main
-                )
-                .clickable { moveToKeywordScreen() }
-                .padding(horizontal = 16.dp, vertical = 8.dp),
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            Text(
-                text = getString(R.string.review_write_add_keyword),
-                color = getColor().main,
-                style = body02
-            )
-            Spacer(modifier = Modifier.width(8.dp))
-            Icon(
-                modifier = Modifier.size(16.dp),
-                imageVector = Icons.Default.Add,
-                contentDescription = null,
-                tint = getColor().main
-            )
+    if(keywords.isEmpty()) {
+        Row(Modifier.fillMaxWidth()) {
+            Spacer(modifier = Modifier.weight(1f))
+            ReviewKeywordAddButton(moveToKeywordScreen)
+            Spacer(modifier = Modifier.weight(1f))
         }
+    } else {
+        FlowRow(
+            modifier = Modifier
+                .fillMaxWidth(),
+            horizontalArrangement = Arrangement.spacedBy(8.dp),
+            verticalArrangement = Arrangement.spacedBy(12.dp)
+        ) {
+            ReviewKeywordAddButton(moveToKeywordScreen)
 
-        keywords.forEach {
-            Row(
-                modifier = Modifier
-                    .background(
-                        color = getColor().main10,
-                        shape = RoundedCornerShape(30.dp)
+            keywords.forEach {
+                Row(
+                    modifier = Modifier
+                        .background(
+                            color = getColor().main10,
+                            shape = RoundedCornerShape(30.dp)
+                        )
+                        .clickable { onRemoveKeyword(it) }
+                        .padding(horizontal = 12.dp, vertical = 6.dp),
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Text(
+                        text = getStringArray(R.array.review_keyword)[it.stringIndex],
+                        color = getColor().main,
+                        style = caption01SemiBold
                     )
-                    .padding(horizontal = 16.dp, vertical = 8.dp)
-                    .clickable { onRemoveKeyword(it) },
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                Text(
-                    text = getStringArray(R.array.review_keyword)[it.stringIndex],
-                    color = getColor().main,
-                    style = body02
-                )
-                Spacer(modifier = Modifier.width(8.dp))
-                Icon(
-                    modifier = Modifier.size(16.dp),
-                    imageVector = Icons.Default.Clear,
-                    contentDescription = null,
-                    tint = getColor().main
-                )
+                    Spacer(modifier = Modifier.width(8.dp))
+                    Icon(
+                        modifier = Modifier.size(16.dp),
+                        imageVector = Icons.Default.Clear,
+                        contentDescription = null,
+                        tint = getColor().main
+                    )
+                }
             }
         }
+    }
+}
+
+@Composable
+private fun ReviewKeywordAddButton(
+    moveToKeywordScreen: () -> Unit
+) {
+    Row(
+        modifier = Modifier
+            .border(
+                width = 1.dp,
+                shape = RoundedCornerShape(30.dp),
+                color = getColor().main
+            )
+            .clickable { moveToKeywordScreen() }
+            .padding(horizontal = 12.dp, vertical = 6.dp),
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        Text(
+            text = getString(R.string.review_write_add_keyword),
+            color = getColor().main,
+            style = caption01SemiBold
+        )
+        Spacer(modifier = Modifier.width(4.dp))
+        Icon(
+            modifier = Modifier.size(16.dp),
+            imageVector = Icons.Default.Add,
+            contentDescription = null,
+            tint = getColor().main
+        )
+    }
+}
+
+@Composable
+private fun Title(
+    text: String,
+    isEssential: Boolean
+) {
+    Row {
+        TextWithPointColor(
+            text = text,
+            style = bodyBold
+        )
+        if(isEssential)
+            Text(
+                modifier = Modifier.padding(start = 2.dp, bottom = 8.dp),
+                text = "*",
+                style = body02,
+                color = getColor().main
+            )
     }
 }

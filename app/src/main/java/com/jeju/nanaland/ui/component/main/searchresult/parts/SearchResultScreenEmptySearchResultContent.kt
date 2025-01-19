@@ -10,12 +10,11 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.jeju.nanaland.R
-import com.jeju.nanaland.ui.theme.body02
+import com.jeju.nanaland.ui.theme.body01
 import com.jeju.nanaland.ui.theme.getColor
 import com.jeju.nanaland.util.resource.getString
 
@@ -27,7 +26,7 @@ fun SearchResultScreenEmptySearchResultContent(isImageSmall: Boolean = false) {
     ) {
         Image(
             modifier = Modifier.size((if (isImageSmall) 48 else 100).dp),
-            painter = painterResource(id = R.drawable.img_mandarine),
+            painter = painterResource(id = R.drawable.img_info_glasses),
             contentDescription = null
         )
 
@@ -36,7 +35,7 @@ fun SearchResultScreenEmptySearchResultContent(isImageSmall: Boolean = false) {
         Text(
             text = getString(R.string.search_result_screen_no_result),
             color = getColor().gray01,
-            style = body02,
+            style = body01,
             textAlign = TextAlign.Center
         )
     }

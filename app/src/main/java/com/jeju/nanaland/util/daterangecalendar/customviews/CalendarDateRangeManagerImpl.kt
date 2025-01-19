@@ -9,10 +9,10 @@ import com.jeju.nanaland.util.daterangecalendar.customviews.CalendarDateRangeMan
 import com.jeju.nanaland.util.daterangecalendar.customviews.CalendarDateRangeManager.DateSelectionState.UNKNOWN
 import com.jeju.nanaland.util.daterangecalendar.models.CalendarStyleAttributes
 import com.jeju.nanaland.util.daterangecalendar.models.CalendarStyleAttributes.DateSelectionMode
-import com.jeju.nanaland.util.daterangecalendar.models.DateTiming
 import com.jeju.nanaland.util.daterangecalendar.models.CalendarStyleAttributes.DateSelectionMode.FIXED_RANGE
 import com.jeju.nanaland.util.daterangecalendar.models.CalendarStyleAttributes.DateSelectionMode.FREE_RANGE
 import com.jeju.nanaland.util.daterangecalendar.models.CalendarStyleAttributes.DateSelectionMode.SINGLE
+import com.jeju.nanaland.util.daterangecalendar.models.DateTiming
 import java.util.Calendar
 
 @Suppress("TooManyFunctions")
@@ -59,6 +59,9 @@ class CalendarDateRangeManagerImpl(
             }
         }
         throw IllegalStateException("Month(" + month.time.toString() + ") is not available in the given month range.")
+    }
+    fun getMonthByIndex(index: Int): Calendar? {
+        return mVisibleMonths.getOrNull(index)
     }
 
     override fun setVisibleMonths(startMonth: Calendar, endMonth: Calendar) {

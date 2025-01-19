@@ -1,29 +1,26 @@
 package com.jeju.nanaland.ui.navigation
 
-import androidx.core.os.bundleOf
-import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
-import com.jeju.nanaland.globalvalue.constant.ROUTE_EXPERIENCE_CONTENT
-import com.jeju.nanaland.globalvalue.constant.ROUTE_EXPERIENCE_LIST
-import com.jeju.nanaland.globalvalue.constant.ROUTE_MAIN
-import com.jeju.nanaland.globalvalue.constant.ROUTE_SIGN_IN
+import androidx.navigation.toRoute
+import com.jeju.nanaland.domain.navigation.NavViewModel
+import com.jeju.nanaland.domain.navigation.ROUTE
 import com.jeju.nanaland.ui.experience.ExperienceListScreen
-import com.jeju.nanaland.util.navigation.navigate
 
-fun NavGraphBuilder.experienceListScreen(navController: NavController) = composable(route = ROUTE_EXPERIENCE_LIST) {
+fun NavGraphBuilder.experienceListScreen(navViewModel: NavViewModel) = composable<ROUTE.Content.Experience> {
+    val data: ROUTE.Content.Experience = it.toRoute()
+
     ExperienceListScreen(
-        moveToBackScreen = { navController.popBackStack() },
+        isActivity = data.isActivity,
+        moveToBackScreen = { navViewModel.popBackStack() },
         moveToExperienceContentScreen = { contentId, experienceCategoryType ->
-            val bundle = bundleOf(
-                "contentId" to contentId,
-                "experienceCategoryType" to experienceCategoryType
-            )
-            navController.navigate(ROUTE_EXPERIENCE_CONTENT, bundle)
+            navViewModel.navigate(ROUTE.Content.Experience.Detail(contentId = contentId, isActivity = data.isActivity))
         },
-        moveToSignInScreen = { navController.navigate(ROUTE_SIGN_IN) {
-            popUpTo(ROUTE_MAIN) { inclusive = true }
-            launchSingleTop = true
-        } }
+        moveToSignInScreen = { navViewModel.navigatePopUpTo(ROUTE.Splash.SignIn, ROUTE.Main()) },
+        toHome = { navViewModel.navigatePopUpTo(ROUTE.Main(0), data) },
+        toFavorite = { navViewModel.navigatePopUpTo(ROUTE.Main(1), data) },
+        toNana = { navViewModel.navigatePopUpTo(ROUTE.Main(2), data) },
+        toProfile = { navViewModel.navigatePopUpTo(ROUTE.Main(3), data) },
+        moveToSearchScreen = { navViewModel.navigate(ROUTE.Content.SearchInContent(ROUTE.Content.Experience(data.isActivity).toString())) }
     )
 }

@@ -10,6 +10,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.jeju.nanaland.domain.entity.common.ImageUrl
 import com.jeju.nanaland.domain.entity.nanapick.NanaPickSubContentAdditionalInfoData
+import com.jeju.nanaland.domain.navigation.ROUTE
 import com.jeju.nanaland.ui.component.detailscreen.nanapick.NanaPickContentAttractivePoint
 import com.jeju.nanaland.ui.component.detailscreen.nanapick.parts.subcontent.NanaPickContentSubContentAdditionalInfo
 import com.jeju.nanaland.ui.component.detailscreen.nanapick.parts.subcontent.NanaPickContentSubContentDescription
@@ -28,10 +29,11 @@ fun NanaPickContentSubContent(
     content: String?,
     additionalInfoList: List<NanaPickSubContentAdditionalInfoData>,
     tagList: List<String?>,
+    moveToMap: (ROUTE.Content.Map)-> Unit,
     attractivePointOnClick: (String) -> Unit
 ) {
     Column {
-        NanaPickContentSubContentSubTitle(text = subTitle)
+        NanaPickContentSubContentSubTitle(text = title)
 
         Spacer(Modifier.height(4.dp))
 
@@ -40,7 +42,7 @@ fun NanaPickContentSubContent(
 
             Spacer(Modifier.width(8.dp))
 
-            NanaPickContentSubContentTitle(text = title)
+            NanaPickContentSubContentTitle(text = subTitle)
         }
 
         Spacer(Modifier.height(20.dp))
@@ -58,7 +60,16 @@ fun NanaPickContentSubContent(
                 NanaPickContentSubContentAdditionalInfo(
                     infoEmoji = info.infoEmoji,
                     infoKey = info.infoKey,
-                    infoValue = info.infoValue
+                    infoValue = info.infoValue,
+                    moveToMap = if(info.infoEmoji != "ADDRESS") null else {{
+                        moveToMap(ROUTE.Content.Map(
+                            name = title.toString(),
+                            localLocate = info.infoValue,
+                            koreaLocate = info.infoValue,
+                            lat = 33.359451, // TODO
+                            lng = 126.545839,
+                        ))
+                    }}
                 )
 
                 Spacer(Modifier.height(8.dp))

@@ -35,7 +35,8 @@ interface FavoriteRepository {
 
     // 이색체험 찜리스트 조회
     suspend fun getFavoriteExperienceList(
-        data: GetFavoriteListRequest
+        data: GetFavoriteListRequest,
+        type: String
     ): NetworkResult<FavoriteListData>
 
     // 전체 찜리스트 조회

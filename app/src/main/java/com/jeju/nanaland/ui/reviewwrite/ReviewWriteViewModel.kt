@@ -5,13 +5,14 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.jeju.nanaland.domain.entity.file.FileCategory
 import com.jeju.nanaland.domain.entity.review.ReviewKeywordResult
-import com.jeju.nanaland.domain.request.UriRequestBody
 import com.jeju.nanaland.domain.request.experience.GetExperienceContentRequest
 import com.jeju.nanaland.domain.request.restaurant.GetRestaurantContentRequest
 import com.jeju.nanaland.domain.request.review.CreateReviewRequest
 import com.jeju.nanaland.domain.request.review.EditImage
 import com.jeju.nanaland.domain.usecase.experience.GetExperienceContentUseCase
+import com.jeju.nanaland.domain.usecase.file.PutFileUseCase
 import com.jeju.nanaland.domain.usecase.restaurant.GetRestaurantContentUseCase
 import com.jeju.nanaland.domain.usecase.review.CreateReviewUseCase
 import com.jeju.nanaland.domain.usecase.review.GetMyReviewDetailUseCase
@@ -63,11 +64,12 @@ class ReviewWriteViewModel @Inject constructor(
     private val getRestaurantContentUseCase: GetRestaurantContentUseCase,
     private val getMyReviewDetailUseCase: GetMyReviewDetailUseCase,
     private val getReviewListByKeywordUseCase: GetReviewListByKeywordUseCase,
+    private val putFileUseCase: PutFileUseCase,
 ) : ViewModel() {
     companion object{
         const val MAX_IMAGE_CNT = 5
         const val MAX_TEXT_LENGTH = 200
-        const val MIN_KEYWORD_CNT = 3
+        const val MIN_KEYWORD_CNT = 1
         const val MAX_KEYWORD_CNT = 6
     }
     var isEdit = false
@@ -157,7 +159,9 @@ class ReviewWriteViewModel @Inject constructor(
             }.launchIn(viewModelScope)
         } else { // create new review
             when(category){
-                ReviewCategoryType.EXPERIENCE -> getExperienceListUseCase(
+                ReviewCategoryType.EXPERIENCE,
+                ReviewCategoryType.ACTIVITY,
+                ReviewCategoryType.ART-> getExperienceListUseCase(
                     GetExperienceContentRequest(id, false)
                 ).onEach { networkResult ->
                     networkResult.onSuccess { code, message, data ->
@@ -199,30 +203,33 @@ class ReviewWriteViewModel @Inject constructor(
         category: ReviewCategoryType,
         snapshotData: ReviewWriteUiState,
         snapshotContent: String,
-        newImages: List<UriRequestBody>
+        newImages: List<String>
     ) {
         viewModelScope.launch {
             _callState.update { UiState.Loading }
             run {
+                val imageFileKeys = newImages.map {
+                    putFileUseCase(it, FileCategory.Review)
+                }
                 if(!isEdit)
                     createReviewUseCase(
                         id = id,
                         category = category,
-                        images = newImages,
                         data = CreateReviewRequest(
                             rating = snapshotData.reviewRating,
                             content = snapshotContent,
+                            images = imageFileKeys,
                             keywords = snapshotData.reviewKeyword,
                         )
                     )
                 else
                     modifyUserReviewUseCase(
                         id = id,
-                        newImages = newImages,
                         data = CreateReviewRequest(
                             rating = snapshotData.reviewRating,
                             content = snapshotContent,
                             keywords = snapshotData.reviewKeyword,
+                            images = imageFileKeys,
                             editImages = snapshotData.reviewImage.map {
                                 EditImage(it.first, it.first == -1)
                             }

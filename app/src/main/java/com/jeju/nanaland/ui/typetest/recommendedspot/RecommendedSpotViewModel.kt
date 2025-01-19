@@ -1,8 +1,11 @@
 package com.jeju.nanaland.ui.typetest.recommendedspot
 
+import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.navigation.toRoute
 import com.jeju.nanaland.domain.entity.member.RecommendedPostData
+import com.jeju.nanaland.domain.navigation.ROUTE
 import com.jeju.nanaland.domain.usecase.member.GetRecommendedPostUseCase
 import com.jeju.nanaland.util.log.LogUtil
 import com.jeju.nanaland.util.network.onError
@@ -19,14 +22,16 @@ import javax.inject.Inject
 
 @HiltViewModel
 class RecommendedSpotViewModel @Inject constructor(
-    private val getRecommendedPostUseCase: GetRecommendedPostUseCase
+    private val getRecommendedPostUseCase: GetRecommendedPostUseCase,
+    savedStateHandle: SavedStateHandle
 ) : ViewModel() {
+    val stateHandle: ROUTE.RecommendedSpot = savedStateHandle.toRoute()
 
     private val _recommendedPostList = MutableStateFlow(emptyList<RecommendedPostData>())
     val recommendedPostList = _recommendedPostList.asStateFlow()
 
-    private fun getRecommendedSpot() {
-        getRecommendedPostUseCase()
+    private fun getRecommendedSpot(memberId: Int? = null) {
+        getRecommendedPostUseCase(memberId)
             .onEach { networkResult ->
                 networkResult.onSuccess { code, message, data ->
                     data?.let {
@@ -43,6 +48,6 @@ class RecommendedSpotViewModel @Inject constructor(
     }
 
     init {
-        getRecommendedSpot()
+        getRecommendedSpot(stateHandle.memberId)
     }
 }

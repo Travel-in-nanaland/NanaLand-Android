@@ -12,5 +12,7 @@ data class InformationModificationProposalRequest(
     @SerializedName("content")
     val content: String,
     @SerializedName("email")
-    val email: String
+    val email: String,
+    @SerializedName("fileKeys")
+    val images: List<String>?,
 )

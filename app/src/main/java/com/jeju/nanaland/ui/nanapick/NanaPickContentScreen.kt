@@ -26,6 +26,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.jeju.nanaland.R
 import com.jeju.nanaland.domain.entity.nanapick.NanaPickContentData
+import com.jeju.nanaland.domain.navigation.ROUTE
 import com.jeju.nanaland.ui.component.common.CustomSurface
 import com.jeju.nanaland.ui.component.detailscreen.nanapick.NanaPickContentAttractivePointDialog
 import com.jeju.nanaland.ui.component.detailscreen.nanapick.NanaPickContentSubContents
@@ -39,12 +40,14 @@ import com.jeju.nanaland.util.resource.getString
 import com.jeju.nanaland.util.ui.UiState
 import com.jeju.nanaland.util.ui.drawColoredShadow
 import kotlinx.coroutines.launch
+import kotlin.math.max
 
 @Composable
 fun NanaPickContentScreen(
     contentId: Int?,
     moveToBackScreen: () -> Unit,
     moveToSignInScreen: () -> Unit,
+    moveToMap: (ROUTE.Content.Map)-> Unit,
     viewModel: NanaPickContentViewModel = hiltViewModel()
 ) {
     LaunchedEffect(Unit) {
@@ -57,6 +60,7 @@ fun NanaPickContentScreen(
         moveToBackScreen = moveToBackScreen,
         toggleFavorite = { viewModel.toggleFavorite(contentId) },
         moveToSignInScreen = moveToSignInScreen,
+        moveToMap = moveToMap,
         isContent = true
     )
 }
@@ -68,6 +72,7 @@ private fun NanaPickContentScreen(
     toggleFavorite: () -> Unit,
     moveToBackScreen: () -> Unit,
     moveToSignInScreen: () -> Unit,
+    moveToMap: (ROUTE.Content.Map)-> Unit,
     isContent: Boolean
 ) {
     val density = LocalDensity.current.density
@@ -124,7 +129,7 @@ private fun NanaPickContentScreen(
 
                             Spacer(Modifier.height(48.dp))
 
-                            NanaPickContentSubContents(nanaPickContent = nanaPickContent.data) {
+                            NanaPickContentSubContents(nanaPickContent = nanaPickContent.data, moveToMap = moveToMap) {
                                 attractiveDialogText = it
                             }
                         }
@@ -133,7 +138,8 @@ private fun NanaPickContentScreen(
                     }
 
                     NanaPickContentTopBanner(
-                        height = if (400 - (scrollState.value / density) > 185) 400 - (scrollState.value / density).toInt() else 185,
+                        height = max(400 - (scrollState.value / density).toInt(), 185),
+                        isEllipsis = scrollState.value / density > (400 - 185) / 2,
                         contentId = contentId,
                         nanaPickContent = nanaPickContent,
                         onBackButtonClicked = moveToBackScreen,

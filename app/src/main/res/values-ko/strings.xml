@@ -25,16 +25,16 @@
     <string name="month_name_11">11월</string>
     <string name="month_name_12">12월</string>
 
+    <string name="year">%d년</string>
     <string name="cancel">Cancel</string>
     <string name="done">Done</string>
     <string name="title_time_picker">Select Time</string>
     <string name="select_time">Select a Time</string>
 
     <!--전체 공통-->
-    <string name="common_7대_자연">7대 자연</string>
+    <string name="common_자연">자연</string>
     <string name="common_축제">축제</string>
     <string name="common_전통시장">전통시장</string>
-    <string name="common_이색_체험">이색 체험</string>
     <string name="common_나나s_Pick">나나\'s Pick</string>
     <string name="common_홈">홈</string>
     <string name="common_찜">찜</string>
@@ -77,7 +77,8 @@
     <string name="home_screen_ad3_content">아직도 남은 전통 시장들은 뭐가 있을까?</string>
     <string name="home_screen_ad4_title">제주도에서만 여는 7월 축제🎈</string>
     <string name="home_screen_ad4_content">세계의 보물, 제주도가 가득 느껴지는 축제 보러가자</string>
-    <string name="home_screen_recommend">우리 %s 님을 위한 도민 추천</string>
+    <string name="home_screen_recommend">우리 %s 님을 위한 도민 추천🍊</string>
+    <string name="home_screen_popular">지금 인기있는 장소🔥</string>
     <string name="home_screen_recommend_default_name">나나</string>
 
     <string name="home_screen_hint_1">제주도는 지금 유채꽃 축제🏵️</string>
@@ -100,15 +101,18 @@
     <string name="searching_screen_hot_keywords">검색량 UP ! JEJU Place 🍊</string>
 
     <!--검색 결과 화면-->
+    <string name="favorite_screen_empty_list">아직 찜한 컨텐츠가 없습니다\n마음에 드는 컨텐츠에 하트를 눌러보세요!</string>
     <string name="search_result_screen_no_result">해당 검색 결과가 없습니다.</string>
 
     <!--비회원 회원가입 유도 다이얼로그-->
-    <string name="non_member_dialog_guide">나나랜드의 회원이 되셔야,\n모든 서비스를\n이용하실 수 있습니다✨</string>
-    <string name="non_member_dialog_go_sign_up">회원가입 하러 가기</string>
+    <string name="dialog_msg_title_9">나나랜드의 회원이 되셔야,\n모든 서비스를\n이용하실 수 있습니다✨</string>
+    <string name="dialog_btn_no_agree">동의하기</string>
+    <string name="dialog_btn_go_sign_up">회원가입 하러 가기</string>
 
 
     <!--날짜 선택 다이얼로그-->
     <string name="date_filter_dialog_날짜_선택">날짜 선택</string>
+    <string name="date_filter_dialog_all_select">이달 전체선택</string>
     <string name="date_filter_dialog_초기화">초기화</string>
 
     <!--지역 선택 다이얼로그-->
@@ -126,6 +130,7 @@
     <string name="list_screen_common_전_지역">전 지역</string>
 
     <!--지역 공통-->
+    <string name="list_screen_common_reset_filter">필터 초기화</string>
     <string name="location_common_제주시">제주시</string>
     <string name="location_common_애월">애월</string>
     <string name="location_common_조천">조천</string>
@@ -148,6 +153,7 @@
     <string name="festival_list_screen_image_caption">*참고용 사진입니다.</string>
 
     <!--상세 화면 공통-->
+    <string name="festival_list_screen_close_detail">종료된 축제입니다. 내년에 다시 만나요🖐</string>
     <string name="detail_screen_common_더보기">더 보기</string>
     <string name="detail_screen_common_접기">접기</string>
     <string name="detail_screen_common_주소">주소</string>
@@ -202,7 +208,7 @@
 
 
     <!--회원가입 프로필 설정 화면-->
-    <string name="sign_up_profile_setting_guide">사용할 이름을 작성 및\n프로필을 선택해 주세요.</string>
+    <string name="sign_up_profile_setting_guide_sub_title">사용할 이름과 사진을 설정해주세요</string>
     <string name="sign_up_profile_setting_hint">이름을 입력해 주세요</string>
     <string name="sign_up_profile_setting_warning1">해당 닉네임은 사용할 수 없습니다.</string>
     <string name="sign_up_profile_setting_warning2">해당 닉네임은 다른 사용자가 사용 중입니다.</string>
@@ -291,24 +297,26 @@
     <string name="language_change_screen_guide">맨 위에 있는 언어로\n기본 설정 되어 있습니다.</string>
 
     <!--언어 설정 화면 다이얼로그-->
-    <string name="language_change_dialog_text">해당 언어로\n변경하시겠습니까?</string>
+    <string name="dialog_msg_title_5">해당 언어로\n변경하시겠습니까?</string>
 
     <!--설정 화면-->
     <string name="settings_screen_설정">설정</string>
     <string name="settings_screen_사용_설정">사용 설정</string>
     <string name="settings_screen_약관_및_정책">약관 및 정책</string>
     <string name="settings_screen_접근권한_안내">접근권한 안내</string>
+    <string name="settings_screen_알림_설정">알림 설정</string>
     <string name="settings_screen_언어_설정">언어 설정</string>
     <string name="settings_screen_버전_정보">버전 정보</string>
     <string name="settings_screen_로그아웃">로그아웃</string>
     <string name="settings_screen_회원_탈퇴">회원 탈퇴</string>
 
     <!--로그아웃 다이얼로그-->
-    <string name="sign_out_dialog_text">정말 로그아웃을\n하시겠습니까?</string>
+    <string name="dialog_msg_title_6">정말 로그아웃을\n하시겠습니까?</string>
 
     <!--마이페이지 화면-->
     <string name="mypage_screen_프로필_수정">프로필 수정</string>
     <string name="mypage_screen_테스트_다시하기">테스트 다시하기</string>
+    <string name="mypage_screen_다시하기">다시하기</string>
     <string name="mypage_screen_테스트_하기">테스트 하기</string>
     <string name="mypage_screen_없음">없음</string>
     <string name="mypage_screen_로그인이_필요해요">로그인이 필요해요</string>
@@ -328,6 +336,7 @@
     <string name="profile_update_screen_warning">소개글은 70자 이내로 작성 가능합니다.</string>
 
     <!--프로필 수정 화면 다이얼로그-->
+    <string name="profile_update_screen_select_image_remove">프로필 사진 삭제</string>
     <string name="profile_update_dialog_text1">정말 나가시겠습니까?</string>
     <string name="profile_update_dialog_text2">지금 나가시면,\n작성 중인 내용이 삭제됩니다.</string>
 
@@ -354,8 +363,8 @@
     <string name="withdrawal_screen_warning">안내사항을 확인하였으며 동의합니다.</string>
 
     <!--회원 탈퇴 다이얼로그-->
-    <string name="withdrawal_dialog_text1">정말 제주도 여행 정보와 혜택을\n받지 않으시겠습니까? 😢</string>
-    <string name="withdrawal_dialog_text2">*90일 이내에 재가입 시,\n기존 계정으로 로그인이 됩니다.</string>
+    <string name="dialog_msg_title_7">정말 제주도 여행 정보와 혜택을\n받지 않으시겠습니까? 😢</string>
+    <string name="dialog_msg_sub_title_7">*90일 이내에 재가입 시,\n기존 계정으로 로그인이 됩니다.</string>
 
     <!--접근 권한 안내 화면-->
     <string name="permission_checking_screen_접근_권한_안내">접근 권한 안내</string>
@@ -384,18 +393,23 @@
     <string name="common_공지사항">공지사항</string>
     <string name="common_수정">수정</string>
     <string name="common_신고">신고</string>
+    <string name="common_신고하기">신고하기</string>
     <string name="common_사진">사진</string>
     <string name="common_동영상">동영상</string>
+    <string name="common_사진_동영상">사진 / 동영상</string>
     <string name="common_원">%s원</string>
     <string name="common_시간전">%d시간 전</string>
     <string name="common_인터넷_문제">인터넷 연결에 문제가 생긴 것 같아요!\n확인 후 다시 들어와줄 수 있을까요?</string>
     <string name="detail_screen_common_영업_시간">영업 시간</string>
     <string name="review_write_title">후기 작성</string>
+    <string name="review_write_title_edit">후기 수정</string>
     <string name="review_write_search_hint">장소를 검색하세요</string>
     <string name="review_write_select_rating">{별점}을 {선택}해주세요!</string>
     <string name="review_write_writing">{방문 후기}를 {작성}해주세요!</string>
     <string name="review_write_writing_hint">내용을 작성해 주세요</string>
+    <string name="review_write_keyword">{키워드}를 {선택}해주세요!</string>
     <string name="review_write_add_keyword">키워드 추가</string>
+    <string name="review_write_picture">{사진}을 {선택}해주세요!</string>
     <string name="review_write_complete">올리기</string>
     <string name="review_write_error_maximum_picture">사진은 %d개까지 선택 가능합니다</string>
     <string name="review_write_error_maximum_text">내용은 %d자 이내로 작성 가능합니다</string>
@@ -403,29 +417,32 @@
     <string name="review_write_keyword_guide">*최소 %d개 이상 선택해야하며, 최대 %d개까지 선택 가능합니다.</string>
     <string name="review_write_keyword_error_over">최대 %d개까지 선택 가능합니다</string>
     <string name="review_write_keyword_complete_title1">당신의 매력적인 글 고마워요 👻</string>
-    <string name="review_write_keyword_complete_sub1">당신의 매력만큼이나\n{여행지의 매력도 함께 올라갔어요!}</string>
+    <string name="review_write_keyword_complete_sub1">당신의 매력만큼이나\n{여행지의 매력도 함께 올라갔어요!}\n\n점점 기대될 것 같아요🧚‍♀️</string>
     <string name="review_write_keyword_complete_title2">너무 마음에 드는걸요 ?</string>
-    <string name="review_write_keyword_complete_sub2">당신의 세심한 글이\n누군가의 여행 선택지를\n풍요롭게 해줬어요 !</string>
+    <string name="review_write_keyword_complete_sub2">당신의 세심한 글이\n누군가의 여행 선택지를\n풍요롭게 해줬어요 !\n\n다음번도 기대할게요</string>
     <string name="review_write_keyword_complete_btn_again">콘텐츠 다시 보러 가기</string>
     <string name="review_write_keyword_complete_btn_add">다른 리뷰 추가하기</string>
-    <string name="review_write_cancel_dialog_title">정말 나가시겠습니까?</string>
-    <string name="review_write_cancel_dialog_subtitle">지금 나가시면,\n작성 중인 내용이 삭제됩니다.</string>
+    <string name="dialog_msg_title_8">정말 나가시겠습니까?</string>
+    <string name="dialog_msg_sub_title_8">지금 나가시면,\n작성 중인 내용이 삭제됩니다.</string>
     <string name="report_category_title">신고하는 이유를 알려주세요!</string>
     <string name="report_category_subtitle">타당한 근거 없이 신고된 내용은 관리자 확인 후\n반영되지 않을 수 있습니다.</string>
     <string name="report_write_resone_title">신고 사유</string>
     <string name="report_write_resone_hint">신고 사유를 %d자 이상 작성해 주세요.</string>
     <string name="report_write_resone_error">신고 사유를 %d자 이상 작성해 주세요.</string>
+    <string name="report_write_email_subtitle">이메일 주소를 정확히 입력해 주세요. 잘못 입력 시 결과를 받지 못할 수 있습니다.</string>
     <string name="report_write_complete_toast">신고한 내용은 운영정책에 따라\n최대 24시간 이내 처리됩니다.</string>
     <string name="review_keyword_mood">분위기</string>
     <string name="review_keyword_with">동반자</string>
     <string name="review_keyword_infra">편의 시설</string>
     <string name="nanapick_list_screen_recommended_post">금주 {추천} 나나’s Pick</string>
     <string name="nanapick_list_screen_see_all">모두보기</string>
-    <string name="common_나가기">나가기</string>
-    <string name="common_재시작">재시도</string>
-    <string name="splash_screen_text">인터넷 연결을 확인해주세요</string>
+    <string name="dialog_btn_out">나가기</string>
+    <string name="dialog_btn_retry">재시도</string>
+    <string name="dialog_msg_title_10">해당 후기를\n삭제하시겠습니까?</string>
+    <string name="dialog_msg_title_11">인터넷 연결을 확인해주세요</string>
 
     <!--리뷰 키워드-->
+    <string name="review_keyword_etc">기타</string>
     <string name="review_keyword_1">기념일에 가면 좋아요</string>
     <string name="review_keyword_2">아기자기해요</string>
     <string name="review_keyword_3">고급스러워요</string>
@@ -435,7 +452,7 @@
     <string name="review_keyword_7">친구</string>
     <string name="review_keyword_8">부모님</string>
     <string name="review_keyword_9">혼자</string>
-    <string name="review_keyword_10">연인, 배우자</string>
+    <string name="review_keyword_10">연인/배우자</string>
     <string name="review_keyword_11">친척/형제</string>
     <string name="review_keyword_12">반려동물</string>
     <string name="review_keyword_13">콘센트 사용 가능</string>
@@ -444,6 +461,7 @@
     <string name="review_keyword_16">깨끗한 화장실</string>
 
     <!--신고 카테고리-->
+    <string name="review_keyword_17">선택할 키워드가 없어요</string>
     <string name="report_reason_1">영리목적 / 홍보성</string>
     <string name="report_reason_2">마음에 들지 않습니다</string>
     <string name="report_reason_3">욕설/인신공격</string>
@@ -489,6 +507,33 @@
     <string name="activity_해양체험">해양체험</string>
     <string name="activity_농촌체험">농촌체험</string>
     <string name="activity_힐링테라피">힐링테라피</string>
+    <string name="map_app_kakao">카카오 지도</string>
     <string name="toast_heart_myself">자신이 작성한 후기는 좋아요 누를 수 없습니다.</string>
     <string name="toast_one_more_exit">한 번 더 누르면 앱이 종료됩니다.</string>
+    <string name="common_외">%s 외 %d</string>
+    <string name="common_close">닫기</string>
+    <string name="list_screen_common_empty_list_by_filter_head">해당 컨텐츠가 없습니다.</string>
+    <string name="list_screen_common_empty_list_by_filter_sub">필터를 조정하거나 초기화해 보세요!</string>
+    <string name="festival_list_screen_close_thumbnail">내년에 다시 만나요🖐</string>
+    <string name="sign_up_profile_setting_guide_title">프로필 설정</string>
+    <string name="profile_update_screen_select_image_album">앨범에서 선택</string>
+    <string name="map_view_map">지도 보기</string>
+    <string name="map_other_app">다른 지도 보기</string>
+    <string name="map_app_google">구글 지도</string>
+    <string name="map_app_naver">네이버 지도</string>
+    <string name="dialog_btn_later">나중에</string>
+    <string name="dialog_btn_write">작성하기</string>
+    <string name="dialog_btn_agree">동의안함</string>
+
+    <string name="dialog_msg_title_1">나나랜드에서의\n제주 이야기들이 재밌으실까요?</string>
+    <string name="dialog_msg_sub_title_1">나나랜드 in Jeju에 대해 한 마디\n메모해주시면 더 재미난\n제주 소식을 가지고 올게요💜</string>
+
+    <string name="dialog_msg_title_2">다양한 이벤트,\n다양한 새소식을 알려드릴게요💜</string>
+    <string name="dialog_msg_sub_title_2">알림 수신 동의 시\n나나랜드 내 다양한 이벤트 / 정보에 대한\n정보를 받으실 수 있습니다.</string>
+
+    <string name="dialog_msg_title_3">%d년 %d월 %d일\nnanaland in Jeju 푸시 알림\n수신 거부하였습니다.</string>
+    <string name="dialog_msg_sub_title_3">나나랜드 내 다양한 이벤트 / 정보에 대한\n정보를 받으실 수 없습니다.\n\n설정 > 알림 수신 설정에서\n변경이 가능합니다.</string>
+
+    <string name="dialog_msg_title_4">알림을 끄시겠어요?</string>
+    <string name="dialog_msg_sub_title_4">나나랜드가 전해주는 다양한 이벤트와\n소식들에 대해서 받지 못 할 수도 있어요 !</string>
 </resources>

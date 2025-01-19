@@ -18,7 +18,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.jeju.nanaland.ui.component.common.CustomSurface
-import com.jeju.nanaland.ui.component.common.topbar.CustomTopBar
+import com.jeju.nanaland.ui.component.common.topbar.TopBarCommon
 import com.jeju.nanaland.ui.theme.body02
 import com.jeju.nanaland.ui.theme.caption01
 import com.jeju.nanaland.ui.theme.getColor
@@ -33,7 +33,7 @@ fun NoticeDetailScreen(
 ) {
     val data = viewModel.noticeData.collectAsStateWithLifecycle()
     CustomSurface {
-        CustomTopBar(
+        TopBarCommon(
             title = "",
             onBackButtonClicked = moveToBackScreen
         )

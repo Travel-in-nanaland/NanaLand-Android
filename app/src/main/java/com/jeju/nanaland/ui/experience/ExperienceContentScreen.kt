@@ -5,7 +5,6 @@ import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
-import androidx.compose.foundation.gestures.animateTo
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -17,41 +16,50 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.jeju.nanaland.BuildConfig
 import com.jeju.nanaland.R
 import com.jeju.nanaland.domain.entity.experience.ExperienceContent
+import com.jeju.nanaland.domain.entity.review.ReviewData
 import com.jeju.nanaland.domain.entity.review.ReviewListData
-import com.jeju.nanaland.globalvalue.type.AnchoredDraggableContentState
+import com.jeju.nanaland.domain.navigation.ROUTE
 import com.jeju.nanaland.globalvalue.type.ExperienceCategoryType
+import com.jeju.nanaland.globalvalue.type.ReviewCategoryType
 import com.jeju.nanaland.ui.component.common.CustomSurface
 import com.jeju.nanaland.ui.component.common.ReviewBottomBar
-import com.jeju.nanaland.ui.component.common.topbar.CustomTopBarWithShareButton
+import com.jeju.nanaland.ui.component.common.dialog.BottomSheetSelectDialog
+import com.jeju.nanaland.ui.component.common.dialog.DialogCommon
+import com.jeju.nanaland.ui.component.common.dialog.DialogCommonType
+import com.jeju.nanaland.ui.component.common.dialog.FullImageDialog
+import com.jeju.nanaland.ui.component.common.topbar.TopBarCommon
 import com.jeju.nanaland.ui.component.detailscreen.other.DetailScreenInformation
 import com.jeju.nanaland.ui.component.detailscreen.other.DetailScreenInformationModificationProposalButton
 import com.jeju.nanaland.ui.component.detailscreen.other.DetailScreenNotice
 import com.jeju.nanaland.ui.component.detailscreen.other.DetailScreenTopBannerImage
 import com.jeju.nanaland.ui.component.detailscreen.other.ExperienceDetailScreenDescription
 import com.jeju.nanaland.ui.component.detailscreen.other.MoveToTopButton
-import com.jeju.nanaland.ui.component.review.ReportBottomDialog
-import com.jeju.nanaland.ui.component.review.ReportDialogDimBackground
 import com.jeju.nanaland.ui.component.review.ReviewCard
 import com.jeju.nanaland.ui.component.review.TotalRatingStar
 import com.jeju.nanaland.ui.component.review.TotalReviewCountText
-import com.jeju.nanaland.ui.component.review.getReportAnchoredDraggableState
 import com.jeju.nanaland.ui.theme.bodyBold
 import com.jeju.nanaland.ui.theme.getColor
 import com.jeju.nanaland.util.language.getLanguage
+import com.jeju.nanaland.util.network.NetworkResult
 import com.jeju.nanaland.util.resource.getString
 import com.jeju.nanaland.util.ui.ScreenPreview
 import com.jeju.nanaland.util.ui.UiState
@@ -71,14 +79,19 @@ fun ExperienceContentScreen(
     moveToReviewWritingScreen: (Int, String, String, String) -> Unit,
     moveToReportScreen: (Int) -> Unit,
     moveToProfileScreen: (Int?) -> Unit,
+    moveToReviewEditScreen: (Int, ReviewCategoryType) -> Unit,
+    moveToMap: (ROUTE.Content.Map)-> Unit,
     viewModel: ExperienceContentViewModel = hiltViewModel()
 ) {
     LaunchedEffect(Unit) {
         viewModel.getExperienceContent(contentId, isSearch)
         viewModel.getReview(contentId)
     }
+    val scope = rememberCoroutineScope()
     val experienceContent = viewModel.experienceContent.collectAsState().value
     val reviewList = viewModel.reviewList.collectAsState().value
+    var removeReviewId by remember { mutableIntStateOf(-1) }
+
     ExperienceContentScreen(
         experienceCategory = experienceCategory,
         contentId = contentId,
@@ -111,11 +124,28 @@ fun ExperienceContentScreen(
         },
         moveToReportScreen = moveToReportScreen,
         moveToProfileScreen = moveToProfileScreen,
+        moveToMap = moveToMap,
+        onEdit = { moveToReviewEditScreen(it.id, ReviewCategoryType.EXPERIENCE) },
+        onRemove = { data ->
+            removeReviewId = data.id
+        },
         isContent = true
     )
+    if (removeReviewId != -1) {
+        DialogCommon(
+            DialogCommonType.RemoveReview,
+            onDismiss = { removeReviewId = -1 },
+            onYes = { scope.launch {
+                if(viewModel.setRemove(removeReviewId) is NetworkResult.Success) {
+                    removeReviewId = -1
+                    viewModel.getReview(contentId)
+                }
+            } },
+        )
+    }
 }
 
-@OptIn(ExperimentalFoundationApi::class)
+@OptIn(ExperimentalFoundationApi::class, ExperimentalMaterial3Api::class)
 @Composable
 private fun ExperienceContentScreen(
     experienceCategory: String,
@@ -132,14 +162,21 @@ private fun ExperienceContentScreen(
     moveToSignInScreen: () -> Unit,
     moveToReportScreen: (Int) -> Unit,
     moveToProfileScreen: (Int?) -> Unit,
+    moveToMap: (ROUTE.Content.Map)-> Unit,
+    onEdit: (ReviewData) -> Unit,
+    onRemove: (ReviewData) -> Unit,
     isContent: Boolean
 ) {
     val context = LocalContext.current
     val scrollState = rememberScrollState()
     val coroutineScope = rememberCoroutineScope()
-    val reportDialogAnchoredDraggableState = remember { getReportAnchoredDraggableState() }
-    val selectedReviewId = remember { mutableIntStateOf(0) }
-    val isDimBackgroundShowing = remember { mutableIntStateOf(-1) }
+    val selectedReviewId = remember { mutableIntStateOf(-1) }
+    val fullImageUrl = remember { mutableStateOf<String?>(null) }
+
+    fullImageUrl.value?.let {
+        FullImageDialog(it) { fullImageUrl.value = null }
+    }
+
     CustomSurface {
         Box(
             modifier = Modifier.fillMaxSize()
@@ -147,18 +184,20 @@ private fun ExperienceContentScreen(
             Column(
                 modifier = Modifier.fillMaxSize()
             ) {
-                CustomTopBarWithShareButton(
+                TopBarCommon(
                     title = if (experienceCategory == ExperienceCategoryType.Activity.toString()) getString(R.string.common_액티비티) else getString(R.string.common_문화예술),
                     onBackButtonClicked = moveToBackScreen,
-                    onShareButtonClicked = {
-                        val sendIntent: Intent = Intent().apply {
-                            action = Intent.ACTION_SEND
-                            putExtra(Intent.EXTRA_TEXT, "http://13.125.110.80:8080/share/${getLanguage()}?category=experience&id=${contentId}")
-                            type = "text/plain"
+                    menus = arrayOf(
+                        R.drawable.ic_share to {
+                            val sendIntent: Intent = Intent().apply {
+                                action = Intent.ACTION_SEND
+                                putExtra(Intent.EXTRA_TEXT, "${BuildConfig.BASE_URL}/share/${getLanguage()}?category=experience&id=${contentId}")
+                                type = "text/plain"
+                            }
+                            val shareIntent = Intent.createChooser(sendIntent, null)
+                            context.startActivity(shareIntent)
                         }
-                        val shareIntent = Intent.createChooser(sendIntent, null)
-                        context.startActivity(shareIntent)
-                    }
+                    )
                 )
 
                 Box(
@@ -195,7 +234,14 @@ private fun ExperienceContentScreen(
                                         DetailScreenInformation(
                                             drawableId = R.drawable.ic_location_outlined,
                                             title = getString(R.string.detail_screen_common_주소),
-                                            content = experienceContent.data.address
+                                            content = experienceContent.data.address,
+                                            moveToMap = { moveToMap(ROUTE.Content.Map(
+                                                name = experienceContent.data.title,
+                                                localLocate = experienceContent.data.address,
+                                                koreaLocate = experienceContent.data.address,
+                                                lat = 33.359451, // TODO
+                                                lng = 126.545839,
+                                            )) }
                                         )
 
                                         Spacer(Modifier.height(24.dp))
@@ -272,12 +318,11 @@ private fun ExperienceContentScreen(
                                         ReviewCard(
                                             data = it,
                                             toggleReviewFavorite = toggleReviewFavorite,
+                                            onImageClick = { fullImageUrl.value = it },
                                             onProfileClick = moveToProfileScreen,
-                                            onMenuButtonClick = {
-                                                isDimBackgroundShowing.intValue = it.id
-                                                coroutineScope.launch { reportDialogAnchoredDraggableState.animateTo(AnchoredDraggableContentState.Open) }
-                                                selectedReviewId.intValue = it.id
-                                            }
+                                            onReport = { selectedReviewId.intValue = it.id },
+                                            onEdit = onEdit,
+                                            onRemove = onRemove
                                         )
 
                                         Spacer(Modifier.height(16.dp))
@@ -345,18 +390,12 @@ private fun ExperienceContentScreen(
                 }
             }
 
-            if (isDimBackgroundShowing.intValue > 0) {
-                ReportDialogDimBackground(
-                    isDimBackgroundShowing = isDimBackgroundShowing,
-                    reportAnchoredDraggableState = reportDialogAnchoredDraggableState
+            if(selectedReviewId.intValue != -1) {
+                BottomSheetSelectDialog(
+                    onDismiss = { selectedReviewId.intValue = -1 },
+                    items = arrayOf(getString(R.string.common_신고하기) to { moveToReportScreen(selectedReviewId.intValue) })
                 )
             }
-
-            ReportBottomDialog(
-                onClick = { moveToReportScreen(selectedReviewId.intValue) },
-                hideDimBackground = { isDimBackgroundShowing.intValue = -1 },
-                anchoredDraggableState = reportDialogAnchoredDraggableState
-            )
         }
     }
 }

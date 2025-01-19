@@ -9,19 +9,19 @@ import com.jeju.nanaland.ui.theme.body02
 import com.jeju.nanaland.ui.theme.getColor
 import com.jeju.nanaland.util.resource.getString
 import com.jeju.nanaland.util.ui.ComponentPreview
-import dagger.Component
 
 @Composable
 fun SearchResultScreenItemCount(
     modifier: Modifier = Modifier,
     count: Int
 ) {
-    Text(
-        modifier = modifier,
-        text = "$count " + getString(R.string.common_건),
-        color = getColor().gray01,
-        style = body02
-    )
+    if(count > 0)
+        Text(
+            modifier = modifier,
+            text = "$count " + getString(R.string.common_건),
+            color = getColor().gray01,
+            style = body02
+        )
 }
 
 @ComponentPreview

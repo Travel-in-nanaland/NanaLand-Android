@@ -1,5 +1,6 @@
 package com.jeju.nanaland.ui.profile.root.component
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
@@ -12,13 +13,15 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.jeju.nanaland.domain.entity.review.MemberReviewDetail
 import com.jeju.nanaland.ui.profile.root.component.parts.ProfileReviewRow
+import com.jeju.nanaland.ui.theme.getColor
 
 @Composable
 fun ProfileScreenReviewListSection(
     reviews: List<MemberReviewDetail>,
-    onClick: (Int) -> Unit
+    onClick: (Int) -> Unit,
+    onMenuClick: (MemberReviewDetail) -> Unit,
 ) {
-    val verticalItemSpacing = 16
+    val verticalItemSpacing = 8
     val data = reviews.take(calculateMaximumItemCount(
         reviews.map {
             if(it.images.isNotEmpty()) 2
@@ -27,14 +30,15 @@ fun ProfileScreenReviewListSection(
     ))
     val height = calculateFinalHeight(
         data.map {
-            if(it.images.isNotEmpty()) 210
-            else 105
+            if(it.images.isNotEmpty()) 214
+            else 103
         },
         verticalItemSpacing
     )
 
     LazyVerticalStaggeredGrid(
         modifier = Modifier
+            .background(getColor().white)
             .height((height + 24).dp)
             .padding(horizontal = 16.dp),
         columns = StaggeredGridCells.Fixed(2),
@@ -44,7 +48,7 @@ fun ProfileScreenReviewListSection(
             item { Spacer(modifier = Modifier.height(8.dp)) }
             item { Spacer(modifier = Modifier.height(8.dp)) }
             items(data) {
-                ProfileReviewRow(it, onClick)
+                ProfileReviewRow(it, onClick, onMenuClick)
             }
         },
     )

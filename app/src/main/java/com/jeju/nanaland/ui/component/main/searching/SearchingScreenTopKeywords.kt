@@ -1,6 +1,5 @@
 package com.jeju.nanaland.ui.component.main.searching
 
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -41,8 +40,8 @@ fun SearchingScreenTopKeywords(
                             Text(
                                 modifier = Modifier.width(12.dp),
                                 text = "${it + 1}.",
-                                color = if (it == 0 || it == 1) getColor().main else getColor().gray01,
-                                style = if (it == 0 || it == 1) body02SemiBold else body02
+                                color = if (it < 3) getColor().main else getColor().gray01,
+                                style = if (it < 3) body02SemiBold else body02
                             )
 
                             Spacer(Modifier.width(8.dp))
@@ -71,7 +70,7 @@ fun SearchingScreenTopKeywords(
                             Text(
                                 modifier = Modifier.width(12.dp),
                                 text = "${it + 5}.",
-                                color = getColor().gray01,
+                                color = getColor().black,
                                 style = body02
                             )
 

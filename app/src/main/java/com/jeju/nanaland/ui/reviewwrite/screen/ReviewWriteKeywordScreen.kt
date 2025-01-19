@@ -27,12 +27,12 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.navigation.NavController
 import com.jeju.nanaland.R
+import com.jeju.nanaland.domain.navigation.NavViewModel
 import com.jeju.nanaland.globalvalue.type.ReviewKeyword
 import com.jeju.nanaland.ui.component.common.BottomOkButton
 import com.jeju.nanaland.ui.component.common.CustomSurface
-import com.jeju.nanaland.ui.component.common.topbar.CustomTopBar
+import com.jeju.nanaland.ui.component.common.topbar.TopBarCommon
 import com.jeju.nanaland.ui.reviewwrite.ReviewWriteViewModel
 import com.jeju.nanaland.ui.theme.body02
 import com.jeju.nanaland.ui.theme.bodyBold
@@ -50,7 +50,7 @@ private fun ReviewWriteKeywordScreenPreview() {
 
 @Composable
 fun ReviewWriteKeywordScreen(
-    navController: NavController,
+    navViewModel: NavViewModel,
     viewModel: ReviewWriteViewModel = hiltViewModel()
 ) {
     val context = LocalContext.current
@@ -59,7 +59,7 @@ fun ReviewWriteKeywordScreen(
     }
 
     ReviewWriteKeywordUI(
-        moveToBackScreen = { navController.popBackStack() },
+        moveToBackScreen = { navViewModel.popBackStack() },
         selectKeyword = selectKeyword,
         onKeyword = {
             val isSelect = it in selectKeyword
@@ -74,7 +74,7 @@ fun ReviewWriteKeywordScreen(
         },
         onComplete = {
             viewModel.setKeyword(selectKeyword)
-            navController.popBackStack()
+            navViewModel.popBackStack()
         }
     )
 }
@@ -92,11 +92,12 @@ private fun ReviewWriteKeywordUI(
     val keywords = remember { listOf(
         Pair(getString(R.string.review_keyword_mood), ReviewKeyword.Mood.entries),
         Pair(getString(R.string.review_keyword_with), ReviewKeyword.With.entries),
-        Pair(getString(R.string.review_keyword_infra), ReviewKeyword.Infra.entries)
+        Pair(getString(R.string.review_keyword_infra), ReviewKeyword.Infra.entries),
+        Pair(getString(R.string.review_keyword_etc), ReviewKeyword.Etc.entries)
     ) }
 
     CustomSurface {
-        CustomTopBar(
+        TopBarCommon(
             title = getString(R.string.review_write_keyword_title),
             onBackButtonClicked =  moveToBackScreen
         )
@@ -149,7 +150,7 @@ private fun ReviewWriteKeywordUI(
                                     .clickable { onKeyword(keyword) }
                                     .padding(horizontal = 16.dp, vertical = 8.dp),
                                 text = getStringArray(R.array.review_keyword)[keyword.stringIndex],
-                                color = if(isSelect) getColor().main else getColor().gray02,
+                                color = if(isSelect) getColor().main else getColor().gray01,
                                 style = body02
                             )
                         }

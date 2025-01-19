@@ -10,8 +10,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.jeju.nanaland.ui.theme.body01
+import com.jeju.nanaland.ui.theme.bodyBold
 import com.jeju.nanaland.ui.theme.getColor
-import com.jeju.nanaland.ui.theme.title02
 import com.jeju.nanaland.util.ui.clickableNoEffect
 
 @Composable
@@ -32,7 +33,7 @@ fun LanguageChangeScreenItem(
         Text(
             text = text,
             color = if (isSelected) getColor().main else getColor().black,
-            style = title02
+            style = if (isSelected) bodyBold else body01,
         )
     }
 }

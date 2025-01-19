@@ -4,7 +4,6 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import com.jeju.nanaland.ui.theme.body02
-import com.jeju.nanaland.ui.theme.body02SemiBold
 import com.jeju.nanaland.ui.theme.getColor
 import com.jeju.nanaland.util.ui.clickableNoEffect
 
@@ -17,7 +16,7 @@ fun SearchingScreenTopKeyword(
     Text(
         modifier = Modifier.clickableNoEffect { onClick() },
         text = text ?: "",
-        color = if (rank == 0 || rank == 1) getColor().main else getColor().gray01,
-        style = if (rank == 0 || rank == 1) body02SemiBold else body02
+        color = if (rank < 3) getColor().main else getColor().black,
+        style = body02
     )
 }

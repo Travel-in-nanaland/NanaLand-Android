@@ -4,7 +4,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.text.style.TextAlign
 import com.jeju.nanaland.R
-import com.jeju.nanaland.ui.theme.body02SemiBold
+import com.jeju.nanaland.ui.theme.body02
 import com.jeju.nanaland.ui.theme.getColor
 import com.jeju.nanaland.util.resource.getString
 
@@ -26,7 +26,7 @@ fun TypeTestingScreenItemText(itemIdx: Int) {
             else -> getString(R.string.type_test_screen_item12)
         },
         color = getColor().black,
-        style = body02SemiBold,
+        style = body02,
         textAlign = TextAlign.Center
     )
 }

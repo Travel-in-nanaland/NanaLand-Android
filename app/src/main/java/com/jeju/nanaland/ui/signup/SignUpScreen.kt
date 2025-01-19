@@ -14,19 +14,25 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.jeju.nanaland.R
 import com.jeju.nanaland.ui.component.common.CustomSurface
 import com.jeju.nanaland.ui.component.signup.profilesetting.SignUpScreenBottomButton
 import com.jeju.nanaland.ui.component.signup.profilesetting.SignUpScreenCharacterCount
-import com.jeju.nanaland.ui.component.signup.profilesetting.SignUpScreenGuideLine
 import com.jeju.nanaland.ui.component.signup.profilesetting.SignUpScreenPhotoPreview
 import com.jeju.nanaland.ui.component.signup.profilesetting.SignUpScreenTextField
+import com.jeju.nanaland.ui.theme.body01
+import com.jeju.nanaland.ui.theme.getColor
+import com.jeju.nanaland.ui.theme.largeTitle02
+import com.jeju.nanaland.util.resource.getString
 import com.jeju.nanaland.util.ui.scrollableVerticalArrangement
 
 @Composable
@@ -99,9 +105,21 @@ private fun SignUpScreen(
                 ) {
                     Spacer(Modifier.height(80.dp))
 
-                    SignUpScreenGuideLine()
+                    Text(
+                        text = getString(R.string.sign_up_profile_setting_guide_title),
+                        color = getColor().black,
+                        textAlign = TextAlign.Center,
+                        style = largeTitle02
+                    )
+                    Spacer(Modifier.height(4.dp))
+                    Text(
+                        text = getString(R.string.sign_up_profile_setting_guide_sub_title),
+                        color = getColor().gray01,
+                        textAlign = TextAlign.Center,
+                        style = body01
+                    )
 
-                    Spacer(Modifier.height(32.dp))
+                    Spacer(Modifier.height(52.dp))
 
                     SignUpScreenPhotoPreview(imageUri = profileImageUri) {
                         takePhotoFromAlbumLauncher.launch(
@@ -111,7 +129,7 @@ private fun SignUpScreen(
                         )
                     }
 
-                    Spacer(Modifier.height(48.dp))
+                    Spacer(Modifier.height(64.dp))
 
                     Box(
                         modifier = Modifier.fillMaxWidth(),
@@ -119,7 +137,7 @@ private fun SignUpScreen(
                     ) {
                         SignUpScreenCharacterCount(
                             count = inputNickname.length,
-                            isError = inputNicknameError != null
+                            isError = inputNicknameError != null && inputNickname.isNotEmpty()
                         )
                     }
 

@@ -4,7 +4,6 @@ import com.jeju.nanaland.domain.entity.auth.AuthTokenData
 import com.jeju.nanaland.domain.request.auth.SignInRequest
 import com.jeju.nanaland.domain.request.auth.SignUpRequest
 import com.jeju.nanaland.util.network.NetworkResult
-import java.io.File
 
 interface AuthRepository {
 
@@ -21,7 +20,7 @@ interface AuthRepository {
     // 회원가입
     suspend fun signUp(
         data: SignUpRequest,
-        image: File?
+        image: String?
     ): NetworkResult<AuthTokenData>
 
     // FCM 토큰 발행

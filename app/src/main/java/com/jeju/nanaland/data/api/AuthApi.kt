@@ -2,16 +2,13 @@ package com.jeju.nanaland.data.api
 
 import com.jeju.nanaland.domain.entity.auth.AuthTokenData
 import com.jeju.nanaland.domain.request.auth.SignInRequest
+import com.jeju.nanaland.domain.request.auth.SignUpRequest
 import com.jeju.nanaland.domain.response.ResponseWrapper
-import okhttp3.MultipartBody
-import okhttp3.RequestBody
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.Header
-import retrofit2.http.Multipart
 import retrofit2.http.POST
-import retrofit2.http.Part
 import retrofit2.http.Query
 
 interface AuthApi {
@@ -30,11 +27,10 @@ interface AuthApi {
     ): Response<ResponseWrapper<AuthTokenData>>
 
     // 회원가입
-    @Multipart
     @POST("member/join")
     suspend fun signUp(
-        @Part("reqDto") data: RequestBody,
-        @Part image: MultipartBody.Part?
+        @Body data: SignUpRequest,
+        @Query("fileKey") image: String?
     ): Response<ResponseWrapper<AuthTokenData>>
 
     // 닉네임 중복 확인

@@ -3,6 +3,7 @@ package com.jeju.nanaland.ui.main
 import androidx.annotation.DrawableRes
 import androidx.lifecycle.ViewModel
 import com.jeju.nanaland.R
+import com.jeju.nanaland.globalvalue.type.HomeScreenViewType
 import com.jeju.nanaland.globalvalue.type.MainScreenViewType
 import com.jeju.nanaland.util.resource.getString
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -18,6 +19,8 @@ class MainViewModel @Inject constructor() : ViewModel() {
     val viewType = _viewType.asStateFlow()
     private val _prevViewType = MutableStateFlow(MainScreenViewType.Home)
     val prevViewType = _prevViewType.asStateFlow()
+    private val _homeScreenViewType = MutableStateFlow(HomeScreenViewType.Home)
+    val homeScreenViewType = _homeScreenViewType.asStateFlow()
 
     fun getNavigationItemContentList(): List<NavigationItemContent> {
         return listOf(
@@ -51,6 +54,9 @@ class MainViewModel @Inject constructor() : ViewModel() {
     fun updateViewType(viewType: MainScreenViewType) {
         _prevViewType.update { _viewType.value }
         _viewType.update { viewType }
+    }
+    fun updateHomeScreenViewType(viewType: HomeScreenViewType) {
+        _homeScreenViewType.update { viewType }
     }
 
     data class NavigationItemContent(

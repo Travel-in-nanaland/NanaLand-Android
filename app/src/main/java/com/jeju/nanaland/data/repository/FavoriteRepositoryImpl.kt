@@ -1,11 +1,11 @@
 package com.jeju.nanaland.data.repository
 
 import com.jeju.nanaland.data.api.FavoriteApi
+import com.jeju.nanaland.domain.entity.favorite.FavoriteListData
 import com.jeju.nanaland.domain.entity.favorite.ToggleFavoriteData
 import com.jeju.nanaland.domain.repository.FavoriteRepository
 import com.jeju.nanaland.domain.request.favorite.GetFavoriteListRequest
 import com.jeju.nanaland.domain.request.favorite.ToggleFavoriteRequest
-import com.jeju.nanaland.domain.entity.favorite.FavoriteListData
 import com.jeju.nanaland.util.network.NetworkResult
 import com.jeju.nanaland.util.network.NetworkResultHandler
 
@@ -74,10 +74,12 @@ class FavoriteRepositoryImpl(
 
     // 이색체험 찜리스트 조회
     override suspend fun getFavoriteExperienceList(
-        data: GetFavoriteListRequest
+        data: GetFavoriteListRequest,
+        type: String
     ): NetworkResult<FavoriteListData> {
         return handleResult {
             favoriteApi.getFavoriteExperienceList(
+                type = type,
                 page = data.page,
                 size = data.size
             )

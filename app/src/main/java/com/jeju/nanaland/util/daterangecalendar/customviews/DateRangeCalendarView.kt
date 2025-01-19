@@ -15,8 +15,6 @@ import com.jeju.nanaland.R
 import com.jeju.nanaland.util.daterangecalendar.models.CalendarStyleAttrImpl
 import com.jeju.nanaland.util.daterangecalendar.models.CalendarStyleAttributes
 import com.jeju.nanaland.util.language.customContext
-import com.jeju.nanaland.util.resource.getString
-import java.text.DateFormatSymbols
 import java.util.Calendar
 import java.util.Locale
 
@@ -135,8 +133,7 @@ class DateRangeCalendarView : LinearLayout, DateRangeCalendarViewApi {
         val currentCalendarMonth = mDateRangeCalendarManager.getVisibleMonthDataList()[position]
         var dateText = customContext.resources.getStringArray(R.array.month_name)[currentCalendarMonth[Calendar.MONTH]]
         dateText = dateText.substring(0, 1).toUpperCase() + dateText.subSequence(1, dateText.length)
-        val yearTitle = "${currentCalendarMonth[Calendar.YEAR]}"
-        tvYearTitle.text = yearTitle
+        tvYearTitle.text = customContext.resources.getString(R.string.year, currentCalendarMonth[Calendar.YEAR])
         tvYearTitle.setTextColor(Color.rgb(88, 63, 245))
         tvMonthTitle.text = dateText
         tvMonthTitle.setTextColor(Color.rgb(21, 21, 21))
@@ -263,6 +260,9 @@ class DateRangeCalendarView : LinearLayout, DateRangeCalendarViewApi {
      */
     override fun setCurrentMonth(calendar: Calendar) {
         vpCalendar.currentItem = mDateRangeCalendarManager.getMonthIndex(calendar)
+    }
+    fun getCurrentMonth(): Calendar? {
+        return mDateRangeCalendarManager.getMonthByIndex(vpCalendar.currentItem)
     }
 
     override fun setSelectableDateRange(startDate: Calendar, endDate: Calendar) {

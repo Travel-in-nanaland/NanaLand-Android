@@ -1,35 +1,48 @@
 package com.jeju.nanaland.ui.festival
 
 import android.content.Intent
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.jeju.nanaland.BuildConfig
 import com.jeju.nanaland.R
 import com.jeju.nanaland.domain.entity.festival.FestivalContentData
+import com.jeju.nanaland.domain.navigation.ROUTE
+import com.jeju.nanaland.globalvalue.userdata.UserData
 import com.jeju.nanaland.ui.component.common.CustomSurface
-import com.jeju.nanaland.ui.component.common.topbar.CustomTopBar
+import com.jeju.nanaland.ui.component.common.dialog.DialogCommon
+import com.jeju.nanaland.ui.component.common.dialog.DialogCommonType
+import com.jeju.nanaland.ui.component.common.topbar.TopBarCommon
 import com.jeju.nanaland.ui.component.detailscreen.other.DetailScreenDescription
 import com.jeju.nanaland.ui.component.detailscreen.other.DetailScreenInformation
 import com.jeju.nanaland.ui.component.detailscreen.other.DetailScreenInformationModificationProposalButton
-import com.jeju.nanaland.ui.component.detailscreen.other.DetailScreenTopBannerImage
 import com.jeju.nanaland.ui.component.detailscreen.other.MoveToTopButton
+import com.jeju.nanaland.ui.theme.body02
+import com.jeju.nanaland.ui.theme.getColor
 import com.jeju.nanaland.util.language.getLanguage
 import com.jeju.nanaland.util.resource.getString
 import com.jeju.nanaland.util.ui.ScreenPreview
 import com.jeju.nanaland.util.ui.UiState
+import com.skydoves.landscapist.glide.GlideImage
 import kotlinx.coroutines.launch
 
 @Composable
@@ -40,6 +53,7 @@ fun FestivalContentScreen(
     moveToBackScreen: () -> Unit,
     moveToInfoModificationProposalScreen: () -> Unit,
     moveToSignInScreen: () -> Unit,
+    moveToMap: (ROUTE.Content.Map)-> Unit,
     viewModel: FestivalContentViewModel = hiltViewModel()
 ) {
     LaunchedEffect(Unit) {
@@ -54,6 +68,7 @@ fun FestivalContentScreen(
         moveToBackScreen = moveToBackScreen,
         moveToInfoModificationProposalScreen = moveToInfoModificationProposalScreen,
         moveToSignInScreen = moveToSignInScreen,
+        moveToMap = moveToMap,
         isContent = true
     )
 }
@@ -67,22 +82,67 @@ private fun FestivalContentScreen(
     moveToBackScreen: () -> Unit,
     moveToInfoModificationProposalScreen: () -> Unit,
     moveToSignInScreen: () -> Unit,
+    moveToMap: (ROUTE.Content.Map)-> Unit,
     isContent: Boolean
 ) {
     val context = LocalContext.current
     val scrollState = rememberScrollState()
     val coroutineScope = rememberCoroutineScope()
+    val isNonMemberGuideDialogShowing = remember { mutableStateOf(false) }
+    if (isNonMemberGuideDialogShowing.value) {
+        DialogCommon(
+            DialogCommonType.Login,
+            onDismiss = { isNonMemberGuideDialogShowing.value = false },
+            onYes = moveToSignInScreen,
+        )
+    }
+
     CustomSurface {
-        CustomTopBar(
+        TopBarCommon(
             title = getString(R.string.common_축제),
-            onBackButtonClicked = moveToBackScreen
+            onBackButtonClicked = moveToBackScreen,
+            menus = arrayOf(
+                (if ((festivalContent as? UiState.Success)?.data?.favorite == true) R.drawable.ic_heart_filled
+                else R.drawable.ic_heart_outlined_thick) to {
+                    if (UserData.provider == "GUEST") {
+                        isNonMemberGuideDialogShowing.value = true
+                    } else if(festivalContent is UiState.Success){
+                        toggleFavorite(festivalContent.data.id, updatePrevScreenListFavorite)
+                    }
+                },
+                R.drawable.ic_share_outlined to {
+                    val sendIntent: Intent = Intent().apply {
+                        action = Intent.ACTION_SEND
+                        putExtra(Intent.EXTRA_TEXT, "${BuildConfig.BASE_URL}/share/${getLanguage()}?category=festival&id=${contentId}")
+                        type = "text/plain"
+                    }
+                    val shareIntent = Intent.createChooser(sendIntent, null)
+                    context.startActivity(shareIntent)
+                }
+            )
         )
         when (festivalContent) {
             is UiState.Loading -> {}
             is UiState.Success -> {
                 Box(modifier = Modifier.fillMaxSize()) {
                     Column(modifier = Modifier.verticalScroll(scrollState)) {
-                        DetailScreenTopBannerImage(imageUri = festivalContent.data.images[0].originUrl)
+                        Box {
+                            GlideImage(
+                                modifier = Modifier.fillMaxWidth().height(240.dp),
+                                imageModel = { festivalContent.data.images[0].originUrl },
+                            )
+                            if(!festivalContent.data.isNotOver)
+                                Text(
+                                    modifier = Modifier
+                                        .background(getColor().black50)
+                                        .fillMaxWidth()
+                                        .padding(vertical = 10.dp),
+                                    text = getString(R.string.festival_list_screen_close_detail),
+                                    style = body02,
+                                    color = getColor().white,
+                                    textAlign = TextAlign.Center
+                                )
+                        }
 
                         Spacer(Modifier.height(24.dp))
 
@@ -96,7 +156,7 @@ private fun FestivalContentScreen(
                                 onShareButtonClicked = {
                                     val sendIntent: Intent = Intent().apply {
                                         action = Intent.ACTION_SEND
-                                        putExtra(Intent.EXTRA_TEXT, "http://13.125.110.80:8080/share/${getLanguage()}?category=festival&id=${contentId}")
+                                        putExtra(Intent.EXTRA_TEXT, "${BuildConfig.BASE_URL}/share/${getLanguage()}?category=festival&id=${contentId}")
                                         type = "text/plain"
                                     }
                                     val shareIntent = Intent.createChooser(sendIntent, null)
@@ -111,7 +171,14 @@ private fun FestivalContentScreen(
                                 DetailScreenInformation(
                                     drawableId = R.drawable.ic_location_outlined,
                                     title = getString(R.string.detail_screen_common_주소),
-                                    content = festivalContent.data.address
+                                    content = festivalContent.data.address,
+                                    moveToMap = { moveToMap(ROUTE.Content.Map(
+                                        name = festivalContent.data.title,
+                                        localLocate = festivalContent.data.address,
+                                        koreaLocate = festivalContent.data.address,
+                                        lat = 33.359451, // TODO
+                                        lng = 126.545839,
+                                    )) }
                                 )
 
                                 Spacer(Modifier.height(24.dp))

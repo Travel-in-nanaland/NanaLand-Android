@@ -10,7 +10,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.jeju.nanaland.ui.theme.body01
+import com.jeju.nanaland.ui.theme.body02
 import com.jeju.nanaland.ui.theme.getColor
 import com.jeju.nanaland.util.ui.clickableNoEffect
 
@@ -31,7 +31,7 @@ fun SettingsScreenCategoryItem(
             modifier = Modifier.weight(1f),
             text = text,
             color = getColor().black,
-            style = body01
+            style = body02
         )
 
         Spacer(Modifier.width(8.dp))

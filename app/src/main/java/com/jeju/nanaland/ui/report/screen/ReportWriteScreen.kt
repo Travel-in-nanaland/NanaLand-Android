@@ -27,6 +27,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
@@ -38,7 +39,6 @@ import com.jeju.nanaland.ui.theme.body02
 import com.jeju.nanaland.ui.theme.bodyBold
 import com.jeju.nanaland.ui.theme.caption01
 import com.jeju.nanaland.ui.theme.getColor
-import com.jeju.nanaland.ui.theme.title02Bold
 import com.jeju.nanaland.util.resource.getString
 import com.jeju.nanaland.util.ui.clickableNoEffect
 
@@ -67,7 +67,7 @@ fun ReportWriteScreen(
             ) {
                 Text(
                     text = getString(R.string.report_write_resone_title),
-                    style = title02Bold,
+                    style = bodyBold,
                     color = getColor().black
                 )
                 Spacer(modifier = Modifier.width(12.dp))
@@ -77,7 +77,7 @@ fun ReportWriteScreen(
                     color = getColor().main
                 )
             }
-            Spacer(modifier = Modifier.height(8.dp))
+            Spacer(modifier = Modifier.height(12.dp))
             InputTextField(
                 text = reason,
                 hint = getString(R.string.report_write_resone_hint, REASON_LENGTH_MIN),
@@ -86,7 +86,7 @@ fun ReportWriteScreen(
                 maxLength = REASON_LENGTH_MAX,
                 onText = {
                     reason = it
-                    reasonError = reason.length < 20
+                    reasonError = reason.length < REASON_LENGTH_MIN
                 }
             )
 
@@ -97,7 +97,7 @@ fun ReportWriteScreen(
             ) {
                 Text(
                     text = getString(R.string.common_이메일),
-                    style = title02Bold,
+                    style = bodyBold,
                     color = getColor().black
                 )
                 Spacer(modifier = Modifier.width(12.dp))
@@ -107,20 +107,26 @@ fun ReportWriteScreen(
                     color = getColor().main
                 )
             }
-            Spacer(modifier = Modifier.height(8.dp))
+            Text(
+                text = getString(R.string.report_write_email_subtitle),
+                style = caption01,
+                color = getColor().gray01
+            )
+            Spacer(modifier = Modifier.height(12.dp))
             InputTextField(
                 text = email,
                 hint = getString(R.string.info_modification_proposal_hint2, REASON_LENGTH_MIN),
                 error = if(emailError) getString(R.string.info_modification_proposal_warning) else null,
                 height = 48,
-                onText = { email = it }
+                onText = {
+                    emailError = !email.matches(emailRegex)
+                    email = it
+                }
             )
             Spacer(modifier = Modifier.height(48.dp))
             Text(
-                text = getString(R.string.common_사진) +
-                        " / " +
-                        getString(R.string.common_동영상),
-                style = title02Bold,
+                text = getString(R.string.common_사진_동영상),
+                style = bodyBold,
                 color = getColor().black
             )
             Spacer(modifier = Modifier.height(8.dp))
@@ -136,12 +142,12 @@ fun ReportWriteScreen(
                 .padding(horizontal = 16.dp)
                 .padding(bottom = 24.dp)
                 .clip(RoundedCornerShape(50))
-                .background(getColor().main)
+                .background(if(!reasonError && !emailError)getColor().main else getColor().main10)
                 .padding(11.dp)
                 .align(Alignment.BottomCenter)
                 .clickableNoEffect {
-                    reasonError = reason.length < REASON_LENGTH_MIN
-                    emailError = !email.matches(emailRegex)
+//                    reasonError = reason.length < REASON_LENGTH_MIN
+//                    emailError = !email.matches(emailRegex)
                     if(!reasonError && !emailError)
                         onComplete(reason, email, images)
                 },
@@ -214,8 +220,9 @@ private fun InputTextField(
 
     Spacer(modifier = Modifier.height(8.dp))
 
-    error?.let {
-        Row(verticalAlignment = Alignment.CenterVertically) {
+        Row(
+            modifier = Modifier.alpha(if(error == null) 0f else 1f),
+            verticalAlignment = Alignment.CenterVertically) {
             Icon(
                 modifier = Modifier.size(20.dp),
                 painter = painterResource(id = R.drawable.ic_warning_outlined),
@@ -224,10 +231,9 @@ private fun InputTextField(
             )
             Spacer(modifier = Modifier.width(4.dp))
             Text(
-                text = it,
+                text = error ?: " ",
                 style = caption01,
                 color = getColor().warning
             )
         }
-    }
 }

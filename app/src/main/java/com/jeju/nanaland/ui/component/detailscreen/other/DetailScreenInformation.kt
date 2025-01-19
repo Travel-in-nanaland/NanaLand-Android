@@ -16,10 +16,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.jeju.nanaland.R
-import com.jeju.nanaland.ui.component.detailscreen.other.parts.information.DetailScreenInformationContent
+import com.jeju.nanaland.ui.component.common.text.TextWithIntent
 import com.jeju.nanaland.ui.component.detailscreen.other.parts.information.DetailScreenInformationIcon
 import com.jeju.nanaland.ui.component.detailscreen.other.parts.information.DetailScreenInformationTitle
 import com.jeju.nanaland.ui.theme.NanaLandTheme
+import com.jeju.nanaland.ui.theme.body02
+import com.jeju.nanaland.ui.theme.getColor
 import com.jeju.nanaland.util.ui.ScreenPreview
 
 @Composable
@@ -27,6 +29,7 @@ fun DetailScreenInformation(
     @DrawableRes drawableId: Int,
     title: String?,
     content: String?,
+    moveToMap: (()-> Unit)? = null
 ) {
     Row(
         modifier = Modifier.fillMaxWidth()
@@ -40,7 +43,39 @@ fun DetailScreenInformation(
 
             Spacer(Modifier.height(4.dp))
 
-            DetailScreenInformationContent(text = content)
+            TextWithIntent(
+                text = content ?: "",
+                color = getColor().black,
+                style = body02
+            )
+            /* TODO
+            moveToMap?.let {
+                Spacer(Modifier.height(8.dp))
+                Row(
+                    modifier = Modifier
+                        .clickableNoEffect(moveToMap)
+                        .background(
+                            color = getColor().gray03,
+                            shape = RoundedCornerShape(50)
+                        )
+                        .padding(horizontal = 8.dp, vertical = 4.dp),
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Text(
+                        text = getString(R.string.map_view_map),
+                        style = caption01,
+                        color = getColor().gray01
+                    )
+                    Spacer(Modifier.width(4.dp))
+                    Icon(
+                        modifier = Modifier.size(12.dp),
+                        painter = painterResource(id = R.drawable.ic_arrow_right),
+                        contentDescription = null,
+                        tint = getColor().gray01
+                    )
+                }
+            }
+             */
         }
     }
 }

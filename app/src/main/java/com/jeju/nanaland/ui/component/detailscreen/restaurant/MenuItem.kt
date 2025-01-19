@@ -15,7 +15,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
 import com.jeju.nanaland.R
 import com.jeju.nanaland.ui.theme.body02
-import com.jeju.nanaland.ui.theme.bodyBold
+import com.jeju.nanaland.ui.theme.body02Bold
 import com.jeju.nanaland.ui.theme.getColor
 import com.jeju.nanaland.util.language.customContext
 import com.jeju.nanaland.util.resource.getString
@@ -37,19 +37,19 @@ fun MenuItem(
             Text(
                 text = menuName,
                 color = getColor().black,
-                style = bodyBold
+                style = body02Bold
             )
 
             Spacer(Modifier.height(4.dp))
 
             Text(
-                text = getString(
-                    R.string.common_원,
-                    price
-                        .toDoubleOrNull()
-                        ?.toWithComma(customContext.resources.configuration.locales[0])
-                        ?: price
-                ),
+                text =
+                price.toDoubleOrNull()?.let {
+                    getString(
+                        R.string.common_원,
+                        it.toWithComma(customContext.resources.configuration.locales[0])
+                    )
+                } ?: price,
                 color = getColor().black,
                 style = body02
             )

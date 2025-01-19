@@ -1,6 +1,7 @@
 package com.jeju.nanaland.ui.nanapick
 
 import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -8,6 +9,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.PageSize
@@ -21,6 +23,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextLayoutResult
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
@@ -29,16 +32,15 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.jeju.nanaland.R
 import com.jeju.nanaland.domain.entity.nanapick.NanaPickBannerData
 import com.jeju.nanaland.ui.component.common.text.TextWithPointColor
-import com.jeju.nanaland.ui.component.common.topbar.CustomTopBarNoBackButton
+import com.jeju.nanaland.ui.component.common.topbar.TopBarCommon
 import com.jeju.nanaland.ui.component.main.home.HomeScreenAdPageIndicator
 import com.jeju.nanaland.ui.nanapick.component.NanaPickThumbnailBanner1
 import com.jeju.nanaland.ui.nanapick.component.NewTag
-import com.jeju.nanaland.ui.theme.body02SemiBold
+import com.jeju.nanaland.ui.theme.body02Bold
+import com.jeju.nanaland.ui.theme.bodyBold
 import com.jeju.nanaland.ui.theme.caption01
-import com.jeju.nanaland.ui.theme.caption01SemiBold
+import com.jeju.nanaland.ui.theme.caption02SemiBold
 import com.jeju.nanaland.ui.theme.getColor
-import com.jeju.nanaland.ui.theme.title01Bold
-import com.jeju.nanaland.ui.theme.title02Bold
 import com.jeju.nanaland.util.resource.getString
 import com.jeju.nanaland.util.ui.UiState
 import com.jeju.nanaland.util.ui.clickableNoEffect
@@ -83,21 +85,21 @@ private fun NanaPickListScreen(
         pageCount = {100000}
     )
     Column {
-        CustomTopBarNoBackButton(
+        TopBarCommon(
             title = getString(R.string.common_나나s_Pick)
         )
 
         Column(
             modifier = Modifier
-                .padding(start = 16.dp, end = 16.dp)
                 .verticalScroll(rememberScrollState())
         ) {
             Spacer(Modifier.height(24.dp))
 
             TextWithPointColor(
+                modifier = Modifier.padding(horizontal = 16.dp),
                 text = getString(R.string.nanapick_list_screen_recommended_post),
                 color = getColor().black,
-                style = title02Bold
+                style = bodyBold
             )
 
             Spacer(Modifier.height(12.dp))
@@ -107,16 +109,17 @@ private fun NanaPickListScreen(
                 is UiState.Success -> {
                     HorizontalPager(
                         state = pagerState,
-                        pageSize = PageSize.Fixed(226.dp)
+                        pageSize = PageSize.Fixed((180 + 16).dp)
                     ) { page ->
                         Column(
-                            modifier = Modifier.clickableNoEffect { moveToNanaPickContentScreen(recommendedNanaPickList.data[page % recommendedNanaPickList.data.size].id) }
+                            modifier = Modifier
+                                .padding(start = 16.dp)
+                                .width(180.dp)
+                                .clickableNoEffect { moveToNanaPickContentScreen(recommendedNanaPickList.data[page % recommendedNanaPickList.data.size].id) }
                         ) {
                             Box(
                                 modifier = Modifier
-                                    .padding(end = 16.dp)
-                                    .height(280.dp)
-                                    .width(210.dp)
+                                    .height(240.dp)
                             ) {
                                 GlideImage(
                                     modifier = Modifier.fillMaxWidth(),
@@ -124,24 +127,24 @@ private fun NanaPickListScreen(
                                     imageOptions = ImageOptions(contentScale = ContentScale.FillHeight)
                                 )
 
-                                Text(
-                                    modifier = Modifier
-                                        .align(Alignment.TopEnd)
-                                        .padding(top = 8.dp, end = 16.dp),
-                                    text = recommendedNanaPickList.data[page % recommendedNanaPickList.data.size].version,
-                                    color = getColor().white,
-                                    style = caption01SemiBold
-                                )
+//                                Text(
+//                                    modifier = Modifier
+//                                        .align(Alignment.TopEnd)
+//                                        .padding(top = 8.dp, end = 16.dp),
+//                                    text = recommendedNanaPickList.data[page % recommendedNanaPickList.data.size].version,
+//                                    color = getColor().white,
+//                                    style = caption01SemiBold
+//                                )
 
                                 Column(
                                     modifier = Modifier
                                         .align(Alignment.BottomStart)
-                                        .padding(16.dp)
+                                        .padding(8.dp)
                                 ) {
                                     Text(
                                         text = recommendedNanaPickList.data[page % recommendedNanaPickList.data.size].subHeading,
                                         color = getColor().white,
-                                        style = body02SemiBold,
+                                        style = caption02SemiBold,
                                         maxLines = 2,
                                         overflow = TextOverflow.Ellipsis
                                     )
@@ -149,14 +152,12 @@ private fun NanaPickListScreen(
                                     Text(
                                         text = recommendedNanaPickList.data[page % recommendedNanaPickList.data.size].heading,
                                         color = getColor().white,
-                                        style = title01Bold,
+                                        style = body02Bold,
                                         maxLines = 2,
                                         overflow = TextOverflow.Ellipsis
                                     )
                                 }
                             }
-
-                            Spacer(Modifier.height(8.dp))
 
                             Row(
                                 modifier = Modifier.width(210.dp),
@@ -173,7 +174,7 @@ private fun NanaPickListScreen(
                                 Text(
                                     text = recommendedNanaPickList.data[page % recommendedNanaPickList.data.size].heading,
                                     color = getColor().black,
-                                    style = title02Bold,
+                                    style = bodyBold,
                                     overflow = TextOverflow.Ellipsis,
                                     maxLines = 1,
                                     onTextLayout = { textLayoutResult: TextLayoutResult ->
@@ -194,23 +195,33 @@ private fun NanaPickListScreen(
             Spacer(Modifier.height(32.dp))
 
             Row(
+                modifier = Modifier.padding(horizontal = 16.dp),
                 verticalAlignment = Alignment.Bottom
             ) {
                 Text(
                     text = getString(R.string.common_나나s_Pick),
                     color = getColor().black,
-                    style = title02Bold
+                    style = bodyBold
                 )
 
                 Spacer(Modifier.weight(1f))
 
-                Text(
+                Row(
                     modifier = Modifier
                         .clickableNoEffect { moveToNanaPickAllListScreen() },
-                    text = getString(R.string.nanapick_list_screen_see_all),
-                    color = getColor().gray01,
-                    style = caption01
-                )
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Text(
+                        text = getString(R.string.nanapick_list_screen_see_all),
+                        color = getColor().black,
+                        style = caption01
+                    )
+                    Image(
+                        modifier = Modifier.size(12.dp),
+                        painter = painterResource(id = R.drawable.ic_arrow_right),
+                        contentDescription = null
+                    )
+                }
             }
 
             Spacer(Modifier.height(8.dp))
@@ -219,10 +230,16 @@ private fun NanaPickListScreen(
                 is UiState.Loading -> {}
                 is UiState.Success -> {
                     nanaPickList.data.forEachIndexed() { idx, item ->
-                        NanaPickThumbnailBanner1(
-                            item = item,
-                            onClick = moveToNanaPickContentScreen
-                        )
+                        if(idx >= 3) return@forEachIndexed
+
+                        Box(
+                            modifier = Modifier.padding(horizontal = 16.dp),
+                        ) {
+                            NanaPickThumbnailBanner1(
+                                item = item,
+                                onClick = moveToNanaPickContentScreen
+                            )
+                        }
                         Spacer(Modifier.height(16.dp))
                     }
                 }

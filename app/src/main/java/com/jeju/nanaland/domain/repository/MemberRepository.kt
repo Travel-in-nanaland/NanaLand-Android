@@ -1,8 +1,8 @@
 package com.jeju.nanaland.domain.repository
 
+import com.jeju.nanaland.domain.entity.member.HotPostData
 import com.jeju.nanaland.domain.entity.member.RecommendedPostData
 import com.jeju.nanaland.domain.entity.member.UserProfile
-import com.jeju.nanaland.domain.request.UriRequestBody
 import com.jeju.nanaland.domain.request.member.UpdateLanguageRequest
 import com.jeju.nanaland.domain.request.member.UpdatePolicyAgreementRequest
 import com.jeju.nanaland.domain.request.member.UpdateUserProfileRequest
@@ -16,7 +16,10 @@ interface MemberRepository {
     suspend fun getUserProfile(id: Int? = null): NetworkResult<UserProfile>
 
     // 유저 타입에 따른 추천 게시물 2개 반환
-    suspend fun getRecommendedPost(): NetworkResult<List<RecommendedPostData>>
+    suspend fun getRecommendedPost(memberId: Int? = null): NetworkResult<List<RecommendedPostData>>
+
+    // 인기 게시물
+    suspend fun getHotPost(): NetworkResult<List<HotPostData>>
 
     // 랜덤 추천 게시물 2개 반환
     suspend fun getRandomRecommendedPost(): NetworkResult<List<RecommendedPostData>>
@@ -29,7 +32,7 @@ interface MemberRepository {
     // 유저 프로필 수정
     suspend fun updateUserProfile(
         data: UpdateUserProfileRequest,
-        image: UriRequestBody?
+        image: String?
     ): NetworkResult<String?>
 
     // 회원 탈퇴

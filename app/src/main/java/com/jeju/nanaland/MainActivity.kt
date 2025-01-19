@@ -9,13 +9,22 @@ import androidx.activity.ComponentActivity
 import androidx.activity.OnBackPressedCallback
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.viewModels
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Surface
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.IntSize
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
+import com.jeju.nanaland.domain.navigation.NavViewModel
+import com.jeju.nanaland.domain.navigation.Navigator
 import com.jeju.nanaland.globalvalue.constant.BOTTOM_NAVIGATION_BAR_HEIGHT
 import com.jeju.nanaland.globalvalue.constant.SCREEN_HEIGHT_WITHOUT_SYSTEM_BAR
 import com.jeju.nanaland.globalvalue.constant.SCREEN_WIDTH
@@ -29,9 +38,14 @@ import com.jeju.nanaland.ui.theme.getColor
 import com.jeju.nanaland.util.intent.DeepLinkData
 import com.jeju.nanaland.util.log.LogUtil
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
+    @Inject lateinit var navHelper: Navigator
+    private val navViewModel : NavViewModel by viewModels()
+
 
     private val viewModel: MainActivityViewModel by lazy {
         ViewModelProvider(this)[MainActivityViewModel::class.java]
@@ -82,7 +96,23 @@ class MainActivity : ComponentActivity() {
         // 공유용 토큰
 //        viewModel.saveRefreshToken("eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI2IiwiYXV0aCI6IlJPTEVfTUVNQkVSIiwiZXhwIjoxNzE1MzU1MDQ3fQ.0qaNAfkEohRBwOAUjiv-3Ob2-tfOUL_XhaVKeFcpp3qQxyVPlbTRz8Q0hzruHNRO5b-p3RymfQxc3CRw24Hvaw")
 
+        var isInit = false
+        var navController: NavHostController
         setContent {
+            navController = rememberNavController()
+            if(!isInit){
+                isInit = true
+                LaunchedEffect(Unit) {
+                    lifecycleScope.launch {
+                        repeatOnLifecycle(Lifecycle.State.STARTED) {
+                            navHelper.navAction.collect {
+                                navHelper.runnableNavigate(navController, it)
+                            }
+                        }
+                    }
+                }
+            }
+
             NanaLandTheme {
                 val density = LocalDensity.current.density
                 Surface(
@@ -95,7 +125,9 @@ class MainActivity : ComponentActivity() {
                         },
                 ) {
                     MainNavigation(
-                        deepLinkData = deepLinkData
+                        deepLinkData = deepLinkData,
+                        navController = navController,
+                        navViewModel = navViewModel
                     )
                 }
             }

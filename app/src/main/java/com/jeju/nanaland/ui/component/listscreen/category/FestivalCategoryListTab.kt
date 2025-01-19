@@ -17,24 +17,22 @@ fun FestivalCategoryListTab(
     selectedCategoryType: FestivalCategoryType,
     updateSelectedCategoryType: (FestivalCategoryType) -> Unit,
 ) {
-    val titleList = remember {
-        listOf(FestivalCategoryType.Monthly, FestivalCategoryType.Ended, FestivalCategoryType.Seasonal)
-    }
+    val titleList = remember { FestivalCategoryType.entries }
     Row(
         modifier = Modifier
             .fillMaxWidth()
             .height(40.dp)
     ) {
-        repeat(3) {
+        FestivalCategoryType.entries.forEach {
             CategoryBox(
                 text = when (it) {
-                    0 -> getString(R.string.festival_list_screen_월별_축제)
-                    1 -> getString(R.string.festival_list_screen_종료된_축제)
+                    FestivalCategoryType.Monthly -> getString(R.string.festival_list_screen_월별_축제)
+                    FestivalCategoryType.Ended -> getString(R.string.festival_list_screen_종료된_축제)
                     else -> getString(R.string.festival_list_screen_계절별_축제)
                 },
-                isSelected = titleList[it] == selectedCategoryType,
+                isSelected = titleList[it.ordinal] == selectedCategoryType,
                 updateSelectedCategoryType = {
-                    updateSelectedCategoryType(titleList[it])
+                    updateSelectedCategoryType(titleList[it.ordinal])
                 }
             )
         }

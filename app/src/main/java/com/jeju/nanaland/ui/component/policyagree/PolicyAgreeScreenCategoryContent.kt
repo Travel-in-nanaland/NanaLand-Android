@@ -2,7 +2,7 @@ package com.jeju.nanaland.ui.component.policyagree
 
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -22,7 +22,7 @@ fun PolicyAgreeScreenCategoryContent(
     moveToDetailsScreen: () -> Unit,
 ) {
     Row(
-        modifier = Modifier.height(48.dp),
+        modifier = Modifier.padding(vertical = 13.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
         PolicyAgreeScreenCheckButton(
@@ -34,16 +34,14 @@ fun PolicyAgreeScreenCategoryContent(
 
         Row(
             modifier = Modifier
-                .height(24.dp)
                 .clickableNoEffect { moveToDetailsScreen() },
-            verticalAlignment = Alignment.CenterVertically
+            verticalAlignment = Alignment.Top
         ) {
             PolicyAgreeScreenCategoryText(
+                modifier = Modifier.weight(1f, false),
                 text = text,
                 isNecessary = isNecessary
             )
-
-            Spacer(Modifier.weight(1f))
 
             PolicyAgreeScreenArrowIcon()
         }

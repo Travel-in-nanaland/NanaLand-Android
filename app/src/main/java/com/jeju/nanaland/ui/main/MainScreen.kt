@@ -12,7 +12,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
@@ -22,12 +21,9 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -37,6 +33,7 @@ import com.jeju.nanaland.globalvalue.constant.TOP_BAR_HEIGHT
 import com.jeju.nanaland.globalvalue.constant.TravelType
 import com.jeju.nanaland.globalvalue.type.HomeScreenViewType
 import com.jeju.nanaland.globalvalue.type.MainScreenViewType
+import com.jeju.nanaland.globalvalue.type.ReviewCategoryType
 import com.jeju.nanaland.globalvalue.type.SearchCategoryType
 import com.jeju.nanaland.ui.component.common.CustomSurface
 import com.jeju.nanaland.ui.main.favorite.FavoriteScreen
@@ -49,22 +46,24 @@ import com.jeju.nanaland.ui.profile.root.ProfileScreen
 import com.jeju.nanaland.ui.theme.NanaLandTheme
 import com.jeju.nanaland.ui.theme.caption02SemiBold
 import com.jeju.nanaland.ui.theme.getColor
+import com.jeju.nanaland.ui.theme.shadowBottomNav
 import com.jeju.nanaland.util.intent.DeepLinkData
-import com.jeju.nanaland.util.listfilter.ListFilter
 import com.jeju.nanaland.util.resource.getString
-import com.jeju.nanaland.util.ui.drawColoredShadow
 import kotlinx.coroutines.flow.emptyFlow
 
 @Composable
 fun MainScreen(
+    viewTypeByPopStack: MainScreenViewType?,
+    retry:()->Unit,
     deepLinkData: DeepLinkData,
     moveToNotificationScreen: () -> Unit,
     moveToCategoryContentScreen: (Int, String?, Boolean) -> Unit,
     moveToRestaurantListScreen: () -> Unit,
-    moveToNatureListScreen: (ListFilter) -> Unit,
-    moveToFestivalListScreen: (ListFilter) -> Unit,
+    moveToNatureListScreen: (String?) -> Unit,
+    moveToFestivalListScreen: (String?) -> Unit,
     moveToMarketListScreen: () -> Unit,
-    moveToExperienceListScreen: () -> Unit,
+    moveToActivityListScreen: () -> Unit,
+    moveToArtListScreen: () -> Unit,
     moveToSettingsScreen: () -> Unit,
     moveToProfileModificationScreen: (String?, String?, String?) -> Unit,
     moveToSignInScreen: () -> Unit,
@@ -74,6 +73,7 @@ fun MainScreen(
     moveToProfileNoticeListScreen: (Int?) -> Unit,
     moveToProfileReviewListScreen: (Int?) -> Unit,
     moveToNanaPickAllListScreen: () -> Unit,
+    moveToReviewEditScreen: (Int, ReviewCategoryType) -> Unit,
     viewModel: MainViewModel = hiltViewModel(),
     homeViewModel: HomeViewModel = hiltViewModel(),
     searchViewModel: SearchViewModel = hiltViewModel(),
@@ -97,8 +97,14 @@ fun MainScreen(
                 "market" -> {
                     moveToCategoryContentScreen(contentId ?: 0, "MARKET", false)
                 }
-                "experience" -> {
+                "experience" -> {//TODO
                     moveToCategoryContentScreen(contentId ?: 0, "EXPERIENCE", false)
+                }
+                "cultureAndArts" -> {//TODO
+                    moveToCategoryContentScreen(contentId ?: 0, "CULTURE_AND_ARTS", false)
+                }
+                "activity" -> {//TODO
+                    moveToCategoryContentScreen(contentId ?: 0, "ACTIVITY", false)
                 }
                 "restaurant" -> {
                     moveToCategoryContentScreen(contentId ?: 0, "RESTAURANT", false)
@@ -110,9 +116,19 @@ fun MainScreen(
         }
     }
     val viewType = viewModel.viewType.collectAsState().value
+    val homeScreenViewType = viewModel.homeScreenViewType.collectAsState().value
     val prevViewType = viewModel.prevViewType.collectAsState().value
     val navigationItemContentList = viewModel.getNavigationItemContentList()
+    
+    LaunchedEffect(viewTypeByPopStack) {
+        viewTypeByPopStack?.let {
+            viewModel.updateViewType(it)
+            retry()
+        }
+    }
     MainScreen(
+        homeScreenViewType = homeScreenViewType,
+        onHomeScreenViewType = viewModel::updateHomeScreenViewType,
         viewType = viewType,
         prevViewType = prevViewType,
         navigationItemContentList = navigationItemContentList,
@@ -131,7 +147,8 @@ fun MainScreen(
         moveToNatureListScreen = moveToNatureListScreen,
         moveToFestivalListScreen = moveToFestivalListScreen,
         moveToMarketListScreen = moveToMarketListScreen,
-        moveToExperienceListScreen = moveToExperienceListScreen,
+        moveToActivityListScreen = moveToActivityListScreen,
+        moveToArtListScreen = moveToArtListScreen,
         moveToSettingsScreen = moveToSettingsScreen,
         moveToProfileModificationScreen = moveToProfileModificationScreen,
         moveToSignInScreen = moveToSignInScreen,
@@ -141,6 +158,7 @@ fun MainScreen(
         moveToProfileNoticeListScreen = moveToProfileNoticeListScreen,
         moveToProfileReviewListScreen = moveToProfileReviewListScreen,
         moveToNanaPickAllListScreen = moveToNanaPickAllListScreen,
+        moveToReviewEditScreen = moveToReviewEditScreen,
         isContent = true
     )
 }
@@ -148,6 +166,8 @@ fun MainScreen(
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 private fun MainScreen(
+    homeScreenViewType: HomeScreenViewType,
+    onHomeScreenViewType: (HomeScreenViewType) -> Unit,
     viewType: MainScreenViewType,
     prevViewType: MainScreenViewType,
     navigationItemContentList: List<MainViewModel.NavigationItemContent>,
@@ -157,10 +177,11 @@ private fun MainScreen(
     moveToNotificationScreen: () -> Unit,
     moveToCategoryContentScreen: (Int, String?, Boolean) -> Unit,
     moveToRestaurantListScreen: () -> Unit,
-    moveToNatureListScreen: (ListFilter) -> Unit,
-    moveToFestivalListScreen: (ListFilter) -> Unit,
+    moveToNatureListScreen: (String?) -> Unit,
+    moveToFestivalListScreen: (String?) -> Unit,
     moveToMarketListScreen: () -> Unit,
-    moveToExperienceListScreen: () -> Unit,
+    moveToActivityListScreen: () -> Unit,
+    moveToArtListScreen: () -> Unit,
     moveToSettingsScreen: () -> Unit,
     moveToProfileModificationScreen: (String?, String?, String?) -> Unit,
     moveToSignInScreen: () -> Unit,
@@ -170,14 +191,14 @@ private fun MainScreen(
     moveToProfileNoticeListScreen: (Int?) -> Unit,
     moveToProfileReviewListScreen: (Int?) -> Unit,
     moveToNanaPickAllListScreen: () -> Unit,
+    moveToReviewEditScreen: (Int, ReviewCategoryType) -> Unit,
     isContent: Boolean
 ) {
-    val homeScreenViewType = remember { mutableStateOf(HomeScreenViewType.Home) }
     CustomSurface { isImeKeyboardShowing ->
         Scaffold(
             topBar = {},
             bottomBar = {
-                if (homeScreenViewType.value == HomeScreenViewType.Home) {
+                if (homeScreenViewType == HomeScreenViewType.Home) {
                     MainNavigationBar(
                         viewType,
                         navigationItemContentList,
@@ -205,11 +226,10 @@ private fun MainScreen(
                             moveToNatureListScreen = moveToNatureListScreen,
                             moveToFestivalListScreen = moveToFestivalListScreen,
                             moveToMarketListScreen = moveToMarketListScreen,
-                            moveToExperienceListScreen = moveToExperienceListScreen,
+                            moveToActivityListScreen = moveToActivityListScreen,
+                            moveToArtListScreen = moveToArtListScreen,
                             moveToSignInScreen = moveToSignInScreen,
-                            updateHomeScreenViewType = { viewType ->
-                                homeScreenViewType.value = viewType
-                            }
+                            updateHomeScreenViewType = onHomeScreenViewType
                         )
                     }
                     MainScreenViewType.Favorite -> {
@@ -239,6 +259,7 @@ private fun MainScreen(
                             moveToReviewWriteScreen = moveToReviewWriteScreen,
                             moveToProfileNoticeListScreen = moveToProfileNoticeListScreen,
                             moveToProfileReviewListScreen = moveToProfileReviewListScreen,
+                            moveToReviewEditScreen = moveToReviewEditScreen,
                         )
                     }
                 }
@@ -258,17 +279,7 @@ fun MainNavigationBar(
     NavigationBar(
         modifier = Modifier
             .height(TOP_BAR_HEIGHT.dp)
-            .drawColoredShadow(
-                color = getColor().black,
-                alpha = 0.1f,
-                shadowRadius = 10.dp,
-                offsetX = 0.dp,
-                offsetY = 0.dp
-            )
-            .graphicsLayer {
-                clip = true
-                shape = RoundedCornerShape(topStart = 10.dp, topEnd = 10.dp)
-            },
+            .shadowBottomNav(),
         containerColor = Color(0xFFFFFFFF),
         windowInsets = WindowInsets(0, 0, 0, 0)
     ) {

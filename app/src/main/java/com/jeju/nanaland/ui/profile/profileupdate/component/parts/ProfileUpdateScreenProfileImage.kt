@@ -11,7 +11,7 @@ import com.skydoves.landscapist.ImageOptions
 import com.skydoves.landscapist.glide.GlideImage
 
 @Composable
-fun ProfileUpdateScreenProfileImage(imageUri: String?) {
+fun ProfileUpdateScreenProfileImage(imageUri: Any?) {
     GlideImage (
         modifier = Modifier
             .size(100.dp)

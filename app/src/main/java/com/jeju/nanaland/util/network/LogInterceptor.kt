@@ -73,7 +73,12 @@ class LogInterceptor @Inject constructor() : Interceptor{
             val contentType = response.body?.contentType()
             val charset: Charset = contentType?.charset(StandardCharsets.UTF_8) ?: StandardCharsets.UTF_8
             val bodyString = buffer.clone().readString(charset)
-            responseBodyString = mGson.toJson(parseString(bodyString))
+            responseBodyString = try{
+                mGson.toJson(parseString(bodyString))
+            } catch (e: Exception) {
+                e.printStackTrace()
+                bodyString
+            }
         }
 
         LogUtil.e("httpResponseLog", "[code]\n${response.code}\n" +

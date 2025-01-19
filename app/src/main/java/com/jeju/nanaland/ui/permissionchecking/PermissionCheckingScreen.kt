@@ -13,13 +13,13 @@ import androidx.compose.ui.unit.dp
 import com.jeju.nanaland.R
 import com.jeju.nanaland.ui.component.common.CustomSurface
 import com.jeju.nanaland.ui.component.common.text.TextWithPointColor
-import com.jeju.nanaland.ui.component.common.topbar.CustomTopBar
+import com.jeju.nanaland.ui.component.common.topbar.TopBarCommon
 import com.jeju.nanaland.ui.component.detailscreen.other.DetailScreenNotice
 import com.jeju.nanaland.ui.component.permissionchecking.PermissionCheckingScreenHorizontalDivider
 import com.jeju.nanaland.ui.component.permissionchecking.PermissionCheckingScreenItem
+import com.jeju.nanaland.ui.theme.body01
+import com.jeju.nanaland.ui.theme.bodyBold
 import com.jeju.nanaland.ui.theme.getColor
-import com.jeju.nanaland.ui.theme.title02
-import com.jeju.nanaland.ui.theme.title02Bold
 import com.jeju.nanaland.util.resource.getString
 
 @Composable
@@ -38,7 +38,7 @@ private fun PermissionCheckingScreen(
     isContent: Boolean
 ) {
     CustomSurface {
-        CustomTopBar(
+        TopBarCommon(
             title = getString(R.string.permission_checking_screen_접근_권한_안내),
             onBackButtonClicked = moveToBackScreen
         )
@@ -49,9 +49,9 @@ private fun PermissionCheckingScreen(
             Box(Modifier.padding(start = 16.dp, end = 16.dp)) {
                 TextWithPointColor(
                     text = getString(R.string.permission_checking_screen_guide),
-                    style = title02,
+                    style = body01,
                     color = getColor().black,
-                    pointStyle = title02Bold,
+                    pointStyle = bodyBold,
                     pointColor = getColor().black
                 )
             }

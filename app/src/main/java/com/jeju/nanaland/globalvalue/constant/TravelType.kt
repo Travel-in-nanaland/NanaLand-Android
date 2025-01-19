@@ -92,3 +92,22 @@ fun String.toTravelType(): TravelType = when (this) {
     getString(R.string.type_감귤_버블티) -> TravelType.GAMGYUL_BUBBLE_TEA
     else -> throw Exception("String.toTravelType Exception ($this)")
 }
+
+fun TravelType.toImageRes(): Int = when (this) {
+    TravelType.GAMGYUL_ICECREAM -> R.drawable.img_type_gamgyul_icecream
+    TravelType.GAMGYUL_RICECAKE -> R.drawable.img_type_gamgyul_ricecake
+    TravelType.GAMGYUL -> R.drawable.img_type_gamgyul
+    TravelType.GAMGYUL_CIDER -> R.drawable.img_type_gamgyul_cider
+    TravelType.GAMGYUL_AFFOKATO -> R.drawable.img_type_gamgyul_affokato
+    TravelType.GAMGYUL_HANGWA -> R.drawable.img_type_hangwa
+    TravelType.GAMGYUL_JUICE -> R.drawable.img_type_gamgyul_juice
+    TravelType.GAMGYUL_CHOCOLATE -> R.drawable.img_type_gamgyul_chocolate
+    TravelType.GAMGYUL_COCKTAIL -> R.drawable.img_type_gamgyul_cocktail
+    TravelType.TANGERINE_PEEL_TEA -> R.drawable.img_type_tangerine_peel_tea
+    TravelType.GAMGYUL_YOGURT -> R.drawable.img_type_gamgyul_yogurt
+    TravelType.GAMGYUL_FLATCCINO -> R.drawable.img_type_gamgyul_flatccino
+    TravelType.GAMGYUL_LATTE -> R.drawable.img_type_gamgyul_latte
+    TravelType.GAMGYUL_SIKHYE -> R.drawable.img_type_gamgyul_sikhye
+    TravelType.GAMGYUL_ADE -> R.drawable.img_type_gamgyul_ade
+    TravelType.GAMGYUL_BUBBLE_TEA -> R.drawable.img_type_gamgyul_bubble_tea
+}

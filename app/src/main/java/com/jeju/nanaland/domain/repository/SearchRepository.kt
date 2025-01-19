@@ -43,7 +43,8 @@ interface SearchRepository {
 
     // 이색체험 검색 결과
     suspend fun getExperienceSearchResultList(
-        data: GetSearchResultListRequest
+        data: GetSearchResultListRequest,
+        type: String
     ): NetworkResult<SearchResultData>
 
     // 전체 카테고리 검색 결과 2개씩

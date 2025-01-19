@@ -7,7 +7,6 @@ import com.jeju.nanaland.domain.entity.review.ReviewFavorite
 import com.jeju.nanaland.domain.entity.review.ReviewKeywordResult
 import com.jeju.nanaland.domain.entity.review.ReviewListData
 import com.jeju.nanaland.domain.entity.review.ReviewThumbnailData
-import com.jeju.nanaland.domain.request.UriRequestBody
 import com.jeju.nanaland.domain.request.review.CreateReviewRequest
 import com.jeju.nanaland.domain.request.review.DeleteReviewRequest
 import com.jeju.nanaland.domain.request.review.GetMyReviewListRequest
@@ -54,7 +53,6 @@ interface ReviewRepository {
     suspend fun createReview(
         id: Int,
         category: ReviewCategoryType,
-        images: List<UriRequestBody>,
         data: CreateReviewRequest
     ): NetworkResult<String?>
 
@@ -66,7 +64,6 @@ interface ReviewRepository {
     // 내가 쓴 리뷰 수정
     suspend fun modifyUserReview(
         id: Int,
-        newImages: List<UriRequestBody>?,
         data: CreateReviewRequest
     ): NetworkResult<String?>
 }

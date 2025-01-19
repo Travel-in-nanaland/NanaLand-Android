@@ -17,13 +17,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import com.jeju.nanaland.R
-import com.jeju.nanaland.globalvalue.type.LanguageType
-import com.jeju.nanaland.ui.theme.appleSdGothicNeo
+import com.jeju.nanaland.ui.theme.body02
 import com.jeju.nanaland.ui.theme.getColor
-import com.jeju.nanaland.ui.theme.nanumPen
-import com.jeju.nanaland.util.language.getLanguage
 import com.jeju.nanaland.util.resource.getString
 import com.jeju.nanaland.util.ui.drawColoredShadow
 
@@ -50,14 +46,15 @@ fun NanaPickContentAttractivePoint(
         Spacer(Modifier.width(16.dp))
 
         Text(
-            text = getString(R.string.detail_screen_common_이_장소만의_매력_포인트),
-            fontFamily = when (getLanguage()) {
-                LanguageType.Chinese -> appleSdGothicNeo
-                LanguageType.Korean, LanguageType.Malaysia,
-                LanguageType.Vietnam, LanguageType.English  -> nanumPen
-            },
-            fontSize = 20.sp,
-            color = getColor().main
+            text = getString(R.string.detail_screen_common_이_장소만의_매력_포인트).replace("{","").replace("}",""),
+//            fontFamily = when (getLanguage()) {
+//                LanguageType.Chinese -> appleSdGothicNeo
+//                LanguageType.Korean, LanguageType.Malaysia,
+//                LanguageType.Vietnam, LanguageType.English  -> nanumPen
+//            },
+//            fontSize = 20.sp,
+            color = getColor().main,
+            style = body02
         )
 
         Spacer(Modifier.weight(1f))

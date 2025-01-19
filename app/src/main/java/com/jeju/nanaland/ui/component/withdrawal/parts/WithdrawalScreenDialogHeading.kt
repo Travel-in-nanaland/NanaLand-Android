@@ -11,7 +11,7 @@ import com.jeju.nanaland.util.resource.getString
 @Composable
 fun WithdrawalScreenDialogHeading() {
     Text(
-        text = getString(R.string.withdrawal_dialog_text1),
+        text = getString(R.string.dialog_msg_title_7),
         color = getColor().black,
         style = title01Bold,
         textAlign = TextAlign.Center

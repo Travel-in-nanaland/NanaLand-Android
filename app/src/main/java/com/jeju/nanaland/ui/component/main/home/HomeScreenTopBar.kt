@@ -1,6 +1,5 @@
 package com.jeju.nanaland.ui.component.main.home
 
-import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -27,6 +26,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.focus.onFocusChanged
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.painterResource
@@ -37,13 +37,13 @@ import com.jeju.nanaland.globalvalue.constant.TOP_BAR_HEIGHT
 import com.jeju.nanaland.globalvalue.type.HomeScreenViewType
 import com.jeju.nanaland.globalvalue.type.SearchCategoryType
 import com.jeju.nanaland.ui.theme.NanaLandTheme
-import com.jeju.nanaland.ui.theme.body02
 import com.jeju.nanaland.ui.theme.getColor
 import com.jeju.nanaland.ui.theme.searchText
 import com.jeju.nanaland.util.language.customContext
 import com.jeju.nanaland.util.resource.getString
 import com.jeju.nanaland.util.ui.ScreenPreview
 import com.jeju.nanaland.util.ui.clickableNoEffect
+import com.jeju.nanaland.util.ui.conditional
 import kotlin.random.Random
 
 @Composable
@@ -63,7 +63,7 @@ fun HomeScreenTopBar(
     Row(
         modifier = Modifier
             .height(TOP_BAR_HEIGHT.dp)
-            .background(getColor().white),
+            .background(Color.Transparent),
         verticalAlignment = Alignment.CenterVertically
     ) {
         Image(
@@ -77,9 +77,16 @@ fun HomeScreenTopBar(
                     }
                 }
                 .padding(start = 16.dp, end = 8.dp)
-                .size(32.dp),
+                .conditional(currentViewType != HomeScreenViewType.Home){
+                    padding(end = 8.dp)
+                }
+                .size(32.dp)
+                .conditional(currentViewType != HomeScreenViewType.Home){
+                    padding(4.dp)
+                },
             painter = painterResource(id = if (currentViewType == HomeScreenViewType.Home) R.drawable.ic_logo else R.drawable.ic_arrow_left),
-            contentDescription = null
+            contentDescription = null,
+            colorFilter = if(currentViewType == HomeScreenViewType.Home) ColorFilter.tint(Color.White) else null
         )
         BasicTextField(
             modifier = Modifier
@@ -97,7 +104,7 @@ fun HomeScreenTopBar(
                 onValueChange(it)
             },
             singleLine = true,
-            textStyle = body02,
+            textStyle = searchText,
             keyboardOptions = KeyboardOptions(imeAction = ImeAction.Search),
             keyboardActions = KeyboardActions(
                 onSearch = {
@@ -115,7 +122,7 @@ fun HomeScreenTopBar(
                     .border(
                         border = BorderStroke(
                             width = 1.dp,
-                            color = getColor().main
+                            color = if(currentViewType == HomeScreenViewType.Home) Color.White else getColor().main
                         ),
                         shape = RoundedCornerShape(50)
                     ),
@@ -133,13 +140,12 @@ fun HomeScreenTopBar(
                             Text(
                                 text = getString(R.string.searching_screen_textfiled_hint),
                                 color = getColor().gray01,
-                                style = body02
+                                style = searchText
                             )
                         } else {
                             Text(
                                 text = customContext.resources.getStringArray(R.array.home_screen_hint)[Random.nextInt(0, 10)],
-                                color = getColor().gray01,
-
+                                color = if(currentViewType == HomeScreenViewType.Home) Color.White else getColor().gray01,
                                 style = searchText
                             )
                         }
@@ -172,7 +178,7 @@ fun HomeScreenTopBar(
                     .clickableNoEffect { moveToNotificationScreen() },
                 painter = painterResource(id = R.drawable.ic_bell_outlined),
                 contentDescription = null,
-                colorFilter = ColorFilter.tint(getColor().main)
+                colorFilter = ColorFilter.tint(Color.White)
             )
         }
 

@@ -15,8 +15,9 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.jeju.nanaland.R
 import com.jeju.nanaland.globalvalue.type.LanguageType
 import com.jeju.nanaland.ui.component.common.CustomSurface
-import com.jeju.nanaland.ui.component.common.topbar.CustomTopBar
-import com.jeju.nanaland.ui.component.languagechange.LanguageChangeScreenDialog
+import com.jeju.nanaland.ui.component.common.dialog.DialogCommon
+import com.jeju.nanaland.ui.component.common.dialog.DialogCommonType
+import com.jeju.nanaland.ui.component.common.topbar.TopBarCommon
 import com.jeju.nanaland.ui.component.languagechange.LanguageChangeScreenGuideText
 import com.jeju.nanaland.ui.component.languagechange.LanguageChangeScreenItem
 import com.jeju.nanaland.util.resource.getString
@@ -48,7 +49,7 @@ private fun LanguageChangeScreen(
     val selectedLanguage = remember { mutableStateOf(currLanguage) }
     val isConfirmDialogShowing = remember { mutableStateOf(false) }
     CustomSurface {
-        CustomTopBar(
+        TopBarCommon(
             title = getString(R.string.settings_screen_언어_설정),
             onBackButtonClicked = { moveToBackScreen() }
         )
@@ -74,11 +75,13 @@ private fun LanguageChangeScreen(
     }
 
     if (isConfirmDialogShowing.value) {
-        LanguageChangeScreenDialog(
-            onConfirm = {
+        DialogCommon(
+            type = DialogCommonType.Language,
+            onDismiss = { isConfirmDialogShowing.value = false },
+            onYes = {
+                isConfirmDialogShowing.value = false
                 updateLanguage(selectedLanguage.value)
-            },
-            onCancel = { isConfirmDialogShowing.value = false }
+            }
         )
     }
 }

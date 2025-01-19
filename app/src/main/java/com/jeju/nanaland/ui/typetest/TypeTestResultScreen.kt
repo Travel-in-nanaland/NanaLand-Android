@@ -66,7 +66,7 @@ fun TypeTestResultScreen(
                             modifier = Modifier.fillMaxSize(),
                             horizontalAlignment = Alignment.CenterHorizontally
                         ) {
-                            Spacer(Modifier.height(60.dp))
+                            Spacer(Modifier.height(106.dp))
 
                             Text(
                                 text = getString(R.string.type_test_screen_text_result_header, name),

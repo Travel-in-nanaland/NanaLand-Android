@@ -1,10 +1,13 @@
 package com.jeju.nanaland.di.repository
 
+import android.content.Context
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import com.jeju.nanaland.data.api.AuthApi
 import com.jeju.nanaland.data.api.BoardApi
 import com.jeju.nanaland.data.api.ExperienceApi
+import com.jeju.nanaland.data.api.FTPApi
+import com.jeju.nanaland.data.api.FTPWithoutTokenApi
 import com.jeju.nanaland.data.api.FavoriteApi
 import com.jeju.nanaland.data.api.FestivalApi
 import com.jeju.nanaland.data.api.MarketApi
@@ -19,6 +22,7 @@ import com.jeju.nanaland.data.repository.AuthDataStoreRepositoryImpl
 import com.jeju.nanaland.data.repository.AuthRepositoryImpl
 import com.jeju.nanaland.data.repository.BoardRepositoryImpl
 import com.jeju.nanaland.data.repository.ExperienceRepositoryImpl
+import com.jeju.nanaland.data.repository.FTPRepositoryImpl
 import com.jeju.nanaland.data.repository.FavoriteRepositoryImpl
 import com.jeju.nanaland.data.repository.FestivalRepositoryImpl
 import com.jeju.nanaland.data.repository.MarketRepositoryImpl
@@ -36,6 +40,7 @@ import com.jeju.nanaland.domain.repository.AuthDataStoreRepository
 import com.jeju.nanaland.domain.repository.AuthRepository
 import com.jeju.nanaland.domain.repository.BoardRepository
 import com.jeju.nanaland.domain.repository.ExperienceRepository
+import com.jeju.nanaland.domain.repository.FTPRepository
 import com.jeju.nanaland.domain.repository.FavoriteRepository
 import com.jeju.nanaland.domain.repository.FestivalRepository
 import com.jeju.nanaland.domain.repository.MarketRepository
@@ -51,6 +56,7 @@ import com.jeju.nanaland.domain.repository.UserSettingsDataStoreRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
@@ -149,9 +155,10 @@ object RepositoryModule {
     @Singleton
     @Provides
     fun provideRecentSearchDataStoreRepository(
-        @DataStoreModule.RecentSearchDataStore dataStore: DataStore<Preferences>
+        @DataStoreModule.RecentSearchDataStore dataStore: DataStore<Preferences>,
+        @DataStoreModule.RecentSearchInContentDataStore dataStoreInContent: DataStore<Preferences>
     ): RecentSearchDataStoreRepository {
-        return RecentSearchDataStoreRepositoryImpl(dataStore)
+        return RecentSearchDataStoreRepositoryImpl(dataStore,dataStoreInContent)
     }
 
     @Singleton
@@ -184,5 +191,15 @@ object RepositoryModule {
         restaurantApi: RestaurantApi
     ): RestaurantRepository {
         return RestaurantRepositoryImpl(restaurantApi)
+    }
+
+    @Singleton
+    @Provides
+    fun provideFTPRepository(
+        ftpApi: FTPApi,
+        ftpWithoutTokenApi: FTPWithoutTokenApi,
+        @ApplicationContext context: Context
+    ): FTPRepository {
+        return FTPRepositoryImpl(ftpApi, ftpWithoutTokenApi, context)
     }
 }

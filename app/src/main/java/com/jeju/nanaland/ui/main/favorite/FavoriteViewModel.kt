@@ -69,7 +69,8 @@ class FavoriteViewModel @Inject constructor(
             SearchCategoryType.Nature -> getFavoriteNatureListUseCase(requestData)
             SearchCategoryType.Festival -> getFavoriteFestivalListUseCase(requestData)
             SearchCategoryType.Market -> getFavoriteMarketListUseCase(requestData)
-            SearchCategoryType.Experience -> getFavoriteExperienceListUseCase(requestData)
+            SearchCategoryType.Activity -> getFavoriteExperienceListUseCase(requestData, SearchCategoryType.Activity)
+            SearchCategoryType.Art -> getFavoriteExperienceListUseCase(requestData, SearchCategoryType.Art)
             SearchCategoryType.NanaPick -> getFavoriteNanaPickListUseCase(requestData)
             SearchCategoryType.Restaurant -> getFavoriteRestaurantListUseCase(requestData)
         }.onEach {  networkResult ->
@@ -79,10 +80,11 @@ class FavoriteViewModel @Inject constructor(
                         UiState.Success(data.totalElements)
                     }
                     _favoriteThumbnailList.update {
+                        val newData = data.data.map { it.copy(favorite = true) }
                         if (prevList.isNullOrEmpty()) {
-                            UiState.Success(data.data)
+                            UiState.Success(newData)
                         } else {
-                            UiState.Success(prevList + data.data)
+                            UiState.Success(prevList + newData)
                         }
                     }
                 }
@@ -113,13 +115,21 @@ class FavoriteViewModel @Inject constructor(
                     data?.let {
                         _favoriteThumbnailList.update { uiState ->
                             if (uiState is UiState.Success) {
-                                val newList = uiState.data.filter {  item ->
-                                    item.id != contentId
+                                val newList = uiState.data.toMutableList()
+                                val changeItemIndex = newList.indexOfFirst {
+                                    it.id == contentId
                                 }
+                                newList[changeItemIndex] = newList[changeItemIndex].copy(
+                                    favorite = !newList[changeItemIndex].favorite
+                                )
                                 _favoriteThumbnailCount.update {
                                     if (it is UiState.Success) {
-                                        UiState.Success(it.data - 1)
-                                    } else it
+                                        if(newList[changeItemIndex].favorite)
+                                            UiState.Success(it.data + 1)
+                                        else
+                                            UiState.Success(it.data - 1)
+                                    } else
+                                        it
                                 }
                                 UiState.Success(newList)
                             } else {

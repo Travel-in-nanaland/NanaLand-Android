@@ -30,23 +30,23 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.blur
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.core.os.bundleOf
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import androidx.navigation.NavController
 import com.jeju.nanaland.R
 import com.jeju.nanaland.domain.entity.review.ReviewKeywordResult
-import com.jeju.nanaland.globalvalue.constant.ROUTE_REVIEW_WRITE
+import com.jeju.nanaland.domain.navigation.NavViewModel
+import com.jeju.nanaland.domain.navigation.ROUTE
+import com.jeju.nanaland.globalvalue.type.ReviewCategoryType
 import com.jeju.nanaland.ui.component.common.CustomSurface
-import com.jeju.nanaland.ui.component.common.topbar.CustomTopBar
+import com.jeju.nanaland.ui.component.common.topbar.TopBarCommon
 import com.jeju.nanaland.ui.reviewwrite.ReviewWriteViewModel
 import com.jeju.nanaland.ui.theme.body01
 import com.jeju.nanaland.ui.theme.body02SemiBold
 import com.jeju.nanaland.ui.theme.caption01
 import com.jeju.nanaland.ui.theme.caption02
 import com.jeju.nanaland.ui.theme.getColor
-import com.jeju.nanaland.util.navigation.navigate
 import com.jeju.nanaland.util.resource.getString
 import com.jeju.nanaland.util.ui.UiState
 import com.jeju.nanaland.util.ui.clickableNoEffect
@@ -56,7 +56,7 @@ import com.skydoves.landscapist.glide.GlideImage
 
 @Composable
 fun ReviewWriteSearchScreen(
-    navController: NavController,
+    navViewModel: NavViewModel,
     viewModel: ReviewWriteViewModel = hiltViewModel()
 ) {
     val keyword = viewModel.keywordText.collectAsStateWithLifecycle()
@@ -66,13 +66,10 @@ fun ReviewWriteSearchScreen(
         keyword = keyword.value,
         onKeyword = { viewModel.keywordText.value = it },
         data = searchResult.value,
-        moveToBackScreen = { navController.popBackStack() },
+        moveToBackScreen = { navViewModel.popBackStack() },
         moveToWriteScreen = {
             viewModel.init(it.id, it.category, false)
-            navController.navigate(ROUTE_REVIEW_WRITE, bundleOf(
-                "id" to it.id,
-                "category" to it.category.toString(),
-            ))
+            navViewModel.navigate(ROUTE.Content.ReviewWrite.StartDest(it.id, it.category.toString()))
         }
     )
 }
@@ -93,7 +90,7 @@ private fun ReviewWriteSearchUI(
     }
 
     CustomSurface {
-        CustomTopBar(
+        TopBarCommon(
             title = getString(R.string.review_write_title),
             onBackButtonClicked = moveToBackScreen
         )
@@ -105,15 +102,14 @@ private fun ReviewWriteSearchUI(
             Box(
                 modifier = Modifier
                     .fillMaxSize(),
-                contentAlignment = Alignment.Center
             ) {
                 when (data) {
                     is UiState.Failure -> ResultNetworkErrorView()
                     is UiState.Loading -> {
-                        if(successData.isEmpty())
+//                        if(successData.isEmpty())
                             ResultSkeletonRowView()
-                        else
-                            ResultDataRowView(successData, true, moveToWriteScreen)
+//                        else
+//                            ResultDataRowView(successData, true, moveToWriteScreen)
                     }
                     is UiState.Success -> ResultDataRowView(successData, false, moveToWriteScreen)
                 }
@@ -180,11 +176,12 @@ private fun ResultDataRowView(
 ) {
     if(data.isEmpty()){
         Text(
+            modifier = Modifier.fillMaxWidth().padding(top = 40.dp),
             text = getString(R.string.search_result_screen_no_result),
             style = body01,
-            color = getColor().gray01
+            color = getColor().gray01,
+            textAlign = TextAlign.Center
         )
-        Spacer(modifier = Modifier.height(40.dp))
     } else {
         LazyColumn(
             modifier = Modifier
@@ -218,7 +215,12 @@ private fun ResultDataRowView(
                                     shape = RoundedCornerShape(50)
                                 )
                                 .padding(horizontal = 12.dp, vertical = 1.dp),
-                            text = it.categoryValue,
+                            text = when(it.category) {
+                                ReviewCategoryType.ACTIVITY -> getString(R.string.common_액티비티)
+                                ReviewCategoryType.ART -> getString(R.string.common_문화예술)
+                                ReviewCategoryType.RESTAURANT -> getString(R.string.common_제주_맛집)
+                                else -> ""
+                            },
                             color = getColor().main,
                             style = caption02
                         )
@@ -243,6 +245,7 @@ private fun ResultSkeletonRowView(
     dataCnt: Int = 16,
 ) {
     LazyColumn(
+        modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.spacedBy(8.dp)
     ) {
         items(dataCnt) {
@@ -287,7 +290,9 @@ private fun ResultSkeletonRowView(
 private fun ResultNetworkErrorView(
 ) {
     Column(
-        horizontalAlignment = Alignment.CenterHorizontally
+        modifier = Modifier.fillMaxSize(),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center
     ) {
         Image(
             painter = painterResource(id = R.drawable.img_sad_orange),
@@ -300,6 +305,6 @@ private fun ResultNetworkErrorView(
             color = getColor().gray01
         )
 
-        Spacer(modifier = Modifier.height(40.dp))
+        Spacer(modifier = Modifier.height(50.dp))
     }
 }

@@ -1,34 +1,36 @@
 package com.jeju.nanaland.ui.navigation
 
+import android.annotation.SuppressLint
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.remember
-import androidx.core.os.bundleOf
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.navigation.NavController
+import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
-import com.jeju.nanaland.globalvalue.constant.ROUTE_FESTIVAL_CONTENT
-import com.jeju.nanaland.globalvalue.constant.ROUTE_FESTIVAL_LIST
-import com.jeju.nanaland.globalvalue.constant.ROUTE_INFORMATION_MODIFICATION_PROPOSAL_CATEGORY
-import com.jeju.nanaland.globalvalue.constant.ROUTE_MAIN
-import com.jeju.nanaland.globalvalue.constant.ROUTE_SIGN_IN
+import androidx.navigation.toRoute
+import com.jeju.nanaland.domain.navigation.NavViewModel
+import com.jeju.nanaland.domain.navigation.ROUTE
 import com.jeju.nanaland.globalvalue.type.MainScreenViewType
 import com.jeju.nanaland.ui.festival.FestivalContentScreen
 import com.jeju.nanaland.ui.festival.FestivalListViewModel
 import com.jeju.nanaland.ui.main.MainViewModel
 import com.jeju.nanaland.ui.main.favorite.FavoriteViewModel
 import com.jeju.nanaland.ui.main.home.search.SearchViewModel
-import com.jeju.nanaland.util.navigation.navigate
 
-fun NavGraphBuilder.festivalContentScreen(navController: NavController) = composable(route = ROUTE_FESTIVAL_CONTENT) {
-    val parentEntry = remember(it) { navController.previousBackStackEntry!! }
-    val isSearch = it.arguments?.getBoolean("isSearch") ?: false
-    val updatePrevScreenListFavorite: (Int, Boolean) -> Unit = when (parentEntry.destination.route) {
-        ROUTE_FESTIVAL_LIST -> {
+@SuppressLint("RestrictedApi")
+fun NavGraphBuilder.festivalContentScreen(
+    navViewModel: NavViewModel,
+    getBackStackEntry: () -> NavBackStackEntry
+) = composable<ROUTE.Content.Festival.Detail> {
+    val data: ROUTE.Content.Festival.Detail = it.toRoute()
+
+    val parentEntry = remember(it) { getBackStackEntry() }
+    val updatePrevScreenListFavorite: (Int, Boolean) -> Unit = when {
+        parentEntry.destination.route?.contains(ROUTE.Content.Festival::class.qualifiedName.toString()) == true -> {
             val viewModel: FestivalListViewModel = hiltViewModel(parentEntry)
             viewModel::toggleFavoriteWithNoApi
         }
-        ROUTE_MAIN -> {
+        parentEntry.destination.route?.contains(ROUTE.Main::class.qualifiedName.toString()) == true -> {
             val mainViewModel: MainViewModel = hiltViewModel(parentEntry)
             val func = when (mainViewModel.viewType.collectAsState().value) {
                 MainScreenViewType.Home -> {
@@ -62,20 +64,14 @@ fun NavGraphBuilder.festivalContentScreen(navController: NavController) = compos
         else -> { _, _ -> }
     }
     FestivalContentScreen(
-        contentId = it.arguments?.getInt("contentId"),
-        isSearch = isSearch,
+        contentId = data.contentId,
+        isSearch = data.isSearch,
         updatePrevScreenListFavorite = updatePrevScreenListFavorite,
-        moveToBackScreen = { navController.popBackStack() },
+        moveToBackScreen = { navViewModel.popBackStack() },
         moveToInfoModificationProposalScreen = {
-            val bundle = bundleOf(
-                "postId" to it.arguments?.getInt("contentId"),
-                "category" to "FESTIVAL"
-            )
-            navController.navigate(ROUTE_INFORMATION_MODIFICATION_PROPOSAL_CATEGORY, bundle)
+            navViewModel.navigate(ROUTE.InformationModification(data.contentId, "FESTIVAL"))
         },
-        moveToSignInScreen = { navController.navigate(ROUTE_SIGN_IN) {
-            popUpTo(ROUTE_MAIN) { inclusive = true }
-            launchSingleTop = true
-        } }
+        moveToSignInScreen = { navViewModel.navigatePopUpTo(ROUTE.Splash.SignIn, ROUTE.Main()) },
+        moveToMap = { navViewModel.navigate(it) }
     )
 }

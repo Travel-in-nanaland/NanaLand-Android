@@ -2,7 +2,6 @@ package com.jeju.nanaland.ui.component.signin
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
@@ -23,6 +22,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.jeju.nanaland.R
 import com.jeju.nanaland.ui.theme.appleSdGothicNeo
+import com.jeju.nanaland.ui.theme.getColor
 import com.jeju.nanaland.util.resource.getString
 import com.jeju.nanaland.util.ui.clickableNoEffect
 
@@ -35,7 +35,7 @@ fun SignInScreenGoogleLoginButton(onClick: () -> Unit) {
             .border(
                 border = BorderStroke(
                     width = 1.dp,
-                    color = Color(0xFF000000)
+                    color = getColor().gray01
                 ),
                 shape = RoundedCornerShape(12.dp)
             )

@@ -1,6 +1,7 @@
 package com.jeju.nanaland.ui.main.home
 
 import androidx.activity.compose.BackHandler
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
@@ -10,13 +11,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.jeju.nanaland.globalvalue.constant.TOP_BAR_HEIGHT
 import com.jeju.nanaland.globalvalue.type.HomeScreenViewType
 import com.jeju.nanaland.globalvalue.type.SearchCategoryType
 import com.jeju.nanaland.ui.component.main.home.HomeScreenTopBar
 import com.jeju.nanaland.ui.main.home.search.SearchResultContent
 import com.jeju.nanaland.ui.main.home.search.SearchViewModel
 import com.jeju.nanaland.ui.main.home.search.SearchingContent
-import com.jeju.nanaland.util.listfilter.ListFilter
 import com.jeju.nanaland.util.ui.ScreenPreview
 
 @Composable
@@ -24,10 +25,11 @@ fun HomeScreen(
     moveToNotificationScreen: () -> Unit,
     moveToCategoryContentScreen: (Int, String?, Boolean) -> Unit,
     moveToRestaurantListScreen: () -> Unit,
-    moveToNatureListScreen: (ListFilter) -> Unit,
-    moveToFestivalListScreen: (ListFilter) -> Unit,
+    moveToNatureListScreen: (String?) -> Unit,
+    moveToFestivalListScreen: (String?) -> Unit,
     moveToMarketListScreen: () -> Unit,
-    moveToExperienceListScreen: () -> Unit,
+    moveToActivityListScreen: () -> Unit,
+    moveToArtListScreen: () -> Unit,
     moveToSignInScreen: () -> Unit,
     updateHomeScreenViewType: (HomeScreenViewType) -> Unit,
     homeViewModel: HomeViewModel = hiltViewModel(),
@@ -52,7 +54,8 @@ fun HomeScreen(
         moveToNatureListScreen = moveToNatureListScreen,
         moveToFestivalListScreen = moveToFestivalListScreen,
         moveToMarketListScreen = moveToMarketListScreen,
-        moveToExperienceListScreen = moveToExperienceListScreen,
+        moveToActivityListScreen = moveToActivityListScreen,
+        moveToArtListScreen = moveToArtListScreen,
         moveToSignInScreen = moveToSignInScreen,
         isContent = true
     )
@@ -70,14 +73,59 @@ private fun HomeScreen(
     moveToNotificationScreen: () -> Unit,
     moveToCategoryContentScreen: (Int, String?, Boolean) -> Unit,
     moveToRestaurantListScreen: () -> Unit,
-    moveToNatureListScreen: (ListFilter) -> Unit,
-    moveToFestivalListScreen: (ListFilter) -> Unit,
+    moveToNatureListScreen: (String?) -> Unit,
+    moveToFestivalListScreen: (String?) -> Unit,
     moveToMarketListScreen: () -> Unit,
-    moveToExperienceListScreen: () -> Unit,
+    moveToActivityListScreen: () -> Unit,
+    moveToArtListScreen: () -> Unit,
     moveToSignInScreen: () -> Unit,
     isContent: Boolean
 ) {
-    Column {
+    Box {
+        Column {
+            when (viewType) {
+                HomeScreenViewType.Home -> {
+                    HomeContent(
+                        moveToCategoryContentScreen = moveToCategoryContentScreen,
+                        moveToRestaurantListScreen = moveToRestaurantListScreen,
+                        moveToNatureListScreen = moveToNatureListScreen,
+                        moveToFestivalListScreen = moveToFestivalListScreen,
+                        moveToMarketListScreen = moveToMarketListScreen,
+                        moveToActivityListScreen = moveToActivityListScreen,
+                        moveToArtListScreen = moveToArtListScreen,
+                        moveToSignInScreen = moveToSignInScreen,
+                    )
+                }
+                HomeScreenViewType.Searching -> {
+                    val focusManager = LocalFocusManager.current
+                    BackHandler {
+                        updateInputText("")
+                        focusManager.clearFocus()
+                        updateHomeScreenViewType(HomeScreenViewType.Home)
+                    }
+                    Spacer(Modifier.height((10 + TOP_BAR_HEIGHT).dp))
+                    SearchingContent(
+                        moveToCategoryContentScreen = moveToCategoryContentScreen,
+                        moveToSignInScreen = moveToSignInScreen,
+                    )
+                }
+                HomeScreenViewType.SearchResult -> {
+                    val focusManager = LocalFocusManager.current
+                    BackHandler {
+                        updateInputText("")
+                        focusManager.clearFocus()
+                        updateHomeScreenViewType(HomeScreenViewType.Home)
+                        updateSearchCategoryType(SearchCategoryType.All)
+                    }
+                    Spacer(Modifier.height((10 + TOP_BAR_HEIGHT).dp))
+                    SearchResultContent(
+                        moveToCategoryContentScreen = moveToCategoryContentScreen,
+                        moveToSignInScreen = moveToSignInScreen,
+                    )
+                }
+            }
+        }
+
         HomeScreenTopBar(
             inputText = inputText,
             onValueChange = updateInputText,
@@ -88,47 +136,6 @@ private fun HomeScreen(
             addRecentSearch = addRecentSearch,
             moveToNotificationScreen = moveToNotificationScreen
         )
-
-        Spacer(Modifier.height(10.dp))
-
-        when (viewType) {
-            HomeScreenViewType.Home -> {
-                HomeContent(
-                    moveToCategoryContentScreen = moveToCategoryContentScreen,
-                    moveToRestaurantListScreen = moveToRestaurantListScreen,
-                    moveToNatureListScreen = moveToNatureListScreen,
-                    moveToFestivalListScreen = moveToFestivalListScreen,
-                    moveToMarketListScreen = moveToMarketListScreen,
-                    moveToExperienceListScreen = moveToExperienceListScreen,
-                    moveToSignInScreen = moveToSignInScreen,
-                )
-            }
-            HomeScreenViewType.Searching -> {
-                val focusManager = LocalFocusManager.current
-                BackHandler {
-                    updateInputText("")
-                    focusManager.clearFocus()
-                    updateHomeScreenViewType(HomeScreenViewType.Home)
-                }
-                SearchingContent(
-                    moveToCategoryContentScreen = moveToCategoryContentScreen,
-                    moveToSignInScreen = moveToSignInScreen,
-                )
-            }
-            HomeScreenViewType.SearchResult -> {
-                val focusManager = LocalFocusManager.current
-                BackHandler {
-                    updateInputText("")
-                    focusManager.clearFocus()
-                    updateHomeScreenViewType(HomeScreenViewType.Home)
-                    updateSearchCategoryType(SearchCategoryType.All)
-                }
-                SearchResultContent(
-                    moveToCategoryContentScreen = moveToCategoryContentScreen,
-                    moveToSignInScreen = moveToSignInScreen,
-                )
-            }
-        }
     }
 }
 

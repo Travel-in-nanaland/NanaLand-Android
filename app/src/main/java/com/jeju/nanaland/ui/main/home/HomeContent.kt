@@ -1,7 +1,9 @@
 package com.jeju.nanaland.ui.main.home
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.layout.padding
@@ -15,16 +17,18 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.jeju.nanaland.R
+import com.jeju.nanaland.domain.entity.member.HotPostData
 import com.jeju.nanaland.domain.entity.member.RecommendedPostData
 import com.jeju.nanaland.domain.entity.nanapick.NanaPickBannerData
 import com.jeju.nanaland.globalvalue.userdata.UserData
-import com.jeju.nanaland.ui.component.main.home.HomeScreenAdBanner
 import com.jeju.nanaland.ui.component.main.home.HomeScreenCategoryButtons
+import com.jeju.nanaland.ui.component.main.home.HomeScreenPopularPlaces
 import com.jeju.nanaland.ui.component.main.home.HomeScreenRecommendedPosts
 import com.jeju.nanaland.ui.component.main.home.HomeScreenTopBanner
+import com.jeju.nanaland.ui.theme.bodyBold
 import com.jeju.nanaland.ui.theme.getColor
+import com.jeju.nanaland.ui.theme.shadowDivider
 import com.jeju.nanaland.ui.theme.title02Bold
-import com.jeju.nanaland.util.listfilter.ListFilter
 import com.jeju.nanaland.util.resource.getString
 import com.jeju.nanaland.util.ui.ScreenPreview
 import com.jeju.nanaland.util.ui.UiState
@@ -32,29 +36,34 @@ import com.jeju.nanaland.util.ui.UiState
 @Composable
 fun HomeContent(
     moveToCategoryContentScreen: (Int, String?, Boolean) -> Unit,
-    moveToNatureListScreen: (ListFilter) -> Unit,
-    moveToFestivalListScreen: (ListFilter) -> Unit,
+    moveToNatureListScreen: (String?) -> Unit,
+    moveToFestivalListScreen: (String?) -> Unit,
     moveToMarketListScreen: () -> Unit,
-    moveToExperienceListScreen: () -> Unit,
+    moveToActivityListScreen: () -> Unit,
+    moveToArtListScreen: () -> Unit,
     moveToRestaurantListScreen: () -> Unit,
     moveToSignInScreen: () -> Unit,
     viewModel: HomeViewModel = hiltViewModel()
 ) {
     val homePreviewBanner = viewModel.homeBannerPreview.collectAsState().value
     val recommendedPosts = viewModel.recommendedPosts.collectAsState().value
+    val hotPosts = viewModel.hotPosts.collectAsState().value
     LaunchedEffect(Unit) {
         viewModel.getHomeBannerPreview()
         viewModel.getRecommendedPost()
+        viewModel.getHotPost()
     }
     HomeContent(
         homePreviewBanner = homePreviewBanner,
         recommendedPosts = recommendedPosts,
+        hotPosts = hotPosts,
         toggleFavorite = viewModel::toggleFavorite,
         moveToCategoryContentScreen = moveToCategoryContentScreen,
         moveToNatureListScreen = moveToNatureListScreen,
         moveToFestivalListScreen = moveToFestivalListScreen,
         moveToMarketListScreen = moveToMarketListScreen,
-        moveToExperienceListScreen = moveToExperienceListScreen,
+        moveToActivityListScreen = moveToActivityListScreen,
+        moveToArtListScreen = moveToArtListScreen,
         moveToRestaurantListScreen = moveToRestaurantListScreen,
         moveToSignInScreen = moveToSignInScreen,
         isContent = true
@@ -65,12 +74,14 @@ fun HomeContent(
 private fun HomeContent(
     homePreviewBanner: UiState<List<NanaPickBannerData>>,
     recommendedPosts: UiState<List<RecommendedPostData>>,
+    hotPosts: UiState<List<HotPostData>>,
     toggleFavorite: (Int, String?) -> Unit,
     moveToCategoryContentScreen: (Int, String?, Boolean) -> Unit,
-    moveToNatureListScreen: (ListFilter) -> Unit,
-    moveToFestivalListScreen: (ListFilter) -> Unit,
+    moveToNatureListScreen: (String?) -> Unit,
+    moveToFestivalListScreen: (String?) -> Unit,
     moveToMarketListScreen: () -> Unit,
-    moveToExperienceListScreen: () -> Unit,
+    moveToActivityListScreen: () -> Unit,
+    moveToArtListScreen: () -> Unit,
     moveToRestaurantListScreen: () -> Unit,
     moveToSignInScreen: () -> Unit,
     isContent: Boolean
@@ -85,54 +96,73 @@ private fun HomeContent(
             onBannerClick = moveToCategoryContentScreen
         )
 
-        Spacer(Modifier.height(16.dp))
+        Spacer(Modifier.height(28.dp))
 
-        Column(
-            modifier = Modifier.padding(start = 16.dp, end = 16.dp)
-        ) {
-            HomeScreenCategoryButtons(
-                moveToNatureListScreen = moveToNatureListScreen,
-                moveToFestivalListScreen = moveToFestivalListScreen,
-                moveToMarketListScreen = moveToMarketListScreen,
-                moveToExperienceListScreen = moveToExperienceListScreen,
-                moveToRestaurantListScreen = moveToRestaurantListScreen,
-            )
-        }
-
-        Spacer(Modifier.height(32.dp))
-
-        HomeScreenAdBanner(
+        HomeScreenCategoryButtons(
             moveToNatureListScreen = moveToNatureListScreen,
             moveToFestivalListScreen = moveToFestivalListScreen,
-            moveToMarketListScreen = moveToMarketListScreen
+            moveToMarketListScreen = moveToMarketListScreen,
+            moveToActivityListScreen = moveToActivityListScreen,
+            moveToArtListScreen = moveToArtListScreen,
+            moveToRestaurantListScreen = moveToRestaurantListScreen,
         )
 
-        Spacer(Modifier.height(32.dp))
+        Spacer(
+            modifier = Modifier
+                .padding(top = 32.dp, bottom = 24.dp)
+                .height(8.dp)
+                .fillMaxWidth()
+                .shadowDivider()
+                .background(getColor().gray03)
+        )
 
-        Column(
-            modifier = Modifier.padding(start = 16.dp, end = 16.dp, bottom = 20.dp)
-        ) {
+//        HomeScreenAdBanner(
+//            moveToNatureListScreen = moveToNatureListScreen,
+//            moveToFestivalListScreen = moveToFestivalListScreen,
+//            moveToMarketListScreen = moveToMarketListScreen
+//        )
 
-            Text(
-                text = getString(R.string.home_screen_recommend,
-                    if(UserData.nickname == "GUEST")
-                        getString(R.string.home_screen_recommend_default_name)
-                    else
-                        UserData.nickname
-                    ),
-                color = getColor().black,
-                style = title02Bold
-            )
+        Text(
+            modifier = Modifier.padding(horizontal = 16.dp),
+            text = getString(R.string.home_screen_recommend,
+                if(UserData.nickname == "GUEST")
+                    getString(R.string.home_screen_recommend_default_name)
+                else
+                    UserData.nickname
+            ),
+            color = getColor().black,
+            style = bodyBold
+        )
+        Spacer(Modifier.height(12.dp))
+        HomeScreenRecommendedPosts(
+            recommendedPosts = recommendedPosts,
+            onFavoriteButtonClick = toggleFavorite,
+            onClick = moveToCategoryContentScreen,
+            moveToSignInScreen = moveToSignInScreen,
+        )
 
-            Spacer(Modifier.height(10.dp))
+        Spacer(
+            modifier = Modifier
+                .padding(top = 32.dp, bottom = 24.dp)
+                .height(8.dp)
+                .fillMaxWidth()
+                .shadowDivider()
+                .background(getColor().gray03)
+        )
 
-            HomeScreenRecommendedPosts(
-                recommendedPosts = recommendedPosts,
-                onFavoriteButtonClick = toggleFavorite,
-                onClick = moveToCategoryContentScreen,
-                moveToSignInScreen = moveToSignInScreen,
-            )
-        }
+        Text(
+            modifier = Modifier.padding(horizontal = 16.dp),
+            text = getString(R.string.home_screen_popular),
+            color = getColor().black,
+            style = title02Bold
+        )
+        Spacer(Modifier.height(12.dp))
+        HomeScreenPopularPlaces(
+            hotPosts = hotPosts,
+            onFavoriteButtonClick = toggleFavorite,
+            onClick = moveToCategoryContentScreen,
+            moveToSignInScreen = moveToSignInScreen,
+        )
     }
 }
 

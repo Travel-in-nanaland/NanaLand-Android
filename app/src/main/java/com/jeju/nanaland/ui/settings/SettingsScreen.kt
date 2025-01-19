@@ -7,9 +7,12 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
@@ -19,12 +22,13 @@ import com.jeju.nanaland.BuildConfig
 import com.jeju.nanaland.R
 import com.jeju.nanaland.globalvalue.userdata.UserData
 import com.jeju.nanaland.ui.component.common.CustomSurface
-import com.jeju.nanaland.ui.component.nonmember.NonMemberGuideDialog
+import com.jeju.nanaland.ui.component.common.dialog.DialogCommon
+import com.jeju.nanaland.ui.component.common.dialog.DialogCommonType
+import com.jeju.nanaland.ui.component.common.toggle.SwitchCommon
 import com.jeju.nanaland.ui.component.settings.SettingsScreenCategoryItem
 import com.jeju.nanaland.ui.component.settings.SettingsScreenCategoryTitle
 import com.jeju.nanaland.ui.component.settings.SettingsScreenHorizontalDivider
 import com.jeju.nanaland.ui.component.settings.SettingsScreenTopBar
-import com.jeju.nanaland.ui.component.signout.SignOutConfirmDialog
 import com.jeju.nanaland.ui.theme.body01
 import com.jeju.nanaland.ui.theme.getColor
 import com.jeju.nanaland.util.resource.getString
@@ -36,17 +40,21 @@ fun SettingsScreen(
     moveToPermissionCheckingScreen: () -> Unit,
     moveToLanguageChangeScreen: () -> Unit,
     moveToWithdrawalScreen: () -> Unit,
-    moveToLanguageInitScreen: () -> Unit,
+    moveToNoticeScreen: () -> Unit,
     moveToSignInScreen: () -> Unit,
     viewModel: SettingsViewModel = hiltViewModel()
 ) {
+    val alarm = viewModel.alarm.collectAsState()
+
     SettingsScreen(
+        alarm = alarm.value,
+        setAlarm = viewModel::setAlarm,
         signOut = viewModel::signOut,
         moveToBackScreen = moveToBackScreen,
         moveToPolicySettingScreen = moveToPolicySettingScreen,
         moveToPermissionCheckingScreen = moveToPermissionCheckingScreen,
         moveToWithdrawalScreen = moveToWithdrawalScreen,
-        moveToLanguageInitScreen = moveToLanguageInitScreen,
+        moveToNoticeScreen = moveToNoticeScreen,
         moveToLanguageChangeScreen = moveToLanguageChangeScreen,
         moveToSignInScreen = moveToSignInScreen,
         isContent = true
@@ -55,19 +63,22 @@ fun SettingsScreen(
 
 @Composable
 private fun SettingsScreen(
+    alarm: Boolean,
+    setAlarm: (Boolean) -> Unit,
     signOut: (() -> Unit) -> Unit,
     moveToBackScreen: () -> Unit,
     moveToPolicySettingScreen: () -> Unit,
     moveToPermissionCheckingScreen: () -> Unit,
     moveToLanguageChangeScreen: () -> Unit,
     moveToWithdrawalScreen: () -> Unit,
-    moveToLanguageInitScreen: () -> Unit,
+    moveToNoticeScreen: () -> Unit,
     moveToSignInScreen: () -> Unit,
     isContent: Boolean
 ) {
     val context = LocalContext.current
     val isSignOutDialogShowing = remember { mutableStateOf(false) }
     val isNonMemberGuideDialogShowing = remember { mutableStateOf(false) }
+    var isAlarmDialogShowing by remember { mutableStateOf(false) }
     val versionClickedCount = remember { mutableIntStateOf(0) }
 
     CustomSurface {
@@ -80,6 +91,11 @@ private fun SettingsScreen(
         SettingsScreenCategoryTitle(text = getString(R.string.settings_screen_사용_설정))
 
         Spacer(Modifier.height(6.dp))
+
+        SettingsScreenCategoryItem(
+            text = getString(R.string.common_공지사항),
+            onClick = moveToNoticeScreen
+        )
 
         SettingsScreenCategoryItem(
             text = getString(R.string.settings_screen_약관_및_정책),
@@ -95,6 +111,26 @@ private fun SettingsScreen(
         SettingsScreenCategoryItem(
             text = getString(R.string.settings_screen_접근권한_안내),
             onClick = { moveToPermissionCheckingScreen() }
+        )
+
+        SettingsScreenCategoryItem(
+            text = getString(R.string.settings_screen_알림_설정),
+            onClick = {
+                if(!alarm)
+                    setAlarm(true)
+                else
+                    isAlarmDialogShowing = true
+            },
+            endView = {
+                SwitchCommon(
+                    checked = alarm,
+                ) {
+                    if(it)
+                        setAlarm(true)
+                    else
+                        isAlarmDialogShowing = true
+                }
+            }
         )
 
         SettingsScreenCategoryItem(
@@ -152,16 +188,33 @@ private fun SettingsScreen(
     }
 
     if (isNonMemberGuideDialogShowing.value) {
-        NonMemberGuideDialog(
-            onCloseClick = { isNonMemberGuideDialogShowing.value = false },
-            moveToSignInScreen = moveToSignInScreen
+        DialogCommon(
+            DialogCommonType.Login,
+            onDismiss = { isNonMemberGuideDialogShowing.value = false },
+            onYes = moveToSignInScreen,
         )
     }
 
     if (isSignOutDialogShowing.value) {
-        SignOutConfirmDialog(
-            onConfirm = { signOut(moveToLanguageInitScreen) },
-            onCancel = { isSignOutDialogShowing.value = false }
+        DialogCommon(
+            DialogCommonType.Logout,
+            onDismiss = { isSignOutDialogShowing.value = false },
+            onYes = {
+                signOut(moveToSignInScreen)
+            },
+            onNo = { isSignOutDialogShowing.value = false }
+        )
+    }
+
+    if (isAlarmDialogShowing) {
+        DialogCommon(
+            DialogCommonType.AlarmDismiss,
+            onDismiss = { isAlarmDialogShowing = false },
+            onYes = {
+                isAlarmDialogShowing = false
+                setAlarm(false)
+            },
+            onNo = { isAlarmDialogShowing = false }
         )
     }
 }

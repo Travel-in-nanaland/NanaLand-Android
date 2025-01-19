@@ -25,7 +25,7 @@ import com.jeju.nanaland.R
 import com.jeju.nanaland.domain.entity.notification.NotificationLinkType
 import com.jeju.nanaland.domain.entity.notification.NotificationType
 import com.jeju.nanaland.ui.component.common.CustomSurface
-import com.jeju.nanaland.ui.component.common.topbar.CustomTopBar
+import com.jeju.nanaland.ui.component.common.topbar.TopBarCommon
 import com.jeju.nanaland.ui.theme.body02Bold
 import com.jeju.nanaland.ui.theme.caption01
 import com.jeju.nanaland.ui.theme.caption02
@@ -45,7 +45,7 @@ fun NotificationScreen(
 
     CustomSurface {
         Column(Modifier.fillMaxSize()) {
-            CustomTopBar(
+            TopBarCommon(
                 title = getString(R.string.common_알림),
                 onBackButtonClicked = moveToBackScreen
             )

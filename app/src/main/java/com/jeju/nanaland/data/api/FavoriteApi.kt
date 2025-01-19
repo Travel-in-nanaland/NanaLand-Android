@@ -1,9 +1,9 @@
 package com.jeju.nanaland.data.api
 
-import com.jeju.nanaland.domain.request.favorite.ToggleFavoriteRequest
-import com.jeju.nanaland.domain.response.ResponseWrapper
 import com.jeju.nanaland.domain.entity.favorite.FavoriteListData
 import com.jeju.nanaland.domain.entity.favorite.ToggleFavoriteData
+import com.jeju.nanaland.domain.request.favorite.ToggleFavoriteRequest
+import com.jeju.nanaland.domain.response.ResponseWrapper
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
@@ -50,6 +50,7 @@ interface FavoriteApi {
     // 이색체험 찜리스트 조회
     @GET("favorite/experience/list")
     suspend fun getFavoriteExperienceList(
+        @Query("experienceType") type: String,
         @Query("page") page: Int,
         @Query("size") size: Int
 

@@ -5,7 +5,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.withStyle
 import com.jeju.nanaland.R
-import com.jeju.nanaland.ui.theme.body02SemiBold
+import com.jeju.nanaland.ui.theme.body02
 import com.jeju.nanaland.ui.theme.getColor
 import com.jeju.nanaland.util.resource.getString
 
@@ -17,14 +17,14 @@ fun PermissionCheckingScreenTitle(
     Text(
         text = buildAnnotatedString {
             withStyle(
-                body02SemiBold.toSpanStyle().copy(
+                body02.toSpanStyle().copy(
                     color = getColor().black
                 )
             ) {
                 append(text)
             }
             withStyle(
-                body02SemiBold.toSpanStyle().copy(
+                body02.toSpanStyle().copy(
                     color = if (isNecessary) getColor().main else getColor().black
                 )
             ) {

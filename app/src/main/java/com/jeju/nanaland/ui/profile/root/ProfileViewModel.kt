@@ -8,6 +8,7 @@ import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.jeju.nanaland.domain.entity.member.UserProfile
 import com.jeju.nanaland.domain.entity.notice.NoticeSummery
+import com.jeju.nanaland.domain.navigation.ROUTE
 import com.jeju.nanaland.domain.request.review.DeleteReviewRequest
 import com.jeju.nanaland.domain.request.review.ToggleReviewFavoriteRequest
 import com.jeju.nanaland.domain.usecase.board.GetNoticeListUseCase
@@ -16,7 +17,6 @@ import com.jeju.nanaland.domain.usecase.member.GetUserProfileUseCase
 import com.jeju.nanaland.domain.usecase.review.DeleteReviewUseCase
 import com.jeju.nanaland.domain.usecase.review.GetReviewListByUserUseCase
 import com.jeju.nanaland.domain.usecase.review.ToggleReviewFavoriteUseCase
-import com.jeju.nanaland.globalvalue.constant.ROUTE
 import com.jeju.nanaland.globalvalue.userdata.UserData
 import com.jeju.nanaland.util.log.LogUtil
 import com.jeju.nanaland.util.network.NetworkResult
@@ -44,7 +44,7 @@ class ProfileViewModel @Inject constructor(
     private val deleteReviewUseCase: DeleteReviewUseCase,
     savedStateHandle: SavedStateHandle
 ) : ViewModel() {
-    val stateHandle: ROUTE.Profile.StartDest = savedStateHandle.toRoute()
+    val stateHandle: ROUTE.Main.Profile.StartDest = savedStateHandle.toRoute()
 
     val userId: Int?
         get() = stateHandle.userId

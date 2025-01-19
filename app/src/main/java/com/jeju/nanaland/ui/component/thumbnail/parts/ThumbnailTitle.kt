@@ -5,7 +5,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.text.style.TextOverflow
 import com.jeju.nanaland.globalvalue.type.LanguageType
 import com.jeju.nanaland.ui.theme.NanaLandTheme
-import com.jeju.nanaland.ui.theme.body02Bold
+import com.jeju.nanaland.ui.theme.body02SemiBold
 import com.jeju.nanaland.ui.theme.getColor
 import com.jeju.nanaland.util.language.getLanguage
 import com.jeju.nanaland.util.ui.ComponentPreview
@@ -17,7 +17,7 @@ fun ThumbnailTitle(
     Text(
         text = text ?: "",
         color = getColor().black,
-        style = body02Bold,
+        style = body02SemiBold,
         maxLines = when (getLanguage()) {
             LanguageType.Korean, LanguageType.Chinese -> 1
             LanguageType.English, LanguageType.Malaysia, LanguageType.Vietnam -> 2

@@ -1,5 +1,6 @@
 package com.jeju.nanaland.util.network
 
+import android.util.Log
 import com.jeju.nanaland.domain.usecase.auth.ReissueAccessTokenUseCase
 import com.jeju.nanaland.domain.usecase.authdatastore.GetAccessTokenUseCase
 import com.jeju.nanaland.domain.usecase.authdatastore.GetRefreshTokenUseCase
@@ -30,33 +31,38 @@ class TokenInterceptor @Inject constructor(
     override fun intercept(chain: Interceptor.Chain): Response {
         lateinit var response: Response
         return runBlocking<Response> {
+            val request = chain.request()
+
             mutex.withLock {
                 val accessToken = getAccessTokenUseCase().first()
                 if (accessToken.isNullOrEmpty()) {
-                    response = errorResponse(chain.request())
+                    response = chain.proceed(request.newBuilder().build())
+//                    response = errorResponse(request)
                     LogUtil.e("Network Error", "Access Token is Null or Empty")
                 } else {
                     LogUtil.e("TokenInterceptor", "${accessToken}")
-                    val request = chain.request().newBuilder().header("Authorization", "Bearer $accessToken").build()
-                    response = chain.proceed(request)
+                    response = chain.proceed(request.newBuilder().header("Authorization", "Bearer $accessToken").build())
                     if (response.code == 401) {
                         response.close()
                         val refreshToken = getRefreshTokenUseCase().first()
                         if (refreshToken.isNullOrEmpty()) {
-                            response = errorResponse(chain.request())
+                            response = errorResponse(request)
                             LogUtil.e("Network Error", "Refresh Token is Null or Empty")
                         } else {
+                            Log.d("Token", "get refreshToken " + refreshToken)
                             reissueAccessTokenUseCase(refreshToken).first().onSuccess { code, message, data ->
+                                Log.d("Token", "code$code, message$message, data$data")
                                 val newAccessToken = data?.accessToken ?: ""
                                 val newRefreshToken = data?.refreshToken ?: ""
                                 saveRefreshTokenUseCase(newRefreshToken)
                                 saveAccessTokenUseCase(newAccessToken)
-                                val newRequest = chain.request().newBuilder().header("Authorization", "Bearer $newAccessToken").build()
-                                response = chain.proceed(newRequest)
+                                response = chain.proceed(request.newBuilder().header("Authorization", "Bearer $newAccessToken").build())
                             }.onError { code, message ->
-                                response = errorResponse(chain.request())
+                                Log.e("Reissue Token ERROR", "code $code, message $message")
+                                response = errorResponse(request)
                             }.onException {
-                                response = errorResponse(chain.request())
+                                Log.e("Reissue Token ERROR", "exception $it")
+                                response = errorResponse(request)
                             }
                         }
                     }

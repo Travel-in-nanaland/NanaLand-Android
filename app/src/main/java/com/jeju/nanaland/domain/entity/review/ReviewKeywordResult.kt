@@ -9,8 +9,6 @@ data class ReviewKeywordResult(
     val id: Int,
     @SerializedName("category")
     val category: ReviewCategoryType,
-    @SerializedName("categoryValue")
-    val categoryValue: String,
     @SerializedName("title")
     val title: String,
     @SerializedName("firstImage")

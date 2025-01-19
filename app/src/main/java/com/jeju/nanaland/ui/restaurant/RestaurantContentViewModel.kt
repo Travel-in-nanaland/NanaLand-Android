@@ -3,20 +3,22 @@ package com.jeju.nanaland.ui.restaurant
 import android.app.Application
 import android.widget.Toast
 import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.jeju.nanaland.domain.entity.restaurant.RestaurantContentData
 import com.jeju.nanaland.domain.entity.review.ReviewListData
 import com.jeju.nanaland.domain.request.favorite.ToggleFavoriteRequest
 import com.jeju.nanaland.domain.request.restaurant.GetRestaurantContentRequest
+import com.jeju.nanaland.domain.request.review.DeleteReviewRequest
 import com.jeju.nanaland.domain.request.review.GetReviewListByPostRequest
 import com.jeju.nanaland.domain.request.review.ToggleReviewFavoriteRequest
 import com.jeju.nanaland.domain.usecase.favorite.ToggleFavoriteUseCase
 import com.jeju.nanaland.domain.usecase.restaurant.GetRestaurantContentUseCase
+import com.jeju.nanaland.domain.usecase.review.DeleteReviewUseCase
 import com.jeju.nanaland.domain.usecase.review.GetReviewListByPostUseCase
 import com.jeju.nanaland.domain.usecase.review.ToggleReviewFavoriteUseCase
 import com.jeju.nanaland.globalvalue.type.ReviewCategoryType
 import com.jeju.nanaland.util.log.LogUtil
+import com.jeju.nanaland.util.network.NetworkResult
 import com.jeju.nanaland.util.network.onError
 import com.jeju.nanaland.util.network.onException
 import com.jeju.nanaland.util.network.onSuccess
@@ -37,6 +39,7 @@ class RestaurantContentViewModel @Inject constructor(
     private val toggleFavoriteUseCase: ToggleFavoriteUseCase,
     private val getReviewListUseCase: GetReviewListByPostUseCase,
     private val toggleReviewFavoriteUseCase: ToggleReviewFavoriteUseCase,
+    private val deleteReviewUseCase: DeleteReviewUseCase,
 ) : AndroidViewModel(application) {
 
     private val _restaurantContent = MutableStateFlow<UiState<RestaurantContentData>>(UiState.Loading)
@@ -96,6 +99,10 @@ class RestaurantContentViewModel @Inject constructor(
             }
             .catch { LogUtil.e("flow Error", "toggleFavoriteUseCase") }
             .launchIn(viewModelScope)
+    }
+
+    suspend fun setRemove(id: Int): NetworkResult<String> {
+        return deleteReviewUseCase(DeleteReviewRequest(id))
     }
 
     fun getReview(contentId: Int?) {

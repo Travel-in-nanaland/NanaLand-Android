@@ -1,5 +1,6 @@
 package com.jeju.nanaland.ui.profile.profileReviewList
 
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
@@ -10,15 +11,17 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.paging.compose.collectAsLazyPagingItems
 import com.jeju.nanaland.R
 import com.jeju.nanaland.globalvalue.type.ReviewCategoryType
-import com.jeju.nanaland.ui.component.common.DialogCommon
+import com.jeju.nanaland.ui.component.common.dialog.BottomSheetSelectDialog
+import com.jeju.nanaland.ui.component.common.dialog.DialogCommon
+import com.jeju.nanaland.ui.component.common.dialog.DialogCommonType
 import com.jeju.nanaland.ui.profile.component.ProfileListFrame
 import com.jeju.nanaland.ui.profile.profileReviewList.component.ProfileListReviewRow
 import com.jeju.nanaland.ui.profile.root.ProfileViewModel
-import com.jeju.nanaland.ui.profile.component.parts.ReportSheet
 import com.jeju.nanaland.util.network.NetworkResult
 import com.jeju.nanaland.util.resource.getString
 import kotlinx.coroutines.launch
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ProfileReviewListScreen(
     moveToBackScreen: () -> Unit,
@@ -66,34 +69,32 @@ fun ProfileReviewListScreen(
             )
     }
     if(removeReviewId != -1)
-        RemoveDialog(
-            onDismissRequest = { removeReviewId = -1 },
-            onDelete = { scope.launch {
+        DialogCommon(
+            DialogCommonType.RemoveReview,
+            onDismiss = { removeReviewId = -1 },
+            onYes = { scope.launch {
                 if(viewModel.setRemove(removeReviewId) is NetworkResult.Success) {
                     removeReviewId = -1
                     reviews.refresh()
                 }
-            } }
+            } },
         )
 
     if(reportReviewId != -1)
-        ReportSheet(
-            onDismissRequest = { reportReviewId = -1 },
-            onReport = { moveToReviewReportScreen(reportReviewId) }
+        BottomSheetSelectDialog(
+            onDismiss = { reportReviewId = -1 },
+            items = arrayOf(getString(R.string.common_신고하기) to { moveToReviewReportScreen(reportReviewId) })
         )
-}
-
-@Composable
-private fun RemoveDialog(
-    onDismissRequest: () -> Unit,
-    onDelete: ()->Unit
-) {
-    DialogCommon(
-        onDismissRequest = onDismissRequest,
-        title = getString(R.string.mypage_screen_review_remove_dialog),
-//        modifier = {},
-//        subTitle = {},
-        onPositive = onDelete,
-        onNegative = onDismissRequest,
-    )
+    if (removeReviewId != -1) {
+        DialogCommon(
+            DialogCommonType.RemoveReview,
+            onDismiss = { removeReviewId = -1 },
+            onYes = { scope.launch {
+                if(viewModel.setRemove(removeReviewId) is NetworkResult.Success) {
+                    removeReviewId = -1
+                    viewModel.init()
+                }
+            } },
+        )
+    }
 }
