@@ -72,8 +72,8 @@ fun SearchResultScreenSearchResultList(
                             SearchCategoryType.Nature -> "NATURE"
                             SearchCategoryType.Festival -> "FESTIVAL"
                             SearchCategoryType.Market -> "MARKET"
-                            SearchCategoryType.Activity -> "EXPERIENCE"
-                            SearchCategoryType.Art -> "EXPERIENCE"
+                            SearchCategoryType.Activity -> "ACTIVITY"
+                            SearchCategoryType.Art -> "CULTURE_AND_ARTS"
                             SearchCategoryType.Restaurant -> "RESTAURANT"
                             else -> ""
                         }, true)

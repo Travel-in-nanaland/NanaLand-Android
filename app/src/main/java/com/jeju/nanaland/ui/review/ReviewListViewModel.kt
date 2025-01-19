@@ -59,6 +59,8 @@ class ReviewListViewModel @Inject constructor(
                 "NANA" -> ReviewCategoryType.NANA
                 "RESTAURANT" -> ReviewCategoryType.RESTAURANT
                 "EXPERIENCE" -> ReviewCategoryType.EXPERIENCE
+                "ACTIVITY" -> ReviewCategoryType.ACTIVITY
+                "CULTURE_AND_ARTS" -> ReviewCategoryType.ART
                 "NATURE" -> ReviewCategoryType.NATURE
                 "FESTIVAL" -> ReviewCategoryType.FESTIVAL
                 "MARKET" -> ReviewCategoryType.MARKET

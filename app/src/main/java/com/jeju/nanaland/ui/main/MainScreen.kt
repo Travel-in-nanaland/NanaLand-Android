@@ -100,6 +100,12 @@ fun MainScreen(
                 "experience" -> {//TODO
                     moveToCategoryContentScreen(contentId ?: 0, "EXPERIENCE", false)
                 }
+                "cultureAndArts" -> {//TODO
+                    moveToCategoryContentScreen(contentId ?: 0, "CULTURE_AND_ARTS", false)
+                }
+                "activity" -> {//TODO
+                    moveToCategoryContentScreen(contentId ?: 0, "ACTIVITY", false)
+                }
                 "restaurant" -> {
                     moveToCategoryContentScreen(contentId ?: 0, "RESTAURANT", false)
                 }

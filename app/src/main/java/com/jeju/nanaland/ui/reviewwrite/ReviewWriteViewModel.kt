@@ -159,7 +159,9 @@ class ReviewWriteViewModel @Inject constructor(
             }.launchIn(viewModelScope)
         } else { // create new review
             when(category){
-                ReviewCategoryType.EXPERIENCE -> getExperienceListUseCase(
+                ReviewCategoryType.EXPERIENCE,
+                ReviewCategoryType.ACTIVITY,
+                ReviewCategoryType.ART-> getExperienceListUseCase(
                     GetExperienceContentRequest(id, false)
                 ).onEach { networkResult ->
                     networkResult.onSuccess { code, message, data ->

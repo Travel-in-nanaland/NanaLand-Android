@@ -22,6 +22,8 @@ fun NavGraphBuilder.recommendedSpotScreen(navViewModel: NavViewModel) = composab
             when(category) {
                 "NATURE" -> navViewModel.navigate(ROUTE.Content.Nature.Detail(id))
                 "EXPERIENCE" -> navViewModel.navigate(ROUTE.Content.Experience.Detail(false,id))
+                "CULTURE_AND_ARTS" -> navViewModel.navigate(ROUTE.Content.Experience.Detail(false, id))
+                "ACTIVITY" -> navViewModel.navigate(ROUTE.Content.Experience.Detail(true, id))
                 "FESTIVAL" -> navViewModel.navigate(ROUTE.Content.Festival.Detail(id))
                 "MARKET" -> navViewModel.navigate(ROUTE.Content.Market.Detail(id))
             }
