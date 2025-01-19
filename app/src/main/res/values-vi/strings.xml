@@ -287,6 +287,7 @@
     <string name="permission_checking_screen_알림_description">Cần thiết để nhận thông báo thông tin sự kiện và lợi ích.</string>
     <string name="permission_checking_screen_오디오_및_음악_description">Cần thiết cho việc đăng ký nội dung video.</string>
     <string name="review_write_title">Viết đánh giá</string>
+    <string name="review_write_title_edit">Chỉnh sửa đánh giá</string>
     <string name="review_write_search_hint">Tìm Kiếm Địa Điểm</string>
     <string name="review_write_select_rating">Vui lòng {chọn} một {xếp hạng sao}!</string>
     <string name="review_write_writing">Vui lòng {viết} một {đánh giá sau chuyến thăm}!</string>
@@ -322,6 +323,7 @@
     <string name="nanapick_list_screen_see_all">Xem tất cả</string>
     <string name="dialog_btn_out">Thoát</string>
     <string name="dialog_btn_retry">Thử Lại</string>
+    <string name="dialog_msg_title_10">Bạn có muốn\nxóa đánh giá này không?</string>
     <string name="dialog_msg_title_11">Vui lòng kiểm tra kết nối internet của bạn</string>
     <string name="week_sun_sat_1">tháng</string>
     <string name="week_sun_sat_2">cơn giận</string>

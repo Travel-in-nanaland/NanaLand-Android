@@ -396,6 +396,7 @@
     <string name="common_인터넷_문제">Saya rasa ada masalah dengan sambungan internet saya!\nBoleh anda kembali selepas menyemak?</string>
     <string name="detail_screen_common_영업_시간">Waktu Operasi</string>
     <string name="review_write_title">Tulis ulasan</string>
+    <string name="review_write_title_edit">Edit Ulasan</string>
     <string name="review_write_search_hint">Cari Lokasi</string>
     <string name="review_write_select_rating">Sila {pilih} penilaian {bintang}!</string>
     <string name="review_write_writing">Sila {tulis} ulasan {kunjungan}!</string>
@@ -431,6 +432,7 @@
     <string name="nanapick_list_screen_see_all">Lihat semua</string>
     <string name="dialog_btn_out">Keluar</string>
     <string name="dialog_btn_retry">Cuba Lagi</string>
+    <string name="dialog_msg_title_10">Adakah anda mahu\nmemadam ulasan ini?</string>
     <string name="dialog_msg_title_11">Sila periksa sambungan internet anda</string>
     <string name="review_keyword_etc">Lain-lain</string>
     <string name="review_keyword_1">Sesuai untuk ulang tahun</string>

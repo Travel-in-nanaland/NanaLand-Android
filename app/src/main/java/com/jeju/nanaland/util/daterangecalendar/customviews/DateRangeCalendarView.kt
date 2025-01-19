@@ -133,8 +133,7 @@ class DateRangeCalendarView : LinearLayout, DateRangeCalendarViewApi {
         val currentCalendarMonth = mDateRangeCalendarManager.getVisibleMonthDataList()[position]
         var dateText = customContext.resources.getStringArray(R.array.month_name)[currentCalendarMonth[Calendar.MONTH]]
         dateText = dateText.substring(0, 1).toUpperCase() + dateText.subSequence(1, dateText.length)
-        val yearTitle = "${currentCalendarMonth[Calendar.YEAR]}"
-        tvYearTitle.text = yearTitle
+        tvYearTitle.text = customContext.resources.getString(R.string.year, currentCalendarMonth[Calendar.YEAR])
         tvYearTitle.setTextColor(Color.rgb(88, 63, 245))
         tvMonthTitle.text = dateText
         tvMonthTitle.setTextColor(Color.rgb(21, 21, 21))

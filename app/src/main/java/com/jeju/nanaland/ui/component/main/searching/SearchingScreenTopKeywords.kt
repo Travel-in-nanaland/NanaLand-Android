@@ -70,7 +70,7 @@ fun SearchingScreenTopKeywords(
                             Text(
                                 modifier = Modifier.width(12.dp),
                                 text = "${it + 5}.",
-                                color = getColor().gray01,
+                                color = getColor().black,
                                 style = body02
                             )
 

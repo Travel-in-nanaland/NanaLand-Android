@@ -107,7 +107,7 @@ private fun PlaceView(
 
         Box(
             modifier = Modifier
-                .align(Alignment.BottomEnd)
+                .align(Alignment.TopEnd)
                 .padding(8.dp)
         ) {
             ThumbnailFavoriteButton(

@@ -395,6 +395,7 @@
     <string name="common_인터넷_문제">网络不太顺畅！\n能检查后回来吗？</string>
     <string name="detail_screen_common_영업_시간">营业时间</string>
     <string name="review_write_title">写评价</string>
+    <string name="review_write_title_edit">编辑评价</string>
     <string name="review_write_search_hint">搜索地点</string>
     <string name="review_write_select_rating">请{选择}一个{星级评分}！</string>
     <string name="review_write_writing">请{写下}一个{访问评价}！</string>
@@ -430,6 +431,7 @@
     <string name="nanapick_list_screen_see_all">查看全部</string>
     <string name="dialog_btn_out">退出</string>
     <string name="dialog_btn_retry">重试</string>
+    <string name="dialog_msg_title_10">确认要\n删除此评论吗？</string>
     <string name="dialog_msg_title_11">请检查您的网络连接</string>
     <string name="review_keyword_etc">其他</string>
     <string name="review_keyword_1">适合于纪念日</string>

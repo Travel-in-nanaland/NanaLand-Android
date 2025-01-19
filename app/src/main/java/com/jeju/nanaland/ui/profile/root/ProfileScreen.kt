@@ -183,7 +183,10 @@ private fun ProfileScreen(
                         R.drawable.ic_more_vert to { moreOptionDialog = true },
                 )
             )
-            Column(Modifier.weight(1f).verticalScroll(rememberScrollState())) {
+            Column(
+                Modifier
+                    .weight(1f)
+                    .verticalScroll(rememberScrollState())) {
                 when (val up = userProfile.value) {
                     is UiState.Loading -> {}
                     is UiState.Success -> {
@@ -215,7 +218,8 @@ private fun ProfileScreen(
 
                             ProfileScreenTopPart(
                                 reviewSize = reviewList.size,
-                                moveToReviewScreen = { moveToProfileReviewListScreen(null) }
+                                moveToReviewScreen = if(isMine && up.data.provider == "GUEST") null
+                                else { { moveToProfileReviewListScreen(null) } }
                             )
                         }
 

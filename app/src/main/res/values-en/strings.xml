@@ -395,6 +395,7 @@
     <string name="common_인터넷_문제">I think there\'s a problem with my internet connection!\nCan you come back after checking?</string>
     <string name="detail_screen_common_영업_시간">Opening Hours</string>
     <string name="review_write_title">Write a review</string>
+    <string name="review_write_title_edit">Edit review</string>
     <string name="review_write_search_hint">Search Location</string>
     <string name="review_write_select_rating">Please {select} a {star rating}!</string>
     <string name="review_write_writing">Please {write} a {visit review}!</string>
@@ -430,6 +431,7 @@
     <string name="nanapick_list_screen_see_all">See all</string>
     <string name="dialog_btn_out">Exit</string>
     <string name="dialog_btn_retry">Retry</string>
+    <string name="dialog_msg_title_10">Do you want to\ndelete this review?</string>
     <string name="dialog_msg_title_11">Please check your internet connection</string>
     <string name="review_keyword_etc">Etc</string>
     <string name="review_keyword_1">Good for anniversaries</string>

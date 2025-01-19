@@ -28,7 +28,7 @@ import com.jeju.nanaland.util.ui.clickableNoEffect
 @Composable
 fun ProfileScreenTopPart (
     reviewSize: Int,
-    moveToReviewScreen: () -> Unit,
+    moveToReviewScreen: (() -> Unit)?,
 ) {
     Box(
         modifier = Modifier
@@ -58,26 +58,28 @@ fun ProfileScreenTopPart (
             )
             Spacer(Modifier.weight(1f))
 
-            Row(
-                modifier = Modifier.clickableNoEffect(moveToReviewScreen),
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.spacedBy(4.dp),
-            ) {
-                Text(
-                    text = reviewSize.toString(),
-                    color = getColor().main,
-                    style = bodySemiBold,
-                )
-                Text(
-                    text = getString(R.string.mypage_screen_모두보기),
-                    color = getColor().black,
-                    style = body02SemiBold,
-                )
-                Image(
-                    modifier = Modifier.size(12.dp),
-                    painter = painterResource(R.drawable.ic_arrow_right),
-                    contentDescription = null,
-                )
+            moveToReviewScreen?.let {
+                Row(
+                    modifier = Modifier.clickableNoEffect(moveToReviewScreen),
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.spacedBy(4.dp),
+                ) {
+                    Text(
+                        text = reviewSize.toString(),
+                        color = getColor().main,
+                        style = bodySemiBold,
+                    )
+                    Text(
+                        text = getString(R.string.mypage_screen_모두보기),
+                        color = getColor().black,
+                        style = body02SemiBold,
+                    )
+                    Image(
+                        modifier = Modifier.size(12.dp),
+                        painter = painterResource(R.drawable.ic_arrow_right),
+                        contentDescription = null,
+                    )
+                }
             }
         }
     }

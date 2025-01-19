@@ -290,7 +290,9 @@ private fun ResultSkeletonRowView(
 private fun ResultNetworkErrorView(
 ) {
     Column(
-        horizontalAlignment = Alignment.CenterHorizontally
+        modifier = Modifier.fillMaxSize(),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center
     ) {
         Image(
             painter = painterResource(id = R.drawable.img_sad_orange),
@@ -303,6 +305,6 @@ private fun ResultNetworkErrorView(
             color = getColor().gray01
         )
 
-        Spacer(modifier = Modifier.height(40.dp))
+        Spacer(modifier = Modifier.height(50.dp))
     }
 }
