@@ -33,6 +33,8 @@ fun NavGraphBuilder.mainScreen(
                 "FESTIVAL" ->  { navViewModel.navigate(ROUTE.Content.Festival.Detail(contentId, isSearch)) }
                 "MARKET" ->  { navViewModel.navigate(ROUTE.Content.Market.Detail(contentId, isSearch)) }
                 "EXPERIENCE" ->  { navViewModel.navigate(ROUTE.Content.Experience.Detail(false, contentId, isSearch)) }
+                "CULTURE_AND_ARTS" ->  { navViewModel.navigate(ROUTE.Content.Experience.Detail(false, contentId, isSearch)) }
+                "ACTIVITY" ->  { navViewModel.navigate(ROUTE.Content.Experience.Detail(true, contentId, isSearch)) }
                 "RESTAURANT" ->  { navViewModel.navigate(ROUTE.Content.Restaurant.Detail(contentId, isSearch)) }
                 else  ->  { navViewModel.navigate(ROUTE.Main.NanaPick.Detail(contentId)) }
             }
