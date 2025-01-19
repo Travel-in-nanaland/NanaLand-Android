@@ -22,7 +22,6 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.jeju.nanaland.R
@@ -116,8 +115,8 @@ private fun DefaultLayout(
         .shadow(                                // 기존 common custom shadow 사용시 뒤에가 비침
             elevation = 1.dp,
             shape = RoundedCornerShape(12.dp),
-            ambientColor = Color.Black.copy(alpha = 0.25f),
-            spotColor = Color.Black.copy(alpha = 0.25f)
+            ambientColor = getColor().black.copy(alpha = 0.15f),
+            spotColor = getColor().black.copy(alpha = 0.15f)
         )
         .padding(horizontal = 1.dp)
         .offset(y = 2.dp)
