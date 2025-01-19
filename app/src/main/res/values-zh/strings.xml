@@ -12,6 +12,7 @@
     <string name="week_sun_sat_6">六</string>
     <string name="week_sun_sat_7">日</string>
 
+    <string name="year">%d年</string>
     <string name="cancel">Cancel</string>
     <string name="done">Done</string>
     <string name="title_time_picker">Select Time</string>
@@ -100,6 +101,7 @@
     <string name="searching_screen_hot_keywords">搜索量上升！ JEJU Place 🍊</string>
 
     <!--검색 결과 화면-->
+    <string name="favorite_screen_empty_list">您还没有收藏的内容\n请点击心形图标收藏您喜欢的内容！</string>
     <string name="search_result_screen_no_result">没有符合条件的搜索结果</string>
 
     <!--비회원 회원가입 유도 다이얼로그-->
@@ -110,6 +112,7 @@
 
     <!--날짜 선택 다이얼로그-->
     <string name="date_filter_dialog_날짜_선택">选择日期</string>
+    <string name="date_filter_dialog_all_select">本月全选</string>
     <string name="date_filter_dialog_초기화">重置</string>
 
     <!--지역 선택 다이얼로그-->
@@ -291,6 +294,7 @@
     <string name="language_change_screen_guide">以顶部的语言设为默认设置</string>
 
     <!--언어 설정 화면 다이얼로그-->
+    <string name="dialog_msg_sub_title_4">您可能无法接收有关\nnanaland内的各种活动和新闻！</string>
     <string name="dialog_msg_title_5">您想更改为该语言吗？</string>
 
     <!--설정 화면-->
@@ -506,5 +510,11 @@
     <string name="dialog_btn_later">稍后</string>
     <string name="dialog_btn_write">写</string>
     <string name="dialog_btn_agree">不同意</string>
+    <string name="dialog_msg_sub_title_3">将无法收到有关\nnanaland内各种活动/信息的通知。\n\n请前往 设置 > 通知接收设置\n进行更改。</string>
     <string name="dialog_msg_title_4">您是否想关闭通知？</string>
+    <string name="dialog_msg_title_2">各种活动，\n我们将通知您各种新闻💜</string>
+    <string name="dialog_msg_sub_title_2">同意接收通知后，\n您可以获取有关nanaland内各种活动/信息的通知。</string>
+    <string name="dialog_msg_title_3">%d年 %d月 %d日\n济州岛NanaLand接收推送通知\n已被拒收</string>
+    <string name="dialog_msg_title_1">nanaland的济州故事\n会让您感到有趣吗？</string>
+    <string name="dialog_msg_sub_title_1">关于nanaland in Jeju的一句话\n请留下笔记，我们会带来更多\n有趣的济州消息💜</string>
 </resources>

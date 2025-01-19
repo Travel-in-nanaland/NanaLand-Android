@@ -562,7 +562,7 @@
     <string name="dialog_msg_sub_title_3">나나랜드 내 다양한 이벤트 / 정보에 대한\n정보를 받으실 수 없습니다.\n\n설정 > 알림 수신 설정에서\n변경이 가능합니다.</string>
 
     <string name="dialog_msg_title_4">알림을 끄시겠어요?</string>
-    <string name="dialog_msg_sub_title_4">나나랜드가 전해주는 다양한 이벤트와\n소식들에 대해서 받지 못 할 수도 있어요 !</string>
+    <string name="dialog_msg_sub_title_4">나나랜드가 전해주는 다양한 이벤트와 소식들에 대해서 받지 못 할 수도 있어요 !</string>
 
     <string name="dialog_msg_title_5">해당 언어로\n변경하시겠습니까?</string>
 

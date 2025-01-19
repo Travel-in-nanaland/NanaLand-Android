@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">nanaland in Jeju</string>
+    <string name="year">Năm %d</string>
     <string name="cancel">Cancel</string>
     <string name="done">Done</string>
     <string name="title_time_picker">Select Time</string>
@@ -67,11 +68,13 @@
     <string name="searching_screen_모두_지우기">Xóa tất cả</string>
     <string name="searching_screen_최근_검색어가_없습니다">Không có tìm kiếm gần đây.</string>
     <string name="searching_screen_hot_keywords">Tăng lượt tìm kiếm! Địa điểm JEJU 🍊</string>
+    <string name="favorite_screen_empty_list">Bạn chưa yêu thích nội dung nào\nHãy nhấn vào biểu tượng trái tim trên nội dung bạn thích!</string>
     <string name="search_result_screen_no_result">Không có kết quả tìm kiếm tương ứng.</string>
     <string name="dialog_msg_title_9">Bạn phải trở thành thành viên của Nana Land để sử dụng tất cả các dịch vụ✨</string>
     <string name="dialog_btn_no_agree">Đồng ý</string>
     <string name="dialog_btn_go_sign_up">Đi đăng ký</string>
     <string name="date_filter_dialog_날짜_선택">Chọn ngày</string>
+    <string name="date_filter_dialog_all_select">Chọn Tất Cả Trong Tháng Này</string>
     <string name="date_filter_dialog_초기화">đặt lại</string>
     <string name="location_filter_dialog_지역">khu vực</string>
     <string name="location_filter_dialog_전체선택">Chọn tất cả</string>
@@ -219,6 +222,7 @@
     <string name="type_test_screen_button1">Điểm đến %s</string>
     <string name="type_test_screen_button2">Về màn hình chính</string>
     <string name="language_change_screen_guide">được đặt mặc định theo\n ngôn ngữ ở trên cùng.</string>
+    <string name="dialog_msg_sub_title_4">Bạn có thể không nhận được\ncác sự kiện và tin tức từ Nana Land!</string>
     <string name="dialog_msg_title_5">Bạn có muốn thay đổi \n sang ngôn ngữ đó không?</string>
     <string name="settings_screen_설정">Cài đặt</string>
     <string name="settings_screen_사용_설정">Đã bật</string>
@@ -434,5 +438,11 @@
     <string name="dialog_btn_later">Sau đó</string>
     <string name="dialog_btn_write">Viết</string>
     <string name="dialog_btn_agree">Không đồng ý</string>
+    <string name="dialog_msg_sub_title_3">Bạn sẽ không nhận được thông tin về\ncác sự kiện/thông tin khác nhau trong nanaland.\n\nĐi tới Cài đặt > Cài đặt Nhận Thông Báo\nđể thay đổi.</string>
     <string name="dialog_msg_title_4">Bạn có muốn tắt thông báo không?</string>
+    <string name="dialog_msg_title_2">Chúng tôi sẽ thông báo cho bạn về các sự kiện khác nhau,\nvà những tin tức hấp dẫn💜</string>
+    <string name="dialog_msg_sub_title_2">Khi đồng ý nhận thông báo,\nbạn có thể nhận thông tin về các sự kiện/thông tin khác nhau trong nanaland.</string>
+    <string name="dialog_msg_title_3">%d Năm %d Tháng %d Ngày\nnanaland ở Jeju Thông Báo Đẩy\nĐã từ chối nhận.</string>
+    <string name="dialog_msg_title_1">Bạn có thấy những câu chuyện về Jeju từ nanaland thú vị không?</string>
+    <string name="dialog_msg_sub_title_1">Một lời về nanaland ở Jeju\nHãy để lại ghi chú, chúng tôi sẽ mang đến\nnhững tin tức thú vị hơn từ Jeju💜</string>
 </resources>

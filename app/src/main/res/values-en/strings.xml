@@ -12,6 +12,7 @@
     <string name="week_sun_sat_6">SAT</string>
     <string name="week_sun_sat_7">SUN</string>
 
+    <string name="year">%d Year</string>
     <string name="cancel">Cancel</string>
     <string name="done">Done</string>
     <string name="title_time_picker">Select Time</string>
@@ -100,6 +101,7 @@
     <string name="searching_screen_hot_keywords">Search Volume UP! JEJU Place 🍊</string>
 
     <!--검색 결과 화면-->
+    <string name="favorite_screen_empty_list">You haven\'t favorited any content yet\nTap the heart on content you like!</string>
     <string name="search_result_screen_no_result">There are no results for that search. </string>
 
     <!--비회원 회원가입 유도 다이얼로그-->
@@ -109,6 +111,7 @@
 
     <!--날짜 선택 다이얼로그-->
     <string name="date_filter_dialog_날짜_선택">Select date</string>
+    <string name="date_filter_dialog_all_select">Select All This Month</string>
     <string name="date_filter_dialog_초기화">Reset</string>
 
     <!--지역 선택 다이얼로그-->
@@ -290,6 +293,7 @@
     <string name="language_change_screen_guide">The language at the top is set as default.</string>
 
     <!--언어 설정 화면 다이얼로그-->
+    <string name="dialog_msg_sub_title_4">You may not be able to receive\nvarious events and news from Nana Land!</string>
     <string name="dialog_msg_title_5">Do you want to change\nto this language?</string>
 
     <!--설정 화면-->
@@ -506,5 +510,11 @@
     <string name="dialog_btn_later">Later</string>
     <string name="dialog_btn_write">Write</string>
     <string name="dialog_btn_agree">Disagree</string>
+    <string name="dialog_msg_sub_title_3">You will not receive information about\nvarious events/information in nanaland.\n\nGo to Settings > Notification Preferences\nto change.</string>
     <string name="dialog_msg_title_4">Would you like to turn off notifications?</string>
+    <string name="dialog_msg_title_2">We\'ll let you know about various events,\nand exciting news💜</string>
+    <string name="dialog_msg_sub_title_2">By agreeing to notifications,\nyou can receive information about various events/information in nanaland.</string>
+    <string name="dialog_msg_title_3">%d Year %d Month %d Day\nnanaland in Jeju Push Notification\nUnsubscribed.</string>
+    <string name="dialog_msg_title_1">Will Jeju stories from nanaland be enjoyable for you?</string>
+    <string name="dialog_msg_sub_title_1">One word about nanaland in Jeju\nLeave a note, and we\'ll bring you more fun\nJeju news💜</string>
 </resources>

@@ -25,6 +25,7 @@
     <string name="month_name_11">11월</string>
     <string name="month_name_12">12월</string>
 
+    <string name="year">%d년</string>
     <string name="cancel">Cancel</string>
     <string name="done">Done</string>
     <string name="title_time_picker">Select Time</string>

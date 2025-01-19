@@ -25,6 +25,7 @@
     <string name="month_name_11">November</string>
     <string name="month_name_12">December</string>
 
+    <string name="year">Tahun %d</string>
     <string name="cancel">Cancel</string>
     <string name="done">Done</string>
     <string name="title_time_picker">Select Time</string>
@@ -100,6 +101,7 @@
     <string name="searching_screen_hot_keywords">eningkatan Pencarian! Tempat Jeju 🍊</string>
 
     <!--검색 결과 화면-->
+    <string name="favorite_screen_empty_list">Anda belum menandakan kandungan sebagai kegemaran\nTekan hati pada kandungan yang anda suka!</string>
     <string name="search_result_screen_no_result">Carian anda tidak\nmengembalikan sebarang hasil.</string>
 
     <!--비회원 회원가입 유도 다이얼로그-->
@@ -110,6 +112,7 @@
 
     <!--날짜 선택 다이얼로그-->
     <string name="date_filter_dialog_날짜_선택">Tarikh</string>
+    <string name="date_filter_dialog_all_select">Pilih Semua Bulan Ini</string>
     <string name="date_filter_dialog_초기화">Set Semula</string>
 
     <!--지역 선택 다이얼로그-->
@@ -291,6 +294,7 @@
     <string name="language_change_screen_guide">Bahasa di atas telah\nditetapkan sebagai lalai.</string>
 
     <!--언어 설정 화면 다이얼로그-->
+    <string name="dialog_msg_sub_title_4">Anda mungkin tidak dapat menerima\npelbagai acara dan berita dari nanaland!</string>
     <string name="dialog_msg_title_5">Adakah anda ingin menukar\nkepada bahasa tersebut?</string>
 
     <!--설정 화면-->
@@ -507,5 +511,11 @@
     <string name="dialog_btn_later">Kemudian</string>
     <string name="dialog_btn_write">Tulis</string>
     <string name="dialog_btn_agree">Tidak setuju</string>
+    <string name="dialog_msg_sub_title_3">Anda tidak akan menerima maklumat tentang\npelbagai acara/maklumat di nanaland.\n\nPergi ke Tetapan > Keutamaan Pemberitahuan\nuntuk mengubahnya.</string>
     <string name="dialog_msg_title_4">Adakah anda mahu mematikan pemberitahuan?</string>
+    <string name="dialog_msg_title_2">Kami akan memberitahu anda tentang pelbagai acara,\ndan berita menarik💜</string>
+    <string name="dialog_msg_sub_title_2">Dengan bersetuju untuk pemberitahuan,\nanda boleh menerima maklumat tentang pelbagai acara/maklumat di nanaland.</string>
+    <string name="dialog_msg_title_3">%d Tahun %d Bulan %d Hari\nnanaland di Jeju Pemberitahuan Tolakan\nBerjaya disekat.</string>
+    <string name="dialog_msg_title_1">Adakah kisah Jeju dari nanaland menyeronokkan untuk anda?</string>
+    <string name="dialog_msg_sub_title_1">Satu kata tentang nanaland di Jeju\nTinggalkan nota, dan kami akan membawa\nberita Jeju yang lebih menarik💜</string>
 </resources>
