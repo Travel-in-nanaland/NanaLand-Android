@@ -22,6 +22,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
@@ -40,6 +41,7 @@ import com.jeju.nanaland.ui.component.common.ReviewBottomBar
 import com.jeju.nanaland.ui.component.common.dialog.BottomSheetSelectDialog
 import com.jeju.nanaland.ui.component.common.dialog.DialogCommon
 import com.jeju.nanaland.ui.component.common.dialog.DialogCommonType
+import com.jeju.nanaland.ui.component.common.dialog.FullImageDialog
 import com.jeju.nanaland.ui.component.common.topbar.TopBarCommon
 import com.jeju.nanaland.ui.component.detailscreen.other.MoveToTopButton
 import com.jeju.nanaland.ui.component.review.ReviewCard
@@ -159,6 +161,11 @@ private fun ReviewListScreen(
     val lazyGridState = rememberLazyListState()
     val coroutineScope = rememberCoroutineScope()
     val selectedReviewId = remember { mutableIntStateOf(-1) }
+    val fullImageUrl = remember { mutableStateOf<String?>(null) }
+
+    fullImageUrl.value?.let {
+        FullImageDialog(it) { fullImageUrl.value = null }
+    }
 
     val loadMore = remember {
         derivedStateOf {
@@ -264,6 +271,7 @@ private fun ReviewListScreen(
                                     ReviewCard(
                                         data = item,
                                         toggleReviewFavorite = toggleReviewFavorite,
+                                        onImageClick = { fullImageUrl.value = it },
                                         onProfileClick = moveToProfileScreen,
                                         onReport = { selectedReviewId.intValue = item.id },
                                         onEdit = onEdit,

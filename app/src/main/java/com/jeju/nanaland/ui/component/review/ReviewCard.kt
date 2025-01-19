@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.itemsIndexed
@@ -31,7 +32,6 @@ import com.jeju.nanaland.domain.entity.review.ReviewData
 import com.jeju.nanaland.ui.component.review.parts.ReviewContent
 import com.jeju.nanaland.ui.component.review.parts.ReviewCountText
 import com.jeju.nanaland.ui.component.review.parts.ReviewFavoriteButton
-import com.jeju.nanaland.ui.component.review.parts.ReviewImage
 import com.jeju.nanaland.ui.component.review.parts.ReviewProfileImage
 import com.jeju.nanaland.ui.component.review.parts.ReviewProfileName
 import com.jeju.nanaland.ui.component.review.parts.ReviewRatingText
@@ -42,11 +42,13 @@ import com.jeju.nanaland.ui.theme.getColor
 import com.jeju.nanaland.util.resource.getString
 import com.jeju.nanaland.util.ui.clickableNoEffect
 import com.jeju.nanaland.util.ui.drawColoredShadow
+import com.skydoves.landscapist.glide.GlideImage
 
 @Composable
 fun ReviewCard(
     data: ReviewData,
     toggleReviewFavorite: (Int) -> Unit,
+    onImageClick: (String) -> Unit,
     onProfileClick: (Int?) -> Unit,
     onReport: () -> Unit,
     onEdit: (ReviewData) -> Unit,
@@ -160,7 +162,13 @@ fun ReviewCard(
                     modifier = Modifier.verticalScroll(scrollState)
                 ) {
                     itemsIndexed(data.images) { idx, item ->
-                        ReviewImage(imageUrl = item.originUrl)
+                        GlideImage(
+                            modifier = Modifier
+                                .size(70.dp)
+                                .clickableNoEffect { onImageClick(item.originUrl) }
+                                .clip(RoundedCornerShape(8.dp)),
+                            imageModel = { item.thumbnailUrl }
+                        )
 
                         Spacer(Modifier.width(8.dp))
                     }
