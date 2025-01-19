@@ -43,13 +43,13 @@ fun MenuItem(
             Spacer(Modifier.height(4.dp))
 
             Text(
-                text = getString(
-                    R.string.common_원,
-                    price
-                        .toDoubleOrNull()
-                        ?.toWithComma(customContext.resources.configuration.locales[0])
-                        ?: price
-                ),
+                text =
+                price.toDoubleOrNull()?.let {
+                    getString(
+                        R.string.common_원,
+                        it.toWithComma(customContext.resources.configuration.locales[0])
+                    )
+                } ?: price,
                 color = getColor().black,
                 style = body02
             )

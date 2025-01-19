@@ -105,6 +105,7 @@ fun ProfileScreenTypePart(
         } else {
             Column {
                 TypePart(null)
+                Spacer(modifier = Modifier.height(8.dp))
                 Spacer(modifier = Modifier.weight(1f))
                 if(isMine)
                     TextWithArrow(getString(R.string.mypage_screen_테스트_하기), moveToTypeTestScreen)

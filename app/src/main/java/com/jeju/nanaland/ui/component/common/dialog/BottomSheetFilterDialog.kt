@@ -48,6 +48,7 @@ import com.jeju.nanaland.ui.theme.body02Bold
 import com.jeju.nanaland.ui.theme.bodyBold
 import com.jeju.nanaland.ui.theme.caption01
 import com.jeju.nanaland.ui.theme.getColor
+import com.jeju.nanaland.ui.theme.searchText
 import com.jeju.nanaland.util.daterangecalendar.customviews.CalendarListener
 import com.jeju.nanaland.util.daterangecalendar.customviews.DateRangeCalendarView
 import com.jeju.nanaland.util.resource.getDrawable
@@ -437,7 +438,7 @@ private fun SelectedBoxList(
                 Text(
                     text = item,
                     color = if (selectList[idx]) getColor().main else getColor().gray01,
-                    style = body02,
+                    style = searchText,
                     textAlign = TextAlign.Center,
                     modifier = Modifier
                         .border(
