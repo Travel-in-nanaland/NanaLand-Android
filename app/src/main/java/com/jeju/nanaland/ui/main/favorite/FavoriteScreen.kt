@@ -6,7 +6,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -28,7 +27,6 @@ import com.jeju.nanaland.ui.component.common.dialog.DialogCommonType
 import com.jeju.nanaland.ui.component.common.topbar.TopBarCommon
 import com.jeju.nanaland.ui.component.favorite.FavoriteScreenCategorySelectionTab
 import com.jeju.nanaland.ui.component.favorite.FavoriteScreenFavoritePosts
-import com.jeju.nanaland.ui.component.main.searchresult.parts.SearchResultScreenItemCount
 import com.jeju.nanaland.ui.theme.body01
 import com.jeju.nanaland.ui.theme.getColor
 import com.jeju.nanaland.util.resource.getString
@@ -90,6 +88,7 @@ private fun FavoriteScreen(
 
         Spacer(Modifier.height(24.dp))
 
+        /*
         when (favoriteThumbnailCount) {
             is UiState.Loading -> {}
             is UiState.Success -> {
@@ -102,6 +101,7 @@ private fun FavoriteScreen(
         }
 
         Spacer(Modifier.height(16.dp))
+         */
 
         when (favoriteThumbnailList) {
             is UiState.Loading -> {}
