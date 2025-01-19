@@ -35,9 +35,10 @@ fun PolicyAgreeScreenCategoryContent(
         Row(
             modifier = Modifier
                 .clickableNoEffect { moveToDetailsScreen() },
-            verticalAlignment = Alignment.CenterVertically
+            verticalAlignment = Alignment.Top
         ) {
             PolicyAgreeScreenCategoryText(
+                modifier = Modifier.weight(1f, false),
                 text = text,
                 isNecessary = isNecessary
             )

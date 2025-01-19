@@ -2,6 +2,7 @@ package com.jeju.nanaland.ui.component.policyagree.parts
 
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.withStyle
 import com.jeju.nanaland.R
@@ -11,10 +12,12 @@ import com.jeju.nanaland.util.resource.getString
 
 @Composable
 fun PolicyAgreeScreenCategoryText(
+    modifier: Modifier = Modifier,
     text: String,
     isNecessary: Boolean
 ) {
     Text(
+        modifier = modifier,
         text = buildAnnotatedString {
             withStyle(
                 style = body02.toSpanStyle().copy(
