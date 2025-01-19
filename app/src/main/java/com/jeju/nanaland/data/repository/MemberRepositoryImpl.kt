@@ -22,8 +22,8 @@ class MemberRepositoryImpl(
     }
 
     // 유저 타입에 따른 추천 게시물 2개 반환
-    override suspend fun getRecommendedPost(): NetworkResult<List<RecommendedPostData>> {
-        return handleResult { memberApi.getRecommendedPost() }
+    override suspend fun getRecommendedPost(memberId: Int?): NetworkResult<List<RecommendedPostData>> {
+        return handleResult { memberApi.getRecommendedPost(memberId) }
     }
     override suspend fun getHotPost(): NetworkResult<List<HotPostData>> {
         return handleResult { memberApi.getHotPost() }
@@ -54,7 +54,11 @@ class MemberRepositoryImpl(
     override suspend fun withdraw(
         data: WithdrawalRequest
     ): NetworkResult<Any?> {
-        return handleResult { memberApi.withdraw(data) }
+        return handleResult {
+            memberApi.withdraw(data)
+            // TODO 삭제
+//            memberApi.withdrawForce()
+        }
     }
 
     override suspend fun signOut(): NetworkResult<Any?> {

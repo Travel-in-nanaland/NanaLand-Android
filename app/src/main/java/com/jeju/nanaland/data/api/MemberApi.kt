@@ -27,6 +27,7 @@ interface MemberApi {
     // 유저 타입에 따른 추천 게시물 2개 반환
     @GET("member/recommended")
     suspend fun getRecommendedPost(
+        @Query("memberId") memberId: Int? = null
     ): Response<ResponseWrapper<List<RecommendedPostData>>>
     @GET("member/hot")
     suspend fun getHotPost(
@@ -54,6 +55,10 @@ interface MemberApi {
     @POST("member/withdrawal")
     suspend fun withdraw(
         @Body body: WithdrawalRequest
+    ): Response<ResponseWrapper<Any?>>
+    // 회원 탈퇴
+    @POST("member/forceWithdrawal")
+    suspend fun withdrawForce(
     ): Response<ResponseWrapper<Any?>>
 
     // 로그아웃
