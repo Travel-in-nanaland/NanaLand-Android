@@ -4,7 +4,6 @@ import android.net.Uri
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -56,9 +55,9 @@ fun ReportWriteScreen(
     var emailError by remember { mutableStateOf(false) }
     var images by remember { mutableStateOf<List<Uri>>(emptyList()) }
 
-    Box(Modifier.fillMaxSize()) {
         Column(
             modifier = Modifier
+                .fillMaxSize()
                 .verticalScroll(rememberScrollState())
                 .padding(horizontal = 16.dp)
         ) {
@@ -133,30 +132,30 @@ fun ReportWriteScreen(
             UploadImages(images.map { it.toString() }) {
                 images = it.map { Uri.parse(it) }
             }
-            Spacer(modifier = Modifier.height(100.dp))
-        }
-
-        Text(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(horizontal = 16.dp)
-                .padding(bottom = 24.dp)
-                .clip(RoundedCornerShape(50))
-                .background(if(!reasonError && !emailError)getColor().main else getColor().main10)
-                .padding(11.dp)
-                .align(Alignment.BottomCenter)
-                .clickableNoEffect {
+            Spacer(modifier = Modifier.height(48.dp))
+            Spacer(modifier = Modifier.weight(1f))
+            Text(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 16.dp)
+                    .padding(bottom = 24.dp)
+                    .clip(RoundedCornerShape(50))
+                    .background(if(!reasonError && !emailError)getColor().main else getColor().main10)
+                    .padding(11.dp)
+                    .align(Alignment.CenterHorizontally)
+                    .clickableNoEffect {
 //                    reasonError = reason.length < REASON_LENGTH_MIN
 //                    emailError = !email.matches(emailRegex)
-                    if(!reasonError && !emailError)
-                        onComplete(reason, email, images)
-                },
-            text = getString(R.string.info_modification_proposal_보내기),
-            style = bodyBold,
-            color = getColor().white,
-            textAlign = TextAlign.Center
-        )
-    }
+                        if(!reasonError && !emailError)
+                            onComplete(reason, email, images)
+                    },
+                text = getString(R.string.info_modification_proposal_보내기),
+                style = bodyBold,
+                color = getColor().white,
+                textAlign = TextAlign.Center
+            )
+        }
+
 }
 
 
