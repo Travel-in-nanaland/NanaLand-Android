@@ -118,8 +118,8 @@ fun ReportWriteScreen(
                 error = if(emailError) getString(R.string.info_modification_proposal_warning) else null,
                 height = 48,
                 onText = {
-                    emailError = !email.matches(emailRegex)
                     email = it
+                    emailError = !email.matches(emailRegex)
                 }
             )
             Spacer(modifier = Modifier.height(48.dp))
