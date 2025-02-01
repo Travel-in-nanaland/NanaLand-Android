@@ -10,7 +10,7 @@ import com.jeju.nanaland.util.resource.getString
 @Composable
 fun InfoModificationProposalWritingScreenDescription() {
     Text(
-        text = getString(R.string.info_modification_proposal_text3),
+        text = getString(R.string.report_write_email_subtitle),
         color = getColor().gray01,
         style = caption01
     )
