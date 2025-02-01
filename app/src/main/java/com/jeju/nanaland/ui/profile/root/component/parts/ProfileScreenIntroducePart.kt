@@ -12,6 +12,8 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -19,6 +21,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.jeju.nanaland.R
 import com.jeju.nanaland.domain.entity.member.UserProfile
+import com.jeju.nanaland.ui.component.common.dialog.FullImageDialog
 import com.jeju.nanaland.ui.theme.bodyBold
 import com.jeju.nanaland.ui.theme.caption01
 import com.jeju.nanaland.ui.theme.getColor
@@ -34,6 +37,12 @@ fun ProfileScreenIntroducePart(
     moveToProfileModificationScreen: () -> Unit,
 ) {
     val isGuest = profile.provider == "GUEST"
+    val fullImageUrl = remember { mutableStateOf<String?>(null) }
+
+    fullImageUrl.value?.let {
+        FullImageDialog(it) { fullImageUrl.value = null }
+    }
+
     Row (
         modifier = Modifier
             .fillMaxWidth()
@@ -100,9 +109,13 @@ fun ProfileScreenIntroducePart(
 
         GlideImage (
             modifier = Modifier
+                .clickableNoEffect {
+                    if(!profile.profileImage.originUrl.contains("/default/"))
+                        fullImageUrl.value = profile.profileImage.originUrl
+                }
                 .size(64.dp)
                 .clip(CircleShape),
-            imageModel = { profile.profileImage.originUrl }
+            imageModel = { profile.profileImage.thumbnailUrl }
         )
     }
 }
