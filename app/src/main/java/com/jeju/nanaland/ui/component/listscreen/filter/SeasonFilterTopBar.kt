@@ -1,7 +1,7 @@
 package com.jeju.nanaland.ui.component.listscreen.filter
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -22,11 +22,12 @@ fun SeasonFilterTopBar(
             .padding(start = 16.dp, end = 16.dp)
             .fillMaxWidth()
             .height(56.dp),
-        verticalAlignment = Alignment.CenterVertically
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.End
     ) {
-        Spacer(Modifier.weight(1f))
 
         SeasonFilterBox(
+            modifier = Modifier.weight(1f, false),
             openSeasonFilterDialog = openSeasonFilterDialog,
             selectedSeasonList = selectedSeasonList
         )

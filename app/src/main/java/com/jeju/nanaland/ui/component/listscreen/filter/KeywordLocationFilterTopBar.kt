@@ -1,5 +1,6 @@
 package com.jeju.nanaland.ui.component.listscreen.filter
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -31,11 +32,11 @@ fun KeywordLocationFilterTopBar(
             .padding(start = 16.dp, end = 16.dp)
             .fillMaxWidth()
             .height(56.dp),
-        verticalAlignment = Alignment.CenterVertically
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.End
     ) {
-        Spacer(Modifier.weight(1f))
-
         KeywordFilterBox(
+            modifier = Modifier.weight(1f, false),
             text = text,
             keywordList = keywordList,
             openKeywordFilterDialog = openKeywordFilterDialog,
@@ -45,6 +46,7 @@ fun KeywordLocationFilterTopBar(
         Spacer(Modifier.width(8.dp))
 
         LocationFilterBox(
+            modifier = Modifier.weight(1f, false),
             locationList = locationList,
             openLocationFilterDialog = openLocationFilterDialog,
             selectedLocationList = selectedLocationList

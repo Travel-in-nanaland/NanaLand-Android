@@ -26,12 +26,13 @@ import com.jeju.nanaland.util.ui.clickableNoEffect
 
 @Composable
 fun SeasonFilterBox(
+    modifier: Modifier,
     openSeasonFilterDialog: () -> Unit,
     selectedSeasonList: SnapshotStateList<Boolean>
 ) {
     val borderColor = getColor().gray02
     Row(
-        modifier = Modifier
+        modifier = modifier
             .height(32.dp)
             .border(
                 border = BorderStroke(
@@ -47,7 +48,7 @@ fun SeasonFilterBox(
         Spacer(Modifier.width(12.dp))
 
         Text(
-            text = getStringArray(R.array.season)[selectedSeasonList.indexOfFirst { it }],
+            text = (getStringArray(R.array.season)[selectedSeasonList.indexOfFirst { it }]).replace('\n',' '),
             color = getColor().gray01,
             style = caption01
         )

@@ -28,13 +28,14 @@ import java.util.Calendar
 
 @Composable
 fun DateFilterBox(
+    modifier: Modifier,
     openDateFilterDialog: () -> Unit,
     startCalendar: Calendar,
     endCalendar: Calendar,
 ) {
     val borderColor = getColor().gray02
     Row(
-        modifier = Modifier
+        modifier = modifier
             .height(32.dp)
             .border(
                 border = BorderStroke(
@@ -76,6 +77,7 @@ fun DateFilterBox(
 private fun DateFilterBoxPreview() {
     NanaLandTheme {
         DateFilterBox(
+            modifier = Modifier,
             openDateFilterDialog = {},
             startCalendar = Calendar.getInstance(),
             endCalendar = Calendar.getInstance()
