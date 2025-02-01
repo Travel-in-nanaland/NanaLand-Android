@@ -27,8 +27,8 @@ android {
         applicationId = "com.jeju.nanaland"
         minSdk = 26
         targetSdk = 34
-        versionCode = 46
-        versionName = "1.2.1-alpha"
+        versionCode = 47
+        versionName = "1.2.1-alpha2"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
