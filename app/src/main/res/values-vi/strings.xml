@@ -189,11 +189,11 @@
     <string name="type_test_screen_테스트_건너뛰기">Bỏ qua bài kiểm tra</string>
     <string name="type_test_screen_다음">Tiếp theo</string>
 
-    <string name="type_test_screen_question1">{Khi chọn điểm đến du lịch thì \n%s thế nào?}</string>
-    <string name="type_test_screen_question2">{Khi lập kế hoạch du lịch thì \n%s thế nào?}</string>
-    <string name="type_test_screen_question3">{Khi xác định chi phí du lịch thì \n%s thế nào?}</string>
-    <string name="type_test_screen_question4">{%s làm gì\nkhi đi du lịch?}</string>
-    <string name="type_test_screen_question5">{Bạn muốn làm gì nhất\nkhi đi du lịch?}</string>
+    <string name="type_test_screen_question1">{Khi chọn điểm đến du lịch thì} \n%s thế nào?</string>
+    <string name="type_test_screen_question2">{Khi lập kế hoạch du lịch thì} \n%s thế nào?</string>
+    <string name="type_test_screen_question3">{Khi xác định chi phí du lịch thì} \n%s thế nào?</string>
+    <string name="type_test_screen_question4">{%s làm gì}\nkhi đi du lịch?</string>
+    <string name="type_test_screen_question5">{Bạn muốn làm gì nhất}\nkhi đi du lịch?</string>
 
     <string name="type_test_screen_item1">Địa điểm du lịch sôi động</string>
     <string name="type_test_screen_item2">Nơi yên tĩnh tại địa phương</string>
