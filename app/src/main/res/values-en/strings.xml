@@ -272,7 +272,7 @@
     <string name="type_test_screen_item11">Natural scenery</string>
     <string name="type_test_screen_item12">Theme park</string>
 
-    <string name="type_test_screen_text_page1_text1">%s</string>
+    <string name="type_test_screen_text_page1_text1">{%s}</string>
     <string name="type_test_screen_text_page1_text2">what travel style</string>
     <string name="type_test_screen_text_page1_text3">do you prefer?</string>
     <string name="type_test_screen_lets_go">Let\'s Go!</string>
