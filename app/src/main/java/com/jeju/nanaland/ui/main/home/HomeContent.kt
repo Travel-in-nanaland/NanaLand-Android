@@ -29,7 +29,6 @@ import com.jeju.nanaland.ui.component.main.home.HomeScreenTopBanner
 import com.jeju.nanaland.ui.theme.bodyBold
 import com.jeju.nanaland.ui.theme.getColor
 import com.jeju.nanaland.ui.theme.shadowDivider
-import com.jeju.nanaland.ui.theme.title02Bold
 import com.jeju.nanaland.util.resource.getString
 import com.jeju.nanaland.util.ui.ScreenPreview
 import com.jeju.nanaland.util.ui.UiState
@@ -161,7 +160,7 @@ private fun HomeContent(
             modifier = Modifier.padding(horizontal = 16.dp),
             text = getString(R.string.home_screen_popular),
             color = getColor().black,
-            style = title02Bold
+            style = bodyBold
         )
         Spacer(Modifier.height(12.dp))
         HomeScreenPopularPlaces(
@@ -170,6 +169,7 @@ private fun HomeContent(
             onClick = moveToCategoryContentScreen,
             moveToSignInScreen = moveToSignInScreen,
         )
+        Spacer(Modifier.height(24.dp))
     }
 }
 
