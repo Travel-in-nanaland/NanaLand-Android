@@ -70,8 +70,7 @@ fun ProfileScreenIntroducePart(
                     if(isGuest) {
                         Icon(
                             modifier = Modifier
-                                .size(15.dp)
-                                .clickableNoEffect(moveToProfileModificationScreen),
+                                .size(15.dp),
                             painter = painterResource(R.drawable.ic_arrow_right),
                             contentDescription = null,
                             tint = getColor().black,
