@@ -73,7 +73,11 @@ fun FavoriteScreenFavoritePosts(
                 Post(
                     item = item,
                     onFavoriteButtonClick = {
-                        onFavoriteButtonClick(item.id, item.category)
+                        onFavoriteButtonClick(
+                            item.id,
+                            if(item.category.uppercase() in listOf("ACTIVITY", "CULTURE_AND_ARTS")) "EXPERIENCE"
+                            else item.category
+                        )
                     },
                     onClick = {
                         onPostClick(item.id, item.category, false)

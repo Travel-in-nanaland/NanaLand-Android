@@ -52,12 +52,14 @@ class MemberRepositoryImpl(
     }
 
     override suspend fun withdraw(
-        data: WithdrawalRequest
+        data: WithdrawalRequest,
+        isForce:Boolean
     ): NetworkResult<Any?> {
         return handleResult {
-            memberApi.withdraw(data)
-            // TODO 삭제
-//            memberApi.withdrawForce()
+            var result = memberApi.withdraw(data)
+            if(isForce)
+                result = memberApi.withdrawForce()
+            result
         }
     }
 

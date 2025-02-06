@@ -1,6 +1,5 @@
 package com.jeju.nanaland.ui.component.detailscreen.nanapick
 
-import android.content.Intent
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -14,7 +13,10 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawBehind
@@ -25,15 +27,15 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
-import com.jeju.nanaland.BuildConfig
 import com.jeju.nanaland.R
 import com.jeju.nanaland.domain.entity.nanapick.NanaPickContentData
+import com.jeju.nanaland.ui.component.common.dialog.FullImageDialog
 import com.jeju.nanaland.ui.component.detailscreen.nanapick.parts.topbanner.NanaPickContentTopBannerFavoriteButton
 import com.jeju.nanaland.ui.component.detailscreen.nanapick.parts.topbanner.NanaPickContentTopBannerShareButton
 import com.jeju.nanaland.ui.component.detailscreen.nanapick.parts.topbanner.NanaPickContentTopBannerSubTitle
 import com.jeju.nanaland.ui.component.detailscreen.nanapick.parts.topbanner.NanaPickContentTopBannerTitle
 import com.jeju.nanaland.ui.theme.getColor
-import com.jeju.nanaland.util.language.getLanguage
+import com.jeju.nanaland.util.intent.goToShare
 import com.jeju.nanaland.util.ui.ScreenPreview
 import com.jeju.nanaland.util.ui.UiState
 import com.jeju.nanaland.util.ui.clickableNoEffect
@@ -51,6 +53,13 @@ fun NanaPickContentTopBanner(
 ) {
     val context = LocalContext.current
     val brush = remember { Brush.verticalGradient(listOf(Color.Transparent, Color(0x99262627))) }
+
+    var fullImageUrl by remember { mutableStateOf<String?>(null) }
+
+    fullImageUrl?.let {
+        FullImageDialog(it) { fullImageUrl = null }
+    }
+
     Box(
         modifier = Modifier
             .fillMaxWidth()
@@ -58,7 +67,7 @@ fun NanaPickContentTopBanner(
             .background(getColor().skeleton)
     ) {
         GlideImage(
-            modifier = Modifier.fillMaxSize(),
+            modifier = Modifier.fillMaxSize().clickableNoEffect { fullImageUrl = nanaPickContent.data.firstImage.originUrl },
             imageModel = { nanaPickContent.data.firstImage.originUrl }
         )
 
@@ -103,15 +112,7 @@ fun NanaPickContentTopBanner(
                 Spacer(Modifier.width(8.dp))
 
                 NanaPickContentTopBannerShareButton(
-                    onClick = {
-                        val sendIntent: Intent = Intent().apply {
-                            action = Intent.ACTION_SEND
-                            putExtra(Intent.EXTRA_TEXT, "${BuildConfig.BASE_URL}/share/${getLanguage()}?category=nanapick&id=${contentId}")
-                            type = "text/plain"
-                        }
-                        val shareIntent = Intent.createChooser(sendIntent, null)
-                        context.startActivity(shareIntent)
-                    }
+                    onClick = { goToShare(context, "nanapick",contentId) }
                 )
             }
 

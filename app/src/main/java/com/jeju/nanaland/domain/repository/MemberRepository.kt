@@ -37,7 +37,8 @@ interface MemberRepository {
 
     // 회원 탈퇴
     suspend fun withdraw(
-        data: WithdrawalRequest
+        data: WithdrawalRequest,
+        isForce:Boolean
     ): NetworkResult<Any?>
 
     // 로그아웃

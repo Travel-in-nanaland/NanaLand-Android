@@ -7,10 +7,16 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.material3.AlertDialog
+import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -29,6 +35,7 @@ import com.jeju.nanaland.ui.component.withdrawal.WithdrawalScreenReasonHeading
 import com.jeju.nanaland.ui.component.withdrawal.WithdrawalScreenReasonItem
 import com.jeju.nanaland.ui.component.withdrawal.WithdrawalScreenWithdrawButton
 import com.jeju.nanaland.util.resource.getString
+import com.jeju.nanaland.util.ui.clickableNoEffect
 import com.jeju.nanaland.util.ui.scrollableVerticalArrangement
 
 @Composable
@@ -52,12 +59,13 @@ fun WithdrawalScreen(
 private fun WithdrawalScreen(
     selectedReason: WithdrawalReasonType,
     updateSelectedReason: (WithdrawalReasonType) -> Unit,
-    withdraw: (() -> Unit,) -> Unit,
+    withdraw: (() -> Unit,Boolean) -> Unit,
     moveToBackScreen: () -> Unit,
     moveToLanguageInitScreen: () -> Unit,
     isContent: Boolean
 ) {
     val isDialogShowing = remember { mutableStateOf(false) }
+    var logoClickCount by remember { mutableIntStateOf(0) }
 
     CustomSurface {
         TopBarCommon(
@@ -77,7 +85,9 @@ private fun WithdrawalScreen(
 
                     Spacer(Modifier.height(16.dp))
 
-                    WithdrawalScreenGuideLineHeading()
+                    WithdrawalScreenGuideLineHeading(
+                        modifier = Modifier.clickableNoEffect { logoClickCount += 1 }
+                    )
 
                     Spacer(Modifier.height(8.dp))
 
@@ -173,7 +183,33 @@ private fun WithdrawalScreen(
         DialogCommon(
             DialogCommonType.Withdrawal,
             onDismiss = { isDialogShowing.value = false },
-            onYes = { withdraw(moveToLanguageInitScreen) }
+            onYes = { withdraw(moveToLanguageInitScreen, false) }
+        )
+    }
+    if(logoClickCount >= 20) {
+        AlertDialog(
+            title = {
+                Text(text = "강제탈퇴")
+            },
+            onDismissRequest = {},
+            confirmButton = {
+                TextButton(
+                    onClick = {
+                        withdraw(moveToLanguageInitScreen, true)
+                    }
+                ) {
+                    Text("Confirm")
+                }
+            },
+            dismissButton = {
+                TextButton(
+                    onClick = {
+                        logoClickCount = 0
+                    }
+                ) {
+                    Text("Dismiss")
+                }
+            }
         )
     }
 }

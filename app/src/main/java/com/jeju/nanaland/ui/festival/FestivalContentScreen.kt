@@ -38,6 +38,7 @@ import com.jeju.nanaland.ui.component.detailscreen.other.DetailScreenInformation
 import com.jeju.nanaland.ui.component.detailscreen.other.MoveToTopButton
 import com.jeju.nanaland.ui.theme.body02
 import com.jeju.nanaland.ui.theme.getColor
+import com.jeju.nanaland.util.intent.goToShare
 import com.jeju.nanaland.util.language.getLanguage
 import com.jeju.nanaland.util.resource.getString
 import com.jeju.nanaland.util.ui.ScreenPreview
@@ -110,15 +111,7 @@ private fun FestivalContentScreen(
                         toggleFavorite(festivalContent.data.id, updatePrevScreenListFavorite)
                     }
                 },
-                R.drawable.ic_share_outlined to {
-                    val sendIntent: Intent = Intent().apply {
-                        action = Intent.ACTION_SEND
-                        putExtra(Intent.EXTRA_TEXT, "${BuildConfig.BASE_URL}/share/${getLanguage()}?category=festival&id=${contentId}")
-                        type = "text/plain"
-                    }
-                    val shareIntent = Intent.createChooser(sendIntent, null)
-                    context.startActivity(shareIntent)
-                }
+                R.drawable.ic_share_outlined to { goToShare(context, "festival",contentId) }
             )
         )
         when (festivalContent) {
@@ -153,15 +146,7 @@ private fun FestivalContentScreen(
                                 title = festivalContent.data.title,
                                 content = festivalContent.data.content,
                                 onFavoriteButtonClicked = { toggleFavorite(festivalContent.data.id, updatePrevScreenListFavorite) },
-                                onShareButtonClicked = {
-                                    val sendIntent: Intent = Intent().apply {
-                                        action = Intent.ACTION_SEND
-                                        putExtra(Intent.EXTRA_TEXT, "${BuildConfig.BASE_URL}/share/${getLanguage()}?category=festival&id=${contentId}")
-                                        type = "text/plain"
-                                    }
-                                    val shareIntent = Intent.createChooser(sendIntent, null)
-                                    context.startActivity(shareIntent)
-                                },
+                                onShareButtonClicked = { goToShare(context, "festival",contentId) },
                                 moveToSignInScreen = moveToSignInScreen,
                             )
 

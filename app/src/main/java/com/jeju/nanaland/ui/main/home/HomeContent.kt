@@ -1,6 +1,7 @@
 package com.jeju.nanaland.ui.main.home
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -28,7 +29,6 @@ import com.jeju.nanaland.ui.component.main.home.HomeScreenTopBanner
 import com.jeju.nanaland.ui.theme.bodyBold
 import com.jeju.nanaland.ui.theme.getColor
 import com.jeju.nanaland.ui.theme.shadowDivider
-import com.jeju.nanaland.ui.theme.title02Bold
 import com.jeju.nanaland.util.resource.getString
 import com.jeju.nanaland.util.ui.ScreenPreview
 import com.jeju.nanaland.util.ui.UiState
@@ -43,6 +43,7 @@ fun HomeContent(
     moveToArtListScreen: () -> Unit,
     moveToRestaurantListScreen: () -> Unit,
     moveToSignInScreen: () -> Unit,
+    homeScreenTopBar: @Composable () -> Unit,
     viewModel: HomeViewModel = hiltViewModel()
 ) {
     val homePreviewBanner = viewModel.homeBannerPreview.collectAsState().value
@@ -66,6 +67,7 @@ fun HomeContent(
         moveToArtListScreen = moveToArtListScreen,
         moveToRestaurantListScreen = moveToRestaurantListScreen,
         moveToSignInScreen = moveToSignInScreen,
+        homeScreenTopBar = homeScreenTopBar,
         isContent = true
     )
 }
@@ -84,6 +86,7 @@ private fun HomeContent(
     moveToArtListScreen: () -> Unit,
     moveToRestaurantListScreen: () -> Unit,
     moveToSignInScreen: () -> Unit,
+    homeScreenTopBar: @Composable () -> Unit,
     isContent: Boolean
 ) {
     Column(
@@ -91,10 +94,13 @@ private fun HomeContent(
             .imePadding()
             .verticalScroll(rememberScrollState())
     ) {
-        HomeScreenTopBanner(
-            topBanner = homePreviewBanner,
-            onBannerClick = moveToCategoryContentScreen
-        )
+        Box {
+            HomeScreenTopBanner(
+                topBanner = homePreviewBanner,
+                onBannerClick = moveToCategoryContentScreen
+            )
+            homeScreenTopBar()
+        }
 
         Spacer(Modifier.height(28.dp))
 
@@ -154,7 +160,7 @@ private fun HomeContent(
             modifier = Modifier.padding(horizontal = 16.dp),
             text = getString(R.string.home_screen_popular),
             color = getColor().black,
-            style = title02Bold
+            style = bodyBold
         )
         Spacer(Modifier.height(12.dp))
         HomeScreenPopularPlaces(
@@ -163,6 +169,7 @@ private fun HomeContent(
             onClick = moveToCategoryContentScreen,
             moveToSignInScreen = moveToSignInScreen,
         )
+        Spacer(Modifier.height(24.dp))
     }
 }
 

@@ -1,7 +1,6 @@
 package com.jeju.nanaland.ui.main.home
 
 import androidx.activity.compose.BackHandler
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
@@ -11,7 +10,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.jeju.nanaland.globalvalue.constant.TOP_BAR_HEIGHT
 import com.jeju.nanaland.globalvalue.type.HomeScreenViewType
 import com.jeju.nanaland.globalvalue.type.SearchCategoryType
 import com.jeju.nanaland.ui.component.main.home.HomeScreenTopBar
@@ -81,8 +79,23 @@ private fun HomeScreen(
     moveToSignInScreen: () -> Unit,
     isContent: Boolean
 ) {
-    Box {
+    val homeScreenTopBar: @Composable ()->Unit = {
+        HomeScreenTopBar(
+            inputText = inputText,
+            onValueChange = updateInputText,
+            currentViewType = viewType,
+            updateHomeScreenViewType = updateHomeScreenViewType,
+            updateSearchCategoryType = updateSearchCategoryType,
+            getSearchResult = getSearchResult,
+            addRecentSearch = addRecentSearch,
+            moveToNotificationScreen = moveToNotificationScreen
+        )
+        Spacer(Modifier.height(10.dp))
+    }
         Column {
+            if(viewType != HomeScreenViewType.Home)
+                homeScreenTopBar()
+
             when (viewType) {
                 HomeScreenViewType.Home -> {
                     HomeContent(
@@ -94,6 +107,7 @@ private fun HomeScreen(
                         moveToActivityListScreen = moveToActivityListScreen,
                         moveToArtListScreen = moveToArtListScreen,
                         moveToSignInScreen = moveToSignInScreen,
+                        homeScreenTopBar = homeScreenTopBar
                     )
                 }
                 HomeScreenViewType.Searching -> {
@@ -103,7 +117,6 @@ private fun HomeScreen(
                         focusManager.clearFocus()
                         updateHomeScreenViewType(HomeScreenViewType.Home)
                     }
-                    Spacer(Modifier.height((10 + TOP_BAR_HEIGHT).dp))
                     SearchingContent(
                         moveToCategoryContentScreen = moveToCategoryContentScreen,
                         moveToSignInScreen = moveToSignInScreen,
@@ -117,7 +130,6 @@ private fun HomeScreen(
                         updateHomeScreenViewType(HomeScreenViewType.Home)
                         updateSearchCategoryType(SearchCategoryType.All)
                     }
-                    Spacer(Modifier.height((10 + TOP_BAR_HEIGHT).dp))
                     SearchResultContent(
                         moveToCategoryContentScreen = moveToCategoryContentScreen,
                         moveToSignInScreen = moveToSignInScreen,
@@ -126,17 +138,6 @@ private fun HomeScreen(
             }
         }
 
-        HomeScreenTopBar(
-            inputText = inputText,
-            onValueChange = updateInputText,
-            currentViewType = viewType,
-            updateHomeScreenViewType = updateHomeScreenViewType,
-            updateSearchCategoryType = updateSearchCategoryType,
-            getSearchResult = getSearchResult,
-            addRecentSearch = addRecentSearch,
-            moveToNotificationScreen = moveToNotificationScreen
-        )
-    }
 }
 
 @ScreenPreview

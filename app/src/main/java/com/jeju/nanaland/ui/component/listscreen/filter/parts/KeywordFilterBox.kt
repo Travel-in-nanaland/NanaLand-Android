@@ -9,7 +9,6 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -28,6 +27,7 @@ import com.jeju.nanaland.util.ui.clickableNoEffect
 
 @Composable
 fun KeywordFilterBox(
+    modifier: Modifier,
     text: String,
     keywordList: List<String>,
     openKeywordFilterDialog: () -> Unit,
@@ -35,9 +35,8 @@ fun KeywordFilterBox(
 ) {
     val borderColor = getColor().gray02
     Row(
-        modifier = Modifier
+        modifier = modifier
             .height(32.dp)
-            .widthIn(max = 159.dp)
             .border(
                 border = BorderStroke(
                     width = 1.dp,
@@ -53,11 +52,11 @@ fun KeywordFilterBox(
 
         Text(
             modifier = Modifier.weight(1f, false),
-            text = when (selectedKeywordList.count { it }) {
+            text = (when (selectedKeywordList.count { it }) {
                 0 -> text
                 1 -> keywordList[selectedKeywordList.indexOfFirst { it }]
                 else -> getString(R.string.common_외, keywordList[selectedKeywordList.indexOfFirst { it }], selectedKeywordList.count { it } - 1)
-            },
+            }).replace('\n',' '),
             color = getColor().gray01,
             style = caption01,
             maxLines = 1,

@@ -281,7 +281,7 @@ private fun ColumnScope.ListCenterText(txt: String){
             .background(getColor().white)
     ) {
         Text(
-            modifier = Modifier.align(Alignment.Center),
+            modifier = Modifier.align(Alignment.Center).padding(horizontal = 16.dp),
             text = txt,
             color = getColor().gray01,
             style = body01,

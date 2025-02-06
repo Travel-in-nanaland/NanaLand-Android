@@ -1,6 +1,5 @@
 package com.jeju.nanaland.ui.market
 
-import android.content.Intent
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -19,7 +18,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.jeju.nanaland.BuildConfig
 import com.jeju.nanaland.R
 import com.jeju.nanaland.domain.entity.market.MarketContent
 import com.jeju.nanaland.domain.navigation.ROUTE
@@ -33,7 +31,7 @@ import com.jeju.nanaland.ui.component.detailscreen.other.DetailScreenInformation
 import com.jeju.nanaland.ui.component.detailscreen.other.DetailScreenInformationModificationProposalButton
 import com.jeju.nanaland.ui.component.detailscreen.other.DetailScreenTopBannerImage
 import com.jeju.nanaland.ui.component.detailscreen.other.MoveToTopButton
-import com.jeju.nanaland.util.language.getLanguage
+import com.jeju.nanaland.util.intent.goToShare
 import com.jeju.nanaland.util.resource.getString
 import com.jeju.nanaland.util.ui.ScreenPreview
 import com.jeju.nanaland.util.ui.UiState
@@ -104,15 +102,7 @@ private fun MarketContentScreen(
                         toggleFavorite(marketContent.data.id, updatePrevScreenListFavorite)
                     }
                 },
-                R.drawable.ic_share_outlined to {
-                    val sendIntent: Intent = Intent().apply {
-                        action = Intent.ACTION_SEND
-                        putExtra(Intent.EXTRA_TEXT, "${BuildConfig.BASE_URL}/share/${getLanguage()}?category=market&id=${contentId}")
-                        type = "text/plain"
-                    }
-                    val shareIntent = Intent.createChooser(sendIntent, null)
-                    context.startActivity(shareIntent)
-                }
+                R.drawable.ic_share_outlined to { goToShare(context, "market",contentId)  }
             )
         )
         when (marketContent) {
@@ -131,14 +121,7 @@ private fun MarketContentScreen(
                                 title = marketContent.data.title,
                                 content = marketContent.data.content,
                                 onFavoriteButtonClicked = { toggleFavorite(marketContent.data.id, updatePrevScreenListFavorite) },
-                                onShareButtonClicked = {
-                                    val sendIntent: Intent = Intent().apply {
-                                        action = Intent.ACTION_SEND
-                                        putExtra(Intent.EXTRA_TEXT, "${BuildConfig.BASE_URL}/share/${getLanguage()}?category=market&id=${contentId}")
-                                        type = "text/plain"
-                                    }
-                                    val shareIntent = Intent.createChooser(sendIntent, null)
-                                    context.startActivity(shareIntent)
+                                onShareButtonClicked = { goToShare(context, "market",contentId)
 //                                    val defaultText = TextTemplate(
 //                                    text = """
 //                                        나나랜드 콘텐츠 공유.

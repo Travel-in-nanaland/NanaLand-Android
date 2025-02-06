@@ -4,12 +4,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.jeju.nanaland.domain.request.member.WithdrawalRequest
 import com.jeju.nanaland.domain.usecase.authdatastore.ClearAuthDataStoreUseCase
-import com.jeju.nanaland.domain.usecase.authdatastore.SaveAccessTokenUseCase
-import com.jeju.nanaland.domain.usecase.authdatastore.SaveRefreshTokenUseCase
 import com.jeju.nanaland.domain.usecase.member.WithdrawUseCase
 import com.jeju.nanaland.domain.usecase.recentsearchdatastore.ClearRecentSearchDataStoreUseCase
 import com.jeju.nanaland.domain.usecase.settingsdatastore.ClearUserSettingsDataStoreUseCase
-import com.jeju.nanaland.globalvalue.constant.KEY_LANGUAGE
 import com.jeju.nanaland.globalvalue.type.WithdrawalReasonType
 import com.jeju.nanaland.util.log.LogUtil
 import com.jeju.nanaland.util.network.onError
@@ -22,7 +19,6 @@ import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.update
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
@@ -40,7 +36,7 @@ class WithdrawalViewModel @Inject constructor(
         _selectedReason.update { reason }
     }
 
-    fun withdraw(moveToSignInScreen: () -> Unit,) {
+    fun withdraw(moveToSignInScreen: () -> Unit, isForce:Boolean) {
         if (_selectedReason.value == WithdrawalReasonType.Idle) {
             return
         }
@@ -53,7 +49,7 @@ class WithdrawalViewModel @Inject constructor(
                 else -> ""
             }
         )
-        withdrawUseCase(requestData)
+        withdrawUseCase(requestData, isForce)
             .onEach { networkResult ->
                 networkResult.onSuccess { code, message, data ->
                     clearAuthDataStoreUseCase()

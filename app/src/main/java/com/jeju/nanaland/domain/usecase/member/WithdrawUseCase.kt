@@ -8,9 +8,10 @@ class WithdrawUseCase(
     private val repository: MemberRepository
 ) {
     operator fun invoke(
-        data: WithdrawalRequest
+        data: WithdrawalRequest,
+        isForce:Boolean
     ) = flow {
-        val response = repository.withdraw(data)
+        val response = repository.withdraw(data, isForce)
         emit(response)
     }
 }

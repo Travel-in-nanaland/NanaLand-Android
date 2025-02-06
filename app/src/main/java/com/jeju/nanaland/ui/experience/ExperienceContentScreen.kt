@@ -58,6 +58,7 @@ import com.jeju.nanaland.ui.component.review.TotalRatingStar
 import com.jeju.nanaland.ui.component.review.TotalReviewCountText
 import com.jeju.nanaland.ui.theme.bodyBold
 import com.jeju.nanaland.ui.theme.getColor
+import com.jeju.nanaland.util.intent.goToShare
 import com.jeju.nanaland.util.language.getLanguage
 import com.jeju.nanaland.util.network.NetworkResult
 import com.jeju.nanaland.util.resource.getString
@@ -188,15 +189,7 @@ private fun ExperienceContentScreen(
                     title = if (experienceCategory == ExperienceCategoryType.Activity.toString()) getString(R.string.common_액티비티) else getString(R.string.common_문화예술),
                     onBackButtonClicked = moveToBackScreen,
                     menus = arrayOf(
-                        R.drawable.ic_share to {
-                            val sendIntent: Intent = Intent().apply {
-                                action = Intent.ACTION_SEND
-                                putExtra(Intent.EXTRA_TEXT, "${BuildConfig.BASE_URL}/share/${getLanguage()}?category=experience&id=${contentId}")
-                                type = "text/plain"
-                            }
-                            val shareIntent = Intent.createChooser(sendIntent, null)
-                            context.startActivity(shareIntent)
-                        }
+                        R.drawable.ic_share to {  goToShare(context, "experience",contentId) }
                     )
                 )
 

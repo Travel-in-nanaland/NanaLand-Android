@@ -18,11 +18,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.layout.onGloballyPositioned
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
+import com.bumptech.glide.load.resource.bitmap.DownsampleStrategy
+import com.bumptech.glide.request.RequestOptions
 import com.jeju.nanaland.ui.theme.getColor
 import com.jeju.nanaland.util.ui.clickableNoEffect
 import com.skydoves.landscapist.ImageOptions
@@ -39,7 +41,8 @@ fun FullImageDialog(
     val offsetY = remember { mutableFloatStateOf(0f) }
 
     val imageSize = remember { mutableStateOf(IntSize.Zero)}
-    val viewSize = remember { mutableStateOf(IntSize.Zero) }
+    val displayMetrics = LocalContext.current.resources.displayMetrics
+    val viewSize = remember { mutableStateOf(IntSize(displayMetrics.widthPixels, displayMetrics.heightPixels)) }
 
     Dialog (onDismiss,
         properties = DialogProperties(usePlatformDefaultWidth = false)
@@ -47,9 +50,6 @@ fun FullImageDialog(
         Box(Modifier
             .fillMaxSize()
             .background(Color.Black)
-            .onGloballyPositioned { coordinates ->
-                viewSize.value = coordinates.size
-            }
             .transformable(
                 state = rememberTransformableState { zoomChange, offsetChange, _ ->
                     // 확대/축소 제한
@@ -57,18 +57,18 @@ fun FullImageDialog(
                     scale.floatValue = newScale
 
                     // 이동 제한
-                    val maxX = (imageSize.value.width * newScale - viewSize.value.width) / 2
-                    val maxY = (imageSize.value.height * newScale - viewSize.value.height) / 2
+                    val maxX = maxOf((imageSize.value.width * newScale - viewSize.value.width) / 2, 0f)
+                    val maxY = maxOf((imageSize.value.height * newScale - viewSize.value.height) / 2, 0f)
 
                     offsetX.floatValue = (offsetX.floatValue + offsetChange.x).coerceIn(-maxX, maxX)
                     offsetY.floatValue = (offsetY.floatValue + offsetChange.y).coerceIn(-maxY, maxY)
                 }
             )
             .graphicsLayer(
-                scaleX = scale.value,
-                scaleY = scale.value,
-                translationX = offsetX.value,
-                translationY = offsetY.value,
+                scaleX = scale.floatValue,
+                scaleY = scale.floatValue,
+                translationX = offsetX.floatValue,
+                translationY = offsetY.floatValue,
             )
         ) {
             GlideImage(
@@ -77,6 +77,9 @@ fun FullImageDialog(
                 imageOptions = ImageOptions(
                     contentScale = ContentScale.Fit
                 ),
+                requestOptions = {
+                    RequestOptions().downsample(DownsampleStrategy.CENTER_INSIDE)
+                },
                 onImageStateChanged =  {
                     if(it is GlideImageState.Success) {
                         it.imageBitmap?.let { bitmap ->

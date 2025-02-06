@@ -80,7 +80,9 @@ fun <T : Any> ProfileListFrame(
                     onBackButtonClicked = moveToBackScreen
                 )
                 if(data.loadState.refresh is LoadState.Loading)
-                    CircularProgressIndicator(modifier = Modifier.weight(1f))
+                    Box(Modifier.fillMaxSize()) {
+                        CircularProgressIndicator(Modifier.align(Alignment.Center))
+                    }
                 else
                     LazyColumn(
                         Modifier
