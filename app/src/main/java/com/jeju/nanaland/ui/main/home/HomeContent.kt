@@ -1,6 +1,7 @@
 package com.jeju.nanaland.ui.main.home
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -43,6 +44,7 @@ fun HomeContent(
     moveToArtListScreen: () -> Unit,
     moveToRestaurantListScreen: () -> Unit,
     moveToSignInScreen: () -> Unit,
+    homeScreenTopBar: @Composable () -> Unit,
     viewModel: HomeViewModel = hiltViewModel()
 ) {
     val homePreviewBanner = viewModel.homeBannerPreview.collectAsState().value
@@ -66,6 +68,7 @@ fun HomeContent(
         moveToArtListScreen = moveToArtListScreen,
         moveToRestaurantListScreen = moveToRestaurantListScreen,
         moveToSignInScreen = moveToSignInScreen,
+        homeScreenTopBar = homeScreenTopBar,
         isContent = true
     )
 }
@@ -84,6 +87,7 @@ private fun HomeContent(
     moveToArtListScreen: () -> Unit,
     moveToRestaurantListScreen: () -> Unit,
     moveToSignInScreen: () -> Unit,
+    homeScreenTopBar: @Composable () -> Unit,
     isContent: Boolean
 ) {
     Column(
@@ -91,10 +95,13 @@ private fun HomeContent(
             .imePadding()
             .verticalScroll(rememberScrollState())
     ) {
-        HomeScreenTopBanner(
-            topBanner = homePreviewBanner,
-            onBannerClick = moveToCategoryContentScreen
-        )
+        Box {
+            HomeScreenTopBanner(
+                topBanner = homePreviewBanner,
+                onBannerClick = moveToCategoryContentScreen
+            )
+            homeScreenTopBar()
+        }
 
         Spacer(Modifier.height(28.dp))
 
