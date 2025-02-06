@@ -233,7 +233,7 @@ private fun RestaurantContentScreen(
                                         MenuItem(
                                             menuName = item.menuName,
                                             price = item.price,
-                                            imageUrl = item.firstImage.originUrl
+                                            imageUrl = item.firstImage
                                         )
                                     }
 

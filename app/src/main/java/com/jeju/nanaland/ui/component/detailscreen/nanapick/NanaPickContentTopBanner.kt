@@ -14,7 +14,10 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawBehind
@@ -28,6 +31,7 @@ import androidx.compose.ui.unit.dp
 import com.jeju.nanaland.BuildConfig
 import com.jeju.nanaland.R
 import com.jeju.nanaland.domain.entity.nanapick.NanaPickContentData
+import com.jeju.nanaland.ui.component.common.dialog.FullImageDialog
 import com.jeju.nanaland.ui.component.detailscreen.nanapick.parts.topbanner.NanaPickContentTopBannerFavoriteButton
 import com.jeju.nanaland.ui.component.detailscreen.nanapick.parts.topbanner.NanaPickContentTopBannerShareButton
 import com.jeju.nanaland.ui.component.detailscreen.nanapick.parts.topbanner.NanaPickContentTopBannerSubTitle
@@ -51,6 +55,13 @@ fun NanaPickContentTopBanner(
 ) {
     val context = LocalContext.current
     val brush = remember { Brush.verticalGradient(listOf(Color.Transparent, Color(0x99262627))) }
+
+    var fullImageUrl by remember { mutableStateOf<String?>(null) }
+
+    fullImageUrl?.let {
+        FullImageDialog(it) { fullImageUrl = null }
+    }
+
     Box(
         modifier = Modifier
             .fillMaxWidth()
@@ -58,7 +69,7 @@ fun NanaPickContentTopBanner(
             .background(getColor().skeleton)
     ) {
         GlideImage(
-            modifier = Modifier.fillMaxSize(),
+            modifier = Modifier.fillMaxSize().clickableNoEffect { fullImageUrl = nanaPickContent.data.firstImage.originUrl },
             imageModel = { nanaPickContent.data.firstImage.originUrl }
         )
 
