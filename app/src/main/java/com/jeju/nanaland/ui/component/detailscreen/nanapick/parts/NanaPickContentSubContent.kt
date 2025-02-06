@@ -33,7 +33,7 @@ fun NanaPickContentSubContent(
     attractivePointOnClick: (String) -> Unit
 ) {
     Column {
-        NanaPickContentSubContentSubTitle(text = title)
+        NanaPickContentSubContentSubTitle(text = subTitle)
 
         Spacer(Modifier.height(4.dp))
 
@@ -42,7 +42,7 @@ fun NanaPickContentSubContent(
 
             Spacer(Modifier.width(8.dp))
 
-            NanaPickContentSubContentTitle(text = subTitle)
+            NanaPickContentSubContentTitle(text = title)
         }
 
         Spacer(Modifier.height(20.dp))
