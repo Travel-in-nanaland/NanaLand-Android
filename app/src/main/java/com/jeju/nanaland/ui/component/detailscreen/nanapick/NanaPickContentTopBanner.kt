@@ -1,6 +1,5 @@
 package com.jeju.nanaland.ui.component.detailscreen.nanapick
 
-import android.content.Intent
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -28,7 +27,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
-import com.jeju.nanaland.BuildConfig
 import com.jeju.nanaland.R
 import com.jeju.nanaland.domain.entity.nanapick.NanaPickContentData
 import com.jeju.nanaland.ui.component.common.dialog.FullImageDialog
@@ -37,7 +35,7 @@ import com.jeju.nanaland.ui.component.detailscreen.nanapick.parts.topbanner.Nana
 import com.jeju.nanaland.ui.component.detailscreen.nanapick.parts.topbanner.NanaPickContentTopBannerSubTitle
 import com.jeju.nanaland.ui.component.detailscreen.nanapick.parts.topbanner.NanaPickContentTopBannerTitle
 import com.jeju.nanaland.ui.theme.getColor
-import com.jeju.nanaland.util.language.getLanguage
+import com.jeju.nanaland.util.intent.goToShare
 import com.jeju.nanaland.util.ui.ScreenPreview
 import com.jeju.nanaland.util.ui.UiState
 import com.jeju.nanaland.util.ui.clickableNoEffect
@@ -114,15 +112,7 @@ fun NanaPickContentTopBanner(
                 Spacer(Modifier.width(8.dp))
 
                 NanaPickContentTopBannerShareButton(
-                    onClick = {
-                        val sendIntent: Intent = Intent().apply {
-                            action = Intent.ACTION_SEND
-                            putExtra(Intent.EXTRA_TEXT, "${BuildConfig.BASE_URL}/share/${getLanguage()}?category=nanapick&id=${contentId}")
-                            type = "text/plain"
-                        }
-                        val shareIntent = Intent.createChooser(sendIntent, null)
-                        context.startActivity(shareIntent)
-                    }
+                    onClick = { goToShare(context, "nanapick",contentId) }
                 )
             }
 

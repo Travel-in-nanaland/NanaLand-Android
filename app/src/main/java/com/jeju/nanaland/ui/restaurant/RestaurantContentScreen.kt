@@ -1,6 +1,5 @@
 package com.jeju.nanaland.ui.restaurant
 
-import android.content.Intent
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
@@ -32,7 +31,6 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.jeju.nanaland.BuildConfig
 import com.jeju.nanaland.R
 import com.jeju.nanaland.domain.entity.restaurant.RestaurantContentData
 import com.jeju.nanaland.domain.entity.review.ReviewData
@@ -57,7 +55,7 @@ import com.jeju.nanaland.ui.component.review.TotalRatingStar
 import com.jeju.nanaland.ui.component.review.TotalReviewCountText
 import com.jeju.nanaland.ui.theme.bodyBold
 import com.jeju.nanaland.ui.theme.getColor
-import com.jeju.nanaland.util.language.getLanguage
+import com.jeju.nanaland.util.intent.goToShare
 import com.jeju.nanaland.util.network.NetworkResult
 import com.jeju.nanaland.util.resource.getString
 import com.jeju.nanaland.util.ui.UiState
@@ -184,15 +182,7 @@ private fun RestaurantContentScreen(
                     title = getString(R.string.common_제주_맛집),
                     onBackButtonClicked = moveToBackScreen,
                     menus = arrayOf(
-                        R.drawable.ic_share to {
-                            val sendIntent: Intent = Intent().apply {
-                                action = Intent.ACTION_SEND
-                                putExtra(Intent.EXTRA_TEXT, "${BuildConfig.BASE_URL}/share/${getLanguage()}?category=restaurant&id=${contentId}")
-                                type = "text/plain"
-                            }
-                            val shareIntent = Intent.createChooser(sendIntent, null)
-                            context.startActivity(shareIntent)
-                        }
+                        R.drawable.ic_share to { goToShare(context, "restaurant",contentId) }
                     )
                 )
 

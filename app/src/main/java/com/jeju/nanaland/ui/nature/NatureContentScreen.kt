@@ -34,6 +34,7 @@ import com.jeju.nanaland.ui.component.detailscreen.other.DetailScreenInformation
 import com.jeju.nanaland.ui.component.detailscreen.other.DetailScreenNotice
 import com.jeju.nanaland.ui.component.detailscreen.other.DetailScreenTopBannerImage
 import com.jeju.nanaland.ui.component.detailscreen.other.MoveToTopButton
+import com.jeju.nanaland.util.intent.goToShare
 import com.jeju.nanaland.util.language.getLanguage
 import com.jeju.nanaland.util.resource.getString
 import com.jeju.nanaland.util.ui.ScreenPreview
@@ -105,15 +106,7 @@ private fun NatureContentScreen(
                         toggleFavorite(natureContent.data.id, updatePrevScreenListFavorite)
                     }
                 },
-                R.drawable.ic_share_outlined to {
-                    val sendIntent: Intent = Intent().apply {
-                        action = Intent.ACTION_SEND
-                        putExtra(Intent.EXTRA_TEXT, "${BuildConfig.BASE_URL}/share/${getLanguage()}?category=nature&id=${contentId}")
-                        type = "text/plain"
-                    }
-                    val shareIntent = Intent.createChooser(sendIntent, null)
-                    context.startActivity(shareIntent)
-                }
+                R.drawable.ic_share_outlined to { goToShare(context, "nature",contentId) }
             )
         )
 
@@ -133,15 +126,7 @@ private fun NatureContentScreen(
                                     title = natureContent.data.title,
                                     content = natureContent.data.content,
                                     onFavoriteButtonClicked = { toggleFavorite(natureContent.data.id, updatePrevScreenListFavorite) },
-                                    onShareButtonClicked = {
-                                        val sendIntent: Intent = Intent().apply {
-                                            action = Intent.ACTION_SEND
-                                            putExtra(Intent.EXTRA_TEXT, "${BuildConfig.BASE_URL}/share/${getLanguage()}?category=nature&id=${contentId}")
-                                            type = "text/plain"
-                                        }
-                                        val shareIntent = Intent.createChooser(sendIntent, null)
-                                        context.startActivity(shareIntent)
-                                    },
+                                    onShareButtonClicked = { goToShare(context, "nature",contentId) },
                                     moveToSignInScreen = moveToSignInScreen,
                                 )
 
