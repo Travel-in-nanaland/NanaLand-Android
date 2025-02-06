@@ -40,7 +40,7 @@ fun SearchingScreenTopKeywords(
                             Text(
                                 modifier = Modifier.width(12.dp),
                                 text = "${it + 1}.",
-                                color = if (it < 3) getColor().main else getColor().gray01,
+                                color = if (it < 3) getColor().main else getColor().black,
                                 style = if (it < 3) body02SemiBold else body02
                             )
 
