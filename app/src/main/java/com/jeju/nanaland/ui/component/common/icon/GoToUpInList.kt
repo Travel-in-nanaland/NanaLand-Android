@@ -31,7 +31,7 @@ fun GoToUpInList(
 ) = GoToUpInListWrapper(
     modifier = modifier,
     state = scrollState,
-    isScrolled = { it.value > 0 },
+    isScrolled = { it.canScrollBackward },
     scrollToTop = { it.animateScrollTo(0) }
 )
 

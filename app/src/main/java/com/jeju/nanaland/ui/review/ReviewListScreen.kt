@@ -42,8 +42,8 @@ import com.jeju.nanaland.ui.component.common.dialog.BottomSheetSelectDialog
 import com.jeju.nanaland.ui.component.common.dialog.DialogCommon
 import com.jeju.nanaland.ui.component.common.dialog.DialogCommonType
 import com.jeju.nanaland.ui.component.common.dialog.FullImageDialog
+import com.jeju.nanaland.ui.component.common.icon.GoToUpInList
 import com.jeju.nanaland.ui.component.common.topbar.TopBarCommon
-import com.jeju.nanaland.ui.component.detailscreen.other.MoveToTopButton
 import com.jeju.nanaland.ui.component.review.ReviewCard
 import com.jeju.nanaland.ui.theme.body01
 import com.jeju.nanaland.ui.theme.body02Bold
@@ -297,9 +297,7 @@ private fun ReviewListScreen(
                     .fillMaxSize()
                     .padding(bottom = TOP_BAR_HEIGHT.dp)
             ) {
-                MoveToTopButton {
-                    coroutineScope.launch { lazyGridState.animateScrollToItem(0) }
-                }
+                GoToUpInList(lazyGridState)
             }
 
             if(selectedReviewId.intValue != -1) {

@@ -19,6 +19,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.tooling.preview.Preview
@@ -28,10 +29,10 @@ import com.jeju.nanaland.R
 import com.jeju.nanaland.domain.entity.nanapick.NanaPickContentData
 import com.jeju.nanaland.domain.navigation.ROUTE
 import com.jeju.nanaland.ui.component.common.CustomSurface
+import com.jeju.nanaland.ui.component.common.icon.GoToUpInList
 import com.jeju.nanaland.ui.component.detailscreen.nanapick.NanaPickContentAttractivePointDialog
 import com.jeju.nanaland.ui.component.detailscreen.nanapick.NanaPickContentSubContents
 import com.jeju.nanaland.ui.component.detailscreen.nanapick.NanaPickContentTopBanner
-import com.jeju.nanaland.ui.component.detailscreen.other.MoveToTopButton
 import com.jeju.nanaland.ui.component.detailscreen.other.parts.notice.DetailScreenNoticeContent
 import com.jeju.nanaland.ui.component.detailscreen.other.parts.notice.DetailScreenNoticeTitle
 import com.jeju.nanaland.ui.theme.getColor
@@ -39,7 +40,6 @@ import com.jeju.nanaland.util.log.LogUtil
 import com.jeju.nanaland.util.resource.getString
 import com.jeju.nanaland.util.ui.UiState
 import com.jeju.nanaland.util.ui.drawColoredShadow
-import kotlinx.coroutines.launch
 import kotlin.math.max
 
 @Composable
@@ -147,9 +147,7 @@ private fun NanaPickContentScreen(
                         moveToSignInScreen = moveToSignInScreen,
                     )
 
-                    MoveToTopButton {
-                        coroutineScope.launch { scrollState.animateScrollTo(0) }
-                    }
+                    GoToUpInList(scrollState, Modifier.align(Alignment.BottomEnd))
                 }
             }
             is UiState.Failure -> {}

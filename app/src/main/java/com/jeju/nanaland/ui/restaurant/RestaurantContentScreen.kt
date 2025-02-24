@@ -26,6 +26,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.style.TextAlign
@@ -43,12 +44,12 @@ import com.jeju.nanaland.ui.component.common.dialog.BottomSheetSelectDialog
 import com.jeju.nanaland.ui.component.common.dialog.DialogCommon
 import com.jeju.nanaland.ui.component.common.dialog.DialogCommonType
 import com.jeju.nanaland.ui.component.common.dialog.FullImageDialog
+import com.jeju.nanaland.ui.component.common.icon.GoToUpInList
 import com.jeju.nanaland.ui.component.common.topbar.TopBarCommon
 import com.jeju.nanaland.ui.component.detailscreen.other.DetailScreenInformation
 import com.jeju.nanaland.ui.component.detailscreen.other.DetailScreenInformationModificationProposalButton
 import com.jeju.nanaland.ui.component.detailscreen.other.DetailScreenTopBannerImage
 import com.jeju.nanaland.ui.component.detailscreen.other.ExperienceDetailScreenDescription
-import com.jeju.nanaland.ui.component.detailscreen.other.MoveToTopButton
 import com.jeju.nanaland.ui.component.detailscreen.restaurant.MenuItem
 import com.jeju.nanaland.ui.component.review.ReviewCard
 import com.jeju.nanaland.ui.component.review.TotalRatingStar
@@ -398,9 +399,7 @@ private fun RestaurantContentScreen(
                         }
                     }
 
-                    MoveToTopButton {
-                        coroutineScope.launch { scrollState.animateScrollTo(0) }
-                    }
+                    GoToUpInList(scrollState, Modifier.align(Alignment.BottomEnd))
                 }
 
                 when (restaurantContent) {
