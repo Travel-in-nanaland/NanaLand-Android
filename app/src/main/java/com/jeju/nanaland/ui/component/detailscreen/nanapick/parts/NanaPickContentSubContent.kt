@@ -8,17 +8,19 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.jeju.nanaland.R
 import com.jeju.nanaland.domain.entity.common.ImageUrl
 import com.jeju.nanaland.domain.entity.nanapick.NanaPickSubContentAdditionalInfoData
 import com.jeju.nanaland.domain.navigation.ROUTE
 import com.jeju.nanaland.ui.component.detailscreen.nanapick.NanaPickContentAttractivePoint
-import com.jeju.nanaland.ui.component.detailscreen.nanapick.parts.subcontent.NanaPickContentSubContentAdditionalInfo
 import com.jeju.nanaland.ui.component.detailscreen.nanapick.parts.subcontent.NanaPickContentSubContentDescription
 import com.jeju.nanaland.ui.component.detailscreen.nanapick.parts.subcontent.NanaPickContentSubContentImage
 import com.jeju.nanaland.ui.component.detailscreen.nanapick.parts.subcontent.NanaPickContentSubContentNumber
 import com.jeju.nanaland.ui.component.detailscreen.nanapick.parts.subcontent.NanaPickContentSubContentSubTitle
 import com.jeju.nanaland.ui.component.detailscreen.nanapick.parts.subcontent.NanaPickContentSubContentTag
 import com.jeju.nanaland.ui.component.detailscreen.nanapick.parts.subcontent.NanaPickContentSubContentTitle
+import com.jeju.nanaland.ui.component.detailscreen.other.DetailScreenInformation
+import com.jeju.nanaland.util.string.useNonBreakingSpace
 
 @Composable
 fun NanaPickContentSubContent(
@@ -57,10 +59,25 @@ fun NanaPickContentSubContent(
 
         additionalInfoList.forEach { info ->
             if (info.infoEmoji != "SPECIAL") {
-                NanaPickContentSubContentAdditionalInfo(
-                    infoEmoji = info.infoEmoji,
-                    infoKey = info.infoKey,
-                    infoValue = info.infoValue,
+                DetailScreenInformation(
+                    drawableId = when (info.infoEmoji) {
+                        "ADDRESS" -> R.drawable.ic_location_outlined
+                        "PARKING" -> R.drawable.ic_car_outlined
+                        "SNS" -> R.drawable.ic_sns
+                        "AMENITY" -> R.drawable.ic_warning_outlined
+                        "WEBSITE" -> R.drawable.ic_clip_outlined
+                        "RESERVATION_LINK" -> R.drawable.ic_ticket_outlined
+                        "AGE" -> R.drawable.ic_age
+                        "TIME" -> R.drawable.ic_clock_outlined
+                        "FEE" -> R.drawable.ic_fee
+                        "DATE" -> R.drawable.ic_calendar_outlined
+                        "DESCRIPTION" -> R.drawable.ic_speech_bubble
+                        "ETC" -> R.drawable.ic_smile
+                        "CALL" -> R.drawable.ic_phone_outlined
+                        else -> return@forEach
+                    },
+                    title = info.infoKey,
+                    content = info.infoValue.useNonBreakingSpace(),
                     moveToMap = if(info.infoEmoji != "ADDRESS") null else {{
                         moveToMap(ROUTE.Content.Map(
                             name = title.toString(),
@@ -71,7 +88,6 @@ fun NanaPickContentSubContent(
                         ))
                     }}
                 )
-
                 Spacer(Modifier.height(8.dp))
             }
         }
