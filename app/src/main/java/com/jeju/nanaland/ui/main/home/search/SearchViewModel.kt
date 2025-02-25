@@ -97,17 +97,15 @@ class SearchViewModel @Inject constructor(
             .launchIn(viewModelScope)
     }
 
-    private var oldKeyword = ""
-    fun getSearchResult(keyword: String) {
+    fun getSearchResult(keyword: String, isReSearch: Boolean = false) {
         var prevList: List<SearchResultThumbnailData>? = null
         if (_categorizedSearchResultList.value is UiState.Success) {
-            if(oldKeyword != keyword) {
-                page = 0
-                oldKeyword = keyword
-            } else {
-                page++
-                prevList = (_categorizedSearchResultList.value as UiState.Success).data.data
-            }
+            page++
+            prevList = (_categorizedSearchResultList.value as UiState.Success).data.data
+        }
+        if(isReSearch) {
+            page = 0
+            prevList = null
         }
         val requestData = when (_selectedCategory.value) {
             SearchCategoryType.All -> GetAllSearchResultListRequest(keyword = keyword)

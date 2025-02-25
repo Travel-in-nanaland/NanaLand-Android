@@ -39,7 +39,7 @@ fun HomeScreen(
         inputText = inputText,
         viewType = viewType,
         updateInputText = homeViewModel::updateInputText,
-        getSearchResult = searchViewModel::getSearchResult,
+        getSearchResult = { searchViewModel.getSearchResult(it, true) },
         addRecentSearch = searchViewModel::addRecentSearch,
         updateHomeScreenViewType = {
             homeViewModel.updateHomeScreenViewType(it)
