@@ -127,12 +127,14 @@ private fun getUiDataByCategory(
     categoryType: ReviewCategoryType
 ): Triple<Int/* image id */,String/* title */,String/* sub text */> {
     return when(categoryType) { // TODO
-        ReviewCategoryType.EXPERIENCE -> Triple(
+        ReviewCategoryType.EXPERIENCE,
+        ReviewCategoryType.ART,
+        ReviewCategoryType.ACTIVITY-> Triple(
             R.raw.review_complete_star,
             getString(R.string.review_write_keyword_complete_title1),
             getString(R.string.review_write_keyword_complete_sub1),
         )
-        ReviewCategoryType.RESTAURANT ->  Triple(
+        ReviewCategoryType.RESTAURANT -> Triple(
             R.raw.review_complete_salad,
             getString(R.string.review_write_keyword_complete_title2),
             getString(R.string.review_write_keyword_complete_sub2),
