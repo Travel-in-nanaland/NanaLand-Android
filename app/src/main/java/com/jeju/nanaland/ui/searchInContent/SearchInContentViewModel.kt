@@ -111,10 +111,11 @@ class SearchInContentViewModel @Inject constructor(
         _inputText.update { text }
     }
     fun onSearch(text: String) {
+        val safeText = text.replace("{","").replace("}","")
         viewModelScope.launch {
-            addRecentSearchUseCase.inContent(category, text)
+            addRecentSearchUseCase.inContent(category, safeText)
             page = 0
-            getSearchResult(text)
+            getSearchResult(safeText)
         }
     }
     fun removeRecentSearch(text: String) {
@@ -135,13 +136,14 @@ class SearchInContentViewModel @Inject constructor(
 
 
     fun getSearchResult(keyword: String) {
+        val safeText = keyword.replace("{","").replace("}","")
         var prevList: List<SearchResultThumbnailData>? = null
         if (_categorizedSearchResultList.value is UiState.Success) {
             page++
             prevList = (_categorizedSearchResultList.value as UiState.Success).data.data
         }
         val requestData = GetSearchResultListRequest(
-            keyword = keyword,
+            keyword = safeText,
             page = page,
             size = PAGING_SIZE
         )
