@@ -24,25 +24,33 @@ class SearchRepositoryImpl(
         return handleResult { searchApi.getTopKeywords() }
     }
 
-    override suspend fun getRestaurantSearchResultList(data: GetSearchResultListRequest): NetworkResult<SearchResultData> {
+    override suspend fun getRestaurantSearchResultList(
+        data: GetSearchResultListRequest,
+        addressFilterList: List<String>?,
+        keywordFilterList: List<String>?
+    ): NetworkResult<SearchResultData> {
         return handleResult {
             searchApi.getRestaurantSearchResultList(
                 keyword = data.keyword,
                 page = data.page,
-                size = data.size
+                size = data.size,
+                addressFilterList = addressFilterList,
+                keywordFilterList = keywordFilterList
             )
         }
     }
 
     // 자연 검색 결과
     override suspend fun getNatureSearchResultList(
-        data: GetSearchResultListRequest
+        data: GetSearchResultListRequest,
+        addressFilterList: List<String>?
     ): NetworkResult<SearchResultData> {
         return handleResult {
             searchApi.getNatureSearchResultList(
                 keyword = data.keyword,
                 page = data.page,
-                size = data.size
+                size = data.size,
+                addressFilterList = addressFilterList
             )
         }
     }
@@ -62,26 +70,34 @@ class SearchRepositoryImpl(
 
     // 전통시장 검색 결과
     override suspend fun getMarketSearchResultList(
-        data: GetSearchResultListRequest
+        data: GetSearchResultListRequest,
+        addressFilterList: List<String>?
     ): NetworkResult<SearchResultData> {
         return handleResult {
             searchApi.getMarketSearchResultList(
                 keyword = data.keyword,
                 page = data.page,
-                size = data.size
+                size = data.size,
+                addressFilterList = addressFilterList,
             )
         }
     }
 
     // 축제 검색 결과
     override suspend fun getFestivalSearchResultList(
-        data: GetSearchResultListRequest
+        data: GetSearchResultListRequest,
+        addressFilterList: List<String>?,
+        startDate: String?,
+        endDate: String?
     ): NetworkResult<SearchResultData> {
         return handleResult {
             searchApi.getFestivalSearchResultList(
                 keyword = data.keyword,
                 page = data.page,
-                size = data.size
+                size = data.size,
+                addressFilterList = addressFilterList,
+                startDate = startDate,
+                endDate = endDate
             )
         }
     }
@@ -89,14 +105,18 @@ class SearchRepositoryImpl(
     // 이색체험 검색 결과
     override suspend fun getExperienceSearchResultList(
         data: GetSearchResultListRequest,
-        type: String
+        type: String,
+        addressFilterList: List<String>?,
+        keywordFilterList: List<String>?
     ): NetworkResult<SearchResultData> {
         return handleResult {
             searchApi.getExperienceSearchResultList(
                 keyword = data.keyword,
                 type = type,
                 page = data.page,
-                size = data.size
+                size = data.size,
+                addressFilterList = addressFilterList,
+                keywordFilterList = keywordFilterList
             )
         }
     }

@@ -17,9 +17,9 @@ import com.jeju.nanaland.domain.entity.search.HotPostThumbnailData
 import com.jeju.nanaland.globalvalue.type.HomeScreenViewType
 import com.jeju.nanaland.ui.component.main.searching.SearchingScreenHotPosts
 import com.jeju.nanaland.ui.component.main.searching.SearchingScreenHotPostsText
+import com.jeju.nanaland.ui.component.main.searching.SearchingScreenRecentSearchContent
 import com.jeju.nanaland.ui.component.main.searching.SearchingScreenTopKeywords
 import com.jeju.nanaland.ui.component.main.searching.SearchingScreenTopKeywordsText
-import com.jeju.nanaland.ui.component.main.searching.SearchingScreenRecentSearchContent
 import com.jeju.nanaland.ui.main.home.HomeViewModel
 import com.jeju.nanaland.util.ui.UiState
 
@@ -44,7 +44,7 @@ fun SearchingContent(
         recentSearchList = recentSearchList,
         deleteAllRecentSearches = viewModel::deleteAllRecentSearches,
         deleteRecentSearch = viewModel::deleteRecentSearch,
-        searchKeyword = viewModel::getSearchResult,
+        searchKeyword = { viewModel.getSearchResult(it, true) },
         toggleHotPostFavorite = viewModel::toggleHotPostFavorite,
         updateViewType = homeViewModel::updateHomeScreenViewType,
         updateInputText = homeViewModel::updateInputText,

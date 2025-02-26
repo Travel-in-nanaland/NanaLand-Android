@@ -8,9 +8,11 @@ class GetRestaurantSearchResultListUseCase(
     private val repository: SearchRepository
 ) {
     operator fun invoke(
-        data: GetSearchResultListRequest
+        data: GetSearchResultListRequest,
+        addressFilterList: List<String>? = null,
+        keywordFilterList: List<String>? = null
     ) = flow {
-        val response = repository.getRestaurantSearchResultList(data)
+        val response = repository.getRestaurantSearchResultList(data, addressFilterList, keywordFilterList)
         emit(response)
     }
 }

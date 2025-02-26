@@ -9,9 +9,10 @@ class GetNatureSearchResultListUseCase(
     private val repository: SearchRepository
 ) {
     operator fun invoke(
-        data: GetSearchResultListRequest
+        data: GetSearchResultListRequest,
+        addressFilterList: List<String>? = null
     ) = flow {
-        val response = repository.getNatureSearchResultList(data)
+        val response = repository.getNatureSearchResultList(data, addressFilterList)
         emit(response)
     }
 }

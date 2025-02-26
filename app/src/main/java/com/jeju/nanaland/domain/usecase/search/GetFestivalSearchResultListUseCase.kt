@@ -8,9 +8,12 @@ class GetFestivalSearchResultListUseCase(
     private val repository: SearchRepository
 ) {
     operator fun invoke(
-        data: GetSearchResultListRequest
+        data: GetSearchResultListRequest,
+        addressFilterList: List<String>? = null,
+        startDate: String? = null,
+        endDate: String? = null
     ) = flow {
-        val response = repository.getFestivalSearchResultList(data)
+        val response = repository.getFestivalSearchResultList(data, addressFilterList, startDate, endDate)
         emit(response)
     }
 }

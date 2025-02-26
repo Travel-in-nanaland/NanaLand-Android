@@ -18,12 +18,15 @@ interface SearchRepository {
 
     // 제주맛집 검색 결과
     suspend fun getRestaurantSearchResultList(
-        data: GetSearchResultListRequest
+        data: GetSearchResultListRequest,
+        addressFilterList: List<String>?,
+        keywordFilterList: List<String>?
     ): NetworkResult<SearchResultData>
 
     // 자연 검색 결과
     suspend fun getNatureSearchResultList(
-        data: GetSearchResultListRequest
+        data: GetSearchResultListRequest,
+        addressFilterList: List<String>?
     ): NetworkResult<SearchResultData>
 
     // 나나스픽 검색 결과
@@ -33,18 +36,24 @@ interface SearchRepository {
 
     // 전통시장 검색 결과
     suspend fun getMarketSearchResultList(
-        data: GetSearchResultListRequest
+        data: GetSearchResultListRequest,
+        addressFilterList: List<String>?
     ): NetworkResult<SearchResultData>
 
     // 축제 검색 결과
     suspend fun getFestivalSearchResultList(
-        data: GetSearchResultListRequest
+        data: GetSearchResultListRequest,
+        addressFilterList: List<String>?,
+        startDate: String?,
+        endDate: String?
     ): NetworkResult<SearchResultData>
 
     // 이색체험 검색 결과
     suspend fun getExperienceSearchResultList(
         data: GetSearchResultListRequest,
-        type: String
+        type: String,
+        addressFilterList: List<String>?,
+        keywordFilterList: List<String>?
     ): NetworkResult<SearchResultData>
 
     // 전체 카테고리 검색 결과 2개씩

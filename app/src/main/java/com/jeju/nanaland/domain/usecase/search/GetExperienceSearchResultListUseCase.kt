@@ -10,11 +10,15 @@ class GetExperienceSearchResultListUseCase(
 ) {
     operator fun invoke(
         data: GetSearchResultListRequest,
-        type: SearchCategoryType
+        type: SearchCategoryType,
+        addressFilterList: List<String>? = null,
+        keywordFilterList: List<String>? = null
     ) = flow {
         val response = repository.getExperienceSearchResultList(
             data,
-            if(type == SearchCategoryType.Activity) "ACTIVITY" else "CULTURE_AND_ARTS"
+            if(type == SearchCategoryType.Activity) "ACTIVITY" else "CULTURE_AND_ARTS",
+            addressFilterList,
+            keywordFilterList
         )
         emit(response)
     }

@@ -8,9 +8,10 @@ class GetMarketSearchResultListUseCase(
     private val repository: SearchRepository
 ) {
     operator fun invoke(
-        data: GetSearchResultListRequest
+        data: GetSearchResultListRequest,
+        addressFilterList: List<String>? = null
     ) = flow {
-        val response = repository.getMarketSearchResultList(data)
+        val response = repository.getMarketSearchResultList(data, addressFilterList)
         emit(response)
     }
 }

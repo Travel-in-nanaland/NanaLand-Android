@@ -25,7 +25,9 @@ interface SearchApi {
     suspend fun getRestaurantSearchResultList(
         @Query("keyword") keyword: String,
         @Query("page") page: Int,
-        @Query("size") size: Int
+        @Query("size") size: Int,
+        @Query("addressFilterList") addressFilterList: List<String>?,
+        @Query("keywordFilter") keywordFilterList: List<String>?
     ): Response<ResponseWrapper<SearchResultData>>
 
     // 자연 검색 결과
@@ -33,7 +35,8 @@ interface SearchApi {
     suspend fun getNatureSearchResultList(
         @Query("keyword") keyword: String,
         @Query("page") page: Int,
-        @Query("size") size: Int
+        @Query("size") size: Int,
+        @Query("addressFilterList") addressFilterList: List<String>?
     ): Response<ResponseWrapper<SearchResultData>>
 
     // 나나스픽 검색 결과
@@ -49,7 +52,8 @@ interface SearchApi {
     suspend fun getMarketSearchResultList(
         @Query("keyword") keyword: String,
         @Query("page") page: Int,
-        @Query("size") size: Int
+        @Query("size") size: Int,
+        @Query("addressFilterList") addressFilterList: List<String>?
     ): Response<ResponseWrapper<SearchResultData>>
 
     // 축제 검색 결과
@@ -57,7 +61,10 @@ interface SearchApi {
     suspend fun getFestivalSearchResultList(
         @Query("keyword") keyword: String,
         @Query("page") page: Int,
-        @Query("size") size: Int
+        @Query("size") size: Int,
+        @Query("addressFilterList") addressFilterList: List<String>?,
+        @Query("startDate") startDate: String?,
+        @Query("endDate") endDate: String?
     ): Response<ResponseWrapper<SearchResultData>>
 
     // 이색체험 검색 결과
@@ -66,7 +73,9 @@ interface SearchApi {
         @Query("keyword") keyword: String,
         @Query("experienceType") type: String,
         @Query("page") page: Int,
-        @Query("size") size: Int
+        @Query("size") size: Int,
+        @Query("keywordFilter") keywordFilterList: List<String>?,
+        @Query("addressFilterList") addressFilterList: List<String>?,
     ): Response<ResponseWrapper<SearchResultData>>
 
     // 전체 카테고리 검색 결과 2개씩

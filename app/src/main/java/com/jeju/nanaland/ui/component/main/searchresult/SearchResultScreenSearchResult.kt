@@ -89,7 +89,7 @@ fun SearchResultScreenSearchResult(
                         count = categorizedSearchResultList.data.count
                     )
 
-                    Spacer(Modifier.height(16.dp))
+                    Spacer(Modifier.height(8.dp))
 
                     if (categorizedSearchResultList.data.count.toInt() == 0) {
                         Box(

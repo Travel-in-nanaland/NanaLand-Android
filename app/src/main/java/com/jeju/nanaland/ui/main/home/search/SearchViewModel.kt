@@ -23,11 +23,17 @@ import com.jeju.nanaland.domain.usecase.search.GetNatureSearchResultListUseCase
 import com.jeju.nanaland.domain.usecase.search.GetRestaurantSearchResultListUseCase
 import com.jeju.nanaland.domain.usecase.search.GetTopKeywordsUseCase
 import com.jeju.nanaland.globalvalue.constant.PAGING_SIZE
+import com.jeju.nanaland.globalvalue.constant.getActivityKeywordSelectionList
+import com.jeju.nanaland.globalvalue.constant.getCultureArtKeywordSelectionList
+import com.jeju.nanaland.globalvalue.constant.getLocationFilterList
+import com.jeju.nanaland.globalvalue.constant.getLocationSelectionList
+import com.jeju.nanaland.globalvalue.constant.getRestaurantKeywordSelectionList
 import com.jeju.nanaland.globalvalue.type.SearchCategoryType
 import com.jeju.nanaland.util.log.LogUtil
 import com.jeju.nanaland.util.network.onError
 import com.jeju.nanaland.util.network.onException
 import com.jeju.nanaland.util.network.onSuccess
+import com.jeju.nanaland.util.string.getYearMonthDate
 import com.jeju.nanaland.util.ui.UiState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -71,6 +77,40 @@ class SearchViewModel @Inject constructor(
     val recentSearchList = _recentSearchList.asStateFlow()
     private var page = 0
 
+
+
+//    private val _selectedCategoryType = MutableStateFlow(ExperienceCategoryType.Activity)
+//    val selectedCategoryType = _selectedCategoryType.asStateFlow()
+    private val locationList = getLocationFilterList()
+    val selectedLocationList = getLocationSelectionList()
+    private val activityKeywordList = listOf("LAND_LEISURE", "WATER_LEISURE", "AIR_LEISURE", "MARINE_EXPERIENCE", "RURAL_EXPERIENCE", "HEALING_THERAPY")
+    val selectedActivityKeywordList = getActivityKeywordSelectionList()
+    private val cultureArtKeywordList = listOf("HISTORY", "EXHIBITION", "WORKSHOP", "ART_MUSEUM", "MUSEUM", "PARK", "PERFORMANCE", "RELIGIOUS_FACILITY", "THEME_PARK")
+    val selectedCultureArtKeywordList = getCultureArtKeywordSelectionList()
+    private val restaurantKeywordList = listOf("KOREAN", "CHINESE", "JAPANESE", "WESTERN", "SNACK", "SOUTH_AMERICAN", "SOUTHEAST_ASIAN", "VEGAN", "HALAL", "MEAT_BLACK_PORK", "SEAFOOD", "CHICKEN_BURGER", "CAFE_DESSERT", "PUB_FOOD_PUB")
+    val selectedRestaurantKeywordList = getRestaurantKeywordSelectionList()
+    private val _startCalendar = MutableStateFlow<Calendar>(Calendar.getInstance())
+    val startCalendar = _startCalendar.asStateFlow()
+    private val _endCalendar = MutableStateFlow<Calendar>(Calendar.getInstance())
+    val endCalendar = _endCalendar.asStateFlow()
+
+    fun updateStartCalendar(calendar: Calendar) { _startCalendar.update { calendar } }
+    fun updateEndCalendar(calendar: Calendar) { _endCalendar.update { calendar } }
+    private fun initFilters() {
+        selectedLocationList.fill(false)
+        selectedActivityKeywordList.fill(false)
+        selectedCultureArtKeywordList.fill(false)
+        selectedRestaurantKeywordList.fill(false)
+        _startCalendar.update { Calendar.getInstance() }
+        _endCalendar.update { Calendar.getInstance() }
+    }
+    private fun selectFilterToRequestData(allList: List<String>, selectedList: List<Boolean>): List<String> {
+        return selectedList.mapIndexedNotNull { idx, value ->
+            if (value) allList[idx] else null
+        }
+    }
+
+
     fun updateSelectedCategoryType(category: SearchCategoryType) {
         page = 0
         _categorizedSearchResultList.update { UiState.Loading }
@@ -97,16 +137,20 @@ class SearchViewModel @Inject constructor(
             .launchIn(viewModelScope)
     }
 
-    fun getSearchResult(keyword: String, isReSearch: Boolean = false) {
+    fun getSearchResult(keyword: String, isReSearch: Boolean = false, initFilter: Boolean = true) {
         var prevList: List<SearchResultThumbnailData>? = null
         if (_categorizedSearchResultList.value is UiState.Success) {
             page++
             prevList = (_categorizedSearchResultList.value as UiState.Success).data.data
         }
+
         if(isReSearch) {
             page = 0
             prevList = null
+            if(initFilter)
+                initFilters()
         }
+
         val requestData = when (_selectedCategory.value) {
             SearchCategoryType.All -> GetAllSearchResultListRequest(keyword = keyword)
             else -> GetSearchResultListRequest(
@@ -117,13 +161,13 @@ class SearchViewModel @Inject constructor(
         }
         when (_selectedCategory.value) {
             SearchCategoryType.All -> getAllSearchResultListUseCase(requestData as GetAllSearchResultListRequest)
-            SearchCategoryType.Activity -> getExperienceSearchResultListUseCase(requestData as GetSearchResultListRequest, SearchCategoryType.Activity)
-            SearchCategoryType.Art -> getExperienceSearchResultListUseCase(requestData as GetSearchResultListRequest, SearchCategoryType.Art)
-            SearchCategoryType.Festival -> getFestivalSearchResultListUseCase(requestData as GetSearchResultListRequest)
-            SearchCategoryType.Nature -> getNatureSearchResultListUseCase(requestData as GetSearchResultListRequest)
-            SearchCategoryType.Market -> getMarketSearchResultListUseCase(requestData as GetSearchResultListRequest)
+            SearchCategoryType.Activity -> getExperienceSearchResultListUseCase(requestData as GetSearchResultListRequest, SearchCategoryType.Activity, selectFilterToRequestData(locationList, selectedLocationList), selectFilterToRequestData(activityKeywordList, selectedActivityKeywordList))
+            SearchCategoryType.Art -> getExperienceSearchResultListUseCase(requestData as GetSearchResultListRequest, SearchCategoryType.Art, selectFilterToRequestData(locationList, selectedLocationList), selectFilterToRequestData(cultureArtKeywordList, selectedCultureArtKeywordList))
+            SearchCategoryType.Festival -> getFestivalSearchResultListUseCase(requestData as GetSearchResultListRequest, selectFilterToRequestData(locationList, selectedLocationList), getYearMonthDate(_startCalendar.value), getYearMonthDate(_endCalendar.value))
+            SearchCategoryType.Nature -> getNatureSearchResultListUseCase(requestData as GetSearchResultListRequest, selectFilterToRequestData(locationList, selectedLocationList))
+            SearchCategoryType.Market -> getMarketSearchResultListUseCase(requestData as GetSearchResultListRequest, selectFilterToRequestData(locationList, selectedLocationList))
             SearchCategoryType.NanaPick -> getNanaPickSearchResultListUseCase(requestData as GetSearchResultListRequest)
-            SearchCategoryType.Restaurant -> getRestaurantSearchResultListUseCase(requestData as GetSearchResultListRequest)
+            SearchCategoryType.Restaurant -> getRestaurantSearchResultListUseCase(requestData as GetSearchResultListRequest, selectFilterToRequestData(locationList, selectedLocationList), selectFilterToRequestData(restaurantKeywordList, selectedRestaurantKeywordList))
         }.onEach { networkResult ->
             networkResult.onSuccess { code, message, data ->
                 data?.let {

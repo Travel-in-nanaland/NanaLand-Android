@@ -153,6 +153,7 @@ private fun ExperienceListScreen(
 
 
                 KeywordLocationFilterTopBar(
+                    text = getString(R.string.review_write_keyword_title),
                     selectedKeywordList = if (selectedCategoryType == ExperienceCategoryType.Activity) selectedActivityKeywordList else selectedCultureArtKeywordList,
                     keywordList = if (selectedCategoryType == ExperienceCategoryType.Activity) getActivityKeywordList() else getCultureArtKeywordList(),
                     selectedLocationList = selectedLocationList,
