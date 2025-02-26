@@ -128,8 +128,9 @@ class SearchInContentViewModel @Inject constructor(
         }
     }
     fun selectRecentSearch(text: String) {
-        updateInputText(text)
-        onSearch(text)
+        val safeText = text.replace("{","").replace("}","")
+        updateInputText(safeText)
+        onSearch(safeText)
     }
 
 
