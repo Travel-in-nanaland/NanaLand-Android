@@ -328,6 +328,7 @@
     <string name="mypage_screen_review_remove_dialog">Adakah anda mahu\n memadam ulasan ini?</string>
     <string name="mypage_screen_review_guest">Log masuk untuk merekod pengalaman anda sendiri!</string>
     <string name="mypage_screen_review_empty">Tinggalkan ulasan dan rekod pengalaman anda!</string>
+    <string name="notification_screen_empty">Tiada notifikasi baru/nKekal kemas kini dengan acara dan berita terkini!</string>
     <string name="profile_update_screen_프로필_수정">Ubah Profil</string>
     <string name="profile_update_screen_수정_완료">Pembetulan selesai</string>
 
@@ -507,6 +508,7 @@
     <string name="festival_list_screen_close_thumbnail">Jumpa lagi tahun depan 🖐️</string>
     <string name="sign_up_profile_setting_guide_title">Tetapan profil</string>
     <string name="profile_update_screen_select_image_album">Pilih dari album</string>
+    <string name="copy_to_clipboard">Disalin ke papan klip!</string>
     <string name="dialog_btn_later">Kemudian</string>
     <string name="dialog_btn_write">Tulis</string>
     <string name="dialog_btn_agree">Tidak setuju</string>
@@ -517,4 +519,7 @@
     <string name="dialog_msg_title_3">%d Tahun %d Bulan %d Hari\nnanaland di Jeju Pemberitahuan Tolakan\nBerjaya disekat.</string>
     <string name="dialog_msg_title_1">Adakah kisah Jeju dari nanaland menyeronokkan untuk anda?</string>
     <string name="dialog_msg_sub_title_1">Satu kata tentang nanaland di Jeju\nTinggalkan nota, dan kami akan membawa\nberita Jeju yang lebih menarik💜</string>
+    <string name="map_view_map">Ketahui lebih lanjut</string>
+    <string name="map_other_app">Lihat di peta lain</string>
+    <string name="map_app_google">Peta Google</string>
 </resources>

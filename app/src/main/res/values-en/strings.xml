@@ -327,6 +327,7 @@
     <string name="mypage_screen_review_remove_dialog">Do you want to\n delete this review?</string>
     <string name="mypage_screen_review_guest">Log in to record your own experience!</string>
     <string name="mypage_screen_review_empty">Leave a review and record your experience!</string>
+    <string name="notification_screen_empty">No new notifications/nStay updated with the latest events and news!</string>
     <string name="profile_update_screen_프로필_수정">Edit Profile</string>
     <string name="profile_update_screen_수정_완료">Update</string>
     <string name="profile_update_screen_warning">The introduction can be written in 70 characters or less.</string>
@@ -506,6 +507,7 @@
     <string name="festival_list_screen_close_thumbnail">See you again next year 🖐️</string>
     <string name="sign_up_profile_setting_guide_title">Profile settings</string>
     <string name="profile_update_screen_select_image_album">Select from album</string>
+    <string name="copy_to_clipboard">Copied to clipboard!</string>
     <string name="dialog_btn_later">Later</string>
     <string name="dialog_btn_write">Write</string>
     <string name="dialog_btn_agree">Disagree</string>
@@ -516,4 +518,7 @@
     <string name="dialog_msg_title_3">%d Year %d Month %d Day\nnanaland in Jeju Push Notification\nUnsubscribed.</string>
     <string name="dialog_msg_title_1">Will Jeju stories from nanaland be enjoyable for you?</string>
     <string name="dialog_msg_sub_title_1">One word about nanaland in Jeju\nLeave a note, and we\'ll bring you more fun\nJeju news💜</string>
+    <string name="map_view_map">Learn more</string>
+    <string name="map_other_app">View on another map</string>
+    <string name="map_app_google">Google Maps</string>
 </resources>

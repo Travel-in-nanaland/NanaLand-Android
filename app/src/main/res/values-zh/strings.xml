@@ -328,6 +328,7 @@
     <string name="mypage_screen_review_remove_dialog">确定删除\n这条评论吗？</string>
     <string name="mypage_screen_review_guest">登录以记录您自己的经验！</string>
     <string name="mypage_screen_review_empty">留下评价并记录您的体验！</string>
+    <string name="notification_screen_empty">没有新通知/n我们会为你带来最新活动和资讯！</string>
     <string name="profile_update_screen_프로필_수정">编辑个人资料</string>
     <string name="profile_update_screen_수정_완료">修改完成</string>
     <string name="profile_update_screen_warning">介绍可以在70个字符以内书写。</string>
@@ -506,6 +507,7 @@
     <string name="festival_list_screen_close_thumbnail">明年再见 🖐️</string>
     <string name="sign_up_profile_setting_guide_title">个人资料设置</string>
     <string name="profile_update_screen_select_image_album">从相册中选择</string>
+    <string name="copy_to_clipboard">已复制到剪贴板！</string>
     <string name="dialog_btn_later">稍后</string>
     <string name="dialog_btn_write">写</string>
     <string name="dialog_btn_agree">不同意</string>
@@ -516,4 +518,7 @@
     <string name="dialog_msg_title_3">%d年 %d月 %d日\n济州岛NanaLand接收推送通知\n已被拒收</string>
     <string name="dialog_msg_title_1">nanaland的济州故事\n会让您感到有趣吗？</string>
     <string name="dialog_msg_sub_title_1">关于nanaland in Jeju的一句话\n请留下笔记，我们会带来更多\n有趣的济州消息💜</string>
+    <string name="map_view_map">了解更多</string>
+    <string name="map_other_app">在其他地图上查看</string>
+    <string name="map_app_google">谷歌地图</string>
 </resources>

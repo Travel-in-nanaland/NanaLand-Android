@@ -330,6 +330,7 @@
     <string name="mypage_screen_review_remove_dialog">해당 후기를\n삭제하시겠습니까?</string>
     <string name="mypage_screen_review_guest">로그인하여 나만의 경험을 기록해보세요!</string>
     <string name="mypage_screen_review_empty">후기를 남겨 나만의 경험을 기록하세요!</string>
+    <string name="notification_screen_empty">새로운 알림이 없습니다\n다양한 이벤트와 소식들을 전해줄게요!</string>
     <string name="profile_update_screen_프로필_수정">프로필 수정</string>
     <string name="profile_update_screen_수정_완료">수정 완료</string>
     <string name="profile_update_screen_warning">소개글은 70자 이내로 작성 가능합니다.</string>
@@ -520,6 +521,7 @@
     <string name="map_other_app">다른 지도 보기</string>
     <string name="map_app_google">구글 지도</string>
     <string name="map_app_naver">네이버 지도</string>
+    <string name="copy_to_clipboard">클립보드에 복사되었습니다!</string>
     <string name="dialog_btn_later">나중에</string>
     <string name="dialog_btn_write">작성하기</string>
     <string name="dialog_btn_agree">동의안함</string>
@@ -535,4 +537,5 @@
 
     <string name="dialog_msg_title_4">알림을 끄시겠어요?</string>
     <string name="dialog_msg_sub_title_4">나나랜드가 전해주는 다양한 이벤트와\n소식들에 대해서 받지 못 할 수도 있어요 !</string>
+    <string name="mypage_screen_notice_empty">공지사항이 없습니다\n새로운 소식으로 찾아뵐게요!</string>
 </resources>

@@ -248,6 +248,7 @@
     <string name="mypage_screen_review_remove_dialog">Bạn có muốn\n xóa đánh giá này không?</string>
     <string name="mypage_screen_review_guest">Đăng nhập để ghi lại trải nghiệm của riêng bạn!</string>
     <string name="mypage_screen_review_empty">Để lại đánh giá và ghi lại trải nghiệm của bạn!</string>
+    <string name="notification_screen_empty">Không có thông báo mới/nCập nhật những sự kiện và tin tức mới nhất!</string>
     <string name="profile_update_screen_프로필_수정">Chỉnh sửa hồ sơ</string>
     <string name="profile_update_screen_수정_완료">Chỉnh sửa hoàn tất</string>
     <string name="profile_update_screen_warning">Giới thiệu có thể được viết trong 70 ký tự hoặc ít hơn.</string>
@@ -434,6 +435,7 @@
     <string name="festival_list_screen_close_thumbnail">Hẹn gặp lại vào năm sau 🖐️</string>
     <string name="sign_up_profile_setting_guide_title">Cài đặt hồ sơ</string>
     <string name="profile_update_screen_select_image_album">Chọn từ album</string>
+    <string name="copy_to_clipboard">Đã sao chép vào bảng tạm!</string>
     <string name="dialog_btn_later">Sau đó</string>
     <string name="dialog_btn_write">Viết</string>
     <string name="dialog_btn_agree">Không đồng ý</string>
@@ -444,4 +446,7 @@
     <string name="dialog_msg_title_3">%d Năm %d Tháng %d Ngày\nnanaland ở Jeju Thông Báo Đẩy\nĐã từ chối nhận.</string>
     <string name="dialog_msg_title_1">Bạn có thấy những câu chuyện về Jeju từ nanaland thú vị không?</string>
     <string name="dialog_msg_sub_title_1">Một lời về nanaland ở Jeju\nHãy để lại ghi chú, chúng tôi sẽ mang đến\nnhững tin tức thú vị hơn từ Jeju💜</string>
+    <string name="map_view_map">Tìm hiểu thêm</string>
+    <string name="map_other_app">Xem trên bản đồ khác</string>
+    <string name="map_app_google">Google Maps</string>
 </resources>
