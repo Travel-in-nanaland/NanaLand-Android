@@ -31,6 +31,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.paging.LoadState
 import androidx.paging.compose.LazyPagingItems
@@ -47,6 +48,7 @@ fun <T : Any> ProfileListFrame(
     initialScrollToItem: Int,
     moveToBackScreen: () -> Unit,
     data: LazyPagingItems<T>,
+    verticalArrangementSpace: Dp = 16.dp,
     emptyView: @Composable () -> Unit = {},
     errorView: @Composable () -> Unit = {},
     rowView: @Composable (T) -> Unit
@@ -91,7 +93,7 @@ fun <T : Any> ProfileListFrame(
                                     .weight(1f)
                                     .padding(horizontal = 16.dp),
                                 state = state,
-                                verticalArrangement = Arrangement.spacedBy(16.dp)
+                                verticalArrangement = Arrangement.spacedBy(verticalArrangementSpace)
                             ) {
                                 item { Spacer(Modifier.height((24 - 16).dp)) }
 

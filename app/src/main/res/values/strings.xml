@@ -363,6 +363,7 @@
     <string name="mypage_screen_review_guest">로그인하여 나만의 경험을 기록해보세요!</string>
     <string name="mypage_screen_review_empty">후기를 남겨 나만의 경험을 기록하세요!</string>
     <string name="mypage_screen_notice_empty">공지사항이 없습니다\n새로운 소식으로 찾아뵐게요!</string>
+    <string name="notification_screen_empty">새로운 알림이 없습니다\n다양한 이벤트와 소식들을 전해줄게요!</string>
 
 
     <!--프로필 수정 화면-->
