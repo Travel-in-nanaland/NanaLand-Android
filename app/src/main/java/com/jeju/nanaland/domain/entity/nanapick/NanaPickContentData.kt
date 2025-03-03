@@ -4,6 +4,8 @@ import com.google.gson.annotations.SerializedName
 import com.jeju.nanaland.domain.entity.common.ImageUrl
 
 data class NanaPickContentData(
+    @SerializedName("id")
+    val id: Int,
     @SerializedName("subHeading")
     val subHeading: String,
     @SerializedName("heading")

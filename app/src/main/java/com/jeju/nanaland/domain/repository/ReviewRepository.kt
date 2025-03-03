@@ -66,4 +66,11 @@ interface ReviewRepository {
         id: Int,
         data: CreateReviewRequest
     ): NetworkResult<String?>
+
+    // 주소 확인
+    suspend fun getKrAddress(
+        id: Int,
+        category: String,
+        number: Int?,
+    ): NetworkResult<String>
 }

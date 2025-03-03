@@ -187,9 +187,8 @@ private fun MarketContentScreen(
                                     moveToMap = { moveToMap(ROUTE.Content.Map(
                                         name = marketContent.data.title,
                                         localLocate = marketContent.data.address,
-                                        koreaLocate = marketContent.data.address,
-                                        lat = 33.359451, // TODO
-                                        lng = 126.545839,
+                                        id = marketContent.data.id,
+                                        category = "MARKET"
                                     )) }
                                 )
 

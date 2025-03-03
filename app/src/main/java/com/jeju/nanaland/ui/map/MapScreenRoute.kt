@@ -1,4 +1,4 @@
-package com.jeju.nanaland.ui.searchInContent
+package com.jeju.nanaland.ui.map
 
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
@@ -12,9 +12,6 @@ fun NavGraphBuilder.mapRoute(navViewModel: NavViewModel) = composable<ROUTE.Cont
     MapScreen(
         name = data.name,
         localLocate = data.localLocate,
-        koreaLocate = data.koreaLocate,
-        lat = data.lat,
-        lng = data.lng,
         moveToBackScreen = { navViewModel.popBackStack() }
     )
 }

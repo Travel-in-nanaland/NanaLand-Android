@@ -253,9 +253,8 @@ private fun RestaurantContentScreen(
                                             moveToMap = { moveToMap(ROUTE.Content.Map(
                                                 name = restaurantContent.data.title,
                                                 localLocate = restaurantContent.data.address,
-                                                koreaLocate = restaurantContent.data.address,
-                                                lat = 33.359451, // TODO
-                                                lng = 126.545839,
+                                                id = restaurantContent.data.id,
+                                                category = "RESTAURANT"
                                             )) }
                                         )
 

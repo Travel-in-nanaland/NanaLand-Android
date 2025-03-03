@@ -133,4 +133,19 @@ class ReviewRepositoryImpl(
             )
         }
     }
+
+    // 주소 확인
+    override suspend fun getKrAddress(
+        id: Int,
+        category: String,
+        number: Int?,
+    ): NetworkResult<String> {
+        return handleResult {
+            api.getKrAddress(
+                id = id,
+                category = category,
+                number = number,
+            )
+        }
+    }
 }

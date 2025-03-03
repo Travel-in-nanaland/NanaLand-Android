@@ -1,8 +1,9 @@
-package com.jeju.nanaland.ui.searchInContent
+package com.jeju.nanaland.ui.map
 
 import android.content.Intent
-import android.content.pm.PackageManager
 import android.net.Uri
+import android.widget.Toast
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -19,16 +20,21 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalClipboardManager
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.jeju.nanaland.R
 import com.jeju.nanaland.ui.component.common.CustomSurface
 import com.jeju.nanaland.ui.component.common.dialog.BottomSheetSelectDialog
@@ -58,12 +64,21 @@ import java.nio.charset.StandardCharsets
 fun MapScreen(
     name: String,
     localLocate: String?,
-    koreaLocate: String,
-    lat: Double,
-    lng: Double,
     moveToBackScreen: () -> Unit,
+    viewModel: MapViewModel = hiltViewModel()
 ) {
+    val context = LocalContext.current
     var isShowLocationApp by remember { mutableStateOf(false) }
+    val latLng = viewModel.latLng.collectAsStateWithLifecycle()
+    val krAddress = viewModel.krAddress.collectAsStateWithLifecycle()
+    val onError = viewModel.onError.collectAsStateWithLifecycle()
+
+    LaunchedEffect(onError.value) {
+        if(onError.value) {
+            Toast.makeText(context, getString(R.string.common_인터넷_문제), Toast.LENGTH_LONG).show()
+            moveToBackScreen()
+        }
+    }
 
     CustomSurface {
         Column {
@@ -72,10 +87,10 @@ fun MapScreen(
                 onBackButtonClicked = moveToBackScreen,
             )
             Box(Modifier.weight(1f)) {
-                MapView(
-                    lat = lat,
-                    lng = lng,
-                )
+                MapView(latLng.value) {
+                    Toast.makeText(context, getString(R.string.common_인터넷_문제), Toast.LENGTH_LONG).show()
+                    moveToBackScreen()
+                }
                 Column(
                     Modifier
                         .align(Alignment.BottomCenter)
@@ -91,7 +106,7 @@ fun MapScreen(
                     BottomInfo(
                         name = name,
                         localLocate = localLocate,
-                        koreaLocate = koreaLocate
+                        koreaLocate = krAddress.value
                     )
                 }
             }
@@ -101,55 +116,50 @@ fun MapScreen(
     if(isShowLocationApp)
         BottomSheetSelectDialog(
             onDismiss = { isShowLocationApp = false },
-            items = getMapApps(koreaLocate).toTypedArray()
+            items = getMapApps(krAddress.value).toTypedArray()
         )
 }
 
 @Composable
 fun MapView(
-    modifier: Modifier = Modifier,
-    lat: Double,
-    lng: Double,
+    latLng: LatLng?,
+    onError: () -> Unit
 ) {
     val context = LocalContext.current
     val mapView = remember { MapView(context) }
-    val latLng = remember { LatLng.from(lat, lng) }
+    var kakaoMap: KakaoMap? by remember { mutableStateOf(null) }
+
+    LaunchedEffect(kakaoMap, latLng) {
+        if(latLng == null) return@LaunchedEffect
+        kakaoMap?.let { map ->
+            map.moveCamera(CameraUpdateFactory.newCenterPosition(latLng))
+            map.labelManager?.layer?.addLabel(
+                LabelOptions
+                    .from(latLng)
+                    .setStyles(
+                        LabelStyles.from(
+                            LabelStyle.from(R.drawable.ic_map_pin),
+                        )
+                    )
+            )
+        }
+
+    }
+
     AndroidView(
-        modifier = modifier.fillMaxSize(),
+        modifier = Modifier.fillMaxSize(),
         factory = {
             mapView.apply {
                 mapView.start(
                     object : MapLifeCycleCallback() {
-                        // 지도 생명 주기 콜백: 지도가 파괴될 때 호출
-                        override fun onMapDestroy() {
-                            // 필자가 직접 만든 Toast생성 함수
-//                            makeToast(context = it, message = "지도를 불러오는데 실패했습니다.")
-                        }
-
-                        // 지도 생명 주기 콜백: 지도 로딩 중 에러가 발생했을 때 호출
+                        override fun onMapDestroy() { }
                         override fun onMapError(exception: Exception?) {
-                            // 필자가 직접 만든 Toast생성 함수
-//                            makeToast(context = it, message = "지도를 불러오는 중 알 수 없는 에러가 발생했습니다.\n onMapError: $exception")
+                            exception?.printStackTrace()
+                            onError()
                         }
                     },
                     object : KakaoMapReadyCallback() {
-                        override fun onMapReady(kakaoMap: KakaoMap) {
-                            kakaoMap.moveCamera(CameraUpdateFactory.newCenterPosition(latLng))
-
-                            val marker = LabelOptions
-                                .from(latLng)
-                                .setStyles(
-                                    LabelStyles.from(
-                                        LabelStyle.from(R.drawable.ic_kakao) // Todo
-                                    )
-                                )
-
-                            kakaoMap.labelManager?.layer?.addLabel(marker)
-                        }
-
-//                        override fun getPosition(): LatLng {
-//                            return latLng
-//                        }
+                        override fun onMapReady(k: KakaoMap) { kakaoMap = k }
                     },
                 )
             }
@@ -164,6 +174,9 @@ private fun BottomInfo(
     localLocate: String?,
     koreaLocate: String,
 ) {
+    val context = LocalContext.current
+    val clipboardManager = LocalClipboardManager.current
+
     Column(
         modifier = modifier
             .fillMaxWidth()
@@ -187,11 +200,26 @@ private fun BottomInfo(
             )
 
         Spacer(Modifier.height(12.dp))
-        Text(
-            text = koreaLocate,
-            style = body02,
-            color = getColor().black
-        )
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Text(
+                modifier = Modifier.weight(1f, false),
+                text = koreaLocate,
+                style = body02,
+                color = getColor().black
+            )
+            Spacer(Modifier.width(4.dp))
+            Image(
+                modifier = Modifier.size(14.dp).clickableNoEffect {
+                    clipboardManager.setText(AnnotatedString(koreaLocate))
+                    Toast.makeText(context, getString(R.string.copy_to_clipboard), Toast.LENGTH_SHORT).show()
+                },
+                painter = painterResource(id = R.drawable.ic_copy),
+                contentDescription = null
+            )
+        }
     }
 }
 
@@ -233,6 +261,7 @@ private fun getMapApps(
     val googlePackage = "com.google.android.apps.maps"
     val kakaoPackage = "net.daum.android.map"
     val naverPackage = "com.nhn.android.nmap"
+    val geoUri = Uri.parse("geo:0,0?q=$koreaLocate")
 
 
     val mapApps = remember {
@@ -243,15 +272,14 @@ private fun getMapApps(
 
             mutableList.add(getString(R.string.map_app_google) to {
                 context.startActivity(
-                    Intent(
-                        Intent.ACTION_VIEW,
-                        Uri.parse("geo:0,0?q=$koreaLocate")
-                    ).apply { setPackage(googlePackage) }
+                    Intent(Intent.ACTION_VIEW, geoUri).apply { setPackage(googlePackage) }
                 )
             })
-        } catch (e: PackageManager.NameNotFoundException) {}
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
 
-        try { // todo
+        try {
             context.packageManager.getPackageInfo(naverPackage, 0)
 
             mutableList.add(getString(R.string.map_app_naver) to {
@@ -266,20 +294,21 @@ private fun getMapApps(
                     ).apply { setPackage(naverPackage) }
                 )
             })
-        } catch (e: PackageManager.NameNotFoundException) {}
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
 
         try {
             context.packageManager.getPackageInfo(kakaoPackage, 0)
 
             mutableList.add(getString(R.string.map_app_kakao) to {
                 context.startActivity(
-                    Intent(
-                        Intent.ACTION_VIEW,
-                        Uri.parse("kakaomap://search?q=$koreaLocate")
-                    ).apply { setPackage(kakaoPackage) }
+                    Intent(Intent.ACTION_VIEW, geoUri).apply { setPackage(kakaoPackage) }
                 )
             })
-        } catch (e: PackageManager.NameNotFoundException) {}
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
 
         return@remember mutableList
     }

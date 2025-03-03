@@ -144,9 +144,8 @@ private fun NatureContentScreen(
                                         moveToMap = { moveToMap(ROUTE.Content.Map(
                                             name = natureContent.data.title,
                                             localLocate = natureContent.data.address,
-                                            koreaLocate = natureContent.data.address,
-                                            lat = 33.359451, // TODO
-                                            lng = 126.545839,
+                                            id = natureContent.data.id,
+                                            category = "NATURE"
                                         )) }
                                     )
 

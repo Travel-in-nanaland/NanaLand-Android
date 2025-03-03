@@ -82,4 +82,12 @@ interface ReviewApi {
         @Path("id") id: Int,
         @Body data: CreateReviewRequest
     ): Response<ResponseWrapper<String>>
+
+    // 주소 확인
+    @GET("address/kr")
+    suspend fun getKrAddress(
+        @Query("postId") id: Int,
+        @Query("category") category: String,
+        @Query("number") number: Int?,
+    ): Response<ResponseWrapper<String>>
 }

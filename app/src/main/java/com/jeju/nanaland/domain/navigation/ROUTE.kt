@@ -196,10 +196,10 @@ sealed class ROUTE {
         @Serializable
         data class Map(
             val name: String,
-            val localLocate: String?,
-            val koreaLocate: String,
-            val lat: Double,
-            val lng: Double,
+            val localLocate: String,
+            val id: Int,
+            val category: String,
+            val number: Int? = null
         ): ROUTE()
     }
 

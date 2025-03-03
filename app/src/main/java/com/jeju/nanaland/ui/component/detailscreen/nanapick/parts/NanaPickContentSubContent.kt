@@ -24,6 +24,8 @@ import com.jeju.nanaland.util.string.useNonBreakingSpace
 
 @Composable
 fun NanaPickContentSubContent(
+    id: Int,
+    number: Int,
     index: Int,
     subTitle: String?,
     title: String?,
@@ -82,9 +84,9 @@ fun NanaPickContentSubContent(
                         moveToMap(ROUTE.Content.Map(
                             name = title.toString(),
                             localLocate = info.infoValue,
-                            koreaLocate = info.infoValue,
-                            lat = 33.359451, // TODO
-                            lng = 126.545839,
+                            id = id,
+                            category = "NANA_CONTENT",
+                            number = number
                         ))
                     }}
                 )

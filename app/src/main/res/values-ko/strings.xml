@@ -517,7 +517,7 @@
     <string name="festival_list_screen_close_thumbnail">내년에 다시 만나요🖐</string>
     <string name="sign_up_profile_setting_guide_title">프로필 설정</string>
     <string name="profile_update_screen_select_image_album">앨범에서 선택</string>
-    <string name="map_view_map">지도 보기</string>
+    <string name="map_view_map">자세히 보기</string>
     <string name="map_other_app">다른 지도 보기</string>
     <string name="map_app_google">구글 지도</string>
     <string name="map_app_naver">네이버 지도</string>

@@ -18,7 +18,7 @@ class NanaLandApplication : Application() {
         try {
             KakaoMapSdk.init(this, BuildConfig.KAKAO_KEY)
         } catch (e: MissingLibraryException) {
-
+            e.printStackTrace()
         }
     }
     init {

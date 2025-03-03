@@ -36,8 +36,16 @@ android {
         }
         buildConfigField("String", "BASE_URL", getProperty("baseUrl"))
         buildConfigField("String", "KAKAO_KEY", getProperty("kakaoKey"))
+        buildConfigField("String", "KAKAO_REST_KEY", getProperty("kakao_REST_Key"))
 //        buildConfigField("String", "NEXT_URL", getProperty("nextUrl"))
 //        buildConfigField("String", "DEV_ACCESS_TOKEN", getProperty("accessToken"))
+
+        ndk {  // for KakaoMapSdk init error 하지만 에뮬은 안되죠?
+            abiFilters.add("arm64-v8a")
+            abiFilters.add("armeabi-v7a")
+            abiFilters.add("x86")
+            abiFilters.add("x86_64")
+        }
     }
 
     buildTypes {
@@ -75,6 +83,10 @@ android {
         resources {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
         }
+        jniLibs { // for KakaoMapSdk init error 하지만 에뮬은 안되죠?
+            useLegacyPackaging = true
+        }
+        exclude("lib/arm64-v8a/librealm-jni.so") // for KakaoMapSdk init error 하지만 에뮬은 안되죠?
     }
 }
 

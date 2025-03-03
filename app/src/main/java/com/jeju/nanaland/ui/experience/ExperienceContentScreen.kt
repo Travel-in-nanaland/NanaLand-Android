@@ -1,6 +1,5 @@
 package com.jeju.nanaland.ui.experience
 
-import android.content.Intent
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
@@ -33,7 +32,6 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.jeju.nanaland.BuildConfig
 import com.jeju.nanaland.R
 import com.jeju.nanaland.domain.entity.experience.ExperienceContent
 import com.jeju.nanaland.domain.entity.review.ReviewData
@@ -60,7 +58,6 @@ import com.jeju.nanaland.ui.component.review.TotalReviewCountText
 import com.jeju.nanaland.ui.theme.bodyBold
 import com.jeju.nanaland.ui.theme.getColor
 import com.jeju.nanaland.util.intent.goToShare
-import com.jeju.nanaland.util.language.getLanguage
 import com.jeju.nanaland.util.network.NetworkResult
 import com.jeju.nanaland.util.resource.getString
 import com.jeju.nanaland.util.ui.ScreenPreview
@@ -232,9 +229,8 @@ private fun ExperienceContentScreen(
                                             moveToMap = { moveToMap(ROUTE.Content.Map(
                                                 name = experienceContent.data.title,
                                                 localLocate = experienceContent.data.address,
-                                                koreaLocate = experienceContent.data.address,
-                                                lat = 33.359451, // TODO
-                                                lng = 126.545839,
+                                                id = experienceContent.data.id,
+                                                category = "EXPERIENCE"
                                             )) }
                                         )
 

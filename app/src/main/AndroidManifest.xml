@@ -6,6 +6,12 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
 
+    <queries>
+        <package android:name="com.google.android.apps.maps" />
+        <package android:name="net.daum.android.map" />
+        <package android:name="com.nhn.android.nmap" />
+    </queries>
+
     <application
         android:name=".NanaLandApplication"
         android:allowBackup="false"

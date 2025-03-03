@@ -11,12 +11,15 @@ import com.jeju.nanaland.ui.component.detailscreen.nanapick.parts.NanaPickConten
 
 @Composable
 fun NanaPickContentSubContents(
+    id: Int,
     nanaPickContent: NanaPickContentData,
     moveToMap: (ROUTE.Content.Map)-> Unit,
     attractivePointOnClick: (String) -> Unit
 ) {
     nanaPickContent.nanaDetails.forEachIndexed { idx, details ->
         NanaPickContentSubContent(
+            id = id,
+            number = details.number,
             index = idx + 1,
             subTitle = details.subTitle,
             title = details.title,

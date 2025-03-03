@@ -129,7 +129,9 @@ private fun NanaPickContentScreen(
 
                             Spacer(Modifier.height(48.dp))
 
-                            NanaPickContentSubContents(nanaPickContent = nanaPickContent.data, moveToMap = moveToMap) {
+                            NanaPickContentSubContents(
+                                id = nanaPickContent.data.id,
+                                nanaPickContent = nanaPickContent.data, moveToMap = moveToMap) {
                                 attractiveDialogText = it
                             }
                         }

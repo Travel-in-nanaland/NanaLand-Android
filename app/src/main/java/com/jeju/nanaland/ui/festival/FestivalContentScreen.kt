@@ -157,9 +157,8 @@ private fun FestivalContentScreen(
                                     moveToMap = { moveToMap(ROUTE.Content.Map(
                                         name = festivalContent.data.title,
                                         localLocate = festivalContent.data.address,
-                                        koreaLocate = festivalContent.data.address,
-                                        lat = 33.359451, // TODO
-                                        lng = 126.545839,
+                                        id = festivalContent.data.id,
+                                        category = "FESTIVAL"
                                     )) }
                                 )
 
