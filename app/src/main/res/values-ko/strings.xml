@@ -330,7 +330,6 @@
     <string name="mypage_screen_review_remove_dialog">해당 후기를\n삭제하시겠습니까?</string>
     <string name="mypage_screen_review_guest">로그인하여 나만의 경험을 기록해보세요!</string>
     <string name="mypage_screen_review_empty">후기를 남겨 나만의 경험을 기록하세요!</string>
-    <string name="mypage_screen_notice_empty">공지사항이 존재하지 않습니다</string>
     <string name="profile_update_screen_프로필_수정">프로필 수정</string>
     <string name="profile_update_screen_수정_완료">수정 완료</string>
     <string name="profile_update_screen_warning">소개글은 70자 이내로 작성 가능합니다.</string>

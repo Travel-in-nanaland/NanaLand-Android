@@ -248,7 +248,6 @@
     <string name="mypage_screen_review_remove_dialog">Bạn có muốn\n xóa đánh giá này không?</string>
     <string name="mypage_screen_review_guest">Đăng nhập để ghi lại trải nghiệm của riêng bạn!</string>
     <string name="mypage_screen_review_empty">Để lại đánh giá và ghi lại trải nghiệm của bạn!</string>
-    <string name="mypage_screen_notice_empty">Không Có Thông Báo</string>
     <string name="profile_update_screen_프로필_수정">Chỉnh sửa hồ sơ</string>
     <string name="profile_update_screen_수정_완료">Chỉnh sửa hoàn tất</string>
     <string name="profile_update_screen_warning">Giới thiệu có thể được viết trong 70 ký tự hoặc ít hơn.</string>

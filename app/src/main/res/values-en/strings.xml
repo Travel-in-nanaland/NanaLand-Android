@@ -327,7 +327,6 @@
     <string name="mypage_screen_review_remove_dialog">Do you want to\n delete this review?</string>
     <string name="mypage_screen_review_guest">Log in to record your own experience!</string>
     <string name="mypage_screen_review_empty">Leave a review and record your experience!</string>
-    <string name="mypage_screen_notice_empty">No Announcements Available</string>
     <string name="profile_update_screen_프로필_수정">Edit Profile</string>
     <string name="profile_update_screen_수정_완료">Update</string>
     <string name="profile_update_screen_warning">The introduction can be written in 70 characters or less.</string>

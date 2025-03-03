@@ -328,7 +328,6 @@
     <string name="mypage_screen_review_remove_dialog">确定删除\n这条评论吗？</string>
     <string name="mypage_screen_review_guest">登录以记录您自己的经验！</string>
     <string name="mypage_screen_review_empty">留下评价并记录您的体验！</string>
-    <string name="mypage_screen_notice_empty">没有公告</string>
     <string name="profile_update_screen_프로필_수정">编辑个人资料</string>
     <string name="profile_update_screen_수정_완료">修改完成</string>
     <string name="profile_update_screen_warning">介绍可以在70个字符以内书写。</string>

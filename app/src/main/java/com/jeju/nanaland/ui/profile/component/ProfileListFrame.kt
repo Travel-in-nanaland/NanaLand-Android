@@ -47,6 +47,8 @@ fun <T : Any> ProfileListFrame(
     initialScrollToItem: Int,
     moveToBackScreen: () -> Unit,
     data: LazyPagingItems<T>,
+    emptyView: @Composable () -> Unit = {},
+    errorView: @Composable () -> Unit = {},
     rowView: @Composable (T) -> Unit
 ) {
     val scope = rememberCoroutineScope()
@@ -79,26 +81,37 @@ fun <T : Any> ProfileListFrame(
                     title = title,
                     onBackButtonClicked = moveToBackScreen
                 )
-                if(data.loadState.refresh is LoadState.Loading)
-                    Box(Modifier.fillMaxSize()) {
-                        CircularProgressIndicator(Modifier.align(Alignment.Center))
-                    }
-                else
-                    LazyColumn(
-                        Modifier
-                            .weight(1f)
-                            .padding(horizontal = 16.dp),
-                        state = state,
-                        verticalArrangement = Arrangement.spacedBy(16.dp)
-                    ) {
-                        item { Spacer(Modifier.height((24 - 16).dp)) }
+                when(data.loadState.refresh) {
+                    is LoadState.NotLoading -> {
+                        if(data.itemCount == 0) {
+                            emptyView()
+                        } else {
+                            LazyColumn(
+                                Modifier
+                                    .weight(1f)
+                                    .padding(horizontal = 16.dp),
+                                state = state,
+                                verticalArrangement = Arrangement.spacedBy(16.dp)
+                            ) {
+                                item { Spacer(Modifier.height((24 - 16).dp)) }
 
-                        items(data.itemCount) { index ->
-                            rowView(data[index]!!)
+                                items(data.itemCount) { index ->
+                                    rowView(data[index]!!)
+                                }
+
+                                item { Spacer(Modifier.height((24 - 16).dp)) }
+                            }
                         }
-
-                        item { Spacer(Modifier.height((24 - 16).dp)) }
                     }
+                    is LoadState.Loading -> {
+                        Box(Modifier.fillMaxSize()) {
+                            CircularProgressIndicator(Modifier.align(Alignment.Center))
+                        }
+                    }
+                    is LoadState.Error -> {
+                        errorView()
+                    }
+                }
             }
         }
     }
