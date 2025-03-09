@@ -453,7 +453,7 @@ private fun SelectedBoxList(
                             shape = RoundedCornerShape(50)
                         )
                         .fillMaxWidth()
-                        .padding(vertical = 7.dp)
+                        .padding(vertical = 10.dp)
                         .clickableNoEffect { onSelect(idx) }
                 )
             }
