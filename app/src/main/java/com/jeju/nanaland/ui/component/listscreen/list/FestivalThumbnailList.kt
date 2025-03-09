@@ -53,13 +53,13 @@ fun FestivalThumbnailList(
                     verticalArrangement = Arrangement.Center
                 ) {
                     Text(
-                        text = getString(R.string.list_screen_common_empty_list_by_filter_head),
+                        text = getString(R.string.list_screen_festival_empty_list_by_filter_head),
                         color = getColor().gray01,
                         style = body01
                     )
                     Spacer(Modifier.height(2.dp))
                     Text(
-                        text = getString(R.string.list_screen_common_empty_list_by_filter_sub),
+                        text = getString(R.string.list_screen_festival_empty_list_by_filter_sub),
                         color = Color(0xFFC4C4C4),
                         style = body02
                     )

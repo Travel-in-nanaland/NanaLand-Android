@@ -156,6 +156,8 @@
     <string name="list_screen_common_전_지역">전 지역</string>
     <string name="list_screen_common_empty_list_by_filter_head">해당 컨텐츠가 없습니다.</string>
     <string name="list_screen_common_empty_list_by_filter_sub">필터를 조정하거나 초기화해 보세요!</string>
+    <string name="list_screen_festival_empty_list_by_filter_head">현재 진행 중인 축제가 없습니다.</string>
+    <string name="list_screen_festival_empty_list_by_filter_sub">필터를 조정하여 다른 날짜로 확인해 보세요!</string>
     <string name="list_screen_common_reset_filter">필터 초기화</string>
 
     <!--지역 공통-->
