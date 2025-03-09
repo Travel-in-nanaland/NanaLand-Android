@@ -40,8 +40,8 @@ fun BottomOkButtonOutlined(
         Text(
             text = text,
             color = getColor().main,
-            style = bodyBold,
-            textAlign = TextAlign.Center
+            style = bodyBold.copy(lineHeight = bodyBold.fontSize),
+            textAlign = TextAlign.Center,
         )
     }
 }
