@@ -327,6 +327,7 @@
     <string name="mypage_screen_review_remove_dialog">Do you want to\n delete this review?</string>
     <string name="mypage_screen_review_guest">Log in to record your own experience!</string>
     <string name="mypage_screen_review_empty">Leave a review and record your experience!</string>
+    <string name="mypage_screen_notice_empty">No announcements.\nWe will be back with new updates!</string>
     <string name="notification_screen_empty">No new notifications/nStay updated with the latest events and news!</string>
     <string name="profile_update_screen_프로필_수정">Edit Profile</string>
     <string name="profile_update_screen_수정_완료">Update</string>
@@ -498,6 +499,7 @@
     <string name="activity_해양체험">Marine experience</string>
     <string name="activity_농촌체험">Rural experience</string>
     <string name="activity_힐링테라피">Healing Therapy</string>
+    <string name="map_btn_sub_text">*To find the correct address, please click on the map \nview and copy the address in Korean!</string>
     <string name="toast_heart_myself">You cannot like a review you wrote yourself.</string>
     <string name="toast_one_more_exit">If you press it once more, the app will close.</string>
     <string name="common_외">%s and %d</string>
@@ -521,4 +523,6 @@
     <string name="map_view_map">Learn more</string>
     <string name="map_other_app">View on another map</string>
     <string name="map_app_google">Google Maps</string>
+    <string name="map_app_naver">Naver Map</string>
+    <string name="map_app_kakao">Kakao Map</string>
 </resources>

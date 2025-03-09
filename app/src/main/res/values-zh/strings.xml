@@ -328,6 +328,7 @@
     <string name="mypage_screen_review_remove_dialog">确定删除\n这条评论吗？</string>
     <string name="mypage_screen_review_guest">登录以记录您自己的经验！</string>
     <string name="mypage_screen_review_empty">留下评价并记录您的体验！</string>
+    <string name="mypage_screen_notice_empty">没有公告。\n我们会带来新的消息！</string>
     <string name="notification_screen_empty">没有新通知/n我们会为你带来最新活动和资讯！</string>
     <string name="profile_update_screen_프로필_수정">编辑个人资料</string>
     <string name="profile_update_screen_수정_완료">修改完成</string>
@@ -498,6 +499,7 @@
     <string name="activity_해양체험">海洋体验</string>
     <string name="activity_농촌체험">农村体验</string>
     <string name="activity_힐링테라피">治愈疗法</string>
+    <string name="map_btn_sub_text">*要查找正确的地址,/n请点击地图视图并复制韩文地址！</string>
     <string name="toast_heart_myself">您不能点赞自己写的评价。</string>
     <string name="toast_one_more_exit">如果你再按一次，应用程序将关闭。</string>
     <string name="common_외">%s和%d</string>
@@ -521,4 +523,6 @@
     <string name="map_view_map">了解更多</string>
     <string name="map_other_app">在其他地图上查看</string>
     <string name="map_app_google">谷歌地图</string>
+    <string name="map_app_naver">Naver 地图</string>
+    <string name="map_app_kakao">Kakao 地图</string>
 </resources>

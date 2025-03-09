@@ -328,6 +328,7 @@
     <string name="mypage_screen_review_remove_dialog">Adakah anda mahu\n memadam ulasan ini?</string>
     <string name="mypage_screen_review_guest">Log masuk untuk merekod pengalaman anda sendiri!</string>
     <string name="mypage_screen_review_empty">Tinggalkan ulasan dan rekod pengalaman anda!</string>
+    <string name="mypage_screen_notice_empty">Tiada pengumuman.\nKami akan kembali dengan berita baharu!</string>
     <string name="notification_screen_empty">Tiada notifikasi baru/nKekal kemas kini dengan acara dan berita terkini!</string>
     <string name="profile_update_screen_프로필_수정">Ubah Profil</string>
     <string name="profile_update_screen_수정_완료">Pembetulan selesai</string>
@@ -499,6 +500,7 @@
     <string name="activity_해양체험">Pengalaman marin</string>
     <string name="activity_농촌체험">Pengalaman luar bandar</string>
     <string name="activity_힐링테라피">Terapi Penyembuhan</string>
+    <string name="map_btn_sub_text">*Untuk mencari alamat yang betul, \nsila klik pada paparan peta dan salin alamat dalam bahasa Korea!</string>
     <string name="toast_heart_myself">Anda tidak boleh menyukai ulasan yang anda tulis sendiri.</string>
     <string name="toast_one_more_exit">Jika anda tekan sekali lagi, aplikasi akan ditutup.\"</string>
     <string name="common_외">%s dan %d</string>
@@ -522,4 +524,6 @@
     <string name="map_view_map">Ketahui lebih lanjut</string>
     <string name="map_other_app">Lihat di peta lain</string>
     <string name="map_app_google">Peta Google</string>
+    <string name="map_app_naver">Peta Naver</string>
+    <string name="map_app_kakao">Peta Kakao</string>
 </resources>

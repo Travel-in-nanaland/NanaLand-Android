@@ -248,6 +248,7 @@
     <string name="mypage_screen_review_remove_dialog">Bạn có muốn\n xóa đánh giá này không?</string>
     <string name="mypage_screen_review_guest">Đăng nhập để ghi lại trải nghiệm của riêng bạn!</string>
     <string name="mypage_screen_review_empty">Để lại đánh giá và ghi lại trải nghiệm của bạn!</string>
+    <string name="mypage_screen_notice_empty">Không có thông báo.\nChúng tôi sẽ trở lại với tin tức mới!</string>
     <string name="notification_screen_empty">Không có thông báo mới/nCập nhật những sự kiện và tin tức mới nhất!</string>
     <string name="profile_update_screen_프로필_수정">Chỉnh sửa hồ sơ</string>
     <string name="profile_update_screen_수정_완료">Chỉnh sửa hoàn tất</string>
@@ -426,6 +427,7 @@
     <string name="activity_해양체험">Trải nghiệm biển</string>
     <string name="activity_농촌체험">Trải nghiệm nông thôn</string>
     <string name="activity_힐링테라피">Liệu pháp chữa lành</string>
+    <string name="map_btn_sub_text">*Để tìm đúng địa chỉ, vui lòng nhấp vào chế độ xem bản đồ \nvà sao chép địa chỉ bằng tiếng Hàn!</string>
     <string name="toast_heart_myself">Bạn không thể thích một đánh giá bạn tự viết.</string>
     <string name="toast_one_more_exit">Nếu bạn nhấn thêm một lần nữa, ứng dụng sẽ đóng.</string>
     <string name="common_외">%s và %d</string>
@@ -449,4 +451,6 @@
     <string name="map_view_map">Tìm hiểu thêm</string>
     <string name="map_other_app">Xem trên bản đồ khác</string>
     <string name="map_app_google">Google Maps</string>
+    <string name="map_app_naver">Bản đồ Naver</string>
+    <string name="map_app_kakao">Bản đồ Kakao</string>
 </resources>
