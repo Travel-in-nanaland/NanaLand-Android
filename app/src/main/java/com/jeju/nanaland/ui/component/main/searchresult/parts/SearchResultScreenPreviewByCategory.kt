@@ -95,7 +95,7 @@ fun SearchResultScreenPreviewByCategory(
                                     SearchCategoryType.Activity -> "EXPERIENCE"
                                     SearchCategoryType.Art -> "EXPERIENCE"
                                     SearchCategoryType.Restaurant -> "RESTAURANT"
-                                    SearchCategoryType.NanaPick -> "NANAPICK"
+                                    SearchCategoryType.NanaPick -> "NANA"
                                     else -> ""
                                 })
                             },

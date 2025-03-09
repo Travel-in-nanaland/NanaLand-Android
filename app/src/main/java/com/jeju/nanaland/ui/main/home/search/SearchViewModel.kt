@@ -361,7 +361,7 @@ class SearchViewModel @Inject constructor(
                                     "MARKET" -> "Market"
                                     "EXPERIENCE" -> "Experience"
                                     "RESTAURANT" -> "Restaurant"
-                                    "NANAPICK" -> "NanaPick"
+                                    "NANA" -> "NanaPick"
                                     else -> ""
                                 }
                                 if (newMap.containsKey(categoryString)) {

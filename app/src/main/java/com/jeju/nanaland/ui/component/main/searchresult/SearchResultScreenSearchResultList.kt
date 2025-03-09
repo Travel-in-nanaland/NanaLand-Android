@@ -64,6 +64,7 @@ fun SearchResultScreenSearchResultList(
                             SearchCategoryType.Activity -> "EXPERIENCE"
                             SearchCategoryType.Art -> "EXPERIENCE"
                             SearchCategoryType.Restaurant -> "RESTAURANT"
+                            SearchCategoryType.NanaPick -> "NANA"
                             else -> ""
                         })
                     },
