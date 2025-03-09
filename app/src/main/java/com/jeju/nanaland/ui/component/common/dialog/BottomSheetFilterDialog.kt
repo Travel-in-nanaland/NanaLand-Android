@@ -475,44 +475,55 @@ private fun AllAndClear(
             .padding(horizontal = 36.dp),
         verticalAlignment = Alignment.CenterVertically,
     ) {
-        /** 전체 선택**/
-        Row(
-            modifier = Modifier
-                .clickableNoEffect(onAll)
-                .padding(horizontal = 20.dp, vertical = 8.dp),
-            verticalAlignment = Alignment.CenterVertically,
-        ) {
-            Image(
-                modifier = Modifier.size(20.dp),
-                painter = painterResource(R.drawable.ic_check),
-                contentDescription = null
-            )
-            Spacer(Modifier.width(8.dp))
-            Text(
-                text = allString,
-                color = getColor().black,
-                style = body02
-            )
-        }
-        Spacer(Modifier.weight(1f))
-        /** 전체 해제**/
-        Row(
-            modifier = Modifier
-                .clickableNoEffect(onClear)
-                .padding(horizontal = 20.dp, vertical = 8.dp),
-            verticalAlignment = Alignment.CenterVertically,
-        ) {
-            Image(
-                modifier = Modifier.size(20.dp),
-                painter = painterResource(R.drawable.ic_reset),
-                contentDescription = null
-            )
-            Spacer(Modifier.width(8.dp))
-            Text(
-                text = clearString,
-                color = getColor().black,
-                style = body02
-            )
+        Row(Modifier.padding(vertical = 8.dp)) {
+            /** 전체 선택**/
+            Row(
+                modifier = Modifier.weight(1f),
+                horizontalArrangement = Arrangement.Center
+            ) {
+                Row(
+                    modifier = Modifier.clickableNoEffect(onAll),
+                    verticalAlignment = Alignment.CenterVertically,
+                ) {
+                    Image(
+                        modifier = Modifier.size(20.dp),
+                        painter = painterResource(R.drawable.ic_check),
+                        contentDescription = null
+                    )
+                    Spacer(Modifier.width(8.dp))
+                    Text(
+                        text = allString,
+                        color = getColor().black,
+                        style = body02
+                    )
+                }
+            }
+            /** 전체 해제**/
+            Row(
+                modifier = Modifier.weight(1f),
+                horizontalArrangement = Arrangement.Center
+            ) {
+                Row(
+                    modifier = Modifier
+                        .clickableNoEffect(onClear)
+                        .padding(horizontal = 20.dp, vertical = 8.dp),
+                    verticalAlignment = Alignment.CenterVertically,
+                ) {
+                    Image(
+                        modifier = Modifier.size(20.dp),
+                        painter = painterResource(R.drawable.ic_reset),
+                        contentDescription = null
+                    )
+                    Spacer(Modifier.width(8.dp))
+                    Text(
+                        text = clearString,
+                        color = getColor().black,
+                        style = body02
+                    )
+                }
+
+            }
+
         }
     }
 }
