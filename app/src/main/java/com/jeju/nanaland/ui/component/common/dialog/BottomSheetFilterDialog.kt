@@ -472,7 +472,7 @@ private fun AllAndClear(
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(horizontal = 36.dp),
+            .padding(horizontal = 12.dp),
         verticalAlignment = Alignment.CenterVertically,
     ) {
         Row(Modifier.padding(vertical = 8.dp)) {
@@ -506,7 +506,7 @@ private fun AllAndClear(
                 Row(
                     modifier = Modifier
                         .clickableNoEffect(onClear)
-                        .padding(horizontal = 20.dp, vertical = 8.dp),
+                        .padding(horizontal = 20.dp),
                     verticalAlignment = Alignment.CenterVertically,
                 ) {
                     Image(
