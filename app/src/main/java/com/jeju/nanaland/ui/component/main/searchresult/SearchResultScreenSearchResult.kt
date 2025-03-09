@@ -50,6 +50,8 @@ fun SearchResultScreenSearchResult(
                             .verticalScroll(rememberScrollState())
                             .padding(start = 16.dp, end = 16.dp)
                     ) {
+                            Spacer(Modifier.height(24.dp))
+
                             SearchCategoryType.entries.sortedByDescending {
                                 allSearchResultList.data[it.name]?.count ?: -1
                             }.forEach {
@@ -84,6 +86,10 @@ fun SearchResultScreenSearchResult(
             when (categorizedSearchResultList) {
                 is UiState.Loading -> {}
                 is UiState.Success -> {
+
+                    if(selectedCategory == SearchCategoryType.NanaPick)
+                        Spacer(Modifier.height(16.dp))
+
                     SearchResultScreenItemCount(
                         modifier = Modifier.padding(start = 16.dp),
                         count = categorizedSearchResultList.data.count

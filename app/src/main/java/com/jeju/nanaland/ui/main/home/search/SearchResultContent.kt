@@ -1,7 +1,5 @@
 package com.jeju.nanaland.ui.main.home.search
 
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.height
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -9,8 +7,6 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.runtime.snapshots.SnapshotStateList
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.jeju.nanaland.R
 import com.jeju.nanaland.domain.entity.search.SearchResultData
@@ -78,11 +74,7 @@ private fun SearchResultContent(
     )
 
 
-    if(selectedCategory == SearchCategoryType.All)
-        Spacer(Modifier.height(24.dp))
-    else if(selectedCategory == SearchCategoryType.NanaPick)
-        Spacer(Modifier.height(16.dp))
-    else
+    if(selectedCategory != SearchCategoryType.All && selectedCategory != SearchCategoryType.NanaPick)
         SearchResultFilterLayout(
             searchViewModel,
             selectedCategory
