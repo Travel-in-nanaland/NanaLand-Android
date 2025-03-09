@@ -2,6 +2,7 @@ package com.jeju.nanaland.ui.map
 
 import android.content.Intent
 import android.net.Uri
+import android.os.Build
 import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -214,7 +215,8 @@ private fun BottomInfo(
             Image(
                 modifier = Modifier.size(14.dp).clickableNoEffect {
                     clipboardManager.setText(AnnotatedString(koreaLocate))
-                    Toast.makeText(context, getString(R.string.copy_to_clipboard), Toast.LENGTH_SHORT).show()
+                    if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.S_V2)
+                        Toast.makeText(context, getString(R.string.copy_to_clipboard), Toast.LENGTH_SHORT).show()
                 },
                 painter = painterResource(id = R.drawable.ic_copy),
                 contentDescription = null
