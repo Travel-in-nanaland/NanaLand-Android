@@ -3,6 +3,7 @@ package com.jeju.nanaland.ui.infomodification
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -53,7 +54,7 @@ private fun InformationModificationProposalCompleteScreen(
     val gif by rememberLottieComposition(LottieCompositionSpec.RawRes(rawRes))
 
     CustomSurface {
-        Box{
+        Box(Modifier.fillMaxSize()){
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
