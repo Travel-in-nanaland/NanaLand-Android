@@ -130,7 +130,7 @@ private fun NatureContentScreen(
                                 Spacer(Modifier.height(24.dp))
 
                                 DetailScreenNotice(
-                                    title = getString(R.string.detail_screen_common_소개합니다),
+                                    title = getString(R.string.detail_screen_common_간단_설명),
                                     content = natureContent.data.intro
                                 )
 
