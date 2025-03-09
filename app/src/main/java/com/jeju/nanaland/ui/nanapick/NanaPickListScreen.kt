@@ -38,7 +38,7 @@ import com.jeju.nanaland.ui.nanapick.component.NanaPickThumbnailBanner1
 import com.jeju.nanaland.ui.nanapick.component.NewTag
 import com.jeju.nanaland.ui.theme.body02Bold
 import com.jeju.nanaland.ui.theme.bodyBold
-import com.jeju.nanaland.ui.theme.caption01
+import com.jeju.nanaland.ui.theme.caption01SemiBold
 import com.jeju.nanaland.ui.theme.caption02SemiBold
 import com.jeju.nanaland.ui.theme.getColor
 import com.jeju.nanaland.util.resource.getString
@@ -214,7 +214,7 @@ private fun NanaPickListScreen(
                     Text(
                         text = getString(R.string.nanapick_list_screen_see_all),
                         color = getColor().black,
-                        style = caption01
+                        style = caption01SemiBold
                     )
                     Image(
                         modifier = Modifier.size(12.dp),
