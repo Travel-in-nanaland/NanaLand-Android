@@ -66,6 +66,12 @@ fun FavoriteScreenFavoritePosts(
         contentPadding = PaddingValues(start = 12.dp, end = 12.dp),
         columns = GridCells.Fixed(2),
     ) {
+        item {
+            Spacer(Modifier.height(24.dp))
+        }
+        item {
+            Spacer(Modifier.height(24.dp))
+        }
         itemsIndexed(favoriteThumbnailList) { idx, item ->
             Box(
                 modifier = Modifier.padding(start = 4.dp, end = 4.dp, bottom = 16.dp)

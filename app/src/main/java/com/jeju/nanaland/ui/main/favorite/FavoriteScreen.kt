@@ -86,7 +86,7 @@ private fun FavoriteScreen(
             updateSelectedCategory = updateSelectedCategory
         )
 
-        Spacer(Modifier.height(24.dp))
+//        Spacer(Modifier.height(24.dp))
 
         /*
         when (favoriteThumbnailCount) {
