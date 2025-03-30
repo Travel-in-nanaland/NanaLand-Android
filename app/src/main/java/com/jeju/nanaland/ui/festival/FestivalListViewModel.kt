@@ -40,7 +40,7 @@ class FestivalListViewModel @Inject constructor(
     private val toggleFavoriteUseCase: ToggleFavoriteUseCase
 ) : ViewModel() {
 
-    private val _selectedCategoryType = MutableStateFlow(FestivalCategoryType.Monthly)
+    private val _selectedCategoryType = MutableStateFlow(FestivalCategoryType.Seasonal)
     val selectedCategoryType = _selectedCategoryType.asStateFlow()
     private val locationList = getLocationFilterList()
     val selectedLocationList = getLocationSelectionList()
