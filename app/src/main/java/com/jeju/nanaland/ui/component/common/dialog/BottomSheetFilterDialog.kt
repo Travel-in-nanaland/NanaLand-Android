@@ -207,7 +207,7 @@ fun BottomSheetFilterDialog(
     ) {
 
         AndroidView(
-            modifier = Modifier.height(330.dp),
+            modifier = Modifier.height(380.dp),
             factory = { calendarView }
         )
 
