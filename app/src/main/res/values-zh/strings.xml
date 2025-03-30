@@ -130,6 +130,7 @@
     <string name="list_screen_common_전_지역">全区域</string>
 
     <!--지역 공통-->
+    <string name="list_screen_festival_empty_list_by_filter_sub">调整筛选条件，查看其他日期！</string>
     <string name="list_screen_common_reset_filter">重置过滤器</string>
     <string name="location_common_제주시">济州市</string>
     <string name="location_common_애월">涯月</string>
@@ -525,4 +526,5 @@
     <string name="map_app_google">谷歌地图</string>
     <string name="map_app_naver">Naver 地图</string>
     <string name="map_app_kakao">Kakao 地图</string>
+    <string name="list_screen_festival_empty_list_by_filter_head">目前没有正在进行的节日.</string>
 </resources>

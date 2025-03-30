@@ -130,6 +130,7 @@
     <string name="list_screen_common_전_지역">전 지역</string>
 
     <!--지역 공통-->
+    <string name="list_screen_festival_empty_list_by_filter_sub">필터를 조정하여 다른 날짜로 확인해 보세요!</string>
     <string name="list_screen_common_reset_filter">필터 초기화</string>
     <string name="location_common_제주시">제주시</string>
     <string name="location_common_애월">애월</string>
@@ -539,4 +540,5 @@
     <string name="dialog_msg_title_4">알림을 끄시겠어요?</string>
     <string name="dialog_msg_sub_title_4">나나랜드가 전해주는 다양한 이벤트와\n소식들에 대해서 받지 못 할 수도 있어요 !</string>
     <string name="mypage_screen_notice_empty">공지사항이 없습니다\n새로운 소식으로 찾아뵐게요!</string>
+    <string name="list_screen_festival_empty_list_by_filter_head">현재 진행 중인 축제가 없습니다.</string>
 </resources>

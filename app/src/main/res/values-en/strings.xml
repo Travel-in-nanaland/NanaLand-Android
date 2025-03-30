@@ -129,6 +129,7 @@
     <string name="list_screen_common_전_지역">All Regions</string>
 
     <!--지역 공통-->
+    <string name="list_screen_festival_empty_list_by_filter_sub">Adjust the filters to check for other dates!</string>
     <string name="list_screen_common_reset_filter">Reset filter</string>
     <string name="location_common_제주시">Jeju City</string>
     <string name="location_common_애월">Aewol</string>
@@ -525,4 +526,5 @@
     <string name="map_app_google">Google Maps</string>
     <string name="map_app_naver">Naver Map</string>
     <string name="map_app_kakao">Kakao Map</string>
+    <string name="list_screen_festival_empty_list_by_filter_head">There are currently no ongoing festivals.</string>
 </resources>

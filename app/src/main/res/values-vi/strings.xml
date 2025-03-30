@@ -82,6 +82,7 @@
     <string name="season_filter_dialog_계절_선택">Chọn mùa</string>
     <string name="filter_dialog_common_적용하기">Áp dụng</string>
     <string name="list_screen_common_전_지역">Tất cả các khu vực</string>
+    <string name="list_screen_festival_empty_list_by_filter_sub">Điều chỉnh bộ lọc để kiểm tra các ngày khác!</string>
     <string name="list_screen_common_reset_filter">Đặt lại bộ lọc</string>
     <string name="location_common_제주시">Jeju City</string>
     <string name="location_common_애월">Aewol</string>
@@ -453,4 +454,5 @@
     <string name="map_app_google">Google Maps</string>
     <string name="map_app_naver">Bản đồ Naver</string>
     <string name="map_app_kakao">Bản đồ Kakao</string>
+    <string name="list_screen_festival_empty_list_by_filter_head">Hiện tại không có lễ hội nào đang diễn ra.</string>
 </resources>
