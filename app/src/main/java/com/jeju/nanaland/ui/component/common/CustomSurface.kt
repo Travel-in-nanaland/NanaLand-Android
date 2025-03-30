@@ -27,6 +27,7 @@ import com.jeju.nanaland.ui.theme.getColor
 
 @Composable
 fun CustomSurface(
+    statusBarPadding: Boolean = true,
     content: @Composable ColumnScope.(Boolean) -> Unit
 ) {
     val view = LocalView.current
@@ -68,11 +69,12 @@ fun CustomSurface(
             .fillMaxSize()
             .background(getColor().white)
     ) {
-        Spacer(
-            Modifier
-                .fillMaxWidth()
-                .height((SYSTEM_STATUS_BAR_HEIGHT).dp)
-        )
+        if(statusBarPadding)
+            Spacer(
+                Modifier
+                    .fillMaxWidth()
+                    .height((SYSTEM_STATUS_BAR_HEIGHT).dp)
+            )
         Column(
             modifier = Modifier
                 .fillMaxWidth()

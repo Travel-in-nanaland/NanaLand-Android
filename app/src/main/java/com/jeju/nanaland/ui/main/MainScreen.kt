@@ -5,6 +5,7 @@ import androidx.compose.foundation.interaction.Interaction
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
@@ -29,6 +30,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.jeju.nanaland.R
+import com.jeju.nanaland.globalvalue.constant.SYSTEM_STATUS_BAR_HEIGHT
 import com.jeju.nanaland.globalvalue.constant.TOP_BAR_HEIGHT
 import com.jeju.nanaland.globalvalue.constant.TravelType
 import com.jeju.nanaland.globalvalue.type.HomeScreenViewType
@@ -194,7 +196,7 @@ private fun MainScreen(
     moveToReviewEditScreen: (Int, ReviewCategoryType) -> Unit,
     isContent: Boolean
 ) {
-    CustomSurface { isImeKeyboardShowing ->
+    CustomSurface(false) { isImeKeyboardShowing ->
         Scaffold(
             topBar = {},
             bottomBar = {
@@ -233,6 +235,7 @@ private fun MainScreen(
                         )
                     }
                     MainScreenViewType.Favorite -> {
+                        Spacer(Modifier.height(SYSTEM_STATUS_BAR_HEIGHT.dp))
                         FavoriteScreen(
                             prevViewType = prevViewType,
                             updateMainScreenViewType = updateMainScreenViewType,
@@ -241,6 +244,7 @@ private fun MainScreen(
                         )
                     }
                     MainScreenViewType.NanaPick -> {
+                        Spacer(Modifier.height(SYSTEM_STATUS_BAR_HEIGHT.dp))
                         NanaPickListScreen(
                             moveToNanaPickContentScreen = { contentId ->
                                 moveToCategoryContentScreen(contentId, "NANA", false) },
@@ -249,6 +253,7 @@ private fun MainScreen(
                         )
                     }
                     MainScreenViewType.MyPage -> {
+                        Spacer(Modifier.height(SYSTEM_STATUS_BAR_HEIGHT.dp))
                         ProfileScreen(
                             onBackButtonClicked = null,
                             moveToSettingsScreen = moveToSettingsScreen,

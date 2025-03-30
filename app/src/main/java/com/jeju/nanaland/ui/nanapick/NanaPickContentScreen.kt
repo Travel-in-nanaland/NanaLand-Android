@@ -28,6 +28,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.jeju.nanaland.R
 import com.jeju.nanaland.domain.entity.nanapick.NanaPickContentData
 import com.jeju.nanaland.domain.navigation.ROUTE
+import com.jeju.nanaland.globalvalue.constant.SYSTEM_STATUS_BAR_HEIGHT
 import com.jeju.nanaland.ui.component.common.CustomSurface
 import com.jeju.nanaland.ui.component.common.icon.GoToUpInList
 import com.jeju.nanaland.ui.component.detailscreen.nanapick.NanaPickContentAttractivePointDialog
@@ -86,7 +87,7 @@ private fun NanaPickContentScreen(
             attractiveDialogText = ""
         }
 
-    CustomSurface {
+    CustomSurface(false) {
 
         when (nanaPickContent) {
             is UiState.Loading -> {}
@@ -140,7 +141,7 @@ private fun NanaPickContentScreen(
                     }
 
                     NanaPickContentTopBanner(
-                        height = max(400 - (scrollState.value / density).toInt(), 185),
+                        height = max((400 + SYSTEM_STATUS_BAR_HEIGHT.toInt()) - (scrollState.value / density).toInt(), (185 + SYSTEM_STATUS_BAR_HEIGHT.toInt())),
                         isEllipsis = scrollState.value / density > (400 - 185) / 2,
                         contentId = contentId,
                         nanaPickContent = nanaPickContent,

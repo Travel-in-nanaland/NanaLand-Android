@@ -21,6 +21,7 @@ import com.jeju.nanaland.R
 import com.jeju.nanaland.domain.entity.member.HotPostData
 import com.jeju.nanaland.domain.entity.member.RecommendedPostData
 import com.jeju.nanaland.domain.entity.nanapick.NanaPickBannerData
+import com.jeju.nanaland.globalvalue.constant.SYSTEM_STATUS_BAR_HEIGHT
 import com.jeju.nanaland.globalvalue.userdata.UserData
 import com.jeju.nanaland.ui.component.main.home.HomeScreenCategoryButtons
 import com.jeju.nanaland.ui.component.main.home.HomeScreenPopularPlaces
@@ -99,7 +100,10 @@ private fun HomeContent(
                 topBanner = homePreviewBanner,
                 onBannerClick = moveToCategoryContentScreen
             )
-            homeScreenTopBar()
+            Column {
+                Spacer(Modifier.height(SYSTEM_STATUS_BAR_HEIGHT.dp))
+                homeScreenTopBar()
+            }
         }
 
         Spacer(Modifier.height(28.dp))

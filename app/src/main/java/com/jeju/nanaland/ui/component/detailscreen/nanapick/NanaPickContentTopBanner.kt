@@ -29,6 +29,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.jeju.nanaland.R
 import com.jeju.nanaland.domain.entity.nanapick.NanaPickContentData
+import com.jeju.nanaland.globalvalue.constant.SYSTEM_STATUS_BAR_HEIGHT
 import com.jeju.nanaland.ui.component.common.dialog.FullImageDialog
 import com.jeju.nanaland.ui.component.detailscreen.nanapick.parts.topbanner.NanaPickContentTopBannerFavoriteButton
 import com.jeju.nanaland.ui.component.detailscreen.nanapick.parts.topbanner.NanaPickContentTopBannerShareButton
@@ -84,7 +85,7 @@ fun NanaPickContentTopBanner(
                 }
         )
         Column(
-            Modifier.padding(horizontal = 16.dp)
+            Modifier.padding(horizontal = 16.dp).padding(top = SYSTEM_STATUS_BAR_HEIGHT.dp)
         ) {
             Row(
                 modifier = Modifier
