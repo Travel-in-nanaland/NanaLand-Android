@@ -132,6 +132,7 @@
     <!--지역 공통-->
     <string name="list_screen_festival_empty_list_by_filter_sub">调整筛选条件，查看其他日期！</string>
     <string name="list_screen_common_reset_filter">重置过滤器</string>
+    <string name="list_screen_festival_reset_filter">查看其他日期</string>
     <string name="location_common_제주시">济州市</string>
     <string name="location_common_애월">涯月</string>
     <string name="location_common_조천">朝天</string>

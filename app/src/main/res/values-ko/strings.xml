@@ -132,6 +132,7 @@
     <!--지역 공통-->
     <string name="list_screen_festival_empty_list_by_filter_sub">필터를 조정하여 다른 날짜로 확인해 보세요!</string>
     <string name="list_screen_common_reset_filter">필터 초기화</string>
+    <string name="list_screen_festival_reset_filter">다른 날짜 확인</string>
     <string name="location_common_제주시">제주시</string>
     <string name="location_common_애월">애월</string>
     <string name="location_common_조천">조천</string>

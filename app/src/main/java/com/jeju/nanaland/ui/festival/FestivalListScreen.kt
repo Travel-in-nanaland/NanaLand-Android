@@ -237,11 +237,13 @@ private fun FestivalListScreen(
                         moveToFestivalContentScreen = moveToFestivalContentScreen,
                         moveToSignInScreen = moveToSignInScreen,
                         filterReset = {
-                            selectedLocationList.forEachIndexed { i, _ ->
-                                selectedLocationList[i] = false
-                            }
-                            clearFestivalList()
-                            coroutineScope.launch { lazyGridState.scrollToItem(0) }
+                            isDateFilterShowing = true
+                            // 기존 초기화 로직
+//                            selectedLocationList.forEachIndexed { i, _ ->
+//                                selectedLocationList[i] = false
+//                            }
+//                            clearFestivalList()
+//                            coroutineScope.launch { lazyGridState.scrollToItem(0) }
                         }
                     )
             }

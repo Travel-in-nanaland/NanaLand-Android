@@ -69,7 +69,7 @@ fun FestivalThumbnailList(
                             .clickableNoEffect(filterReset)
                             .background(getColor().gray02, shape = RoundedCornerShape(50))
                             .padding(horizontal = 27.dp, vertical = 9.dp),
-                        text = getString(R.string.list_screen_common_reset_filter),
+                        text = getString(R.string.list_screen_festival_reset_filter),
                         color = getColor().gray01,
                         style = body02SemiBold
                     )
