@@ -249,7 +249,7 @@
     <string name="mypage_screen_review_guest">Đăng nhập để ghi lại trải nghiệm của riêng bạn!</string>
     <string name="mypage_screen_review_empty">Để lại đánh giá và ghi lại trải nghiệm của bạn!</string>
     <string name="mypage_screen_notice_empty">Không có thông báo.\nChúng tôi sẽ trở lại với tin tức mới!</string>
-    <string name="notification_screen_empty">Không có thông báo mới/nCập nhật những sự kiện và tin tức mới nhất!</string>
+    <string name="notification_screen_empty">Không có thông báo mới\nCập nhật những sự kiện và tin tức mới nhất!</string>
     <string name="profile_update_screen_프로필_수정">Chỉnh sửa hồ sơ</string>
     <string name="profile_update_screen_수정_완료">Chỉnh sửa hoàn tất</string>
     <string name="profile_update_screen_warning">Giới thiệu có thể được viết trong 70 ký tự hoặc ít hơn.</string>
@@ -411,7 +411,7 @@
     <string name="restaurant_해산물">Hải sản</string>
     <string name="restaurant_치킨_버거">Gà/Burger</string>
     <string name="restaurant_카페_디저트">Quán cà phê/Món tráng miệng</string>
-    <string name="restaurant_펍_요리주점">Quán rượu/Nhà hàng</string>
+    <string name="restaurant_펍_요리주점">Quán rượu\nhà hàng</string>
     <string name="activity_역사">Lịch sử</string>
     <string name="activity_전시회">Triển lãm</string>
     <string name="activity_공방">Hội thảo trải nghiệm</string>
