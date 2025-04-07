@@ -10,6 +10,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.jeju.nanaland.globalvalue.constant.SYSTEM_STATUS_BAR_HEIGHT
 import com.jeju.nanaland.globalvalue.type.HomeScreenViewType
 import com.jeju.nanaland.globalvalue.type.SearchCategoryType
 import com.jeju.nanaland.ui.component.main.home.HomeScreenTopBar
@@ -80,6 +81,8 @@ private fun HomeScreen(
     isContent: Boolean
 ) {
     val homeScreenTopBar: @Composable ()->Unit = {
+        if(viewType != HomeScreenViewType.Home)
+            Spacer(Modifier.height(SYSTEM_STATUS_BAR_HEIGHT.dp))
         HomeScreenTopBar(
             inputText = inputText,
             onValueChange = updateInputText,
