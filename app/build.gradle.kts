@@ -14,7 +14,7 @@ plugins {
 
 android {
     namespace = "com.jeju.nanaland"
-    compileSdk = 34
+    compileSdk = 35
 
     // 설정하지 않으면, 플레이스토어에 배포할 때 리소스 관련(언어별 string) 문제가 발생할 수 있다.
     bundle {
@@ -26,9 +26,9 @@ android {
     defaultConfig {
         applicationId = "com.jeju.nanaland"
         minSdk = 26
-        targetSdk = 34
-        versionCode = 55
-        versionName = "1.2.5"
+        targetSdk = 35
+        versionCode = 56
+        versionName = "1.2.6"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
